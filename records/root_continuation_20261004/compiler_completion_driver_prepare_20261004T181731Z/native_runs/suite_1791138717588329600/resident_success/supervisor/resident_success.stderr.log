@@ -1,0 +1,2 @@
+{"fixture":"COMPILER_COMPLETION_CPU_V1","role":"child","mode":"resident_child","pid":78688,"hold_seconds":60,"stream":"stderr"}
+{"fixture":"COMPILER_COMPLETION_CPU_V1","role":"root","mode":"resident_success","pid":28184,"owned_child_pid":78688,"requested_exit":0,"stream":"stderr"}

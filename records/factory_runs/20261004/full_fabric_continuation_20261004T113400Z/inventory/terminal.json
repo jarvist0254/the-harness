@@ -1,0 +1,20 @@
+{
+  "usage": {
+    "prompt_tokens": 6937,
+    "total_tokens": 13382,
+    "completion_tokens": 6445,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 6937
+    }
+  },
+  "requested_model": "qwen3.8-flash",
+  "native_children_actual": 0,
+  "status": "COMPLETE_UNTRUSTED_PENDING_GATES",
+  "job": "inventory",
+  "http": 200,
+  "pid": 46184,
+  "finish_reason": "stop",
+  "observed_model": "qwen3.8-flash",
+  "elapsed_seconds": 87.26
+}

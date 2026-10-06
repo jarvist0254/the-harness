@@ -1,0 +1,42 @@
+[
+  {
+    "tests_chars": 8000,
+    "source_chars": 16000,
+    "expected_accept": true,
+    "name": "exact16000_8000",
+    "observed_accept": true,
+    "pass": true
+  },
+  {
+    "tests_chars": 1,
+    "source_chars": 16001,
+    "expected_accept": false,
+    "name": "source16001",
+    "observed_accept": false,
+    "pass": true
+  },
+  {
+    "tests_chars": 8001,
+    "source_chars": 1,
+    "expected_accept": false,
+    "name": "tests8001",
+    "observed_accept": false,
+    "pass": true
+  },
+  {
+    "tests_chars": 8001,
+    "source_chars": 16001,
+    "expected_accept": false,
+    "name": "both_over",
+    "observed_accept": false,
+    "pass": true
+  },
+  {
+    "tests_chars": 1,
+    "source_chars": 1,
+    "expected_accept": false,
+    "name": "unknown_status",
+    "observed_accept": false,
+    "pass": true
+  }
+]

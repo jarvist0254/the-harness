@@ -1,0 +1,24 @@
+{
+  "status": "AST_PARSE_ONLY_PASS",
+  "candidate_imported_or_executed": false,
+  "provider_tests_executed": false,
+  "native_gpu_driver_or_provider_calls": false,
+  "python_path": "C:/Users/thoma/AppData/Local/Programs/Python/Python310/python.exe",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "parsed_files": [
+    {
+      "path": "E:/the_harness/records/factory_runs/20261004/l0_egl_sync_bridge_two_prep_20261004T212837Z/qwen_l0_egl_fence_adapter/source.qwen_untrusted.py",
+      "sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c"
+    },
+    {
+      "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_20261004T2214Z/test_adapter_independent_contract.py",
+      "sha256": "8abcadd3fc52aeb98ac6421f0ef4055862e84a45c2755cb29a31036995386304"
+    },
+    {
+      "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_20261004T2214Z/pure_qa_controller.py",
+      "sha256": "a63853d4ab61f3d4b54908759829cae9e28e77c80c36dacc099369c82382ef24"
+    }
+  ],
+  "command": "python.exe -I -c \"import ast,pathlib; ... ast.parse(p.read_text(...)) ...\"",
+  "scope": "Syntax parsing only; AST nodes were not imported, evaluated, or executed."
+}

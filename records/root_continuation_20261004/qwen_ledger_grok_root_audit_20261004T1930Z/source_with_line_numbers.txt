@@ -1,0 +1,683 @@
+1: import hashlib
+2: import json
+3: import math
+4: 
+5: MODEL_WHITELIST = {
+6:     'original_q8': {
+7:         'sha256': '9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031',
+8:         'size': 639446688,
+9:         'quant': 'q8_0',
+10:     },
+11:     'derived_f32': {
+12:         'sha256': 'bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80',
+13:         'size': 2390150816,
+14:         'quant': 'f32',
+15:     },
+16: }
+17: SOURCE_COMMIT = '0faee5004297c3bcfa40b7bf11750127b8c1fd7d'
+18: REQUESTED_CTX = 128
+19: ACTUAL_CTX = 256
+20: PINNED_GGML_PAD = 256
+21: N_BATCH = 32
+22: N_UBATCH = 32
+23: EXACT_TOKENS = tuple(range(16))
+24: VOCAB_COUNT = 151936
+25: ATOL = 0.01
+26: RTOL = 0.01
+27: DLL_COUNT = 5
+28: ALLOWED_STATES = (
+29:     'PENDING',
+30:     'RUNNING',
+31:     'FAILED_NUMERIC',
+32:     'FAILED_RUNTIME',
+33:     'NOT_CHECKED',
+34:     'DIAGNOSTIC_ONLY',
+35: )
+36: TERMINAL_STATES = (
+37:     'FAILED_NUMERIC',
+38:     'FAILED_RUNTIME',
+39:     'NOT_CHECKED',
+40:     'DIAGNOSTIC_ONLY',
+41: )
+42: TRANSITIONS = {
+43:     'PENDING': ('RUNNING', 'NOT_CHECKED', 'FAILED_RUNTIME'),
+44:     'RUNNING': ('FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY'),
+45:     'FAILED_NUMERIC': (),
+46:     'FAILED_RUNTIME': (),
+47:     'NOT_CHECKED': (),
+48:     'DIAGNOSTIC_ONLY': (),
+49: }
+50: PLAN_BOUND_DEFAULT = 4096
+51: HEX_DIGITS = '0123456789abcdef'
+52: EXPECTED_DLL_NAMES = (
+53:     'ggml.dll',
+54:     'ggml-base.dll',
+55:     'ggml-cpu.dll',
+56:     'ggml-rpc.dll',
+57:     'ggml-vulkan.dll',
+58: )
+59: TRUSTED_DLL_REGISTRY = (
+60:     ('ggml.dll', '56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb', 62976),
+61:     ('ggml-base.dll', 'beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3', 693760),
+62:     ('ggml-cpu.dll', 'e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481', 1125888),
+63:     ('ggml-rpc.dll', '11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd', 143872),
+64:     ('ggml-vulkan.dll', '3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085', 45299712),
+65: )
+66: CLOSED_FLAGS = ('model_pass', 'transport_corruption_proof', 'superseded')
+67: 
+68: 
+69: class FrozenList:
+70:     __slots__ = ('_items',)
+71: 
+72:     def __init__(self, items):
+73:         self._items = tuple(items)
+74: 
+75:     def __getitem__(self, index):
+76:         return self._items[index]
+77: 
+78:     def __len__(self):
+79:         return len(self._items)
+80: 
+81:     def __iter__(self):
+82:         return iter(self._items)
+83: 
+84:     def __eq__(self, other):
+85:         if isinstance(other, FrozenList):
+86:             return self._items == other._items
+87:         if isinstance(other, (list, tuple)):
+88:             if len(self._items) != len(other):
+89:                 return False
+90:             for left, right in zip(self._items, other):
+91:                 if left != right:
+92:                     return False
+93:             return True
+94:         return NotImplemented
+95: 
+96: 
+97: class FrozenDict:
+98:     __slots__ = ('_items',)
+99: 
+100:     def __init__(self, pairs):
+101:         self._items = dict(pairs)
+102: 
+103:     def __getitem__(self, key):
+104:         return self._items[key]
+105: 
+106:     def __iter__(self):
+107:         return iter(self._items)
+108: 
+109:     def __len__(self):
+110:         return len(self._items)
+111: 
+112:     def __contains__(self, key):
+113:         return key in self._items
+114: 
+115:     def get(self, key, default=None):
+116:         return self._items.get(key, default)
+117: 
+118:     def items(self):
+119:         return self._items.items()
+120: 
+121:     def keys(self):
+122:         return self._items.keys()
+123: 
+124:     def __eq__(self, other):
+125:         if isinstance(other, FrozenDict):
+126:             return self._items == other._items
+127:         if isinstance(other, dict):
+128:             return self._items == other
+129:         return NotImplemented
+130: 
+131: 
+132: def is_strict_int(value):
+133:     return isinstance(value, int) and not isinstance(value, bool)
+134: 
+135: 
+136: def _finite_float(value):
+137:     if isinstance(value, bool) or not isinstance(value, (int, float)):
+138:         return None
+139:     try:
+140:         number = float(value)
+141:     except (OverflowError, ValueError, TypeError, ArithmeticError):
+142:         return None
+143:     if not math.isfinite(number):
+144:         return None
+145:     return number
+146: 
+147: 
+148: def is_strict_number(value):
+149:     return _finite_float(value) is not None
+150: 
+151: 
+152: def _hex64(value):
+153:     if not isinstance(value, str) or len(value) != 64:
+154:         return False
+155:     for ch in value:
+156:         if ch not in HEX_DIGITS:
+157:             return False
+158:     return True
+159: 
+160: 
+161: def transition_allowed(old_state, new_state):
+162:     if new_state not in ALLOWED_STATES:
+163:         return False
+164:     if old_state is None:
+165:         return True
+166:     return new_state in TRANSITIONS.get(old_state, ())
+167: 
+168: 
+169: def _expected_dll_table():
+170:     if not isinstance(TRUSTED_DLL_REGISTRY, tuple) or len(TRUSTED_DLL_REGISTRY) != DLL_COUNT:
+171:         return None
+172:     if tuple(EXPECTED_DLL_NAMES) != tuple(row[0] for row in TRUSTED_DLL_REGISTRY):
+173:         return None
+174:     mapping = {}
+175:     sizes = {}
+176:     for row in TRUSTED_DLL_REGISTRY:
+177:         if not isinstance(row, tuple) or len(row) != 3:
+178:             return None
+179:         name, digest, size = row
+180:         if not isinstance(name, str) or name in mapping:
+181:             return None
+182:         if not _hex64(digest) or digest == ('0' * 64):
+183:             return None
+184:         if not is_strict_int(size) or size <= 0:
+185:             return None
+186:         mapping[name] = digest
+187:         sizes[name] = size
+188:     if len(set(mapping.values())) != DLL_COUNT:
+189:         return None
+190:     return mapping, sizes
+191: 
+192: 
+193: def validate_dll_bindings(declared):
+194:     try:
+195:         table = _expected_dll_table()
+196:         if table is None:
+197:             return False
+198:         expected, _sizes = table
+199:         if not isinstance(declared, dict) or len(declared) != DLL_COUNT:
+200:             return False
+201:         if set(declared.keys()) != set(EXPECTED_DLL_NAMES):
+202:             return False
+203:         digests = []
+204:         for name in EXPECTED_DLL_NAMES:
+205:             digest = declared.get(name)
+206:             if not _hex64(digest) or digest == ('0' * 64):
+207:                 return False
+208:             if digest != expected[name]:
+209:                 return False
+210:             digests.append(digest)
+211:         return len(set(digests)) == DLL_COUNT
+212:     except (TypeError, ValueError, OverflowError, ArithmeticError):
+213:         return False
+214: 
+215: 
+216: def _dll_bytes_ok(meta):
+217:     if 'dll_bytes' not in meta:
+218:         return True
+219:     table = _expected_dll_table()
+220:     if table is None:
+221:         return False
+222:     _mapping, sizes = table
+223:     declared = meta.get('dll_bytes')
+224:     if not isinstance(declared, dict) or set(declared.keys()) != set(EXPECTED_DLL_NAMES):
+225:         return False
+226:     for name in EXPECTED_DLL_NAMES:
+227:         size = declared.get(name)
+228:         if not is_strict_int(size) or size != sizes[name]:
+229:             return False
+230:     return True
+231: 
+232: 
+233: def validate_tokens(tokens):
+234:     if not isinstance(tokens, list) or len(tokens) != len(EXACT_TOKENS):
+235:         return False
+236:     for idx, value in enumerate(tokens):
+237:         if not is_strict_int(value) or value != idx:
+238:             return False
+239:     return True
+240: 
+241: 
+242: def validate_model_metadata(meta):
+243:     try:
+244:         if not isinstance(meta, dict):
+245:             return False
+246:         model_key = meta.get('model_key')
+247:         if not isinstance(model_key, str) or model_key == '':
+248:             return False
+249:         entry = MODEL_WHITELIST.get(model_key)
+250:         if entry is None:
+251:             return False
+252:         if meta.get('sha256') != entry['sha256']:
+253:             return False
+254:         size = meta.get('size')
+255:         if not is_strict_int(size) or size != entry['size']:
+256:             return False
+257:         if meta.get('quant') != entry['quant']:
+258:             return False
+259:         if meta.get('source_commit') != SOURCE_COMMIT:
+260:             return False
+261:         return True
+262:     except (TypeError, ValueError, OverflowError, ArithmeticError):
+263:         return False
+264: 
+265: 
+266: def _pinned_int(meta, key, expected):
+267:     value = meta.get(key)
+268:     return is_strict_int(value) and value == expected
+269: 
+270: 
+271: def validate_runtime_metadata(meta):
+272:     try:
+273:         if not isinstance(meta, dict):
+274:             return False
+275:         if not _pinned_int(meta, 'requested_ctx', REQUESTED_CTX):
+276:             return False
+277:         if not _pinned_int(meta, 'actual_ctx', ACTUAL_CTX):
+278:             return False
+279:         if not _pinned_int(meta, 'pinned_ggml_pad', PINNED_GGML_PAD):
+280:             return False
+281:         if not _pinned_int(meta, 'n_batch', N_BATCH):
+282:             return False
+283:         if not _pinned_int(meta, 'n_ubatch', N_UBATCH):
+284:             return False
+285:         if not validate_tokens(meta.get('tokens')):
+286:             return False
+287:         if not validate_dll_bindings(meta.get('dll_hashes')):
+288:             return False
+289:         if not _dll_bytes_ok(meta):
+290:             return False
+291:         devices = meta.get('device_order')
+292:         if not isinstance(devices, list) or len(devices) == 0:
+293:             return False
+294:         for item in devices:
+295:             if not isinstance(item, str) or item == '':
+296:                 return False
+297:         origins = meta.get('cpu_vs_gpu_origins')
+298:         if not isinstance(origins, dict):
+299:             return False
+300:         if not isinstance(origins.get('cpu'), str) or origins.get('cpu') == '':
+301:             return False
+302:         if not isinstance(origins.get('gpu'), str) or origins.get('gpu') == '':
+303:             return False
+304:         if not isinstance(meta.get('build_id'), str) or meta.get('build_id') == '':
+305:             return False
+306:         if not _hex64(meta.get('exe_sha256')):
+307:             return False
+308:         if not is_strict_int(meta.get('requested_kv')) or meta.get('requested_kv') <= 0:
+309:             return False
+310:         if not is_strict_int(meta.get('actual_kv')) or meta.get('actual_kv') <= 0:
+311:             return False
+312:         if meta.get('requested_kv') != meta.get('actual_kv'):
+313:             return False
+314:         for key in ('child_f16_disabled', 'fusion_disabled', 'coopmat_disabled', 'coopmat2_disabled'):
+315:             if meta.get(key) is not True:
+316:                 return False
+317:         return True
+318:     except (TypeError, ValueError, OverflowError, ArithmeticError):
+319:         return False
+320: 
+321: 
+322: def validate_capture_metadata(meta):
+323:     try:
+324:         if not isinstance(meta, dict):
+325:             return False
+326:         if meta.get('native_capture_claimed') is not False:
+327:             return False
+328:         if not isinstance(meta.get('callback_intrusiveness_declared'), bool):
+329:             return False
+330:         if meta.get('unsupported_dtype_fail_closed') is not True:
+331:             return False
+332:         for key in (
+333:             'name_op_dim_canonical',
+334:             'node_order_declared',
+335:             'common_intended_device_workload_separate_cpu_origin',
+336:         ):
+337:             if not isinstance(meta.get(key), bool):
+338:                 return False
+339:         return True
+340:     except (TypeError, ValueError, OverflowError, ArithmeticError):
+341:         return False
+342: 
+343: 
+344: def _classify_logits(values):
+345:     if not isinstance(values, list) or len(values) != VOCAB_COUNT:
+346:         return 'structural'
+347:     saw_nonfinite = False
+348:     saw_unrepresentable = False
+349:     for value in values:
+350:         if isinstance(value, bool) or not isinstance(value, (int, float)):
+351:             return 'structural'
+352:         try:
+353:             number = float(value)
+354:         except (OverflowError, ValueError, TypeError, ArithmeticError):
+355:             saw_unrepresentable = True
+356:             continue
+357:         if not math.isfinite(number):
+358:             saw_nonfinite = True
+359:     if saw_nonfinite:
+360:         return 'nonfinite'
+361:     if saw_unrepresentable:
+362:         return 'unrepresentable'
+363:     return 'ok'
+364: 
+365: 
+366: def validate_logit_list(values):
+367:     try:
+368:         return _classify_logits(values)
+369:     except (OverflowError, ValueError, TypeError, ArithmeticError):
+370:         return 'unrepresentable'
+371: 
+372: 
+373: def canonical_payload_bytes(cpu_logits, gpu_logits):
+374:     obj = {'cpu': cpu_logits, 'gpu': gpu_logits}
+375:     return json.dumps(obj, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+376: 
+377: 
+378: def _close_metadata_number(actual, expected):
+379:     actual_f = _finite_float(actual)
+380:     expected_f = _finite_float(expected)
+381:     if actual_f is None or expected_f is None:
+382:         return False
+383:     return abs(actual_f - expected_f) <= 1e-12
+384: 
+385: 
+386: def _refusal(state, reason):
+387:     return {
+388:         'state': state,
+389:         'reason': reason,
+390:         'model_pass': False,
+391:         'transport_corruption_proof': False,
+392:     }
+393: 
+394: 
+395: def _compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind):
+396:     if control_kind not in ('baseline_clean', 'perturbed_negative'):
+397:         return _refusal('NOT_CHECKED', 'control_kind_malformed')
+398:     if not is_strict_int(count) or count != VOCAB_COUNT:
+399:         return _refusal('NOT_CHECKED', 'count_malformed')
+400:     left = _classify_logits(cpu_logits)
+401:     right = _classify_logits(gpu_logits)
+402:     if left == 'structural' or right == 'structural':
+403:         return _refusal('NOT_CHECKED', 'logit_type_or_length_malformed')
+404:     if left == 'unrepresentable' or right == 'unrepresentable':
+405:         return _refusal('NOT_CHECKED', 'logit_unrepresentable')
+406:     if left == 'nonfinite' or right == 'nonfinite':
+407:         return _refusal('FAILED_RUNTIME', 'logit_nonfinite')
+408:     try:
+409:         computed_sha = hashlib.sha256(canonical_payload_bytes(cpu_logits, gpu_logits)).hexdigest()
+410:     except (TypeError, ValueError, OverflowError, ArithmeticError):
+411:         return _refusal('NOT_CHECKED', 'payload_canonicalization_failed')
+412:     if not _hex64(payload_sha256) or payload_sha256 != computed_sha:
+413:         return _refusal('NOT_CHECKED', 'payload_sha_mismatch')
+414:     fail_indices = []
+415:     max_err = 0.0
+416:     sum_sq = 0.0
+417:     for idx in range(VOCAB_COUNT):
+418:         cpu_value = float(cpu_logits[idx])
+419:         gpu_value = float(gpu_logits[idx])
+420:         err = abs(cpu_value - gpu_value)
+421:         if err > max_err:
+422:             max_err = err
+423:         sum_sq += err * err
+424:         limit = ATOL + (RTOL * abs(cpu_value))
+425:         if err > limit:
+426:             fail_indices.append(idx)
+427:     if not math.isfinite(max_err) or not math.isfinite(sum_sq):
+428:         return _refusal('NOT_CHECKED', 'metric_unrepresentable')
+429:     measured_rmse = math.sqrt(sum_sq / float(VOCAB_COUNT))
+430:     if not math.isfinite(measured_rmse):
+431:         return _refusal('NOT_CHECKED', 'metric_unrepresentable')
+432:     if not _close_metadata_number(max_abs_err, max_err):
+433:         return _refusal('NOT_CHECKED', 'max_abs_err_not_bound')
+434:     if not _close_metadata_number(rmse, measured_rmse):
+435:         return _refusal('NOT_CHECKED', 'rmse_not_bound')
+436:     result = {
+437:         'state': 'DIAGNOSTIC_ONLY',
+438:         'reason': 'numerical_diagnostic_complete',
+439:         'control_kind': control_kind,
+440:         'count': VOCAB_COUNT,
+441:         'fail_count': len(fail_indices),
+442:         'fail_indices_sample': fail_indices[:16],
+443:         'measured_max_abs_err': max_err,
+444:         'measured_rmse': measured_rmse,
+445:         'payload_sha256': computed_sha,
+446:         'atol': ATOL,
+447:         'rtol': RTOL,
+448:         'transport_corruption_proof': False,
+449:         'model_pass': False,
+450:     }
+451:     if control_kind == 'baseline_clean' and fail_indices:
+452:         result['state'] = 'FAILED_NUMERIC'
+453:         result['reason'] = 'strict_logit_tolerance_failed'
+454:     if control_kind == 'perturbed_negative':
+455:         result['state'] = 'DIAGNOSTIC_ONLY'
+456:         result['reason'] = 'perturbed_negative_comparison_only'
+457:         result['transport_corruption_proof'] = False
+458:         result['model_pass'] = False
+459:     return result
+460: 
+461: 
+462: def compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind='baseline_clean'):
+463:     try:
+464:         return _compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind)
+465:     except (OverflowError, TypeError, ValueError, ArithmeticError):
+466:         return _refusal('NOT_CHECKED', 'comparison_fail_closed')
+467: 
+468: 
+469: def _evaluate_experiment(record):
+470:     if not isinstance(record, dict):
+471:         return _refusal('NOT_CHECKED', 'record_malformed')
+472:     experiment_id = record.get('experiment_id')
+473:     if not isinstance(experiment_id, str) or experiment_id == '':
+474:         return _refusal('NOT_CHECKED', 'experiment_id_malformed')
+475:     if not validate_model_metadata(record.get('model_metadata')):
+476:         outcome = _refusal('NOT_CHECKED', 'model_metadata_malformed')
+477:         outcome['experiment_id'] = experiment_id
+478:         return outcome
+479:     if not validate_runtime_metadata(record.get('runtime_metadata')):
+480:         outcome = _refusal('NOT_CHECKED', 'runtime_metadata_malformed')
+481:         outcome['experiment_id'] = experiment_id
+482:         return outcome
+483:     if not validate_capture_metadata(record.get('capture_metadata')):
+484:         outcome = _refusal('NOT_CHECKED', 'capture_metadata_malformed')
+485:         outcome['experiment_id'] = experiment_id
+486:         return outcome
+487:     for key in ('cpu_logits', 'gpu_logits', 'payload_sha256', 'max_abs_err', 'rmse', 'count'):
+488:         if key not in record:
+489:             outcome = _refusal('NOT_CHECKED', 'payload_field_missing')
+490:             outcome['experiment_id'] = experiment_id
+491:             return outcome
+492:     control_kind = record.get('control_kind', 'baseline_clean')
+493:     outcome = compare_logits(
+494:         record['cpu_logits'],
+495:         record['gpu_logits'],
+496:         record['payload_sha256'],
+497:         record['max_abs_err'],
+498:         record['rmse'],
+499:         record['count'],
+500:         control_kind,
+501:     )
+502:     outcome['experiment_id'] = experiment_id
+503:     model_meta = record.get('model_metadata')
+504:     if isinstance(model_meta, dict) and isinstance(model_meta.get('model_key'), str):
+505:         outcome['model_key'] = model_meta.get('model_key')
+506:     outcome['superseded'] = False
+507:     outcome['model_pass'] = False
+508:     outcome['transport_corruption_proof'] = False
+509:     return outcome
+510: 
+511: 
+512: def evaluate_experiment(record):
+513:     try:
+514:         return _evaluate_experiment(record)
+515:     except (OverflowError, TypeError, ValueError, ArithmeticError):
+516:         experiment_id = 'malformed'
+517:         if isinstance(record, dict):
+518:             candidate = record.get('experiment_id')
+519:             if isinstance(candidate, str) and candidate != '':
+520:                 experiment_id = candidate
+521:         outcome = _refusal('NOT_CHECKED', 'evaluation_fail_closed')
+522:         outcome['experiment_id'] = experiment_id
+523:         return outcome
+524: 
+525: 
+526: def _freeze(value, stack):
+527:     if value is None or isinstance(value, str):
+528:         return value
+529:     if isinstance(value, bool):
+530:         return True if value else False
+531:     if isinstance(value, int):
+532:         return int(value)
+533:     if isinstance(value, float):
+534:         if not math.isfinite(value):
+535:             raise ValueError('record_nonfinite')
+536:         return float(value)
+537:     if isinstance(value, dict):
+538:         if id(value) in stack:
+539:             raise ValueError('record_cycle')
+540:         stack.add(id(value))
+541:         pairs = []
+542:         try:
+543:             for key, item in value.items():
+544:                 if not isinstance(key, str):
+545:                     raise ValueError('record_key_malformed')
+546:                 if key in CLOSED_FLAGS:
+547:                     pairs.append((key, False))
+548:                 else:
+549:                     pairs.append((key, _freeze(item, stack)))
+550:         finally:
+551:             stack.discard(id(value))
+552:         return FrozenDict(pairs)
+553:     if isinstance(value, (list, tuple)):
+554:         if id(value) in stack:
+555:             raise ValueError('record_cycle')
+556:         stack.add(id(value))
+557:         try:
+558:             items = tuple(_freeze(item, stack) for item in value)
+559:         finally:
+560:             stack.discard(id(value))
+561:         return FrozenList(items)
+562:     raise ValueError('record_not_serializable')
+563: 
+564: 
+565: def _actual_prior(existing, experiment_id):
+566:     actual = None
+567:     seen = False
+568:     for rec in existing:
+569:         if rec.get('experiment_id') == experiment_id:
+570:             actual = rec.get('state')
+571:             seen = True
+572:     if not seen:
+573:         return None
+574:     return actual
+575: 
+576: 
+577: def _accept(record, existing):
+578:     if not isinstance(record, dict):
+579:         raise ValueError('record_malformed')
+580:     state = record.get('state')
+581:     if state not in ALLOWED_STATES:
+582:         raise ValueError('state_malformed')
+583:     experiment_id = record.get('experiment_id')
+584:     if not isinstance(experiment_id, str) or experiment_id == '':
+585:         raise ValueError('experiment_id_malformed')
+586:     if record.get('supersede') is True or 'supersedes' in record:
+587:         raise ValueError('supersession_forbidden')
+588:     actual_prior = _actual_prior(existing, experiment_id)
+589:     if 'prior_state' in record and record.get('prior_state') != actual_prior:
+590:         raise ValueError('prior_state_forged')
+591:     if actual_prior in TERMINAL_STATES:
+592:         raise ValueError('terminal_restart_forbidden')
+593:     if not transition_allowed(actual_prior, state):
+594:         raise ValueError('transition_forbidden')
+595:     stack = set()
+596:     stack.add(id(record))
+597:     pairs = []
+598:     try:
+599:         for key, item in record.items():
+600:             if not isinstance(key, str):
+601:                 raise ValueError('record_key_malformed')
+602:             if key in ('model_pass', 'seq'):
+603:                 continue
+604:             if key in CLOSED_FLAGS:
+605:                 pairs.append((key, False))
+606:             else:
+607:                 pairs.append((key, _freeze(item, stack)))
+608:         pairs.append(('model_pass', False))
+609:         pairs.append(('seq', len(existing)))
+610:     finally:
+611:         stack.discard(id(record))
+612:     return FrozenDict(pairs)
+613: 
+614: 
+615: def _thaw(value):
+616:     if isinstance(value, FrozenDict):
+617:         return {key: _thaw(item) for key, item in value.items()}
+618:     if isinstance(value, FrozenList):
+619:         return [_thaw(item) for item in value]
+620:     return value
+621: 
+622: 
+623: class StateLedger:
+624:     def __init__(self, records=(), plan_bound=PLAN_BOUND_DEFAULT):
+625:         if not is_strict_int(plan_bound) or plan_bound <= 0:
+626:             raise ValueError('plan_bound_malformed')
+627:         if isinstance(records, (str, bytes, dict)) or not isinstance(records, (list, tuple)):
+628:             raise ValueError('records_malformed')
+629:         accepted = []
+630:         for record in records:
+631:             accepted.append(_accept(record, accepted))
+632:         self._plan_bound = plan_bound
+633:         self._records = tuple(accepted)
+634: 
+635:     def records(self):
+636:         return self._records
+637: 
+638:     def append(self, record):
+639:         accepted = _accept(record, self._records)
+640:         clone = StateLedger.__new__(StateLedger)
+641:         clone._plan_bound = self._plan_bound
+642:         clone._records = self._records + (accepted,)
+643:         return clone
+644: 
+645:     def candidate_plan(self):
+646:         bounded = self._records[-self._plan_bound:]
+647:         plan = {
+648:             'schema': 'state-ledger-candidate-plan',
+649:             'version': 1,
+650:             'source_commit': SOURCE_COMMIT,
+651:             'bounded': True,
+652:             'plan_bound': self._plan_bound,
+653:             'record_count': len(self._records),
+654:             'included_count': len(bounded),
+655:             'records': [_thaw(item) for item in bounded],
+656:             'no_pass': True,
+657:         }
+658:         try:
+659:             payload = json.dumps(plan, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+660:             plan['digest'] = hashlib.sha256(payload).hexdigest()
+661:             return json.dumps(plan, sort_keys=True, separators=(',', ':'), allow_nan=False)
+662:         except (TypeError, ValueError, OverflowError, ArithmeticError):
+663:             raise ValueError('candidate_plan_not_serializable')
+664: 
+665:     def durable_commit_representation(self):
+666:         plan = self.candidate_plan()
+667:         return {
+668:             'kind': 'in_memory_atomic_candidate_plan',
+669:             'sha256': hashlib.sha256(plan.encode('utf-8')).hexdigest(),
+670:             'writes_performed': False,
+671:         }
+672: 
+673: 
+674: def refusal_record(reason):
+675:     if not isinstance(reason, str) or reason == '':
+676:         reason = 'refused'
+677:     return {
+678:         'state': 'NOT_CHECKED',
+679:         'reason': reason,
+680:         'experiment_id': 'refusal',
+681:         'model_pass': False,
+682:         'transport_corruption_proof': False,
+683:     }

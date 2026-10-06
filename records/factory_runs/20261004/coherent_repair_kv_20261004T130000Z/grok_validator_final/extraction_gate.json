@@ -1,0 +1,40 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_validator_final\\qualification_validator.grok_final.py",
+  "sha256": "1c998ceb0ce7b905102d1df40d4bc2fdea36351717714eeb67f708137c571b5f",
+  "spans": [
+    {
+      "index": 0,
+      "count": 1
+    },
+    {
+      "index": 1,
+      "count": 1
+    },
+    {
+      "index": 2,
+      "count": 1
+    },
+    {
+      "index": 3,
+      "count": 1
+    },
+    {
+      "index": 4,
+      "count": 1
+    },
+    {
+      "index": 5,
+      "count": 1
+    },
+    {
+      "index": 6,
+      "count": 1
+    },
+    {
+      "index": 7,
+      "count": 1
+    }
+  ],
+  "gate": "AST_ONLY_PASS_NO_IMPORT",
+  "runtime_admitted": false
+}

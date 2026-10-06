@@ -1,0 +1,22 @@
+test_anonymous_duplicate_dll_hashes_not_fresh_five (__main__.Tests) ... ok
+test_constructor_does_not_bypass_validation (__main__.Tests) ... ok
+test_cpu_reference_threshold_accepts_reverse_boundary (__main__.Tests) ... ok
+test_cpu_reference_threshold_rejects_001005 (__main__.Tests) ... ok
+test_float_context_refused (__main__.Tests) ... ok
+test_float_count_refused (__main__.Tests) ... ok
+test_float_model_bytes_refused (__main__.Tests) ... ok
+test_huge_int_logit_refuses_without_exception (__main__.Tests) ... ok
+test_huge_int_metric_refuses_without_exception (__main__.Tests) ... ok
+test_input_nested_metadata_cannot_change_ledger (__main__.Tests) ... ok
+test_no_native_import_calls (__main__.Tests) ... ok
+test_records_cannot_mutate_model_pass (__main__.Tests) ... ok
+test_records_cannot_mutate_prior_state (__main__.Tests) ... ok
+test_terminal_cannot_restart_by_omitting_prior (__main__.Tests) ... ok
+test_terminal_cannot_restart_with_forged_prior (__main__.Tests) ... ok
+test_unhashable_model_key_refuses_without_exception (__main__.Tests) ... ok
+test_valid_zero_is_diagnostic_no_hardware_pass (__main__.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.528s
+
+OK

@@ -1,0 +1,108 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_NO_CANDIDATE_IMPORT",
+  "contract": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\COMPARATOR_CONTRACT.json",
+  "contract_sha256": "745215ff0dda2ed1f3d7a059447aea20b63428ff581f46f6312b5ee396eebfc4",
+  "api": "compare_artifacts(cpu_root,gpu_root,*,expected,atol=0.01,rtol=0.01)",
+  "controls": [
+    {
+      "name": "valid_equal_three_nodes",
+      "discriminator": "Actual independent F32_LE bytes and SHA; three ordered whitelist nodes. Must DIAGNOSTIC_MATCH, never qualification PASS."
+    },
+    {
+      "name": "valid_mismatch_first_observed",
+      "discriminator": "Perturb second and third GPU node bytes and update their true digests. Must DIAGNOSTIC_DIVERGENCE, first observed node ordinal1/nameffn_out-0, not final-logit success."
+    },
+    {
+      "name": "per_element_relative_tolerance",
+      "discriminator": "CPU [0,1000000]; GPU [.02,1000000]. Fixed0.01/0.01 must flag zero-reference element; a global reference scale would falsely match."
+    },
+    {
+      "name": "signed_negative_reference",
+      "discriminator": "CPU negative values uses abs(CPU), not signed scale."
+    },
+    {
+      "name": "digest_mismatch",
+      "discriminator": "Flip real GPU bytes without hash update. Must refuse integrity before numerical match."
+    },
+    {
+      "name": "truncation_and_trailing_bytes",
+      "discriminator": "Actual file smaller/larger than declared nbytes must refuse even when supplied digest matches altered bytes."
+    },
+    {
+      "name": "nan_and_infinity",
+      "discriminator": "Actual NaN/+Inf/-Inf CPU or GPU F32 data with matching byte digests must refuse, never diagnostic match."
+    },
+    {
+      "name": "duplicate_json_keys",
+      "discriminator": "Inject duplicated schema/origin/source_sha256/node name fields into raw JSON; reject nested duplicates too."
+    },
+    {
+      "name": "canonical_node_aliases",
+      "discriminator": "Duplicate exact node name and zero-padded index aliasattn_norm-00 vsattn_norm-0; reject alias or noncanonical syntax."
+    },
+    {
+      "name": "missing_extra_reordered_nodes",
+      "discriminator": "Remove/add/reorder only GPU node with internally consistent ordinal/file/hash fields; cannot zip-truncate or silently match unordered sets."
+    },
+    {
+      "name": "node_identity_shape_layout",
+      "discriminator": "Mutate only op/dtype/dims/strides; bool dims/ordinal/nbytes invalid; wrong endian or noncontiguous layout invalid."
+    },
+    {
+      "name": "authority_pins",
+      "discriminator": "Mutate exactly one schema/status/intrusive/qualification/source/executable/pin/model/model_bytes/workload field; require refusal."
+    },
+    {
+      "name": "cpu_gpu_origin",
+      "discriminator": "CPU claimedGPU device or GPU roleCPU, CPU flags true, GPU flags false, duplicateGPU names or unsupported names; require refusal."
+    },
+    {
+      "name": "same_token_workload",
+      "discriminator": "Mismatched CPU/GPU token sequence with unchanged declared workload hash must refuse; caller JSON hash is not content authentication."
+    },
+    {
+      "name": "path_confinement",
+      "discriminator": "Absolute drive/UNC/colonADS/.. filename escapes rejected; symlink/reparse at root/intermediate/file rejected. Created links only inside owned fixture folder if supported; unavailable link creation NOT_CHECKED."
+    },
+    {
+      "name": "manifest_budget",
+      "discriminator": "Real manifest beyond131072bytes including whitespace refused before unbounded JSON load."
+    },
+    {
+      "name": "tensor_size_budget",
+      "discriminator": "Sparse/ordinary file exceeding16MiB refused before numerical materialization; exact bound valid needs separate controlled fixture."
+    },
+    {
+      "name": "aggregate_budget",
+      "discriminator": "Five valid named nodes refer to same actual16MiB zero tensor with true hash; total declared processed bytes80MiB must refuse even though only16MiB stored. Avoid missing-file confound; do not mirror implementation."
+    },
+    {
+      "name": "node_count_budget",
+      "discriminator": "145 valid unique canonical names impossible in whitelist142; independently label maxnode-count and whitelist rejection rather than pretend unrelated overcap proves cap-specific branch."
+    },
+    {
+      "name": "tolerance_validation",
+      "discriminator": "bool/negative/NaN/Inf tolerances rejected; widen>0.01 contract ambiguity pending root adjudication."
+    },
+    {
+      "name": "strict_extra_authority",
+      "discriminator": "Unknown authority-bearing fields such asqualificationPASS/ref_scale/control_success not ignored; harmless unknown-field policy needs contract adjudication."
+    },
+    {
+      "name": "readonly_comparator",
+      "discriminator": "Snapshot every owned input file hash and list before/after; comparator must create/modify no artifacts."
+    },
+    {
+      "name": "source_bound_result",
+      "discriminator": "Report artifact roots/hashes and first observed whitelist capture only; no arbitrary node inferred as actual first causal divergence; noLLM/capacity/P2P PASS."
+    }
+  ],
+  "conflicts": [
+    "Exact sixteen tokens[0..15] versus any values0..15 needs explicit decision.",
+    "Arbitrary finite positive caller tolerances versus fixed0.01/no widening needs explicit decision.",
+    "Base workload hash includes selected DEVICES; CPU/GPU origin populations differ. Shared run hash stamping must be explicit.",
+    "Result first-divergence field names are not specified; test adapter must read actual source and be attributed, not guess.",
+    "Canonical whitelist has142 possible names; declared cap144 means no145-node otherwise-valid fixture. Report this logical bound honestly."
+  ],
+  "scope": "Independent synthetic file fixtures, not source/model authenticity or GPU execution. No providers/native/GPU or imports yet."
+}

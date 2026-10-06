@@ -1,0 +1,598 @@
+You are actual Grok coding editor after Qwen generation and completed substantive Gemini review. Rewrite the rejected pure validator architecture where necessary, not superficial copyediting. Return ONLYJSON {source:completequalification_validator.py,test_source:completeactual-import unittestmodule,notes:[schema contract and limitations]}. No tools/code execution/edits yourself/auth/MCP/web/agents. Root static gate then runs puretests. Originalimmutable. Full original TASK_CONTRACTS and exactsource/tests/Gemini findings appended.
+Known severe bugs MUST eliminate: canonicalPCI erroneously4colonsegments; boolmemory accepted; emptyclaims/artifacts/devices QUALIFIED; FOURdevicecount automaticallyclaims greaterthanonecard/fournecessary capacity; equal arbitrarylogithashes bypassfinite/error/fulltensor/count; NaN maxabs maypass; TWO_VENDOR vendorlabels-only; P2Pprimitive-label-only; unboundmodel/workload/control/trustedartifact references; unknownstatus falsequalification.
+API validate_result(receipt,*,now_utc,max_age_seconds=10,trusted_artifact_hashes=frozenset()) strictGPUfreeimports nofiles/process. Unknown/unverifiedmissing->NOT_CHECKED; malformed/contradictory/knownfalse->REFUSED; no requestedclaimunknown yieldsQUALIFIED. Define clear implemented schema1 with source bound per-evidenceartifact SHA25664 inexternallytrusted set; defaultempty/nonempty requiredartifacts mandatory; contextcallertrust external notauthenticatingarbitraryJSON. No resultclaimnotrequested; partialnumericalclaim doesn't infercapacity. Emptyclaims shouldNOT_CHECKED.
+FullPCI domain4or8numeric<=ffff, bus2hex/device2hex<=1f/function0..7, canonical4lowercase completeBDF; no inventeddomain; duplicatesaliases reject. Strictbytes typeintnotbool, finite scalar metricsfloatnotbool NaNInf reject, awareUTCnow+samplepastfresh0..maxage. Physicaldevicefields schema consistent. Required bindings model_sha256/workload_sha256/build_sha256/executable_sha256/devices physicalIDs mustmatch allCPU/GPU/control/single/three/four comparison evidences; unknownidentityNOT_CHECKED nofake complete.
+Separate claimsTWO_VENDOR_NUMERICAL,FOUR_PHYSICAL_GPU,DEDICATED_CAPACITY_GT_ONE_CARD,FOUR_REQUIRED_CAPACITY,LLM_LOGIT_PARITY,DIRECT_P2P,DURABLE_REPLAY. Numerical actualfullcountfiniteCPUreference model/workload/hash/arraydigests/atolrtol/fullviolationcount0 measuredrmsemaxerrorandtrustedartifact; requirecompleted actualGPUkernel/tensor refs perparticipating device pluscleancontrolFAILexit1kindCOMPARATOR_ONLY orcompute path explicitscope; onlycomparatornottransportnegative. Fourphysicaldiscrete actual4distinctGPU(notCPUIGPUshared) ownerunique nonemptyblock IDs andoriginalweight hashes nofullreplication. SharedAMDpartialTWOVENDORvalidiftrustednumerical butnotdedicatedcapacity. Capacity knownmeasuredperdeviceusablefree/reserve/highwaterACTUAL_ALLOCATOR bytes alltrusted bound currenttimestamps, requirementsgreaterlargestactualsingleusable andperdevicefit; samehashedworkloadsinglecapacityfailure ACTUAL_ALLOCATOR_OOM notPOLICY. Fournecessary adds3allocatorOOMidenticalworkload. TinyMLP/policy1..64MB/CPUworkerscannotpassphysicalcapacity. EightGBphysicalgoal usesactualusablebudgets nothardcodehashsize oruniform4x. LLM realhashedlicensedGGUFmetadata attentionKVopsqualification trustedCPUfullvocablogitref numericalnotprose; actual0.6Bmodel fitsonecard henceonlyLLMNUMERICALcanqualifyifparitypass, notcapacity. Current mixedLLMfailed fixed.01/.01; neverturnfailurepassbyloosening.
+P2P directedpairs primitiveDIRECT_DEVICE andactualparity+trustedartifact notHOST_STAGED/D3D12L0systemmemory, missinginstrumentNOT_CHECKED. Durablecheckpointidentityseq/replayboundary+actualworkerloss/cancel/restart trustedreceipts in-flightUNKNOWNnotCOMPLETE, noatomicJSON-alone qualification. Puretests synthesize trustset onlyto testalgorithm, nothardwareproof.
+Meaningfulactual-import tests importqualification_validator; no mirroredstub, no pass/placeholders, no onlyconstantassertions. Specificallyall abovefalsepositive controls inclNaN/Inf,bool, emptytrust, emptyclaims,8hexdup,futurestale,badtype, mismatchedmodel/workload/devicebinding,capacitydevicecount-only, singlefits,policyrefusal,replication,hashesequalwithoutnumericmetrics,missingnumericalcontrols,sharedAMD/CPU,unmeasuredP2P/durable. ValidpartialTWO_VENDOR and complete4capacitytrustedSYNTHETICfixture passrequestedclaimsONLY. Keep readable<=500source lines plus<=350tests, architecturecompleteunderbudget. MaxQwen10andDeepSeek10authorizationactualGroktools0children0. Source/testseparate exactoutput.
+
+SOURCE TASK_CONTRACTS.json
+{"version":1,"jobs":{"supervisor":{"model":"qwen3.8-max","file":"contained_supervisor.py","text":"Generate complete standalone Python Windows contained-worker supervisor using appended proven windows_job.py, NEVER importing/editing live PyRe. API run_workers(manifest,output_root,*,cancel_event=None)->terminaldict. Schema1 run_id safeidentifier, workers1..4 [{worker_id,argv absoluteverifiedexe+literalargs,executable_sha256,cwdabsolute}], deadline_secondsint1..60 startup_seconds1..10 log_limit_bytes1024..131072 containment_policy explicit_terminate(default)|kill_on_close. Validate stricttypes/no bools/pathtraversal/NUL/duplicateworkerIDs before any allocation; NEWoutputroot absolute refuseexisting. No shell/no network/GPUlaunches, no auth/envsecrets. Child env onlyrequiredWindowsvars explicit minimal. GPU-free imports.\nUse CPython _winapi CreateProcess CREATE_SUSPENDED4 +CREATE_NO_WINDOW, STARTUPINFOEX.handle_list only duplicatedstdinNUL/stdout/stderrhandles. Assign job BEFORE ResumeThread; signatures correct pointer-sizedHANDLE. Every failedassign/resume terminates owned suspended process and waitsbounded beforeclose. Correct namedjobcollision refusal. explicit_terminate default NOkill-on-close as provenrecoverabledefault, but NO recovery claim: no wrapperholdsacknowledgedhandle =>controllerloss UNKNOWN_INTERRUPTED. Optionalkillonclose propertypedWindowsstructs correctLimitFlags no magicoffsetbytearray. Retainownedprocesshandles; deadlines monotonic; cancellation never overwritten. Wholejob explicitTerminateJobObject thenboundeddrain exacthandles+active query, unknown/departeduncapturedmembers =>drain_proof UNKNOWN not falsewhole-treecertificate. No killingPIDafterreuse.\nCompletiononlyallownedprocessesexit0 +no activejobchildren; statusPROCESS_COMPLETED neverinference/modelqualified. ReadinessonlylivenessnotCOMPLETE. Deadline TIMEOUT/FAIL, nonzeroFAILED, cancelCANCELLED. Logs bounded whilerunning via inheritedpipe readerthreads cappedwrites; ifoverflow recordtruncationcounts or terminateLOG_LIMIT; no unboundedfiles. AtomicJSON tempfsyncreplace<=128KiB durablesequenceevent receipt; no KV/replay claim. restart_receipt pure stateinflightUNKNOWN_INTERRUPTED no stalePIDattach. NonWindowsNOT_IMPLEMENTED honest. <=500source lines, actual-import unittest tests importcontained_supervisor, NOstub implementations. Puretestsstrictmanifest+mockactualAPIassignbeforeResumeThread/failcleanup; spawnedharmlessPythonfixtures childsleep/cancel/deadline/nonzero/logoverflow OPTIN RUN_CONTAINMENT_FIXTURES=1 Windows only, rootstaticadmissionneeded beforeexecution. No runtime/modelimports orcalls at import. Max nativeQwen10 andDeepSeek10 separatelyauthorized; thisdirectAPItools0children0. ONLYJSON {source,tests,notes} complete."},"validator":{"model":"qwen3.8-flash","file":"qualification_validator.py","text":"Generate complete pure measured-evidence validator actual-import unittest tests NOstubs/passplaceholders. API validate_result(receipt,*,now_utc,max_age_seconds=10,trusted_artifact_hashes=frozenset()) ->{status:QUALIFIED|REFUSED|NOT_CHECKED,reasonsstablecodes,qualified_claims:[]}. Strictschema1 clearlydocument. Unknown/missing/untrusted=>NOT_CHECKED, malformed/contradictory/knownfalse=>REFUSED. NeverQUALIFYunknown. Externaltrusted_artifact_hashes mustbind requiredmeasurement artifacts SHA64; defaultempty=>NOT_CHECKED, cannotauthenticateJSONclaims. Synthetic unit fixtures passowntrustedset but neverhardwareproof.\nClaims separate TWO_VENDOR_NUMERICAL,FOUR_PHYSICAL_GPU,DEDICATED_CAPACITY_GT_ONE_CARD,FOUR_REQUIRED_CAPACITY,LLM_LOGIT_PARITY,DIRECT_P2P,DURABLE_REPLAY. SharedAMD/tinyMLP/CPU-RPC/policy9MB cannotqualifyfourdiscreteVRAM/LLM/P2P. Devices knownfullPCI4or8hexsegmentnumeric<=ffff normalizedcanonical4, dev<=1f fn<=7; aliasedduplicatesrefuse noinventeddomain. FOUR requires4actualdiscreteGPU unique completed kernels andunique residentnonemptyblockownership notwholemodelreplication (IGPU/sharednotfourdiscrete). Perdevice memory_kindDEDICATED|SHARED_HOST|UNKNOWN, measuredtotal/free/allocatorpeak/reserve+weightsKVactivationbytes sources timestamps awarefresh0<=age<=max. strictnonboolfiniteintbytes nonnegative free<=total peak<=usable. advertisedtotalNOTFREE driverdeltanotallocatorproof; missingmeasurementbasisACTUAL_ALLOCATOR_REQUIRED=>NOT_CHECKED. Eachuniqueblock bindsmodel/workload/source/exehashes consistentallcomparisonreceipts.\nCapacity actualresidentrequirements exceedlargestactualsingleusable dedicatedbudget, fitperdeviceplans; sameexactmodel/workload/quant/context/batch singlecardtrustedACTUAL_ALLOCATOROOM vsfouractualparitypass; artificialpolicyneverphysicalcapacityproof even64MB. FOUR_REQUIRED additionally3cardidenticalworkloadactualOOM, notpolicy. LLM hashedlicensedGGUFattentionKVoperators,pinnedbuild,fullvocabCPUindependentlogitref allfinite/maxabsRMSEviolations0 predeclaredtolerances referencehash/count; no outputproseproof orsuccessboolalone. Trustartifactssummaryrequired, allfinite/violationscount numeric sanity. Comparatorcorruption expectedFAILexit1 detectedtrue controlscopeCOMPARE_ONLY doesn'tprovecompute/transportnegative. P2P directedpairsactualprimitiveDIRECT_DEVICE+parity+trust rejectHOST_STAGED/D3D12L0SYSTEMHEAP. Durable checkpointidentitycommitsequence+replayboundary+workerloss/cancelrestart exactevidence; atomicfinalJSONalone/inflightstate notdurability.\nCurrentpartial: OpenCLfinalSHAFF13C3783BDA61CF153B1BB58AFB9472BBE9C2404FA056C2816D011E749EA387,47puretests, installedNV5070Ti+AMDgfx1036shared8actualkernels cleanfullCPUerror8.344650268554688e-06 atol=rtol5e-5; injectedall8ranlast4mismatchfinal1.001207709312439. NewLLM C++ compilepasses butdefaultcontextmismatch(noGPUinferenceproofyet); Qwen3-0.6B-Q8_0 bytes639446688hash9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031 fitsonecard. Nofourcards.\n<=450lines source+testsimportactualqualification_validator. TestsunknownNOTCHECKED,badboolNaNnegativeREFUSED,stale/future/unknownPCI,8hexaliasdup,CPU4/sharedAMD/tinypolicy/singlecardfits/replication, modelworkloadmismatch, absentallocator, forgedboolnoprovenance, validTWO_VENDORpartial, complete4trustedSYNTHETICstructuredfixturepass,4necessary3policyOOMrefuse,LLMprosefake,P2Phoststagefake,durableatomicfake. No file/subprocess/nativeimports. MaxQwen10andDeepSeek10separatelyauthorized butdirectAPI tools0nativechildren0. ONLYJSON {source,tests,notes} complete."}},"native_max_qwen":10,"native_max_deepseek":10,"actual_children":0}
+
+SOURCE validator_v2\qualification_validator.py
+import hashlib
+from datetime import datetime, timezone
+
+def validate_result(receipt, *, now_utc, max_age_seconds=10, trusted_artifact_hashes=frozenset()):
+    """
+    Pure measured-evidence validator.
+    Returns: {status: 'QUALIFIED'|'REFUSED'|'NOT_CHECKED', reasons: [str], qualified_claims: []}
+    """
+    reasons = []
+    qualified_claims = []
+    status = 'NOT_CHECKED'
+
+    # 1. Basic Schema & Trust Check
+    if not isinstance(receipt, dict):
+        return {'status': 'REFUSED', 'reasons': ['INVALID_SCHEMA'], 'qualified_claims': []}
+    
+    claims = receipt.get('claims', [])
+    artifacts = receipt.get('artifacts', [])
+    devices = receipt.get('devices', [])
+    timestamp_str = receipt.get('timestamp')
+
+    # Verify Artifacts against Trusted Hashes
+    for art in artifacts:
+        h = art.get('sha256')
+        if not h or h not in trusted_artifact_hashes:
+            reasons.append(f'UNTRUSTED_ARTIFACT:{h}')
+            return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}
+
+    # Verify Timestamp Freshness
+    try:
+        ts = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+        age = (now_utc - ts).total_seconds()
+        if age < 0 or age > max_age_seconds:
+            reasons.append('STALE_OR_FUTURE_TIMESTAMP')
+            return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}
+    except Exception:
+        reasons.append('INVALID_TIMESTAMP_FORMAT')
+        return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}
+
+    # 2. Device Validation (PCI Normalization & Uniqueness)
+    seen_pci = set()
+    valid_devices = []
+    for dev in devices:
+        pci_raw = dev.get('pci_id', '')
+        # Normalize PCI: expect 4 hex segments, numeric <= ffff
+        parts = pci_raw.split(':')
+        if len(parts) != 4:
+            reasons.append(f'MALFORMED_PCI:{pci_raw}')
+            continue
+        try:
+            norm_parts = [f'{int(p, 16):04x}' for p in parts]
+            if any(int(p, 16) > 0xffff for p in parts):
+                reasons.append(f'PCI_OUT_OF_RANGE:{pci_raw}')
+                continue
+            norm_pci = ':'.join(norm_parts)
+            if norm_pci in seen_pci:
+                reasons.append(f'DUPLICATE_PCI_ALIAS:{norm_pci}')
+                continue
+            seen_pci.add(norm_pci)
+            valid_devices.append({**dev, 'normalized_pci': norm_pci})
+        except ValueError:
+            reasons.append(f'NON_HEX_PCI:{pci_raw}')
+            continue
+
+    if len(valid_devices) != len(devices):
+        reasons.append('DEVICE_VALIDATION_FAILED')
+        return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+
+    # 3. Claim-Specific Validation
+    claim_map = {c['id']: c for c in claims}
+    
+    # Helper to check memory constraints
+    def check_mem(device):
+        mem = device.get('memory', {})
+        total = mem.get('total_bytes')
+        free = mem.get('free_bytes')
+        peak = mem.get('allocator_peak_bytes')
+        kind = mem.get('kind')
+        
+        if not all(isinstance(x, int) and x >= 0 for x in [total, free, peak]):
+            return False, 'INVALID_MEM_TYPES'
+        if free > total:
+            return False, 'FREE_GT_TOTAL'
+        if peak > total:
+            return False, 'PEAK_GT_TOTAL'
+        if kind == 'SHARED_HOST':
+            return False, 'SHARED_MEMORY_NOT_DEDICATED'
+        return True, ''
+
+    # FOUR_PHYSICAL_GPU / DEDICATED_CAPACITY_GT_ONE_CARD / FOUR_REQUIRED_CAPACITY
+    if 'FOUR_PHYSICAL_GPU' in claim_map:
+        if len(valid_devices) < 4:
+            reasons.append('INSUFFICIENT_DISCRETE_GPUS')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+        
+        # Check dedicated VRAM and unique ownership
+        gpu_count = 0
+        for dev in valid_devices:
+            ok, err = check_mem(dev)
+            if not ok:
+                reasons.append(err)
+                return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+            if dev['memory']['kind'] == 'DEDICATED':
+                gpu_count += 1
+        
+        if gpu_count < 4:
+            reasons.append('FEWER_THAN_4_DEDICATED_VRAM')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+        
+        # Check kernel completion and block ownership
+        kernels_done = sum(1 for d in valid_devices if d.get('kernels_completed', False))
+        if kernels_done < 4:
+            reasons.append('INCOMPLETE_KERNEL_EXECUTION')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+            
+        blocks_owned = set()
+        for d in valid_devices:
+            b = d.get('resident_block_hash')
+            if not b:
+                reasons.append('MISSING_BLOCK_OWNERSHIP')
+                return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+            blocks_owned.add(b)
+        
+        if len(blocks_owned) < 4:
+            reasons.append('DUPLICATE_MODEL_REPLICATION')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+
+        qualified_claims.append('FOUR_PHYSICAL_GPU')
+        qualified_claims.append('DEDICATED_CAPACITY_GT_ONE_CARD')
+        qualified_claims.append('FOUR_REQUIRED_CAPACITY')
+
+    # LLM_LOGIT_PARITY
+    if 'LLM_LOGIT_PARITY' in claim_map:
+        llm_data = claim_map['LLM_LOGIT_PARITY'].get('evidence', {})
+        ref_hash = llm_data.get('reference_logit_hash')
+        calc_hash = llm_data.get('calculated_logit_hash')
+        error = llm_data.get('max_abs_error')
+        tol = llm_data.get('tolerance')
+        
+        if not ref_hash or not calc_hash:
+            reasons.append('MISSING_LOGIT_HASHES')
+            return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}
+        
+        if ref_hash != calc_hash:
+             # Allow small numerical drift if within tolerance
+             if error is None or tol is None:
+                 reasons.append('NO_TOLERANCE_DATA')
+                 return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}
+             if error > tol:
+                 reasons.append('LOGIT_ERROR_EXCEEDS_TOLERANCE')
+                 return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+        
+        # Ensure it's not just prose
+        if llm_data.get('type') != 'NUMERICAL_ARRAY':
+            reasons.append('PROSE_ONLY_EVIDENCE')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+            
+        qualified_claims.append('LLM_LOGIT_PARITY')
+
+    # DIRECT_P2P
+    if 'DIRECT_P2P' in claim_map:
+        p2p_data = claim_map['DIRECT_P2P'].get('evidence', {})
+        primitive = p2p_data.get('primitive_type')
+        if primitive != 'DIRECT_DEVICE':
+            reasons.append('HOST_STAGED_OR_SYSTEM_HEAP_P2P')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+        qualified_claims.append('DIRECT_P2P')
+
+    # DURABLE_REPLAY
+    if 'DURABLE_REPLAY' in claim_map:
+        dur_data = claim_map['DURABLE_REPLAY'].get('evidence', {})
+        checkpoint_id = dur_data.get('checkpoint_identity')
+        commit_seq = dur_data.get('commit_sequence')
+        replay_boundary = dur_data.get('replay_boundary')
+        
+        if not checkpoint_id or commit_seq is None or replay_boundary is None:
+            reasons.append('INCOMPLETE_DURABILITY_EVIDENCE')
+            return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}
+        
+        # Atomic final JSON alone is not durability
+        if dur_data.get('method') == 'ATOMIC_JSON_WRITE_ONLY':
+            reasons.append('ATOMIC_JSON_NOT_DURABILITY')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+            
+        qualified_claims.append('DURABLE_REPLAY')
+
+    # TWO_VENDOR_NUMERICAL
+    if 'TWO_VENDOR_NUMERICAL' in claim_map:
+        # Requires at least 2 distinct vendors in devices
+        vendors = set(d.get('vendor') for d in valid_devices)
+        if len(vendors) < 2:
+            reasons.append('SINGLE_VENDOR_EVIDENCE')
+            return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}
+        qualified_claims.append('TWO_VENDOR_NUMERICAL')
+
+    if not reasons:
+        status = 'QUALIFIED'
+    elif 'NOT_CHECKED' in str(reasons) or any('UNTRUSTED' in r for r in reasons):
+        status = 'NOT_CHECKED'
+    else:
+        status = 'REFUSED'
+
+    return {
+        'status': status,
+        'reasons': sorted(list(set(reasons))),
+        'qualified_claims': sorted(qualified_claims)
+    }
+
+SOURCE validator_v2\tests.candidate.py
+import unittest
+import json
+from datetime import datetime, timezone
+
+# Assuming the source above is imported as qualification_validator
+# For this test file, we will define a mock import structure or assume it exists.
+# In a real scenario: from qualification_validator import validate_result
+
+def validate_result_mock(receipt, *, now_utc, max_age_seconds=10, trusted_artifact_hashes=frozenset()):
+    # Placeholder to allow tests to run in isolation if module not found
+    # But per instructions, we must use actual-import. 
+    # We will rely on the environment having the source available.
+    pass
+
+try:
+    from qualification_validator import validate_result
+except ImportError:
+    # Fallback for strict execution context if needed, but prompt says NO stubs.
+    # We assume the runner injects the source into sys.modules or path.
+    raise ImportError("qualification_validator not found")
+
+class TestQualificationValidator(unittest.TestCase):
+    def setUp(self):
+        self.now = datetime(2026, 10, 4, 12, 0, 0, tzinfo=timezone.utc)
+        self.max_age = 10
+        self.trusted_hash = 'a' * 64
+        self.trusted_set = frozenset([self.trusted_hash])
+
+    def make_receipt(self, **kwargs):
+        base = {
+            'timestamp': self.now.isoformat(),
+            'artifacts': [{'sha256': self.trusted_hash}],
+            'devices': [],
+            'claims': []
+        }
+        base.update(kwargs)
+        return base
+
+    def test_unknown_missing_untrusted_not_checked(self):
+        # Missing artifact hash
+        receipt = self.make_receipt(artifacts=[{'sha256': 'wrong'}])
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'NOT_CHECKED')
+        self.assertIn('UNTRUSTED_ARTIFACT:wrong', res['reasons'])
+
+    def test_malformed_bool_nan_negative_refused(self):
+        # Invalid memory types
+        dev = {
+            'pci_id': '0000:01:00.0',
+            'vendor': 'NVIDIA',
+            'memory': {
+                'total_bytes': float('nan'),
+                'free_bytes': 100,
+                'allocator_peak_bytes': 50,
+                'kind': 'DEDICATED'
+            },
+            'kernels_completed': True,
+            'resident_block_hash': 'block1'
+        }
+        receipt = self.make_receipt(
+            devices=[dev]*4,
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('INVALID_MEM_TYPES', res['reasons'])
+
+    def test_stale_future_timestamp_not_checked(self):
+        old_time = self.now.replace(minute=59)
+        receipt = self.make_receipt(timestamp=old_time.isoformat())
+        res = validate_result(receipt, now_utc=self.now, max_age_seconds=10, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'NOT_CHECKED')
+        self.assertIn('STALE_OR_FUTURE_TIMESTAMP', res['reasons'])
+
+    def test_8hex_alias_dup_refused(self):
+        # Duplicate normalized PCI
+        dev1 = {'pci_id': '0000:01:00.0', 'vendor': 'A', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}
+        dev2 = {'pci_id': '0000:01:00.0', 'vendor': 'B', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b2'}
+        receipt = self.make_receipt(
+            devices=[dev1, dev2, dev1, dev2],
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('DUPLICATE_PCI_ALIAS:0000:01:00.0', res['reasons'])
+
+    def test_cpu_shared_amd_tiny_policy_single_card_fits_replication_refused(self):
+        # Shared host memory cannot qualify for dedicated VRAM gate
+        dev = {
+            'pci_id': '0000:01:00.0',
+            'vendor': 'AMD',
+            'memory': {
+                'total_bytes': 1000,
+                'free_bytes': 500,
+                'allocator_peak_bytes': 100,
+                'kind': 'SHARED_HOST' # Not Dedicated
+            },
+            'kernels_completed': True,
+            'resident_block_hash': 'b1'
+        }
+        receipt = self.make_receipt(
+            devices=[dev]*4,
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('SHARED_MEMORY_NOT_DEDICATED', res['reasons'])
+
+    def test_model_workload_mismatch_refused(self):
+        # Duplicate resident blocks implies replication
+        dev = {
+            'pci_id': '0000:01:00.0',
+            'vendor': 'NVIDIA',
+            'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'},
+            'kernels_completed': True,
+            'resident_block_hash': 'SAME_BLOCK' # All same
+        }
+        receipt = self.make_receipt(
+            devices=[dev]*4,
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('DUPLICATE_MODEL_REPLICATION', res['reasons'])
+
+    def test_absent_allocator_not_checked(self):
+        # Missing allocator proof
+        dev = {
+            'pci_id': '0000:01:00.0',
+            'vendor': 'NVIDIA',
+            'memory': {'total_bytes': 1000, 'free_bytes': 500, 'kind': 'DEDICATED'}, # No peak
+            'kernels_completed': True,
+            'resident_block_hash': 'b1'
+        }
+        receipt = self.make_receipt(
+            devices=[dev]*4,
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED') # INVALID_MEM_TYPES because peak is None/missing
+        self.assertIn('INVALID_MEM_TYPES', res['reasons'])
+
+    def test_forged_bool_no_provenance_not_checked(self):
+        # If artifacts are missing/untrusted, it's NOT_CHECKED
+        receipt = self.make_receipt(artifacts=[], claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}])
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'NOT_CHECKED')
+
+    def test_valid_two_vendor_partial(self):
+        devs = [
+            {'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'},
+            {'pci_id': '0000:02:00.0', 'vendor': 'AMD', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b2'},
+        ]
+        receipt = self.make_receipt(
+            devices=devs,
+            claims=[{'id': 'TWO_VENDOR_NUMERICAL', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'QUALIFIED')
+        self.assertIn('TWO_VENDOR_NUMERICAL', res['qualified_claims'])
+
+    def test_complete_4_trusted_synthetic_structured_fixture_pass(self):
+        devs = []
+        for i in range(4):
+            devs.append({
+                'pci_id': f'0000:0{i+1}:00.0',
+                'vendor': 'NVIDIA' if i % 2 == 0 else 'AMD',
+                'memory': {'total_bytes': 10000, 'free_bytes': 5000, 'allocator_peak_bytes': 1000, 'kind': 'DEDICATED'},
+                'kernels_completed': True,
+                'resident_block_hash': f'unique_block_{i}'
+            })
+        receipt = self.make_receipt(
+            devices=devs,
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'QUALIFIED')
+        self.assertIn('FOUR_PHYSICAL_GPU', res['qualified_claims'])
+
+    def test_4_necessary_3_policy_oom_refuse(self):
+        # Simulate OOM by setting peak > total
+        devs = []
+        for i in range(4):
+            devs.append({
+                'pci_id': f'0000:0{i+1}:00.0',
+                'vendor': 'NVIDIA',
+                'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 2000, 'kind': 'DEDICATED'}, # Peak > Total
+                'kernels_completed': True,
+                'resident_block_hash': f'b{i}'
+            })
+        receipt = self.make_receipt(
+            devices=devs,
+            claims=[{'id': 'FOUR_PHYSICAL_GPU', 'evidence': {}}]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('PEAK_GT_TOTAL', res['reasons'])
+
+    def test_llm_prose_fake_refused(self):
+        devs = [{'pci_id': '0000:01:00.0', 'vendor': 'N', 'memory': {'total_bytes': 100, 'free_bytes': 50, 'allocator_peak_bytes': 10, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}] * 4
+        receipt = self.make_receipt(
+            devices=devs,
+            claims=[{
+                'id': 'LLM_LOGIT_PARITY', 
+                'evidence': {
+                    'type': 'TEXT_PROSE', # Fake
+                    'reference_logit_hash': 'h1',
+                    'calculated_logit_hash': 'h1',
+                    'max_abs_error': 0.0,
+                    'tolerance': 0.0
+                }
+            }]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('PROSE_ONLY_EVIDENCE', res['reasons'])
+
+    def test_p2p_host_stage_fake_refused(self):
+        devs = [{'pci_id': '0000:01:00.0', 'vendor': 'N', 'memory': {'total_bytes': 100, 'free_bytes': 50, 'allocator_peak_bytes': 10, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}] * 4
+        receipt = self.make_receipt(
+            devices=devs,
+            claims=[{
+                'id': 'DIRECT_P2P', 
+                'evidence': {
+                    'primitive_type': 'HOST_STAGED' # Fake
+                }
+            }]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('HOST_STAGED_OR_SYSTEM_HEAP_P2P', res['reasons'])
+
+    def test_durable_atomic_fake_refused(self):
+        devs = [{'pci_id': '0000:01:00.0', 'vendor': 'N', 'memory': {'total_bytes': 100, 'free_bytes': 50, 'allocator_peak_bytes': 10, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}] * 4
+        receipt = self.make_receipt(
+            devices=devs,
+            claims=[{
+                'id': 'DURABLE_REPLAY', 
+                'evidence': {
+                    'checkpoint_identity': 'cp1',
+                    'commit_sequence': 1,
+                    'replay_boundary': 1,
+                    'method': 'ATOMIC_JSON_WRITE_ONLY' # Fake durability
+                }
+            }]
+        )
+        res = validate_result(receipt, now_utc=self.now, trusted_artifact_hashes=self.trusted_set)
+        self.assertEqual(res['status'], 'REFUSED')
+        self.assertIn('ATOMIC_JSON_NOT_DURABILITY', res['reasons'])
+
+if __name__ == '__main__':
+    unittest.main()
+
+SOURCE gemini_candidate_review\review.json
+{
+  "findings": [
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, _winapi\nclass TestWinapiResumeThread(unittest.TestCase):\n    def test_winapi_lacks_resumethread(self):\n        self.assertFalse(hasattr(_winapi, 'ResumeThread'), '_winapi does not have ResumeThread in CPython; must use kernel32.ResumeThread')\n",
+      "exact_source": "if _winapi.ResumeThread(th)==0xFFFFFFFF:raise WindowsJobError('RESUME_FAILED')",
+      "line": 128,
+      "minimal_fix": "if krn.ResumeThread(th)==0xFFFFFFFF:raise WindowsJobError('RESUME_FAILED')",
+      "reason": "_winapi in CPython does not export ResumeThread. Calling _winapi.ResumeThread raises AttributeError at runtime. ResumeThread was correctly declared on kernel32 via _kernel(), but the author invoked _winapi.ResumeThread instead of krn.ResumeThread.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, ctypes, contained_supervisor as cs\nclass TestKillOnClose(unittest.TestCase):\n    def test_set_information_job_object_declared(self):\n        krn = cs._kernel()\n        self.assertTrue(hasattr(krn, 'SetInformationJobObject'), 'SetInformationJobObject must be declared on kernel32 to set kill_on_close')\n",
+      "exact_source": "if not krn.QueryInformationJobObject(jh,9,ctypes.byref(eli),ctypes.sizeof(eli),None):",
+      "line": 96,
+      "minimal_fix": "Add SetInformationJobObject to _kernel() signatures and call krn.SetInformationJobObject(jh, 9, ctypes.byref(jeli), ctypes.sizeof(jeli)) with JOBOBJECT_EXTENDED_LIMIT_INFORMATION setting LimitFlags = 0x2000 (JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE).",
+      "reason": "To set JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE (0x2000), Windows API requires SetInformationJobObject. The candidate calls QueryInformationJobObject with class 9, which only queries limits into uninitialized memory and never configures kill-on-close. Furthermore, SetInformationJobObject is missing from _kernel() prototypes.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, ctypes, contained_supervisor as cs\nclass TestJobCollision(unittest.TestCase):\n    def test_collision_detection_on_nonzero_handle(self):\n        # CreateJobObjectW returns non-zero handle and GetLastError() == 183 on collision\n        krn = cs._kernel()\n        jh1 = krn.CreateJobObjectW(None, 'TEST_COLLISION_JOB')\n        try:\n            with self.assertRaises(cs.WindowsJobError) as ctx:\n                cs.run_workers({'run_id': 'TEST_COLLISION_JOB', 'workers': [{'worker_id': 'w1', 'argv': ['C:\\\\Windows\\\\System32\\\\cmd.exe', '/c', 'exit 0'], 'executable_sha256': '0'*64, 'cwd': 'C:\\\\'}], 'deadline_seconds': 5, 'startup_seconds': 2, 'log_limit_bytes': 1024}, 'C:\\\\test_out_nonexistent')\n            self.assertEqual(ctx.exception.code, 'JOB_COLLISION')\n        finally:\n            krn.CloseHandle(jh1)\n",
+      "exact_source": "if not jh:\n    e=ctypes.get_last_error()\n    if e==183:raise WindowsJobError('JOB_COLLISION',183)\n    raise WindowsJobError('CREATE_JOB_FAILED',e)",
+      "line": 89,
+      "minimal_fix": "if not jh:\n    raise WindowsJobError('CREATE_JOB_FAILED', ctypes.get_last_error())\nif ctypes.get_last_error() == 183:\n    krn.CloseHandle(jh)\n    raise WindowsJobError('JOB_COLLISION', 183)",
+      "reason": "CreateJobObjectW returns a valid open HANDLE (not NULL/0) when a named job already exists, with GetLastError() returning 183 (ERROR_ALREADY_EXISTS). By checking `if not jh:`, the candidate fails to detect named job collision, leaks the duplicate handle, and runs inside an uncontained/colliding job.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, contained_supervisor as cs\nclass TestFailureCleanup(unittest.TestCase):\n    def test_assign_failure_terminates_job(self):\n        # When an error occurs during worker creation, TerminateJobObject must be invoked even on unhandled exceptions\n        pass\n",
+      "exact_source": "if not krn.AssignProcessToJobObject(jh,ph):\n    ae=ctypes.get_last_error();_winapi.TerminateProcess(ph,1);_winapi.WaitForSingleObject(ph,5000)\n    raise WindowsJobError('ASSIGN_FAILED',ae)",
+      "line": 120,
+      "minimal_fix": "Wrap worker setup and execution so that any exception invokes krn.TerminateJobObject(jh, 1) and boundedly waits for all created processes in phs before closing handles.",
+      "reason": "If AssignProcessToJobObject or ResumeThread fails, the exception bypasses line 145 (TerminateJobObject) and enters finally:, where only CloseHandle is called on phs and jh. Under explicit_terminate mode where kill-on-close is disabled, surviving child processes are not terminated when the job handle closes, leaking detached processes.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, contained_supervisor as cs\nclass TestPipeHandles(unittest.TestCase):\n    def test_pipe_read_handles_closed(self):\n        # prd and erd handles must be closed upon supervisor completion\n        pass\n",
+      "exact_source": "prd,pwr=_winapi.CreatePipe(None,0);stk.callback(_winapi.CloseHandle,pwr)\nerd,ewr=_winapi.CreatePipe(None,0);stk.callback(_winapi.CloseHandle,ewr)",
+      "line": 110,
+      "minimal_fix": "Register prd and erd with stk.callback(_winapi.CloseHandle, ...) or close them in reader threads/finally, and close pwr/ewr/oh/eh immediately after CreateProcess so write ends do not remain open in the parent process during execution.",
+      "reason": "Pipe read handles prd and erd are never closed, leaking kernel handles. Furthermore, writer handles pwr, ewr, oh, eh remain open in the parent ExitStack until execution finishes, preventing ReadFile in reader threads from detecting EOF when children terminate.",
+      "severity": "MEDIUM"
+    },
+    {
+      "artifact": "supervisor_v2/tests.candidate.py",
+      "discriminating_test": "import unittest, supervisor_v2.tests_candidate as tc\nclass TestMockTestsExist(unittest.TestCase):\n    def test_has_pure_mock_tests(self):\n        # Contract requires pure unit tests with mocked API checking assign-before-resume without opt-in fixtures\n        self.assertTrue(hasattr(tc, 'TestMockContainment'), 'Pure mock unit tests for run_workers assign-before-resume are missing')\n",
+      "exact_source": "class TestValidation(unittest.TestCase):",
+      "line": 17,
+      "minimal_fix": "Implement pure mock unit tests for run_workers that mock _winapi and _kernel to assert AssignProcessToJobObject precedes ResumeThread and verify failure-path cleanup without requiring RUN_CONTAINMENT_FIXTURES=1.",
+      "reason": "supervisor_v2/tests.candidate.py completely lacks pure unit tests for run_workers execution. All tests of run_workers are confined to TestFixtures, which is skipped unless RUN_CONTAINMENT_FIXTURES=1 is set. The contract strictly requires pure mock tests verifying assignment before ResumeThread and fail cleanup.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestPciParsing(unittest.TestCase):\n    def test_standard_pci_not_malformed(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        dev = {'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': [dev], 'claims': []}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertNotIn('MALFORMED_PCI:0000:01:00.0', res['reasons'])\n",
+      "exact_source": "parts = pci_raw.split(':')\nif len(parts) != 4:\n    reasons.append(f'MALFORMED_PCI:{pci_raw}')\n    continue",
+      "line": 46,
+      "minimal_fix": "Parse PCI ID by splitting domain/bus/device/function properly (e.g. splitting domain:bus:device.function where device and function are separated by a dot), normalizing to 4 hex segments and verifying dev <= 0x1f and fn <= 0x7.",
+      "reason": "Standard PCI IDs format device and function as 'device.function' (e.g. 0000:01:00.0). Splitting only on ':' results in 3 parts (['0000', '01', '00.0']), causing line 47 to reject all standard PCI identifiers as MALFORMED_PCI and failing every device receipt in the test suite.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestEmptyArtifactsTrustGate(unittest.TestCase):\n    def test_empty_artifacts_rejected(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [], 'devices': [], 'claims': [{'id': 'TWO_VENDOR_NUMERICAL'}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset())\n        self.assertEqual(res['status'], 'NOT_CHECKED')\n",
+      "exact_source": "for art in artifacts:\n    h = art.get('sha256')\n    if not h or h not in trusted_artifact_hashes:\n        reasons.append(f'UNTRUSTED_ARTIFACT:{h}')\n        return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}",
+      "line": 23,
+      "minimal_fix": "Verify receipt contains non-empty required artifacts and that every required measurement artifact hash is present in non-empty trusted_artifact_hashes; if trusted_artifact_hashes is empty or artifacts are missing, immediately return {'status': 'NOT_CHECKED', 'reasons': ['UNTRUSTED_OR_MISSING_ARTIFACTS'], 'qualified_claims': []}.",
+      "reason": "External trust gate bypass: If receipt['artifacts'] is empty or omitted, the loop is completely skipped, allowing receipts to be evaluated and qualified with empty trusted_artifact_hashes. Pure validator cannot authenticate JSON claims without external trust gate binding required measurement artifacts.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestBoolMemoryRejected(unittest.TestCase):\n    def test_bool_memory_rejected(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        dev = {'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': True, 'free_bytes': False, 'allocator_peak_bytes': False, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': [dev]*4, 'claims': [{'id': 'FOUR_PHYSICAL_GPU'}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertIn('INVALID_MEM_TYPES', res['reasons'])\n",
+      "exact_source": "if not all(isinstance(x, int) and x >= 0 for x in [total, free, peak]):\n    return False, 'INVALID_MEM_TYPES'",
+      "line": 80,
+      "minimal_fix": "if not all(isinstance(x, int) and not isinstance(x, bool) and x >= 0 for x in [total, free, peak]):\n    return False, 'INVALID_MEM_TYPES'",
+      "reason": "In Python, bool is a subclass of int, so isinstance(True, int) evaluates to True. As a result, boolean values pass check_mem, violating the contract requirement: strict nonbool finite int bytes.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestCapacityOOMRequired(unittest.TestCase):\n    def test_capacity_claims_require_oom_proof(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        devs = [{'pci_id': f'0000:0{i+1}:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': f'b{i}'} for i in range(4)]\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': devs, 'claims': [{'id': 'FOUR_PHYSICAL_GPU'}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertNotIn('DEDICATED_CAPACITY_GT_ONE_CARD', res['qualified_claims'])\n        self.assertNotIn('FOUR_REQUIRED_CAPACITY', res['qualified_claims'])\n",
+      "exact_source": "qualified_claims.append('FOUR_PHYSICAL_GPU')\nqualified_claims.append('DEDICATED_CAPACITY_GT_ONE_CARD')\nqualified_claims.append('FOUR_REQUIRED_CAPACITY')",
+      "line": 128,
+      "minimal_fix": "Implement separate claim validation for DEDICATED_CAPACITY_GT_ONE_CARD and FOUR_REQUIRED_CAPACITY requiring proof that 1-card and 3-card workloads encounter actual allocator OOM on identical model/workload hashes while 4-card passes without policy caps.",
+      "reason": "qualification_validator.py automatically stamps DEDICATED_CAPACITY_GT_ONE_CARD and FOUR_REQUIRED_CAPACITY as qualified whenever FOUR_PHYSICAL_GPU is claimed, without verifying any single-card or 3-card actual allocator OOM evidence or memory budget exceedance.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestTwoVendorNumerical(unittest.TestCase):\n    def test_two_vendor_requires_numerical_evidence(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        devs = [{'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}, {'pci_id': '0000:02:00.0', 'vendor': 'AMD', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b2'}]\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': devs, 'claims': [{'id': 'TWO_VENDOR_NUMERICAL', 'evidence': {}}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertNotIn('TWO_VENDOR_NUMERICAL', res['qualified_claims'])\n",
+      "exact_source": "if 'TWO_VENDOR_NUMERICAL' in claim_map:\n    # Requires at least 2 distinct vendors in devices\n    vendors = set(d.get('vendor') for d in valid_devices)\n    if len(vendors) < 2:\n        reasons.append('SINGLE_VENDOR_EVIDENCE')\n        return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}\n    qualified_claims.append('TWO_VENDOR_NUMERICAL')",
+      "line": 188,
+      "minimal_fix": "Verify evidence contains numerical kernel execution proof, clean CPU reference tolerances (atol, rtol), and bound artifact hashes, rather than qualifying on vendor string counts alone.",
+      "reason": "TWO_VENDOR_NUMERICAL qualifies simply if two distinct vendor strings exist in the device map, completely ignoring numerical kernel execution, tolerance bounds, and CPU reference verification.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "validator_v2/tests.candidate.py",
+      "discriminating_test": "import unittest, validator_v2.tests_candidate as tc\nclass TestFixtureExecution(unittest.TestCase):\n    def test_run_candidate_tests(self):\n        suite = unittest.defaultTestLoader.loadTestsFromModule(tc)\n        runner = unittest.TextTestRunner()\n        result = runner.run(suite)\n        self.assertTrue(result.wasSuccessful(), 'Candidate tests fail when run against candidate validator due to PCI parsing bug')\n",
+      "exact_source": "def test_complete_4_trusted_synthetic_structured_fixture_pass(self):",
+      "line": 162,
+      "minimal_fix": "Fix the candidate validator PCI normalization to accept canonical colon/dot PCI formats and run the test suite to verify tests actually pass.",
+      "reason": "validator_v2/tests.candidate.py contains tests that were never run against qualification_validator.py. Because of the PCI parsing defect in qualification_validator.py line 46, test_complete_4_trusted_synthetic_structured_fixture_pass and test_valid_two_vendor_partial fail with AssertionError ('REFUSED' != 'QUALIFIED').",
+      "severity": "HIGH"
+    }
+  ],
+  "qualification_limits": [
+    "Contained supervisor candidate contained_supervisor.py fails Windows process execution proof due to calling non-existent _winapi.ResumeThread and failing to configure kill_on_close via SetInformationJobObject.",
+    "Supervisor unit tests omit required pure-mock assign-before-resume tests, running only schema validation unless fixtures are manually enabled via RUN_CONTAINMENT_FIXTURES=1.",
+    "Qualification validator qualification_validator.py fails PCI normalization for all standard PCI addresses (splitting on ':' instead of recognizing '.' for device.function), refusing all valid multi-device receipts.",
+    "Validator external trust gate is unauthenticated when receipt artifacts list is empty, and capacity claims (DEDICATED_CAPACITY_GT_ONE_CARD, FOUR_REQUIRED_CAPACITY) are fabricated without single-card or 3-card actual allocator OOM proof.",
+    "No physical 4-GPU hardware execution proof exists; LLM inference context mismatch and single-card Qwen3-0.6B model bounds remain unproven for 4-discrete-GPU qualification."
+  ],
+  "toolAction": "Finalizing candidate review",
+  "toolSummary": "Finalize candidate review",
+  "verdict": "REJECTED"
+}
+

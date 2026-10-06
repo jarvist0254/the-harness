@@ -1,0 +1,93 @@
+{
+  "utc": "2026-10-04T22:58:54.249794+00:00",
+  "status": "PREPARATION_ONLY_PENDING_ROOT_ADMISSION",
+  "launch_authorized": false,
+  "job": "qwen_vulkan_nv_l0_intel_reverse_v2",
+  "model": "qwen3.8-max",
+  "reasoning_effort": "xhigh",
+  "enable_thinking": true,
+  "thinking_budget_absent": true,
+  "source_chars_limit": 32000,
+  "tests_chars_limit": 16000,
+  "http_seconds": 2400,
+  "outer_seconds": 2430,
+  "raw_stream_cap_bytes": 16777216,
+  "normalized_each_cap": 2097152,
+  "native_children_actual": 0,
+  "source_execution": false,
+  "source_binding": {
+    "path": "E:\\the_harness\\records\\vendor_headers\\vulkan_1.4.321\\include\\vulkan\\vulkan_core.h",
+    "sha256": "3172a758081a172f4c46771a88046a53d5791ef2bd24329ff4bd7ed8c6f12abd",
+    "bytes": 1204373
+  },
+  "prompt": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.prompt.txt",
+    "sha256": "63be2d7e791c85181480f00374038edce62f6fd3aef06d6cfaa01d6ae26f4bd5",
+    "bytes": 74690
+  },
+  "spec": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.spec.txt",
+    "sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6",
+    "bytes": 5378
+  },
+  "api": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.api.txt",
+    "sha256": "53a3049c660a18fb6d512846e3b59cd9d58f40c25ccfa81c6332e7785cccd0c4",
+    "bytes": 22945
+  },
+  "full_embedded_inputs": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\external_memory.adoc",
+      "sha256": "101ee727ee6d90dc863776994274a9461f7f9172ca1e7da9bb820c2a6f77e47d",
+      "bytes": 11740
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\external_memory_fd.adoc",
+      "sha256": "8f402e86c670909c8c6c6b757e4b553ab42a5d0ba8057e226cbda52aa8f66100",
+      "bytes": 1901
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\external_memory_dma_buf.adoc",
+      "sha256": "de12385f23b7bbe24c7f9f0c752b08aaccafd12023ba4d07295787e382a22f54",
+      "bytes": 2261
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\bridge_contract_findings.md",
+      "sha256": "4e02a99eaf54e92d13ccf5d7a1deb15981f31c050a63f08865eb4862f392dbc8",
+      "bytes": 6314
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\source_excerpts.txt",
+      "sha256": "4170f42fad8e03dd12ad347b39c3fbca29493d1d3ab95f1f17ff7d60f931486e",
+      "bytes": 23295
+    }
+  ],
+  "helpers": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\invoke_owned_stream_research.v3.ps1",
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "bytes": 8048
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_http_stream_research.v3.ps1",
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "bytes": 8011
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\research_artifact.v3.ps1",
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36",
+      "bytes": 774
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PURE_LIMIT_CONTROLS.json",
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e",
+      "bytes": 582
+    }
+  ],
+  "helper_diffs": "NONE frozen approved helpers unchanged"
+}

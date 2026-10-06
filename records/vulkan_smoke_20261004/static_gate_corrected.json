@@ -1,0 +1,70 @@
+{
+  "status": "STATIC_GATE_FAIL",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_independent_work_20261004T102000\\vulkan_codegen\\vulkan_two_device.cpp",
+  "source_sha256": "fa2051f10b693b43e47d8b24bb0e78370bef16b0d6146555eb651fc8adc6ebe7",
+  "compiled": false,
+  "executed": false,
+  "requires_external_provider_correction": true,
+  "findings": [
+    {
+      "finding": "nonexistent_device_group_api",
+      "lines": [
+        125,
+        129
+      ]
+    },
+    {
+      "finding": "unfiltered_first_two_devices",
+      "lines": [
+        119
+      ]
+    },
+    {
+      "finding": "noncapturing_lambda_local_devs",
+      "lines": [
+        208
+      ]
+    },
+    {
+      "finding": "destination_independently_cpu_filled",
+      "lines": [
+        228
+      ]
+    },
+    {
+      "finding": "source_readback_unmapped_before_destination_upload",
+      "lines": [
+        219,
+        221
+      ]
+    },
+    {
+      "finding": "missing_functional_header",
+      "uses_std_function_at": [
+        174
+      ],
+      "functional_header_present": false
+    },
+    {
+      "finding": "missing_source_fill_to_copy_transfer_dependency",
+      "fill_lines": [
+        51,
+        209
+      ],
+      "note": "Actual phase1 lambda has no transfer-write-to-transfer-read barrier; unused recorder barrier does not run"
+    },
+    {
+      "finding": "buffer_barriers_queue_family_indices_not_ignored",
+      "note": "Barrier structs zero-initialized; src/dstQueueFamilyIndex never set to VK_QUEUE_FAMILY_IGNORED"
+    }
+  ],
+  "bounded_properties": {
+    "buffer_bytes": 262144,
+    "fence_wait_chunk_ns": 1000000000,
+    "fence_deadline_seconds": 10,
+    "corruption_compares_fixed_reference": true
+  },
+  "retained_fixture_source_created": false,
+  "corrects": "static_gate.json",
+  "correction_note": "VkPhysicalDeviceGroupProperties is valid; vkGetPhysicalDeviceGroupProperties is not. Valid vkEnumeratePhysicalDeviceGroups takes VkInstance."
+}

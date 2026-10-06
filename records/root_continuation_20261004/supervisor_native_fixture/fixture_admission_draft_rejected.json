@@ -1,0 +1,7 @@
+{
+  "status": "REJECTED_BEFORE_NATIVE_CASES",
+  "reason": "malformed_controller_sha256_literal",
+  "bad_literal": "d85f31373c78fd8c066427c296e918ef1adbf ee34a31f318d6d393f2c82a24ce",
+  "native_cases_started": false,
+  "superseded_by": "fixture_admission.json"
+}

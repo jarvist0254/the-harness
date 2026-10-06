@@ -1,0 +1,16 @@
+{
+  "max_native_authorized_qwen": 10,
+  "native_children_actual": 0,
+  "prompt_sha256": "B8C65A481A8097A74BBA8F9E1C61B98494A4EDAB3217405457DC5B5E7A592865",
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "credential_saved": false,
+  "source_path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+  "source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "requested_model": "qwen3.8-max",
+  "pid": 87556,
+  "response_cap_bytes": 2097152,
+  "http_deadline_seconds": 240,
+  "max_native_authorized_deepseek": 10,
+  "enable_thinking": false,
+  "max_completion_tokens": 8192
+}

@@ -1,0 +1,126 @@
+import importlib.util
+import json
+import os
+import tempfile
+import unittest
+
+SOURCE_PATH = os.environ.get('CONTRACT_VALIDATOR_SOURCE', 'contract_validator.py')
+spec = importlib.util.spec_from_file_location('contract_validator', SOURCE_PATH)
+cv = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(cv)
+
+def make_artifacts():
+ out = []
+ for name in cv.REQUIRED_ARTIFACTS:
+  meta = cv.PRIMARY_SPANS[name]
+  out.append({'name': name, 'sha256': meta['sha256'], 'path': 'records/' + name, 'url': meta.get('url', ''), 'spans': meta['spans']})
+ return out
+
+def base_candidate():
+ return {
+  'schema_version': cv.SCHEMA_VERSION,
+  'evidence_id': 'test000',
+  'scope': 'SOURCE_PREP',
+  'host': {'os': 'Linux', 'kernel': 'NOT_CHECKED', 'arch': 'x86_64', 'native_linux': False},
+  'producer': {
+   'route': 'raw_l0',
+   'device': {'pci': 'NOT_CHECKED', 'uuid': 'NOT_CHECKED', 'driver_version': 'NOT_CHECKED'},
+   'allocation': {'size_bytes': 65536, 'owner': 'NOT_CHECKED', 'type': 'DEVICE', 'page_size': 'NOT_CHECKED', 'export_flags': ['ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF']},
+   'layout': {'fourcc': 'NOT_CHECKED', 'modifier': 'NOT_CHECKED', 'stride': 'NOT_CHECKED', 'offset': 'NOT_CHECKED', 'plane_count': 'NOT_CHECKED'},
+   'fence': {'kind': 'NOT_CHECKED', 'source': 'NOT_CHECKED'},
+   'cache': {'flush_contract': 'NOT_CHECKED'}
+  },
+  'consumer': {
+   'platform': 'EGL_PLATFORM_DEVICE_EXT',
+   'device': {'egl_device': 'NOT_CHECKED', 'drm_render_node': 'NOT_CHECKED', 'sysfs_pci_path': 'NOT_CHECKED', 'vendor': 'NOT_CHECKED', 'driver_version': 'NOT_CHECKED'},
+   'extensions': ['EGL_EXT_image_dma_buf_import', 'EGL_EXT_image_dma_buf_import_modifiers', 'EGL_KHR_image_base', 'GL_OES_EGL_image'],
+   'format_query': {'fourcc': 'NOT_CHECKED', 'modifier': 'NOT_CHECKED', 'external_only': 'NOT_CHECKED'},
+   'import': dict(cv.IMAGE_DESCRIPTOR),
+   'sync': {'import_sync_type': 'NOT_CHECKED'}
+  },
+  'payload': {'baseline_hash': 'NOT_CHECKED', 'corruption_hash': 'NOT_CHECKED', 'word_count': 16384, 'context_binding': 'NOT_CHECKED', 'actual_work_proof': False},
+  'artifacts': make_artifacts(),
+  'claims': {},
+  'prerequisites': [{'id': 'prep_only', 'scope': 'no allocation or GPU work', 'status': 'DECLARED'}],
+  'driver_identity_binding': {'level_zero_driver_version': 'NOT_CHECKED', 'egl_driver_version': 'NOT_CHECKED', 'kernel_version': 'NOT_CHECKED', 'bound': False, 'tied_to_evidence_id': 'test000'},
+  'requested_operations': {'allocate_export': False, 'egl_import': False, 'producer_write': False, 'consumer_read': False, 'parity': False},
+  'declared_contract_ids': []
+ }
+
+def write_candidate(cand):
+ fd, path = tempfile.mkstemp(suffix='.json')
+ with os.fdopen(fd, 'w', encoding='utf-8') as f:
+  json.dump(cand, f)
+ return path
+
+class ValidatorTests(unittest.TestCase):
+ def test_minimal_scoped_prep(self):
+  path = write_candidate(base_candidate())
+  res = cv.validate_candidate(path)
+  self.assertTrue(res['ok'])
+  self.assertEqual(res['status'], 'ANALYSIS')
+  self.assertIn('No physical transport qualification; declared prerequisites only', res['notes'])
+ def test_reject_raw_l0_fabricated_linear(self):
+  cand = base_candidate()
+  cand['claims']['linear_layout'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+  self.assertEqual(res['status'], 'FAIL1')
+ def test_reject_linear_layout_proof_claim(self):
+  cand = base_candidate()
+  cand['claims']['linear_layout_proof'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+ def test_reject_minigbm_linear_without_metadata(self):
+  cand = base_candidate()
+  cand['producer']['route'] = 'minigbm_to_l0'
+  cand['claims']['linear_layout'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+ def test_minigbm_exact_metadata_is_declared_not_proof(self):
+  cand = base_candidate()
+  cand['producer']['route'] = 'minigbm_to_l0'
+  cand['producer']['layout'] = {'fourcc': 'DRM_FORMAT_ARGB8888', 'modifier': 0, 'stride': 1024, 'offset': 0, 'plane_count': 1}
+  cand['claims']['linear_layout'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertTrue(res['ok'])
+  self.assertIn('minigbm declared linear metadata scoped to allocation only', res['accepted_prerequisites'])
+  self.assertIn('p2p_transport_measurement', res['unresolved_gates'])
+ def test_reject_dummy_fence(self):
+  cand = base_candidate()
+  cand['requested_operations']['producer_write'] = True
+  cand['producer']['fence'] = {'kind': 'dummy', 'source': 'selfreported'}
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+ def test_reject_self_reported_local_vram(self):
+  cand = base_candidate()
+  cand['claims']['local_vram'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+ def test_reject_unknown_sysfs_before_import(self):
+  cand = base_candidate()
+  cand['requested_operations']['egl_import'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+ def test_reject_driver_version_misbinding(self):
+  cand = base_candidate()
+  cand['driver_identity_binding']['bound'] = True
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+ def test_reject_artifact_sha_mismatch(self):
+  cand = base_candidate()
+  cand['artifacts'][0]['sha256'] = '0' * 64
+  path = write_candidate(cand)
+  res = cv.validate_candidate(path)
+  self.assertFalse(res['ok'])
+
+if __name__ == '__main__':
+ unittest.main()

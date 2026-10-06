@@ -1,0 +1,35 @@
+{
+  "syntax_parse_errors": [],
+  "previous_batch_immutable": true,
+  "credential_read": false,
+  "source_char_limit": 8000,
+  "normalized_caps_each_bytes": 2097152,
+  "utc": "2026-10-04T19:10:34.1200371Z",
+  "authority": "ROOT revised sixcompacttask prep before independentpacketreview",
+  "tests_char_limit": 6000,
+  "outer_deadline_seconds": 2430,
+  "helpers": [
+    {
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "file": "provider_common.ps1"
+    },
+    {
+      "sha256": "ac688b556dbeeb1c54deef0e15d0919a45f1ccd528681c06b1218d458eef1169",
+      "file": "research_artifact.ps1"
+    },
+    {
+      "sha256": "37593c44ade5eb4d66b01d892961b738b405a6fa61f660b215e3f7fa267fc501",
+      "file": "qwen_http_stream_research.ps1"
+    },
+    {
+      "sha256": "d922c0863f9f88d51158a36ea37644772f1bf1a05598e9db901a2076e1613fd8",
+      "file": "invoke_owned_stream_research.ps1"
+    }
+  ],
+  "http_deadline_seconds": 2400,
+  "raw_cap_bytes_per_job": 16777216,
+  "enable_thinking": true,
+  "thinking_budget_set": false,
+  "state": "SOURCEONLY_HELPER_PREP_NO_PROVIDER_LAUNCH",
+  "reasoning_effort": "xhigh"
+}

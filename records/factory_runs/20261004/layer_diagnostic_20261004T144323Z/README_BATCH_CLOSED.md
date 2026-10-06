@@ -1,0 +1,13 @@
+This fifth isolated provider batch completed six actual jobs: four Qwen request attempts, one Gemini review, and one Grok edit. Existing global Factory and accepted harness modules were untouched.
+
+The C++ intermediate-capture fixture remains NOT_CHECKED: Qwen Max timed out after 240.75 seconds without an artifact (usage unknown), and the focused Qwen Flash retry reached the output limit (36,988 reported tokens; incomplete code rejected). No compiler or GPU tests ran from this manager.
+
+Qwen returned a complete Python comparator and independent tests. Independent QA found 21 failures in 62 comparator tests. Gemini reviewed those actual Python artifacts and rejected them; it explicitly did not review a nonexistent C++ candidate. Grok returned a corrected comparator and corrected tests. Both pass syntax-only parsing and await root's independent admission. No generated test PASS is claimed. Root's additional pre/post-fstat requirement arrived after Grok launched and is absent from its candidate; current path checks must not be described as race-free.
+
+Current reported usage: Qwen 55,677 tokens plus one request with unknown usage; Gemini 72,568; Grok 56,141. Total observed: 184,386. Grok reported one internal model call for its one CLI job. Gemini internal model-call counts are not reported; CLI turns are not model calls. All jobs launched zero native child agents, distinct from authorization for up to ten per Qwen/DeepSeek parent.
+
+The immutable ledger references the previous four batches rather than recounting copied artifacts. Across five batches: 47 jobs, 2,515,200 observed reported tokens and two jobs with unknown usage. Qwen: 20 jobs, 382,243 observed tokens plus one unknown. Gemini: 11 jobs, 1,323,322. Grok: 16 jobs, 809,635 observed plus one unknown. Tokens are not ModelStudio Credits. No new dashboard or quota query was performed here; the earlier root-observed 35.6% snapshot is historical.
+
+All six owned provider PIDs are terminal and absent. The bounded batch audit checked 82 text files against three known credential strings and found zero matches and zero credential-named files. It does not claim to identify every possible unknown secret.
+
+Evidence: USAGE_FINAL_SIX_20261004T150416Z.json, BATCH_CLOSED_SIX_20261004T150416Z.json, SECRET_PROCESS_AUDIT_FINAL_SIX.json, and grok_capture_edit/SOURCE_EXTRACTION_GATE.json. Raw failed/partial requests, complete responses, review, and generated sources remain preserved. Existing real LLM numerical failures and fixed tolerances remain unchanged. The full four-card integrated execution/fabrication goal is still open.

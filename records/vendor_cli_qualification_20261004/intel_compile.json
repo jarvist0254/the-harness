@@ -1,0 +1,15 @@
+{
+  "command": [
+    "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\clang++.exe",
+    "-fsycl",
+    "-O2",
+    "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\intel_vector.cpp",
+    "-o",
+    "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\intel_vector.exe"
+  ],
+  "pid": 90688,
+  "exit_code": 1104,
+  "source_sha256": "bf928f9ff2988403e36109321014a268ed824a17467748cbeb9f231d150ea9f7",
+  "stdout": "LINK : fatal error LNK1104: cannot open file 'msvcrt.lib'\r\n",
+  "stderr": "clang++: error: linker command failed with exit code 1104 (use -v to see invocation)\r\n"
+}

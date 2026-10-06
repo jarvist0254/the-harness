@@ -1,0 +1,74 @@
+{
+  "files": [
+    {
+      "sha256": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+      "bytes": 6983,
+      "name": "cuda_l0_device_dmabuf.v2.prompt.txt"
+    },
+    {
+      "sha256": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+      "bytes": 6983,
+      "name": "cuda_l0_device_dmabuf.v2.spec.txt"
+    },
+    {
+      "sha256": "cd3dc75226551f79ec2177882b59537c4d5ca8059cea64c87fb8f266520721f8",
+      "bytes": 8048,
+      "name": "invoke_owned_stream_research.v2.ps1"
+    },
+    {
+      "sha256": "1017a72a77e6483687383920da34eaae05579d0a16e1b441d1c1474ae1b55156",
+      "bytes": 481,
+      "name": "PURE_V2_LIMIT_CONTROLS.json"
+    },
+    {
+      "sha256": "1c2bbcc93314c4dbcd4fe25bac1bfbbee465fb53e39586401cbe8861555d8400",
+      "bytes": 8011,
+      "name": "qwen_http_stream_research.v2.ps1"
+    },
+    {
+      "sha256": "bf152cd6ca732e51680daef7bf1e5a2938109e4afa10933f99cb2123bf033f82",
+      "bytes": 773,
+      "name": "research_artifact.v2.ps1"
+    }
+  ],
+  "changes": [
+    "remove artificial prior-proven crossvendor protocol gate; attempt documented API support within bounded fixture",
+    "retain exact unsupported errors/FD lifetime/sync and no directP2P qualification from payload",
+    "simple CUDA constantpattern/device one-wordfault, no giant PTX",
+    "newprivate parserlimits16k8k; transport/model/endpoint/time/log caps unchanged"
+  ],
+  "old_intake_refusals_immutable": true,
+  "modelcode_import_execution": false,
+  "state": "REVISED_V2_PENDING_ROOT_LAUNCH_ADMISSION",
+  "utc": "2026-10-04T19:58:19.6934253Z",
+  "boundary_controls": [
+    {
+      "observed_accept": true,
+      "pass": true,
+      "name": "exactbounds",
+      "expected_accept": true
+    },
+    {
+      "observed_accept": true,
+      "pass": false,
+      "name": "source_over",
+      "expected_accept": false
+    },
+    {
+      "observed_accept": false,
+      "pass": true,
+      "name": "tests_over",
+      "expected_accept": false
+    },
+    {
+      "observed_accept": false,
+      "pass": true,
+      "name": "unknown_status",
+      "expected_accept": false
+    }
+  ],
+  "credentials_read_in_prep": false,
+  "tests_chars_limit": 8000,
+  "provider_launch_authorized": false,
+  "source_chars_limit": 16000
+}

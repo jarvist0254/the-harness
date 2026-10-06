@@ -1,0 +1,22 @@
+{
+  "actual_qwen_json_full_embedded": true,
+  "cpp_source_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "model": "gemini-3.8-flash-medium",
+  "critical_exact_ranges": [
+    "72-84",
+    "309-331",
+    "334-347",
+    "398-465",
+    "500-519"
+  ],
+  "prompt_utf16": 23457,
+  "omitted_source_scope_disclosed": true,
+  "job": "gemini_shared_host_review",
+  "provider_launched": false,
+  "state": "SOURCE_ONLY_PENDING_ROOT_BINDING",
+  "utc": "2026-10-04T17:16:06.5011888Z",
+  "prompt_sha256": "ef48273fa1c4221266618026b5d870688ae2f66f5fe6e71123241e6ac965bf81",
+  "source_sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\qwen_shared_host_protocol\\protocol.raw.unaccepted.json",
+  "conservative_argv_utf16": 24457
+}

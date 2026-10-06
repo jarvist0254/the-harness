@@ -1,0 +1,14 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_KHR_fence_sync.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/EGL-Registry/main/extensions/KHR/EGL_KHR_fence_sync.txt",
+    "bytes": 23478,
+    "sha256": "8973f2a9fa1acef7938569ee1f940334551eff99605b9c4701574cb66c84e087"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_KHR_wait_sync.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/EGL-Registry/main/extensions/KHR/EGL_KHR_wait_sync.txt",
+    "bytes": 11216,
+    "sha256": "46f5b9273c134931a22d33430b63a9579df50cd748398943c88d2084925f3410"
+  }
+]

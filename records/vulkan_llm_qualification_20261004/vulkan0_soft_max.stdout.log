@@ -1,0 +1,15 @@
+Testing 3 devices
+
+Backend 1/3: Vulkan0
+  Device description: NVIDIA GeForce RTX 5070 Ti
+  Device memory: 15995 MB (15223 MB free)
+
+  SOFT_MAX(type=f32,ne=[16,16,1,1],mask=0,sinks=0,m_prec=f32,nr23=[1,1],scale=1.000000,max_bias=0.000000,inplace=0): [1;32mOK[0m
+  1/1 tests passed
+  Backend Vulkan0: [1;32mOK[0m
+Backend 2/3: Vulkan1
+  Skipping
+Backend 3/3: CPU
+  Skipping
+3/3 backends passed
+[1;32mOK[0m

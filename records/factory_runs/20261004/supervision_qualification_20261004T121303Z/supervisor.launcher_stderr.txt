@@ -1,0 +1,6 @@
+Exception: E:\the_harness\records\factory_runs\20261004\supervision_qualification_20261004T121303Z\provider_job.ps1:8
+Line |
+   8 |  . odel|Select-Object -First 1;if(!$m){throw 'model unavailable'};$key=$ .
+     |                                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+     | model unavailable
+

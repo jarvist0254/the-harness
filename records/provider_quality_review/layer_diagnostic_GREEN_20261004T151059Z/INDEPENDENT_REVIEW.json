@@ -1,0 +1,44 @@
+{
+  "source_sha256_before": "2786a0213039cdeb1654dd1de7688e9f628672a963355fcfef6ebe94cba87495",
+  "source_sha256_after": "2786a0213039cdeb1654dd1de7688e9f628672a963355fcfef6ebe94cba87495",
+  "original62": {
+    "pass": 62,
+    "fail": 0
+  },
+  "additional3": {
+    "pass": 0,
+    "fail": 3
+  },
+  "forbidden_calls": [],
+  "input_unchanged_all": true,
+  "status": "ORIGINAL_CONTROLS_GREEN_ADDITIONAL_MALFORMED_CONTROLS_RED",
+  "scope": "Synthetic artifact comparator only; not model or GPU qualification",
+  "source_keys": [
+    "result",
+    "comparator",
+    "control",
+    "nodes",
+    "first_noise",
+    "first_threshold_violation",
+    "first_divergent_ordinal and stats only when threshold violated"
+  ],
+  "limitations": [
+    "Metadata pins are declarations, not execution authentication.",
+    "Dynamic rename/reparse races NOT_CHECKED: source checks lstat before opening but not opened-handle fstat pre/post.",
+    "No provider-generated tests or native GPU captures.",
+    "142 canonical names make isolated144/145 otherwise-valid node cap unreachable.",
+    "No runtime code edited."
+  ],
+  "independent_evaluator_adaptations": {
+    "original_evaluator": "E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py",
+    "original_sha256": "e64ccbc7a62e00680fd1f4ad06ca139364e2daaccf8e59d61d85208ffa8f8730",
+    "changes": [
+      "Exact candidate path and SHA retargeted.",
+      "AST gate permits reviewed __future__/stat/pathlib imports and literal constants plus exact safe getattr/frozenset initialization.",
+      "No original62 assertion or result-key adapter change.",
+      "Three additional malformed-input controls independently added; not counted as original controls."
+    ],
+    "scope": "Independent QA derivative, not provider tests or hardware qualification",
+    "gate_correction": "First import-gate attempt failed before importing candidate because ast.unparse used single quotes; corrected to structural exact AST argument check. Original failed gate receipt preserved."
+  }
+}

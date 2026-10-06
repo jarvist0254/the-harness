@@ -1,0 +1,9 @@
+--- build_owned_build_attempt4.cmd
++++ build_owned_build_attempt5.cmd
+@@ -4,5 +4,5 @@
+ call "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat"
+ if errorlevel 1 exit /b %errorlevel%
+ set "VULKAN_SDK=E:\the_harness\records\build_vulkan_real\toolchain\sdk"
+-"C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/bin/cmake.exe" "--build" "E:\the_harness\records\build_vulkan_fp32_staging_20261004T155932Z\build_attempt4" "--target" "ggml" "ggml-vulkan" "--parallel" "4"
++"C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/bin/cmake.exe" "--build" "E:\the_harness\records\build_vulkan_fp32_staging_20261004T155932Z\build_attempt5" "--target" "ggml" "ggml-vulkan" "--parallel" "4"
+ exit /b %errorlevel%

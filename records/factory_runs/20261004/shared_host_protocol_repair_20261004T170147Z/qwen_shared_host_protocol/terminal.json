@@ -1,0 +1,26 @@
+{
+  "http": 200,
+  "credential_saved": false,
+  "observed_model": "qwen3.8-max",
+  "elapsed_seconds": 55.22,
+  "failure_stage": "artifact_parse",
+  "timeout": false,
+  "provider_patch_applied": false,
+  "usage": {
+    "prompt_tokens": 11839,
+    "total_tokens": 14904,
+    "completion_tokens": 3065,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 11839
+    }
+  },
+  "parse_error_type": "RuntimeException",
+  "response_cap_exceeded": false,
+  "finish_reason": "stop",
+  "native_children_actual": 0,
+  "requested_model": "qwen3.8-max",
+  "usage_known": true,
+  "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+  "pid": 58864
+}

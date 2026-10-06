@@ -1,0 +1,10 @@
+test_build_policy_accepts_only_integer_deadlines_through_600 (test_build_policy_boundaries.BuildPolicyBoundaries) ... ok
+test_candidate_is_exactly_one_literal_change (test_build_policy_boundaries.BuildPolicyBoundaries) ... ok
+test_import_and_validation_never_request_native_or_process_modules (test_build_policy_boundaries.BuildPolicyBoundaries) ... ok
+test_log_limit_stays_capped_at_131072 (test_build_policy_boundaries.BuildPolicyBoundaries) ... ok
+test_old_supervisor_keeps_original_deadline_boundary (test_build_policy_boundaries.BuildPolicyBoundaries) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.013s
+
+OK

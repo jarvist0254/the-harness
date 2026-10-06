@@ -1,0 +1,18 @@
+{
+  "observed_model": "deepseek-v4-pro-0813",
+  "http": 200,
+  "elapsed_seconds": 42.21,
+  "finish_reason": "stop",
+  "pid": 6780,
+  "status": "COMPLETE_UNVERIFIED",
+  "requested_model": "deepseek-v4-pro-0813",
+  "job": "d3d12_review",
+  "usage": {
+    "prompt_tokens": 6713,
+    "total_tokens": 10833,
+    "completion_tokens": 4120,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  }
+}

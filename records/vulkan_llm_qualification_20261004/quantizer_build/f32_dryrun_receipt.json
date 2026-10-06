@@ -1,0 +1,23 @@
+{
+  "pid": 8224,
+  "command": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\llama-quantize.exe --dry-run --allow-requantize --pure --max-buffer-size 256 E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\Qwen3-0.6B-Q8_0-dequant-F32.gguf F32 4",
+  "timeout_seconds": 60,
+  "timed_out": false,
+  "exit_code": 0,
+  "elapsed_seconds": 0.722,
+  "process_present_after": false,
+  "input": "E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf",
+  "input_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "input_bytes": 639446688,
+  "output_target": "E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\Qwen3-0.6B-Q8_0-dequant-F32.gguf",
+  "output_exists_after_dryrun": false,
+  "free_bytes_after": 832505516032,
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\quantizer_build\\f32_dryrun.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\quantizer_build\\f32_dryrun.stderr.log",
+  "stdout_tail": [
+    "",
+    "llama_quantize: quantize time =   142.66 ms",
+    "llama_quantize:    total time =   142.66 ms",
+    ""
+  ]
+}

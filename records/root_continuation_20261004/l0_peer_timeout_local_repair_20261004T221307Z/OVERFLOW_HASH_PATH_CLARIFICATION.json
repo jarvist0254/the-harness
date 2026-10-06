@@ -1,0 +1,16 @@
+{
+  "issue": "Pending original_overflow_receipt_sha256 lacked an explicit path; it hashes the per-command overflow capture receipt, not aggregate adjudication.",
+  "pending_packet_preserved": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\cpu_stub_run_only_after_inspection.pending.json",
+    "sha256": "a4685cf9149820f0f1095319fe9d9e58089f74725888bd3b8350934cf695559d"
+  },
+  "per_command_overflow": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.receipt.json",
+    "sha256": "707c2f4b42521ed828e163c7ebe170ab821157da01a8cb2b825157a7abbc6c3f"
+  },
+  "aggregate_build_refusal": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\BUILD_ADJUDICATION_REFUSED.json",
+    "sha256": "06d77b5bf7caf41c089be61b997d8c635edf9a44a430f13aeb656a6726e0eb7f"
+  },
+  "next_action": "Distinct ROOT admission should bind both exact paths/hashes. No fake execution authorized yet."
+}

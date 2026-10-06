@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-04T14:15:57.797693+00:00",
+  "raw_gemini_verdict": "STATIC_REJECTED",
+  "actual_review_source_root": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+  "root_sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "findings_scope": "All8findings point to supplied PRIOR_QWEN_SOURCE_OR_TESTS. No exact new rootsource defect identified. Model states ROOTcandidateaddresses18REDstatistically; priorQwentests not accompanying rootacceptedtests. Raw verdict retained, not converted to modelPASS.",
+  "independent_postlaunch_QA": "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_root_20261004T140834Z\\INDEPENDENT_REVIEW.json",
+  "root_controls": "40of40mocktestsPASS0errors0forbidden_calls",
+  "qwen_same_controls": "20of40fail0errors0forbidden_calls",
+  "gemini_read_postlaunch_QA": false,
+  "test_ownership": "RootandindependentQA actualrootcandidate tests separate from unexecuted generatedQwentests",
+  "native_production_admission": "NONE",
+  "grok_edits_delivered": false,
+  "root_edits_attribution": "ROOTauthored, notGrokreturned",
+  "note": "Gemini ZERO_NATIVE_CHILDREN0 is actualcount; its claim0authorized contradicts usermaximum10authorization. No nativechildrenlaunched."
+}

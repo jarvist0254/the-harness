@@ -1,0 +1,20 @@
+{
+  "observed_model": "qwen3.8-max",
+  "native_children_actual": 0,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 15433,
+    "total_tokens": 17988,
+    "completion_tokens": 2555,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 15433
+    }
+  },
+  "http": 200,
+  "requested_model": "qwen3.8-max",
+  "job": "freecad",
+  "elapsed_seconds": 51.16,
+  "pid": 51800,
+  "status": "COMPLETE_UNTRUSTED_PENDING_GATES"
+}

@@ -1,0 +1,65 @@
+import sys
+import json
+
+def as_dict(x):
+    return x if isinstance(x, dict) else {}
+
+def as_list(x):
+    return x if isinstance(x, list) else []
+
+def main():
+    try:
+        text = sys.stdin.read()
+        obj = json.loads(text)
+    except Exception as e:
+        print(json.dumps({'status':'REFUSED','reason':'PARSE_ERROR','detail':str(e)}))
+        return 1
+    if not isinstance(obj, dict):
+        print(json.dumps({'status':'REFUSED','reason':'ROOT_NOT_OBJECT'}))
+        return 1
+    errors = []
+    if obj.get('schema_version') != 1:
+        errors.append('schema_version_missing_or_not_1')
+    if obj.get('import_copy_path_disabled') is not True:
+        errors.append('import_copy_path_not_disabled')
+    if obj.get('actual_gpu_qualification') is not False:
+        errors.append('actual_gpu_qualification_must_be_false')
+    devices = as_list(obj.get('devices'))
+    if len(devices) == 0:
+        errors.append('no_devices')
+    for di in range(len(devices)):
+        d = as_dict(devices[di])
+        if d.get('import_copy_path_disabled') is not True:
+            errors.append('device_' + str(di) + '_import_copy_path_not_disabled')
+        claims = as_dict(d.get('claims'))
+        mem_types = as_list(d.get('memory_types'))
+        heaps = as_list(d.get('memory_heaps'))
+        for ti in range(len(mem_types)):
+            t = as_dict(mem_types[ti])
+            device_local = t.get('device_local') is True
+            host_visible = t.get('host_visible') is True
+            heap_idx = t.get('heap_index')
+            heap_device_local = False
+            if isinstance(heap_idx, int) and 0 <= heap_idx < len(heaps):
+                heap_device_local = as_dict(heaps[heap_idx]).get('device_local') is True
+            if claims.get('dedicated_vram_p2p') == 'PASS' and not (device_local and heap_device_local and not host_visible):
+                errors.append('device_' + str(di) + '_dedicated_vram_p2p_claim_without_dedicated_device_local_receipt')
+            if claims.get('cross_vendor_dma_buf_import') == 'PASS':
+                errors.append('device_' + str(di) + '_cross_vendor_dma_buf_import_pass_requires_disabled_path')
+    if obj.get('legal_cross_vendor_dma_buf_p2p') == 'PASS':
+        errors.append('legal_cross_vendor_dma_buf_p2p_pass_not_allowed_without_probe_receipts')
+    if obj.get('host_memory_as_vram_p2p') != 'REFUSED':
+        errors.append('host_memory_as_vram_p2p_must_be_refused')
+    result = {
+        'status': 'REFUSED' if errors else 'ANALYSIS',
+        'mock_contract_validator_pass': not errors,
+        'actual_gpu_qualification': False,
+        'import_copy_path_disabled': True,
+        'errors': errors,
+        'note': 'Mock schema validation only. It is not GPU qualification, not P2P proof, and not driver legal contract proof.'
+    }
+    print(json.dumps(result))
+    return 1 if errors else 0
+
+if __name__ == '__main__':
+    sys.exit(main())

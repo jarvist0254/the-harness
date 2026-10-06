@@ -1,0 +1,58 @@
+{
+  "scope": "FILESYSTEM_PREPARATION_ONLY_NO_COMPILER_GPU_OR_PROVIDER",
+  "status": "PASS",
+  "pid": 94364,
+  "reaped": true,
+  "exit_code": 0,
+  "timeout": false,
+  "elapsed_seconds": 11.375,
+  "inputs_before": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\grok_fp32_patch\\patch.pending_root_qa.json": "4d90acfb1f9f004e3a0dced9b2d02eb7fb8f731bdfa64e1b840f9d0db09cb203",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ggml-vulkan.grok_candidate_PENDING_ROOT.cpp": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\prepare_derived.py": "52edeb8ba8d0338e870ca3521364fc9b3c7da306ca1d4ec3c97ad3c57b72710a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\toolchain_pins_preparation.json": "a3f9109ccaa063ab936f386d84e9f1fba03f1d3d6d0d76869098eba715b3c9d9"
+  },
+  "inputs_after": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\grok_fp32_patch\\patch.pending_root_qa.json": "4d90acfb1f9f004e3a0dced9b2d02eb7fb8f731bdfa64e1b840f9d0db09cb203",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ggml-vulkan.grok_candidate_PENDING_ROOT.cpp": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\prepare_derived.py": "52edeb8ba8d0338e870ca3521364fc9b3c7da306ca1d4ec3c97ad3c57b72710a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\toolchain_pins_preparation.json": "a3f9109ccaa063ab936f386d84e9f1fba03f1d3d6d0d76869098eba715b3c9d9"
+  },
+  "three_replacements_independently_reconstructed": true,
+  "two_merged_diff_regions": [
+    {
+      "tag": "replace",
+      "old_first_line": 6319,
+      "old_end_exclusive_line": 6320,
+      "new_first_line": 6319,
+      "new_end_exclusive_line": 6321,
+      "old_bytes_sha256": "c7f28b45ba458c6e42331d54113b1e782675e9b3b665a4688d7f0acbe80fcbcc",
+      "new_bytes_sha256": "607fb06153234b477f610ba07c633c4f6a30f824ea16814b616389db8c0d4033"
+    },
+    {
+      "tag": "replace",
+      "old_first_line": 6381,
+      "old_end_exclusive_line": 6383,
+      "new_first_line": 6382,
+      "new_end_exclusive_line": 6384,
+      "old_bytes_sha256": "fca77c5c0209b709ce5ef6bd476e305a4b9d84600a855b4d6cfdc797ad8de20b",
+      "new_bytes_sha256": "fcdafacb6529da3478fb67faf49e50ef43d189760aa79a753c3651c73236a50f"
+    }
+  ],
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\prepare_derived.py",
+    "--admission",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\root_preparation_20261004T162215Z\\admission.json",
+    "--admission-sha256",
+    "92cf434c4b8803a8f6734ae45ff120e021a0887acdfddbe4fed74007b16a3b5a"
+  ],
+  "admission_sha256": "92cf434c4b8803a8f6734ae45ff120e021a0887acdfddbe4fed74007b16a3b5a"
+}

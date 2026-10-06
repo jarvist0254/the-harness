@@ -1,0 +1,14 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\qwen_scoped_repairs_20261004T125000Z\\spawn_transaction\\contained_supervisor.spawn_candidate.py",
+  "sha256": "9fd31912e25f9c6a3c6f69813b025c6b4b226ae833de9d32e81953046bc2da31",
+  "source_gate": "AST_ONLY_PASS_NO_IMPORT",
+  "test_gate": "AST_ONLY_PASS_NO_IMPORT",
+  "replacements": [
+    {
+      "index": 0,
+      "count": 1
+    }
+  ],
+  "baseline_sha256": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+  "scope": "_spawn transaction only; other unsafe functions unchanged; NOT execution admitted"
+}

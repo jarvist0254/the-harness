@@ -1,0 +1,36 @@
+{
+  "authority": "ROOT-delegated isolated provider-only code review; no source mutation or execution",
+  "lane": "Gemini",
+  "model": "gemini-3.8-flash-high",
+  "source_sha256": "0E5292D39A9D9AFB0D8787904F51D3815C3723694E44F4AB964D8E6BD6E0F564",
+  "prompt_sha256": "5560846E6F81E74A1BC9C85165A26F3DF80C111D52FFFC7C0BC67B752139B933",
+  "schema_sha256": "2019A3013444C654B9C82B4551AB3DBE26D41C57E6A6AF08DF73B80DCCEF6F64",
+  "exact_inputs": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py": "0E5292D39A9D9AFB0D8787904F51D3815C3723694E44F4AB964D8E6BD6E0F564",
+    "E:\\the_harness\\records\\root_continuation_20261004\\COMPILER_COMPLETION_TASK_SPEC.md": "390080FA8E3D17AF2ACF983E94F713C6479BD118178CA3491A51ECF1E3E5FAD2",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "FA907E8637870521B573922F6E939E56E388439FA61DC1A76FBEB53F7AD45EF3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_driver.py": "E4327908E0DA6F668BA7AE51CF92FB641BB7C4E02DDE019722A863B8217C3C1D",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\controller_compiler_completion_attempt5.py": "23EEBE110753C4BF5D929D6B3D38EB4209ED755FBB11974ED2064AAF8B669137",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\test_driver_acceptance_pure.py": "3210071EFAEAABB9B305222BF92B40A01A69C6A459A9C61AACA1642BE91ACDD0",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_independent_20261004T1818Z\\test_post_query_guards.py": "B81B70D331B89733F85E6BCC8FCE2C0D40651AFDA67E9C6D2CC9883E9E3A84B4",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_independent_20261004T1818Z\\test_more_contract.py": "2D22AE68D0A5B871FF445D73B4448F3C6F5FBC096A44D8533E9DA7CD315E4C17",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_independent_20261004T1818Z\\fallback_22_GREEN.log": "603D0DA4507DAE33921D1CE49F79A53C9B7E0708A20C970DF21CDFF840DB1740",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\run_output\\parsed_review.json": "E2891060AA99855EA9DA9DDD775B7100ABE6BFDADBD2FC5732E5F51E80EEAA95",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\run_output\\parser_reconciliation.json": "5936F2D48468A0190AEAC7A7FCC5C8FEC26F60D58979B5924813F260ED4F799B"
+  },
+  "local_pins": {
+    "candidate.snapshot.py": "0E5292D39A9D9AFB0D8787904F51D3815C3723694E44F4AB964D8E6BD6E0F564",
+    "gemini_prompt.txt": "5560846E6F81E74A1BC9C85165A26F3DF80C111D52FFFC7C0BC67B752139B933",
+    "gemini_schema.json": "2019A3013444C654B9C82B4551AB3DBE26D41C57E6A6AF08DF73B80DCCEF6F64",
+    "inputs.json": "94D3E2F7117EF630E2FF7C8BD2754254E4DEEED6B5AF141DA23440F94E01BB3B",
+    "agy.exe": "871E1EEB205DD3269B762E81808B7A86FE7CF73B59DA51B14E3D8AC005581BFE"
+  },
+  "limits": {
+    "max_prompt_bytes": 262144,
+    "captured_bytes_per_stream": 2097152,
+    "deadline_seconds": 240
+  },
+  "tools_requested": "none; source context fully embedded",
+  "source_execution": false,
+  "provider_edit": false
+}

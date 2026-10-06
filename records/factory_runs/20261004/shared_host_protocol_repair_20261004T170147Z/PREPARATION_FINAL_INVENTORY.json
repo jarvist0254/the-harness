@@ -1,0 +1,136 @@
+{
+  "gemini_final_prompt": "DEPENDENT_NOT_BUILT",
+  "native_children_actual": 0,
+  "pure_intake_controls": "PURE_INTAKE_CONTROLS.json",
+  "state": "PREPARED_PENDING_ROOT_READ_AND_LAUNCH_ADMISSION",
+  "full_context_qwen_prompt_utf16": 50657,
+  "inventory": [
+    {
+      "sha256": "c4e206a063ad5d1e00b46587f4c48b20d1b67ec7247a82118ec1a35bd9c44742",
+      "name": "ADAPTER_DIFF_NOTES.json",
+      "bytes": 894
+    },
+    {
+      "sha256": "8ad6bcc3c948aad4632e86759cac7586b77bba4fe68f4445aa185e3e2a26c2d7",
+      "name": "ADAPTER_EXACT_LINE_DIFF.json",
+      "bytes": 4365
+    },
+    {
+      "sha256": "ba117f38b50a57acff7bf2c878815202e15ca0cdb3994d692f2dd5566813abfe",
+      "name": "CAPABILITY_FINDINGS.md",
+      "bytes": 2525
+    },
+    {
+      "sha256": "0e0dabca6adb0a47c0f39a234b5127d412b1f1c2718c13b8bac1b63e4ac895a4",
+      "name": "COMMANDS_PENDING_ROOT.md",
+      "bytes": 2533
+    },
+    {
+      "sha256": "94d558cd37e6edf44b734a3b607995311050eb4d226fb842947b8c5b903a35aa",
+      "name": "gemini_shared_host_review.template.txt",
+      "bytes": 1308
+    },
+    {
+      "sha256": "94d558cd37e6edf44b734a3b607995311050eb4d226fb842947b8c5b903a35aa",
+      "name": "grok_shared_host_edit.template.txt",
+      "bytes": 1308
+    },
+    {
+      "sha256": "647c516363d3835c88fbd795c5df1d8765d024506bfb6ebd3b94b42605639c4a",
+      "name": "invoke_owned_protocol.ps1",
+      "bytes": 7995
+    },
+    {
+      "sha256": "a2d0adfa589bfc533f4b6ced4f1406f03f045fc92c31d2a3c04e93752697254d",
+      "name": "invoke_owned_provider.ps1",
+      "bytes": 7806
+    },
+    {
+      "sha256": "34ad37e4c80ac54f8b611318bad2a556cea2bd7487f84f1497f0d60ea875f787",
+      "name": "original_contract.md",
+      "bytes": 9674
+    },
+    {
+      "sha256": "f3408801b00f8dfe69c72a23a17124693dbd1e975cbf8e90bf2079fba8ae6ad8",
+      "name": "PREPARATION_MANIFEST.json",
+      "bytes": 7296
+    },
+    {
+      "sha256": "1ce5615e24e078971738d79b220c45274237e6618bde3187c8de0f6ffa9cc730",
+      "name": "PRIMARY_REFERENCES.md",
+      "bytes": 2106
+    },
+    {
+      "sha256": "99622be807ec2a16745496d9e90a3227cce4907f4dd592d4e3838da7b1bd9fed",
+      "name": "protocol_artifact.ps1",
+      "bytes": 2576
+    },
+    {
+      "sha256": "19f4b9d21dbac7caa2f022dd162516e27148d3fc6666b7fc764ec7011e1c2253",
+      "name": "PROTOCOL_SCHEMA.json",
+      "bytes": 1767
+    },
+    {
+      "sha256": "24ca09ca269491adca571ab495ff8a382a9ae2c74c79a3d9b4dbbff92ba3cae1",
+      "name": "provider_common.ps1",
+      "bytes": 4120
+    },
+    {
+      "sha256": "7459c7061b2ad942de2ee27a6c679612d01d4ee4a06fa123a7b2542911b68d7d",
+      "name": "PURE_INTAKE_CONTROLS.json",
+      "bytes": 1825
+    },
+    {
+      "sha256": "5b04db9e56202aae55d32543355eacf8bba934d10013720a768acaac943a5fe0",
+      "name": "qwen_http_patch.ps1",
+      "bytes": 5370
+    },
+    {
+      "sha256": "ffc33ebfa5afcbc6ddfea6a0062274511a7a419f5bbf491f6b7e62654bf1f309",
+      "name": "qwen_http_protocol.ps1",
+      "bytes": 5432
+    },
+    {
+      "sha256": "185b4683b745384357fad4806a181e4a88dd091722646d3e08ce20906c8e53f5",
+      "name": "qwen_shared_host_protocol.prompt.txt",
+      "bytes": 50681
+    },
+    {
+      "sha256": "3449a633613cafee7dd19f670c5d715dd8926db566c27dc3a84a7f2cfe5c0c97",
+      "name": "REVIEW_SCHEMA.json",
+      "bytes": 906
+    },
+    {
+      "sha256": "427d6444c28c472d5ec52738a36b36f1c79566fd0230edf231c427f412acab4a",
+      "name": "ROOT_LAUNCH_RECEIPT_SCHEMA.json",
+      "bytes": 882
+    },
+    {
+      "sha256": "6cb2a18bbec7df2521b3ae7e9dab9d56109f7592950ad2be912e3d86a160face",
+      "name": "ROOT_REVIEW.md",
+      "bytes": 2907
+    },
+    {
+      "sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+      "name": "source_snapshot.cpp",
+      "bytes": 26860
+    },
+    {
+      "sha256": "06d690a8381687c7bf107e52911fa7039fead5f756ddc6e767f481def4938335",
+      "name": "TASK_CONTRACT.md",
+      "bytes": 3615
+    },
+    {
+      "sha256": "3e859be08f0826efd0e86915e600f4c96296ef73f153b0e90c13602e6cd8cfd4",
+      "name": "test_protocol_intake.ps1",
+      "bytes": 2806
+    }
+  ],
+  "credentials_read": false,
+  "semantic_protocol_admission": false,
+  "pure_control_passed": 7,
+  "paid_jobs_started": 0,
+  "pure_control_failed": 0,
+  "provider_http_requests": 0,
+  "utc": "2026-10-04T17:08:30.9523040Z"
+}

@@ -1,0 +1,16 @@
+class TestSupervisor(unittest.TestCase):
+    # Duplicate physical IDs -> ValueError
+    # Duplicate ports -> ValueError
+    # Port <1024 or >65535 -> ValueError
+    # SHA256 mismatch -> ValueError
+    # Unsafe device chars (shell metacharacters) -> ValueError
+    # Output root outside supplied root -> ValueError
+    # Stale PID restart receipt -> UNKNOWN_INTERRUPTED, no reattach
+    # Atomic JSON >128KiB -> ValueError
+    # Cancel mid-startup -> CANCELLED state, teardown called
+    # Fake launcher inject failure on port -> FAILED state
+    # Fake launcher success -> READY then COMPLETED after deadline
+    # Existing run directory -> FileExistsError
+    # Job object assignment failure (Windows mock) -> FAILED, process killed
+    # killpg containment failure (Linux mock) -> handled gracefully
+

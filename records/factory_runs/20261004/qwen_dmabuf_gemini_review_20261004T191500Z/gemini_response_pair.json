@@ -1,0 +1,209 @@
+{
+  "provider_status": "SUCCESS",
+  "response_object_count": 2,
+  "response_objects": [
+    {
+      "verdict": "REFUSED",
+      "findings": [
+        {
+          "region": "source:external_buffer_caps:53-63",
+          "exact_source": "bool dedicated_only = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT) != 0;\n  bool exportable = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT) != 0;\n  bool importable = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT) != 0;\n  bool first = true;\n  key(first, STR(handle_type)); str_val(ht_name);\n  key(first, STR(external_memory_features)); num_val(static_cast<uint64_t>(props.externalMemoryFeatures));\n  key(first, STR(dedicated_only)); bool_val(dedicated_only);\n  key(first, STR(exportable)); bool_val(exportable);\n  key(first, STR(importable)); bool_val(importable);\n  key(first, STR(export_from_imported_handle_types)); num_val(static_cast<uint64_t>(props.exportFromImportedHandleTypes));\n  key(first, STR(compatible_handle_types)); num_val(static_cast<uint64_t>(props.compatibleHandleTypes));",
+          "reason": "VkExternalBufferProperties in Vulkan 1.1 core (vulkan_core.h) embeds VkExternalMemoryProperties externalMemoryProperties. Accessing externalMemoryFeatures, exportFromImportedHandleTypes, and compatibleHandleTypes directly as members of VkExternalBufferProperties fails compilation. Counterexample: Compiling with standard Vulkan 1.1 headers produces compiler error 'struct VkExternalBufferProperties has no member named externalMemoryFeatures'.",
+          "minimal_fix": "Nest member accesses under props.externalMemoryProperties (e.g., props.externalMemoryProperties.externalMemoryFeatures, props.externalMemoryProperties.exportFromImportedHandleTypes, and props.externalMemoryProperties.compatibleHandleTypes)."
+        },
+        {
+          "region": "source:external_buffer_caps:48-52",
+          "exact_source": "VkPhysicalDeviceExternalBufferInfo info{};\n  info.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;\n  info.handleType = ht;\n  VkExternalBufferProperties props{};\n  props.sType = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES;\n  vkGetPhysicalDeviceExternalBufferProperties(pd, &info, &props);",
+          "reason": "info.usage is left 0. Vulkan specification requires usage to be a valid non-zero combination of VkBufferUsageFlagBits (VUID-VkPhysicalDeviceExternalBufferInfo-usage-requiredbitmask). Leaving usage as zero violates valid usage and causes drivers to return zero capability flags or validation failures. Counterexample: Calling vkGetPhysicalDeviceExternalBufferProperties with usage=0 triggers Vulkan validation error and returns exportable=false on compliant drivers.",
+          "minimal_fix": "Set info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; (or the specific buffer usage under evaluation) before querying properties."
+        },
+        {
+          "region": "source:main:107-122",
+          "exact_source": "if (gpu_count > 0) {\n    res = vkEnumeratePhysicalDevices(instance, &gpu_count, gpus.data());\n    if (res != VK_SUCCESS) gpu_count = 0;\n  }\n... \n    if (vkEnumerateDeviceExtensionProperties(pd, nullptr, &ext_count, nullptr) == VK_SUCCESS && ext_count > 0) {\n      exts.resize(ext_count);\n      if (vkEnumerateDeviceExtensionProperties(pd, nullptr, &ext_count, exts.data()) != VK_SUCCESS) exts.clear();\n    }",
+          "reason": "Vulkan enumeration APIs (vkEnumeratePhysicalDevices, vkEnumerateDeviceExtensionProperties) return VK_INCOMPLETE (positive success code) when buffer sizing or counts change. Testing res != VK_SUCCESS treats VK_INCOMPLETE as a fatal failure, incorrectly zeroing gpu_count or clearing all discovered extensions. Counterexample: If a driver returns VK_INCOMPLETE on extension enumeration, exts.clear() wipes extension properties and falsely drops VK_EXT_external_memory_dma_buf.",
+          "minimal_fix": "Check res < VK_SUCCESS instead of res != VK_SUCCESS to allow VK_INCOMPLETE as valid non-fatal completion."
+        },
+        {
+          "region": "source:main:139-166",
+          "exact_source": "#if defined(VK_VERSION_1_1)\n    VkPhysicalDeviceIDProperties id_props{};\n    id_props.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;\n    VkPhysicalDeviceProperties2 prop2{};\n    prop2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;\n... \n    vkGetPhysicalDeviceProperties2(pd, &prop2);",
+          "reason": "Compile-time header guard #if defined(VK_VERSION_1_1) verifies header availability but does not verify runtime driver support (prop.apiVersion >= VK_API_VERSION_1_1) or resolve entrypoints via vkGetInstanceProcAddr. Calling Vulkan 1.1 entrypoints on a Vulkan 1.0 runtime results in null dereferences or dynamic symbol resolution failures. Counterexample: Executing against a Vulkan 1.0 loader or driver crashes when calling statically resolved vkGetPhysicalDeviceProperties2.",
+          "minimal_fix": "Add runtime check if (prop.apiVersion >= VK_API_VERSION_1_1) before invoking Vulkan 1.1 calls, or dynamically resolve entrypoints using vkGetInstanceProcAddr."
+        },
+        {
+          "region": "tests:main:37-43",
+          "exact_source": "for ti in range(len(mem_types)):\n            t = as_dict(mem_types[ti])\n            device_local = t.get('device_local') is True\n            host_visible = t.get('host_visible') is True\n            heap_idx = t.get('heap_index')\n            heap_device_local = False\n            if isinstance(heap_idx, int) and 0 <= heap_idx < len(heaps):\n                heap_device_local = as_dict(heaps[heap_idx]).get('device_local') is True\n            if claims.get('dedicated_vram_p2p') == 'PASS' and not (device_local and heap_device_local and not host_visible):\n                errors.append('device_' + str(di) + '_dedicated_vram_p2p_claim_without_dedicated_device_local_receipt')",
+          "reason": "The test evaluates dedicated_vram_p2p against individual memory types on an isolated single device. This equates single-device local VRAM residency with multi-device P2P transfer, while falsely rejecting valid discrete GPUs because any additional host-visible memory type (e.g., ReBAR) triggers an error. Counterexample: A discrete GPU claiming P2P with two memory types (Type 0: non-host-visible VRAM, Type 1: ReBAR host-visible VRAM) triggers a false positive rejection on Type 1.",
+          "minimal_fix": "Validate dedicated_vram_p2p across multi-device topology receipts and peer capabilities rather than looping over memory types of a single device in isolation."
+        },
+        {
+          "region": "tests:main:20-53",
+          "exact_source": "devices = as_list(obj.get('devices'))\n    if len(devices) == 0:\n        errors.append('no_devices')\n    for di in range(len(devices)):\n        d = as_dict(devices[di])\n        if d.get('import_copy_path_disabled') is not True:\n            errors.append('device_' + str(di) + '_import_copy_path_not_disabled')\n        claims = as_dict(d.get('claims'))\n        mem_types = as_list(d.get('memory_types'))\n        heaps = as_list(d.get('memory_heaps'))",
+          "reason": "The test validator fails to check external_buffer_capabilities, external_semaphore_capabilities, or external_fence_capabilities. It never validates DMA_BUF or sync primitive availability, exportability, or compatibility flags. Counterexample: An artifact providing empty external_buffer_capabilities: [] passes validator checks with mock_contract_validator_pass: True and return code 0.",
+          "minimal_fix": "Add explicit assertions checking that external_buffer_capabilities, external_semaphore_capabilities, and external_fence_capabilities contain valid DMA_BUF_EXT and SYNC_FD entries."
+        }
+      ],
+      "safety_checks": [
+        "Source contains fatal compilation defect props.externalMemoryFeatures and must not be compiled or executed until nested under externalMemoryProperties.",
+        "Zero-usage buffer capability query violates Vulkan valid usage (VUID-VkPhysicalDeviceExternalBufferInfo-usage-requiredbitmask) and cannot represent valid driver capabilities.",
+        "Host-visible or imported buffer sharing must never be claimed or aliased as dedicated physical VRAM peer-to-peer (P2P) transfer.",
+        "Advertised device extensions do not prove cross-vendor legal allocation import, synchronization contracts, or physical PCIe bus routing.",
+        "Untrusted driver facts and cross-vendor DMA-BUF transfers remain NOT_CHECKED without verified physical hardware receipts and directed peer access queries."
+      ]
+    },
+    {
+      "findings": [
+        {
+          "exact_source": "bool dedicated_only = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT) != 0;\n  bool exportable = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT) != 0;\n  bool importable = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT) != 0;\n  bool first = true;\n  key(first, STR(handle_type)); str_val(ht_name);\n  key(first, STR(external_memory_features)); num_val(static_cast<uint64_t>(props.externalMemoryFeatures));\n  key(first, STR(dedicated_only)); bool_val(dedicated_only);\n  key(first, STR(exportable)); bool_val(exportable);\n  key(first, STR(importable)); bool_val(importable);\n  key(first, STR(export_from_imported_handle_types)); num_val(static_cast<uint64_t>(props.exportFromImportedHandleTypes));\n  key(first, STR(compatible_handle_types)); num_val(static_cast<uint64_t>(props.compatibleHandleTypes));",
+          "minimal_fix": "Nest member accesses under props.externalMemoryProperties (e.g., props.externalMemoryProperties.externalMemoryFeatures, props.externalMemoryProperties.exportFromImportedHandleTypes, and props.externalMemoryProperties.compatibleHandleTypes).",
+          "reason": "VkExternalBufferProperties in Vulkan 1.1 core (vulkan_core.h) embeds VkExternalMemoryProperties externalMemoryProperties. Accessing externalMemoryFeatures, exportFromImportedHandleTypes, and compatibleHandleTypes directly as members of VkExternalBufferProperties fails compilation. Counterexample: Compiling with standard Vulkan 1.1 headers produces compiler error 'struct VkExternalBufferProperties has no member named externalMemoryFeatures'.",
+          "region": "source:external_buffer_caps:53-63"
+        },
+        {
+          "exact_source": "VkPhysicalDeviceExternalBufferInfo info{};\n  info.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;\n  info.handleType = ht;\n  VkExternalBufferProperties props{};\n  props.sType = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES;\n  vkGetPhysicalDeviceExternalBufferProperties(pd, &info, &props);",
+          "minimal_fix": "Set info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; (or the specific buffer usage under evaluation) before querying properties.",
+          "reason": "info.usage is left 0. Vulkan specification requires usage to be a valid non-zero combination of VkBufferUsageFlagBits (VUID-VkPhysicalDeviceExternalBufferInfo-usage-requiredbitmask). Leaving usage as zero violates valid usage and causes drivers to return zero capability flags or validation failures. Counterexample: Calling vkGetPhysicalDeviceExternalBufferProperties with usage=0 triggers Vulkan validation error and returns exportable=false on compliant drivers.",
+          "region": "source:external_buffer_caps:48-52"
+        },
+        {
+          "exact_source": "if (gpu_count > 0) {\n    res = vkEnumeratePhysicalDevices(instance, &gpu_count, gpus.data());\n    if (res != VK_SUCCESS) gpu_count = 0;\n  }\n...\n    if (vkEnumerateDeviceExtensionProperties(pd, nullptr, &ext_count, nullptr) == VK_SUCCESS && ext_count > 0) {\n      exts.resize(ext_count);\n      if (vkEnumerateDeviceExtensionProperties(pd, nullptr, &ext_count, exts.data()) != VK_SUCCESS) exts.clear();\n    }",
+          "minimal_fix": "Check res < VK_SUCCESS instead of res != VK_SUCCESS to allow VK_INCOMPLETE as valid non-fatal completion.",
+          "reason": "Vulkan enumeration APIs (vkEnumeratePhysicalDevices, vkEnumerateDeviceExtensionProperties) return VK_INCOMPLETE (positive success code) when buffer sizing or counts change. Testing res != VK_SUCCESS treats VK_INCOMPLETE as a fatal failure, incorrectly zeroing gpu_count or clearing all discovered extensions. Counterexample: If a driver returns VK_INCOMPLETE on extension enumeration, exts.clear() wipes extension properties and falsely drops VK_EXT_external_memory_dma_buf.",
+          "region": "source:main:107-122"
+        },
+        {
+          "exact_source": "#if defined(VK_VERSION_1_1)\n    VkPhysicalDeviceIDProperties id_props{};\n    id_props.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;\n    VkPhysicalDeviceProperties2 prop2{};\n    prop2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;\n...\n    vkGetPhysicalDeviceProperties2(pd, &prop2);",
+          "minimal_fix": "Add runtime check if (prop.apiVersion >= VK_API_VERSION_1_1) before invoking Vulkan 1.1 calls, or dynamically resolve entrypoints using vkGetInstanceProcAddr.",
+          "reason": "Compile-time header guard #if defined(VK_VERSION_1_1) verifies header availability but does not verify runtime driver support (prop.apiVersion >= VK_API_VERSION_1_1) or resolve entrypoints via vkGetInstanceProcAddr. Calling Vulkan 1.1 entrypoints on a Vulkan 1.0 runtime results in null dereferences or dynamic symbol resolution failures. Counterexample: Executing against a Vulkan 1.0 loader or driver crashes when calling statically resolved vkGetPhysicalDeviceProperties2.",
+          "region": "source:main:139-166"
+        },
+        {
+          "exact_source": "for ti in range(len(mem_types)):\n            t = as_dict(mem_types[ti])\n            device_local = t.get('device_local') is True\n            host_visible = t.get('host_visible') is True\n            heap_idx = t.get('heap_index')\n            heap_device_local = False\n            if isinstance(heap_idx, int) and 0 <= heap_idx < len(heaps):\n                heap_device_local = as_dict(heaps[heap_idx]).get('device_local') is True\n            if claims.get('dedicated_vram_p2p') == 'PASS' and not (device_local and heap_device_local and not host_visible):\n                errors.append('device_' + str(di) + '_dedicated_vram_p2p_claim_without_dedicated_device_local_receipt')",
+          "minimal_fix": "Validate dedicated_vram_p2p across multi-device topology receipts and peer capabilities rather than looping over memory types of a single device in isolation.",
+          "reason": "The test evaluates dedicated_vram_p2p against individual memory types on an isolated single device. This equates single-device local VRAM residency with multi-device P2P transfer, while falsely rejecting valid discrete GPUs because any additional host-visible memory type (e.g., ReBAR) triggers an error. Counterexample: A discrete GPU claiming P2P with two memory types (Type 0: non-host-visible VRAM, Type 1: ReBAR host-visible VRAM) triggers a false positive rejection on Type 1.",
+          "region": "tests:main:37-43"
+        },
+        {
+          "exact_source": "devices = as_list(obj.get('devices'))\n    if len(devices) == 0:\n        errors.append('no_devices')\n    for di in range(len(devices)):\n        d = as_dict(devices[di])\n        if d.get('import_copy_path_disabled') is not True:\n            errors.append('device_' + str(di) + '_import_copy_path_not_disabled')\n        claims = as_dict(d.get('claims'))\n        mem_types = as_list(d.get('memory_types'))\n        heaps = as_list(d.get('memory_heaps'))",
+          "minimal_fix": "Add explicit assertions checking that external_buffer_capabilities, external_semaphore_capabilities, and external_fence_capabilities contain valid DMA_BUF_EXT and SYNC_FD entries.",
+          "reason": "The test validator fails to check external_buffer_capabilities, external_semaphore_capabilities, or external_fence_capabilities. It never validates DMA_BUF or sync primitive availability, exportability, or compatibility flags. Counterexample: An artifact providing empty external_buffer_capabilities: [] passes validator checks with mock_contract_validator_pass: True and return code 0.",
+          "region": "tests:main:20-53"
+        }
+      ],
+      "safety_checks": [
+        "Source contains fatal compilation defect props.externalMemoryFeatures and must not be compiled or executed until nested under externalMemoryProperties.",
+        "Zero-usage buffer capability query violates Vulkan valid usage (VUID-VkPhysicalDeviceExternalBufferInfo-usage-requiredbitmask) and cannot represent valid driver capabilities.",
+        "Host-visible or imported buffer sharing must never be claimed or aliased as dedicated physical VRAM peer-to-peer (P2P) transfer.",
+        "Advertised device extensions do not prove cross-vendor legal allocation import, synchronization contracts, or physical PCIe bus routing.",
+        "Untrusted driver facts and cross-vendor DMA-BUF transfers remain NOT_CHECKED without verified physical hardware receipts and directed peer access queries."
+      ],
+      "toolAction": "Submitting review verdict",
+      "toolSummary": "Code review completion",
+      "verdict": "REFUSED"
+    }
+  ],
+  "structured_output": {
+    "findings": [
+      {
+        "exact_source": "bool dedicated_only = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT) != 0;\n  bool exportable = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT) != 0;\n  bool importable = (props.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT) != 0;\n  bool first = true;\n  key(first, STR(handle_type)); str_val(ht_name);\n  key(first, STR(external_memory_features)); num_val(static_cast<uint64_t>(props.externalMemoryFeatures));\n  key(first, STR(dedicated_only)); bool_val(dedicated_only);\n  key(first, STR(exportable)); bool_val(exportable);\n  key(first, STR(importable)); bool_val(importable);\n  key(first, STR(export_from_imported_handle_types)); num_val(static_cast<uint64_t>(props.exportFromImportedHandleTypes));\n  key(first, STR(compatible_handle_types)); num_val(static_cast<uint64_t>(props.compatibleHandleTypes));",
+        "minimal_fix": "Nest member accesses under props.externalMemoryProperties (e.g., props.externalMemoryProperties.externalMemoryFeatures, props.externalMemoryProperties.exportFromImportedHandleTypes, and props.externalMemoryProperties.compatibleHandleTypes).",
+        "reason": "VkExternalBufferProperties in Vulkan 1.1 core (vulkan_core.h) embeds VkExternalMemoryProperties externalMemoryProperties. Accessing externalMemoryFeatures, exportFromImportedHandleTypes, and compatibleHandleTypes directly as members of VkExternalBufferProperties fails compilation. Counterexample: Compiling with standard Vulkan 1.1 headers produces compiler error 'struct VkExternalBufferProperties has no member named externalMemoryFeatures'.",
+        "region": "source:external_buffer_caps:53-63"
+      },
+      {
+        "exact_source": "VkPhysicalDeviceExternalBufferInfo info{};\n  info.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;\n  info.handleType = ht;\n  VkExternalBufferProperties props{};\n  props.sType = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES;\n  vkGetPhysicalDeviceExternalBufferProperties(pd, &info, &props);",
+        "minimal_fix": "Set info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; (or the specific buffer usage under evaluation) before querying properties.",
+        "reason": "info.usage is left 0. Vulkan specification requires usage to be a valid non-zero combination of VkBufferUsageFlagBits (VUID-VkPhysicalDeviceExternalBufferInfo-usage-requiredbitmask). Leaving usage as zero violates valid usage and causes drivers to return zero capability flags or validation failures. Counterexample: Calling vkGetPhysicalDeviceExternalBufferProperties with usage=0 triggers Vulkan validation error and returns exportable=false on compliant drivers.",
+        "region": "source:external_buffer_caps:48-52"
+      },
+      {
+        "exact_source": "if (gpu_count > 0) {\n    res = vkEnumeratePhysicalDevices(instance, &gpu_count, gpus.data());\n    if (res != VK_SUCCESS) gpu_count = 0;\n  }\n...\n    if (vkEnumerateDeviceExtensionProperties(pd, nullptr, &ext_count, nullptr) == VK_SUCCESS && ext_count > 0) {\n      exts.resize(ext_count);\n      if (vkEnumerateDeviceExtensionProperties(pd, nullptr, &ext_count, exts.data()) != VK_SUCCESS) exts.clear();\n    }",
+        "minimal_fix": "Check res < VK_SUCCESS instead of res != VK_SUCCESS to allow VK_INCOMPLETE as valid non-fatal completion.",
+        "reason": "Vulkan enumeration APIs (vkEnumeratePhysicalDevices, vkEnumerateDeviceExtensionProperties) return VK_INCOMPLETE (positive success code) when buffer sizing or counts change. Testing res != VK_SUCCESS treats VK_INCOMPLETE as a fatal failure, incorrectly zeroing gpu_count or clearing all discovered extensions. Counterexample: If a driver returns VK_INCOMPLETE on extension enumeration, exts.clear() wipes extension properties and falsely drops VK_EXT_external_memory_dma_buf.",
+        "region": "source:main:107-122"
+      },
+      {
+        "exact_source": "#if defined(VK_VERSION_1_1)\n    VkPhysicalDeviceIDProperties id_props{};\n    id_props.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;\n    VkPhysicalDeviceProperties2 prop2{};\n    prop2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;\n...\n    vkGetPhysicalDeviceProperties2(pd, &prop2);",
+        "minimal_fix": "Add runtime check if (prop.apiVersion >= VK_API_VERSION_1_1) before invoking Vulkan 1.1 calls, or dynamically resolve entrypoints using vkGetInstanceProcAddr.",
+        "reason": "Compile-time header guard #if defined(VK_VERSION_1_1) verifies header availability but does not verify runtime driver support (prop.apiVersion >= VK_API_VERSION_1_1) or resolve entrypoints via vkGetInstanceProcAddr. Calling Vulkan 1.1 entrypoints on a Vulkan 1.0 runtime results in null dereferences or dynamic symbol resolution failures. Counterexample: Executing against a Vulkan 1.0 loader or driver crashes when calling statically resolved vkGetPhysicalDeviceProperties2.",
+        "region": "source:main:139-166"
+      },
+      {
+        "exact_source": "for ti in range(len(mem_types)):\n            t = as_dict(mem_types[ti])\n            device_local = t.get('device_local') is True\n            host_visible = t.get('host_visible') is True\n            heap_idx = t.get('heap_index')\n            heap_device_local = False\n            if isinstance(heap_idx, int) and 0 <= heap_idx < len(heaps):\n                heap_device_local = as_dict(heaps[heap_idx]).get('device_local') is True\n            if claims.get('dedicated_vram_p2p') == 'PASS' and not (device_local and heap_device_local and not host_visible):\n                errors.append('device_' + str(di) + '_dedicated_vram_p2p_claim_without_dedicated_device_local_receipt')",
+        "minimal_fix": "Validate dedicated_vram_p2p across multi-device topology receipts and peer capabilities rather than looping over memory types of a single device in isolation.",
+        "reason": "The test evaluates dedicated_vram_p2p against individual memory types on an isolated single device. This equates single-device local VRAM residency with multi-device P2P transfer, while falsely rejecting valid discrete GPUs because any additional host-visible memory type (e.g., ReBAR) triggers an error. Counterexample: A discrete GPU claiming P2P with two memory types (Type 0: non-host-visible VRAM, Type 1: ReBAR host-visible VRAM) triggers a false positive rejection on Type 1.",
+        "region": "tests:main:37-43"
+      },
+      {
+        "exact_source": "devices = as_list(obj.get('devices'))\n    if len(devices) == 0:\n        errors.append('no_devices')\n    for di in range(len(devices)):\n        d = as_dict(devices[di])\n        if d.get('import_copy_path_disabled') is not True:\n            errors.append('device_' + str(di) + '_import_copy_path_not_disabled')\n        claims = as_dict(d.get('claims'))\n        mem_types = as_list(d.get('memory_types'))\n        heaps = as_list(d.get('memory_heaps'))",
+        "minimal_fix": "Add explicit assertions checking that external_buffer_capabilities, external_semaphore_capabilities, and external_fence_capabilities contain valid DMA_BUF_EXT and SYNC_FD entries.",
+        "reason": "The test validator fails to check external_buffer_capabilities, external_semaphore_capabilities, or external_fence_capabilities. It never validates DMA_BUF or sync primitive availability, exportability, or compatibility flags. Counterexample: An artifact providing empty external_buffer_capabilities: [] passes validator checks with mock_contract_validator_pass: True and return code 0.",
+        "region": "tests:main:20-53"
+      }
+    ],
+    "safety_checks": [
+      "Source contains fatal compilation defect props.externalMemoryFeatures and must not be compiled or executed until nested under externalMemoryProperties.",
+      "Zero-usage buffer capability query violates Vulkan valid usage (VUID-VkPhysicalDeviceExternalBufferInfo-usage-requiredbitmask) and cannot represent valid driver capabilities.",
+      "Host-visible or imported buffer sharing must never be claimed or aliased as dedicated physical VRAM peer-to-peer (P2P) transfer.",
+      "Advertised device extensions do not prove cross-vendor legal allocation import, synchronization contracts, or physical PCIe bus routing.",
+      "Untrusted driver facts and cross-vendor DMA-BUF transfers remain NOT_CHECKED without verified physical hardware receipts and directed peer access queries."
+    ],
+    "verdict": "REFUSED"
+  },
+  "json_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "verdict": {
+        "type": "string"
+      },
+      "findings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "region": {
+              "type": "string"
+            },
+            "exact_source": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "minimal_fix": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "region",
+            "exact_source",
+            "reason",
+            "minimal_fix"
+          ]
+        }
+      },
+      "safety_checks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "verdict",
+      "findings",
+      "safety_checks"
+    ]
+  },
+  "usage": {
+    "input_tokens": 57666,
+    "output_tokens": 29029,
+    "thinking_tokens": 24688,
+    "cache_read_tokens": 31745,
+    "total_tokens": 86695
+  },
+  "duration_seconds": 111.455311,
+  "num_turns": 2,
+  "note": "Both response objects preserved; exact single-response acceptance unresolved pending ROOT reconciliation. Source-only review; no source execution, compile, device query, or provider edit."
+}

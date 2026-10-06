@@ -1,0 +1,7 @@
+{
+  "pid": 69844,
+  "status": "EXIT_0",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\configure_serveron.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\configure_serveron.stderr.log",
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\configure_vulkan.cmd"
+}

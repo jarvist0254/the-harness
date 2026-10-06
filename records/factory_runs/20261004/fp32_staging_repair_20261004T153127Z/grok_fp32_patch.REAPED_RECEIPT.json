@@ -1,0 +1,10 @@
+{
+  "cli_pid": 51436,
+  "identity": "Retained owned process/session exits primary; point PID absence informational",
+  "wrapper_session": 23164,
+  "wrapper_pid": 31016,
+  "owned_pids_still_alive": [],
+  "cli_exit": 0,
+  "wrapper_session_exit": 0,
+  "utc": "2026-10-04T16:10:52.2049236Z"
+}

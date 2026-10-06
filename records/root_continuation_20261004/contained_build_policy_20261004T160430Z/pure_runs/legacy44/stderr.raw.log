@@ -1,0 +1,49 @@
+test_alive_exception_remaining_cleanup (__main__.Cases) ... ok
+test_baseline (__main__.Cases) ... ok
+test_cleanup_clock_starts_after_work (__main__.Cases) ... ok
+test_close_failure_01 (__main__.Cases) ... ok
+test_close_failure_02 (__main__.Cases) ... ok
+test_close_failure_03 (__main__.Cases) ... ok
+test_close_failure_04 (__main__.Cases) ... ok
+test_close_failure_05 (__main__.Cases) ... ok
+test_close_failure_06 (__main__.Cases) ... ok
+test_close_failure_07 (__main__.Cases) ... ok
+test_close_failure_08 (__main__.Cases) ... ok
+test_close_failure_09 (__main__.Cases) ... ok
+test_close_failure_10 (__main__.Cases) ... ok
+test_close_failure_11 (__main__.Cases) ... ok
+test_close_failure_12 (__main__.Cases) ... ok
+test_close_failure_13 (__main__.Cases) ... ok
+test_close_failure_14 (__main__.Cases) ... ok
+test_close_failure_15 (__main__.Cases) ... ok
+test_close_failure_16 (__main__.Cases) ... ok
+test_close_failure_17 (__main__.Cases) ... ok
+test_close_failure_18 (__main__.Cases) ... ok
+test_close_failure_19 (__main__.Cases) ... ok
+test_direct_already_signaled_exit_three (__main__.Cases) ... ok
+test_direct_job_bool_zero_after_root_exit (__main__.Cases) ... ok
+test_direct_running_root_still_terminated (__main__.Cases) ... ok
+test_direct_uncertain_prewait_refused (__main__.Cases) ... ok
+test_first_join_exception_attempts_all_readers (__main__.Cases) ... ok
+test_job_close_boolean_false (__main__.Cases) ... ok
+test_job_close_exception (__main__.Cases) ... ok
+test_job_close_failure_persisted_uncertainty (__main__.Cases) ... ok
+test_job_close_integer_zero (__main__.Cases) ... ok
+test_join_exception_unknown (__main__.Cases) ... ok
+test_log_write_rejection (__main__.Cases) ... ok
+test_read_failure_01 (__main__.Cases) ... ok
+test_read_failure_02 (__main__.Cases) ... ok
+test_read_failure_03 (__main__.Cases) ... ok
+test_read_failure_04 (__main__.Cases) ... ok
+test_receipt_write_rejection (__main__.Cases) ... ok
+test_shutdown_and_all_joins_share_deadline (__main__.Cases) ... ok
+test_terminal_journal_durable_receipt (__main__.Cases) ... ok
+test_terminate_boolean_false (__main__.Cases) ... ok
+test_terminate_integer_zero (__main__.Cases) ... ok
+test_total_monotonic_join_budget (__main__.Cases) ... ok
+test_writer_close_failure_persisted_uncertainty (__main__.Cases) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.507s
+
+OK

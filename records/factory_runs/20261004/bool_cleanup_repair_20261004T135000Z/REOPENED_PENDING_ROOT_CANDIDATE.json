@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-04T14:07:44.388278+00:00",
+  "state": "REOPENED_PENDING_ROOT_CANDIDATE",
+  "reason": "Root steering arrived after immutable three-job close snapshot. Reserve optionaljob4 Gemini for separately root-authored corrected exactsource after gates. Earlier receipt/ledger remain historical unchanged.",
+  "provider_jobs_terminal": 3,
+  "maximum_provider_jobs": 4,
+  "grok_timeout_preserved": true,
+  "grok_changes_returned": false,
+  "credits_and_rawtokens_distinct": true
+}

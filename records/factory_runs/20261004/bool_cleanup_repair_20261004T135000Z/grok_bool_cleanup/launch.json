@@ -1,0 +1,8 @@
+{
+  "pid": 88900,
+  "model": "grok-4.7-build-fast",
+  "source_sha256": "6bb4e7edb317044e34d426d44b0035c2ea57fb762aade601f81e3be599ca59f9",
+  "credential_saved": false,
+  "deadline_seconds": 300,
+  "native_children_actual": 0
+}

@@ -1,0 +1,110 @@
+{
+  "status": "RED_NOT_ADMITTED_FOR_USE",
+  "candidate_source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+  "results": {
+    "tests_run": 62,
+    "failures": 21,
+    "errors": 0,
+    "not_checked": 0,
+    "forbidden_calls": []
+  },
+  "execution": {
+    "command": [
+      "python",
+      "-B",
+      "E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py"
+    ],
+    "pid": 6324,
+    "exit_code": 1,
+    "elapsed_seconds": 1.2029999997466803,
+    "timeout": false,
+    "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+    "evaluator_sha256": "e64ccbc7a62e00680fd1f4ad06ca139364e2daaccf8e59d61d85208ffa8f8730",
+    "scope": "Pure synthetic comparator; native/process/network/GPU calls trapped"
+  },
+  "findings": [
+    {
+      "finding": "Caller authority optional",
+      "lines": [
+        205
+      ],
+      "observed": "Empty expected dictionary yields match; six expected pins are not required."
+    },
+    {
+      "finding": "Token sequence insufficient",
+      "lines": [
+        76
+      ],
+      "observed": "Short same sequences and different CPU/GPU sequences yield match instead of exact sixteen0..15 refusal."
+    },
+    {
+      "finding": "Integer fields compare numerically",
+      "lines": [
+        52
+      ],
+      "observed": "Float model_bytes/context/ordinal/strides accepted; float nbytes reaches struct.error."
+    },
+    {
+      "finding": "Canonical alias not canonicalized",
+      "lines": [
+        93
+      ],
+      "observed": "attn_norm-00 accepted, violating strict canonical identity."
+    },
+    {
+      "finding": "Root link erased before check",
+      "lines": [
+        129
+      ],
+      "observed": "Actual owned root symlink is resolved away before reparse inspection and falsely matches."
+    },
+    {
+      "finding": "Metadata classified as numeric divergence",
+      "lines": [
+        218
+      ],
+      "observed": "Missing/extra/order/op/shape mismatches return DIAGNOSTIC_DIVERGENCE instead of CaptureError/NOT_CHECKED artifact refusal."
+    },
+    {
+      "finding": "Fixed tolerance policy not enforced",
+      "lines": [
+        213
+      ],
+      "observed": "0.02 and0 are accepted despite root exact0.01 policy."
+    },
+    {
+      "finding": "All-capture statistics missing",
+      "lines": [
+        251
+      ],
+      "observed": "Only first threshold-divergent capture emits stats; matching captures and within-tolerance noise are not reported."
+    },
+    {
+      "finding": "Authority extras ignored",
+      "lines": [
+        187
+      ],
+      "observed": "Origin qualificationGPU_PASS, manifest production_pass and node reference_scale fields ignored."
+    }
+  ],
+  "passing_discriminators": [
+    "Synthetic equal baseline",
+    "Actual second/third tensor corruption with updated true digests reports first violating ordinal1 and correct max error1/failed count1",
+    "Per-element reference scale rejects zero-reference0.02 even with another reference element1000000",
+    "Real SHA mismatch and real truncated/trailing bytes refused",
+    "NaN and both infinities refused in either pass",
+    "Nested duplicate JSON keys refused",
+    "Aggregate80MiB declared processing over actual valid16MiB shared tensor refused",
+    "Actual manifest over128KiB refused",
+    "Inputs remained byte-for-byte unchanged on every test"
+  ],
+  "limits": [
+    "Standard-library comparator only; metadata is declaration binding, not source/model authenticity or GPU execution.",
+    "Explicit source schema adapter uses actual result/first_divergent_ordinal/stats fields. All-capture-stat test will need documented shape adaptation if a corrected candidate uses keyed statistics rather than a list.",
+    "Root and file symlinks were actually created inside the owned temporary folder; no skip/no fabricated link fixture.",
+    "Node-count cap cannot be isolated with145 otherwise-valid canonical IDs because whitelist has142names.",
+    "Per-tensor16MiB oversize/exact-bound full comparison, hardlinks/reparse junctions, TOCTOU/racing growth, and deeply nested hostile JSON resource limits not independently executed.",
+    "No provider-generated tests or native/GPU/provider calls executed.",
+    "Temporary fixture folders deleted after each case; original source unchanged."
+  ]
+}

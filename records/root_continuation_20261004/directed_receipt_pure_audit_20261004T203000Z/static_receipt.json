@@ -1,0 +1,8 @@
+{
+  "status": "SAFE_FOR_ROOT_ADMITTED_PURE_QA",
+  "source_sha256": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f",
+  "provider_test_sha256": "fa250c767d0062c5af5055838dea9e256fe1e87bc2716d110c764e53c9413931",
+  "top_level": "Only re import, literal constants/pure re.compile, undecorated class/function definitions",
+  "intake_status": "REFUSED_PRESERVED",
+  "provider_tests_executed": false
+}

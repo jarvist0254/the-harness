@@ -1,0 +1,53 @@
+{
+  "inherited_muse_wrapper_sha256": "db22545730884bed4eae8b182f66d22e7532744e7f11a8f4dff544f19b2d5792",
+  "muse_deadline_seconds": 300,
+  "candidate_import_execution": false,
+  "capture_each_bytes": 2097152,
+  "root_admission": false,
+  "candidate_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "steps": [
+    "ROOT read/admit actual pinned Muse wrapper+prompt; no launch fromprep",
+    "Muse independent review actual source/spec/tests using pinned headless tool restrictions",
+    "Build Gemini compact <=24000UTF16 prompt from actual Muse artifact+all actual candidate sources; root launch admission separately",
+    "Build Grok HIGH editor prompt from actual Muse+Gemini findings; exact coherent source/tests only; root launch admission separately",
+    "ROOT independent actual-file pure/static gates; NO native/four hardware claim from fixture"
+  ],
+  "state": "SOURCEONLY_REVIEW_CHAIN_PREP_NO_PROVIDER_LAUNCH",
+  "files": [
+    {
+      "bytes": 18256,
+      "sha256": "7b386f3d129562a67a7ccd13000f4e519d2a98b231177c3880161f0065c15090",
+      "name": "muse_capacity.prompt.txt"
+    },
+    {
+      "bytes": 1388,
+      "sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+      "name": "output_schema.json"
+    },
+    {
+      "bytes": 22228,
+      "sha256": "5097fb8cb9c23b92c92b33b59b077c251db42fd35522d303bc0a799adeb8a1c6",
+      "name": "run_muse_capacity.pending_admission.py"
+    },
+    {
+      "bytes": 7296,
+      "sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+      "name": "source.snapshot.txt"
+    },
+    {
+      "bytes": 5354,
+      "sha256": "8ab81aa30e7ccd104b2e8ae6fbb9d19c87b31fffb7fcb32880dc97f0c02d1bb8",
+      "name": "spec.snapshot.txt"
+    },
+    {
+      "bytes": 3522,
+      "sha256": "aae6be310522f4d7a3152652ffd2816df186db72a317f5ead1372ec9dda95239",
+      "name": "tests.snapshot.txt"
+    }
+  ],
+  "utc": "2026-10-04T19:46:37.6375128Z",
+  "downstream_findings_not_fabricated": true,
+  "physical_capacity_proof": false,
+  "inherited_muse_wrapper_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_qwen_linux_dmabuf_audit_20261004T190700Z\\run_muse_job.py",
+  "candidate_provider": "qwen3.8-max"
+}

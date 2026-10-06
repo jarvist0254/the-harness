@@ -1,0 +1,40 @@
+{
+  "unknown_usage_jobs": 9,
+  "actual_requests": 13,
+  "scope": "ONLY managerowned resumedQwenrounds, notearlierfrozen53+otheragentcalls",
+  "known_usage_jobs": 4,
+  "observed_completion_tokens": 112255,
+  "complete_untrusted_code_artifacts": 2,
+  "ledgers": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_stream_adapter_20261004T182800Z\\RESUME_QWEN_ROUNDS_AGGREGATE.json",
+      "sha256": "0227fb008edec53fa1f2da077af9a0c094f67b3f27437a1c5ac56929fa3398ab"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\USAGE_FINAL_STREAM_SIX.json",
+      "sha256": "20738828f90cd622fbb7de81996b3b2bd818d7046d7961689a7bfca9b47543c9"
+    }
+  ],
+  "accepted_functionality": 0,
+  "reasoning_tokens_included_not_added": 94204,
+  "observed_total_tokens": 118308,
+  "credits": "NOT_CHECKED",
+  "complete_advisory_or_refusal_artifacts": 2,
+  "native_children_actual": 0,
+  "all_owned_provider_processes_reaped": true,
+  "observed_prompt_tokens": 6053,
+  "providers": {
+    "Qwen": {
+      "requests": 13,
+      "unknown_usage_jobs": 9,
+      "model": "qwen3.8-max",
+      "observed_tokens": 118308
+    },
+    "Gemini": {
+      "requests": 0
+    },
+    "Grok": {
+      "requests": 0
+    }
+  }
+}

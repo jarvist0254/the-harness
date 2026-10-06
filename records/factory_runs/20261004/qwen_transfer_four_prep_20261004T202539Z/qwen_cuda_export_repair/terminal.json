@@ -1,0 +1,36 @@
+{
+  "raw_bytes": 4004891,
+  "timeout": false,
+  "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+  "http": 200,
+  "usage_known": true,
+  "finish_reason": "stop",
+  "done": true,
+  "response_cap_exceeded": false,
+  "provider_patch_applied": false,
+  "reasoning_bytes": 162765,
+  "known_secret_match_refused": false,
+  "usage": {
+    "prompt_tokens": 6967,
+    "total_tokens": 60362,
+    "completion_tokens": 53395,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 6967
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 44481,
+      "text_tokens": 53395
+    }
+  },
+  "credential_saved": false,
+  "content_bytes": 27626,
+  "observed_model": "qwen3.8-max",
+  "frames": 14775,
+  "pid": 52796,
+  "native_children_actual": 0,
+  "requested_model": "qwen3.8-max",
+  "normalized_cap_exceeded": false,
+  "parse_error_type": "RuntimeException",
+  "elapsed_seconds": 1071.82
+}

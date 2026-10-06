@@ -1,0 +1,1 @@
+FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY

@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "scope": "Read-only UI observation of existing signed-in QwenCloud Individual Token Plan tab",
+  "page": "https://home.qwencloud.com/analytics/token-plan/individual",
+  "method": "cua_repl browser accessibility tree after tab.reload; no account settings changed",
+  "plan": "Individual Plan Pro",
+  "plan_status": "Active",
+  "page_last_updated_label": "2026-10-04 16:28:39",
+  "page_time_zone": "NOT_REPORTED",
+  "remaining_display_percent": 35.0,
+  "remaining_progress_indicator_percent": 34.96215057373047,
+  "monthly_plan_quota": 180000,
+  "remaining_credits_derived_approx": 62931.871032714844,
+  "derivation": "180000 * 34.96215057373047 / 100; estimate from UI percentage, not a returned exact Credits balance",
+  "reset_time_label": "2026-10-06 12:00:00",
+  "credit_packs_label": "No Credit Packs",
+  "quota_goal_achieved": false,
+  "factory_attribution": "NOT_PROVEN: account usage may include user or other jobs",
+  "tokens_are_not_credits": true,
+  "credentials_or_url_query_saved": false,
+  "billing_or_auto_renew_mutations": false
+}

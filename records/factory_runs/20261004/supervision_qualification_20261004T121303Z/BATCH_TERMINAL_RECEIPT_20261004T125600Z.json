@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-04T12:55:36.084806+00:00",
+  "provider_execution_status": "13_ACTUAL_REQUESTS_TERMINAL",
+  "usage_snapshot": "usage_snapshot_20261004T125512786Z.json",
+  "observed_tokens": 651431,
+  "unknown_usage_calls": 0,
+  "local_startup_failure_excluded_from_provider_calls": 2,
+  "actual_native_children": 0,
+  "authorized_native_maximum_each_qwen_deepseek": 10,
+  "credential_audit": "credential_persistence_audit_after_scoped_repairs.json",
+  "no_candidate_imports_or_process_tests": true,
+  "source_artifacts": {
+    "grok_model_whitelist": "grok_model_whitelist/llama_logits_model_whitelist.cpp",
+    "supervisor_syntax_derivative": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+    "validator": "grok_validator_repair/qualification_validator.corrected.py"
+  },
+  "qualification": {
+    "grok_supervisor": "STATIC_REJECTED_NO_EXECUTION",
+    "grok_validator": "STATIC_REJECTED_AS_QUALIFICATION_AUTHORITY",
+    "qwen_spawn": "REJECTED_THREAD_HANDLE_OWNERSHIP_REMAINS_BROKEN",
+    "qwen_cleanup": "REJECTED_TERMINATION_UNCERTAINTY_CLOSE_FAILURE_RECEIPT_FAILURE_GAPS",
+    "qwen_capacity": "AST_ONLY_SCOPE_OVERLAP_NEEDS_ADJUDICATION",
+    "qwen_proof_bindings": "PARTIAL_NOT_ACCEPTED_LENGTH",
+    "grok_model_whitelist": "DELIVERED_ROOT_CLEAN_GATE_PENDING_RUNTIME_BY_ROOT_ONLY"
+  },
+  "reviews": [
+    "gemini_repaired_admission_review/review.json",
+    "GEMINI_REPAIRED_REVIEW_ADJUDICATION_20261004T124800Z.json",
+    "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\GROK_STATIC_REVIEW.md"
+  ],
+  "full_goal": "OPEN; real four discrete device capacity+complete fabric and physical CAD interface qualification unproven; original Q8_0 parity failure preserved; F32 distinct diagnostic not superseding it",
+  "next": "Root/static adjudication of scoped Qwen patches then requested Gemini/Grok integration; source owner applies only admitted exact edits"
+}

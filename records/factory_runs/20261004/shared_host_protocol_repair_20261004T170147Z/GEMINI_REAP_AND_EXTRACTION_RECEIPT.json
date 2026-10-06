@@ -1,0 +1,31 @@
+{
+  "wrapper_pid": 88972,
+  "review_sha256": "194e15e75747a10410889519f32d36d708a07c619053abe5d95b9854bafa2216",
+  "usage": {
+    "input_tokens": 38203,
+    "output_tokens": 8474,
+    "thinking_tokens": 5283,
+    "cache_read_tokens": 25420,
+    "total_tokens": 46677
+  },
+  "extraction": "Exact raw CLI structured_output values, JSON serialization only, no finding edits; .response markdown/trailing JSON not normalized",
+  "internal_model_calls": "NOT_REPORTED; num_turns is not modelCalls",
+  "wrapper_session": 80202,
+  "admission_after_sha256": "65b74971809093d9b8de5cac675be36755d36117bb5320adb99a3ad810238564",
+  "patch_applied": false,
+  "raw_verdict": "REJECT",
+  "raw_cli_sha256": "0d7689b105fa8446cb8feb223073ad0f2311f45d3cf0f2a8a8f2280210286348",
+  "grok_launched": false,
+  "wrapper_session_exit": 0,
+  "provider_status": "SUCCESS",
+  "cpp_after_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "secondary_state": "ACTUAL_STRUCTURED_OUTPUT_EXTRACTED_FOR_ROOT_REVIEW",
+  "num_turns": 2,
+  "source_after_sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+  "owned_pids_still_alive": [],
+  "raw_owned_terminal_status": "PARSE_OR_SCHEMA_ERROR",
+  "utc": "2026-10-04T17:21:49.0476199Z",
+  "cli_pid": 37448,
+  "verdict_is_execution_admission": false,
+  "native_children_actual": 0
+}

@@ -1,0 +1,14 @@
+{
+  "pid": 95260,
+  "command": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\cmake.exe --build E:\\the_harness\\records\\build_vulkan_real\\build --target llama-quantize --parallel 4",
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "exit_code": 1,
+  "elapsed_seconds": 1.689,
+  "process_present_after": false,
+  "target": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\llama-quantize.exe",
+  "target_exists": false,
+  "target_sha256": null,
+  "stdout": "records\\vulkan_llm_qualification_20261004\\quantizer_build\\stdout.log",
+  "stderr": "records\\vulkan_llm_qualification_20261004\\quantizer_build\\stderr.log"
+}

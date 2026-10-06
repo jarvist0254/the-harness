@@ -1,0 +1,19 @@
+{
+  "observed_model": "qwen3.8-flash",
+  "finish_reason": "stop",
+  "native_children": 0,
+  "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+  "pid": 52540,
+  "http": 200,
+  "requested_model": "qwen3.8-flash",
+  "elapsed_seconds": 78.27,
+  "usage": {
+    "prompt_tokens": 6948,
+    "total_tokens": 12830,
+    "completion_tokens": 5882,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 6948
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "format_recovery": "Removed JSON markdown fence only; original answer and terminal preserved; no extra provider call",
+  "findings": [
+    "T1 assertion no_kernel_launch_count > 0 contradicts zero native launches; use actual receipt schema and zero event count.",
+    "REJECTED/CAPACITY_REFUSED and assigned_layer_ids are proposed names, not verified current receipt fields.",
+    "T4 cannot request a B-to-C target using current injection CLI; actual control selects first vendor boundary.",
+    "No dedicated VRAM delta equality can be assumed for caching/driver allocations; measurement must distinguish shared AMD memory.",
+    "Reference to shared memory in initial verified mixed-vendor execution is misleading: transport is host-staged between separate contexts.",
+    "Four cards absent; all proposed four-card tests remain NOT_CHECKED."
+  ],
+  "state": "COMPLETE_ADVISORY_WITH_INVALID_ASSERTIONS",
+  "actual_native_children": 0
+}

@@ -1,0 +1,9 @@
+{
+  "json_parse": "PASS_DATA_ONLY",
+  "tests_chars": 3839,
+  "source_chars": 8586,
+  "accepted": false,
+  "schema": "REFUSED",
+  "reason": "compact source bound",
+  "provider_status": "PROPOSED"
+}

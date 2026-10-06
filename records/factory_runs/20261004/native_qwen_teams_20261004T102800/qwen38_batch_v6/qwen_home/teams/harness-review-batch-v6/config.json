@@ -1,0 +1,9 @@
+{
+  "name": "harness-review-batch-v6",
+  "description": "Isolated read-only source review of supplied J-Link fixtures (Vulkan / RPC / evidence-integrity). Three named read-only teammates, no writes, no shell, no nested workers.",
+  "createdAt": 1791109938607,
+  "leadAgentId": "leader@harness-review-batch-v6",
+  "leadSessionId": "96283631-fad5-42f7-8ed4-4d65c1e764f1",
+  "leadPid": 27560,
+  "members": []
+}

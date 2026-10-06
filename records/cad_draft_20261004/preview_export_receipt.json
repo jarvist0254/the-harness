@@ -1,0 +1,12 @@
+{
+  "command": [
+    "E:\\tooling\\FreeCAD\\app\\FreeCAD_1.1.4-Windows-x86_64-py311\\bin\\freecadcmd.exe",
+    "E:\\the_harness\\records\\cad_draft_20261004\\export_preview_geometry.py"
+  ],
+  "pid": 46592,
+  "process_exit_code": 0,
+  "timed_out": false,
+  "seconds": 0.578999999910593,
+  "geometry_present": true,
+  "script_sha256": "400990510b9e32ac906198dfba198b7196d36fe002457ae209bf70bd59c18896"
+}

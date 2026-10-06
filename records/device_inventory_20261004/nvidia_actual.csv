@@ -1,0 +1,2 @@
+pci.bus_id, name, memory.total [MiB], memory.free [MiB], memory.used [MiB], uuid
+00000000:01:00.0, NVIDIA GeForce RTX 5070 Ti, 16303, 14682, 1314, GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c

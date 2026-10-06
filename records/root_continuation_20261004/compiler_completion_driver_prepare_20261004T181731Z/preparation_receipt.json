@@ -1,0 +1,57 @@
+{
+  "status": "SOURCE_PREPARATION_AST_AND_PURE_ONLY",
+  "files": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\BUILD_ADMISSION_TEMPLATE_PENDING_ROOT.json",
+      "sha256": "bef2e6c38c556c9d5435baba65cd9b229de17576d8a54afdbd1373104230369a"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\CONTRACT.json",
+      "sha256": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\controller_compiler_completion_attempt5.py",
+      "sha256": "23eebe110753c4bf5d929d6b3d38eb4209ed755fbb11974ed2064aaf8b669137"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\job_member_trace.py",
+      "sha256": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\NATIVE_ADMISSION_TEMPLATE_PENDING_ROOT.json",
+      "sha256": "d4d1421a95a51c09cbb96e490d14fbaf010db68e41600d5fa34336401a6e740c"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_driver.py",
+      "sha256": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\PREPARATION_AND_COMMANDS.md",
+      "sha256": "b3d296d6621c2c1867a87a18e195b720d818470d7c64aa7cd6a322600ad40e58"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\pure_receipt.json",
+      "sha256": "13396191c912c540e469883f2712ea4ee08b8a4428e7aaf7cba93c776453c578"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\test_driver_acceptance_pure.py",
+      "sha256": "3210071efaeaabb9b305222bf92b40a01a69c6a459a9c61aaca1642be91acdd0"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\worker.py",
+      "sha256": "015f376a054758fec223833a3613f4345186a2dbfa4a935a5a0485ae58dd3dbe"
+    }
+  ],
+  "candidate_cpp_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "driver_pure_tests": 14,
+  "pure_exit": 0,
+  "private_adapter_imported": false,
+  "native_compile_gpu_execution": false,
+  "native_suite_external_bound_seconds": 60,
+  "build_limits": {
+    "configure": 120,
+    "build": 600,
+    "streams": 131072,
+    "parallel": 4
+  }
+}

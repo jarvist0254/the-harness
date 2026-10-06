@@ -1,0 +1,22 @@
+{
+  "native_import_test_execution": false,
+  "status": "ORIGINAL_INTAKE_REFUSAL_PRESERVED",
+  "budget_override_for_acceptance": false,
+  "original_reason": "source8586>8000chars",
+  "root_scope": "exact JSON string extraction to immutable txt only",
+  "files": [
+    {
+      "chars": 8586,
+      "sha256": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f",
+      "field": "source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+    },
+    {
+      "chars": 3839,
+      "sha256": "fa250c767d0062c5af5055838dea9e256fe1e87bc2716d110c764e53c9413931",
+      "field": "tests_source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\tests_source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+    }
+  ],
+  "root_admission": false
+}

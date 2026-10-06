@@ -1,0 +1,26 @@
+[
+  {
+    "name": "memory_help",
+    "command": [
+      "E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\bin\\memory_benchmark_ocl.exe",
+      "--help"
+    ],
+    "pid": 33644,
+    "exit": 0,
+    "seconds": 0.23400000017136335,
+    "timed_out": false,
+    "exe_sha256": "06fb7eb2338dbbcc954f80fe6ac6c3ed21ced7a154909e014da1845029a6065b"
+  },
+  {
+    "name": "devices_help",
+    "command": [
+      "E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\bin\\show_devices_ocl.exe",
+      "--help"
+    ],
+    "pid": 50836,
+    "exit": 0,
+    "seconds": 0.3130000000819564,
+    "timed_out": false,
+    "exe_sha256": "d8434533ed3c31fcad72fbccf7df1333ba5bbc5541fc42d20183f77af4eb262f"
+  }
+]

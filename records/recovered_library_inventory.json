@@ -1,0 +1,457 @@
+{
+  "collected_utc": "2026-10-04",
+  "recursive_folder": "/Harness Project",
+  "complete_returned_inventory": true,
+  "files": [
+    {
+      "library_path": "/Harness Project/current/CURRENT_MANIFEST.md",
+      "library_file_id": "libfile_d135c25924708191972f407492653fc2",
+      "version_id": null,
+      "modified_at": "2026-09-30T15:03:12.755103Z",
+      "size_bytes": 842,
+      "sha256": "4100e1851c275b2633ce55490341837032d34221f292679449b184457b785328",
+      "local_path": "sources/library/Harness Project/current/CURRENT_MANIFEST.md"
+    },
+    {
+      "library_path": "/Harness Project/current/HANDOFF_STATUS.md",
+      "library_file_id": "libfile_b4d0d9e64ff481919460057a235ffedd",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:42.553512Z",
+      "size_bytes": 1511,
+      "sha256": "c48203b14f1c6d52f2b75e72d197654ba32cc9fba5641dbe8c172219558acd6f",
+      "local_path": "sources/library/Harness Project/current/HANDOFF_STATUS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/DIMENSION_AUTHORITY_AND_TBDS.md",
+      "library_file_id": "libfile_97354b2988e081919321c81131ac0386",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:40.979826Z",
+      "size_bytes": 6599,
+      "sha256": "cfa026e26a5b937a7774bc7410c0249cdac024f368d9450d235e8b86aad0df0a",
+      "local_path": "sources/library/Harness Project/current/DIMENSION_AUTHORITY_AND_TBDS.md"
+    },
+    {
+      "library_path": "/Harness Project/Harness_Project_v2.zip",
+      "library_file_id": "libfile_576729bf7930819183f67559768cc6d6",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:19.520885Z",
+      "size_bytes": 26204,
+      "sha256": "ac106f7821bcd7426472c3411829aa23ede564982e54cbe0a743eefb485c7b10",
+      "local_path": "sources/library/Harness Project/Harness_Project_v2.zip"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/SOURCE_NOTES.md",
+      "library_file_id": "libfile_bccda836a0208191a17095e4f82d73c4",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:17.286554Z",
+      "size_bytes": 968,
+      "sha256": "59ec9702b673a92aa3872dd373ca4a24a8f4f08823ce07c70d04097eb10cb879",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/SOURCE_NOTES.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/parameters.json",
+      "library_file_id": "libfile_806bf825d2d4819197aa1928239e425d",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:15.386833Z",
+      "size_bytes": 1910,
+      "sha256": "3d1588050c768489258d788bfce4304bc383e93787c46781ac56477731a836f7",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/parameters.json"
+    },
+    {
+      "library_path": "/Harness Project/current/ASTRA_FREECAD_HANDOFF.md",
+      "library_file_id": "libfile_40da0b8be6148191a055228a6efa74ea",
+      "version_id": "1",
+      "modified_at": "2026-09-30T15:00:20.823210Z",
+      "size_bytes": 9682,
+      "sha256": "55d2743889593a1a9a508e7d0a9dbe6579acdae6e10d39cf3783b568f6635d9a",
+      "local_path": "sources/library/Harness Project/current/ASTRA_FREECAD_HANDOFF.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/EXPANSION_PODLINK.md",
+      "library_file_id": "libfile_e724a531a1e881919f3dfa024dd30c60",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:11.097626Z",
+      "size_bytes": 2088,
+      "sha256": "9a9a9d66b887fb8ac3be6fb068be89affd1aee22bf62bcd63edc65bd3063e91e",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/EXPANSION_PODLINK.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/ELECTRONICS_INTERFACE.md",
+      "library_file_id": "libfile_329161508e808191a1ece0c0bd1da6ba",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:09.782397Z",
+      "size_bytes": 1991,
+      "sha256": "f23c3eaead26b8ad61deef64c962a31d93f1e2f4580bd8dc1a24b9fbfa1c5f62",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/ELECTRONICS_INTERFACE.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/PRINT_MATERIAL_AND_SLICER_STRATEGY.md",
+      "library_file_id": "libfile_62167425ee988191b5b536c4c2fe45c1",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:07.439946Z",
+      "size_bytes": 4905,
+      "sha256": "0626c0c202e6b7bf54b10c65443c15642c89ba90f71109e7fa6a07efe8908456",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/PRINT_MATERIAL_AND_SLICER_STRATEGY.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/FASTENERS_AND_INSERTS.md",
+      "library_file_id": "libfile_69f118bcfe148191806edb68381e1158",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:05.180816Z",
+      "size_bytes": 3868,
+      "sha256": "a50b99da5ca8b93b284f9d8c371d4ca0caceefaf732116924e5838b58bc0f092",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/FASTENERS_AND_INSERTS.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/AIRFLOW_CHANNELS.md",
+      "library_file_id": "libfile_b93651ad8738819198810a0d58260b06",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:03.379122Z",
+      "size_bytes": 2905,
+      "sha256": "24d82d8ff30235ef5cb30decb3d07d4c09656050d6a7408a71a16412a02b7aeb",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/AIRFLOW_CHANNELS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/decisions.json",
+      "library_file_id": "libfile_188dcf5ff8048191ba1b4b3c6ce3504b",
+      "version_id": null,
+      "modified_at": "2026-09-30T14:54:00.275961Z",
+      "size_bytes": 1313,
+      "sha256": "cfac5206efdd51404d2f88acac6ab2b35a8410a3fe0b07c6460a50f665b95010",
+      "local_path": "sources/library/Harness Project/current/decisions.json"
+    },
+    {
+      "library_path": "/Harness Project/current/vendor_cad/README.md",
+      "library_file_id": "libfile_682dadac3b408191a982098c606047df",
+      "version_id": "1",
+      "modified_at": "2026-09-30T14:54:50.521492Z",
+      "size_bytes": 1716,
+      "sha256": "ee9ad08979c06412c3fac0dbdf71422b74f398719eb1417f2cd17086de0d9ebd",
+      "local_path": "sources/library/Harness Project/current/vendor_cad/README.md"
+    },
+    {
+      "library_path": "/Harness Project/current/MECHANICAL_ENVELOPE.md",
+      "library_file_id": "libfile_497cc4fd588c81918ee1cef793afd505",
+      "version_id": "2",
+      "modified_at": "2026-09-30T15:00:23.892099Z",
+      "size_bytes": 3486,
+      "sha256": "b6e233a0bd87f97ce1f30c57ee560c92c7ab62eda683c53a4522810e2f751c23",
+      "local_path": "sources/library/Harness Project/current/MECHANICAL_ENVELOPE.md"
+    },
+    {
+      "library_path": "/Harness Project/current/J_LINK_SOFTWARE_FABRIC.md",
+      "library_file_id": "libfile_c821e5cda2d081919ab2f27b7d912475",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:24:28.535013Z",
+      "size_bytes": 1842,
+      "sha256": "be69ac5706035cc363581614311ed69170ec53fe74cbbdbc5bb5d5736293bec4",
+      "local_path": "sources/library/Harness Project/current/J_LINK_SOFTWARE_FABRIC.md"
+    },
+    {
+      "library_path": "/Harness Project/current/DECISIONS.md",
+      "library_file_id": "libfile_0d68e2a7ddcc819198c418a640eb692b",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:55.539794Z",
+      "size_bytes": 1511,
+      "sha256": "abc834592b1ca78a012f2289e409fa36ba73e5e8bc3e196ce62c6e06fa47f37c",
+      "local_path": "sources/library/Harness Project/current/DECISIONS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/CAD_PARAMETERS.md",
+      "library_file_id": "libfile_7e5b2cc599888191ad57b1d4d412f050",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:54.183668Z",
+      "size_bytes": 1927,
+      "sha256": "b485ba36c69383d884a17eed2e166b81da514ea3b9a24909626991018892cfd8",
+      "local_path": "sources/library/Harness Project/current/CAD_PARAMETERS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/SOURCE_MANIFEST.md",
+      "library_file_id": "libfile_6e6f48f451888191b00e1b5e4f6ca681",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:52.851131Z",
+      "size_bytes": 2213,
+      "sha256": "1d09a37a4b0785c983a72be5f778ba6bfaa2d7bfd0ce71420ca0fc78b91b1edb",
+      "local_path": "sources/library/Harness Project/current/SOURCE_MANIFEST.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/ASTRA_HANDOFF_PROMPT.md",
+      "library_file_id": "libfile_33de0cdd3d848191843900f0e399b0b1",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:51.133822Z",
+      "size_bytes": 6298,
+      "sha256": "12672889396a2759cee3a60fa8b8e55b4f5c1f546a53974f3ca10dce0f803893",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/ASTRA_HANDOFF_PROMPT.md"
+    },
+    {
+      "library_path": "/Harness Project/current/VALIDATION_CHECKLIST.md",
+      "library_file_id": "libfile_172e26a7a1d08191a096072a75f850ac",
+      "version_id": "1",
+      "modified_at": "2026-09-30T14:53:51.356951Z",
+      "size_bytes": 2474,
+      "sha256": "53e6864e28d546565b9e75cace78474f5bb53110768ec0b2eb1cedc96102025c",
+      "local_path": "sources/library/Harness Project/current/VALIDATION_CHECKLIST.md"
+    },
+    {
+      "library_path": "/Harness Project/current/PURCHASE_AND_BOM.md",
+      "library_file_id": "libfile_4308ea95a1508191a1ace765f3b33c20",
+      "version_id": "1",
+      "modified_at": "2026-09-30T14:53:48.233553Z",
+      "size_bytes": 4931,
+      "sha256": "414ae50da207128987113bb9404bf3e391d2ee6168baa90babecfd920095a61c",
+      "local_path": "sources/library/Harness Project/current/PURCHASE_AND_BOM.md"
+    },
+    {
+      "library_path": "/Harness Project/current/POWER_AND_CABLING.md",
+      "library_file_id": "libfile_01ba62e88a188191b5793b441bc82cb1",
+      "version_id": "1",
+      "modified_at": "2026-09-30T14:53:44.807046Z",
+      "size_bytes": 3186,
+      "sha256": "4b9ed51a029d3399a9159c4f879437ee958c6b6710f211ce30972a6f526b178c",
+      "local_path": "sources/library/Harness Project/current/POWER_AND_CABLING.md"
+    },
+    {
+      "library_path": "/Harness Project/current/CURRENT_ARCHITECTURE.md",
+      "library_file_id": "libfile_14a14c0714f88191b1f451450e1f3c7d",
+      "version_id": "1",
+      "modified_at": "2026-09-30T14:53:31.483827Z",
+      "size_bytes": 2472,
+      "sha256": "880661d0e68dadcfc6114d2107c1e91ddb0059b92aeeebdc702c8a2e30714889",
+      "local_path": "sources/library/Harness Project/current/CURRENT_ARCHITECTURE.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/BOM_DETAILED.md",
+      "library_file_id": "libfile_2b8316796ce88191b31451d010a55d13",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:23.247959Z",
+      "size_bytes": 7832,
+      "sha256": "8900e2a4112f3b2ebdb3b384c3667aeba6e24249df43b69be47333b4cb20d06e",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/BOM_DETAILED.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/PODLINK_EXPANSION.md",
+      "library_file_id": "libfile_eeea47f47e2c8191b6212524c116bca2",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:23.152310Z",
+      "size_bytes": 2204,
+      "sha256": "a9898fc05c791e96811bee8e707134bb26ee68b2d594241948c8cdc74bf1775d",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/PODLINK_EXPANSION.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/POWER_AND_PCIE.md",
+      "library_file_id": "libfile_f81d61c9af508191b3a7448b2128dcce",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:20.223840Z",
+      "size_bytes": 3948,
+      "sha256": "d5edb01b9c62d4ee963ae0b1cd3c2bf9c0cbfb30a0c873ec44d5a3df2f35f155",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/POWER_AND_PCIE.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/CABLE_MANAGEMENT.md",
+      "library_file_id": "libfile_0d209057e0648191bb1d1ac8bf4d633f",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:20.021263Z",
+      "size_bytes": 3653,
+      "sha256": "8d39abf7ecb6fd52d519a2376be7344fa7447d65f55e991a5029cae4f207713e",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/CABLE_MANAGEMENT.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/FASTENERS_AND_METAL_INTERFACES.md",
+      "library_file_id": "libfile_9759689cc9fc8191a3c68ffcea800572",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:19.884072Z",
+      "size_bytes": 5079,
+      "sha256": "04f519aec290870798e5799690b86059a7c1ec67dd60561b8a9e6670e3b8cf47",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/FASTENERS_AND_METAL_INTERFACES.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/PRINT_ENGINEERING.md",
+      "library_file_id": "libfile_d60e9bf3f07c8191ba6317834bc25d36",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:19.875114Z",
+      "size_bytes": 5311,
+      "sha256": "0a18a3cc12eef1caaac5c90abcc092cdf5b1dfd6bbdaf8cade8d83ebb966a7e0",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/PRINT_ENGINEERING.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/AIRFLOW_AND_CHANNELS.md",
+      "library_file_id": "libfile_6f61874a7760819191c0b08a72224711",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:17.440868Z",
+      "size_bytes": 4199,
+      "sha256": "033712ec2aea7305a7e6f8a6e0ef6c189a63074c60bdf8257bbb103bcdf09cde",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/AIRFLOW_AND_CHANNELS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/README_FIRST.md",
+      "library_file_id": "libfile_9d28993926288191a5ac7a32bba7443f",
+      "version_id": "3",
+      "modified_at": "2026-09-30T15:03:11.005105Z",
+      "size_bytes": 5490,
+      "sha256": "b30f32548eb564566ecb64d5b6449fd98ace41e02c3dd6f5d888378cef0018bb",
+      "local_path": "sources/library/Harness Project/current/README_FIRST.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/MECHANICAL_BLUEPRINT.md",
+      "library_file_id": "libfile_dfb3a1194eac8191812e89e5d1e329f6",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:17.311329Z",
+      "size_bytes": 5214,
+      "sha256": "817cb34c1d9194556c379f7159c5c2c1c299b5dbfdc18715d1ee47a3a4ee80fa",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/MECHANICAL_BLUEPRINT.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/pre_v2_current_drafts/SYSTEM_BLUEPRINT.md",
+      "library_file_id": "libfile_c8fa839f25c08191a7d7474033695d2c",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:17:17.050022Z",
+      "size_bytes": 3602,
+      "sha256": "9b73da0920017e12fb8fc8351e6b383312290adee8633ec32343233607ea0e69",
+      "local_path": "sources/library/Harness Project/archive/pre_v2_current_drafts/SYSTEM_BLUEPRINT.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/VALIDATION_CHECKLIST.md",
+      "library_file_id": "libfile_e3bb573a3a5c8191b7560cb1e3630082",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:44.250194Z",
+      "size_bytes": 2313,
+      "sha256": "27c8e1c801c90934b5eaa3c7a9774090fbbf0e34efd237f34cdd62f7104c188e",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/VALIDATION_CHECKLIST.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/README_FIRST.md",
+      "library_file_id": "libfile_52ae5471614881918f863b6fcbdb4f9a",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:43.677407Z",
+      "size_bytes": 5794,
+      "sha256": "37ef02b6964ecb5842d09d4fb9fd3ba3dcec8f81f616b820a60e72a6c70c3ab4",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/README_FIRST.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/PURCHASE_AND_BOM.md",
+      "library_file_id": "libfile_ff30d6707f848191ab50d97bf76fb04b",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:43.600694Z",
+      "size_bytes": 1960,
+      "sha256": "aacf889884964a8035c62c058c22ec4787baf47bc0780918a2d3eadab08236cc",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/PURCHASE_AND_BOM.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/POWER_AND_CABLING.md",
+      "library_file_id": "libfile_da26169fe1f08191aba5e8c79eabb15b",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:43.139327Z",
+      "size_bytes": 2194,
+      "sha256": "20f9d99b857341f9d284e709f80809130d50ff6a3acaca5be2f1a312eb601b38",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/POWER_AND_CABLING.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/MECHANICAL_ENVELOPE.md",
+      "library_file_id": "libfile_9143770110d0819189abdc4a87be5ad4",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:40.886042Z",
+      "size_bytes": 4175,
+      "sha256": "e805cee2ab3030339cb8dd8ade4a5744ce36449bc1ded28681a425ca34be3468",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/MECHANICAL_ENVELOPE.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/CURRENT_ARCHITECTURE.md",
+      "library_file_id": "libfile_8f7ace5763008191a5462b0b7e36dbff",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:40.677642Z",
+      "size_bytes": 2604,
+      "sha256": "1613ac792f0087458e1d62d75344bcc8ff8888de5adfcb852c4e110f65b0bc8e",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/CURRENT_ARCHITECTURE.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/J_LINK_SOFTWARE_FABRIC.md",
+      "library_file_id": "libfile_3dd8d8933dac8191b4a1265a4023b6b0",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:40.452303Z",
+      "size_bytes": 2488,
+      "sha256": "f545f8f160050be204eefef846f0b7bcb8c11333f56cb263cae381c73b6131fb",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/J_LINK_SOFTWARE_FABRIC.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/v1.0-draft/decisions.json",
+      "library_file_id": "libfile_4fb3a94433688191875da7312adab1a3",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:16:40.111148Z",
+      "size_bytes": 1591,
+      "sha256": "09df905d8a8bb3e1b6b7e78c6873f6df5ab5b4a7ace2c15cde3765114a8ab73d",
+      "local_path": "sources/library/Harness Project/archive/v1.0-draft/decisions.json"
+    },
+    {
+      "library_path": "/Harness Project/current/AIRFLOW_AND_CABLE_CHANNELS.md",
+      "library_file_id": "libfile_04ce6542a2288191a767417ad0045390",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:15:14.764273Z",
+      "size_bytes": 4601,
+      "sha256": "84d36144461b65b2630db30e1f786ad51fdc5fadf60a6d875fedf2bfbf14ee2e",
+      "local_path": "sources/library/Harness Project/current/AIRFLOW_AND_CABLE_CHANNELS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/FASTENERS_AND_HARDPOINTS.md",
+      "library_file_id": "libfile_e04471b7367081919757408e0caf8042",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:15:13.356784Z",
+      "size_bytes": 6132,
+      "sha256": "b288dce2d0049d3610590c5f6413512bd29e6fcec39065a6c91d15d26ad42df9",
+      "local_path": "sources/library/Harness Project/current/FASTENERS_AND_HARDPOINTS.md"
+    },
+    {
+      "library_path": "/Harness Project/current/MATERIAL_AND_PRINT_PLAN.md",
+      "library_file_id": "libfile_a6f9b28b6f04819188155aa39d080a23",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:15:12.096155Z",
+      "size_bytes": 6339,
+      "sha256": "7739d27f16955c09b5fec153b90cc90d281eaa412a51b99aea332096ecf42a26",
+      "local_path": "sources/library/Harness Project/current/MATERIAL_AND_PRINT_PLAN.md"
+    },
+    {
+      "library_path": "/Harness Project/current/MASTER_BLUEPRINT.md",
+      "library_file_id": "libfile_b89122ddd10c8191a6d0a0b2bcc555bd",
+      "version_id": null,
+      "modified_at": "2026-09-30T13:15:10.578203Z",
+      "size_bytes": 12197,
+      "sha256": "085b5b3758eebb727e41f0f496ab9534acdbf7bddd3eaa1227152de0cf388a03",
+      "local_path": "sources/library/Harness Project/current/MASTER_BLUEPRINT.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/interrupted_alt_branch/JEH_Universal_3GPU_Pod_Astra_Handoff_v2.zip",
+      "library_file_id": "libfile_a4c942c2a7cc8191a53c927bddf57df5",
+      "version_id": "1",
+      "modified_at": "2026-09-30T13:24:34.939031Z",
+      "size_bytes": 39088,
+      "sha256": "1a3d6c35edf32638b51ef47b63edef288b0c9d69f11f4a172675b584ab58d309",
+      "local_path": "sources/library/Harness Project/archive/interrupted_alt_branch/JEH_Universal_3GPU_Pod_Astra_Handoff_v2.zip"
+    },
+    {
+      "library_path": "/Harness Project/current/POD_EXPANSION_INTERFACE.md",
+      "library_file_id": "libfile_085f85c11a308191a4cb3435ba14e052",
+      "version_id": "1",
+      "modified_at": "2026-09-30T13:17:45.455079Z",
+      "size_bytes": 1251,
+      "sha256": "e5bd911d213cfbe14747a88cd331796f3ac3c8d8fb9b422015707da04d96a884",
+      "local_path": "sources/library/Harness Project/current/POD_EXPANSION_INTERFACE.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/QOVARYX_3xS80_External_GPU_Shelf_Blueprint_v0.9.md",
+      "library_file_id": "libfile_233da0519c7881919da8628f454d59fa",
+      "version_id": null,
+      "modified_at": "2026-09-30T10:19:26.187654Z",
+      "size_bytes": 80780,
+      "sha256": "f9a4e0b369893e935499ab8f1a8e9ad20215245673e07b3adb8b84763b604a4f",
+      "local_path": "sources/library/Harness Project/archive/QOVARYX_3xS80_External_GPU_Shelf_Blueprint_v0.9.md"
+    },
+    {
+      "library_path": "/Harness Project/archive/QOVARYX_Shelf_Fit_and_A770_Review_Addendum_v0.9.1.md",
+      "library_file_id": "libfile_2eb3af890d1881918fc5676c393ec7b3",
+      "version_id": null,
+      "modified_at": "2026-09-30T10:19:25.954055Z",
+      "size_bytes": 12776,
+      "sha256": "8794a26283ff23bb8e9d7ce2c49ca48f76e89906fadd65081b565de735edb4c9",
+      "local_path": "sources/library/Harness Project/archive/QOVARYX_Shelf_Fit_and_A770_Review_Addendum_v0.9.1.md"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "required": [
+    "provider_launch_authorized",
+    "batch_path",
+    "job_id",
+    "lane",
+    "model",
+    "source_path",
+    "source_sha256",
+    "prompt_sha256"
+  ],
+  "properties": {
+    "provider_launch_authorized": {
+      "type": "boolean"
+    },
+    "batch_path": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "lane": {
+      "enum": [
+        "Qwen",
+        "Gemini",
+        "Grok"
+      ]
+    },
+    "model": {
+      "enum": [
+        "qwen3.8-max",
+        "gemini-3.8-flash-medium",
+        "grok-4.7-build-fast"
+      ]
+    },
+    "source_path": {
+      "type": "string"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "prompt_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

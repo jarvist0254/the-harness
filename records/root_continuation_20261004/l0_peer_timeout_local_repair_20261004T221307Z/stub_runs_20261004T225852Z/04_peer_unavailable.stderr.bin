@@ -1,0 +1,12 @@
+FAKE_CALL zeInit
+FAKE_CALL zeDriverGet
+FAKE_CALL zeDriverGet
+FAKE_CALL zeDeviceGet
+FAKE_CALL zeDeviceGet
+FAKE_CALL zeDeviceGetProperties
+FAKE_CALL zeDeviceGetProperties
+FAKE_CALL zeDeviceCanAccessPeer
+FAKE_CALL zeDeviceCanAccessPeer
+FAKE_CALL zeDeviceGetP2PProperties
+FAKE_CALL zeDeviceGetP2PProperties
+FAKE_SUMMARY api_calls=11 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY

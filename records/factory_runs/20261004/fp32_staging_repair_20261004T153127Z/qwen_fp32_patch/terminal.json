@@ -1,0 +1,26 @@
+{
+  "timeout": false,
+  "http": 200,
+  "native_children_actual": 0,
+  "failure_stage": "artifact_parse",
+  "status": "COMPLETE_PATCH_STAGED_UNAPPLIED",
+  "finish_reason": "stop",
+  "elapsed_seconds": 20.76,
+  "requested_model": "qwen3.8-max",
+  "response_cap_exceeded": false,
+  "pid": 87556,
+  "provider_patch_applied": false,
+  "observed_model": "qwen3.8-max",
+  "usage": {
+    "prompt_tokens": 10682,
+    "total_tokens": 11992,
+    "completion_tokens": 1310,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 10682
+    }
+  },
+  "usage_known": true,
+  "credential_saved": false,
+  "parse_error_type": null
+}

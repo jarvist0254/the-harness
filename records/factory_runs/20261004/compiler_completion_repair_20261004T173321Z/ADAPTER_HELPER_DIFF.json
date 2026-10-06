@@ -1,0 +1,68 @@
+[
+  {
+    "adapted_sha256": "0e9c9d2295df75ce5ac9bd0b8f7f698caf6a8cb199c9378fe2a09808348f0cb9",
+    "original_sha256": "ffc33ebfa5afcbc6ddfea6a0062274511a7a419f5bbf491f6b7e62654bf1f309",
+    "original": "qwen_http_protocol.ps1",
+    "adapted": "qwen_http_adapter.ps1",
+    "exact_line_set_diff": [
+      {
+        "text": ". (Join-Path $PSScriptRoot 'adapter_artifact.ps1')",
+        "side": "=>"
+      },
+      {
+        "text": "   $stage='artifact_parse';try{$artifact=Read-StrictJson $answer;Assert-AdapterArtifact $artifact;Save-NewJson (Join-Path $work 'adapter.pending_root_qa.json') $artifact;$state='COMPLETE_ADAPTER_STAGED_UNAPPLIED'}catch{$state='ARTIFACT_PARSE_OR_SCHEMA_ERROR';$parseError=$_.Exception.GetType().Name}",
+        "side": "=>"
+      },
+      {
+        "text": ". (Join-Path $PSScriptRoot 'protocol_artifact.ps1')",
+        "side": "<="
+      },
+      {
+        "text": "   $stage='artifact_parse';try{$artifact=Read-StrictJson $answer;Assert-ProtocolArtifact $artifact;Save-NewJson (Join-Path $work 'protocol.pending_root_qa.json') $artifact;$state='COMPLETE_PROTOCOL_STAGED_UNAPPLIED'}catch{$state='ARTIFACT_PARSE_OR_SCHEMA_ERROR';$parseError=$_.Exception.GetType().Name}",
+        "side": "<="
+      }
+    ],
+    "purpose": "Intake/helper target/staged artifact filename/status/system output schema only; no transport/time/log/credential-control changes."
+  },
+  {
+    "adapted_sha256": "a998042a41d8abf9bed72a0a290a4d707251c03bfd02c13be982c9ad57897036",
+    "original_sha256": "647c516363d3835c88fbd795c5df1d8765d024506bfb6ebd3b94b42605639c4a",
+    "original": "invoke_owned_protocol.ps1",
+    "adapted": "invoke_owned_adapter.ps1",
+    "exact_line_set_diff": [
+      {
+        "text": ". (Join-Path $PSScriptRoot 'adapter_artifact.ps1')",
+        "side": "=>"
+      },
+      {
+        "text": " foreach($arg in @('-NoProfile','-File',(Join-Path $PSScriptRoot 'qwen_http_adapter.ps1'),'-Job',$Job,'-AdmissionPath',$AdmissionPath,'-SourcePath',$SourcePath,'-SourceSha256',$SourceSha256,'-PromptPath',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "=>"
+      },
+      {
+        "text": "  foreach($arg in @('--model',$models[$Lane],'--cwd',$work,'--session-id',[Guid]::NewGuid().ToString(),'--no-subagents','--disable-web-search','--permission-mode','plan','--tools','read_file','--disallowed-tools','read_file,Agent,run_terminal_cmd,search_replace,web_search,web_fetch,task,todo_write','--verbatim','--system-prompt-override','Tool-less compiler-only adapter source editor. Output only adapter_source,pure_tests_source,rationale,safety_checks,native_fixture_plan JSON. No tools, execution or file edits. Preserve original supervisor; adapter requests owned cleanup without claiming natural whole-tree completion.','--reasoning-effort','low','--max-turns','3','--output-format','json','--prompt-file',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "=>"
+      },
+      {
+        "text": "   else{$finish=$r.stopReason;$parsed=Read-StrictJson $r.text;Assert-AdapterArtifact $parsed;Save-NewJson (Join-Path $work 'adapter.pending_root_qa.json') $parsed;$state='COMPLETE_ADAPTER_STAGED_UNAPPLIED'}",
+        "side": "=>"
+      },
+      {
+        "text": ". (Join-Path $PSScriptRoot 'protocol_artifact.ps1')",
+        "side": "<="
+      },
+      {
+        "text": " foreach($arg in @('-NoProfile','-File',(Join-Path $PSScriptRoot 'qwen_http_protocol.ps1'),'-Job',$Job,'-AdmissionPath',$AdmissionPath,'-SourcePath',$SourcePath,'-SourceSha256',$SourceSha256,'-PromptPath',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "<="
+      },
+      {
+        "text": "  foreach($arg in @('--model',$models[$Lane],'--cwd',$work,'--session-id',[Guid]::NewGuid().ToString(),'--no-subagents','--disable-web-search','--permission-mode','plan','--tools','read_file','--disallowed-tools','read_file,Agent,run_terminal_cmd,search_replace,web_search,web_fetch,task,todo_write','--verbatim','--system-prompt-override','Tool-less protocol correctness reviewer/editor. Output only status, protocol_argument, changes, prerequisites, evidence_limits, smoke_plan JSON. No tools, execution or edits. Refuse unsupported alias/ownership semantics; never fabricate edits.','--reasoning-effort','low','--max-turns','3','--output-format','json','--prompt-file',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "<="
+      },
+      {
+        "text": "   else{$finish=$r.stopReason;$parsed=Read-StrictJson $r.text;Assert-ProtocolArtifact $parsed;Save-NewJson (Join-Path $work 'protocol.pending_root_qa.json') $parsed;$state='COMPLETE_PROTOCOL_STAGED_UNAPPLIED'}",
+        "side": "<="
+      }
+    ],
+    "purpose": "Intake/helper target/staged artifact filename/status/system output schema only; no transport/time/log/credential-control changes."
+  }
+]

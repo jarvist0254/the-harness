@@ -1,0 +1,41 @@
+{
+  "status": "PREPARED_STATIC_GATE_FAIL",
+  "native_cases_started": false,
+  "checks": {
+    "source_hash": true,
+    "python_hash": true,
+    "run_command": true,
+    "fixture_hashes": true,
+    "driver_exact_replacements": false,
+    "controller_exact_replacements": true,
+    "worker_unchanged": true,
+    "five_case_scope": true,
+    "no_native_runs": true,
+    "all": false
+  },
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "source_and_fixture_files": [
+    {
+      "name": "fixture_driver.py",
+      "sha256": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df"
+    },
+    {
+      "name": "fixture_controller.py",
+      "sha256": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15"
+    },
+    {
+      "name": "worker.py",
+      "sha256": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+    },
+    {
+      "name": "fixture_contract.json",
+      "sha256": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc"
+    },
+    {
+      "name": "fixture_admission.json",
+      "sha256": "38dccba35270518c2d282370a76dd7f437a3e0d4e488e075549a15a124d102ba"
+    }
+  ],
+  "note": "Static preparation only. Native fixture not launched."
+}

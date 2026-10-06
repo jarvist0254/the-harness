@@ -1,0 +1,10 @@
+{
+  "status": "STATIC_SAFE_FOR_ROOT_ADMITTED_PURE_QA",
+  "source_pins": {
+    "source.grok_untrusted.py": "e44e86db99225b95cb9c9b63a41987d978e692eb0efc3f431741e2adf28833df",
+    "tests_source.grok_untrusted.py": "938739185fe5e6e12d115639160a228a6f917a20a18bd7368bb16231ccdf7869"
+  },
+  "source_top_level": "Only stdlib imports, literal constants, undecorated functions/classes; no execution/import-time API calls",
+  "adaptation": "Only source path and SHA in original17; additional3 exact byte copy; no candidate duplicate implementation",
+  "provider_tests": "Fully read, NOT_EXECUTED; imports state_ledger rather than exact delivered path, so not independent acceptance"
+}

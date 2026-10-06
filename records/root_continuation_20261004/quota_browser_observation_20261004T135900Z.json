@@ -1,0 +1,34 @@
+{
+  "observation_utc_approximate": "2026-10-04T13:59:00Z",
+  "source": "Existing user Chrome tab, read-only Computer Use accessibility and screenshot observation",
+  "page": "https://home.qwencloud.com/analytics/token-plan/individual",
+  "private_query_parameters_omitted": true,
+  "tab_already_authenticated": true,
+  "action": "Read existing page, reload same quota page, wait for visible Monthly Quota, read refreshed page, visually inspect screenshot",
+  "before": {
+    "displayed_last_updated": "2026-10-04 06:10:59",
+    "remaining_display_percent": 36.0,
+    "accessibility_progress_percent": 36.00632095336914
+  },
+  "after": {
+    "displayed_last_updated": "2026-10-04 09:58:41",
+    "remaining_display_percent": 35.6,
+    "accessibility_progress_percent": 35.596370697021484,
+    "plan": "Individual Plan Pro",
+    "status": "Active",
+    "plan_quota_display": 180000,
+    "displayed_reset_time": "2026-10-06 12:00:00",
+    "displayed_expiry": "2026-11-06 11:00:00",
+    "displayed_timestamp_timezone": "NOT_REPORTED_BY_PAGE"
+  },
+  "visual_confirmation": true,
+  "new_authentication_or_configuration_or_purchase": false,
+  "credential_fields_opened": false,
+  "limitations": [
+    "This is a dated browser observation, not a direct quota API/CLI response or a current counter after later requests.",
+    "No exact per-job Credits deduction was retrieved. Counter movement is not attributed solely to this harness.",
+    "Provider-reported tokens and native-child counts are independent evidence; tokens are not Credits.",
+    "Earlier batch NOT_CHECKED quota receipts remain accurate historical records and are not rewritten."
+  ],
+  "official_units_source": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/token-plan-personal-faq"
+}

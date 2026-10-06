@@ -1,0 +1,19 @@
+{
+  "admission": "ROOT_ADMITTED_SINGLE_NONZERO_NATIVE_DIAGNOSTIC",
+  "source_hash": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "sha256": {
+    "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+    "trace_controller.py": "ba71bc4fe694ebc821e24e8f9b3df3cabb904cc6fb1680e8016d1260d84b13c0",
+    "trace_driver.py": "49373af94bfd59de8a4c4a3c5bb5df1826df9e755ddc86b6e2aa0c690dd4fcfa",
+    "trace_contract.json": "99d04af267885505d8decdc7eac2bad2ee890565878f5b7151010d4b79a78faf",
+    "python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "exact_case": "same existing harmless nonzero worker exit 3; same kill_on_close manifest limits",
+  "max_cases": 1,
+  "outer_timeout_seconds": 30,
+  "network": false,
+  "provider": false,
+  "gpu": false,
+  "no_source_edits": true
+}

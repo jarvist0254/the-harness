@@ -1,0 +1,63 @@
+{
+  "findings": [
+    {
+      "exact_source": "if len(sh)!=len(P['four']['canon']): raise _E('FAIL','shard_count')",
+      "minimal_fix": "Track resident devices in a set and verify that every canonical device participates with at least one resident weight shard: set(w['device'].lower() for w in ws) == P['four']['canon'].",
+      "reason": "Only unique shard_hash count is compared to canonical device count. If all four shards are assigned to device0 with distinct hashes (or if devices 1, 2, and 3 hold zero shards), len(sh)==4 matches len(P['four']['canon'])==4, passing weight_dev, shard_count, and reconcile while leaving participants with zero resident shards, creating a false PASS on non-pooled layouts.",
+      "region": "weights per-device distribution"
+    },
+    {
+      "exact_source": "if np.get(nd,0)<rb: raise _E('FAIL','peak_cover')",
+      "minimal_fix": "Aggregate resident bytes per canonical device across all shards (e.g. dev_tot[nd] = dev_tot.get(nd, 0) + rb) and verify after the loop that dev_tot[d] <= np[d] for every canonical device d.",
+      "reason": "Peak allocator coverage is evaluated per-shard individually rather than against the cumulative sum of resident bytes per device. If device0 hosts two 1000-byte shards against a reported allocator peak of 1000 bytes, np.get(nd,0) < rb (1000 < 1000) evaluates false for both, falsely passing an oversubscribed allocation where resident weights (2000 bytes) exceed peak allocator bytes (1000 bytes).",
+      "region": "allocator cumulative peak coverage"
+    },
+    {
+      "exact_source": "if abs(ob-cp)>lt: raise _E('FAIL','logit_tol_fail')",
+      "minimal_fix": "Compute act_max = max(abs(p['observed'] - p['cpu']) for p in lg) and verify act_max <= mx <= tol, and verify rmse is mathematically consistent with the logit errors (e.g. abs(math.sqrt(sum((p['observed']-p['cpu'])**2 for p in lg)/len(lg)) - rm) <= 1e-6).",
+      "reason": "Individual logit differences are only compared against the tolerance threshold lt, never against the claimed max_abs_error mx. An execution record claiming rmse: 0.0 and max_abs_error: 0.0 passes even when observed logit differences are 0.05 (within lt=0.1), allowing self-reported clean execution metrics that are directly contradicted by the accompanying logit payload.",
+      "region": "execution error metrics verification"
+    },
+    {
+      "exact_source": "if not (nm & seen): phys+=1\n                seen|=nm; canon.add(_l(cid))\n            if len(canon)!=phys: raise _E('FAIL','dedup:'+r)",
+      "minimal_fix": "Explicitly require len(ds) == len(canon) == phys for each attempt; if duplicate canonical IDs or duplicate device definitions are provided, immediately fail dedup.",
+      "reason": "When a device list contains duplicate entries for the same physical GPU, nm & seen is non-empty on subsequent occurrences, preventing phys from incrementing, while canon.add(cid) does not increase len(canon). Consequently, len(canon) == phys remains true, allowing a padded list of duplicate devices to pass the cardinality check (e.g. [dev0, dev0] for role single yields phys=1 and passes single_phys).",
+      "region": "device list duplicate collapse"
+    },
+    {
+      "exact_source": "if P['single']['phys']!=1: raise _E('FAIL','single_phys')\n        if P['three']['phys']!=3: raise _E('FAIL','three_phys')\n        if P['four']['phys']!=4: raise _E('FAIL','four_phys')",
+      "minimal_fix": "Assert len(a['devices']) == expected_count (1 for single, 3 for three, 4 for four) in addition to asserting physical and canonical uniqueness.",
+      "reason": "Device count validation checks only the computed phys count and len(canon)==phys, but fails to assert len(ds)==1 for single, len(ds)==3 for three, and len(ds)==4 for four. When combined with duplicate collapse, a multi-element list with redundant devices satisfies the physical check.",
+      "region": "device list role cardinality enforcement"
+    },
+    {
+      "exact_source": "for a in att:\n            if isinstance(a,dict) and _s(a.get('role')): by.setdefault(a['role'],[]).append(a)",
+      "minimal_fix": "Require len(att) == 3, verify every element is a valid dict, and assert set(by.keys()) == {'single', 'three', 'four'} with exactly one attempt per role; raise NOT_CHECKED on malformed entries and FAIL on unexpected roles.",
+      "reason": "Attempts list parsing silently skips malformed elements (non-dict or missing role) and ignores extraneous roles (e.g. role 'two' or 'five') without validation. Extra or invalid execution records accompany the required roles without causing failure or review.",
+      "region": "attempt role scope and extraneous attempt handling"
+    },
+    {
+      "exact_source": "for k in ART+('artifact_source','cpu_reference_hash'):\n            if not _s(evidence.get(k)): raise _E('NOT_CHECKED','artifact:'+k)",
+      "minimal_fix": "Validate that all hash artifacts match expected hex string formatting (e.g. all(c in '0123456789abcdefABCDEF' for c in val) and len(val) >= 16) rather than accepting arbitrary non-empty strings.",
+      "reason": "_s only verifies non-empty string types. When trusted is True, arbitrary short placeholders (e.g. 'm', 'w', 's', 'cpu1') pass without validating that cryptographic hashes (model_hash, workload_hash, source_hash, exe_hash, context_hash, cpu_reference_hash) are valid hex-encoded digests.",
+      "region": "artifact hash formatting validation"
+    },
+    {
+      "exact_source": "def test_replicated_weights(self):\n        e=ev(); e['attempts'][2]['weights'][1]['shard_hash']=e['attempts'][2]['weights'][0]['shard_hash']\n        self.assertEqual(self.runv(e)['status'],'FAIL')",
+      "minimal_fix": "Add discriminating unit tests verifying FAIL when all shards belong to device0, when dev_resident_bytes > peak_bytes, when claimed max_abs_error < actual logit error, and when device list contains duplicate canonical IDs.",
+      "reason": "The test suite tests replicated shard hashes across distinct devices, but lacks negative tests for: (1) all four shards placed on device0, (2) two 1000-byte shards on a device with peak allocator limit of 1000 bytes, (3) claimed RMSE/max_abs_error of 0 contradicted by non-zero logit errors, (4) duplicate canonical device entries in devices, and (5) extraneous attempt roles.",
+      "region": "test suite coverage for pooling and peak oversubscription"
+    }
+  ],
+  "safety_checks": [
+    "Independent STATIC audit conducted: no code execution, imports, dynamic tests, or file modifications performed.",
+    "GPU-free pure Python receipt validator confirmed: imports standard math module only, no CUDA, Level Zero, driver, or hardware dependencies.",
+    "Candidate source 7005 remains UNTRUSTED until ROOT compilation, dynamic testing, and admission; passing synthetic fixtures does not prove physical hardware capacity.",
+    "Hardware environment acknowledged: local host features NVIDIA RTX 5070 Ti and AMD gfx1036 shared iGPU (no Intel Arc GPU); shared iGPU arithmetic cannot satisfy four-discrete VRAM pooling capacity.",
+    "Adjudication invariants preserved: exact-four cardinality upheld per ROOT instruction (5+ GPU rejection is not a defect); unspecified staleness default not penalized; 1e-12 floating point tolerance preserved.",
+    "Strict exit code mapping verified: PASS exit 0, FAIL exit 1, NOT_CHECKED exit 2.",
+    "No purchasing advice provided; GPU SKUs and chassis configurations remain deferred.",
+    "Subagent budget strictly adhered to: 0 child agents launched, adhering to HTTP direct request constraints."
+  ],
+  "verdict": "REQUEST_CHANGES"
+}

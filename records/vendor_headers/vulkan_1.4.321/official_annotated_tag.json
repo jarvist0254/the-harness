@@ -1,0 +1,24 @@
+{
+  "node_id": "TA_kwDOB97SgdoAKDRjOGFhODRhNjFjMTJjYWI5NzgwZmE0NDI5ODYxNzY2NmI0OTFkNzE",
+  "sha": "4c8aa84a61c12cab9780fa44298617666b491d71",
+  "url": "https://api.github.com/repos/KhronosGroup/Vulkan-Headers/git/tags/4c8aa84a61c12cab9780fa44298617666b491d71",
+  "tagger": {
+    "name": "Jon Leech",
+    "email": "oddhack@sonic.net",
+    "date": "2025-07-04T00:00:29Z"
+  },
+  "object": {
+    "sha": "2cd90f9d20df57eac214c148f3aed885372ddcfe",
+    "type": "commit",
+    "url": "https://api.github.com/repos/KhronosGroup/Vulkan-Headers/git/commits/2cd90f9d20df57eac214c148f3aed885372ddcfe"
+  },
+  "tag": "v1.4.321",
+  "message": "Update for Vulkan-Docs 1.4.321\n",
+  "verification": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  }
+}

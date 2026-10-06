@@ -1,0 +1,44 @@
+{
+  "status": "STATIC_GATE_FAIL",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_vulkan_repair_20261004T103000\\repair\\vulkan_two_device_correction.cpp",
+  "source_sha256": "01c1d3268ae5e956b57f1c132b1a5ab4f843e24ac44570bc8ef97bf9d1e6f42a",
+  "compile": "NOT_CHECKED",
+  "api_execution": "NOT_CHECKED",
+  "transfer": "NOT_CHECKED",
+  "verification": "NOT_CHECKED",
+  "requires_external_provider_correction": true,
+  "findings": [
+    {
+      "name": "destination_reconstructs_constant_instead_of_forwarding_source_gpu_bytes",
+      "lines": [
+        216
+      ],
+      "required": "Copy actual mapped A readback into a bounded CPU byte vector before unmap, then memcpy vector into mapped B upload; keep expected PATTERN separate"
+    },
+    {
+      "name": "core11_device_group_api_called_with_instance_api10",
+      "lines": [
+        55,
+        92,
+        96
+      ],
+      "required": "Remove optional diagnostic or request supported Vulkan1.1 and check calls"
+    },
+    {
+      "name": "vendor_filter_lacks_hardware_device_type_guard",
+      "lines": [
+        72,
+        73
+      ],
+      "required": "Require INTEGRATED_GPU or DISCRETE_GPU, never CPU type"
+    }
+  ],
+  "fixed_previous_items": [
+    "functional header",
+    "lambda captures",
+    "source fill/copy barrier",
+    "queue-family ignored"
+  ],
+  "original_provider_source_preserved": true,
+  "retained_fixture_created": false
+}

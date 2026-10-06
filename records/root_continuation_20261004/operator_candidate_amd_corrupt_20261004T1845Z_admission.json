@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "adjudicator": "ROOT",
+  "launch": true,
+  "fixture": "operator",
+  "helper": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fixture_runtime_win32_query_revision2.py",
+    "sha256": "33f66211b94d24a3544c1150e6c983ed607b6ddc886a6b64386a56a38d1bbd67",
+    "bytes": 18773
+  },
+  "python": {
+    "path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "bytes": 103192
+  },
+  "source": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\fp32_staging_operator.cpp",
+    "sha256": "f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59",
+    "bytes": 8485
+  },
+  "executable": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\compile_original_20261004T155012Z\\fp32_staging_operator.exe",
+    "sha256": "ad449a153447080836e25a5ca264ebd4b3afa5b14dbb239b11a5bad5be117b5b",
+    "bytes": 32768
+  },
+  "dlls": [
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml.dll",
+      "sha256": "56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb",
+      "bytes": 62976
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-base.dll",
+      "sha256": "beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3",
+      "bytes": 693760
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-cpu.dll",
+      "sha256": "e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481",
+      "bytes": 1125888
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-rpc.dll",
+      "sha256": "11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd",
+      "bytes": 143872
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-vulkan.dll",
+      "sha256": "3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085",
+      "bytes": 45299712
+    }
+  ],
+  "supporting_dlls": [],
+  "system_loader": {
+    "path": "C:\\Windows\\System32\\vulkan-1.dll",
+    "sha256": "e933f507df7162eb64de289c5c5ce4ecb48584e5c2b507eea4750b1c870ae6bd",
+    "bytes": 1625648
+  },
+  "model": null,
+  "runtime_dir": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z",
+  "arguments": [
+    "--device",
+    "Vulkan1",
+    "--inject-corruption"
+  ],
+  "timeout_seconds": 30,
+  "stream_limit_bytes": 2097152,
+  "child_flags": {
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1",
+    "GGML_VK_DISABLE_COOPMAT": "1",
+    "GGML_VK_DISABLE_COOPMAT2": "1"
+  },
+  "parent_runtime_environment": {
+    "GGML_BACKEND_DL_PATH": null,
+    "GGML_BACKEND_PATH": null,
+    "GGML_VK_DISABLE_COOPMAT": null,
+    "GGML_VK_DISABLE_COOPMAT2": null,
+    "GGML_VK_DISABLE_F16": null,
+    "GGML_VK_DISABLE_FUSION": null,
+    "VK_ADD_DRIVER_FILES": null,
+    "VK_DRIVER_FILES": null,
+    "VK_ICD_FILENAMES": null,
+    "VK_INSTANCE_LAYERS": null,
+    "VK_LAYER_PATH": null,
+    "VULKAN_SDK": null
+  }
+}

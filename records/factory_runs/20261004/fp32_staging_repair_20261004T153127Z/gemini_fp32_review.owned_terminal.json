@@ -1,0 +1,20 @@
+{
+  "finish_reason": null,
+  "outer_killed": false,
+  "lane": "Gemini",
+  "requested_model": "gemini-3.8-flash-medium",
+  "exit_code": null,
+  "pid": null,
+  "credential_saved": false,
+  "log_cap_exceeded": false,
+  "pipe_error": true,
+  "provider_patch_applied": false,
+  "status": "NOT_ACCEPTED",
+  "parse_error_type": null,
+  "private_url_output_refused": false,
+  "model_usage": null,
+  "elapsed_seconds": 0.02,
+  "native_children_actual": 0,
+  "usage": null,
+  "drain_unknown": true
+}

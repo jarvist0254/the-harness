@@ -1,0 +1,11 @@
+[1/7] Performing build step for 'vulkan-shaders-gen'
+ninja: no work to do.
+[2/7] Performing install step for 'vulkan-shaders-gen'
+-- Up-to-date: E:/the_harness/records/build_vulkan_real/build/Release/./vulkan-shaders-gen.exe
+[3/7] Completed 'vulkan-shaders-gen'
+[4/7] Building CXX object tools\quantize\CMakeFiles\llama-quantize-impl.dir\quantize.cpp.obj
+FAILED: tools/quantize/CMakeFiles/llama-quantize-impl.dir/quantize.cpp.obj 
+C:\PROGRA~1\MICROS~4\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\Hostx64\x64\cl.exe  /nologo /TP -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_CPU -DGGML_USE_RPC -DGGML_USE_VULKAN -DLLAMA_SHARED -DLLAMA_SUBPROCESS -D_CRT_SECURE_NO_WARNINGS -Dllama_quantize_impl_EXPORTS -IE:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\tools\quantize -IE:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\common\. -IE:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\vendor\nlohmann\.. -IE:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\vendor\sheredom\.. -IE:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\src\..\include -IE:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\ggml\src\..\include /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD /utf-8 /bigobj /showIncludes /Fotools\quantize\CMakeFiles\llama-quantize-impl.dir\quantize.cpp.obj /Fdtools\quantize\CMakeFiles\llama-quantize-impl.dir\ /FS -c E:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\tools\quantize\quantize.cpp
+E:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\ggml\src\..\include\ggml.h(211): fatal error C1083: Cannot open include file: 'stdbool.h': No such file or directory
+[5/7] Building CXX object tools\quantize\CMakeFiles\llama-quantize.dir\main.cpp.obj
+ninja: build stopped: subcommand failed.

@@ -1,0 +1,14 @@
+{
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "native_hardware_execution": false,
+  "schema_sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+  "prompt_sha256": "7b386f3d129562a67a7ccd13000f4e519d2a98b231177c3880161f0065c15090",
+  "provider": "Muse1.4.2 Meta",
+  "utc": "2026-10-04T19:52:57.5712938Z",
+  "authority": "ROOT explicit pinned capacity Muse launchmessage19:52UTC",
+  "source_import_execution": false,
+  "deadline_seconds": 300,
+  "capture_aggregate_bytes": 2097152,
+  "future_calls_need_explicit_launch_admission": true,
+  "wrapper_sha256": "5097fb8cb9c23b92c92b33b59b077c251db42fd35522d303bc0a799adeb8a1c6"
+}

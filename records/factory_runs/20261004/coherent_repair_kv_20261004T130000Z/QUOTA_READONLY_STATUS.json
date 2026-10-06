@@ -1,0 +1,17 @@
+{
+  "tokens_are_not_credits": true,
+  "limitations": "No raw tokens to Credits inference. Current FAQ Pro180000 monthly differs from July blog windows; current FAQ takes precedence. No installs/auth or speculative balance API.",
+  "dedicated_prefix_confirmed": true,
+  "installed_getter": "NOT_FOUND_WITHIN_PATH_AND_6_EXACT_INSTALL_PATHS",
+  "sources": [
+    "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/token-plan-personal-faq",
+    "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/token-plan-overview",
+    "https://modelstudio.alibabacloud.com/intl/blog/manage-token-plan-via-cli/",
+    "https://github.com/modelstudioai/cli"
+  ],
+  "credential_value_printed_or_saved": false,
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "status": "NOT_CHECKED_REMAINING_CREDITS",
+  "live_credit_response_obtained": false,
+  "new_install_login_config_changes": false
+}

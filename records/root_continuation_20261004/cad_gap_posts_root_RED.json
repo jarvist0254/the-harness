@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-04T13:27:33.786205+00:00",
+  "source_sha256": "26e90d2c1af98f942f02696073a6ab186d2a6f1f545ddbced2b33bad249bf1a6",
+  "gate": "REJECTED_DECLARED_ACTUAL_GEOMETRY_HEIGHT_MISMATCH",
+  "tests": [
+    {
+      "profile": "compact",
+      "declared_bbox": [
+        188.0,
+        200.0,
+        200.0
+      ],
+      "actual_geometry_height_from_posts_and_beams": 150.0,
+      "matches": false
+    },
+    {
+      "profile": "universal",
+      "declared_bbox": [
+        188.0,
+        200.0,
+        254.0
+      ],
+      "actual_geometry_height_from_posts_and_beams": 199.0,
+      "matches": false
+    }
+  ],
+  "scope": "Pure actual-candidate imports and plans only; no FreeCAD or native geometry calls",
+  "explanation": "Candidate shortened posts and beam geometry but retains old printed_height=min(254,Dbodytop+8), so native build would refuse the actual 150/199 high geometry against declared200/254."
+}

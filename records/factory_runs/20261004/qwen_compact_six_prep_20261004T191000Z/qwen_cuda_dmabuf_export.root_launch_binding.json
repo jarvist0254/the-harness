@@ -1,0 +1,13 @@
+{
+  "job_id": "qwen_cuda_dmabuf_export",
+  "authority": "ROOT full sixpacket helper scope review actual provider-only sixlaunch approval19:29UTC",
+  "native_children_actual": 0,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export.spec.txt",
+  "source_sha256": "1542c8a8bfec576980991b365e519135bb0c17c9890ad9c561775b9120b347b3",
+  "provider_launch_authorized": true,
+  "model": "qwen3.8-max",
+  "lane": "Qwen",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z",
+  "prompt_sha256": "1542c8a8bfec576980991b365e519135bb0c17c9890ad9c561775b9120b347b3",
+  "packet_sha256": "6820ca489ce27be5c3bee175a01a0102030ea06c208e2fbde5b8dd8283212612"
+}

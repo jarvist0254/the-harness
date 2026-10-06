@@ -1,0 +1,27 @@
+{
+  "previous_v2_failure_preserved": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\cuda_l0_device_dmabuf_prep_20261004T195400Z",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\cuda_l0_device_dmabuf_prep_20261004T195400Z\\cuda_l0_device_dmabuf.v3.spec.txt",
+  "helper_pins": {
+    "cuda_l0_device_dmabuf.v3.spec.txt": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+    "provider_common.ps1": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+    "invoke_owned_stream_research.v3.ps1": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+    "qwen_http_stream_research.v3.ps1": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+    "research_artifact.v3.ps1": "ae851878f0bb551909ae16b7a0f58202ba67cc1272df8f34daa53cbc2d5071f3",
+    "cuda_l0_device_dmabuf.v3.prompt.txt": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493"
+  },
+  "tests_char_limit": 8000,
+  "source_char_limit": 16000,
+  "http_deadline_seconds": 2400,
+  "source_execution": false,
+  "prompt_sha256": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+  "provider_launch_authorized": true,
+  "authority": "ROOT explicit actual V3 fullread exactpin onecalllaunch",
+  "model": "qwen3.8-max",
+  "job_id": "qwen_cuda_l0_device_dmabuf_v3",
+  "outer_deadline_seconds": 2430,
+  "source_sha256": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+  "lane": "Qwen",
+  "utc": "2026-10-04T20:21:44.8864915Z",
+  "native_children_actual": 0
+}

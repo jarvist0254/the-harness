@@ -1,0 +1,56 @@
+import importlib.util, os, unittest
+P=os.environ.get('CANDIDATE_PATH','candidate.py')
+sp=importlib.util.spec_from_file_location('task6_candidate',P)
+m=importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+def H(c):return (c*64)[:64]
+G=['ggml.dll','ggml-base.dll','ggml-cpu.dll','ggml-rpc.dll','ggml-vulkan.dll']
+OC=['contiguous','X_stride','Y_stride','X_stride_Y_stride','Y_transpose','X_stride_Y_transpose']
+def trusted():
+ return {'op_src':H('a'),'model_src':H('b'),'model_exe':H('c'),'op_exe':H('d'),'model_sha':H('e'),'model_bytes':100,'llama_dll':H('f'),'dlls':[{'path':'C:/b/'+n,'bytes':10,'sha256':H(n[0])} for n in G],'receipts':{}}
+def pins(tr,fx):
+ out=[{'path':'src','sha256':tr['model_src'] if fx=='model' else tr['op_src'],'bytes':1},{'path':'exe','sha256':tr['model_exe'] if fx=='model' else tr['op_exe'],'bytes':1}]
+ out+=[{'path':e['path'],'sha256':e['sha256'],'bytes':e['bytes']} for e in tr['dlls']]
+ if fx=='model':out+=[{'path':'model','sha256':tr['model_sha'],'bytes':tr['model_bytes']},{'path':'llama','sha256':tr['llama_dll'],'bytes':1}]
+ return out
+def streams(tr,fo):
+ so=H(fo+'o');se=H(fo+'e');tr['receipts'][fo]={'stdout_sha256':so,'stdout_bytes':7,'stderr_sha256':se,'stderr_bytes':8}
+ return {'stdout':{'captured_bytes':7,'observed_bytes':7,'sha256':so,'reader_alive':False,'error':None,'truncated':False},'stderr':{'captured_bytes':8,'observed_bytes':8,'sha256':se,'reader_alive':False,'error':None,'truncated':False}}
+def mods(tr,fo,fx):
+ r=[{'path':'C:/r/'+fo+'/'+e['path'].rsplit('/',1)[-1],'sha256':e['sha256']} for e in tr['dlls']]
+ if fx=='model':r.append({'path':'C:/r/'+fo+'/llama.dll','sha256':tr['llama_dll']})
+ return r
+def mstdout(dv,inj,wl):
+ return {'status':'NUMERIC_PARITY_FAIL' if inj else 'NUMERIC_PARITY_PASS','exit_code':1 if inj else 0,'error':'inject_corruption' if inj else None,'sha256':H('e'),'file_size':100,'devices':dv,'workload_sha256':wl,'tokens':list(range(16)),'n_layer':28,'n_vocab':151936,'n_ctx_actual':256,'n_batch_actual':32,'n_ubatch_actual':32,'kv_requested':'f32','kv_actual_k':'f32','kv_actual_v':'f32','max_abs':1.0 if inj else 0.00001,'rmse':0.1 if inj else 0.000001,'fail_count':1 if inj else 0,'all_finite_cpu':True,'all_finite_gpu':True,'inject_corruption':inj,'requested':{'n_ctx':128,'kv':'f32','flash_attn':'disabled'}}
+def ostdout(dv,inj):
+ cs=[]
+ for i,n in enumerate(OC):
+  c=inj and i==5
+  cs.append({'name':n,'outputs':2048,'finite_count':2048,'shape_checked':True,'buffer_owner_checked':True,'graph_status':'SUCCESS','fail_count':1 if c else 0,'max_abs':8.0 if c else 0.00001,'rmse':0.2 if c else 0.000001,'corruption_injected':c})
+ return {'scope':'F32_OPERATOR_ONLY_NOT_LLM_OR_CAPACITY','device':dv,'M':32,'N':32,'K':64,'batch':2,'atol':2e-05,'rtol':2e-06,'cases':cs,'status':'OPERATOR_PARITY_FAIL' if inj else 'OPERATOR_PARITY_PASS','exit_code':1 if inj else 0}
+def run(tr,fx,fo,cmd,s):
+ return {'command':cmd,'supporting_modules_observed':True,'errors':[],'pin_checks_after':[{'path':'x','unchanged':True}],'module_observations':mods(tr,fo,fx),'all_five_local_ggml_modules_observed':True,'stdout':s,'owned_process_handle_closed':True,'streams':streams(tr,fo),'pid_absent_through_owned_handle':True,'exit_code':s['exit_code'],'owned_process_reaped':True,'parent_runtime_environment_unchanged':True,'fixture':fx,'folder':fo,'full_stdout_json':True,'receipt_status':'EXECUTION_RECORDED_NO_NUMERICAL_ADJUDICATION','input_pins_before':pins(tr,fx),'receipt_numerical_adjudication':'NOT_PERFORMED'}
+def valid():
+ tr=trusted();rs=[]
+ rs.append(run(tr,'model','m1',['x','--devices','Vulkan0,Vulkan1'],mstdout(['Vulkan0','Vulkan1'],False,H('wm'))))
+ rs.append(run(tr,'model','m2',['x','--devices','Vulkan1,Vulkan0'],mstdout(['Vulkan1','Vulkan0'],False,H('wr'))))
+ rs.append(run(tr,'model','m3',['x','--devices','Vulkan0,Vulkan1','--inject-logit-corruption'],mstdout(['Vulkan0','Vulkan1'],True,H('wm'))))
+ rs.append(run(tr,'model','m4',['x','--devices','Vulkan1,Vulkan0','--inject-logit-corruption'],mstdout(['Vulkan1','Vulkan0'],True,H('wr'))))
+ rs.append(run(tr,'operator','o1',['x','--device','Vulkan0'],ostdout('Vulkan0',False)))
+ rs.append(run(tr,'operator','o2',['x','--device','Vulkan1'],ostdout('Vulkan1',False)))
+ rs.append(run(tr,'operator','o3',['x','--device','Vulkan0','--inject-corruption'],ostdout('Vulkan0',True)))
+ rs.append(run(tr,'operator','o4',['x','--device','Vulkan1','--inject-corruption'],ostdout('Vulkan1',True)))
+ return tr,rs
+class T(unittest.TestCase):
+ def test_valid(self):
+  tr,rs=valid();r=m.adjudicate(rs,trusted=tr);self.assertTrue(r['admission_flag'],r['violations']);self.assertEqual(r['scope'],'REPORTED_NUMERICAL_EVIDENCE_CONSISTENT')
+ def test_missing_role(self):
+  tr,rs=valid();rs.pop();self.assertFalse(m.adjudicate(rs,trusted=tr)['admission_flag'])
+ def test_bad_receipt(self):
+  tr,rs=valid();rs[0]['streams']['stdout']['sha256']=H('z');self.assertFalse(m.adjudicate(rs,trusted=tr)['admission_flag'])
+ def test_clean_fail(self):
+  tr,rs=valid();rs[0]['stdout']['fail_count']=1;self.assertFalse(m.adjudicate(rs,trusted=tr)['admission_flag'])
+ def test_control_binding(self):
+  tr,rs=valid();rs[2]['stdout']['workload_sha256']=H('bad');self.assertFalse(m.adjudicate(rs,trusted=tr)['admission_flag'])
+ def test_dll_mismatch(self):
+  tr,rs=valid();tr['dlls'][0]['sha256']=H('z');self.assertFalse(m.adjudicate(rs,trusted=tr)['admission_flag'])
+if __name__=='__main__':unittest.main()

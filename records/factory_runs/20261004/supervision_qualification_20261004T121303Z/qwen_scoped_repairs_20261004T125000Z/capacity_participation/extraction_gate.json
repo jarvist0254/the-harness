@@ -1,0 +1,35 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\qwen_scoped_repairs_20261004T125000Z\\capacity_participation\\qualification_validator.capacity_candidate.py",
+  "sha256": "186b078a503eda34e841f52b1d490368c35012869eed47d45c71f3079f648e7f",
+  "source_gate": "AST_ONLY_PASS_NO_IMPORT",
+  "test_gate": "AST_ONLY_PASS_NO_IMPORT",
+  "replacements": [
+    {
+      "index": 0,
+      "count": 1
+    },
+    {
+      "index": 1,
+      "count": 1
+    },
+    {
+      "index": 2,
+      "count": 1
+    },
+    {
+      "index": 3,
+      "count": 1
+    },
+    {
+      "index": 4,
+      "count": 1
+    },
+    {
+      "index": 5,
+      "count": 1
+    }
+  ],
+  "baseline_sha256": "f024298ca0d597c8cfa04f00334924f957bb268b0734fb8ff6ce1ca5fa9378f0",
+  "scope": "capacity_participation",
+  "execution_admitted": false
+}

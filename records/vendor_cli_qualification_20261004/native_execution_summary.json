@@ -1,0 +1,98 @@
+{
+  "global_install_changes": false,
+  "timestamp_utc": "2026-10-04T12:00:33.3801761Z",
+  "hip": "PASS_NATIVE_GFX1036_AFFINE",
+  "hashes": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "902255D28CE82C8E6D36D0345A9E7EB7BD50C4225D87DDB78A7C510128334DE0",
+      "Path": "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\hip_vector.exe"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "1B94B61D74AB3D1226261DF24104EFF2A5FC765B9BAE536831F6BA13815A089D",
+      "Path": "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\affine_gfx1036.hsaco"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "6CCD0B08B3E7AC5789EF9DABDA323FD31B96A1D5B67B7C1E5569A18240198BAC",
+      "Path": "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\hip_module_host.cpp"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "6FB594112485893DC4148B705034AF80A9B5B413FDB11E875E33691F82CAB37A",
+      "Path": "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\affine_device.cpp"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "411BE45A8B2B9BFD5469EE1398358E788D8B9E5F86DDC01CB44ADA7185123389",
+      "Path": "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\intel_vector.exe"
+    }
+  ],
+  "hip_corruption": "EXPECTED_FAIL_EXIT1_MISMATCH1",
+  "intel_compile": "PASS",
+  "processes": [
+    {
+      "running": false,
+      "pid": 63844
+    },
+    {
+      "running": false,
+      "pid": 64016
+    },
+    {
+      "running": false,
+      "pid": 89920
+    },
+    {
+      "running": false,
+      "pid": 38360
+    },
+    {
+      "running": false,
+      "pid": 78572
+    },
+    {
+      "running": false,
+      "pid": 44796
+    },
+    {
+      "running": false,
+      "pid": 85996
+    },
+    {
+      "running": false,
+      "pid": 22008
+    },
+    {
+      "running": false,
+      "pid": 19580
+    },
+    {
+      "running": false,
+      "pid": 16328
+    },
+    {
+      "running": false,
+      "pid": 83520
+    },
+    {
+      "running": false,
+      "pid": 90688
+    },
+    {
+      "running": false,
+      "pid": 27676
+    },
+    {
+      "running": false,
+      "pid": 21312
+    },
+    {
+      "running": false,
+      "pid": 33608
+    }
+  ],
+  "intel_execution": "NOT_CHECKED_OPENCL_ADAPTER_FILTERS_NV_AMD",
+  "sigstore_verification": "NOT_CHECKED_NO_VERIFIER"
+}

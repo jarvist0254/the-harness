@@ -1,0 +1,1684 @@
+{
+  "schema": 1,
+  "utc": "2026-10-04T23:33:10.2439439Z",
+  "scope": "DOCUMENTATION_AND_SAVED_ARTIFACT_INTEGRITY_ONLY",
+  "state": "DOCUMENTATION_CHECK_PASS",
+  "documents": [
+    {
+      "path": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "bytes": 41126,
+      "sha256": "fb8f57fc0d697dbe6923a02395ae69d8c3c25f3f49e1f22d666fc1a06ea19765",
+      "headings": [
+        "# Harness and JLink five hour handoff",
+        "## Results at the stop point",
+        "## Compiler repair and numerical GPU acceptance",
+        "## Capacity and directed receipt validators",
+        "## Intel collector candidates and independent reviews",
+        "## Intel peer copy CPU fake repair",
+        "## Completion adapter QA and review ingestion",
+        "## Actual capability queries and JLink route findings",
+        "## Native NVIDIA EGL consumer request",
+        "## Primary Intel research saved before stop",
+        "## Provider usage and quota",
+        "## Owned jobs closed and work left unrun",
+        "## Harness CAD and precursor work carried into this interval",
+        "## Evidence preservation and completion requirements"
+      ]
+    },
+    {
+      "path": "E:\\the_harness\\records\\HARNESS_STATUS_STOPPED_20261004.md",
+      "bytes": 10827,
+      "sha256": "51c4f6a8ce1c3a20e2ce9c24a6dc147d8eb56e601a8f2d0f98274d61b1e400ca",
+      "headings": [
+        "# The Harness and JLink status",
+        "## What was completed",
+        "## Hardware and transport remain unqualified",
+        "## Model activity and final stop state",
+        "## Prepared work left unrun"
+      ]
+    },
+    {
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "bytes": 10827,
+      "sha256": "51c4f6a8ce1c3a20e2ce9c24a6dc147d8eb56e601a8f2d0f98274d61b1e400ca",
+      "headings": [
+        "# The Harness and JLink status",
+        "## What was completed",
+        "## Hardware and transport remain unqualified",
+        "## Model activity and final stop state",
+        "## Prepared work left unrun"
+      ]
+    },
+    {
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status-20261004-stopped.md",
+      "bytes": 10827,
+      "sha256": "51c4f6a8ce1c3a20e2ce9c24a6dc147d8eb56e601a8f2d0f98274d61b1e400ca",
+      "headings": [
+        "# The Harness and JLink status",
+        "## What was completed",
+        "## Hardware and transport remain unqualified",
+        "## Model activity and final stop state",
+        "## Prepared work left unrun"
+      ]
+    },
+    {
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status-20261004-1841.md",
+      "bytes": 16209,
+      "sha256": "1b0cfec09b226562b8624e05c13cf7d4dd42214a8a08bb9c7fdeb7ce7bc73ab7",
+      "headings": [
+        "# The Harness and JLink — status",
+        "## What works, and what still needs proof",
+        "## Accepted compute scope",
+        "## Latest engineering progress",
+        "## JLink route findings",
+        "## Model activity and quota",
+        "## What would make this complete"
+      ]
+    }
+  ],
+  "local_link_occurrences_checked": 90,
+  "local_link_failures": [],
+  "local_links": [
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "C:/Users/thoma/Desktop/status/harness-jlink-status.md",
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "C:/Users/thoma/Desktop/status/harness-jlink-status-20261004-1841.md",
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status-20261004-1841.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/HANDOFF_LAST_5_HOURS_VERIFICATION.json",
+      "path": "E:\\the_harness\\records\\HANDOFF_LAST_5_HOURS_VERIFICATION.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/compiler_adapter_local_fallback_20261004T182833Z/root12_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\root12_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/compiler_cleanup_refusal_proof_20261004T183508Z/proof_results.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_cleanup_refusal_proof_20261004T183508Z\\proof_results.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/compiler_completion_driver_prepare_20261004T181731Z/native_runs/suite_1791138717588329600/suite_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_runs\\suite_1791138717588329600\\suite_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/ROOT_FP32_BUILD_ATTEMPT5_ADMISSION_20261004T1837Z.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\ROOT_FP32_BUILD_ATTEMPT5_ADMISSION_20261004T1837Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/build_vulkan_fp32_staging_20261004T155932Z/evidence/attempt5_compiler_root_cleanup/controller_result.json",
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\controller_result.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/capacity_binding_grok_root_audit_20261004T215300Z/FINAL_ADJUDICATION.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_binding_grok_root_audit_20261004T215300Z\\FINAL_ADJUDICATION.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/capacity_binding_grok_root_audit_20261004T215300Z/stdout.raw.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_binding_grok_root_audit_20261004T215300Z\\stdout.raw.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/directed_receipt_repair_audit_20261004T2135Z/AUDIT_EXECUTED.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_repair_audit_20261004T2135Z\\AUDIT_EXECUTED.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_query_local_repair_20261004T214344Z/source.local_derivative_revision2.cpp",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_query_local_repair_20261004T214344Z/ADJUDICATION.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\ADJUDICATION.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/muse_l0_collector_prep_20261004T220000Z/parser_revision2/CLOSED_MUSE_COLLECTOR_RECEIPT.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\CLOSED_MUSE_COLLECTOR_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/muse_l0_collector_prep_20261004T220000Z/parser_revision2/run_output/parsed_review.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_output\\parsed_review.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/muse_l0_collector_prep_20261004T220000Z/ROOT_ADDITIONAL_COLLECTOR_SCOPE_GAPS_20261004T220600Z.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\ROOT_ADDITIONAL_COLLECTOR_SCOPE_GAPS_20261004T220600Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/gemini_l0_collector_review_prep_20261004T222800Z/gemini_l0_collector_high.owned_terminal.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high.owned_terminal.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/gemini_l0_collector_review_prep_20261004T222800Z/gemini_l0_collector_high/review.pending_root_qa.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high\\review.pending_root_qa.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/source.qwen_untrusted.cpp",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\source.qwen_untrusted.cpp",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/compile_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_measured_repair_object_qa_20261004T2228Z\\compile_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_query_measured_repair_cpu_fake_v2_20261004T2305Z/CPU_FAKE_ROOT_REVIEW_PACKET_V2.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_measured_repair_cpu_fake_v2_20261004T2305Z\\CPU_FAKE_ROOT_REVIEW_PACKET_V2.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/peer_copy_local.cpp",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.cpp",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/fake_level_zero_local.cpp",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.cpp",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/FINAL_CPU_FAKE_ADJUDICATION.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\FINAL_CPU_FAKE_ADJUDICATION.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/FINAL_CPU_FAKE_ADJUDICATION.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\FINAL_CPU_FAKE_ADJUDICATION.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/stub_runs_20261004T225852Z/receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/independent_assertions_20261004T225900Z/ASSERTION_RECEIPT.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\ASSERTION_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/stub_build_20261004T222818Z/BUILD_ADJUDICATION_REFUSED.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\BUILD_ADJUDICATION_REFUSED.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/symbol_inspection_20261004T225008Z/INSPECTION_RECEIPT.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\symbol_inspection_20261004T225008Z\\INSPECTION_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/RESIDUAL_GAPS.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\RESIDUAL_GAPS.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_egl_adapter_root_qa_v3_20261004T2254Z/runs/pure_qa_20261004T225945Z/receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_egl_adapter_root_qa_v3_20261004T2254Z/runs/pure_qa_20261004T225945Z/stderr.bin",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\stderr.bin",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_egl_adapter_root_qa_v3_20261004T2254Z/runs/outer_20261004T2301Z/outer_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\outer_20261004T2301Z\\outer_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/muse_l0_collector_prep_20261004T220000Z/parser_revision2/run_muse_collector.root_revision2.py",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_muse_collector.root_revision2.py",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/muse_l0_collector_prep_20261004T220000Z/parser_revision2/GREEN.stderr.log",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\GREEN.stderr.log",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/external_cuda_capability_query_20261004T2005Z/execution_summary.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\external_cuda_capability_query_20261004T2005Z\\execution_summary.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/level_zero_loader_smoke_20261004T2037Z/execution_summary.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\level_zero_loader_smoke_20261004T2037Z\\execution_summary.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/cuda_l0_source_compile_20261004T202000Z_attempt2/compile_qa_findings.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\cuda_l0_source_compile_20261004T202000Z_attempt2\\compile_qa_findings.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_device_nv_vulkan_route_20261004T204500Z/RESEARCH.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_vulkan_route_20261004T204500Z\\RESEARCH.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/egl_proposal_independent_audit_20261004T2130Z/audit_findings.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\egl_proposal_independent_audit_20261004T2130Z\\audit_findings.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_fd_sync_bridge_trace_20261004T2115Z/bridge_contract_findings.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\bridge_contract_findings.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/dma_buf_sync_bridge_primary_20261004T2144Z/host_relay_correction_addendum.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\dma_buf_sync_bridge_primary_20261004T2144Z\\host_relay_correction_addendum.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/nv_egl_payload_consumer_prep_20261004T221300Z/LENGTH_POSTMORTEM_REVIEW_ONLY/POSTMORTEM.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\LENGTH_POSTMORTEM_REVIEW_ONLY\\POSTMORTEM.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/nv_egl_payload_consumer_prep_20261004T221300Z/LENGTH_POSTMORTEM_REVIEW_ONLY/content.UNACCEPTED_PARTIAL_REVIEW_ONLY.txt",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\LENGTH_POSTMORTEM_REVIEW_ONLY\\content.UNACCEPTED_PARTIAL_REVIEW_ONLY.txt",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/nv_egl_payload_consumer_prep_20261004T221300Z/LENGTH_POSTMORTEM_REVIEW_ONLY/source.COMPLETE_STRING_UNACCEPTED_REVIEW_ONLY.txt",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\LENGTH_POSTMORTEM_REVIEW_ONLY\\source.COMPLETE_STRING_UNACCEPTED_REVIEW_ONLY.txt",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_multi_arc_ze_peer_research_20261004T230000Z/download_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\download_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_multi_arc_ze_peer_research_20261004T230000Z/intel_863931_rev1p0.pdf",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\intel_863931_rev1p0.pdf",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_multi_arc_ze_peer_research_20261004T230000Z/commit_metadata.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\commit_metadata.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_multi_arc_ze_peer_research_20261004T230000Z/issue_921.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\issue_921.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/primary/zes_api.v1.34.0.h.txt",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\zes_api.v1.34.0.h.txt",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/SCOPED_RESUME_44_CLOSED_USER_STOP_FINAL.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\SCOPED_RESUME_44_CLOSED_USER_STOP_FINAL.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/grok_capacity_binding_focused_prep_20261004T213535Z/grok_capacity_binding_focused_high.owned_terminal.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_focused_prep_20261004T213535Z\\grok_capacity_binding_focused_high.owned_terminal.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/CLOSED_TWO_QWEN_COMPILER_USAGE_RECEIPT.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\CLOSED_TWO_QWEN_COMPILER_USAGE_RECEIPT.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/QUOTA_UI_OBSERVATION_20261004T2230Z.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\QUOTA_UI_OBSERVATION_20261004T2230Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/USER_STOP_TWO_OWNED_QWEN_20261004T230832Z.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\USER_STOP_TWO_OWNED_QWEN_20261004T230832Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/SECRET_PROCESS_AUDIT_STOPPED_WAVE.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\SECRET_PROCESS_AUDIT_STOPPED_WAVE.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/qwen_completion_adapter_repair.V3_ROOT_REVIEW_PACKET.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.V3_ROOT_REVIEW_PACKET.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/qwen_vulkan_nv_l0_intel_reverse_v2.ROOT_REVIEW_PACKET.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.ROOT_REVIEW_PACKET.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/qwen_q8_original_parity_diagnostic_v2.ROOT_REVIEW_PACKET.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.ROOT_REVIEW_PACKET.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/grok_l0_collector_repair_prep_20261004T230400Z/GROK_COLLECTOR_V2_ROOT_REVIEW_PACKET.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\GROK_COLLECTOR_V2_ROOT_REVIEW_PACKET.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/l0_query_measured_repair_cpu_fake_v2_20261004T2305Z/CPU_FAKE_ROOT_REVIEW_PACKET_V2.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_measured_repair_cpu_fake_v2_20261004T2305Z\\CPU_FAKE_ROOT_REVIEW_PACKET_V2.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/PREPARED_ARTIFACTS_AT_USER_STOP.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PREPARED_ARTIFACTS_AT_USER_STOP.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_multi_arc_ze_peer_research_20261004T230000Z/download_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\download_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/cad_draft_20261004/native_build_revision4_runs.json",
+      "path": "E:\\the_harness\\records\\cad_draft_20261004\\native_build_revision4_runs.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/J_LINK_ACCEPTANCE_20261004.md",
+      "path": "E:\\the_harness\\records\\J_LINK_ACCEPTANCE_20261004.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "docs/08_VENDOR_DEVELOPER_TOOLS.md",
+      "path": "E:\\the_harness\\docs\\08_VENDOR_DEVELOPER_TOOLS.md",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/root_continuation_20261004/intel_p2p_inventory_20261004T1820Z.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_p2p_inventory_20261004T1820Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "records/ADAPTATION_SHA256_20261004_2148Z.json",
+      "path": "E:\\the_harness\\records\\ADAPTATION_SHA256_20261004_2148Z.json",
+      "exists": true
+    },
+    {
+      "document": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "target": "C:/Users/thoma/Desktop/status/harness-jlink-status-check-20261004-1841.json",
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status-check-20261004-1841.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/HANDOFF_LAST_5_HOURS.md",
+      "path": "E:\\the_harness\\HANDOFF_LAST_5_HOURS.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "C:/Users/thoma/Desktop/status/harness-jlink-status-20261004-1841.md",
+      "path": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status-20261004-1841.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/capacity_binding_grok_root_audit_20261004T215300Z/FINAL_ADJUDICATION.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_binding_grok_root_audit_20261004T215300Z\\FINAL_ADJUDICATION.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/directed_receipt_repair_audit_20261004T2135Z/AUDIT_EXECUTED.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_repair_audit_20261004T2135Z\\AUDIT_EXECUTED.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/FINAL_CPU_FAKE_ADJUDICATION.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\FINAL_CPU_FAKE_ADJUDICATION.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/compile_receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_measured_repair_object_qa_20261004T2228Z\\compile_receipt.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v3_20261004T2254Z/runs/pure_qa_20261004T225945Z/receipt.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\receipt.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/intel_p2p_inventory_20261004T1820Z.json",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_p2p_inventory_20261004T1820Z.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/cad_draft_20261004/native_build_revision4_runs.json",
+      "path": "E:\\the_harness\\records\\cad_draft_20261004\\native_build_revision4_runs.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/l0_fd_sync_bridge_trace_20261004T2115Z/bridge_contract_findings.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\bridge_contract_findings.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/root_continuation_20261004/dma_buf_sync_bridge_primary_20261004T2144Z/host_relay_correction_addendum.md",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\dma_buf_sync_bridge_primary_20261004T2144Z\\host_relay_correction_addendum.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/J_LINK_ACCEPTANCE_20261004.md",
+      "path": "E:\\the_harness\\records\\J_LINK_ACCEPTANCE_20261004.md",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/SCOPED_RESUME_44_CLOSED_USER_STOP_FINAL.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\SCOPED_RESUME_44_CLOSED_USER_STOP_FINAL.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/factory_runs/20261004/nv_egl_payload_consumer_prep_20261004T221300Z/LENGTH_POSTMORTEM_REVIEW_ONLY/POSTMORTEM.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\LENGTH_POSTMORTEM_REVIEW_ONLY\\POSTMORTEM.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/USER_STOP_TWO_OWNED_QWEN_20261004T230832Z.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\USER_STOP_TWO_OWNED_QWEN_20261004T230832Z.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/SECRET_PROCESS_AUDIT_STOPPED_WAVE.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\SECRET_PROCESS_AUDIT_STOPPED_WAVE.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/factory_runs/20261004/QUOTA_UI_OBSERVATION_20261004T2230Z.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\QUOTA_UI_OBSERVATION_20261004T2230Z.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/factory_runs/20261004/qwen_five_software_wave_prep_20261004T223400Z/PREPARED_ARTIFACTS_AT_USER_STOP.json",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PREPARED_ARTIFACTS_AT_USER_STOP.json",
+      "exists": true
+    },
+    {
+      "document": "C:\\Users\\thoma\\Desktop\\status\\harness-jlink-status.md",
+      "target": "E:/the_harness/records/HANDOFF_LAST_5_HOURS_VERIFICATION.json",
+      "path": "E:\\the_harness\\records\\HANDOFF_LAST_5_HOURS_VERIFICATION.json",
+      "exists": true
+    }
+  ],
+  "unique_evidence_pins_checked": 146,
+  "hash_failures": [],
+  "numerical_artifact_pins_checked": 22,
+  "peer_capture_pins_checked": 48,
+  "intel_download_pins_checked": 29,
+  "prepared_artifact_pins_checked": 24,
+  "evidence_pins": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json",
+      "scope": "numerical_adjudication",
+      "expected_sha256": "b1da0dd4719ee343b39f63e8ca0597d80c0c94c7083fe80d283d5b2f81204cde",
+      "actual_sha256": "b1da0dd4719ee343b39f63e8ca0597d80c0c94c7083fe80d283d5b2f81204cde",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv2_20261004T1843Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "e32dda15524ce4c675a6ec431bb4f44b49a869d60b9ec0e52950e4a7ef6ec2e7",
+      "actual_sha256": "e32dda15524ce4c675a6ec431bb4f44b49a869d60b9ec0e52950e4a7ef6ec2e7",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv2_20261004T1843Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "dd9fc52b433df97686937681a88287b0e99d2dbbe6817eecf2df83a8658b7ab2",
+      "actual_sha256": "dd9fc52b433df97686937681a88287b0e99d2dbbe6817eecf2df83a8658b7ab2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_20261004T1843Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "1828f127232f0674407042c85a933723a6542ccb7fea54291276eb792ea0d4aa",
+      "actual_sha256": "1828f127232f0674407042c85a933723a6542ccb7fea54291276eb792ea0d4aa",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_20261004T1843Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "935b06dfacdf0f7e59e04239834bea42d9cceb72261c06a5e34cb02994daef35",
+      "actual_sha256": "935b06dfacdf0f7e59e04239834bea42d9cceb72261c06a5e34cb02994daef35",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv_corrupt_20261004T1845Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "74bc0eb7cea96b9e1917f9df0154932b20570b9cfd55ab8ba48dc845dd193372",
+      "actual_sha256": "74bc0eb7cea96b9e1917f9df0154932b20570b9cfd55ab8ba48dc845dd193372",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv_corrupt_20261004T1845Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "1eb66aa2aec8e38fb973eaa6fa38e29f39ba53fdfce1825bb5ba1c9eee8c21e2",
+      "actual_sha256": "1eb66aa2aec8e38fb973eaa6fa38e29f39ba53fdfce1825bb5ba1c9eee8c21e2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "12905661aeb032908a868a0e11a95ffc9814fd59b0c22343887a5a5f9fa8eca6",
+      "actual_sha256": "12905661aeb032908a868a0e11a95ffc9814fd59b0c22343887a5a5f9fa8eca6",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "ec1345cb34acf8387541cb49beb41dd1162a5165fcd13409399868b93ea1e00a",
+      "actual_sha256": "ec1345cb34acf8387541cb49beb41dd1162a5165fcd13409399868b93ea1e00a",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "ce8b380dd06676ce2e80a228515a75f9eab392811fc7076a8641a15de932e4c0",
+      "actual_sha256": "ce8b380dd06676ce2e80a228515a75f9eab392811fc7076a8641a15de932e4c0",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "30050a291becf283912afeb2559058fa9615b6ef2bb115ee3dec2c25b8426d78",
+      "actual_sha256": "30050a291becf283912afeb2559058fa9615b6ef2bb115ee3dec2c25b8426d78",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "d5312d7c8922d4c222f599f242992c65babcf63e94214748474db298e5202892",
+      "actual_sha256": "d5312d7c8922d4c222f599f242992c65babcf63e94214748474db298e5202892",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "5db2361f7e734798c77f60dfd6a5a1ee79a33f1057449393875076042674d4ce",
+      "actual_sha256": "5db2361f7e734798c77f60dfd6a5a1ee79a33f1057449393875076042674d4ce",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_corrupt_fixed_20261004T1902Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "e1eec739de6bf1f5b561af0b843a59acc714e122e3b0b48286b27a8c729f95a2",
+      "actual_sha256": "e1eec739de6bf1f5b561af0b843a59acc714e122e3b0b48286b27a8c729f95a2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_corrupt_fixed_20261004T1902Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "35406d614f7cc4f1bb91a939495e641f235082ea507993c00393d703b06b8068",
+      "actual_sha256": "35406d614f7cc4f1bb91a939495e641f235082ea507993c00393d703b06b8068",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\run_receipt.json",
+      "scope": "numerical_run_receipt",
+      "expected_sha256": "dda2c0cf6356c3564bca915cf2a185403023606f6ddd2cad8e59154d55adf704",
+      "actual_sha256": "dda2c0cf6356c3564bca915cf2a185403023606f6ddd2cad8e59154d55adf704",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\stdout.raw.log",
+      "scope": "numerical_raw_capture",
+      "expected_sha256": "c64f2d9fa71e7ae83a24a8236a4ca7c3f16a81580c202b44c2460a224943fcd0",
+      "actual_sha256": "c64f2d9fa71e7ae83a24a8236a4ca7c3f16a81580c202b44c2460a224943fcd0",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml.dll",
+      "scope": "numerical_built_dll",
+      "expected_sha256": "56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb",
+      "actual_sha256": "56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-base.dll",
+      "scope": "numerical_built_dll",
+      "expected_sha256": "beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3",
+      "actual_sha256": "beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-cpu.dll",
+      "scope": "numerical_built_dll",
+      "expected_sha256": "e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481",
+      "actual_sha256": "e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-rpc.dll",
+      "scope": "numerical_built_dll",
+      "expected_sha256": "11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd",
+      "actual_sha256": "11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-vulkan.dll",
+      "scope": "numerical_built_dll",
+      "expected_sha256": "3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085",
+      "actual_sha256": "3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\controller_result.json",
+      "scope": "numerical_build_receipt",
+      "expected_sha256": "c3b83af401e3bd560be78f29427c8d762445a9307485065edd1f78cc430e2c9f",
+      "actual_sha256": "c3b83af401e3bd560be78f29427c8d762445a9307485065edd1f78cc430e2c9f",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\FINAL_CPU_FAKE_ADJUDICATION.json",
+      "scope": "peer_adjudication",
+      "expected_sha256": "52742f7558723dfd548f6419127d84f11c9b46bd6da5a41d321199f9fad7cbf5",
+      "actual_sha256": "52742f7558723dfd548f6419127d84f11c9b46bd6da5a41d321199f9fad7cbf5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\01_pins.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "8032ced00ed279a20f74233c34d64dff2576f703a7512384c5a5c0190db0f69f",
+      "actual_sha256": "8032ced00ed279a20f74233c34d64dff2576f703a7512384c5a5c0190db0f69f",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\01_pins.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\01_pins.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "2280b81c5481021f9783970eecc17c989afc32c2db1d741060ab598409a60ec4",
+      "actual_sha256": "2280b81c5481021f9783970eecc17c989afc32c2db1d741060ab598409a60ec4",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\02_clean.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "580bfc89e11678b4badd457add6b860717a6bee98645f8f271b9ae4f7587c700",
+      "actual_sha256": "580bfc89e11678b4badd457add6b860717a6bee98645f8f271b9ae4f7587c700",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\02_clean.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "bc9c03eb9b9d583aa2c6b63f1afc60b71c7e098d8e5c43716faccb460f4b405b",
+      "actual_sha256": "bc9c03eb9b9d583aa2c6b63f1afc60b71c7e098d8e5c43716faccb460f4b405b",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\02_clean.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "00166ff66062c00a0fe5e7f43c96429d58da86552bf2e60d90170067da902e5d",
+      "actual_sha256": "00166ff66062c00a0fe5e7f43c96429d58da86552bf2e60d90170067da902e5d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\03_corrupt.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "91afaf60a4fb3ed44c788fb965d3a374a15b5c73c99ec6cd297bd69bcb4eb7db",
+      "actual_sha256": "91afaf60a4fb3ed44c788fb965d3a374a15b5c73c99ec6cd297bd69bcb4eb7db",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\03_corrupt.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "492164f3171301eb1e3aee85ce704c29669809e500361ee4570d7218ea4615a1",
+      "actual_sha256": "492164f3171301eb1e3aee85ce704c29669809e500361ee4570d7218ea4615a1",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\03_corrupt.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "216068c89c472b0d7169bf389c5d114e99d115fdfa307e35f28e2037954634d3",
+      "actual_sha256": "216068c89c472b0d7169bf389c5d114e99d115fdfa307e35f28e2037954634d3",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\04_peer_unavailable.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "58dc62704b66e0426f14411152e6eaaa85e35e65d105712fc501133bbf07f474",
+      "actual_sha256": "58dc62704b66e0426f14411152e6eaaa85e35e65d105712fc501133bbf07f474",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\04_peer_unavailable.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "39d9fc0dcbae218bb34b0a3d0d164849e22bdecbf9c54964cdf5fa9d4a4a1049",
+      "actual_sha256": "39d9fc0dcbae218bb34b0a3d0d164849e22bdecbf9c54964cdf5fa9d4a4a1049",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\04_peer_unavailable.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "202a076d791a1a24acc621b11886807529391241b5cdea2c067eb6e2b330e20a",
+      "actual_sha256": "202a076d791a1a24acc621b11886807529391241b5cdea2c067eb6e2b330e20a",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\05_fence_timeout.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "4173642e1b0863ef8d01d57a1d38c208647a845bd7b2c6eb218d8bb17e5d57bd",
+      "actual_sha256": "4173642e1b0863ef8d01d57a1d38c208647a845bd7b2c6eb218d8bb17e5d57bd",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\05_fence_timeout.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "41a17c7785c4570d114e91b27927c6bfe624140279be0d47918809c442506e6c",
+      "actual_sha256": "41a17c7785c4570d114e91b27927c6bfe624140279be0d47918809c442506e6c",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\05_fence_timeout.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "92b18152a917cb5ca9368736cc88802c6979faa7ca6b789a4723446553bcae04",
+      "actual_sha256": "92b18152a917cb5ca9368736cc88802c6979faa7ca6b789a4723446553bcae04",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\06_cleanup_failure.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "06e18c75c003d93fb2e016daeb7cbc2828e551c18915ec30ba835e02d8e477e9",
+      "actual_sha256": "06e18c75c003d93fb2e016daeb7cbc2828e551c18915ec30ba835e02d8e477e9",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\06_cleanup_failure.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "bc9c03eb9b9d583aa2c6b63f1afc60b71c7e098d8e5c43716faccb460f4b405b",
+      "actual_sha256": "bc9c03eb9b9d583aa2c6b63f1afc60b71c7e098d8e5c43716faccb460f4b405b",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\06_cleanup_failure.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "2953cb29318eb9a854cfa4401eae497aaadc75ba735a5786f74882daad99379d",
+      "actual_sha256": "2953cb29318eb9a854cfa4401eae497aaadc75ba735a5786f74882daad99379d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\07_malformed_cli.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "0c2de241a8ba5fc7f343cb0621d10b9e5db4b8749e9316543b9ab441b1d4fa27",
+      "actual_sha256": "0c2de241a8ba5fc7f343cb0621d10b9e5db4b8749e9316543b9ab441b1d4fa27",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\07_malformed_cli.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "2c81c734642e32f8f74278db6f58553b216389b0631835b5669dd8dc1d6f5d82",
+      "actual_sha256": "2c81c734642e32f8f74278db6f58553b216389b0631835b5669dd8dc1d6f5d82",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\07_malformed_cli.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "1283cbf2b2df090adc26e48a75a926e8773410a83bd413fef0575d5bbfdcca5d",
+      "actual_sha256": "1283cbf2b2df090adc26e48a75a926e8773410a83bd413fef0575d5bbfdcca5d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\08_surplus_cli.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "b02469842abf9c1a5121ac8a2e456160d9da7553136d9d08a2a61b0d9e059a4d",
+      "actual_sha256": "b02469842abf9c1a5121ac8a2e456160d9da7553136d9d08a2a61b0d9e059a4d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\08_surplus_cli.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "2c81c734642e32f8f74278db6f58553b216389b0631835b5669dd8dc1d6f5d82",
+      "actual_sha256": "2c81c734642e32f8f74278db6f58553b216389b0631835b5669dd8dc1d6f5d82",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\08_surplus_cli.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "40883253d251ac9bd4496a079ef25c01910538c3dcf54aa5d82b33f38377659d",
+      "actual_sha256": "40883253d251ac9bd4496a079ef25c01910538c3dcf54aa5d82b33f38377659d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\09_duplicate_flag_cli.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "911c210d914cda11f2094e9c2e778082c3224097f477b923a9b3960cde6a763d",
+      "actual_sha256": "911c210d914cda11f2094e9c2e778082c3224097f477b923a9b3960cde6a763d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\09_duplicate_flag_cli.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "2c81c734642e32f8f74278db6f58553b216389b0631835b5669dd8dc1d6f5d82",
+      "actual_sha256": "2c81c734642e32f8f74278db6f58553b216389b0631835b5669dd8dc1d6f5d82",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\09_duplicate_flag_cli.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "6b80358c95d0662c6be2df1856516601fe6901d2a4fcd85ca17db979def0a662",
+      "actual_sha256": "6b80358c95d0662c6be2df1856516601fe6901d2a4fcd85ca17db979def0a662",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\10_fence_timeout_copy.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "567cac48367e8a281eff7f50b2dc2432aa1225f9de2c7dd9aa4db2bfe108b209",
+      "actual_sha256": "567cac48367e8a281eff7f50b2dc2432aa1225f9de2c7dd9aa4db2bfe108b209",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\10_fence_timeout_copy.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "1a146a1010199c0787c20ce8d4d802b5a08d61d4c5a8f0be8082481cd4980ce3",
+      "actual_sha256": "1a146a1010199c0787c20ce8d4d802b5a08d61d4c5a8f0be8082481cd4980ce3",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\10_fence_timeout_copy.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "b7690d995464e7eccdcfdef6eab309036117b87febe08e01280ba052d703c650",
+      "actual_sha256": "b7690d995464e7eccdcfdef6eab309036117b87febe08e01280ba052d703c650",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\11_fence_timeout_readback.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "d7acb5fe5d669b8d6edb23bc07d527a09dd98b90ad56f233b0f0511401f9fa75",
+      "actual_sha256": "d7acb5fe5d669b8d6edb23bc07d527a09dd98b90ad56f233b0f0511401f9fa75",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\11_fence_timeout_readback.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "ed743dafe830feb596511e74508a0cbcfe1e4bea161f23dbf1157615673adff1",
+      "actual_sha256": "ed743dafe830feb596511e74508a0cbcfe1e4bea161f23dbf1157615673adff1",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\11_fence_timeout_readback.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "ef90923da685ce3a12fa7c9615ba6713afbf9e4a995235dcfbd6960fdd9f51a5",
+      "actual_sha256": "ef90923da685ce3a12fa7c9615ba6713afbf9e4a995235dcfbd6960fdd9f51a5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\12_fence_timeout_corrupt.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "d6b70652a29eccb17214c8063a1f3e0f0c1fee6534e150b12a65ea8d5f48d759",
+      "actual_sha256": "d6b70652a29eccb17214c8063a1f3e0f0c1fee6534e150b12a65ea8d5f48d759",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\12_fence_timeout_corrupt.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "f6c13469e5ce73272d282cfd0cbfa8ad503d5dc4fa954b8340a50dd565b3c3a2",
+      "actual_sha256": "f6c13469e5ce73272d282cfd0cbfa8ad503d5dc4fa954b8340a50dd565b3c3a2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\12_fence_timeout_corrupt.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "b36df139a86c24baeeb2b1a9776bda6ae0cbd793e1e8e45803dd2574b5c450e5",
+      "actual_sha256": "b36df139a86c24baeeb2b1a9776bda6ae0cbd793e1e8e45803dd2574b5c450e5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\13_pins_after.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "0d87c375256167c51976cade0e16210843c0a8353fcc769a8e5e78aa3d49d505",
+      "actual_sha256": "0d87c375256167c51976cade0e16210843c0a8353fcc769a8e5e78aa3d49d505",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\13_pins_after.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\13_pins_after.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "2280b81c5481021f9783970eecc17c989afc32c2db1d741060ab598409a60ec4",
+      "actual_sha256": "2280b81c5481021f9783970eecc17c989afc32c2db1d741060ab598409a60ec4",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\case_results.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "3f2095365c050c5019bcf2a3dfd66b8d8d07ad256d87debda40d38b18c7280db",
+      "actual_sha256": "3f2095365c050c5019bcf2a3dfd66b8d8d07ad256d87debda40d38b18c7280db",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "ca1bdf110cf2a9e043ca024a52394475be031f2780c5e825b735d488035ba3fb",
+      "actual_sha256": "ca1bdf110cf2a9e043ca024a52394475be031f2780c5e825b735d488035ba3fb",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\01_original9.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "ac113ed485e1ffba5fc1ee968e5f11a4566dfb8c99a9ac4ba7daa245d16902d5",
+      "actual_sha256": "ac113ed485e1ffba5fc1ee968e5f11a4566dfb8c99a9ac4ba7daa245d16902d5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\01_original9.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "97ebfeee057d2b5a0c9c53523f02fadf2c7dcd24d2c88be7a3adf3a7ef9a3f92",
+      "actual_sha256": "97ebfeee057d2b5a0c9c53523f02fadf2c7dcd24d2c88be7a3adf3a7ef9a3f92",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\01_original9.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.receipt.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "1a4a1fc36c4152402557e3592340c2ea19844cb0361ee796f6d4ec6fb4430648",
+      "actual_sha256": "1a4a1fc36c4152402557e3592340c2ea19844cb0361ee796f6d4ec6fb4430648",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.stderr.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "185e67dbdea16a56aabd852ed397a9f994d32a0836cdf8ce7eeb68b6d86c81c1",
+      "actual_sha256": "185e67dbdea16a56aabd852ed397a9f994d32a0836cdf8ce7eeb68b6d86c81c1",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.stdout.bin",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\ASSERTION_RECEIPT.json",
+      "scope": "peer_runtime_assertion_capture",
+      "expected_sha256": "7b139d663da14cd99fdf74ae73334f311c7e384ed28f90dce9928a0c64dc9a41",
+      "actual_sha256": "7b139d663da14cd99fdf74ae73334f311c7e384ed28f90dce9928a0c64dc9a41",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_focused_prep_20261004T213535Z\\static_extraction_20261004T215100Z\\source.grok_untrusted.py",
+      "scope": "capacity_inputs_and_interpreter",
+      "expected_sha256": "446d78eaebd631eac79bca9f32c71671a485642371e1e9899306c7199543c5a5",
+      "actual_sha256": "446d78eaebd631eac79bca9f32c71671a485642371e1e9899306c7199543c5a5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_focused_prep_20261004T213535Z\\static_extraction_20261004T215100Z\\tests_source.grok_untrusted.py",
+      "scope": "capacity_inputs_and_interpreter",
+      "expected_sha256": "29044665a96f2e27aefcc5e4bf65bac54dc96139e907d73045bbe3a67f09dfbc",
+      "actual_sha256": "29044665a96f2e27aefcc5e4bf65bac54dc96139e907d73045bbe3a67f09dfbc",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_binding_grok_root_audit_20261004T215300Z\\test_independent_capacity.py",
+      "scope": "capacity_inputs_and_interpreter",
+      "expected_sha256": "aa1609b74ca0ff2633a1f43e4be9c2fc8a79db4cf3d8c8cc00670024bab91fb7",
+      "actual_sha256": "aa1609b74ca0ff2633a1f43e4be9c2fc8a79db4cf3d8c8cc00670024bab91fb7",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_binding_grok_root_audit_20261004T215300Z\\run_bounded_pure.py",
+      "scope": "capacity_inputs_and_interpreter",
+      "expected_sha256": "900142ece2509a135f60936b80ace5dd974384dd371b760fc6b171c7230d5fc5",
+      "actual_sha256": "900142ece2509a135f60936b80ace5dd974384dd371b760fc6b171c7230d5fc5",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "scope": "capacity_inputs_and_interpreter",
+      "expected_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+      "actual_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\intel_863931_rev1p0.pdf",
+      "scope": "intel_primary_download",
+      "expected_sha256": "8e0f722ea8c7c20674dd80938172d79a78354a0c2ef35c596b203999b826dc90",
+      "actual_sha256": "8e0f722ea8c7c20674dd80938172d79a78354a0c2ef35c596b203999b826dc90",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\repo_metadata.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "fa5f5242897c90f6b0b54153e4f729944e50bec879c2d35af89591857798a756",
+      "actual_sha256": "fa5f5242897c90f6b0b54153e4f729944e50bec879c2d35af89591857798a756",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\commit_metadata.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "9e70479cc8060ae7f9c524e9dc2f204027a72d2344873420fb09f4ac57a9a8e7",
+      "actual_sha256": "9e70479cc8060ae7f9c524e9dc2f204027a72d2344873420fb09f4ac57a9a8e7",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\perf_directory.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "323975db3d07998e47aa6d9356e111b25b9548d233c812c0cb1abbf7068b98b8",
+      "actual_sha256": "323975db3d07998e47aa6d9356e111b25b9548d233c812c0cb1abbf7068b98b8",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\ze_peer_directory.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "a42fc2962380fbb56805a8270fa45c9122d8ed530672c1e6712b39fdfdf6ca2f",
+      "actual_sha256": "a42fc2962380fbb56805a8270fa45c9122d8ed530672c1e6712b39fdfdf6ca2f",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\CMakeLists.txt",
+      "scope": "intel_primary_download",
+      "expected_sha256": "ea30d4ff42e3b328fa404dd780bd535c80e7c85bc8d5b5342553344985e788cd",
+      "actual_sha256": "ea30d4ff42e3b328fa404dd780bd535c80e7c85bc8d5b5342553344985e788cd",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\README.md",
+      "scope": "intel_primary_download",
+      "expected_sha256": "68f8fced0fb1e671ce24d5ec0a9d8bc119bd69deeaa7c084e556d48ac3979de4",
+      "actual_sha256": "68f8fced0fb1e671ce24d5ec0a9d8bc119bd69deeaa7c084e556d48ac3979de4",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\issue_921.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "0b804f249b56696348e6c299bcfa9e38b6a91db38e2f7bfdfffc5cbe707e90e1",
+      "actual_sha256": "0b804f249b56696348e6c299bcfa9e38b6a91db38e2f7bfdfffc5cbe707e90e1",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\issue_921_comments.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "25f666a4f21efb22607ee1a607f80da974986c6719e31b4b7cd9d3b106b3acef",
+      "actual_sha256": "25f666a4f21efb22607ee1a607f80da974986c6719e31b4b7cd9d3b106b3acef",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\src_directory.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "a1c04d76c4dfc55b3451bb08d3d6662ae298613e937534b049bb7f9ca9cd53aa",
+      "actual_sha256": "a1c04d76c4dfc55b3451bb08d3d6662ae298613e937534b049bb7f9ca9cd53aa",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "b5f32245badb90170685bcd36b1d56046dedfedf7d6582623366aa20d910fd13",
+      "actual_sha256": "b5f32245badb90170685bcd36b1d56046dedfedf7d6582623366aa20d910fd13",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_bidirectional.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "5ffd2069f09d35f361ce1c4ad0cb8ae1bfd9c46d2ededeb651afb64082c16473",
+      "actual_sha256": "5ffd2069f09d35f361ce1c4ad0cb8ae1bfd9c46d2ededeb651afb64082c16473",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_common.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "32f931eac881b6d57cdeb80e2f8e18592457e7991166b24caa6977b730c6b6a9",
+      "actual_sha256": "32f931eac881b6d57cdeb80e2f8e18592457e7991166b24caa6977b730c6b6a9",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_ipc.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "91db5052bfabd7e5a0ad78cade256d43b90d7b9ca511aea7e4c27581ca95e69e",
+      "actual_sha256": "91db5052bfabd7e5a0ad78cade256d43b90d7b9ca511aea7e4c27581ca95e69e",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_parallel_multiple_targets.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "9a78fe31dce490d80f89165b30d26d8aef7900be1d349acd17125d3871cd26aa",
+      "actual_sha256": "9a78fe31dce490d80f89165b30d26d8aef7900be1d349acd17125d3871cd26aa",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_parallel_pair_targets.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "4b5ce212492789abb4d1974222f0fedf51852b55e26089839c2e4da24731c2b8",
+      "actual_sha256": "4b5ce212492789abb4d1974222f0fedf51852b55e26089839c2e4da24731c2b8",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_parallel_single_target.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "62fb62e286de71a176207eae1b06b405817aad95fb813ccacaa277e470bd89a5",
+      "actual_sha256": "62fb62e286de71a176207eae1b06b405817aad95fb813ccacaa277e470bd89a5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_unidirectional.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "27c6cbf4f0d4fe9b76ca69a788d0235771450140e0ec612684782d605502dfc6",
+      "actual_sha256": "27c6cbf4f0d4fe9b76ca69a788d0235771450140e0ec612684782d605502dfc6",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\include_directory.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "545bde1880c3d5f2c2f8f717b96c172e473e7aa2f5a0079ad35e3063ba000872",
+      "actual_sha256": "545bde1880c3d5f2c2f8f717b96c172e473e7aa2f5a0079ad35e3063ba000872",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\include\\ze_peer.h",
+      "scope": "intel_primary_download",
+      "expected_sha256": "f56871cbf04c8a5b42f792eabaa9c5a7393922c1ba6b65eea12493b84b0ad8c0",
+      "actual_sha256": "f56871cbf04c8a5b42f792eabaa9c5a7393922c1ba6b65eea12493b84b0ad8c0",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\kernels_directory.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "44f24e6785f98b9ed94d0290ea19475d7cdadeae8366b23696163346c223e096",
+      "actual_sha256": "44f24e6785f98b9ed94d0290ea19475d7cdadeae8366b23696163346c223e096",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\kernels\\ze_peer_benchmarks.cl",
+      "scope": "intel_primary_download",
+      "expected_sha256": "d840e1f8a5c6ef3d971e203c0c344afcedd0e3ffe173442b9f70cff403f5cba2",
+      "actual_sha256": "d840e1f8a5c6ef3d971e203c0c344afcedd0e3ffe173442b9f70cff403f5cba2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\kernels\\ze_peer_benchmarks.spv",
+      "scope": "intel_primary_download",
+      "expected_sha256": "4f2e34610223ddd6f8d89e4a3c9a9d7ae42abc6476045d55c5689cd5bd57f1c2",
+      "actual_sha256": "4f2e34610223ddd6f8d89e4a3c9a9d7ae42abc6476045d55c5689cd5bd57f1c2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\common\\src\\ze_app.cpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "8bb1b924c98378ba6d61b33a9671a82b4aff47887970f26d5063911f6a663953",
+      "actual_sha256": "8bb1b924c98378ba6d61b33a9671a82b4aff47887970f26d5063911f6a663953",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\common\\include\\ze_app.hpp",
+      "scope": "intel_primary_download",
+      "expected_sha256": "7967eb51a465a9b8d18d6adae0daf022abfa411d65d5e68df1447e83ce486087",
+      "actual_sha256": "7967eb51a465a9b8d18d6adae0daf022abfa411d65d5e68df1447e83ce486087",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\LICENSE",
+      "scope": "intel_primary_download",
+      "expected_sha256": "8c95643f47a244153bef1c2d3a2801dde2b566f0294aae956c8a5226f7acd789",
+      "actual_sha256": "8c95643f47a244153bef1c2d3a2801dde2b566f0294aae956c8a5226f7acd789",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\CMakeLists.txt",
+      "scope": "intel_primary_download",
+      "expected_sha256": "905d796f1c7ea08baf0e69dbc7a703fe31c8be168bb36d673e240f74ffe122d7",
+      "actual_sha256": "905d796f1c7ea08baf0e69dbc7a703fe31c8be168bb36d673e240f74ffe122d7",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\e91243a9d03de849f45d8b862a62afd4424cff8b.commit.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "38cdfb741ac18458b013d64620f1a9618d43631ceffc3122e0168540bfa3b0b3",
+      "actual_sha256": "38cdfb741ac18458b013d64620f1a9618d43631ceffc3122e0168540bfa3b0b3",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\258518f8039afba59c46d98bb7f6f068d12f026d.commit.json",
+      "scope": "intel_primary_download",
+      "expected_sha256": "11e67ddd4264355e19269b53119b959c92ffd5347c26c8afa8a4cf9c83665e39",
+      "actual_sha256": "11e67ddd4264355e19269b53119b959c92ffd5347c26c8afa8a4cf9c83665e39",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\USER_STOP_TWO_OWNED_QWEN_20261004T230832Z.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "0c552bdf0d172fe9762bca7e112370b239720f521c8e15e8d55145a4c2dc660a",
+      "actual_sha256": "0c552bdf0d172fe9762bca7e112370b239720f521c8e15e8d55145a4c2dc660a",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\SCOPED_RESUME_44_CLOSED_USER_STOP_FINAL.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "b4cf12dda5be1c02ffa35a712bc729ac3745afb3a18631dc254ba0914ab8173c",
+      "actual_sha256": "b4cf12dda5be1c02ffa35a712bc729ac3745afb3a18631dc254ba0914ab8173c",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\zes_api.v1.34.0.h.txt",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4",
+      "actual_sha256": "569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+      "actual_sha256": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "fc73cb96c60a4df88815d670f3d6682ff71c3a1cbcaf9dc06942bc780768dc29",
+      "actual_sha256": "fc73cb96c60a4df88815d670f3d6682ff71c3a1cbcaf9dc06942bc780768dc29",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+      "actual_sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_output\\parsed_review.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "f88cdad706e88a7af8fa4aad0c6d214d16ead6706a2e9ee1468e5a6092bbf5a1",
+      "actual_sha256": "f88cdad706e88a7af8fa4aad0c6d214d16ead6706a2e9ee1468e5a6092bbf5a1",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_muse_collector.root_revision2.py",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "fd4be5277c9f6557a3f76d0d0312eae3ca5777b3a9c12aab4e098847653de4e1",
+      "actual_sha256": "fd4be5277c9f6557a3f76d0d0312eae3ca5777b3a9c12aab4e098847653de4e1",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high\\review.pending_root_qa.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "0b405573f32bb91e0d4b9de8d299c30698225c9b6c4e38fc5b48826b8d1d1529",
+      "actual_sha256": "0b405573f32bb91e0d4b9de8d299c30698225c9b6c4e38fc5b48826b8d1d1529",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\source.qwen_untrusted.cpp",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "27d560b3f73dd830b68de9aac3316d7b8510c0218d54704156e273929ce23fe2",
+      "actual_sha256": "27d560b3f73dd830b68de9aac3316d7b8510c0218d54704156e273929ce23fe2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_measured_repair_object_qa_20261004T2228Z\\compile_receipt.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "66a0d44cc910da3d583b0107388c0b5d056b6d5ddc271d884cb914b5171b1b67",
+      "actual_sha256": "66a0d44cc910da3d583b0107388c0b5d056b6d5ddc271d884cb914b5171b1b67",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_measured_repair_object_qa_20261004T2228Z\\query_candidate.o",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "1fa2833788b88605de3b450c6a63f10c88724e0e9f9b9e3080eea30282505022",
+      "actual_sha256": "1fa2833788b88605de3b450c6a63f10c88724e0e9f9b9e3080eea30282505022",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.cpp",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+      "actual_sha256": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.cpp",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+      "actual_sha256": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\receipt.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "92faffe57bd149289b66323cdb67889b335b429c41855b71bcc94101e6439085",
+      "actual_sha256": "92faffe57bd149289b66323cdb67889b335b429c41855b71bcc94101e6439085",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\outer_20261004T2301Z\\outer_receipt.json",
+      "scope": "handoff_explicit_source_or_receipt_pin",
+      "expected_sha256": "c82f4956e43b4928ca3b4d4fdc846eff006eada5ea64011c64312d11d448d292",
+      "actual_sha256": "c82f4956e43b4928ca3b4d4fdc846eff006eada5ea64011c64312d11d448d292",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_adapter.ps1",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "c98504fe65610486b7c4dc443b22371a3bc54ad6218ae3ff1ada946ee4a6f175",
+      "actual_sha256": "c98504fe65610486b7c4dc443b22371a3bc54ad6218ae3ff1ada946ee4a6f175",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_collector_grok.py",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "3aa86e7a3b7aa1f1bf8f568ac59ed19ebb5706704188b769daf61726f82fe409",
+      "actual_sha256": "3aa86e7a3b7aa1f1bf8f568ac59ed19ebb5706704188b769daf61726f82fe409",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_inventories.ps1",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "4ab9cefadb2f32c7aae219054cfc19fbbc8014f1a6f70b9922c3ca7ee3c5c448",
+      "actual_sha256": "4ab9cefadb2f32c7aae219054cfc19fbbc8014f1a6f70b9922c3ca7ee3c5c448",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_q8.py",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "a5d1e7610741bc834ee7e79f48a2394e606e78ba63b3cf908ce34b226663d118",
+      "actual_sha256": "a5d1e7610741bc834ee7e79f48a2394e606e78ba63b3cf908ce34b226663d118",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_remaining.py",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "1f845eab9e40c8648b538b7a41a365a032a387a23769f5d1262908d5df89655f",
+      "actual_sha256": "1f845eab9e40c8648b538b7a41a365a032a387a23769f5d1262908d5df89655f",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.prompt.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "cde777d2af4f62913490b16e16e60a2d06d555ef5a2cd67473a808e4c29f5d37",
+      "actual_sha256": "cde777d2af4f62913490b16e16e60a2d06d555ef5a2cd67473a808e4c29f5d37",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.ROOT_REVIEW_PACKET.json",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "6ac11aac24b74242c5fea58919e4c51b95f76f940cff031abae8d5d4524c3a47",
+      "actual_sha256": "6ac11aac24b74242c5fea58919e4c51b95f76f940cff031abae8d5d4524c3a47",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "4e9589deca4516679f18ad40c29b0e7ee8693b284bb087cd6ea87f1805c4ebbe",
+      "actual_sha256": "4e9589deca4516679f18ad40c29b0e7ee8693b284bb087cd6ea87f1805c4ebbe",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.V3_ROOT_REVIEW_PACKET.json",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "01d94aa80bcbcecc6d6f6ea790211c8e045b5fa2f30963c7090300f2c0d5def6",
+      "actual_sha256": "01d94aa80bcbcecc6d6f6ea790211c8e045b5fa2f30963c7090300f2c0d5def6",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.v3.prompt.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "ba1cc0bc5401b00f225606dbf906b1c0bcea7470335def06f68bb0ec4082bc8a",
+      "actual_sha256": "ba1cc0bc5401b00f225606dbf906b1c0bcea7470335def06f68bb0ec4082bc8a",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.prompt.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "35850337e1d55c09ca96618fce516bfc00ac91a0c239cd614d03a19523591b10",
+      "actual_sha256": "35850337e1d55c09ca96618fce516bfc00ac91a0c239cd614d03a19523591b10",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.ROOT_REVIEW_PACKET.json",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "aa975c5f80addd93f54afd651cacd87e3bbba5a120c4f5eda80ec40bddc46e88",
+      "actual_sha256": "aa975c5f80addd93f54afd651cacd87e3bbba5a120c4f5eda80ec40bddc46e88",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "5aa8b220d78265c6f64651b477dd883908edb6760caa0f50d6f9a8fa83cd1386",
+      "actual_sha256": "5aa8b220d78265c6f64651b477dd883908edb6760caa0f50d6f9a8fa83cd1386",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.prompt.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "6bff78f368092229fffc108a21f33cad4116bc536788bec79fc013ee1591f92c",
+      "actual_sha256": "6bff78f368092229fffc108a21f33cad4116bc536788bec79fc013ee1591f92c",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.ROOT_REVIEW_PACKET.json",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "19e7d671d24418012e57f2481ebb62969aaa9d76185f673fc0e61ee1ccaf0a0b",
+      "actual_sha256": "19e7d671d24418012e57f2481ebb62969aaa9d76185f673fc0e61ee1ccaf0a0b",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae",
+      "actual_sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae",
+      "actual_sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.prompt.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "63be2d7e791c85181480f00374038edce62f6fd3aef06d6cfaa01d6ae26f4bd5",
+      "actual_sha256": "63be2d7e791c85181480f00374038edce62f6fd3aef06d6cfaa01d6ae26f4bd5",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.ROOT_REVIEW_PACKET.json",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "b41fb6823a6699601fdc8a0edbdcf20f17fd7806a376d86965d7f95765ab38bb",
+      "actual_sha256": "b41fb6823a6699601fdc8a0edbdcf20f17fd7806a376d86965d7f95765ab38bb",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6",
+      "actual_sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6",
+      "actual_sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.prompt.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "4a2fac93c7a264195dc1f846cfd747bff61d61ffb577e99fa5382ec37d701b05",
+      "actual_sha256": "4a2fac93c7a264195dc1f846cfd747bff61d61ffb577e99fa5382ec37d701b05",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.ROOT_REVIEW_PACKET.json",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "b3e7869eb85959e64e2bd8aa10ab3a8d6e409d364fd2f90fc94db6ab8df6f31d",
+      "actual_sha256": "b3e7869eb85959e64e2bd8aa10ab3a8d6e409d364fd2f90fc94db6ab8df6f31d",
+      "matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.spec.txt",
+      "scope": "prepared_unrun_artifact",
+      "expected_sha256": "eaab7f37614bff00e04cd5a2e2ccd455d084ae372b51de86c7004311dfcb2d70",
+      "actual_sha256": "eaab7f37614bff00e04cd5a2e2ccd455d084ae372b51de86c7004311dfcb2d70",
+      "matches": true
+    }
+  ],
+  "desktop_live_matches_dated_and_harness_status": true,
+  "previous_1841_snapshot_preserved": true,
+  "ledger_arithmetic": {
+    "closed_jobs": 44.0,
+    "known_jobs": 27.0,
+    "unknown_jobs": 17.0,
+    "observed_tokens": 1878656.0,
+    "live_jobs": 0
+  },
+  "ledger_arithmetic_matches": true,
+  "verification_self_hash_excluded": true,
+  "provider_launches": 0,
+  "builds": 0,
+  "gpu_workload_reruns": 0,
+  "native_hardware_tests": 0,
+  "external_links_live_rechecked": false,
+  "visual_markdown_render": "NOT_CHECKED",
+  "limitations": [
+    "Hash/existence checks do not qualify hardware or rejected source.",
+    "Closure state is from saved owner receipts and completed-agent reports, not a global process inventory.",
+    "Only specified saved artifacts are hashed; no whole-tree certificate."
+  ],
+  "checker_correction": {
+    "prior_record": "E:\\the_harness\\records\\HANDOFF_LAST_5_HOURS_VERIFICATION_FIRST_CHECK_WITH_PATH_ERRORS.json",
+    "prior_sha256": "d38318e350ddef0bcae8bc224b36b7c66e3529e74f1feb16f0599229fbfe5b0f",
+    "prior_verdict": "NOT_ACCEPTED_PATH_CHECKER_EMITTED_NONTERMINATING_ERRORS",
+    "cause": "Split-Path -LiteralPath with -Parent used an invalid parameter set; replacement resolves the document parent with System.IO.Path.GetDirectoryName.",
+    "current_error_policy": "Stop",
+    "all_links_recomputed": true,
+    "all_146_evidence_pins_rehashed": true
+  }
+}

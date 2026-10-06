@@ -1,0 +1,172 @@
+--- qwen_6bb4_actual
++++ root_candidate_4d8272
+@@ -1,4 +1,4 @@
+-"""Standalone Windows contained-worker supervisor.
++"""Standalone Windows contained-worker supervisor; root cleanup-repair candidate.
+ 
+ Import is side-effect free: no _winapi, ctypes, WinDLL, or processes at import.
+ Process fixtures still require Windows and RUN_CONTAINMENT_FIXTURES=1. This module does not import PyRe.
+@@ -6,6 +6,8 @@
+ Closing the controller job handle is not a drain certificate. Without a cooperating
+ wrapper holding its own job handle, controller loss is UNKNOWN_INTERRUPTED.
+ No PID reattach and no replay.
++Derived from Qwen 6bb4e7ed; root edits address independently reproduced cleanup
++and terminal-commit failures. Not admitted for native or production execution.
+ """
+ 
+ from __future__ import annotations
+@@ -402,7 +404,8 @@
+         rec = {"worker_id": worker["worker_id"], "ph": ph, "th": th, "pid": pid, "assigned": False, "resumed": False, "exit_code": None, "wait": None}
+         owned.append(rec)
+         ph = th = None
+-        _close_quiet(wapi.CloseHandle, close_after)
++        if not _close_quiet(wapi.CloseHandle, close_after):
++            rec["close_uncertain"] = True
+         if not kernel.AssignProcessToJobObject(job, rec["ph"]):
+             raise WindowsJobError("ASSIGN_FAILED", deps["ctypes"].get_last_error())
+         rec["assigned"] = True
+@@ -421,6 +424,8 @@
+         close_ok = _close_quiet(wapi.CloseHandle, reads) and close_ok
+         if rec is not None and not close_ok:
+             rec["close_uncertain"] = True
++        if not close_ok:
++            spec["parent_close_uncertain"] = True
+         if th is not None:
+             wapi.CloseHandle(th)
+         if ph is not None:
+@@ -434,14 +439,23 @@
+ 
+ 
+ def _join(threads, timeout, deadline=None):
++    if deadline is None:
++        deadline = _monotonic() + timeout
++    certain = True
+     for thread in threads:
+-        if thread.is_alive():
+-            if deadline is not None:
+-                rem = max(0.0, deadline - _monotonic())
+-                t = min(timeout, rem)
+-            else:
+-                t = timeout
+-            thread.join(t)
++        try:
++            alive = thread.is_alive()
++        except Exception:
++            # Inspection uncertainty cannot skip the remaining owned readers.
++            alive = True
++            certain = False
++        if alive:
++            rem = max(0.0, deadline - _monotonic())
++            try:
++                thread.join(min(timeout, rem))
++            except Exception:
++                certain = False
++    return certain
+ 
+ 
+ def _wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by):
+@@ -477,7 +491,8 @@
+         if counts[0] > 0:
+             _sleep(0.02)
+             continue
+-        _join(threads, 2, dead_by)
++        if _join(threads, 2, dead_by) is not True:
++            return "UNKNOWN", "reader_join"
+         if any(thread.is_alive() for thread in threads):
+             return "UNKNOWN", "reader_join"
+         if cancel_event.is_set():
+@@ -641,8 +656,10 @@
+         encoded = json.dumps(payload).encode()
+     if len(encoded) > _RECEIPT_MAX:
+         raise WindowsJobError("RECEIPT_TOO_LARGE")
++    # A receipt is the commit marker. A terminal journal row alone is never
++    # accepted by restart_receipt as a completed run.
++    _journal(spec, {"event": "terminal", "status": status, "failure_reason": reason})
+     _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", encoded)
+-    _journal(spec, {"event": "terminal", "status": status, "failure_reason": reason})
+     return payload
+ 
+ 
+@@ -659,7 +676,6 @@
+     overflow_event = threading.Event()
+     status, reason, active, drain = "UNKNOWN", "init", None, "UNKNOWN_DRAIN"
+     result = None
+-    cleanup_deadline = _monotonic() + 8.0
+     try:
+         spec["output"].mkdir()
+         try:
+@@ -678,6 +694,7 @@
+         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+             status, reason = "FAILED", "EXCEPTION"
+     finally:
++        cleanup_deadline = _monotonic() + 8.0
+         try:
+             try:
+                 active2, drain = _shutdown(deps, kernel, job, owned, status != "PROCESS_COMPLETED", cleanup_deadline)
+@@ -685,33 +702,42 @@
+                     active = active2
+             except Exception:
+                 drain = "UNKNOWN_DRAIN"
+-            try:
+-                _join(threads, 2, cleanup_deadline)
+-            except Exception:
+-                pass
+-            if any(t.is_alive() for t in threads) or drain not in ("CLEANUP", "UNKNOWN_DRAIN"):
++            join_certain = False
++            try:
++                join_certain = _join(threads, 2, cleanup_deadline)
++            except Exception:
++                join_certain = False
++            readers_unresolved = join_certain is not True
++            for thread in threads:
++                try:
++                    if thread.is_alive():
++                        readers_unresolved = True
++                except Exception:
++                    readers_unresolved = True
++            if readers_unresolved or drain not in ("CLEANUP", "UNKNOWN_DRAIN"):
+                 drain = "UNKNOWN_DRAIN"
+             if drain != "CLEANUP" and status == "PROCESS_COMPLETED":
+                 status, reason = "UNKNOWN", "proof_incomplete"
+-            if status == "PROCESS_COMPLETED" and any(
++            if any(
+                 slot.get("bad_read") or slot.get("close_uncertain") or slot.get("closed") is not True
+                 for slot in slots
+             ):
+-                status, reason = "UNKNOWN", "bad_read" if any(slot.get("bad_read") for slot in slots) else "close_uncertain"
++                if status == "PROCESS_COMPLETED":
++                    status, reason = "UNKNOWN", "bad_read" if any(slot.get("bad_read") for slot in slots) else "close_uncertain"
+                 drain = "UNKNOWN_DRAIN"
+             owned_closed = False
+             try:
+                 owned_closed = _close_owned(deps["_winapi"], owned)
+             except Exception:
+                 owned_closed = False
+-            if owned_closed is not True or any(rec.get("close_uncertain") for rec in owned):
++            if owned_closed is not True or spec.get("parent_close_uncertain") or any(rec.get("close_uncertain") for rec in owned):
+                 drain = "UNKNOWN_DRAIN"
+                 if status == "PROCESS_COMPLETED":
+                     status, reason = "UNKNOWN", "close_uncertain"
+             job_close_ok = True
+             try:
+                 jres = kernel.CloseHandle(job)
+-                if jres is False or jres == 0:
++                if not jres:
+                     job_close_ok = False
+             except Exception:
+                 job_close_ok = False
+@@ -728,6 +754,14 @@
+                 if status not in ("CANCELLED", "TIMEOUT"):
+                     status, reason = "FAILED", "UNKNOWN_DURABILITY"
+                 result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "durability": "UNKNOWN_DURABILITY", "whole_tree_certificate": False, "reattach": False, "replay": False}
++                # Never leave a prior successful receipt after a failed terminal
++                # journal commit. This best-effort refusal is not a durability
++                # certificate; a failed write remains UNKNOWN_DURABILITY.
++                try:
++                    if spec["output"].is_dir():
++                        _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", json.dumps(result).encode())
++                except Exception:
++                    pass
+         except Exception:
+             pass
+     if result is None:

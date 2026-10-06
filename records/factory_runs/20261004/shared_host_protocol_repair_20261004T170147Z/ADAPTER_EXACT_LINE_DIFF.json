@@ -1,0 +1,60 @@
+[
+  {
+    "original": "qwen_http_patch.ps1",
+    "adapted": "qwen_http_protocol.ps1",
+    "limitations": "Line set diff, not an applyable patch. Full original and adapted files preserved.",
+    "adapted_sha256": "ffc33ebfa5afcbc6ddfea6a0062274511a7a419f5bbf491f6b7e62654bf1f309",
+    "original_sha256": "5b04db9e56202aae55d32543355eacf8bba934d10013720a768acaac943a5fe0",
+    "exact_changed_lines": [
+      {
+        "text": ". (Join-Path $PSScriptRoot 'protocol_artifact.ps1')",
+        "side": "=>"
+      },
+      {
+        "text": "   $stage='artifact_parse';try{$artifact=Read-StrictJson $answer;Assert-ProtocolArtifact $artifact;Save-NewJson (Join-Path $work 'protocol.pending_root_qa.json') $artifact;$state='COMPLETE_PROTOCOL_STAGED_UNAPPLIED'}catch{$state='ARTIFACT_PARSE_OR_SCHEMA_ERROR';$parseError=$_.Exception.GetType().Name}",
+        "side": "=>"
+      },
+      {
+        "text": "   $stage='artifact_parse';try{$artifact=Read-StrictJson $answer;Assert-PatchArtifact $artifact;Save-NewJson (Join-Path $work 'patch.pending_root_qa.json') $artifact;$state='COMPLETE_PATCH_STAGED_UNAPPLIED'}catch{$state='ARTIFACT_PARSE_OR_SCHEMA_ERROR';$parseError=$_.Exception.GetType().Name}",
+        "side": "<="
+      }
+    ]
+  },
+  {
+    "original": "invoke_owned_provider.ps1",
+    "adapted": "invoke_owned_protocol.ps1",
+    "limitations": "Line set diff, not an applyable patch. Full original and adapted files preserved.",
+    "adapted_sha256": "647c516363d3835c88fbd795c5df1d8765d024506bfb6ebd3b94b42605639c4a",
+    "original_sha256": "a2d0adfa589bfc533f4b6ced4f1406f03f045fc92c31d2a3c04e93752697254d",
+    "exact_changed_lines": [
+      {
+        "text": ". (Join-Path $PSScriptRoot 'protocol_artifact.ps1')",
+        "side": "=>"
+      },
+      {
+        "text": " foreach($arg in @('-NoProfile','-File',(Join-Path $PSScriptRoot 'qwen_http_protocol.ps1'),'-Job',$Job,'-AdmissionPath',$AdmissionPath,'-SourcePath',$SourcePath,'-SourceSha256',$SourceSha256,'-PromptPath',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "=>"
+      },
+      {
+        "text": "  foreach($arg in @('--model',$models[$Lane],'--cwd',$work,'--session-id',[Guid]::NewGuid().ToString(),'--no-subagents','--disable-web-search','--permission-mode','plan','--tools','read_file','--disallowed-tools','read_file,Agent,run_terminal_cmd,search_replace,web_search,web_fetch,task,todo_write','--verbatim','--system-prompt-override','Tool-less protocol correctness reviewer/editor. Output only status, protocol_argument, changes, prerequisites, evidence_limits, smoke_plan JSON. No tools, execution or edits. Refuse unsupported alias/ownership semantics; never fabricate edits.','--reasoning-effort','low','--max-turns','3','--output-format','json','--prompt-file',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "=>"
+      },
+      {
+        "text": "   else{$finish=$r.stopReason;$parsed=Read-StrictJson $r.text;Assert-ProtocolArtifact $parsed;Save-NewJson (Join-Path $work 'protocol.pending_root_qa.json') $parsed;$state='COMPLETE_PROTOCOL_STAGED_UNAPPLIED'}",
+        "side": "=>"
+      },
+      {
+        "text": " foreach($arg in @('-NoProfile','-File',(Join-Path $PSScriptRoot 'qwen_http_patch.ps1'),'-Job',$Job,'-AdmissionPath',$AdmissionPath,'-SourcePath',$SourcePath,'-SourceSha256',$SourceSha256,'-PromptPath',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "<="
+      },
+      {
+        "text": "  foreach($arg in @('--model',$models[$Lane],'--cwd',$work,'--session-id',[Guid]::NewGuid().ToString(),'--no-subagents','--disable-web-search','--permission-mode','plan','--tools','read_file','--disallowed-tools','read_file,Agent,run_terminal_cmd,search_replace,web_search,web_fetch,task,todo_write','--verbatim','--system-prompt-override','Tool-less exact-source patch planner. Output only changes, rationale, safety_checks JSON. No tools, execution or edits.','--reasoning-effort','low','--max-turns','3','--output-format','json','--prompt-file',$PromptPath)){$si.ArgumentList.Add($arg)}",
+        "side": "<="
+      },
+      {
+        "text": "   else{$finish=$r.stopReason;$parsed=Read-StrictJson $r.text;Assert-PatchArtifact $parsed;Save-NewJson (Join-Path $work 'patch.pending_root_qa.json') $parsed;$state='COMPLETE_PATCH_STAGED_UNAPPLIED'}",
+        "side": "<="
+      }
+    ]
+  }
+]

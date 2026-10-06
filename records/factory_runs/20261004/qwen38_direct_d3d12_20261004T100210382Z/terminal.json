@@ -1,0 +1,8 @@
+{
+  "status": "SOURCE_GENERATED",
+  "http_status": 200,
+  "seconds": 66.2496392,
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen38_direct_d3d12_20261004T100210382Z",
+  "requested_model": "qwen3.8-flash",
+  "completed_at": "2026-10-04T10:03:16.6881200Z"
+}

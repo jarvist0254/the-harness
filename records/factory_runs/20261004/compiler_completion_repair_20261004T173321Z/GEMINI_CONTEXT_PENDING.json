@@ -1,0 +1,14 @@
+{
+  "state": "QWEN_CONTEXT_READY_MUSE_PENDING_NOT_ADMITTED",
+  "context_utf16_chars": 18708,
+  "adapter_sha256": "e9f4cb6fdd756e53e48de122abcc02fe985b72d580262412094da4e21b25f43f",
+  "remaining_before_muse_and_final_instructions": 5292,
+  "maximum_final_prompt_utf16_chars": 24000,
+  "muse_artifact_present": false,
+  "candidate_parsed_imported_executed": false,
+  "context_path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\QWEN_CONTEXT_FOR_GEMINI_PENDING.txt",
+  "context_sha256": "7e482c09b8d2312d337449ad4a87fc4fdaffd7fa4b4a21086bb0cb8deafade25",
+  "actual_native_children": 0,
+  "provider_launch": false,
+  "tests_sha256": "be32488746c0f1c980ce2901c8c1095ab56cdfd28ca9d338c98fd50a7a14f33b"
+}

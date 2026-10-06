@@ -1,0 +1,298 @@
+[
+  {
+    "case": "clean",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 0,
+    "json": {
+      "status": "PEER_COPY_PAYLOAD_OBSERVED",
+      "exit_code": 0,
+      "inject_corruption": false,
+      "direct_transport_qualified": false,
+      "payload_observed_only": true,
+      "bytes": 65536,
+      "words": 16384,
+      "timeout_ns": 10000000000,
+      "mismatch_count": 0,
+      "fault_index": null,
+      "src": {
+        "uuid": "00112233445566778899aabbccddeeff",
+        "vendorId": "0x8086",
+        "deviceId": 4096
+      },
+      "dst": {
+        "uuid": "ffeeddccbbaa99887766554433221100",
+        "vendorId": "0x8086",
+        "deviceId": 4097
+      },
+      "peer": {
+        "can_src_to_dst": true,
+        "can_dst_to_src": true,
+        "p2p_src_to_dst": true,
+        "p2p_dst_to_src": true,
+        "access_src_to_dst": true,
+        "access_dst_to_src": true,
+        "copy_device": "src"
+      },
+      "queues": {
+        "fill": {
+          "device": "src",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        },
+        "copy": {
+          "device": "src",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        },
+        "readback": {
+          "device": "dst",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        }
+      },
+      "allocations": {
+        "src": {
+          "ptr": 109155360355456,
+          "bytes": 65536,
+          "declared_owner": "00112233445566778899aabbccddeeff",
+          "actual_owner": "00112233445566778899aabbccddeeff",
+          "memory_type": "DEVICE",
+          "api": "zeMemAllocDevice"
+        },
+        "dst": {
+          "ptr": 109155360421120,
+          "bytes": 65536,
+          "declared_owner": "ffeeddccbbaa99887766554433221100",
+          "actual_owner": "ffeeddccbbaa99887766554433221100",
+          "memory_type": "DEVICE",
+          "api": "zeMemAllocDevice"
+        },
+        "host": {
+          "ptr": 109155360486752,
+          "bytes": 65536,
+          "declared_owner": null,
+          "actual_owner": null,
+          "memory_type": "HOST",
+          "api": "zeMemAllocHost"
+        }
+      },
+      "cleanup_errors": [],
+      "api_sequence": "zeInit,zeDriverGet,zeDeviceGet,zeDeviceGetProperties,zeDeviceGetCommandQueueGroupProperties,zeDeviceCanAccessPeer,zeDeviceGetP2PProperties,zeContextCreateEx,zeMemAllocDevice,zeMemAllocHost,zeMemGetAllocProperties,zeCommandQueueCreate,zeCommandListCreate,zeCommandListAppendMemoryFill,zeCommandListAppendMemoryCopy,zeCommandListClose,zeFenceCreate,zeCommandQueueExecuteCommandLists,zeFenceHostSynchronize",
+      "fake_summary_line": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\02_clean.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\02_clean.stderr.bin"
+  },
+  {
+    "case": "corrupt",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100",
+      "--inject-corruption"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "reason": "payload_mismatch",
+      "inject_corruption": true,
+      "direct_transport_qualified": false,
+      "mismatch_count": 1,
+      "first_bad_index": 8192,
+      "expected": 1515870810,
+      "got": 3735928559,
+      "bytes": 65536,
+      "words": 16384,
+      "timeout_ns": 10000000000,
+      "fault_index": 8192,
+      "cleanup_errors": [],
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=66 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=4 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=66 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=4 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\03_corrupt.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\03_corrupt.stderr.bin"
+  },
+  {
+    "case": "peer_unavailable",
+    "mode": "peer_unavailable",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 2,
+    "json": {
+      "status": "NOT_CHECKED",
+      "reason": "directed_peer_access_unsupported",
+      "exit_code": 2,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=11 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=11 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\04_peer_unavailable.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\04_peer_unavailable.stderr.bin"
+  },
+  {
+    "case": "fence_timeout",
+    "mode": "fence_timeout",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "zeCommandQueueExecuteCommandLists",
+      "ze_result": 1,
+      "ze_result_name": "ERROR",
+      "reason": "fill_wait",
+      "cleanup_errors": [],
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=34 context_creates=1 allocations=3 frees=3 pending_teardowns=7 wait_count=1 pending_at_exit=1 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=34 context_creates=1 allocations=3 frees=3 pending_teardowns=7 wait_count=1 pending_at_exit=1 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\05_fence_timeout.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\05_fence_timeout.stderr.bin"
+  },
+  {
+    "case": "cleanup_failure",
+    "mode": "cleanup_failure",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "reason": "cleanup_failed",
+      "cleanup_errors": [
+        "zeMemFree[2]=2147483646"
+      ],
+      "inject_corruption": false,
+      "mismatch_count": 0,
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\06_cleanup_failure.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\06_cleanup_failure.stderr.bin"
+  },
+  {
+    "case": "malformed_cli",
+    "mode": "clean",
+    "argv": [
+      "bad_uuid",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 2,
+    "json": {
+      "status": "NOT_CHECKED",
+      "reason": "uuid_must_be_32_lower_hex",
+      "exit_code": 2,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\07_malformed_cli.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\07_malformed_cli.stderr.bin"
+  },
+  {
+    "case": "surplus_cli",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100",
+      "unexpected"
+    ],
+    "exit": 0,
+    "json": {
+      "status": "PEER_COPY_PAYLOAD_OBSERVED",
+      "exit_code": 0,
+      "inject_corruption": false,
+      "direct_transport_qualified": false,
+      "payload_observed_only": true,
+      "bytes": 65536,
+      "words": 16384,
+      "timeout_ns": 10000000000,
+      "mismatch_count": 0,
+      "fault_index": null,
+      "src": {
+        "uuid": "00112233445566778899aabbccddeeff",
+        "vendorId": "0x8086",
+        "deviceId": 4096
+      },
+      "dst": {
+        "uuid": "ffeeddccbbaa99887766554433221100",
+        "vendorId": "0x8086",
+        "deviceId": 4097
+      },
+      "peer": {
+        "can_src_to_dst": true,
+        "can_dst_to_src": true,
+        "p2p_src_to_dst": true,
+        "p2p_dst_to_src": true,
+        "access_src_to_dst": true,
+        "access_dst_to_src": true,
+        "copy_device": "src"
+      },
+      "queues": {
+        "fill": {
+          "device": "src",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        },
+        "copy": {
+          "device": "src",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        },
+        "readback": {
+          "device": "dst",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        }
+      },
+      "allocations": {
+        "src": {
+          "ptr": 98837970334848,
+          "bytes": 65536,
+          "declared_owner": "00112233445566778899aabbccddeeff",
+          "actual_owner": "00112233445566778899aabbccddeeff",
+          "memory_type": "DEVICE",
+          "api": "zeMemAllocDevice"
+        },
+        "dst": {
+          "ptr": 98837970400512,
+          "bytes": 65536,
+          "declared_owner": "ffeeddccbbaa99887766554433221100",
+          "actual_owner": "ffeeddccbbaa99887766554433221100",
+          "memory_type": "DEVICE",
+          "api": "zeMemAllocDevice"
+        },
+        "host": {
+          "ptr": 98837970466144,
+          "bytes": 65536,
+          "declared_owner": null,
+          "actual_owner": null,
+          "memory_type": "HOST",
+          "api": "zeMemAllocHost"
+        }
+      },
+      "cleanup_errors": [],
+      "api_sequence": "zeInit,zeDriverGet,zeDeviceGet,zeDeviceGetProperties,zeDeviceGetCommandQueueGroupProperties,zeDeviceCanAccessPeer,zeDeviceGetP2PProperties,zeContextCreateEx,zeMemAllocDevice,zeMemAllocHost,zeMemGetAllocProperties,zeCommandQueueCreate,zeCommandListCreate,zeCommandListAppendMemoryFill,zeCommandListAppendMemoryCopy,zeCommandListClose,zeFenceCreate,zeCommandQueueExecuteCommandLists,zeFenceHostSynchronize",
+      "fake_summary_line": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\08_surplus_cli.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\stub_runs_20261004T220255Z\\08_surplus_cli.stderr.bin"
+  }
+]

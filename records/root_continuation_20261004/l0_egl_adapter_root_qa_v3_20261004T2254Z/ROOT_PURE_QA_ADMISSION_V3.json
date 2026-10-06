@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-04T22:58:02.653309+00:00",
+  "scope": "PURE_CALLBACK_STATE_MACHINE_TESTS_ONLY",
+  "admitted": true,
+  "source_sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+  "independent_tests_sha256": "c449ab05a605a21003c42c45233422416249c87c3251ac4a57a7e743cd947204",
+  "controller_sha256": "3482b54c4b155d5231338481640aa7105774e9a67377dca73b9167612224e4cc",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "deadline_seconds": 20,
+  "per_stream_cap_bytes": 131072,
+  "provider_tests_executed": false,
+  "native_or_gpu_calls": false,
+  "root_full_read": [
+    "unchanged source/v2 controller/tests previously fully read",
+    "v3 complete diff and controller path-only diff"
+  ],
+  "changes": "Fix independently measured fixture keyword; move assertions for actual order/invalid FD ahead of expected failure; record raw per-test callback/result observations. No expectations removed or candidate changes.",
+  "source_promotion_authorized": false,
+  "v2_raw_failures_preserved": true
+}

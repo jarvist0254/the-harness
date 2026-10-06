@@ -1,0 +1,16 @@
+{
+  "authority": "ROOT explicit exact v2 four-call admission",
+  "source_execution": false,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z",
+  "other_live_qwen": 1,
+  "utc": "2026-10-04T20:34:16.2069034Z",
+  "lane": "Qwen",
+  "source_sha256": "72fe9486e2afaaa3f10686f1648fe85e3a75f50c2c7cf4220273b847d70418ea",
+  "prompt_sha256": "32d85bff0c7e3f01f2158767e10902c67c7cfbd158572d1f6a7fea68319ffec5",
+  "native_children_actual": 0,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair.v2.spec.txt",
+  "job_id": "qwen_l0_peer_repair",
+  "packet_sha256": "2767389e7e4f604f76bd73b367b2174bc5b63a48ad000593e8589bea25f3145d",
+  "provider_launch_authorized": true,
+  "model": "qwen3.8-max"
+}

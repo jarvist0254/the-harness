@@ -1,0 +1,178 @@
+import importlib.util
+import os
+import unittest
+
+def load_candidate():
+    path = os.environ.get('PROTOCOL_ADAPTER_CANDIDATE', '')
+    if not path or not os.path.isfile(path):
+        raise AssertionError('PROTOCOL_ADAPTER_CANDIDATE must point to candidate adapter file')
+    spec = importlib.util.spec_from_file_location('candidate_protocol_adapter', path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+class CandidateTestCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.mod = load_candidate()
+
+    def make_binding(self, fault='drain'):
+        m = self.mod
+        return m.Binding('phys0', 'driverX', 'd4fc0756006fa28738766cb66034dc9acadea91e', 'op1', 'payload1', 'ctrl1', fault, 'cpu0')
+
+    def make_prereqs(self, cache='REVIEWED_CACHE_CONTRACT_TOKEN'):
+        m = self.mod
+        return m.Prerequisites(root_admission=True, pinned_source_receipt=True, independent_native_admission=True, kernel_syncobj_to_sync_file_abi='REVIEWED_PROOF_TOKEN', nvidia_egl_native_fence_import='REVIEWED_PROOF_TOKEN', cache_visibility_contract=cache, producer_completion_receipt='REVIEWED_PROOF_TOKEN', consumer_completion_proof='REVIEWED_PROOF_TOKEN', outer_worker_owned=True)
+
+    def make_callbacks(self, calls, overrides=None, timed_out_ops=None, false_ops=None):
+        m = self.mod
+        timed_out_ops = timed_out_ops or set()
+        false_ops = false_ops or set()
+        def mk(name):
+            def fn(*args):
+                calls.append(name)
+                if name in timed_out_ops:
+                    return m.NativeOutcome(ok=False, timed_out=True, unknown_inflight=True, message=name)
+                if name in false_ops:
+                    return m.NativeOutcome(ok=False, error_code=22, message=name)
+                return m.NativeOutcome(ok=True, payload_visible=True)
+            return fn
+        fields = {'memory_import': mk('memory_import'), 'semaphore_import': mk('semaphore_import'), 'producer_completion_wait': mk('producer_completion_wait'), 'syncobj_host_signal': mk('syncobj_host_signal'), 'syncobj_export_sync_file': mk('syncobj_export_sync_file'), 'egl_import_sync_file': mk('egl_import_sync_file'), 'consumer_completion_wait': mk('consumer_completion_wait'), 'readback': mk('readback'), 'cleanup_drain': mk('cleanup_drain')}
+        if overrides:
+            fields.update(overrides)
+        return m.Callbacks(**fields)
+
+    def make_adapter(self, calls, prereqs=None, clock=None, overrides=None, timed_out_ops=None, false_ops=None, binding=None):
+        m = self.mod
+        prereqs = prereqs or self.make_prereqs()
+        cbs = self.make_callbacks(calls, overrides=overrides, timed_out_ops=timed_out_ops, false_ops=false_ops)
+        clock = clock or (lambda: 0.0)
+        binding = binding or self.make_binding()
+        return m.ProtocolAdapter(binding, prereqs, cbs, clock=clock)
+
+    def tokens(self):
+        m = self.mod
+        mem = m.FdToken(7, m.FdKind.MEMORY_DMA_BUF, 'caller')
+        sem = m.FdToken(3, m.FdKind.SEMAPHORE_SYNCOBJ, 'caller')
+        return mem, sem
+
+    def test_missing_cache_contract_is_not_checked_and_no_callbacks(self):
+        calls = []
+        adapter = self.make_adapter(calls, prereqs=self.make_prereqs(cache=None))
+        mem, sem = self.tokens()
+        rep = adapter.run(10.0, mem, sem)
+        self.assertEqual(rep['result'], self.mod.RESULT_NOT_CHECKED)
+        self.assertFalse(rep['direct_transport_qualified'])
+        self.assertIn('cache_visibility_contract', rep['missing_prerequisites'])
+        self.assertEqual(calls, [])
+
+    def test_memory_success_consumption(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        m = self.mod
+        tok = m.FdToken(7, m.FdKind.MEMORY_DMA_BUF, 'caller')
+        out = m.NativeOutcome(ok=True, observed_fd_consumed=True)
+        new = adapter.observe_memory_import(tok, out)
+        self.assertEqual(new.state, m.FdState.CONSUMED_ON_SUCCESS)
+        self.assertNotEqual(adapter.result, m.RESULT_FAIL)
+
+    def test_memory_failure_retention(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        m = self.mod
+        tok = m.FdToken(7, m.FdKind.MEMORY_DMA_BUF, 'caller')
+        out = m.NativeOutcome(ok=False, observed_fd_consumed=False)
+        new = adapter.observe_memory_import(tok, out)
+        self.assertEqual(new.state, m.FdState.RETAINED_ON_FAILURE)
+        self.assertNotEqual(adapter.result, m.RESULT_FAIL)
+
+    def test_semaphore_positive_consumed_before_status(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        m = self.mod
+        tok = m.FdToken(3, m.FdKind.SEMAPHORE_SYNCOBJ, 'caller')
+        out = m.NativeOutcome(ok=False, observed_fd_consumed=True)
+        new = adapter.observe_semaphore_import(tok, out)
+        self.assertEqual(new.state, m.FdState.CONSUMED_BEFORE_STATUS)
+        self.assertNotEqual(adapter.result, m.RESULT_FAIL)
+
+    def test_semaphore_fd0_retained(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        m = self.mod
+        tok = m.FdToken(0, m.FdKind.SEMAPHORE_SYNCOBJ, 'caller')
+        out = m.NativeOutcome(ok=True, observed_fd_consumed=False)
+        new = adapter.observe_semaphore_import(tok, out)
+        self.assertEqual(new.state, m.FdState.RETAINED_FD0)
+        self.assertNotEqual(adapter.result, m.RESULT_FAIL)
+
+    def test_wrong_fd_flavor(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        m = self.mod
+        tok = m.FdToken(7, m.FdKind.MEMORY_DMA_BUF, 'caller')
+        out = m.NativeOutcome(ok=True)
+        adapter.observe_semaphore_import(tok, out)
+        self.assertEqual(adapter.result, m.RESULT_FAIL)
+        self.assertIn('wrong_fd_flavor_for_semaphore_import', adapter.failures)
+
+    def test_premature_cpu_signal(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        adapter.signal_syncobj(10.0)
+        self.assertEqual(adapter.result, self.mod.RESULT_FAIL)
+        self.assertIn('premature_host_signal_before_producer_completion', adapter.failures)
+        self.assertNotIn('syncobj_host_signal', calls)
+
+    def test_false_ioctl_failure(self):
+        calls = []
+        adapter = self.make_adapter(calls, false_ops={'syncobj_host_signal'})
+        mem, sem = self.tokens()
+        rep = adapter.run(10.0, mem, sem)
+        self.assertEqual(rep['result'], self.mod.RESULT_FAIL)
+        self.assertIn('syncobj_host_signal', calls)
+        self.assertTrue(any('syncobj_host_signal_error' in x for x in rep['failures']))
+
+    def test_deadline_unknown_drain(self):
+        calls = []
+        m = self.mod
+        def cleanup(*args):
+            calls.append('cleanup_drain')
+            return m.NativeOutcome(ok=True, unknown_inflight=False)
+        adapter = self.make_adapter(calls, overrides={'cleanup_drain': cleanup}, timed_out_ops={'producer_completion_wait'})
+        mem, sem = self.tokens()
+        rep = adapter.run(10.0, mem, sem)
+        self.assertEqual(rep['result'], m.RESULT_NOT_CHECKED)
+        self.assertEqual(rep['cleanup_state'], m.UNKNOWN_DRAIN)
+        self.assertIn('cleanup_drain', calls)
+
+    def test_reordered_completion(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        adapter.observe_completion('consumer')
+        self.assertEqual(adapter.result, self.mod.RESULT_FAIL)
+        self.assertIn('reordered_completion', adapter.failures)
+
+    def test_proven_gated_success_path(self):
+        calls = []
+        adapter = self.make_adapter(calls)
+        mem, sem = self.tokens()
+        rep = adapter.run(10.0, mem, sem)
+        self.assertEqual(rep['result'], self.mod.RESULT_READY)
+        self.assertFalse(rep['direct_transport_qualified'])
+        self.assertTrue(rep['producer_completion_proven'])
+        self.assertTrue(rep['consumer_completion_proven'])
+        self.assertEqual(rep['original_cpu_reference'], 'cpu0')
+        self.assertEqual(calls, ['memory_import', 'semaphore_import', 'producer_completion_wait', 'syncobj_host_signal', 'syncobj_export_sync_file', 'egl_import_sync_file', 'consumer_completion_wait', 'readback'])
+
+    def test_binding_fault_control_single_word(self):
+        calls = []
+        adapter = self.make_adapter(calls, binding=self.make_binding(fault='not clean'))
+        mem, sem = self.tokens()
+        rep = adapter.run(10.0, mem, sem)
+        self.assertEqual(rep['result'], self.mod.RESULT_FAIL)
+        self.assertIn('binding_fields_not_clean', adapter.failures)
+        self.assertEqual(calls, [])
+
+if __name__ == '__main__':
+    unittest.main()

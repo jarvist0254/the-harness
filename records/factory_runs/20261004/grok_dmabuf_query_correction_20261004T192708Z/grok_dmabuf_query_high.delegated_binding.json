@@ -1,0 +1,14 @@
+{
+  "lane": "Grok",
+  "prompt_sha256": "54b1bda1d8be31cff85d1fdc354b40999c82bd1bdbec5ad6891fc5434aeab005",
+  "native_children_actual": 0,
+  "authority": "ROOT explicit SECOND separate Grok correction relayed Luna",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_dmabuf_query_correction_20261004T192708Z",
+  "source_sha256": "7052c8ebaa49d9807f6428b5a1ed6779a093392bccf6ef3266b254c0eac3cb5b",
+  "reasoning_effort": "high",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\source.qwen_untrusted.cpp",
+  "provider_launch_authorized": true,
+  "model": "grok-4.7-build-fast",
+  "owned_deadline_seconds": 600,
+  "job_id": "grok_dmabuf_query_high"
+}

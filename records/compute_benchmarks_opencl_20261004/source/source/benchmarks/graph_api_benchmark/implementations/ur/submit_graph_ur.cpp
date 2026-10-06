@@ -1,0 +1,195 @@
+/*
+ * Copyright (C) 2024-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#include "framework/test_case/register_test_case.h"
+#include "framework/ur/error.h"
+#include "framework/ur/ur.h"
+#include "framework/utility/combo_profiler.h"
+#include "framework/utility/file_helper.h"
+
+#include "definitions/submit_graph.h"
+
+#include <iostream>
+
+#if __has_include(<unified-runtime/ur_api.h>)
+#include <unified-runtime/ur_api.h>
+#else
+#include <ur_api.h>
+#endif
+
+static constexpr size_t n_dimensions = 3;
+static constexpr size_t global_size[] = {1, 1, 1};
+static constexpr size_t global_offset = 0;
+
+static TestResult run([[maybe_unused]] const SubmitGraphArguments &arguments, Statistics &statistics) {
+    ComboProfilerWithStats prof(Configuration::get().profilerType);
+    if ((!arguments.emulateGraphs && !arguments.inOrderQueue) || arguments.useHostTasks || arguments.useExplicit) {
+        return TestResult::ApiNotCapable;
+    } else if (isNoopRun()) {
+        prof.pushNoop(statistics);
+        return TestResult::Nooped;
+    }
+
+    UrState ur;
+
+    // Check device capabilities based on mode
+    if (arguments.emulateGraphs) {
+        // Command buffer mode - check command buffer support
+        ur_bool_t command_buffer_support = false;
+        EXPECT_UR_RESULT_SUCCESS(urDeviceGetInfo(
+            ur.device, UR_DEVICE_INFO_COMMAND_BUFFER_SUPPORT_EXP,
+            sizeof(command_buffer_support), &command_buffer_support, nullptr));
+        if (!command_buffer_support) {
+            return TestResult::DeviceNotCapable;
+        }
+    } else {
+        // Graph record & replay mode - check graph support
+        ur_bool_t graph_support = false;
+        EXPECT_UR_RESULT_SUCCESS(urDeviceGetInfo(
+            ur.device, UR_DEVICE_INFO_GRAPH_RECORD_AND_REPLAY_SUPPORT_EXP,
+            sizeof(graph_support), &graph_support, nullptr));
+        if (!graph_support) {
+            return TestResult::DeviceNotCapable;
+        }
+    }
+
+    // Create kernel
+    auto spirvModule = FileHelper::loadBinaryFile("api_overhead_benchmark_eat_time.spv");
+    if (spirvModule.size() == 0)
+        return TestResult::KernelNotFound;
+
+    ur_program_handle_t program;
+    EXPECT_UR_RESULT_SUCCESS(urProgramCreateWithIL(ur.context, spirvModule.data(),
+                                                   spirvModule.size(), nullptr, &program));
+
+    EXPECT_UR_RESULT_SUCCESS(urProgramBuild(ur.context, program, nullptr));
+
+    const char *kernelName = "eat_time";
+
+    ur_kernel_handle_t kernel;
+    EXPECT_UR_RESULT_SUCCESS(urKernelCreate(program, kernelName, &kernel));
+
+    ur_queue_handle_t queue;
+    ur_queue_properties_t queueProperties = {};
+
+    ur_queue_flags_t queueFlags = 0;
+    auto inOrder = arguments.inOrderQueue;
+    if (!inOrder) {
+        queueFlags |= UR_QUEUE_FLAG_OUT_OF_ORDER_EXEC_MODE_ENABLE;
+    }
+    auto useProfiling = arguments.useProfiling;
+    if (useProfiling) {
+        queueFlags |= UR_QUEUE_FLAG_PROFILING_ENABLE;
+    }
+    queueProperties.flags = queueFlags;
+
+    EXPECT_UR_RESULT_SUCCESS(urQueueCreate(ur.context, ur.device,
+                                           &queueProperties, &queue));
+
+    // Handles for both modes (only one set will be used)
+    ur_exp_command_buffer_handle_t cmdBuffer = nullptr;
+    ur_exp_graph_handle_t graph = nullptr;
+    ur_exp_executable_graph_handle_t execGraph = nullptr;
+
+    if (arguments.emulateGraphs) {
+        // Command buffer mode
+        ur_exp_command_buffer_desc_t cmdBufferDesc = {
+            UR_STRUCTURE_TYPE_EXP_COMMAND_BUFFER_DESC,
+            nullptr,     // pNext
+            false,       // isUpdatable
+            inOrder,     // isInOrder
+            useProfiling // enableProfiling
+        };
+
+        EXPECT_UR_RESULT_SUCCESS(urCommandBufferCreateExp(
+            ur.context, ur.device, &cmdBufferDesc, &cmdBuffer));
+        for (auto i = 0u; i < arguments.numKernels; i++) {
+            EXPECT_UR_RESULT_SUCCESS(urCommandBufferAppendKernelLaunchExp(
+                cmdBuffer, kernel, n_dimensions, &global_offset, global_size,
+                nullptr, 0, nullptr, 0, nullptr, 0, nullptr,
+                nullptr, nullptr, nullptr));
+        }
+
+        EXPECT_UR_RESULT_SUCCESS(urCommandBufferFinalizeExp(cmdBuffer));
+    } else {
+        // Graph record & replay mode
+        EXPECT_UR_RESULT_SUCCESS(urGraphCreateExp(ur.context, &graph));
+        EXPECT_UR_RESULT_SUCCESS(urQueueBeginCaptureIntoGraphExp(queue, graph));
+
+        for (auto i = 0u; i < arguments.numKernels; i++) {
+
+            int kernelOperationsCount = static_cast<int>(arguments.kernelExecutionTime);
+            ur_exp_kernel_arg_value_t val = {};
+            val.value = static_cast<void *>(&kernelOperationsCount);
+
+            ur_exp_kernel_arg_properties_t args[] = {
+                {UR_STRUCTURE_TYPE_EXP_KERNEL_ARG_PROPERTIES, nullptr, UR_EXP_KERNEL_ARG_TYPE_VALUE, 0, sizeof(kernelOperationsCount), val}};
+            EXPECT_UR_RESULT_SUCCESS(urEnqueueKernelLaunchWithArgsExp(
+                queue, kernel, n_dimensions, &global_offset, global_size,
+                nullptr, 1, args, nullptr, 0, nullptr, nullptr));
+        }
+
+        EXPECT_UR_RESULT_SUCCESS(urQueueEndGraphCaptureExp(queue, &graph));
+        EXPECT_UR_RESULT_SUCCESS(urGraphInstantiateGraphExp(graph, &execGraph));
+    }
+
+    // Benchmark
+    for (auto i = 0u; i < arguments.iterations; i++) {
+        prof.measureStart();
+
+        if (!arguments.useEvents) {
+            if (arguments.emulateGraphs) {
+                EXPECT_UR_RESULT_SUCCESS(
+                    urEnqueueCommandBufferExp(queue, cmdBuffer, 0, nullptr, nullptr));
+            } else {
+                EXPECT_UR_RESULT_SUCCESS(
+                    urEnqueueGraphExp(queue, execGraph, 0, nullptr, nullptr));
+            }
+
+            if (!arguments.measureCompletionTime) {
+                prof.measureEnd();
+            }
+
+            EXPECT_UR_RESULT_SUCCESS(urQueueFinish(queue));
+        } else {
+            ur_event_handle_t event;
+            if (arguments.emulateGraphs) {
+                EXPECT_UR_RESULT_SUCCESS(
+                    urEnqueueCommandBufferExp(queue, cmdBuffer, 0, nullptr, &event));
+            } else {
+                EXPECT_UR_RESULT_SUCCESS(
+                    urEnqueueGraphExp(queue, execGraph, 0, nullptr, &event));
+            }
+
+            if (!arguments.measureCompletionTime) {
+                prof.measureEnd();
+            }
+
+            EXPECT_UR_RESULT_SUCCESS(urEventWait(1, &event));
+            EXPECT_UR_RESULT_SUCCESS(urEventRelease(event));
+        }
+
+        if (arguments.measureCompletionTime) {
+            prof.measureEnd();
+        }
+        prof.pushStats(statistics);
+    }
+
+    if (arguments.emulateGraphs) {
+        EXPECT_UR_RESULT_SUCCESS(urCommandBufferReleaseExp(cmdBuffer));
+    } else {
+        EXPECT_UR_RESULT_SUCCESS(urGraphExecutableGraphDestroyExp(execGraph));
+        EXPECT_UR_RESULT_SUCCESS(urGraphDestroyExp(graph));
+    }
+    EXPECT_UR_RESULT_SUCCESS(urQueueRelease(queue));
+    EXPECT_UR_RESULT_SUCCESS(urKernelRelease(kernel));
+    EXPECT_UR_RESULT_SUCCESS(urProgramRelease(program));
+
+    return TestResult::Success;
+}
+
+[[maybe_unused]] static RegisterTestCaseImplementation<SubmitGraph> registerTestCase(run, Api::UR);

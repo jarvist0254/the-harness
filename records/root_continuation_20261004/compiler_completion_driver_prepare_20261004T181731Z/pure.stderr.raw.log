@@ -1,0 +1,19 @@
+test_all_five_synthetic_shapes (__main__.Tests) ... ok
+test_assignment_bool_refused (__main__.Tests) ... ok
+test_bad_drain_refused (__main__.Tests) ... ok
+test_bad_durability_refused (__main__.Tests) ... ok
+test_duplicate_keys_refused (__main__.Tests) ... ok
+test_generic_status_refused (__main__.Tests) ... ok
+test_job_still_active_refused (__main__.Tests) ... ok
+test_mismatched_stream_pid_refused (__main__.Tests) ... ok
+test_missing_actual_child_refused (__main__.Tests) ... ok
+test_no_native_traps_invoked (__main__.Tests) ... ok
+test_overflow_refused (__main__.Tests) ... ok
+test_restart_mismatch_refused (__main__.Tests) ... ok
+test_wrong_custom_reason_refused (__main__.Tests) ... ok
+test_wrong_exit_refused (__main__.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.001s
+
+OK

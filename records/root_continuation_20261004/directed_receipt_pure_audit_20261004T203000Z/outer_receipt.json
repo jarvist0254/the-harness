@@ -1,0 +1,19 @@
+{
+  "owned_controller_pid": 80668,
+  "exit_code": 1,
+  "reaped": true,
+  "timeout": false,
+  "capture": {
+    "bytes": {
+      "controller.stdout.log": 0,
+      "controller.stderr.log": 2537
+    },
+    "overflow": [],
+    "errors": []
+  },
+  "readers_joined": true,
+  "seconds": 0.07799999974668026,
+  "controller_source_sha_before": "1f569ed734ec07b7a6ae287937f2ba3992800fbcc9b69049b53ecdf13787f12a",
+  "controller_source_sha_after": "1f569ed734ec07b7a6ae287937f2ba3992800fbcc9b69049b53ecdf13787f12a",
+  "scope": "ROOT_ADMITTED_SYNTHETIC_DIRECTED_RECEIPT_ONLY_NATIVE_NETWORK_PROCESS_GUARDS"
+}

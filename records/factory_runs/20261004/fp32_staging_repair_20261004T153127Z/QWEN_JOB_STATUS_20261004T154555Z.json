@@ -1,0 +1,40 @@
+{
+  "utc": "2026-10-04T15:47:10.353344+00:00",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "state": "QWEN_COMPLETE_GEMINI_PREPARED_NOT_LAUNCHED",
+  "provider_jobs_actual": 1,
+  "requested_model": "qwen3.8-max",
+  "observed_model": "qwen3.8-max",
+  "usage": {
+    "prompt_tokens": 10682,
+    "total_tokens": 11992,
+    "completion_tokens": 1310,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 10682
+    }
+  },
+  "finish_reason": "stop",
+  "http": 200,
+  "elapsed_seconds": 20.76,
+  "patch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch\\patch.pending_root_qa.json",
+  "patch_sha256": "6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "original_source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "text_matches": [
+    1,
+    1,
+    1
+  ],
+  "provider_patch_applied": false,
+  "tests_executed": false,
+  "native_build_gpu": false,
+  "credential_echo_or_persistence": false,
+  "credential_guard": "OwnedHTTPchild refused configured key substring inprompt/response before persistence; no keys read by outer wrapper or preparation",
+  "reap_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch.REAPED_RECEIPT.json",
+  "next_prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\gemini_fp32_review.prompt.txt",
+  "next_prompt_sha256": "b593ebcab840e6f4177a81e7c7784d5c3b1a9a256056165eee232910cdbed674",
+  "next_launch_admission": "AWAIT_DISTINCT_ROOT_RECEIPT",
+  "provider_native_children_actual": 0,
+  "native_maximum_authorized_each_qwen_deepseek_parent": 10,
+  "scope_limit": "Provider patch is untrusted staged plan, not code/runtime/LLM qualification. Fixed5-batch47jobledger untouched; thissingle6thbatchcall is separate."
+}

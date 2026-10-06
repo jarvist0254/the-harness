@@ -1,0 +1,39 @@
+{
+  "status": "UNRESOLVED_DUPLICATE_JSON_RESPONSE",
+  "wrapper_status": "PARSE_OR_SCHEMA_ERROR",
+  "response_objects": 2,
+  "first_verdict": "REJECTED",
+  "second_verdict": "REJECTED",
+  "first_keys": [
+    "findings",
+    "safety_checks",
+    "verdict"
+  ],
+  "second_keys": [
+    "findings",
+    "safety_checks",
+    "toolAction",
+    "toolSummary",
+    "verdict"
+  ],
+  "structured_output_keys": [
+    "findings",
+    "safety_checks",
+    "verdict"
+  ],
+  "raw_stdout_sha256": "6502C153FAA7F1E84CDE1F6114B8C21440842995F03527FB67A54E0E3FFB2536",
+  "response_pair_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_gemini_retry_20261004T191100Z\\gemini_response_pair.json",
+  "response_pair_sha256": "D582C13F2EF39D7E5F22EF1BED73B875D07367787EE4D8F200AB4D85D8B17E3E",
+  "usage": {
+    "input_tokens": 45637,
+    "output_tokens": 16073,
+    "thinking_tokens": 13862,
+    "cache_read_tokens": 30531,
+    "total_tokens": 61710
+  },
+  "tool_calls": "UNKNOWN",
+  "subagents": "UNKNOWN",
+  "source_execution": false,
+  "provider_edit": false,
+  "source_pins_unchanged": true
+}

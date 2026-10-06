@@ -1,0 +1,70 @@
+{
+  "jobs": [
+    {
+      "elapsed_seconds": 1880.3,
+      "terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_peer_compile_repair\\terminal.json",
+      "source_acceptance": "UNTRUSTED_OR_INCOMPLETE_NO_NATIVE_ADMISSION",
+      "usage": {
+        "prompt_tokens": 24134,
+        "total_tokens": 102826,
+        "completion_tokens": 78692,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 24134
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 62304,
+          "text_tokens": 78692
+        }
+      },
+      "http": 200,
+      "input_pins_changed": [],
+      "status": "INCOMPLETE_STREAM_NOT_ACCEPTED",
+      "finish_reason": "length",
+      "session_reaped": true,
+      "job": "qwen_l0_peer_compile_repair",
+      "done": true,
+      "model": "qwen3.8-max",
+      "source_execution": false,
+      "terminal_sha256": "0b42dec2cc03c4317c9a19b00c6d65353a7bab59d584c2c68dd5c499d7866406"
+    },
+    {
+      "elapsed_seconds": 1547.47,
+      "terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\terminal.json",
+      "source_acceptance": "UNTRUSTED_OR_INCOMPLETE_NO_NATIVE_ADMISSION",
+      "usage": {
+        "prompt_tokens": 24484,
+        "total_tokens": 90216,
+        "completion_tokens": 65732,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 24484
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 53679,
+          "text_tokens": 65732
+        }
+      },
+      "http": 200,
+      "input_pins_changed": [],
+      "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+      "finish_reason": "stop",
+      "session_reaped": true,
+      "job": "qwen_l0_query_measured_repair",
+      "done": true,
+      "model": "qwen3.8-max",
+      "source_execution": false,
+      "terminal_sha256": "f1bd856e514b6b248f7a9c514315a3035d3acfd720ddf29d41e801e7a753c2b5"
+    }
+  ],
+  "source_execution": false,
+  "reported_tokens": 193042,
+  "scope": "CLOSED_TWO_QWEN_COMPILER_REPAIR_SOURCE_JOBS",
+  "unknown_usage_jobs": 0,
+  "native_children_actual": 0,
+  "known_usage_jobs": 2,
+  "secret_process_audit": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\SECRET_PROCESS_AUDIT_COMPILER_TWO.json",
+  "utc": "2026-10-04T22:30:16.7338825Z",
+  "thinking_included_not_added": true,
+  "provider_jobs": 2
+}

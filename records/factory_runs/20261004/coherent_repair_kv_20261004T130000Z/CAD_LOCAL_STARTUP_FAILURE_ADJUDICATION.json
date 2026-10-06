@@ -1,0 +1,12 @@
+{
+  "status": "LOCAL_STARTUP_FAILURE_NOT_PROVIDER_REQUEST",
+  "all_exit1": true,
+  "owned_pids": [
+    93148,
+    96428,
+    22560
+  ],
+  "retry_new_folder": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2",
+  "reason": "PowerShell single nested-array flattened into3strings, prompt paths c/q/i missing before HTTP",
+  "original_evidence_preserved": true
+}

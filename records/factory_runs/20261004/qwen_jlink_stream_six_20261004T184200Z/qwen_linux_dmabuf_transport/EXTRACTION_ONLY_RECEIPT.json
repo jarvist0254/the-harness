@@ -1,0 +1,23 @@
+{
+  "provider_status": "PROPOSED",
+  "root_admission": false,
+  "files": [
+    {
+      "chars": 13928,
+      "field": "source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\source.qwen_untrusted.cpp",
+      "sha256": "7052c8ebaa49d9807f6428b5a1ed6779a093392bccf6ef3266b254c0eac3cb5b"
+    },
+    {
+      "chars": 2901,
+      "field": "tests_source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\tests_source.qwen_untrusted.txt",
+      "sha256": "6363369cf5ba49b2b82397893d42d622f35ef5bd434ddffefd578733b6568e76"
+    }
+  ],
+  "artifact_sha256": "45134eb59455e47252f6e4f0e3aa3c44d74f7ae8878a961d83982fef2c5feb46",
+  "job": "qwen_linux_dmabuf_transport",
+  "candidate_parsed_imported_compiled_executed": false,
+  "action": "Exact JSON source-string extraction only",
+  "provider_tests_executed": false
+}

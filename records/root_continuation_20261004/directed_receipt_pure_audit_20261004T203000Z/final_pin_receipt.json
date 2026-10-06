@@ -1,0 +1,16 @@
+{
+  "source_sha_before": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f",
+  "source_sha_after": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f",
+  "provider_tests_sha_before": "fa250c767d0062c5af5055838dea9e256fe1e87bc2716d110c764e53c9413931",
+  "provider_tests_sha_after": "fa250c767d0062c5af5055838dea9e256fe1e87bc2716d110c764e53c9413931",
+  "source_and_provider_tests_unchanged": true,
+  "scripts_python_pins": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_pure_audit_20261004T203000Z\\test_independent_directed.py": "1f569ed734ec07b7a6ae287937f2ba3992800fbcc9b69049b53ecdf13787f12a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_pure_audit_20261004T203000Z\\pure_import_fence.py": "edb65ca99074a40e330b9ea22758a7aca0512a3e69d01a8ebd8101c71cb42df9",
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_pure_audit_20261004T203000Z\\run_bounded_pure.py": "d65bb526e5c06b7b7c3da2eba8ccd1e99103768af22a8aa92530a5eee9e9cbae",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "verdict": "PURE_RED_3_FAIL_0_ERROR",
+  "provider_tests_executed": false,
+  "native_hardware_qualification": "NOT_CHECKED"
+}

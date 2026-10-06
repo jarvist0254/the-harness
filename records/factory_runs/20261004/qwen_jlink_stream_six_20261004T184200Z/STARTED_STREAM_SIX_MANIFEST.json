@@ -1,0 +1,100 @@
+{
+  "global_factory_started": false,
+  "jobusage": "PENDING_FINAL_STREAM_USAGE",
+  "max_native_authorized_each_qwen_deepseek": 10,
+  "provider_model": "qwen3.8-max",
+  "outer_deadline_seconds": 1230,
+  "max_concurrent_provider_jobs": 6,
+  "reasoning_effort": "xhigh",
+  "normalized_content_cap_bytes": 2097152,
+  "native_children_actual": 0,
+  "stream_include_usage": true,
+  "state": "SIX_ACTUAL_HTTP200_QWEN_MAX_STREAM_REQUESTS_RUNNING",
+  "generated_sources_executed": false,
+  "helper_pins": [
+    {
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "file": "provider_common.ps1"
+    },
+    {
+      "bytes": 722,
+      "sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+      "file": "research_artifact.ps1"
+    },
+    {
+      "bytes": 7804,
+      "sha256": "56561ffd930c100f2de08a1170b8b0af7330f589e8290b87af3defc007b15c8c",
+      "file": "qwen_http_stream_research.ps1"
+    },
+    {
+      "bytes": 8042,
+      "sha256": "0eff91d569ab0efde781b6808ee9e2a8b498461718361ad96b143585ab833bca",
+      "file": "invoke_owned_stream_research.ps1"
+    },
+    {
+      "bytes": 5093,
+      "sha256": "969f1c7f5c170383e7dd6f9af9caa9e46188ca86fa8ab5c1150add3138f62d4a",
+      "file": "SIX_SOURCE_PROMPT_BINDINGS.json"
+    }
+  ],
+  "jobs": [
+    {
+      "started": "2026-10-04T18:45:08.8717947Z",
+      "job": "qwen_intel_peer_copy",
+      "source_sha256": "150cb209673db9697119c7cfeb3eeb7b2c14964eb6ecf50723bce46a2e6456f9",
+      "worker_pid": 96136,
+      "wrapper_pid": 55364,
+      "prompt_sha256": "150cb209673db9697119c7cfeb3eeb7b2c14964eb6ecf50723bce46a2e6456f9"
+    },
+    {
+      "started": "2026-10-04T18:45:08.8843273Z",
+      "job": "qwen_intel_nvidia_external_query",
+      "source_sha256": "daa4f9e8c87399fe98c37f623161b33f3aa794233ea3b4dd259497305186b4c7",
+      "worker_pid": 90144,
+      "wrapper_pid": 17404,
+      "prompt_sha256": "daa4f9e8c87399fe98c37f623161b33f3aa794233ea3b4dd259497305186b4c7"
+    },
+    {
+      "started": "2026-10-04T18:45:08.9027636Z",
+      "job": "qwen_intel_backend_contract",
+      "source_sha256": "c28c55a9744738ec45e77a640d03e706500fabdca8f79000ea06c0d85decd811",
+      "worker_pid": 66232,
+      "wrapper_pid": 60640,
+      "prompt_sha256": "2181c8ad18f2a78f8708429807a068f15323b7e77fde15d05064f5a3325ed6e4"
+    },
+    {
+      "started": "2026-10-04T18:45:08.9110346Z",
+      "job": "qwen_four_physical_capacity_tests",
+      "source_sha256": "5df5c41d315f53b12e9e2689e1891c603ccf1a78ebf4d9324ff6da6bf03eb277",
+      "worker_pid": 45996,
+      "wrapper_pid": 79628,
+      "prompt_sha256": "5df5c41d315f53b12e9e2689e1891c603ccf1a78ebf4d9324ff6da6bf03eb277"
+    },
+    {
+      "started": "2026-10-04T18:45:09.1116492Z",
+      "job": "qwen_vulkan_numeric_state_ledger",
+      "source_sha256": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9",
+      "worker_pid": 88240,
+      "wrapper_pid": 83116,
+      "prompt_sha256": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9"
+    },
+    {
+      "started": "2026-10-04T18:45:08.9952095Z",
+      "job": "qwen_linux_dmabuf_transport",
+      "source_sha256": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc",
+      "worker_pid": 21300,
+      "wrapper_pid": 68712,
+      "prompt_sha256": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc"
+    }
+  ],
+  "utc": "2026-10-04T18:46:31.3602508Z",
+  "http_deadline_seconds": 1200,
+  "credits": "NOT_CHECKED",
+  "raw_cap_bytes_per_job": 16777216,
+  "service_internal_reasoning_budget": "NOT_REPORTED",
+  "normalized_reasoning_cap_bytes": 2097152,
+  "max_reply_tokens": 16384,
+  "source_promotion": false,
+  "enable_thinking": true
+}

@@ -1,0 +1,53 @@
+{
+  "outer_deadline": 240,
+  "prompt_sha256": "d87b6746cd58f454a3d4f87cbbef3a4f4d7e36144cea3608358f714575ca907c",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+  "model": "gemini-3.8-flash-high",
+  "Muse_review_raw_sha256": "4ad7f5d9c2fd92d489dba5f3836e164e74b1783a0f3461207b685ce8fe064e16",
+  "native_children_actual": 0,
+  "provider_deadline": 210,
+  "job": "gemini_combined_high",
+  "actual_tests_embedded": false,
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+  "helpers": [
+    {
+      "sha256": "ae3e95758427ae9f634ead883defe597506ad291e0160df3f3ebb7aaf36c78d1",
+      "name": "gemini_combined_high.prompt.txt",
+      "bytes": 23501
+    },
+    {
+      "sha256": "13427d2f951c556a79dd982ad3d3e8b0bc0a19389e00b03d897dd8d7e9f54454",
+      "name": "invoke_owned_combined_review.high.pending_admission.ps1",
+      "bytes": 8819
+    },
+    {
+      "sha256": "2a6b79b3151aefdb7e704192506aa9f3e03c6107c79b22f9350cd247c3035975",
+      "name": "provider_common.high.v2.ps1",
+      "bytes": 4070
+    },
+    {
+      "sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+      "name": "REVIEW_SCHEMA.json",
+      "bytes": 1388
+    }
+  ],
+  "raw_compiler_embedded": false,
+  "stdout_stderr_each_cap": 2097152,
+  "actual_full_muse_semantic_json_embedded": true,
+  "provider_launch_authorized": false,
+  "utc": "2026-10-04T21:17:57.1197218Z",
+  "compact_muse_chars": 9693,
+  "actual_full_source_embedded": true,
+  "source_execution": false,
+  "prompt_chars": 23792,
+  "compiler_root_summary_only": true,
+  "full_root_review_embedded": false,
+  "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_combined_dma_prep_20261004T211555Z\\gemini_combined_high.v2.prompt.txt",
+  "command_line_measurement": {
+    "sha256": "bf999a32379b706f2bb689976a7570addbf32d5b45309d4f6d30a043a5fa174f",
+    "actual_quoted_utf16_chars": 24576,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_combined_dma_prep_20261004T211555Z\\ACTUAL_DOTNET_CMDLINE_MEASUREMENT.json",
+    "process_started": false
+  },
+  "root_muse_adjudication": "CUDA allocation AFTER DMA_BUF gate; context beforeDMA/allocbeforeIntel eligibility true; ownership not invented/leaked; unavailable vs API failure distinction"
+}

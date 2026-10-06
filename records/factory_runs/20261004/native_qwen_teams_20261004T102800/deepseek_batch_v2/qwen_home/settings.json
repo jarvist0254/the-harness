@@ -1,0 +1,135 @@
+{
+  "context": {
+    "loadFromIncludeDirectories": false,
+    "fileName": "NO_CONTEXT_DISABLED.md"
+  },
+  "security": {
+    "auth": {
+      "selectedType": "openai"
+    }
+  },
+  "permissions": {
+    "allow": [
+      "agent",
+      "team_create",
+      "team_delete",
+      "list_agents",
+      "send_message",
+      "request_shutdown",
+      "task_create",
+      "task_update",
+      "task_list",
+      "task_get",
+      "task_stop"
+    ],
+    "deny": [
+      "read_file",
+      "grep_search",
+      "glob",
+      "list_directory",
+      "run_shell_command",
+      "write_file",
+      "edit",
+      "notebook_edit",
+      "web_fetch",
+      "web_search",
+      "skill",
+      "tool_search",
+      "save_memory",
+      "schedule_task",
+      "computer_use",
+      "ask_user_question"
+    ]
+  },
+  "memory": {
+    "enableManagedAutoDream": false,
+    "enableTeamMemorySync": false,
+    "enableTeamMemory": false,
+    "enableAutoSkill": false,
+    "enableManagedAutoMemory": false
+  },
+  "experimental": {
+    "agentTeam": true
+  },
+  "agents": {
+    "team": {
+      "maxTeammates": 10
+    },
+    "builtin": {
+      "exploreModel": "inherit"
+    }
+  },
+  "tools": {
+    "exclude": [
+      "read_file",
+      "grep_search",
+      "glob",
+      "list_directory",
+      "run_shell_command",
+      "write_file",
+      "edit",
+      "notebook_edit",
+      "web_fetch",
+      "web_search",
+      "skill",
+      "tool_search",
+      "save_memory",
+      "schedule_task",
+      "computer_use",
+      "ask_user_question"
+    ],
+    "core": [
+      "agent",
+      "team_create",
+      "team_delete",
+      "list_agents",
+      "send_message",
+      "request_shutdown",
+      "task_create",
+      "task_update",
+      "task_list",
+      "task_get",
+      "task_stop"
+    ]
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "modelProviders": {
+    "openai": [
+      {
+        "id": "deepseek-v4-flash-0731",
+        "name": "[ModelStudio Token Plan for Global/Intl] deepseek-v4-flash-0731",
+        "capabilities": {
+          "reasoning": {
+            "thinking": true,
+            "efforts": [
+              "low",
+              "high",
+              "max"
+            ],
+            "defaultEffort": "high",
+            "disableField": "enable_thinking"
+          }
+        },
+        "baseUrl": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+        "envKey": "BAILIAN_TOKEN_PLAN_API_KEY",
+        "generationConfig": {
+          "contextWindowSize": 1000000
+        }
+      }
+    ]
+  },
+  "model": {
+    "name": "deepseek-v4-flash-0731",
+    "maxSubagentDepth": 1,
+    "generationConfig": {
+      "timeout": 120000,
+      "extra_body": {
+        "enable_thinking": false
+      },
+      "maxRetries": 0
+    }
+  },
+  "mcpServers": {}
+}

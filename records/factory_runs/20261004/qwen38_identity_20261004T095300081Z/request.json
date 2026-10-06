@@ -1,0 +1,24 @@
+{
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "argv": [
+    "D:\\DevCache\\npm\\node_modules\\@qwen-code\\qwen-code\\cli-entry.js",
+    "--model",
+    "qwen3.8-flash",
+    "--prompt",
+    "Return exactly HARNESS_QWEN38_OK. Do not call any tools, inspect files, modify files, access external services, or execute commands. This is an identity and transport canary only.",
+    "--approval-mode",
+    "plan",
+    "--max-session-turns",
+    "1",
+    "--max-tool-calls",
+    "0",
+    "--max-wall-time",
+    "45s",
+    "--output-format",
+    "json",
+    "--mcp-config",
+    "{\"mcpServers\":{}}"
+  ],
+  "cwd": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen38_identity_20261004T095300081Z",
+  "outer_timeout_seconds": 60
+}

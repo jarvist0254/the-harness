@@ -1,0 +1,31 @@
+{
+  "status": "THEORY_ONLY_PARTIALLY_CORRECT",
+  "provider_source": "d3d12_review/review.json",
+  "verified_quantities": {
+    "weight_bias_bytes_per_layer": 1050624,
+    "modeled_mib_per_layer": 2,
+    "total_actual_weight_bias_bytes": 8404992,
+    "per_device_actual_weight_bias_bytes_for_four_layers": 4202496,
+    "activation_payload_bytes": 16384,
+    "two_activation_buffers_bytes_per_device": 32768,
+    "eight_layer_parity_readback_bytes": 131072
+  },
+  "rejected_provider_claims": [
+    "GEMM operation counts inserted an extra width-512 dimension and disagree with their own arithmetic."
+  ],
+  "corrected_quantities": {
+    "multiply_operations_per_layer": 2097152,
+    "multiply_derivation": "batch * width * width = 8 * 512 * 512",
+    "two_operation_gemm_flops_per_layer": 4194304,
+    "two_operation_gemm_flops_all_eight_layers": 33554432,
+    "residual_additions_per_layer": 4096,
+    "relu_elements_per_layer": 4096
+  },
+  "limitations": [
+    "These are arithmetic and payload counts, not measured throughput or latency.",
+    "An activation read and upload move one 16384-byte activation payload twice; they do not create 32768 bytes of unique activation state.",
+    "The default workload fits the host GPU; policy-forced placement is not larger-than-physical-capacity proof.",
+    "AMD integrated shared memory is not an external dedicated 8GB card.",
+    "Actual copy counts depend on the reviewed executor and whether parity readbacks are reused at boundaries."
+  ]
+}

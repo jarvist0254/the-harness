@@ -1,0 +1,33 @@
+
+Dump of file E:\the_harness\records\build_vulkan_fp32_staging_20261004T155932Z\build_attempt5\bin\ggml-vulkan.dll
+
+File Type: DLL
+
+  Section contains the following exports for ggml-vulkan.dll
+
+    00000000 characteristics
+    FFFFFFFF time date stamp
+        0.00 version
+           1 ordinal base
+           8 number of functions
+           8 number of names
+
+    ordinal hint RVA      name
+
+          1    0 000EA5E0 ggml_backend_is_vk
+          2    1 000EA610 ggml_backend_vk_buffer_type
+          3    2 000EA6A0 ggml_backend_vk_get_device_count
+          4    3 000EA6C0 ggml_backend_vk_get_device_description
+          5    4 000EA710 ggml_backend_vk_get_device_memory
+          6    5 000EABC0 ggml_backend_vk_host_buffer_type
+          7    6 000EACD0 ggml_backend_vk_init
+          8    7 000EADD0 ggml_backend_vk_reg
+
+  Summary
+
+        6000 .data
+        7000 .pdata
+     2A28000 .rdata
+        1000 .reloc
+        1000 .rsrc
+      101000 .text

@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "scope": "Root independent unit/profile verification and inspection of final-hash hardware logs; no duplicate GPU runs",
+  "source_sha256": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387",
+  "unit_command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "j_link/tests",
+    "-v"
+  ],
+  "unit_exit_code": 0,
+  "unit_tests": 47,
+  "profiles": [
+    {
+      "name": "all_nvidia",
+      "four_policy_fit": true,
+      "three_same_workload_refused": true,
+      "scope": "HYPOTHETICAL_NOT_ALLOCATED"
+    },
+    {
+      "name": "all_amd",
+      "four_policy_fit": true,
+      "three_same_workload_refused": true,
+      "scope": "HYPOTHETICAL_NOT_ALLOCATED"
+    },
+    {
+      "name": "all_intel",
+      "four_policy_fit": true,
+      "three_same_workload_refused": true,
+      "scope": "HYPOTHETICAL_NOT_ALLOCATED"
+    },
+    {
+      "name": "mixed",
+      "four_policy_fit": true,
+      "three_same_workload_refused": true,
+      "scope": "HYPOTHETICAL_NOT_ALLOCATED"
+    }
+  ],
+  "hardware_evidence": [
+    {
+      "case": "default",
+      "exit_code": 0,
+      "status": "PASS",
+      "kernels_completed": 8,
+      "final_error": 8.344650268554688e-06,
+      "raw_log": "E:\\the_harness\\records\\opencl_executor_20261004\\final_revision\\default.stdout.log",
+      "source_sha256": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387"
+    },
+    {
+      "case": "reverse",
+      "exit_code": 0,
+      "status": "PASS",
+      "kernels_completed": 8,
+      "final_error": 8.344650268554688e-06,
+      "raw_log": "E:\\the_harness\\records\\opencl_executor_20261004\\final_revision\\reverse.stdout.log",
+      "source_sha256": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387"
+    },
+    {
+      "case": "corruption",
+      "exit_code": 1,
+      "status": "FAIL",
+      "kernels_completed": 8,
+      "final_error": 1.001207709312439,
+      "raw_log": "E:\\the_harness\\records\\opencl_executor_20261004\\final_revision\\corruption.stdout.log",
+      "source_sha256": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387"
+    }
+  ]
+}

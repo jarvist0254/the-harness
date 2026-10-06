@@ -1,0 +1,53 @@
+import importlib.util, os, unittest
+P=os.environ.get('CANDIDATE_PATH') or os.environ.get('CANDIDATE_SOURCE_PATH') or 'candidate.py'
+if not os.path.isfile(P):
+    raise RuntimeError('set CANDIDATE_PATH to the actual candidate source path')
+spec=importlib.util.spec_from_file_location('candidate_under_test', P)
+mod=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+def dev(i):
+    return {'canonical_id':'pci:0000:%02x.0'%i,'physical_alias':'phys:%d'%i,'aliases':['root:%d'%i,'sub:%d:0'%i],'discrete':True,'form_factor':'discrete_gpu'}
+def att(role,n,ts=1000):
+    a={'role':role,'model_hash':'m','workload_hash':'w','source_hash':'s','exe_hash':'e','context_hash':'c','quant':'q','timestamp_ns':ts,'controller':{'args_valid':True,'timeout':False,'policy_cap':False,'native_error':None},'devices':[dev(i) for i in range(n)],'allocator':{'class':'dedicated_vram','fresh':True,'source':'allocd','timestamp_ns':ts}}
+    if role!='four':
+        a['execution']={'status':'allocator_oom','requested_bytes':4000}
+    else:
+        a['execution']={'status':'success','rmse':0.1,'max_abs_error':0.2,'logits':[{'cpu':1.0,'observed':1.05,'tol_abs':0.1}]}
+        a['weights']=[{'device':'pci:0000:%02x.0'%i,'shard_hash':'h%d'%i,'resident_bytes':1000,'backing':'device_vram'} for i in range(4)]
+        a['allocator']['peak_bytes_by_device']={'pci:0000:%02x.0'%i:1000 for i in range(4)}
+    return a
+def ev():
+    return {'model_hash':'m','workload_hash':'w','source_hash':'s','exe_hash':'e','context_hash':'c','quant':'q','artifact_source':'root-store','cpu_reference_hash':'cpu1','observed_at_ns':1000,'model_bytes':4000,'logit_tol_abs':0.1,'attempts':[att('single',1),att('three',3),att('four',4)]}
+class T(unittest.TestCase):
+    def runv(self,e,trusted=True): return mod.validate_capacity(e,trusted=trusted)
+    def test_pass(self): self.assertEqual(self.runv(ev())['exit_code'],0)
+    def test_untrusted(self): self.assertEqual(self.runv(ev(),False)['status'],'NOT_CHECKED')
+    def test_three_cards(self):
+        e=ev(); e['attempts'][2]['devices']=e['attempts'][2]['devices'][:3]
+        self.assertEqual(self.runv(e)['status'],'FAIL')
+    def test_alias_dedup(self):
+        e=ev(); e['attempts'][2]['devices'][1]['aliases'].append('root:0')
+        self.assertEqual(self.runv(e)['status'],'FAIL')
+    def test_replicated_weights(self):
+        e=ev(); e['attempts'][2]['weights'][1]['shard_hash']=e['attempts'][2]['weights'][0]['shard_hash']
+        self.assertEqual(self.runv(e)['status'],'FAIL')
+    def test_policy_oom_substitute(self):
+        e=ev(); e['attempts'][0]['controller']['policy_cap']=True
+        self.assertEqual(self.runv(e)['status'],'FAIL')
+    def test_missing_peak(self):
+        e=ev(); del e['attempts'][2]['allocator']['peak_bytes_by_device']['pci:0000:01.0']
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_missing_residence(self):
+        e=ev(); del e['attempts'][2]['weights'][0]['resident_bytes']
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_stale(self):
+        e=ev(); e['attempts'][2]['timestamp_ns']=999999999999
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_numeric_clean(self):
+        e=ev(); e['attempts'][2]['execution']['rmse']=0.3
+        self.assertEqual(self.runv(e)['status'],'FAIL')
+    def test_mismatched_model(self):
+        e=ev(); e['attempts'][2]['model_hash']='x'
+        self.assertEqual(self.runv(e)['status'],'FAIL')
+if __name__=='__main__':
+    unittest.main()

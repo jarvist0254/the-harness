@@ -1,0 +1,19 @@
+{
+  "vendor": "nvidia",
+  "tool": "nvidia-smi",
+  "tool_version": "driver 591.86 from prior independent inventory",
+  "sampled_at_utc": "2026-10-04T12:12:13.324006+00:00",
+  "capture_completed_utc": "2026-10-04T12:12:13.389347+00:00",
+  "exit_code": 0,
+  "format": "csv",
+  "stdout": "pci.bus_id, name, memory.total [MiB], memory.free [MiB], memory.used [MiB], uuid\r\n00000000:01:00.0, NVIDIA GeForce RTX 5070 Ti, 16303, 14682, 1314, GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c\r\n",
+  "memory_kind": "DEDICATED",
+  "classification_basis": "Independent Windows PNP and OpenCL inventory identify actual discrete RTX5070Ti; not inferred from parser",
+  "command": [
+    "C:\\Windows\\System32\\nvidia-smi.exe",
+    "--query-gpu=pci.bus_id,name,memory.total,memory.free,memory.used,uuid",
+    "--format=csv,nounits"
+  ],
+  "pid": 37572,
+  "binary_sha256": "c363a12133ece7f36581b08f849d6c8945c1f4c05324aab0b9771fe942c48a55"
+}

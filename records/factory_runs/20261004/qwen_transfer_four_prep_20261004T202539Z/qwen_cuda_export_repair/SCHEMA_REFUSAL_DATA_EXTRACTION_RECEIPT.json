@@ -1,0 +1,13 @@
+{
+  "owned_pids_point_absent": true,
+  "refusal_reason": "compact source bound",
+  "source_sha256": "057cf790e012db56306d31e0b9de0e0c3bcbe038bc1881373bcb82e37f3682c2",
+  "source_chars": 17149,
+  "candidate_acceptance": "NOT_ACCEPTED_SCHEMA_REFUSAL_EXACT_STRINGS_REVIEW_ONLY",
+  "original_status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+  "utc": "2026-10-04T20:53:15.8948885Z",
+  "tests_sha256": "8d01502aabe169349bda0313e3f17824317d8556ea71909b7ac2aba1516131e3",
+  "source_execution": false,
+  "tests_chars": 8653,
+  "session_reaped": 9154
+}

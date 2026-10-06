@@ -1,0 +1,31 @@
+HIP version: 7.14.60850-1b2a555677
+
+==hipconfig
+HIP_PATH           :E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core
+ROCM_PATH          :E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core
+HIP_COMPILER       :clang
+HIP_PLATFORM       :amd
+HIP_RUNTIME        :rocclr
+CPP_CONFIG         :/
+
+==hip-clang
+HIP_CLANG_PATH     :E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\bin
+AMD clang version 23.0.0git (https://github.com/ROCm/llvm-project.git 52226beb248fcdd136d084307a12207d2fc00220+PATCHED:1efe4605317a40d2170d33617075bd5675d0d558)
+Target: x86_64-pc-windows-msvc
+Thread model: posix
+InstalledDir: E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\bin
+hip-clang-cxxflags :
+ -O3
+hip-clang-ldflags :
+--driver-mode=g++ -O3 -fuse-ld=lld --ld-path="E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\bin\lld-link.exe" --hip-link
+
+== Environment Variables
+PATH=E:\tooling\jetbrains-launchers;D:\DevCache\npm;C:\Users\thoma\AppData\Local\agy\bin;C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.6.0_x64__8wekyb3d8bbwe;C:\Users\thoma\.codex\tmp\arg0\codex-arg0rNu7iP;D:\DevCache\npm\node_modules\@openai\codex\node_modules\@openai\codex-win32-x64\vendor\x86_64-pc-windows-msvc\codex-path;C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\libnvvp;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.3\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.3\libnvvp;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;D:\OpenJDK\jdk-17.0.15+6\bin;C:\Users\thoma\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\thoma\AppData\Local\Programs\Python\Python310\;C:\Users\thoma\AppData\Local\Programs\Python\Launcher\;C:\Users\thoma\AppData\Local\Microsoft\WindowsApps;C:\Users\thoma\.dotnet\tools;C:\Users\thoma\AppData\Local\Programs\Ollama;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\lib\x64;C:\Program Files\NVIDIA Corporation\Nsight Compute 2025.1.1\;C:\Program Files\nodejs\;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\GitHub CLI\;C:\Program Files\VFTChain Desktop Client\resources\app\dlls;C:\Program Files\VFTChain Desktop Client\resources\app\cuda;C:\Program Files\VFTChain Desktop Client;C:\Program Files\Git\cmd;C:\Program Files\Amazon\SessionManagerPlugin\bin\;C:\Program Files\Tailscale\;C:\Program Files (x86)\Google\Cloud SDK\google-cloud-sdk\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Sunshine;C:\Program Files\Sunshine\tools;C:\Program Files\Docker\Docker\resources\bin;C:\Users\thoma\.grok\bin;E:\Bleeding_edge\.venv\Scripts;C:\Users\thoma\scoop\shims;C:\Users\thoma\.fly\bin;C:\Users\thoma\AppData\Local\Microsoft\WinGet\Links;C:\Users\thoma\AppData\Local\JetBrains\Toolbox\scripts;C:\Program Files\JetBrains\PyCharm 2026.2.1\bin;C:\Users\thoma\.local\bin;C:\Users\thoma\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\thoma\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\thoma\AppData\Local\github-copilot\jetbrains-terminal\copilot-cli-shim\v1
+
+CUDA_PATH_V12_3=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.3
+CUDA_PATH_V12_8=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8
+
+== Windows Display Drivers
+DESKTOP-3LGGL0G
+Advanced Micro Devices, Inc. C:\windows\System32\DriverStore\FileRepository\u0420529.inf_amd64_94ad5a6c4d1a04e2\B419765\atidx9loader64.dll,C:\windows\System32\DriverStore\FileRepository\u0420529.inf_amd64_94ad5a6c4d1a04e2\B419765\amdxx64.dll,C:\windows\System32\DriverStore\FileRepository\u0420529.inf_amd64_94ad5a6c4d1a04e2\B419765\amdxx64.dll,C:\windows\System32\DriverStore\FileRepository\u0420529.inf_amd64_94ad5a6c4d1a04e2\B419765\amdxc64.dll AMD Radeon(TM) Graphics   
+Hostname      :

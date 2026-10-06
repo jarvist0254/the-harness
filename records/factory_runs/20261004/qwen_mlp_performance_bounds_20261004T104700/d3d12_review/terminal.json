@@ -1,0 +1,19 @@
+{
+  "elapsed_seconds": 43.2,
+  "observed_model": "qwen3.8-max",
+  "job": "d3d12_review",
+  "pid": 88108,
+  "requested_model": "qwen3.8-max",
+  "status": "COMPLETE_UNVERIFIED",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 568,
+    "total_tokens": 2741,
+    "completion_tokens": 2173,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 568
+    }
+  },
+  "http": 200
+}

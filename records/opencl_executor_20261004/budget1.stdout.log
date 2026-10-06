@@ -1,0 +1,14 @@
+{
+  "status": "REFUSED",
+  "reason": "Indivisible block layer_00 cannot fit any device budget",
+  "labels": [
+    "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+    "EXPLICIT_HOST_STAGED",
+    "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+  ],
+  "experimental": true,
+  "child_pid": 28000,
+  "child_exit_code": 2,
+  "elapsed_seconds": 0.5630000000819564,
+  "timestamp_utc": "2026-10-04T11:08:20.636805+00:00"
+}

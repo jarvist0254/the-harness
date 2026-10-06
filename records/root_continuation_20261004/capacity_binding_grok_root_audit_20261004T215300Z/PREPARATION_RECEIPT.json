@@ -1,0 +1,14 @@
+{
+  "execution": "NOT_RUN_PENDING_ROOT_ADMISSION",
+  "source_sha256": "446d78eaebd631eac79bca9f32c71671a485642371e1e9899306c7199543c5a5",
+  "original47_substantive_assertions": "UNCHANGED",
+  "new_schema_controls": 26,
+  "source_static_top_level": "hashlib/math/json imports, literals, functions and exception class definitions; no executable calls at import",
+  "provider_tests": "fully read; not executed",
+  "scope": "Pure synthetic evidence validation only; metadata cannot authenticate hardware residency/capacity/P2P",
+  "pins": {
+    "run_bounded_pure.py": "900142ece2509a135f60936b80ace5dd974384dd371b760fc6b171c7230d5fc5",
+    "test_adaptation.diff": "60c7866a22e1f74757624fbcd74e0ebbfff3f0a58cd63db9453a47155f60c9c0",
+    "test_independent_capacity.py": "aa1609b74ca0ff2633a1f43e4be9c2fc8a79db4cf3d8c8cc00670024bab91fb7"
+  }
+}

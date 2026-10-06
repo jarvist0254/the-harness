@@ -1,0 +1,9 @@
+{
+  "job": "cleanup_transaction",
+  "seconds": 153.26,
+  "identity": "retained process object",
+  "pid": 64460,
+  "exit_code": 0,
+  "outer_killed": false,
+  "log_overflow": false
+}

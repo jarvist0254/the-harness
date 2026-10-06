@@ -1,0 +1,39 @@
+{
+  "case": "legacy44",
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "evaluate_revision2_build_candidate.py"
+  ],
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z",
+  "timeout_seconds": 15,
+  "elapsed_seconds": 0.662424,
+  "pid": 30612,
+  "create_no_window": true,
+  "timeout_kill_attempted_on_retained_child_only": false,
+  "child_drained": true,
+  "exit_code": 0,
+  "pid_absent_after_wait": true,
+  "stdout_bytes": 743,
+  "stderr_bytes": 2433,
+  "each_stream_cap_bytes": 1048576,
+  "streams_within_cap": true,
+  "hashes_before": {
+    "baseline": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+    "candidate": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "boundary_tests": "c9bbbb16a2f4c4eca94a3bf9abfa530d8222874fd185dcd7fc9a2674658fc11c",
+    "python310": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "legacy44_copy": "53d2c3468eecbd6cca0c71b263b9293788123ed8183cc18101ff09d2f800e6e5"
+  },
+  "hashes_after": {
+    "baseline": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+    "candidate": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "boundary_tests": "c9bbbb16a2f4c4eca94a3bf9abfa530d8222874fd185dcd7fc9a2674658fc11c",
+    "python310": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "legacy44_copy": "53d2c3468eecbd6cca0c71b263b9293788123ed8183cc18101ff09d2f800e6e5"
+  },
+  "hashes_unchanged": true,
+  "native_supervisor_api_calls": "NOT_ATTEMPTED",
+  "native_workers_or_gpu": "NOT_ATTEMPTED",
+  "status": "PURE_TESTS_PASS"
+}

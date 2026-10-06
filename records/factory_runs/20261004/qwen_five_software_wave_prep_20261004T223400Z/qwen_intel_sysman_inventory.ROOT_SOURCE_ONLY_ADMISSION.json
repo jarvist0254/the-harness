@@ -1,0 +1,98 @@
+{
+  "utc": "2026-10-04T22:49:47.655487+00:00",
+  "provider_launch_authorized": true,
+  "lane": "Qwen",
+  "model": "qwen3.8-max",
+  "job_id": "qwen_intel_sysman_inventory",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\zes_api.v1.34.0.h.txt",
+  "source_sha256": "569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4",
+  "prompt_sha256": "35850337e1d55c09ca96618fce516bfc00ac91a0c239cd614d03a19523591b10",
+  "scope": "SOURCE_ONLY_ALLOCATION_FREE_QUERY_IMPLEMENTATION_PROPOSAL",
+  "packet_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.ROOT_REVIEW_PACKET.json",
+  "packet_sha256": "aa975c5f80addd93f54afd651cacd87e3bbba5a120c4f5eda80ec40bddc46e88",
+  "pins": [
+    {
+      "bytes": 8048,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\invoke_owned_stream_research.v3.ps1",
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063"
+    },
+    {
+      "bytes": 4072,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    {
+      "bytes": 582,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PURE_LIMIT_CONTROLS.json",
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e"
+    },
+    {
+      "bytes": 8011,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_http_stream_research.v3.ps1",
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c"
+    },
+    {
+      "bytes": 774,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\research_artifact.v3.ps1",
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36"
+    },
+    {
+      "bytes": 615098,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\zes_api.v1.34.0.h.txt",
+      "sha256": "569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4"
+    },
+    {
+      "bytes": 1240682,
+      "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+      "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de"
+    },
+    {
+      "bytes": 415,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\SYSMAN_HEADER_PROVENANCE.json",
+      "sha256": "c208c69fa0a286d52a383e7c6003e4de26fda52674f02a3c2647f7a41497d5e5"
+    },
+    {
+      "bytes": 79076,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.prompt.txt",
+      "sha256": "35850337e1d55c09ca96618fce516bfc00ac91a0c239cd614d03a19523591b10"
+    },
+    {
+      "bytes": 4714,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.spec.txt",
+      "sha256": "5aa8b220d78265c6f64651b477dd883908edb6760caa0f50d6f9a8fa83cd1386"
+    },
+    {
+      "bytes": 73857,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.api.txt",
+      "sha256": "c58bc31e0076a25a9f3401c0581ae57f6c907787d9344cf9bb63feb098dc68e1"
+    },
+    {
+      "bytes": 615098,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\zes_api.v1.34.0.h.txt",
+      "sha256": "569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4"
+    }
+  ],
+  "root_full_read": [
+    "complete task spec",
+    "packet metadata",
+    "frozen transport/helper earlier at exact unchanged pins"
+  ],
+  "full_spec_and_api_embedded": true,
+  "reasoning_effort": "xhigh",
+  "enable_thinking": true,
+  "thinking_budget_absent": true,
+  "source_chars_limit": 32000,
+  "tests_chars_limit": 16000,
+  "http_seconds": 2400,
+  "outer_seconds": 2430,
+  "raw_stream_cap_bytes": 16777216,
+  "normalized_each_cap": 2097152,
+  "source_execution_authorized": false,
+  "native_or_gpu_calls_authorized": false,
+  "source_promotion_authorized": false,
+  "auth_or_installs_or_global_factory_mutations_authorized": false,
+  "max_owned_qwen_requests_including_existing_consumer": 6,
+  "native_child_agents_actual": 0,
+  "limitations": "Capability collector only; no physical P2P/residency/pooling evidence. Sysman snapshot is source-only, not installed SDK/runtime."
+}

@@ -1,0 +1,9 @@
+{
+  "native_children_actual": 0,
+  "native_max_authorized": 10,
+  "credential_present": true,
+  "http_deadline_seconds": 240,
+  "credential_saved": false,
+  "pid": 80428,
+  "model": "qwen3.8-max"
+}

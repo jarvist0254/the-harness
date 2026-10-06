@@ -1,0 +1,30 @@
+[
+  {
+    "pid": 46184,
+    "job": "inventory",
+    "outer_deadline_seconds": 270,
+    "started_utc": "2026-10-04T11:45:23.3392475Z",
+    "model": "qwen3.8-flash"
+  },
+  {
+    "pid": 62704,
+    "job": "supervisor",
+    "outer_deadline_seconds": 270,
+    "started_utc": "2026-10-04T11:45:23.3528677Z",
+    "model": "qwen3.8-max"
+  },
+  {
+    "pid": 53684,
+    "job": "validator",
+    "outer_deadline_seconds": 270,
+    "started_utc": "2026-10-04T11:45:23.3623107Z",
+    "model": "qwen3.8-flash"
+  },
+  {
+    "pid": 80428,
+    "job": "llama_spec",
+    "outer_deadline_seconds": 270,
+    "started_utc": "2026-10-04T11:45:23.3734170Z",
+    "model": "qwen3.8-max"
+  }
+]

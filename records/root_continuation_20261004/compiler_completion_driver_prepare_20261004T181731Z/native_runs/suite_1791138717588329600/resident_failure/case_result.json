@@ -1,0 +1,101 @@
+{
+  "case": "resident_failure",
+  "accepted": true,
+  "result": {
+    "version": 1,
+    "run_id": "compiler_resident_failure",
+    "status": "FAILED",
+    "failure_reason": "nonzero_exit",
+    "containment_policy": "kill_on_close",
+    "workers": [
+      {
+        "worker_id": "resident_failure",
+        "pid": 66484,
+        "exit_code": 3,
+        "assigned": true,
+        "resumed": true
+      }
+    ],
+    "job_active_count": 0,
+    "drain_proof": "CLEANUP",
+    "whole_tree_certificate": false,
+    "logs": {
+      "resident_failure": {
+        "stdout": "{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"child\",\"mode\":\"resident_child\",\"pid\":93580,\"hold_seconds\":60,\"stream\":\"stdout\"}\r\n{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"root\",\"mode\":\"resident_failure\",\"pid\":66484,\"owned_child_pid\":93580,\"requested_exit\":3,\"stream\":\"stdout\"}\r\n",
+        "stdout_bytes": 284,
+        "stdout_overflow": false,
+        "stdout_path": "resident_failure.stdout.log",
+        "stderr": "{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"child\",\"mode\":\"resident_child\",\"pid\":93580,\"hold_seconds\":60,\"stream\":\"stderr\"}\r\n{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"root\",\"mode\":\"resident_failure\",\"pid\":66484,\"owned_child_pid\":93580,\"requested_exit\":3,\"stream\":\"stderr\"}\r\n",
+        "stderr_bytes": 284,
+        "stderr_overflow": false,
+        "stderr_path": "resident_failure.stderr.log"
+      }
+    },
+    "reattach": false,
+    "replay": false
+  },
+  "restart": {
+    "version": 1,
+    "run_id": "compiler_resident_failure",
+    "status": "FAILED",
+    "failure_reason": "nonzero_exit",
+    "containment_policy": "kill_on_close",
+    "workers": [
+      {
+        "worker_id": "resident_failure",
+        "pid": 66484,
+        "exit_code": 3,
+        "assigned": true,
+        "resumed": true
+      }
+    ],
+    "job_active_count": 0,
+    "drain_proof": "CLEANUP",
+    "whole_tree_certificate": false,
+    "logs": {
+      "resident_failure": {
+        "stdout": "{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"child\",\"mode\":\"resident_child\",\"pid\":93580,\"hold_seconds\":60,\"stream\":\"stdout\"}\r\n{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"root\",\"mode\":\"resident_failure\",\"pid\":66484,\"owned_child_pid\":93580,\"requested_exit\":3,\"stream\":\"stdout\"}\r\n",
+        "stdout_bytes": 284,
+        "stdout_overflow": false,
+        "stdout_path": "resident_failure.stdout.log",
+        "stderr": "{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"child\",\"mode\":\"resident_child\",\"pid\":93580,\"hold_seconds\":60,\"stream\":\"stderr\"}\r\n{\"fixture\":\"COMPILER_COMPLETION_CPU_V1\",\"role\":\"root\",\"mode\":\"resident_failure\",\"pid\":66484,\"owned_child_pid\":93580,\"requested_exit\":3,\"stream\":\"stderr\"}\r\n",
+        "stderr_bytes": 284,
+        "stderr_overflow": false,
+        "stderr_path": "resident_failure.stderr.log"
+      }
+    },
+    "reattach": false,
+    "replay": false
+  },
+  "pins_before": {
+    "driver": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d",
+    "worker": "015f376a054758fec223833a3613f4345186a2dbfa4a935a5a0485ae58dd3dbe",
+    "supervisor": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "adapter": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "pins_after": {
+    "driver": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d",
+    "worker": "015f376a054758fec223833a3613f4345186a2dbfa4a935a5a0485ae58dd3dbe",
+    "supervisor": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "adapter": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "pid_checks": [
+    {
+      "pid": 66484,
+      "absent": true,
+      "exit": 0,
+      "stdout": "INFO: No tasks are running which match the specified criteria.\r\n",
+      "scope": "Point-in-time read-only lookup, no PID control"
+    },
+    {
+      "pid": 93580,
+      "absent": true,
+      "exit": 0,
+      "stdout": "INFO: No tasks are running which match the specified criteria.\r\n",
+      "scope": "Point-in-time read-only lookup, no PID control"
+    }
+  ],
+  "scope": "Actual bounded CPU fixture only; not GPU or arbitrary controller-loss certification"
+}

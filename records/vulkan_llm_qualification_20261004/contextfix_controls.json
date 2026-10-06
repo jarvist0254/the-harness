@@ -1,0 +1,35 @@
+[
+  {
+    "name": "contextfix_self_test",
+    "pid": 70336,
+    "args": [
+      "--self-test"
+    ],
+    "exit_code": "0",
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_self_test.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_self_test.stderr.log",
+    "process_present_after": false
+  },
+  {
+    "name": "contextfix_missing_args",
+    "pid": 72628,
+    "args": [
+      "--model"
+    ],
+    "exit_code": "2",
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_missing_args.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_missing_args.stderr.log",
+    "process_present_after": false
+  },
+  {
+    "name": "contextfix_bad_arg",
+    "pid": 88824,
+    "args": [
+      "--bogus"
+    ],
+    "exit_code": "2",
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_bad_arg.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_bad_arg.stderr.log",
+    "process_present_after": false
+  }
+]

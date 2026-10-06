@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "scope": "Primary research leads checked during Intel-first JLink continuation; no implementation or hardware acceptance implied",
+  "all_methods_exhausted": false,
+  "sources": [
+    {
+      "title": "The DMA Streaming Framework: Kernel-Level Buffer Orchestration for High-Performance AI Data Paths",
+      "url": "https://arxiv.org/html/2603.10030v1",
+      "observed_scope": "Kernel buffer orchestration, per-importer DMA mapping, NVIDIA BAR pinning, deferred unpin cleanup and completion credits. RDMA measurements use Soft-RoCE and CPU memcpy; hardware NIC BAR DMA was not measured.",
+      "jlink_action": "Use its teardown and per-importer mapping invariants when reviewing a future transport implementation. It supplies no measured Intel-to-NVIDIA peer VRAM link or consumer-card compatibility proof.",
+      "local_execution": "NOT_CHECKED; no kernel module installed or loaded"
+    },
+    {
+      "title": "Evaluating OpenMP Offloading for Intra-node Multi-GPU Programming across NVIDIA, AMD, and Intel Architectures",
+      "url": "https://arxiv.org/html/2608.11882v1",
+      "observed_scope": "Separate NVIDIA H100, AMD MI250X and Intel Max 1550 platforms; dual/quad GPU variants compare native and OpenMP allocation, asynchronous copies and communication overlap.",
+      "jlink_action": "Design single/dual/quad workload and transfer-overlap benchmarks with unchanged CPU references. Inference: architecture-portable source and same-vendor platform results do not demonstrate a mixed Intel/NVIDIA peer link or four 8GB consumer cards.",
+      "local_execution": "NOT_CHECKED; paper benchmarks not reproduced"
+    },
+    {
+      "title": "Intel SHMEM: GPU-initiated OpenSHMEM using SYCL",
+      "url": "https://arxiv.org/abs/2409.20476",
+      "observed_scope": "GPU-aware and GPU-initiated communication using direct load/store or GPU copy engines. Only abstract checked in this pass.",
+      "jlink_action": "Investigate same-vendor Intel communication and synchronization after target hardware/runtime support is established. Do not infer mixed-vendor support from the abstract.",
+      "local_execution": "NOT_CHECKED; no SHMEM deployment"
+    },
+    {
+      "title": "Intel compute-runtime issue 995: non-contiguous peer mappings",
+      "url": "https://github.com/intel/compute-runtime/issues/995",
+      "observed_scope": "Reporter describes a peer-copy crash on two Arc Pro B70 GPUs, Linux, driver 26.31.3995.13. This is a reported bug on that configuration, not a local reproduction or a consumer Arc verdict.",
+      "jlink_action": "Add fragmented/non-contiguous backing to later actual peer regression work after the minimal contiguous transfer is qualified. Keep allocation layout and driver version in each receipt.",
+      "local_execution": "NOT_CHECKED; no B70 hardware here"
+    }
+  ],
+  "separate_runtime_evidence": "CUDA query on this WSL driver reports DMA_BUF_SUPPORTED result0/value0 and does not qualify direct P2P; see external_cuda_capability_query_20261004T2005Z/execution_summary.md",
+  "alternate_route": "Intel-owned DMA_BUF to NVIDIA Vulkan importer has a primary specification scope conflict under investigation; EGL/OpenGL foreign-import contracts are being checked separately",
+  "no_kernel_driver_bios_or_product_changes": true
+}

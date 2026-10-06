@@ -1,0 +1,128 @@
+[
+  {
+    "snapshot_sha256": "33f66211b94d24a3544c1150e6c983ed607b6ddc886a6b64386a56a38d1bbd67",
+    "sha256": "33f66211b94d24a3544c1150e6c983ed607b6ddc886a6b64386a56a38d1bbd67",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\fixture_runtime_win32_query_revision2.py",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\runtime_collector.py"
+  },
+  {
+    "snapshot_sha256": "73005082727db79cebfc11d0cf5afcc428556329d3c093b95e24ccf359406aef",
+    "sha256": "73005082727db79cebfc11d0cf5afcc428556329d3c093b95e24ccf359406aef",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\make_fixed_runtime_admission_revision2_20261004.py",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\admission_factory.py"
+  },
+  {
+    "snapshot_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+    "sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+    "original_path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_cli_source.cpp"
+  },
+  {
+    "snapshot_sha256": "f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59",
+    "sha256": "f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\fp32_staging_operator.cpp",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_fixture.cpp"
+  },
+  {
+    "snapshot_sha256": "c69b080dbb0f0bcfa1d7f436f791e5f40a46600cdc7326f16f2fc8a5bb2d379f",
+    "sha256": "c69b080dbb0f0bcfa1d7f436f791e5f40a46600cdc7326f16f2fc8a5bb2d379f",
+    "original_path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\fresh_dll_manifest.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\fresh_dll_manifest.json"
+  },
+  {
+    "snapshot_sha256": "30050a291becf283912afeb2559058fa9615b6ef2bb115ee3dec2c25b8426d78",
+    "sha256": "30050a291becf283912afeb2559058fa9615b6ef2bb115ee3dec2c25b8426d78",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_mixed_20261004T1845Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "ce8b380dd06676ce2e80a228515a75f9eab392811fc7076a8641a15de932e4c0",
+    "sha256": "ce8b380dd06676ce2e80a228515a75f9eab392811fc7076a8641a15de932e4c0",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_mixed_20261004T1845Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "5db2361f7e734798c77f60dfd6a5a1ee79a33f1057449393875076042674d4ce",
+    "sha256": "5db2361f7e734798c77f60dfd6a5a1ee79a33f1057449393875076042674d4ce",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_reverse_20261004T1847Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "d5312d7c8922d4c222f599f242992c65babcf63e94214748474db298e5202892",
+    "sha256": "d5312d7c8922d4c222f599f242992c65babcf63e94214748474db298e5202892",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_reverse_20261004T1847Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "35406d614f7cc4f1bb91a939495e641f235082ea507993c00393d703b06b8068",
+    "sha256": "35406d614f7cc4f1bb91a939495e641f235082ea507993c00393d703b06b8068",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_corrupt_fixed_20261004T1902Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_corrupt_fixed_20261004T1902Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "e1eec739de6bf1f5b561af0b843a59acc714e122e3b0b48286b27a8c729f95a2",
+    "sha256": "e1eec739de6bf1f5b561af0b843a59acc714e122e3b0b48286b27a8c729f95a2",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_corrupt_fixed_20261004T1902Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_corrupt_fixed_20261004T1902Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "c64f2d9fa71e7ae83a24a8236a4ca7c3f16a81580c202b44c2460a224943fcd0",
+    "sha256": "c64f2d9fa71e7ae83a24a8236a4ca7c3f16a81580c202b44c2460a224943fcd0",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "dda2c0cf6356c3564bca915cf2a185403023606f6ddd2cad8e59154d55adf704",
+    "sha256": "dda2c0cf6356c3564bca915cf2a185403023606f6ddd2cad8e59154d55adf704",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "dd9fc52b433df97686937681a88287b0e99d2dbbe6817eecf2df83a8658b7ab2",
+    "sha256": "dd9fc52b433df97686937681a88287b0e99d2dbbe6817eecf2df83a8658b7ab2",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv2_20261004T1843Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_nv2_20261004T1843Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "e32dda15524ce4c675a6ec431bb4f44b49a869d60b9ec0e52950e4a7ef6ec2e7",
+    "sha256": "e32dda15524ce4c675a6ec431bb4f44b49a869d60b9ec0e52950e4a7ef6ec2e7",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv2_20261004T1843Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_nv2_20261004T1843Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "935b06dfacdf0f7e59e04239834bea42d9cceb72261c06a5e34cb02994daef35",
+    "sha256": "935b06dfacdf0f7e59e04239834bea42d9cceb72261c06a5e34cb02994daef35",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_20261004T1843Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_amd_20261004T1843Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "1828f127232f0674407042c85a933723a6542ccb7fea54291276eb792ea0d4aa",
+    "sha256": "1828f127232f0674407042c85a933723a6542ccb7fea54291276eb792ea0d4aa",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_20261004T1843Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_amd_20261004T1843Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "1eb66aa2aec8e38fb973eaa6fa38e29f39ba53fdfce1825bb5ba1c9eee8c21e2",
+    "sha256": "1eb66aa2aec8e38fb973eaa6fa38e29f39ba53fdfce1825bb5ba1c9eee8c21e2",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv_corrupt_20261004T1845Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_nv_corrupt_20261004T1845Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "74bc0eb7cea96b9e1917f9df0154932b20570b9cfd55ab8ba48dc845dd193372",
+    "sha256": "74bc0eb7cea96b9e1917f9df0154932b20570b9cfd55ab8ba48dc845dd193372",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv_corrupt_20261004T1845Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_nv_corrupt_20261004T1845Z\\run_receipt.json"
+  },
+  {
+    "snapshot_sha256": "ec1345cb34acf8387541cb49beb41dd1162a5165fcd13409399868b93ea1e00a",
+    "sha256": "ec1345cb34acf8387541cb49beb41dd1162a5165fcd13409399868b93ea1e00a",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z\\stdout.raw.log",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_amd_corrupt_20261004T1845Z\\stdout.raw.log"
+  },
+  {
+    "snapshot_sha256": "12905661aeb032908a868a0e11a95ffc9814fd59b0c22343887a5a5f9fa8eca6",
+    "sha256": "12905661aeb032908a868a0e11a95ffc9814fd59b0c22343887a5a5f9fa8eca6",
+    "original_path": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z\\run_receipt.json",
+    "snapshot_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\evidence_snapshot\\operator_candidate_amd_corrupt_20261004T1845Z\\run_receipt.json"
+  }
+]

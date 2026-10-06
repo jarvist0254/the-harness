@@ -1,0 +1,14 @@
+{
+  "secret_process_audit": "SECRET_PROCESS_AUDIT_SEVENTH.json",
+  "utc": "2026-10-04T17:28:38.6095184Z",
+  "protocol_status": "REFUSED",
+  "full_goal_complete": false,
+  "code_applied": false,
+  "status": "PROVIDER_BATCH_CLOSED_PENDING_ROOT_ADJUDICATION",
+  "ledger": "USAGE_FINAL_SEVENTH.json",
+  "changes_count": 0,
+  "paid_jobs": 3,
+  "native_compile_gpu_run": false,
+  "later_adjudication": "Separate immutable receipt; never rewrite older ledgers",
+  "observed_tokens": 86991
+}

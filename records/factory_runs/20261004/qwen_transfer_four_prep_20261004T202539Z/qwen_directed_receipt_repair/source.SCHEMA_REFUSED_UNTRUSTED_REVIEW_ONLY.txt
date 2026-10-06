@@ -1,0 +1,231 @@
+import re
+SCHEMA='p2p.transfer.receipt/v2'
+TSCHEMA='p2p.trusted/v2'
+MAX=2**63-1
+ZERO='0'*64
+HX=re.compile(r'^[0-9a-f]{64}$')
+UID=re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+PCI=re.compile(r'^[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}[.][0-7]$')
+DIRS={'nv_device_dmabuf_export_to_intel_imported_view':('nvidia','intel'),'intel_write_to_nv_device_allocation_cuda_read':('intel','nvidia')}
+ART=('source_executable','target_executable','build','payload','controller','baseline','model','workload')
+TOP={'schema','direction','source','target','artifacts','sync','controls','payload','residency','export','import','write','read','reverse_visibility','cuda_dmabuf_import'}
+REGS=('clean_baseline_hashes','corruption_control_hashes','consumer_result_hashes','parity_hashes','sync_event_hashes','residency_measurement_hashes','resource_provenance_hashes','reverse_visibility_hashes')
+class Missing(Exception): pass
+def _miss(k): raise Missing(k)
+def _need(d,k):
+ if type(d) is not dict: raise ValueError('obj')
+ if k not in d: _miss(k)
+ return d[k]
+def _allow(d,allowed,name):
+ if type(d) is not dict: raise ValueError(name)
+ for k in d:
+  if k not in allowed: raise ValueError('unknown_field:'+name+'.'+k)
+def _int(v,n,lo=0):
+ if type(v) is not int or isinstance(v,bool): raise ValueError(n)
+ if v<lo or v>MAX: raise ValueError(n)
+ return v
+def _str(v,n,ml=256):
+ if type(v) is not str or not v or len(v)>ml: raise ValueError(n)
+ return v
+def _hash(v,n):
+ v=_str(v,n,64)
+ if not HX.match(v) or v==ZERO: raise ValueError(n)
+ return v
+def _bool(v,n):
+ if type(v) is not bool: raise ValueError(n)
+ return v
+def _dev(d,n):
+ _allow(d,{'vendor','uuid','pci','allocation_id','api','path','kind'},n)
+ v=_str(_need(d,'vendor'),n+'.vendor',16); u=_str(_need(d,'uuid'),n+'.uuid',36); p=_str(_need(d,'pci'),n+'.pci',16); a=_hash(_need(d,'allocation_id'),n+'.allocation_id'); api=_str(_need(d,'api'),n+'.api',128); pa=_str(_need(d,'path'),n+'.path',256); k=_str(_need(d,'kind'),n+'.kind',16)
+ if v not in ('nvidia','intel') or not UID.match(u) or not PCI.match(p) or k not in ('device','host','shared'): raise ValueError(n)
+ return {'vendor':v,'uuid':u,'pci':p,'allocation_id':a,'api':api,'path':pa,'kind':k}
+def _devref(d,n):
+ _allow(d,{'vendor','uuid','pci','allocation_id'},n)
+ v=_str(_need(d,'vendor'),n+'.vendor',16); u=_str(_need(d,'uuid'),n+'.uuid',36); p=_str(_need(d,'pci'),n+'.pci',16); a=_hash(_need(d,'allocation_id'),n+'.allocation_id')
+ if v not in ('nvidia','intel') or not UID.match(u) or not PCI.match(p): raise ValueError(n)
+ return (v,u,p,a)
+def _hashset(v):
+ if type(v) is not list: return None
+ s=set()
+ for x in v:
+  if type(x) is not str or not HX.match(x) or x==ZERO or x in s: return None
+  s.add(x)
+ return s
+def _pins(t):
+ try:
+  if type(t) is not dict: return None
+  _allow(t,{'schema','authorities','artifacts','devices','evaluation_unix','max_staleness_seconds','transfer','registries'},'trusted')
+  if t.get('schema')!=TSCHEMA: return None
+  au=t.get('authorities')
+  if type(au) is not list or not au: return None
+  ids=set(); ns=set()
+  for a in au:
+   if type(a) is not dict: return None
+   _allow(a,{'id','name'},'trusted.authority')
+   i=a.get('id'); nm=a.get('name')
+   if type(i) is not str or not HX.match(i) or i==ZERO: return None
+   if type(nm) is not str or not nm or nm in ns or i in ids: return None
+   ids.add(i); ns.add(nm)
+  ar=t.get('artifacts')
+  if type(ar) is not dict or set(ar)!=set(ART): return None
+  oa={}
+  for k in ART:
+   v=ar.get(k)
+   if type(v) is not str or not HX.match(v) or v==ZERO: return None
+   oa[k]=v
+  ds=t.get('devices')
+  if type(ds) is not list or not ds: return None
+  dm={}
+  for d in ds:
+   if type(d) is not dict: return None
+   _allow(d,{'vendor','uuid','pci','allocation_id','api','path','kind'},'trusted.device')
+   v=d.get('vendor'); u=d.get('uuid'); p=d.get('pci'); a=d.get('allocation_id'); k=d.get('kind'); api=d.get('api'); pa=d.get('path')
+   if v not in ('nvidia','intel') or type(u) is not str or not UID.match(u) or type(p) is not str or not PCI.match(p): return None
+   if type(a) is not str or not HX.match(a) or a==ZERO or k not in ('device','host','shared'): return None
+   if type(api) is not str or not api or type(pa) is not str or not pa: return None
+   key=(v,u,p,a)
+   if key in dm: return None
+   dm[key]={'kind':k,'api':api,'path':pa}
+  ev=t.get('evaluation_unix')
+  if type(ev) is not int or isinstance(ev,bool) or ev<0 or ev>MAX: return None
+  ms=t.get('max_staleness_seconds',300)
+  if type(ms) is not int or isinstance(ms,bool) or ms<0 or ms>MAX: return None
+  tr=t.get('transfer')
+  if type(tr) is not dict: return None
+  _allow(tr,{'direction','source_device','target_device','payload_bytes','controller'},'trusted.transfer')
+  direction=tr.get('direction')
+  if direction not in DIRS: return None
+  sref=_devref(_need(tr,'source_device'),'trusted.transfer.source_device')
+  tref=_devref(_need(tr,'target_device'),'trusted.transfer.target_device')
+  pb=tr.get('payload_bytes')
+  if type(pb) is not int or isinstance(pb,bool) or pb<1 or pb>MAX: return None
+  ctrl=tr.get('controller')
+  if type(ctrl) is not str or not HX.match(ctrl) or ctrl==ZERO or ctrl!=oa['controller']: return None
+  if sref not in dm or tref not in dm: return None
+  rg=t.get('registries',{})
+  if type(rg) is not dict: return None
+  if set(rg)-set(REGS): return None
+  outregs={}
+  for k in REGS:
+   if k in rg:
+    s=_hashset(rg[k])
+    if s is None: return None
+    outregs[k]=s
+   else:
+    outregs[k]=set()
+  return {'artifacts':oa,'devices':dm,'evaluation_unix':ev,'max_staleness':ms,'transfer':{'direction':direction,'source_device':sref,'target_device':tref,'payload_bytes':pb,'controller':ctrl},'registries':outregs}
+ except Exception:
+  return None
+def _r(s,c,g,f): return {'status':s,'classification':c,'transport_accepted':False,'scope':'evidence_consistency_only','gaps':g,'failures':f}
+def _reg(pins,key,value,fails,gaps,missing,untrusted):
+ s=pins['registries'].get(key,set())
+ if not s:
+  if missing not in gaps: gaps.append(missing)
+ elif value not in s:
+  fails.append(untrusted)
+def validate(receipt,*,trusted):
+ pins=_pins(trusted)
+ if pins is None: return _r('NOT_CHECKED','NOT_CHECKED',['trusted_authoritative_pins_absent'],[])
+ if type(receipt) is not dict: raise ValueError('receipt')
+ _allow(receipt,TOP,'receipt')
+ if receipt.get('schema')!=SCHEMA: raise ValueError('schema')
+ direction=_str(receipt.get('direction'),'direction',128)
+ if direction not in DIRS: raise ValueError('direction')
+ try:
+  src=_dev(_need(receipt,'source'),'source'); tgt=_dev(_need(receipt,'target'),'target')
+  arts=_need(receipt,'artifacts')
+  _allow(arts,set(ART),'artifacts')
+  fails=[]; gaps=[]
+  for k in ART:
+   if _hash(_need(arts,k),'artifacts.'+k)!=pins['artifacts'][k]: fails.append('artifact_pin_mismatch:'+k)
+  sy=_need(receipt,'sync'); _allow(sy,{'producer_event_hash','consumer_event_hash'},'sync')
+  speh=_hash(_need(sy,'producer_event_hash'),'sync.producer_event_hash'); sceh=_hash(_need(sy,'consumer_event_hash'),'sync.consumer_event_hash')
+  if speh==sceh: fails.append('sync_event_not_distinct')
+  ct=_need(receipt,'controls'); _allow(ct,{'cpu_staging','host_pointer_equality_only','clean_baseline_hash','producer_corruption_before_copy_hash'},'controls')
+  cpu=_bool(_need(ct,'cpu_staging'),'controls.cpu_staging'); hp=_bool(_need(ct,'host_pointer_equality_only'),'controls.host_pointer_equality_only')
+  clean=_hash(_need(ct,'clean_baseline_hash'),'controls.clean_baseline_hash'); corr=_hash(_need(ct,'producer_corruption_before_copy_hash'),'controls.producer_corruption_before_copy_hash')
+  if clean==corr: fails.append('corruption_control_not_distinct')
+  pay=_need(receipt,'payload'); _allow(pay,{'bytes','baseline_hash','consumer_result_hash','parity_hash'},'payload')
+  pb=_int(_need(pay,'bytes'),'payload.bytes',1); base=_hash(_need(pay,'baseline_hash'),'payload.baseline_hash'); cons=_hash(_need(pay,'consumer_result_hash'),'payload.consumer_result_hash'); par=_hash(_need(pay,'parity_hash'),'payload.parity_hash')
+  res=receipt.get('residency')
+  hb=cpu or hp or src['kind']!='device' or tgt['kind']!='device'
+  sk=(src['vendor'],src['uuid'],src['pci'],src['allocation_id']); tk=(tgt['vendor'],tgt['uuid'],tgt['pci'],tgt['allocation_id'])
+  if sk not in pins['devices'] or tk not in pins['devices']: return _r('NOT_CHECKED','HOST_BACKED' if hb else 'NOT_CHECKED',['device_pin_absent'],[])
+  if sk[1]==tk[1] or sk[2]==tk[2] or sk==tk: fails.append('source_target_same_physical_identity')
+  tr=pins['transfer']
+  if direction!=tr['direction']: fails.append('direction_not_pinned')
+  if sk!=tr['source_device']: fails.append('source_device_not_pinned')
+  if tk!=tr['target_device']: fails.append('target_device_not_pinned')
+  if pb!=tr['payload_bytes']: fails.append('payload_bytes_not_pinned')
+  if arts.get('controller')!=tr['controller']: fails.append('controller_not_pinned')
+  sd=pins['devices'][sk]; td=pins['devices'][tk]
+  if sd['kind']!='device' or td['kind']!='device': hb=True
+  if sd['api']!=src['api'] or sd['path']!=src['path'] or td['api']!=tgt['api'] or td['path']!=tgt['path']: fails.append('device_api_path_mismatch')
+  sv,tv=DIRS[direction]
+  if src['vendor']!=sv or tgt['vendor']!=tv: fails.append('direction_source_target_order')
+  if clean!=pins['artifacts']['baseline']: fails.append('clean_baseline_not_pinned')
+  if base!=clean: fails.append('baseline_mismatch')
+  if cons!=corr: fails.append('consumer_control_mismatch')
+  if par!=cons: fails.append('parity_mismatch')
+  _reg(pins,'clean_baseline_hashes',clean,fails,gaps,'clean_baseline_registry_absent','clean_baseline_unregistered')
+  _reg(pins,'corruption_control_hashes',corr,fails,gaps,'corruption_control_registry_absent','corruption_control_unregistered')
+  _reg(pins,'consumer_result_hashes',cons,fails,gaps,'consumer_result_registry_absent','consumer_result_unregistered')
+  _reg(pins,'parity_hashes',par,fails,gaps,'parity_registry_absent','parity_unregistered')
+  _reg(pins,'sync_event_hashes',speh,fails,gaps,'sync_registry_absent','producer_event_unregistered')
+  _reg(pins,'sync_event_hashes',sceh,fails,gaps,'sync_registry_absent','consumer_event_unregistered')
+  if type(res) is not dict:
+   gaps.append('residency_missing')
+  else:
+   _allow(res,{'source_device_resident','target_device_resident','measurement_hash','timestamp_unix'},'residency')
+   if _bool(_need(res,'source_device_resident'),'residency.source_device_resident') is not True: gaps.append('source_not_resident')
+   if _bool(_need(res,'target_device_resident'),'residency.target_device_resident') is not True: gaps.append('target_not_resident')
+   mh=_hash(_need(res,'measurement_hash'),'residency.measurement_hash')
+   ts=_int(_need(res,'timestamp_unix'),'residency.timestamp_unix',0)
+   if ts>pins['evaluation_unix']+pins['max_staleness'] or ts<pins['evaluation_unix']-pins['max_staleness']: gaps.append('residency_stale')
+   _reg(pins,'residency_measurement_hashes',mh,fails,gaps,'residency_registry_absent','residency_measurement_unregistered')
+  if direction=='nv_device_dmabuf_export_to_intel_imported_view':
+   if 'write' in receipt or 'read' in receipt or 'reverse_visibility' in receipt: fails.append('unexpected_direction_section')
+   if 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+   ex=_need(receipt,'export'); im=_need(receipt,'import')
+   _allow(ex,{'fd_hash','backing_allocation_id','bytes','os_provenance_hash'},'export')
+   _allow(im,{'external_type','imported_fd_hash','allocation_id','bytes','os_provenance_hash'},'import')
+   fd=_hash(_need(ex,'fd_hash'),'export.fd_hash'); back=_hash(_need(ex,'backing_allocation_id'),'export.backing_allocation_id'); eb=_int(_need(ex,'bytes'),'export.bytes',1); ep=_hash(_need(ex,'os_provenance_hash'),'export.os_provenance_hash')
+   if back!=src['allocation_id']: fails.append('export_backing_allocation_mismatch')
+   if _str(_need(im,'external_type'),'import.external_type',64)!='ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF': fails.append('import_external_type')
+   if _hash(_need(im,'imported_fd_hash'),'import.imported_fd_hash')!=fd: fails.append('fd_binding')
+   if _hash(_need(im,'allocation_id'),'import.allocation_id')!=tgt['allocation_id']: fails.append('import_allocation_mismatch')
+   if _int(_need(im,'bytes'),'import.bytes',1)!=eb: fails.append('bytes_mismatch')
+   ip=_hash(_need(im,'os_provenance_hash'),'import.os_provenance_hash')
+   if ip!=ep: fails.append('fd_provenance_binding')
+   _reg(pins,'resource_provenance_hashes',ep,fails,gaps,'resource_provenance_registry_absent','resource_provenance_unregistered')
+   exp=eb
+  else:
+   if 'export' in receipt or 'import' in receipt or 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+   wr=_need(receipt,'write'); rd=_need(receipt,'read'); rv=receipt.get('reverse_visibility')
+   _allow(wr,{'allocation_id','pattern_hash','bytes','provenance_hash'},'write')
+   _allow(rd,{'allocation_id','cuda_read_hash','bytes','provenance_hash'},'read')
+   wa=_hash(_need(wr,'allocation_id'),'write.allocation_id'); pat=_hash(_need(wr,'pattern_hash'),'write.pattern_hash'); wb=_int(_need(wr,'bytes'),'write.bytes',1); wp=_hash(_need(wr,'provenance_hash'),'write.provenance_hash')
+   ra=_hash(_need(rd,'allocation_id'),'read.allocation_id'); rr=_hash(_need(rd,'cuda_read_hash'),'read.cuda_read_hash'); rb=_int(_need(rd,'bytes'),'read.bytes',1); rp=_hash(_need(rd,'provenance_hash'),'read.provenance_hash')
+   if wa!=tgt['allocation_id'] or ra!=tgt['allocation_id']: fails.append('nv_allocation_binding')
+   if rr!=pat: fails.append('write_read_pattern_mismatch')
+   if pat!=corr: fails.append('write_control_mismatch')
+   if wb!=rb: fails.append('bytes_mismatch')
+   if rp!=wp: fails.append('write_read_provenance_mismatch')
+   _reg(pins,'resource_provenance_hashes',wp,fails,gaps,'resource_provenance_registry_absent','resource_provenance_unregistered')
+   if type(rv) is not dict:
+    gaps.append('reverse_visibility_missing')
+   else:
+    _allow(rv,{'method','evidence_hash'},'reverse_visibility')
+    _str(_need(rv,'method'),'reverse_visibility.method',128)
+    evh=_hash(_need(rv,'evidence_hash'),'reverse_visibility.evidence_hash')
+    _reg(pins,'reverse_visibility_hashes',evh,fails,gaps,'reverse_visibility_registry_absent','reverse_visibility_unregistered')
+   exp=wb
+  if pb!=exp: fails.append('payload_bytes_mismatch')
+ except Missing as m:
+  return _r('NOT_CHECKED','NOT_CHECKED',['missing:'+str(m)],[])
+ if fails: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',gaps,fails)
+ if hb:
+  if gaps: return _r('NOT_CHECKED','HOST_BACKED',gaps,[])
+  return _r('EVIDENCE_CONSISTENT','HOST_BACKED',[],[])
+ if gaps: return _r('NOT_CHECKED','NOT_CHECKED',gaps,[])
+ return _r('EVIDENCE_CONSISTENT','DEVICE_P2P',[],[])

@@ -1,0 +1,9 @@
+{
+  "immutable_source": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_model_whitelist\\llama_logits_model_whitelist.cpp",
+  "immutable_sha256": "9025908c04837fcbacf871eabe9dcb8ad575a8542d4a7da3f9e698288bd7d3ee",
+  "derived_source": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\llama_logits_model_whitelist_compilefix.cpp",
+  "derived_sha256": "bbb705b5419fcc369f8d1eed54e4cae0683899cfdd8d7c1eac2e662881c23c12",
+  "change": "Only two matching forward declarations inserted immediately before workload_canon, resolving workload_id calls before existing helper definitions.",
+  "diff": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\compile_only_declarations.diff",
+  "changes_expected": 2
+}

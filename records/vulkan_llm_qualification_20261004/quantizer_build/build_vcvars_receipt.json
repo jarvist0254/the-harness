@@ -1,0 +1,14 @@
+{
+  "pid": 58600,
+  "command": "cmd.exe /d /s /c call build_quantizer.cmd (vcvars64 + cmake --build --target llama-quantize --parallel 4)",
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "exit_code": 0,
+  "elapsed_seconds": 5.705,
+  "process_present_after": false,
+  "target": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\llama-quantize.exe",
+  "target_exists": true,
+  "target_sha256": "28d19fcf648406bb7e77dc5afcd4a43867f0ad92550c50409d0c63e8e061f332",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\quantizer_build\\build_vcvars.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\quantizer_build\\build_vcvars.stderr.log"
+}

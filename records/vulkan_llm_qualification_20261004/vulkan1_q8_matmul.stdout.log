@@ -1,0 +1,17 @@
+Testing 3 devices
+
+Backend 1/3: Vulkan0
+  Skipping
+Backend 2/3: Vulkan1
+  Device description: AMD Radeon(TM) Graphics
+  Device memory: 48379 MB (45960 MB free)
+
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1,src_overlap=0,m_v=0,pad=0): [1;32mOK[0m
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1,src_overlap=0,m_v=0,pad=0): [1;32mOK[0m
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1,src_overlap=0,m_v=0,pad=0): [1;32mOK[0m
+  3/3 tests passed
+  Backend Vulkan1: [1;32mOK[0m
+Backend 3/3: CPU
+  Skipping
+3/3 backends passed
+[1;32mOK[0m

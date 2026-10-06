@@ -1,0 +1,8 @@
+{
+  "pid": 81552,
+  "query": "tasklist /FI PID eq 81552",
+  "output": "INFO: No tasks are running which match the specified criteria.",
+  "process_absent": true,
+  "observed_utc": "2026-10-04T17:12:59.5782820Z",
+  "scope": "Independent point-in-time attempt3 worker PID check"
+}

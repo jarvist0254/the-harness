@@ -1,0 +1,9 @@
+{
+  "model": "gemini-3.8-flash-high",
+  "pid": 68748,
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 37.4080069,
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini38_identity_20261004T095400898Z",
+  "expected_response_present": false
+}

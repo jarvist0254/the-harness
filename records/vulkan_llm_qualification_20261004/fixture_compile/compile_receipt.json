@@ -1,0 +1,10 @@
+{
+  "pid": 56848,
+  "exit_code": "3",
+  "source": "records/factory_runs/20261004/full_fabric_continuation_20261004T113400Z/grok_logits_edit/llama_logits_corrected.cpp",
+  "source_sha256": "5D52219D3948BA75E82C475CB8AFD71B1ADD5E07A1841961F5480C99781FBFCA",
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\compile_logits_fixture.cmd",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile.stderr.log",
+  "ran_executable": false
+}

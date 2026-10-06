@@ -1,0 +1,23 @@
+test_actual_prior_muse_terminal_json_text (__main__.ParserTests) ... ok
+test_boolean_schema_version (__main__.ParserTests) ... ok
+test_completed_then_failed_is_ambiguous (__main__.ParserTests) ... ok
+test_dict_instead_of_review_text (__main__.ParserTests) ... ok
+test_duplicate_outer_json_key (__main__.ParserTests) ... ok
+test_duplicate_review_key (__main__.ParserTests) ... ok
+test_failed_terminal_does_not_supply_accepted_review (__main__.ParserTests) ... ok
+test_invalid_review_schema (__main__.ParserTests) ... ok
+test_malformed_review_json (__main__.ParserTests) ... ok
+test_minimal_terminal_text (__main__.ParserTests) ... ok
+test_missing_final_newline (__main__.ParserTests) ... ok
+test_nonterminal_structured_review_is_not_terminal (__main__.ParserTests) ... ok
+test_nonterminal_text_is_not_terminal (__main__.ParserTests) ... ok
+test_record_after_terminal_is_not_complete_stream (__main__.ParserTests) ... ok
+test_two_terminal_records_are_ambiguous (__main__.ParserTests) ... ok
+test_wrong_payload_kind (__main__.ParserTests) ... ok
+test_wrong_payload_schema_version (__main__.ParserTests) ... ok
+test_wrong_terminal_value (__main__.ParserTests) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.006s
+
+OK

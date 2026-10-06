@@ -1,0 +1,88 @@
+import json,os,sys
+REQ=['#include <level_zero/ze_api.h>','zeInit','zeDriverGet','zeDeviceGet','zeDeviceGetProperties','zeDeviceGetCommandQueueGroupProperties','zeDeviceCanAccessPeer(S.h,D.h,&can_s2d)','zeDeviceCanAccessPeer(D.h,S.h,&can_d2s)','zeDeviceGetP2PProperties(S.h,D.h,&pp)','zeDeviceGetP2PProperties(D.h,S.h,&pp)','ZE_DEVICE_P2P_PROPERTY_FLAG_ACCESS','zeContextCreateEx','zeMemAllocDevice','zeMemAllocHost','zeMemGetAllocProperties','zeCommandQueueCreate(ctx,dev,&d,&out)','zeCommandListCreate','zeCommandListAppendMemoryFill','zeCommandListAppendMemoryCopy','zeFenceHostSynchronize','10000000000ULL','PEER_COPY_PAYLOAD_OBSERVED','NOT_CHECKED','--inject-corruption','0x5A5A5A5Au','0xDEADBEEFu','65536','usage SRC_UUID DST_UUID','u==su','u==du','ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COPY','ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COMPUTE','uuid_hex','for(int i=0;i<16;++i)','mismatch_count','for(size_t i=0;i<WORDS;++i)','destroy_tracker','direct_transport_qualified','0x8086u']
+BAD=['dv[0]','devs[0]','devices[0]','zeCommandQueueCreate(st.c,S.h,fq.o','zeCommandQueueCreate(st.c,cdv,cq.o','zeCommandQueueCreate(st.c,D.h,rq.o']
+def val_src(p):
+ errs=[]
+ try:
+  txt=open(p,encoding='utf-8',errors='replace').read()
+ except Exception as e:
+  return [str(e)]
+ if not txt:errs.append('empty')
+ if len(txt)>16000:errs.append('too_long')
+ for t in REQ:
+  if t not in txt:errs.append('missing:'+t)
+ for t in BAD:
+  if t in txt:errs.append('forbidden:'+t)
+ if txt.count('int main')!=1:errs.append('main')
+ return errs
+def val_rec(o):
+ errs=[]
+ if not isinstance(o,dict):return ['not_object']
+ st=o.get('status')
+ if st not in {'PEER_COPY_PAYLOAD_OBSERVED','FAIL','NOT_CHECKED'}:return ['bad_status']
+ if st=='PEER_COPY_PAYLOAD_OBSERVED':
+  if o.get('exit_code')!=0:errs.append('exit_code')
+  if o.get('bytes')!=65536 or o.get('words')!=16384:errs.append('size')
+  if o.get('timeout_ns')!=10000000000:errs.append('timeout')
+  if o.get('direct_transport_qualified') is not False:errs.append('direct_transport_qualified')
+  if o.get('mismatch_count')!=0:errs.append('mismatch_count')
+  ce=o.get('cleanup_errors')
+  if not isinstance(ce,list) or ce:errs.append('cleanup_errors')
+  s=o.get('src',{});d=o.get('dst',{})
+  if not s.get('uuid') or not d.get('uuid') or s.get('uuid')==d.get('uuid'):errs.append('uuid')
+  if s.get('vendorId')!='0x8086' or d.get('vendorId')!='0x8086':errs.append('vendor')
+  ap=o.get('api_sequence','')
+  for t in ['zeDeviceCanAccessPeer','zeDeviceGetP2PProperties','zeMemAllocDevice','zeCommandListAppendMemoryCopy','zeFenceHostSynchronize']:
+   if t not in ap:errs.append('api:'+t)
+  al=o.get('allocations',{})
+  for k in ['src','dst','host']:
+   if k not in al:
+    errs.append('alloc:'+k)
+   else:
+    a=al[k]
+    for f in ['ptr','bytes','api']:
+     if f not in a:errs.append('alloc_field:'+k+':'+f)
+ elif st=='NOT_CHECKED':
+  if not o.get('reason'):errs.append('reason')
+  if o.get('exit_code') not in (2,None):errs.append('exit_code')
+ else:
+  if not (o.get('api') or o.get('reason')):errs.append('detail')
+  if o.get('exit_code') not in (1,None):errs.append('exit_code')
+  ce=o.get('cleanup_errors')
+  if ce is not None and not isinstance(ce,list):errs.append('cleanup_errors_type')
+ return errs
+def fixtures():
+ ok={'status':'PEER_COPY_PAYLOAD_OBSERVED','exit_code':0,'bytes':65536,'words':16384,'timeout_ns':10000000000,'direct_transport_qualified':False,'mismatch_count':0,'cleanup_errors':[],'src':{'uuid':'a','vendorId':'0x8086'},'dst':{'uuid':'b','vendorId':'0x8086'},'api_sequence':'zeDeviceCanAccessPeer zeDeviceGetP2PProperties zeMemAllocDevice zeCommandListAppendMemoryCopy zeFenceHostSynchronize','allocations':{'src':{'ptr':'1','bytes':65536,'api':'zeMemAllocDevice'},'dst':{'ptr':'2','bytes':65536,'api':'zeMemAllocDevice'},'host':{'ptr':'3','bytes':65536,'api':'zeMemAllocHost'}}}
+ bad=dict(ok);bad['bytes']=1
+ nc={'status':'NOT_CHECKED','reason':'x','exit_code':2}
+ fl={'status':'FAIL','api':'x','exit_code':1,'cleanup_errors':[]}
+ assert val_rec(ok)==[]
+ assert val_rec(bad)!=[]
+ assert val_rec(nc)==[]
+ assert val_rec(fl)==[]
+ assert val_rec({'status':'BOGUS'})!=[]
+def main():
+ p=sys.argv[1] if len(sys.argv)>1 else os.environ.get('CANDIDATE_SOURCE_PATH','')
+ recp=sys.argv[2] if len(sys.argv)>2 else os.environ.get('RECEIPT_PATH','')
+ if not p:
+  print(json.dumps({'status':'FAIL','reason':'candidate source path missing'}));return 2
+ try:
+  fixtures()
+ except Exception as e:
+  print(json.dumps({'status':'FAIL','reason':'fixture_selftest_failed','detail':str(e)}));return 1
+ errs=val_src(p)
+ rec_errs=[]
+ if recp:
+  try:
+   rec=json.load(open(recp,encoding='utf-8'))
+   rec_errs=val_rec(rec)
+  except Exception as e:
+   rec_errs=[str(e)]
+ out={'status':'FAIL' if errs or rec_errs else 'STATIC_SOURCE_VALID','native_execution':'NOT_CHECKED_BY_THIS_TEST','source_path':p,'source_errors':errs}
+ if recp:
+  out['receipt_path']=recp
+  out['receipt_errors']=rec_errs
+ out['native_qualification']='Compile separately on Intel Level Zero host: g++ -std=c++17 candidate.cpp -lze_loader -o peer_copy. Run ./peer_copy SRC_UUID DST_UUID for exit0 PEER_COPY_PAYLOAD_OBSERVED; with --inject-corruption expect exit1 payload_mismatch; missing/unsupported Intel pair expect exit2 NOT_CHECKED. This Python test does not execute native code.'
+ print(json.dumps(out))
+ return 1 if errs or rec_errs else 0
+if __name__=='__main__':sys.exit(main())

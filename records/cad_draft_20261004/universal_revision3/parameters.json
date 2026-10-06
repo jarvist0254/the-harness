@@ -1,0 +1,47 @@
+{
+  "profile": "universal",
+  "core_width_mm": 188,
+  "core_depth_mm": 200,
+  "base_mm": 8,
+  "post_mm": 10,
+  "shoe_height_mm": 16,
+  "gap_mm": 12,
+  "rail_depth_mm": 8,
+  "d_beam_height_mm": 6,
+  "metal_rail_height_mm": 2,
+  "cards": [
+    {
+      "bay": "A",
+      "length_mm": 360,
+      "height_mm": 165,
+      "thickness_mm": 68,
+      "measured": false
+    },
+    {
+      "bay": "B",
+      "length_mm": 360,
+      "height_mm": 165,
+      "thickness_mm": 68,
+      "measured": false
+    },
+    {
+      "bay": "C",
+      "length_mm": 360,
+      "height_mm": 165,
+      "thickness_mm": 68,
+      "measured": false
+    },
+    {
+      "bay": "D",
+      "length_mm": 360,
+      "height_mm": 165,
+      "thickness_mm": 68,
+      "measured": false
+    }
+  ],
+  "receiver_hole_datums": null,
+  "safe_support_patches": null,
+  "psu_interfaces": null,
+  "cable_bends": null,
+  "fan_plenum": null
+}

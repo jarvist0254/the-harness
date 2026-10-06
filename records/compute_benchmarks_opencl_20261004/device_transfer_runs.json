@@ -1,0 +1,52 @@
+[
+  {
+    "vendor_case": "nvidia",
+    "command": [
+      "E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\bin\\memory_benchmark_ocl.exe",
+      "--test=ReadBufferMisaligned",
+      "--api=ocl",
+      "--size=1048576",
+      "--misalignment=1",
+      "--useEvents=0",
+      "--iterations=2",
+      "--warmupIterations=0",
+      "--oclPlatformIndex=0",
+      "--oclDeviceIndex=0",
+      "--useOOQ=0",
+      "--no-intel-extensions",
+      "--sleepFor=0",
+      "--verbose"
+    ],
+    "pid": 35412,
+    "exit": 0,
+    "seconds": 0.6409999998286366,
+    "timed_out": false,
+    "stdout": "OpenCL Platform: NVIDIA CUDA\r\n\tDevice: NVIDIA GeForce RTX 5070 Ti\r\n\t\tdriverVersion: 591.86\r\n\t\tcomputeUnits:  70\r\n\t\tclockFreq:     2452\r\n\r\nTestCase                                                                    Mean         Median         StdDev            Min            Max   Type   Label [unit]\r\nReadBufferMisaligned(api=ocl size=1MB misalignment=1 useEvents=0)          9.203          9.203         38.78%          5.634         12.772  [CPU]         [GB/s]\r\nindividual results: [ 5.63448 12.7719 ]\r\n\r\n",
+    "stderr": ""
+  },
+  {
+    "vendor_case": "amd",
+    "command": [
+      "E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\bin\\memory_benchmark_ocl.exe",
+      "--test=ReadBufferMisaligned",
+      "--api=ocl",
+      "--size=1048576",
+      "--misalignment=1",
+      "--useEvents=0",
+      "--iterations=2",
+      "--warmupIterations=0",
+      "--oclPlatformIndex=1",
+      "--oclDeviceIndex=0",
+      "--useOOQ=0",
+      "--no-intel-extensions",
+      "--sleepFor=0",
+      "--verbose"
+    ],
+    "pid": 39216,
+    "exit": 0,
+    "seconds": 0.9060000004246831,
+    "timed_out": false,
+    "stdout": "OpenCL Platform: AMD Accelerated Parallel Processing\r\n\tDevice: gfx1036\r\n\t\tdriverVersion: 3652.0 (PAL,LC)\r\n\t\tcomputeUnits:  1\r\n\t\tclockFreq:     2200\r\n\r\nTestCase                                                                    Mean         Median         StdDev            Min            Max   Type   Label [unit]\r\nReadBufferMisaligned(api=ocl size=1MB misalignment=1 useEvents=0)          2.960          2.960         69.25%          0.910          5.010  [CPU]         [GB/s]\r\nindividual results: [ 0.91038 5.00992 ]\r\n\r\n",
+    "stderr": ""
+  }
+]

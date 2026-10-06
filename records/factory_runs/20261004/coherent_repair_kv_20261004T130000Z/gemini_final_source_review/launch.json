@@ -1,0 +1,10 @@
+{
+  "model": "gemini-3.8-flash-medium",
+  "provider_deadline": 210,
+  "native_children": 0,
+  "identity": "retained Process handle",
+  "outer_deadline": 240,
+  "pid": 84200,
+  "clock": "Stopwatch",
+  "credential_saved": false
+}

@@ -1,0 +1,20 @@
+{
+  "observed_model": "qwen3.8-max",
+  "native_children_actual": 0,
+  "pid": 80428,
+  "job": "llama_spec",
+  "finish_reason": "stop",
+  "requested_model": "qwen3.8-max",
+  "elapsed_seconds": 90.26,
+  "http": 200,
+  "usage": {
+    "prompt_tokens": 10269,
+    "total_tokens": 14236,
+    "completion_tokens": 3967,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 10269
+    }
+  },
+  "status": "COMPLETE_UNTRUSTED_PENDING_GATES"
+}

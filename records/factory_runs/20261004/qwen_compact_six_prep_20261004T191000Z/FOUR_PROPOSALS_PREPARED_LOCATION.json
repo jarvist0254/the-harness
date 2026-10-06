@@ -1,0 +1,10 @@
+{
+  "folder": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z",
+  "packet_sha256": "a27ec77fbda8027d398c34c951d6c8fac4d65e6ce31c55c229a88425b2e99a58",
+  "jobs": [
+    "qwen_l0_query_replacement",
+    "qwen_cuda_export_repair",
+    "qwen_directed_receipt_repair",
+    "qwen_l0_peer_repair"
+  ]
+}

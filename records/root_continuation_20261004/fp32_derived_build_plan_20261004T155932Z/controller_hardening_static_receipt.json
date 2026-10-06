@@ -1,0 +1,59 @@
+{
+  "utc": "2026-10-04T16:29:04.424994+00:00",
+  "scope": "STATIC_NONEXECUTING_CONTROLLER_PREPARATION",
+  "ast": "PASS",
+  "controller_sha256": "2611fcaa96bd921f33c3e8308d9c6181a958fbb6cfa8e1d09fe0d350e488a9e7",
+  "revision1_sha256": "4c23701e27723a123713d460ed90be4cb69df31087ddbfd006586182dc278feb",
+  "prepare_derived_sha256": "52edeb8ba8d0338e870ca3521364fc9b3c7da306ca1d4ec3c97ad3c57b72710a",
+  "contract_sha256": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+  "candidate_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "native_calls": [],
+  "controller_executed": false,
+  "configuration_or_build_executed": false,
+  "required_runtime_admission_fields": [
+    "authorization",
+    "boundary_receipt_path",
+    "boundary_receipt_sha256",
+    "boundary_stderr_path",
+    "boundary_stderr_sha256",
+    "build_cmd_sha256",
+    "cmd_exe",
+    "cmd_exe_sha256",
+    "configure_cmd_sha256",
+    "controller_sha256",
+    "copied_clean_manifest_sha256",
+    "derived_manifest_sha256",
+    "derived_root",
+    "evidence_admission_snapshot_sha256",
+    "native_admitted",
+    "native_suite_receipt_path",
+    "native_suite_receipt_sha256",
+    "plan_sha256",
+    "pure44_receipt_path",
+    "pure44_receipt_sha256",
+    "pure_controls_pass",
+    "toolchain_original_pins_sha256",
+    "variant_path",
+    "variant_sha256"
+  ],
+  "changes": [
+    "Manifest persisted before starting heartbeat; thread start under stop/join finally",
+    "Final verification errors captured; best-effort terminal receipt retains failure",
+    "Caller admission, controller, evidence manifests, commands and qualification receipts pinned before reads and verified before/after stages",
+    "Pure 44 and boundary 5 results interpreted; native five cases recomputed from raw status/restart/worker/output and hashes; accepted field ignored"
+  ],
+  "limits": {
+    "configure_seconds": 60,
+    "build_seconds": 600,
+    "stdout_bytes": 131072,
+    "stderr_bytes": 131072,
+    "heartbeat_seconds": 15
+  },
+  "limitations": [
+    "No controller import/runtime or native build yet",
+    "Pins are trusted caller bindings, not cryptographic authentication of hardware evidence",
+    "Dynamic filesystem rename/reparse races not qualified",
+    "Tasklist is bounded point-in-time PID absence on the current English host, not identity or all-controller-loss proof",
+    "Native five CPU cases do not certify a 600-second compiler workload"
+  ]
+}

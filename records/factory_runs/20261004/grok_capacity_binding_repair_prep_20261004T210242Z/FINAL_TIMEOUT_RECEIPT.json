@@ -1,0 +1,66 @@
+{
+  "correction_artifact_exists": false,
+  "cleanup_scope": "Inner wrapper retained owned Process, observed exit, drained streams, disposed handle; final absent PID read is point-in-time only",
+  "retry_calls": 0,
+  "wrapper_exit_code": 0,
+  "candidate_source_executed": false,
+  "wrapper_session_completed": true,
+  "wrapper_tool_session": 57905,
+  "status": "OWNED_PROVIDER_TIMEOUT_NO_CORRECTION",
+  "provider_calls": 1,
+  "source_unchanged": true,
+  "owned_provider_pid": 67880,
+  "elapsed_seconds": 600.43,
+  "pins": {
+    "ROOT_LAUNCH_BINDING.pending.json": {
+      "bytes": 650,
+      "sha256": "420839d8668b99c1921442ed7fab992b54f2ff6c143a703e8257acd2e8eaa6b7"
+    },
+    "research_artifact.ps1": {
+      "bytes": 722,
+      "sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459"
+    },
+    "grok_capacity_binding_high.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "invoke_owned_capacity_editor.ps1": {
+      "bytes": 8076,
+      "sha256": "4c31e32ca8baf6d8b231c38a0a8e3845c667341b6e85f87e5449b08d2b974005"
+    },
+    "PREPARATION_PACKET.json": {
+      "bytes": 2089,
+      "sha256": "f7ccac641e1e3413a46189e578ea7bb5286b0472286ac4a87785d8b2166e1b76"
+    },
+    "grok_capacity_binding_high.owned_launch.json": {
+      "bytes": 515,
+      "sha256": "36dffaa946ce1130be8ee93aa911e38690b27d91024a4ba098dfa57be6c87b31"
+    },
+    "provider_common.ps1": {
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    "grok_capacity_binding_high.prompt.txt": {
+      "bytes": 66957,
+      "sha256": "b3850fd5653d1176f418686fdef2a45500a73134c75c4218f482f707ed3250cc"
+    },
+    "grok_capacity_binding_high.owned_terminal.json": {
+      "bytes": 529,
+      "sha256": "67ee93d7a70920e8c8fac0ab273be47b77bbbd0df76aff26ed7cac24abd791e3"
+    },
+    "grok_capacity_binding_high.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ROOT_LAUNCH_BINDING.admitted.json": {
+      "bytes": 813,
+      "sha256": "9f411c013bc22b28cf3f444fc000a9c7deb9dc993c9b821fae81246d09b68bcf"
+    }
+  },
+  "reasoning_effort": "high",
+  "provider_pid_absent_at_final_readonly_observation": true,
+  "source_sha256_after": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "native_gpu_product_execution": false,
+  "requested_model": "grok-4.7-build-fast",
+  "usage": "UNKNOWN_NOT_REPORTED"
+}

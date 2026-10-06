@@ -1,0 +1,7 @@
+{
+  "outer_killed": false,
+  "pid": 90812,
+  "model": "qwen3.8-flash",
+  "exit_code": 55,
+  "elapsed_seconds": 255.58
+}

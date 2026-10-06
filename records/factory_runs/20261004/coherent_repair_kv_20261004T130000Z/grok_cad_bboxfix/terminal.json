@@ -1,0 +1,28 @@
+{
+  "pid": 94668,
+  "outer_killed": false,
+  "stop_reason": "end_turn",
+  "vendor_reported_cost_usd": 0.04020976,
+  "status": "COMPLETE_PATCH_UNTRUSTED",
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 10438,
+      "outputTokens": 6280,
+      "cacheReadInputTokens": 1152,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.04020976
+    }
+  },
+  "requested_model": "grok-4.7-build-fast",
+  "elapsed_seconds": 39.96,
+  "exit_code": 0,
+  "usage": {
+    "input_tokens": 10438,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 6280,
+    "reasoning_tokens": 4977,
+    "total_tokens": 17870
+  }
+}

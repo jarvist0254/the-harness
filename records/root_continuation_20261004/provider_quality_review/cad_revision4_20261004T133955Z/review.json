@@ -1,0 +1,255 @@
+{
+  "verdict": "PASS_FOR_ROOT_PROMOTION_AS_UNQUALIFIED_DRAFT_ONLY",
+  "candidate_sha256": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+  "accepted_source_sha256_unchanged": "326133a489430f5167bec29a87c28af8ea652e2fe40701d64c153399b85f372c",
+  "pure_tests": {
+    "source_sha256": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "profiles": [
+      {
+        "profile": "compact",
+        "GPU_poses_equal": true,
+        "six_clipped_shoes_equal": true,
+        "post_boxes": [
+          {
+            "origin_mm": [
+              -31.0,
+              0.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              150.0
+            ]
+          },
+          {
+            "origin_mm": [
+              -31.0,
+              190.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              150.0
+            ]
+          },
+          {
+            "origin_mm": [
+              21.0,
+              0.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              150.0
+            ]
+          },
+          {
+            "origin_mm": [
+              21.0,
+              190.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              150.0
+            ]
+          }
+        ],
+        "gap_side_clearance_mm": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ]
+        ],
+        "printed_bbox_mm": [
+          188.0,
+          200.0,
+          150.0
+        ],
+        "all_16_post_body_box_intersection_volumes_mm3": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "profile": "universal",
+        "GPU_poses_equal": true,
+        "six_clipped_shoes_equal": true,
+        "post_boxes": [
+          {
+            "origin_mm": [
+              -45.0,
+              0.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              199.0
+            ]
+          },
+          {
+            "origin_mm": [
+              -45.0,
+              190.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              199.0
+            ]
+          },
+          {
+            "origin_mm": [
+              35.0,
+              0.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              199.0
+            ]
+          },
+          {
+            "origin_mm": [
+              35.0,
+              190.0,
+              0.0
+            ],
+            "size_mm": [
+              10.0,
+              10.0,
+              199.0
+            ]
+          }
+        ],
+        "gap_side_clearance_mm": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ]
+        ],
+        "printed_bbox_mm": [
+          188.0,
+          200.0,
+          199.0
+        ],
+        "all_16_post_body_box_intersection_volumes_mm3": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "AST_top_level_stdlib_definitions_only": true,
+    "accepted_source_sha256_after": "326133a489430f5167bec29a87c28af8ea652e2fe40701d64c153399b85f372c"
+  },
+  "native_profile_checks": [
+    {
+      "profile": "compact",
+      "native_one_valid_solid": true,
+      "actual_bbox_mm": [
+        188.0,
+        200.0,
+        150.0
+      ],
+      "rotated_print_bbox_mm": [
+        200.0,
+        188.0,
+        150.0
+      ],
+      "core_volume_mm3": 151903.99999999994,
+      "all16_post_body_positivevolume_intersections_zero": true,
+      "all8_metal_body_intersections_zero": true,
+      "all4_core_body_intersections_zero": true,
+      "GPU_saved_shapes_unchanged": true,
+      "six_native_clipped_shoes_unchanged": true,
+      "post_top_mm": 150.0,
+      "D_bottom_mm": 152.0,
+      "post_body_gap_mm": 2.0,
+      "safe_contact_load_fit": "NOT_CHECKED",
+      "source_hash_stable": true
+    },
+    {
+      "profile": "universal",
+      "native_one_valid_solid": true,
+      "actual_bbox_mm": [
+        188.0,
+        200.0,
+        199.0
+      ],
+      "rotated_print_bbox_mm": [
+        200.0,
+        188.0,
+        199.0
+      ],
+      "core_volume_mm3": 182767.99999999968,
+      "all16_post_body_positivevolume_intersections_zero": true,
+      "all8_metal_body_intersections_zero": true,
+      "all4_core_body_intersections_zero": true,
+      "GPU_saved_shapes_unchanged": true,
+      "six_native_clipped_shoes_unchanged": true,
+      "post_top_mm": 199.0,
+      "D_bottom_mm": 201.0,
+      "post_body_gap_mm": 2.0,
+      "safe_contact_load_fit": "NOT_CHECKED",
+      "source_hash_stable": true
+    }
+  ],
+  "native_receipt": "E:\\the_harness\\records\\cad_draft_20261004\\native_build_revision4_runs.json",
+  "pure_process_absence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "native_PIDs_absent": [
+    92244,
+    91196
+  ],
+  "old_preview_matches_new_printed_geometry": false,
+  "limitations": [
+    "Printed posts/core geometry intentionally changes from revision3; old retained preview must be labelled historical or regenerated before claiming revision4 rendering.",
+    "No STL, slicer estimates, production release, safe contacts, load strength, actual hardware receiver/PSU/cable/fan interfaces or thermal qualification.",
+    "Body envelope overlap volumes are zero within native BRep checks; hypothetical boxes remain unmeasured."
+  ]
+}

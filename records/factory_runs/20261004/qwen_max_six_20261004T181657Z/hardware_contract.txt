@@ -1,0 +1,1 @@
+Four-card distributed single-model P0 software research contract. Current actualhost NVIDIA5070Ti +AMDgfx1036integrated sharedmemory. IntelphysicaldeviceNOT_PRESENT/NOT_CHECKED. CardsSKUsundecided. No pooledVRAM/directP2P/qualifiedLLM established. Candidate code untrusted SOURCEONLY. Requestedmaximum nativechildagents10eachQwen/DeepSeek; directHTTP actual0.

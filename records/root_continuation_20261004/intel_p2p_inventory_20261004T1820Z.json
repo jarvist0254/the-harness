@@ -1,0 +1,17 @@
+{
+  "observed_local": "2026-10-04T14:21:00-04:00",
+  "method": "Read-only Win32_VideoController inventory; not backend discovery or peer capability",
+  "devices": [
+    {
+      "Name": "NVIDIA GeForce RTX 5070 Ti",
+      "PNPDeviceID": "PCI\\VEN_10DE&DEV_2C05&SUBSYS_89F51043&REV_A1\\4FF4D438022DB04800",
+      "DriverVersion": "32.0.15.9186"
+    },
+    {
+      "Name": "AMD Radeon(TM) Graphics",
+      "PNPDeviceID": "PCI\\VEN_1002&DEV_164E&SUBSYS_7E471462&REV_C5\\4&48FFC35&0&0041",
+      "DriverVersion": "32.0.21030.2001"
+    }
+  ],
+  "intel_gpu_in_this_inventory": 0
+}

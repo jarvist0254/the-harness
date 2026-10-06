@@ -1,0 +1,185 @@
+ # Compute Benchmarks
+A benchmark suite developed and maintained by NEO driver development team in order to provide a stable environment, which allows checking and reproducing performance for various parts of the driver. The benchmark suite is divided into multiple executables, each of which tests a different aspect of the driver. Each executable contained in ComputeBechmarks consists of multiple test cases with a set of predefined configurations (parameters like buffer sizes, workgroup sizes, etc.) along with a possibility to run them with any desired parameters. They support both OpenCL and Level Zero APIs, although some tests may be available in only one API.
+
+Current list of tests can be found in [TESTS.md](TESTS.md).
+
+## How to run benchmarks
+For specific information about how to run the benchmarks, please run the binary with "--help" parameter.
+
+## FAQ
+Answers to frequently asked questions and common problems can be found in [FAQ.md](FAQ.md).
+
+
+## Building
+
+
+### Run CMake and compile
+Build the benchmark as any other CMake project. Example command sequence:
+```
+git clone --recurse-submodules https://github.com/intel/compute-benchmarks
+cd compute-benchmarks
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+```
+The last line can be substituted with platform-specific command, for example:
+```
+make -j`nproc`
+```
+or:
+```
+make memory_benchmark_ocl -j`nproc`
+```
+
+### Building with SYCL support
+
+#### Building with DPC++
+
+SYCL implementations of benchmarks will be built if the following conditions are met:
+
+* oneAPI is installed with support for DPC++;
+* the user has sourced the `setvars.sh` script prior to running CMake;
+* the CMake option `BUILD_SYCL` is set to `ON`;
+
+Note that building SYCL benchmarks is currently only supported on Linux.
+
+##### Example
+
+```
+git clone --recurse-submodules https://github.com/intel/compute-benchmarks
+cd compute-benchmarks
+mkdir build
+cd build
+. /opt/intel/oneapi/setvars.sh
+cmake .. -DBUILD_SYCL=ON
+cmake --build . --config Release
+```
+
+#### Building with AdaptiveCpp
+
+The SYCL implementations of the benchmarks can also be built with AdaptiveCpp:
+
+* `acpp` must be in your path;
+* `SYCL_COMPILER_ROOT` must be set manually to point at AdaptiveCpp;
+* `SYCL_COMPILER` must be set manually to point at AdaptiveCpp;
+* `ALLOW_WARNINGS` must be set to `ON`;
+
+It is recommended to set the optimization flags explicitly, because
+AdaptiveCpp's defaults are less agressive than those of DPC++.
+
+##### Example
+
+```
+git clone --recurse-submodules https://github.com/intel/compute-benchmarks
+cd compute-benchmarks
+mkdir build
+cmake .. -DBUILD_SYCL=ON -DSYCL_COMPILER_ROOT=/path/to/AdaptiveCpp/install/ -DSYCL_COMPILER=acpp -DALLOW_WARNINGS=ON -DCMAKE_CXX_FLAGS="-O3"
+cmake --build . --config Release
+```
+
+
+### Building with MPI support
+
+Hybrid MPI + X implementations of the benchmarks will be built if:
+
+* the CMake option `BUILD_MPI` is set to `ON`;
+* CMake is able to locate the MPI compilers/headers/libraries through its `FindMPI` module;
+
+For Intel MPI, setting `I_MPI_OFFLOAD=1` or `I_MPI_OFFLOAD=2` is required; for other MPI implementations please refer to their manuals.
+
+The MPI benchmarks are only supported on Linux.
+
+### Building with LLVM Offload support
+
+LLVM Offload implementations of the benchmarks will be built if:
+
+* the CMake option `BUILD_OL` is set to `ON`;
+* LLVM's `liboffload` has been built and installed from
+  [llvm-project revision cdd1900816f625eb1f38a6e755c49ccadec56209](https://github.com/llvm/llvm-project/commit/cdd1900816f625eb1f38a6e755c49ccadec56209)
+  with the Offload runtime enabled;
+* `LIBOFFLOAD_INCLUDE_DIR` points to the LLVM installation's include directory;
+* `LIBOFFLOAD_LIBRARY_DIR` points to the LLVM installation's library directory.
+
+`BUILD_OL` defaults to `OFF`. The Offload API is under active development, so
+other llvm-project revisions are not guaranteed to provide a compatible API.
+The LLVM source is not fetched by the benchmark's build.
+
+The Offload runtime must be built with the plugins supported by the target 
+machine, e.g. for Level Zero, the CMake option `LIBOMPTARGET_PLUGINS_TO_BUILD`
+should be set to `level_zero`.
+
+A known-good configuration for liboffload with the Level Zero plugin is
+provided below for reference:
+
+```bash
+cmake -S llvm -B llvm/build -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLVM_TARGETS_TO_BUILD='host;SPIRV;NVPTX' \
+  -DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;lldb;lld' \
+  -DLLVM_ENABLE_RUNTIMES='offload;openmp;libc;libsycl' \
+  -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF \
+  -DLIBOMPTARGET_PLUGINS_TO_BUILD="level_zero" \
+  -DLLVM_PARALLEL_LINK_JOBS=10 \
+  -DLLVM_ENABLE_BINDINGS=OFF \
+  '-DLLVM_LIT_ARGS=-v -vv' \
+  -DCMAKE_INSTALL_PREFIX=/path/to/llvm/install
+```
+
+Configure the benchmarks against a working installation:
+
+```bash
+cmake -S . -B build \
+    -DBUILD_OL=ON \
+    -DLIBOFFLOAD_INCLUDE_DIR=/path/to/llvm-install/include \
+    -DLIBOFFLOAD_LIBRARY_DIR=/path/to/llvm-install/lib
+cmake --build build --config Release
+```
+
+When more than one Offload device is present, select one with
+`--olDeviceIndex=<n>`. Run a benchmark with `--hwInfo` to list the available
+devices.
+
+### Building with Vulkan support
+
+Vulkan implementations of benchmarks will be built if:
+
+* the CMake option `BUILD_VK` is set to `ON`;
+
+`BUILD_VK` defaults to `OFF`, so machines without a Vulkan SDK are unaffected.
+
+A system SDK is *not* required to build. CMake first tries its `FindVulkan` module, and falls back to [third_party/vulkan-sdk](third_party/vulkan-sdk) when nothing is found, the same way OpenCL and Level Zero do. Set `USE_SYSTEM_VULKAN=OFF` to force the bundled SDK.
+
+To *run* the benchmarks you additionally need:
+
+* a Vulkan driver (ICD) for your device. Use `vulkaninfo --summary` to confirm which ICD the loader picks - a `deviceType` of `CPU` means a software rasterizer was selected instead of your GPU;
+* `glslc` is only needed to regenerate the shaders, the compiled `.spv` files are committed to the repository.
+
+##### Example
+
+```
+git clone --recurse-submodules https://github.com/intel/compute-benchmarks
+cd compute-benchmarks
+mkdir build
+cd build
+cmake .. -DBUILD_VK=ON
+cmake --build . --config Release
+```
+
+When more than one Vulkan physical device is present, select one with `--vkDeviceIndex=<n>`. Run the benchmark with `--hwInfo` to list the available devices. The Vulkan validation layer can be enabled with `--vkEnableValidation`.
+
+### Binary types
+Each benchmark suite can be built as a single-api binary or as a an all-api binary.
+- Single-api binaries are named like `ulls_benchmark_ocl` and do not load libraries from not used APIs. They are built by default and can be disabled by passing `-DBUILD_SINGLE_API_BINARIES=OFF` to CMake.
+- All-api binaries are named like `ulls_benchamrk` and contain every API supported by the benchmark, which makes them more convenient, but at a risk of introducing some overhead caused by loading unnecessary library. They are *not* built by default and can be enabled by passing `-DBUILD_ALL_API_BINARIES=ON` to CMake.
+
+By default all benchmarks are compiled in all configurations they support. This can be changed with CMake arguments. For example, to disable all-api binaries, run:
+```
+cmake .. -DBUILD_ALL_API_BINARIES=OFF -DBUILD_SINGLE_API_BINARIES=ON
+```
+
+### SDK
+ComputeBenchmarks will try to find SDKs for the APIs used. In case of inability to find those, it will use libraries contained in [third_party/opencl-sdk](third_party/opencl-sdk), [third_party/level-zero-sdk](third_party/level-zero-sdk) and [third_party/vulkan-sdk](third_party/vulkan-sdk) directories. The libraries were compiled on Ubuntu 20.04 LTS. Using a different setup may result in build failures due to ABI incompatibility, so it's safest to have the SDK installed in your system.
+
+### Contributing
+Information on how to contribute to ComputeBenchmarks can be found in [CONTRIBUTING.md](CONTRIBUTING.md)

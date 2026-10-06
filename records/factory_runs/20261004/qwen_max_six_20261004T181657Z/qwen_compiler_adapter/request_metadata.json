@@ -1,0 +1,17 @@
+{
+  "requested_model": "qwen3.8-max",
+  "max_reply_tokens": 16384,
+  "max_native_authorized_deepseek": 10,
+  "reasoning_effort": "xhigh",
+  "enable_thinking": true,
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "max_native_authorized_qwen": 10,
+  "http_deadline_seconds": 330,
+  "prompt_sha256": "4540C8A46C90F34E837BEFE1B845168A9CAAFFF9894061BBF7D385B2ADFB0388",
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\supervisor_snapshot.py",
+  "credential_saved": false,
+  "response_cap_bytes": 2097152,
+  "native_children_actual": 0,
+  "pid": 82540
+}

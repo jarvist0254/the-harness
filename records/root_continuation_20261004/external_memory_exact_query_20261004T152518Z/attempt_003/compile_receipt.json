@@ -1,0 +1,16 @@
+{
+  "bootstrap": {
+    "captured_stdout_bytes": 17089,
+    "elapsed_seconds": 1.844,
+    "pid": 52124,
+    "process_present_after_wait": false,
+    "return_code": 0,
+    "stderr_bytes": 0,
+    "stderr_truncated": false,
+    "timed_out": false
+  },
+  "compile_executed": false,
+  "compile_status": "TOOLCHAIN_ENVIRONMENT_FAIL",
+  "reason": "MSVC bootstrap omitted PATH, INCLUDE, or LIB",
+  "runtime_status": "NOT_RUN"
+}

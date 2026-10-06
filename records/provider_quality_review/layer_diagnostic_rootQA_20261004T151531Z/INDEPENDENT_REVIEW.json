@@ -1,0 +1,24 @@
+{
+  "status": "PASS_INDEPENDENT_65_SYNTHETIC_CONTROLS",
+  "source_sha256_before": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+  "source_sha256_after": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+  "changed_functions_vs_raw_grok": [
+    "_canonical_name",
+    "_validate_expected"
+  ],
+  "tests": 65,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "forbidden_calls": [],
+  "input_unchanged_all": true,
+  "static_scope": "Component lstat checks and limit+1 bounded reads present; opened-handle fstat identity binding absent.",
+  "limits": [
+    "Dynamic rename/reparse race NOT_CHECKED.",
+    "Metadata origin pins are declarations and do not authenticate native capture.",
+    "No GPU, model, Intel hardware, peer-link or pooled memory qualification.",
+    "No provider-generated tests executed.",
+    "144-node cap cannot be isolated with142canonicalnames.",
+    "Caller-defined card SKUs remain undecided."
+  ]
+}

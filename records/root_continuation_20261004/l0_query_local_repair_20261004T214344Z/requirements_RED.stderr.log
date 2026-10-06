@@ -1,0 +1,63 @@
+test_all_owned_cleanup_proofs_are_complete (__main__.MeasuredRequirements) ... ok
+test_device_lost_is_attempted_failure (__main__.MeasuredRequirements) ... FAIL
+test_directed_relation_preserved (__main__.MeasuredRequirements) ... FAIL
+test_duplicate_root_queries_two_physical_owners_only (__main__.MeasuredRequirements) ... FAIL
+test_no_transport_qualification_from_queries (__main__.MeasuredRequirements) ... FAIL
+test_normal_full_artifact_is_strict_JSON (__main__.MeasuredRequirements) ... FAIL
+test_normal_queries_actual_external_properties (__main__.MeasuredRequirements) ... FAIL
+
+======================================================================
+FAIL: test_device_lost_is_attempted_failure (__main__.MeasuredRequirements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\test_measured_requirements.py", line 19, in test_device_lost_is_attempted_failure
+    self.assertEqual(parsed['value']['status'],'FAIL')
+AssertionError: 'NOT_CHECKED2' != 'FAIL'
+- NOT_CHECKED2
++ FAIL
+
+
+======================================================================
+FAIL: test_directed_relation_preserved (__main__.MeasuredRequirements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\test_measured_requirements.py", line 27, in test_directed_relation_preserved
+    self.assertTrue(CASES['normal']['strict_stdout_json']['valid'])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_duplicate_root_queries_two_physical_owners_only (__main__.MeasuredRequirements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\test_measured_requirements.py", line 12, in test_duplicate_root_queries_two_physical_owners_only
+    self.assertEqual(CASES['duplicate_root']['independent_stub_counters']['external_queries'],2)
+AssertionError: 0 != 2
+
+======================================================================
+FAIL: test_no_transport_qualification_from_queries (__main__.MeasuredRequirements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\test_measured_requirements.py", line 24, in test_no_transport_qualification_from_queries
+    self.assertTrue(case['strict_stdout_json']['valid'])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_normal_full_artifact_is_strict_JSON (__main__.MeasuredRequirements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\test_measured_requirements.py", line 8, in test_normal_full_artifact_is_strict_JSON
+    self.assertTrue(CASES['normal']['strict_stdout_json']['valid'])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_normal_queries_actual_external_properties (__main__.MeasuredRequirements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\test_measured_requirements.py", line 10, in test_normal_queries_actual_external_properties
+    self.assertEqual(CASES['normal']['independent_stub_counters']['external_queries'],2)
+AssertionError: 0 != 2
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+FAILED (failures=6)

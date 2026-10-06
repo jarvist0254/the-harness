@@ -1,0 +1,7 @@
+{
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "model": "qwen3.8-flash",
+  "credential_source": "saved configured envKey (redacted)",
+  "timeout_seconds": 180,
+  "pid": 51788
+}

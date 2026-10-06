@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-04T15:50:50.296693+00:00",
+  "status": "LOCAL_PRE_PROVIDER_START_FAILURE_NO_RETRY",
+  "actual_cli_pid": null,
+  "owned_terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\gemini_fp32_review.owned_terminal.json",
+  "elapsed_seconds": 0.02,
+  "provider_response_exists": false,
+  "owned_launch_exists": false,
+  "prompt_sha256": "b593ebcab840e6f4177a81e7c7784d5c3b1a9a256056165eee232910cdbed674",
+  "prompt_utf16_code_units": 39223,
+  "Windows_command_line_limit_units": 32767,
+  "cause": "Full embeddedprompt passed as --print argument exceedsWindows32767commandline evenbeforeotherargs; originalwrapper catch didnotrecordnativeexceptiondetails. No assertion ofauthentication/providerfailure.",
+  "paid_provider_job_count_for_this_attempt": 0,
+  "provider_usage": "NOT_APPLICABLE_NO_CLI_STARTED",
+  "patch_applied": false,
+  "retry_launched": false,
+  "next_step": "Rootadmittednewbinding forverifiedfile/stdin input orshortreadonlyprompt referencingfixedcontextfiles; originalreceipt/promptimmutable."
+}

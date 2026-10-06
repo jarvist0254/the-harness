@@ -1,0 +1,62 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp",
+  "before_sha256": "bbb705b5419fcc369f8d1eed54e4cae0683899cfdd8d7c1eac2e662881c23c12",
+  "after_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "replacements": [
+    {
+      "index": 0,
+      "old_count": 1
+    },
+    {
+      "index": 1,
+      "old_count": 1
+    },
+    {
+      "index": 2,
+      "old_count": 1
+    },
+    {
+      "index": 3,
+      "old_count": 1
+    },
+    {
+      "index": 4,
+      "old_count": 1
+    },
+    {
+      "index": 5,
+      "old_count": 1
+    },
+    {
+      "index": 6,
+      "old_count": 1
+    },
+    {
+      "index": 7,
+      "old_count": 1
+    },
+    {
+      "index": 8,
+      "old_count": 1
+    },
+    {
+      "index": 9,
+      "old_count": 1
+    },
+    {
+      "index": 10,
+      "old_count": 1
+    },
+    {
+      "index": 11,
+      "old_count": 1
+    },
+    {
+      "index": 12,
+      "old_count": 1
+    }
+  ],
+  "lines": 95,
+  "compile_runtime": "NOT_RUN_ROOT_GATE_REQUIRED",
+  "tolerance_widening_authorized": false
+}

@@ -1,0 +1,12 @@
+{
+  "authorization": "ROOT_ADMITTED_FIVE_FIXED_NATIVE_CPU_FIXTURES",
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "scope": "Natural, exit3, timeout, cancel, overflow; up to4 CPU workers <=5seconds; no600second fixture, noGPU/build/provider/globalqueues",
+  "driver_sha256": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+  "controller_sha256": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+  "worker_sha256": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+  "prepared_contract_sha256": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc",
+  "prepared_admission_sha256": "38dccba35270518c2d282370a76dd7f437a3e0d4e488e075549a15a124d102ba",
+  "root_review": "Read immutable originaldriver/controller+newexactdiff/worker/fullcontracts and 5+44pure receipts",
+  "created_utc": "2026-10-04T16:24:05.9435564Z"
+}

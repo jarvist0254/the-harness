@@ -1,0 +1,28 @@
+{
+  "candidate": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ggml-vulkan.grok_candidate_PENDING_ROOT.cpp",
+  "candidate_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "derived_cpp_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "exact_regions": [
+    {
+      "tag": "replace",
+      "old_first_line": 6319,
+      "old_end_exclusive_line": 6320,
+      "new_first_line": 6319,
+      "new_end_exclusive_line": 6321,
+      "old_bytes_sha256": "c7f28b45ba458c6e42331d54113b1e782675e9b3b665a4688d7f0acbe80fcbcc",
+      "new_bytes_sha256": "607fb06153234b477f610ba07c633c4f6a30f824ea16814b616389db8c0d4033"
+    },
+    {
+      "tag": "replace",
+      "old_first_line": 6381,
+      "old_end_exclusive_line": 6383,
+      "new_first_line": 6382,
+      "new_end_exclusive_line": 6384,
+      "old_bytes_sha256": "fca77c5c0209b709ce5ef6bd476e305a4b9d84600a855b4d6cfdc797ad8de20b",
+      "new_bytes_sha256": "fcdafacb6529da3478fb67faf49e50ef43d189760aa79a753c3651c73236a50f"
+    }
+  ],
+  "output_root": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z",
+  "plan_sha256": "bd669e7e0d9b693c3f07a12292ffe7694110e8d11b8eee50a2e666e0d7cf9ed5",
+  "authorization": "PENDING_ROOT"
+}

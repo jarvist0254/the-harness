@@ -1,0 +1,79 @@
+{
+  "verdict": "REPRODUCED_REFUSAL",
+  "tests_run": 17,
+  "failures": 14,
+  "errors": 0,
+  "baselines_passed": [
+    "positive_two_vendor_baseline",
+    "observed_llm_failure_refused",
+    "tolerance_loosening_refused_baseline"
+  ],
+  "real_worker_launches": 0,
+  "native_job_mutations": 0,
+  "GPU_calls": 0,
+  "forbidden_native_or_process_attempts": [],
+  "candidate_source_unchanged": true,
+  "post_run_sha256": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\contained_supervisor.syntax_normalized.py": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\qualification_validator.corrected.py": "f024298ca0d597c8cfa04f00334924f957bb268b0734fb8ff6ce1ca5fa9378f0"
+  },
+  "failure_source_trace_links": [
+    {
+      "test": "__main__.SupervisorCases.test_bad_read_never_process_completed",
+      "review_finding_id": "S4"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_failed_job_termination_still_waits_roots",
+      "review_finding_id": "S2"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_query_exception_still_closes_owned_handles",
+      "review_finding_id": "S2"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_second_pipe_failure_no_leaks",
+      "review_finding_id": "S1"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_second_reader_start_no_double_close",
+      "review_finding_id": "S3"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_second_writer_duplicate_failure_no_leaks",
+      "review_finding_id": "S1"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_wait_exception_still_closes_owned_handles",
+      "review_finding_id": "S2"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_cpu_participants",
+      "review_finding_id": "V4"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_declared_tolerance_metric_inconsistency",
+      "review_finding_id": "V5"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_four_required_exactly_three_devices",
+      "review_finding_id": "V2"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_llm_without_gpu",
+      "review_finding_id": "V4"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_other_participants",
+      "review_finding_id": "V4"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_unrelated_workload_control",
+      "review_finding_id": "V3"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_zero_highwater_no_resident_or_kernel_capacity",
+      "review_finding_id": "V1"
+    }
+  ],
+  "evidence_limit": "Actual imported provider algorithms, but all device/allocator/numerical evidence and all process/handle APIs were synthetic; no physical qualification inferred."
+}

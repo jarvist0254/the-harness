@@ -1,0 +1,33 @@
+{
+  "revision": "2.0-draft",
+  "frozen": [
+    "Exactly three GPU positions per pod",
+    "Universal adjustable GPU carriers; not RTX-3060-specific",
+    "One monolithic printed core on Ender-3 S1 Pro",
+    "No mid-print spool change",
+    "Primary material is one 5kg PETG spool unless validation fails",
+    "No machine screws self-threaded into printed plastic",
+    "M3 inserts/standoffs for electronics; M4 inserts/through-bolts for structure",
+    "Two 120mm front fans feeding expanding plenum and four air lanes",
+    "Open rear exhaust",
+    "Exact PCIe receiver PCB hole map remains parametric until hardware is purchased",
+    "Expansion is another 3-GPU pod, not a larger pod",
+    "PodLink does not passively daisy-chain PCIe lanes"
+  ],
+  "superseded": [
+    "four-position pod",
+    "fixed 42mm RTX 3060 bay geometry",
+    "empty fourth bay / air dam",
+    "S80 worker plan",
+    "A770 worker plan",
+    "active shared x4 switch as preferred first topology"
+  ],
+  "open_items": [
+    "exact PCI_E1 x16-to-x4/x4/x4/x4 transport card",
+    "exact three receiver boards/cables",
+    "final PSU after receiver input requirements are known",
+    "measured heat-set insert dimensions from purchased hardware",
+    "final slicer mass and print time",
+    "exact RTX 5070 Ti external link hardware"
+  ]
+}

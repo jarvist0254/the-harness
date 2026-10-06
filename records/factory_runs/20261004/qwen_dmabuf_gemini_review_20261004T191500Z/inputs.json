@@ -1,0 +1,20 @@
+{
+  "source": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\source.qwen_untrusted.cpp",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_dmabuf_gemini_review_20261004T191500Z\\candidate.snapshot.cpp",
+    "sha256": "7052C8EBAA49D9807F6428B5A1ED6779A093392BCCF6EF3266B254C0EAC3CB5B",
+    "bytes": 13928
+  },
+  "tests": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\tests_source.qwen_untrusted.txt",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_dmabuf_gemini_review_20261004T191500Z\\tests.snapshot.txt",
+    "sha256": "6363369CF5BA49B2B82397893D42D622F35EF5BD434DDFFEFD578733B6568E76",
+    "bytes": 2901
+  },
+  "spec": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport.spec.txt",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_dmabuf_gemini_review_20261004T191500Z\\spec.snapshot.txt",
+    "sha256": "7714B45230DBD5DB30A52A186B5934C8A944B60D21053A762EF34D0169D5D8CC",
+    "bytes": 4700
+  }
+}

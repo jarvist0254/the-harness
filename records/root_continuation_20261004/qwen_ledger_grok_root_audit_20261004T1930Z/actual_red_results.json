@@ -1,0 +1,8 @@
+{
+  "scope": "SYNTHETIC_PURE_ONLY",
+  "tests": 17,
+  "failures": [],
+  "errors": [],
+  "native_dependency_traps": [],
+  "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a"
+}

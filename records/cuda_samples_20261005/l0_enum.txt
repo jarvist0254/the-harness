@@ -1,0 +1,1 @@
+{"status":"NOT_CHECKED","stage":"loader","reason":"ze_loader.dll absent: no Intel GPU driver; B60 trigger intact"}

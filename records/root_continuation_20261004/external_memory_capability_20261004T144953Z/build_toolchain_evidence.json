@@ -1,0 +1,10 @@
+{
+  "vulkaninfo_path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Bin\\vulkaninfoSDK.exe",
+  "vulkaninfo_sha256": "3dd853ca5acb16f6bc99fd00b5bb40783acf65b386aa9f6a3fdfa36122d52273",
+  "vulkaninfo_file_version": "1.4.363.0",
+  "sdk_root": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk",
+  "sdk_provenance": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\source_provenance.json",
+  "sdk_provenance_sha256": "3bc9fee26aaceed5572f635a86daac286b47851288ed25d8762b0e7739dfc90b",
+  "cmake_cache": "E:\\the_harness\\records\\build_vulkan_real\\build\\CMakeCache.txt",
+  "cmake_cache_sha256": "16f23bdfb1daffa86ce9213b4f005cab0abf1b812ec424d42858935f515f280a"
+}

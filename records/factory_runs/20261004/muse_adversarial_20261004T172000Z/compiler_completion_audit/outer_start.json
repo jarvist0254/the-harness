@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-04T18:29:25.5497150Z",
+  "outer_pid": 82144,
+  "wrapper_pid": 71548,
+  "python": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "python_sha256": "3CCE33D75D6FDAE4E004D0BDF149320B3147482A9CAF370079DCB9C191A1B260",
+  "runner_sha256": "2DBFCD462E49BD15E530674E2E26248D32D4836682E790F289BAC9E562E03431",
+  "muse_sha256": "39A97806D315ECE0FC5CDBB88C903EF5BC77655F32E66DC22D267A212C5030BA",
+  "prompt_sha256": "AB6A6220AA9B4413B6D96E4D259D2968CBB29850B954BBA0EAB4EC397AA7B4D4",
+  "schema_sha256": "6D9132A41CA02CE6AFA6F6AE8BF436A06F76EDF865B19EFAF0943C9ED8FFDF16",
+  "wrapper_deadline_seconds": 330,
+  "wrapper_log_cap_bytes": 65536,
+  "hidden": true,
+  "retained_process_handle": true,
+  "kill_scope": "exact retained Python wrapper PID only; inner KILL_ON_JOB_CLOSE contains Muse"
+}

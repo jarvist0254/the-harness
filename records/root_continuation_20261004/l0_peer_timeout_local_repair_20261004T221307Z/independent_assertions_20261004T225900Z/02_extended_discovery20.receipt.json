@@ -1,0 +1,27 @@
+{
+  "label": "extended_discovery20",
+  "argv": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-I",
+    "-B",
+    "-c",
+    "import os,sys,runpy;os.environ['PEER_CASE_ROOT']='E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\stub_runs_20261004T225852Z';sys.path.insert(0,'E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z');sys.argv=['E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\test_extended_receipt_requirements.py','-v'];runpy.run_path('E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\test_extended_receipt_requirements.py',run_name='__main__')"
+  ],
+  "pid": 80860,
+  "started_utc": "2026-10-04T22:59:31.203+00:00",
+  "elapsed_seconds": 0.109,
+  "returncode": 0,
+  "outer_timeout": false,
+  "outer_killed_owned_wsl_client": false,
+  "stream_overflow": false,
+  "owned_wsl_client_exited": true,
+  "readers_joined": true,
+  "pipes_drained": true,
+  "reader_errors": [],
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.stdout.bin",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 0,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.stderr.bin",
+  "stderr_sha256": "185e67dbdea16a56aabd852ed397a9f994d32a0836cdf8ce7eeb68b6d86c81c1",
+  "stderr_bytes": 1387
+}

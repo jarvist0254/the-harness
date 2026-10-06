@@ -1,0 +1,106 @@
+{
+  "native_children_actual": 0,
+  "grok_capacity": "PREPARED_NOT_LAUNCHED",
+  "provider_live_count": 5,
+  "gemini_closed_tokens": 65652,
+  "utc": "2026-10-04T20:36:54.0608359Z",
+  "usage_known_current_live": 0,
+  "jobs": [
+    {
+      "worker_pid": 52796,
+      "wrapper_pid": 81876,
+      "job": "qwen_cuda_export_repair",
+      "status": "LIVE_REASONING_NO_FINAL_ARTIFACT",
+      "progress": {
+        "http": 200,
+        "frames": 1763,
+        "usage_known": false,
+        "seconds": 135.46,
+        "finish_reason": null,
+        "observed_model": "qwen3.8-max",
+        "done": false,
+        "reasoning_bytes": 25956,
+        "content_bytes": 0,
+        "raw_bytes": 481083
+      },
+      "session": 9154
+    },
+    {
+      "worker_pid": 94856,
+      "wrapper_pid": 28956,
+      "job": "qwen_l0_query_replacement",
+      "status": "LIVE_REASONING_NO_FINAL_ARTIFACT",
+      "progress": {
+        "observed_model": "qwen3.8-max",
+        "seconds": 135.72,
+        "content_bytes": 0,
+        "done": false,
+        "reasoning_bytes": 27701,
+        "usage_known": false,
+        "finish_reason": null,
+        "frames": 1888,
+        "http": 200,
+        "raw_bytes": 514987
+      },
+      "session": 11252
+    },
+    {
+      "worker_pid": 91576,
+      "wrapper_pid": 95488,
+      "job": "qwen_directed_receipt_repair",
+      "status": "LIVE_REASONING_NO_FINAL_ARTIFACT",
+      "progress": {
+        "seconds": 135.71,
+        "raw_bytes": 486646,
+        "usage_known": false,
+        "http": 200,
+        "done": false,
+        "content_bytes": 0,
+        "finish_reason": null,
+        "observed_model": "qwen3.8-max",
+        "reasoning_bytes": 27984,
+        "frames": 1777
+      },
+      "session": 22518
+    },
+    {
+      "worker_pid": 19104,
+      "wrapper_pid": 97056,
+      "job": "qwen_l0_peer_repair",
+      "status": "LIVE_REASONING_NO_FINAL_ARTIFACT",
+      "progress": {
+        "frames": 1880,
+        "raw_bytes": 511286,
+        "usage_known": false,
+        "finish_reason": null,
+        "done": false,
+        "observed_model": "qwen3.8-max",
+        "seconds": 135.95,
+        "reasoning_bytes": 26111,
+        "content_bytes": 0,
+        "http": 200
+      },
+      "session": 40657
+    },
+    {
+      "worker_pid": 83092,
+      "wrapper_pid": 31356,
+      "job": "qwen_cuda_l0_device_dmabuf_v3",
+      "status": "LIVE_REASONING_NO_FINAL_ARTIFACT",
+      "progress": {
+        "observed_model": "qwen3.8-max",
+        "content_bytes": 0,
+        "finish_reason": null,
+        "seconds": 906.07,
+        "frames": 13529,
+        "raw_bytes": 3667630,
+        "usage_known": false,
+        "reasoning_bytes": 175086,
+        "done": false,
+        "http": 200
+      },
+      "session": 77619
+    }
+  ],
+  "candidate_execution": false
+}

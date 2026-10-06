@@ -1,0 +1,13 @@
+{
+  "clock": "Stopwatch",
+  "identity": "retained Process object; no PID reattach",
+  "lane": "Gemini",
+  "observed_process_start_utc": "2026-10-04T17:18:28.0072335Z",
+  "native_children_actual": 0,
+  "pid": 37448,
+  "credential_read_by_outer_wrapper": false,
+  "source_sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+  "deadline_seconds": 240,
+  "prompt_sha256": "ef48273fa1c4221266618026b5d870688ae2f66f5fe6e71123241e6ac965bf81",
+  "requested_model": "gemini-3.8-flash-medium"
+}

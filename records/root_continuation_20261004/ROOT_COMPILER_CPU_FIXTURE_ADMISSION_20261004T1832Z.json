@@ -1,0 +1,11 @@
+{
+  "authorization": "ROOT_COMPILER_CPU_FIXTURE_ADMITTED",
+  "adapter_path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py",
+  "adapter_sha256": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+  "install_symbol": "install",
+  "success_reason": "compiler_root_exited_zero",
+  "driver_sha256": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d",
+  "worker_sha256": "015f376a054758fec223833a3613f4345186a2dbfa4a935a5a0485ae58dd3dbe",
+  "supervisor_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "interpreter_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+}

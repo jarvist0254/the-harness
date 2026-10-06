@@ -1,0 +1,43 @@
+{
+  "Scope": "Official Intel compute-runtime immutable-commit source snapshots; no installation or native execution",
+  "FetchedUtc": "2026-10-04T21:03:59.6331882Z",
+  "TreeCommit": "d4fc0756006fa28738766cb66034dc9acadea91e",
+  "TreeTruncated": false,
+  "Files": [
+    {
+      "URL": "https://raw.githubusercontent.com/intel/compute-runtime/d4fc0756006fa28738766cb66034dc9acadea91e/shared/source/os_interface/linux/external_semaphore_linux.cpp",
+      "Path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__external_semaphore_linux.cpp",
+      "Bytes": 5442,
+      "GitBlobSHA1": "c40aec34c4a922a5618fccea7cc11273869d06b8",
+      "SHA256": "f4e9e16b9deea753720ab85156cbe69795c70aded895910e07632e8f7d55711f"
+    },
+    {
+      "URL": "https://raw.githubusercontent.com/intel/compute-runtime/d4fc0756006fa28738766cb66034dc9acadea91e/shared/source/os_interface/linux/external_semaphore_linux.h",
+      "Path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__external_semaphore_linux.h",
+      "Bytes": 937,
+      "GitBlobSHA1": "93617f03db92e5b3fa30d13bc2c5fe0829ab93e6",
+      "SHA256": "87e8b2e5907709be3f29e0f4c8181fe2af44daec7f343e93d1936836d6e6070e"
+    },
+    {
+      "URL": "https://raw.githubusercontent.com/intel/compute-runtime/d4fc0756006fa28738766cb66034dc9acadea91e/level_zero/core/source/semaphore/external_semaphore_imp.cpp",
+      "Path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\level_zero__core__source__semaphore__external_semaphore_imp.cpp",
+      "Bytes": 6009,
+      "GitBlobSHA1": "a124603f323eac97b19eafefcf7af5f23fe3dca3",
+      "SHA256": "3ccf261403276499057f5c3966657d1c24928e9eda162ff61f6ee8e81ec3ddd8"
+    },
+    {
+      "URL": "https://raw.githubusercontent.com/intel/compute-runtime/d4fc0756006fa28738766cb66034dc9acadea91e/shared/source/os_interface/linux/drm_memory_manager.cpp",
+      "Path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__drm_memory_manager.cpp",
+      "Bytes": 192618,
+      "GitBlobSHA1": "e6d928899d1f4540611ac7bcefd41e78856e8d45",
+      "SHA256": "f5e68fd52e4a1171bbe48a30c3ca7c7c0da3f02fcb7a5ab1bc82590d7baafc60"
+    },
+    {
+      "URL": "https://raw.githubusercontent.com/intel/compute-runtime/d4fc0756006fa28738766cb66034dc9acadea91e/shared/source/os_interface/external_semaphore.h",
+      "Path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__external_semaphore.h",
+      "Bytes": 1961,
+      "GitBlobSHA1": "1497c2508c83b75bc6a77d9361d27531f834aa73",
+      "SHA256": "d93c6f1ca8076f1f8eb8b3045e2ed69d07925abf0d56eea8dc16aa656ddf97d3"
+    }
+  ]
+}

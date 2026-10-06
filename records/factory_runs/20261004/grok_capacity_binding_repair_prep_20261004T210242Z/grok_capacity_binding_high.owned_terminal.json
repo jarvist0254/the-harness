@@ -1,0 +1,20 @@
+{
+  "pid": 67880,
+  "model_usage": null,
+  "lane": "Grok",
+  "pipe_error": false,
+  "credential_saved": false,
+  "outer_killed": true,
+  "elapsed_seconds": 600.43,
+  "drain_unknown": false,
+  "private_url_output_refused": false,
+  "provider_patch_applied": false,
+  "status": "OWNED_DEADLINE_OR_LOG_CAP_TERMINATION",
+  "log_cap_exceeded": false,
+  "finish_reason": null,
+  "parse_error_type": null,
+  "usage": null,
+  "exit_code": -1,
+  "native_children_actual": 0,
+  "requested_model": "grok-4.7-build-fast"
+}

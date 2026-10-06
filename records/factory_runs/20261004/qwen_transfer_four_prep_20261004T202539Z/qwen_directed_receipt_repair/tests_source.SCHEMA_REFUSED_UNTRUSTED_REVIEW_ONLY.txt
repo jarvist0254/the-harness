@@ -1,0 +1,89 @@
+import importlib.util, os, sys, hashlib, json
+p=os.environ.get('CANDIDATE_PATH') or (sys.argv[1] if len(sys.argv)>1 else 'candidate.py')
+spec=importlib.util.spec_from_file_location('candidate',p)
+m=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(m)
+H=lambda x: hashlib.sha256(x.encode()).hexdigest()
+NU='00000000-0000-0000-0000-000000000001'
+IU='00000000-0000-0000-0000-000000000002'
+NP='0000:01:00.0'; IP='0000:03:00.0'
+NA=H('nv-alloc'); IA=H('intel-alloc')
+FWD='nv_device_dmabuf_export_to_intel_imported_view'
+REV='intel_write_to_nv_device_allocation_cuda_read'
+arts={'source_executable':H('src-exe'),'target_executable':H('tgt-exe'),'build':H('build'),'payload':H('payload'),'controller':H('controller'),'baseline':H('clean'),'model':H('model'),'workload':H('workload')}
+def dev(v,u,p,a,api,path): return {'vendor':v,'uuid':u,'pci':p,'allocation_id':a,'api':api,'path':path,'kind':'device'}
+regs={'clean_baseline_hashes':[H('clean')],'corruption_control_hashes':[H('corrupt')],'consumer_result_hashes':[H('corrupt')],'parity_hashes':[H('corrupt')],'sync_event_hashes':[H('p'),H('c')],'residency_measurement_hashes':[H('res')],'resource_provenance_hashes':[H('prov')],'reverse_visibility_hashes':[H('rev')]}
+trusted={'schema':'p2p.trusted/v2','authorities':[{'id':H('root'),'name':'root'}],'artifacts':arts,'devices':[dev('nvidia',NU,NP,NA,'cuda/13.4','cuMemGetHandleForAddressRange'),dev('intel',IU,IP,IA,'level_zero/1.19.12','ze_external_memory_import_fd')],'evaluation_unix':1000000,'max_staleness_seconds':300,'transfer':{'direction':FWD,'source_device':{'vendor':'nvidia','uuid':NU,'pci':NP,'allocation_id':NA},'target_device':{'vendor':'intel','uuid':IU,'pci':IP,'allocation_id':IA},'payload_bytes':4096,'controller':arts['controller']},'registries':regs}
+base={'schema':'p2p.transfer.receipt/v2','direction':FWD,'source':dev('nvidia',NU,NP,NA,'cuda/13.4','cuMemGetHandleForAddressRange'),'target':dev('intel',IU,IP,IA,'level_zero/1.19.12','ze_external_memory_import_fd'),'artifacts':arts,'sync':{'producer_event_hash':H('p'),'consumer_event_hash':H('c')},'controls':{'cpu_staging':False,'host_pointer_equality_only':False,'clean_baseline_hash':H('clean'),'producer_corruption_before_copy_hash':H('corrupt')},'payload':{'bytes':4096,'baseline_hash':H('clean'),'consumer_result_hash':H('corrupt'),'parity_hash':H('corrupt')},'export':{'fd_hash':H('fd'),'backing_allocation_id':NA,'bytes':4096,'os_provenance_hash':H('prov')},'import':{'external_type':'ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF','imported_fd_hash':H('fd'),'allocation_id':IA,'bytes':4096,'os_provenance_hash':H('prov')},'residency':{'source_device_resident':True,'target_device_resident':True,'measurement_hash':H('res'),'timestamp_unix':1000000}}
+C=lambda d: json.loads(json.dumps(d))
+def bad(fn):
+ try:
+  fn()
+ except ValueError:
+  return True
+ except Exception:
+  return False
+ return False
+o=m.validate(C(base),trusted=C(trusted))
+assert o['status']=='EVIDENCE_CONSISTENT' and o['classification']=='DEVICE_P2P' and o['transport_accepted'] is False
+o=m.validate(C(base),trusted=None)
+assert o['status']=='NOT_CHECKED' and 'trusted_authoritative_pins_absent' in o['gaps']
+r=C(base); r['controls']['clean_baseline_hash']=H('forged-clean'); r['payload']['baseline_hash']=H('forged-clean')
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='FAIL' and o['classification']!='DEVICE_P2P' and 'clean_baseline_not_pinned' in o['failures']
+t=C(trusted); t['devices'][1]['uuid']=NU; t['devices'][1]['pci']=NP; t['transfer']['target_device']['uuid']=NU; t['transfer']['target_device']['pci']=NP
+r=C(base); r['target']['uuid']=NU; r['target']['pci']=NP
+o=m.validate(r,trusted=t)
+assert o['status']=='FAIL' and o['classification']!='DEVICE_P2P' and 'source_target_same_physical_identity' in o['failures']
+t=C(trusted); t['registries']['residency_measurement_hashes']=[]
+o=m.validate(C(base),trusted=t)
+assert o['status']=='NOT_CHECKED' and o['classification']!='DEVICE_P2P' and 'residency_registry_absent' in o['gaps']
+t=C(trusted); t['registries']['residency_measurement_hashes']=[H('other-res')]
+o=m.validate(C(base),trusted=t)
+assert o['status']=='FAIL' and 'residency_measurement_unregistered' in o['failures']
+t=C(trusted); t['registries']['sync_event_hashes']=[H('p'),H('other-c')]
+o=m.validate(C(base),trusted=t)
+assert o['status']=='FAIL' and 'consumer_event_unregistered' in o['failures']
+r=C(base); r['controls']['producer_corruption_before_copy_hash']=H('clean')
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='FAIL' and 'corruption_control_not_distinct' in o['failures']
+r=C(base); r['import']['imported_fd_hash']=H('other-fd')
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='FAIL' and 'fd_binding' in o['failures']
+r=C(base); r['export']['fd_hash']='0'*64
+assert bad(lambda: m.validate(r,trusted=C(trusted)))
+r=C(base); r['source'],r['target']=C(base['target']),C(base['source'])
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='FAIL' and o['classification']!='DEVICE_P2P'
+r=C(base); r['controls']['cpu_staging']=True
+o=m.validate(r,trusted=C(trusted))
+assert o['classification']=='HOST_BACKED' and o['status']=='EVIDENCE_CONSISTENT'
+r=C(base); r['residency']['timestamp_unix']=999000
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='NOT_CHECKED' and 'residency_stale' in o['gaps']
+r=C(base); del r['residency']
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='NOT_CHECKED' and 'residency_missing' in o['gaps']
+r=C(base); r['payload']['bytes']=True
+assert bad(lambda: m.validate(r,trusted=C(trusted)))
+r=C(base); r['payload']['bytes']=4096.0
+assert bad(lambda: m.validate(r,trusted=C(trusted)))
+r=C(base); r['payload']['bytes']=8192
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='FAIL' and ('payload_bytes_not_pinned' in o['failures'] or 'payload_bytes_mismatch' in o['failures'])
+r=C(base); r['foo']=1
+assert bad(lambda: m.validate(r,trusted=C(trusted)))
+r=C(base); r['cuda_dmabuf_import']={'x':1}
+o=m.validate(r,trusted=C(trusted))
+assert o['status']=='FAIL' and 'desktop_cuda_dmabuf_import_claim' in o['failures']
+tr=C(trusted); tr['transfer']['direction']=REV; tr['transfer']['source_device']={'vendor':'intel','uuid':IU,'pci':IP,'allocation_id':IA}; tr['transfer']['target_device']={'vendor':'nvidia','uuid':NU,'pci':NP,'allocation_id':NA}
+rv=C(base); rv['direction']=REV; rv['source']=dev('intel',IU,IP,IA,'level_zero/1.19.12','ze_external_memory_import_fd'); rv['target']=dev('nvidia',NU,NP,NA,'cuda/13.4','cuMemGetHandleForAddressRange'); del rv['export']; del rv['import']; rv['write']={'allocation_id':NA,'pattern_hash':H('corrupt'),'bytes':4096,'provenance_hash':H('prov')}; rv['read']={'allocation_id':NA,'cuda_read_hash':H('corrupt'),'bytes':4096,'provenance_hash':H('prov')}; rv['reverse_visibility']={'method':'intel_write_same_nv_allocation_cuda_read','evidence_hash':H('rev')}
+o=m.validate(C(rv),trusted=C(tr))
+assert o['status']=='EVIDENCE_CONSISTENT' and o['classification']=='DEVICE_P2P'
+r=C(rv); del r['reverse_visibility']
+o=m.validate(r,trusted=C(tr))
+assert o['status']=='NOT_CHECKED' and 'reverse_visibility_missing' in o['gaps']
+r=C(rv); r['export']=C(base['export'])
+o=m.validate(r,trusted=C(tr))
+assert o['status']=='FAIL' and 'desktop_cuda_dmabuf_import_claim' in o['failures']
+print('ok')

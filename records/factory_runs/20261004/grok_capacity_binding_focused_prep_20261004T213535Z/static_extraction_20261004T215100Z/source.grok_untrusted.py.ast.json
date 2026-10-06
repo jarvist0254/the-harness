@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "Import",
+    "line": 1,
+    "detail": "import hashlib, math, json"
+  },
+  {
+    "kind": "Assign",
+    "line": 2,
+    "detail": "ART = ('model_hash', 'workload_hash', 'source_hash', 'exe_hash', 'context_hash', 'quant')"
+  },
+  {
+    "kind": "Assign",
+    "line": 3,
+    "detail": "HASH = ('model_hash', 'workload_hash', 'source_hash', 'exe_hash', 'context_hash', 'cpu_reference_hash')"
+  },
+  {
+    "kind": "Assign",
+    "line": 4,
+    "detail": "_FIX = 1e-12"
+  },
+  {
+    "kind": "ClassDef",
+    "line": 5,
+    "detail": "_E"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 8,
+    "detail": "_i"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 10,
+    "detail": "_n"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 12,
+    "detail": "_s"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 14,
+    "detail": "_l"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 16,
+    "detail": "_hex64"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 18,
+    "detail": "_ret"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 21,
+    "detail": "_bind"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 45,
+    "detail": "_consistent"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 54,
+    "detail": "_as_float"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 69,
+    "detail": "_pair_err"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 76,
+    "detail": "_exact_cpu"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 89,
+    "detail": "_cpu_raw"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 109,
+    "detail": "_cpu_numbers"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 153,
+    "detail": "_bind_cpu"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 161,
+    "detail": "_dev_names"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 168,
+    "detail": "_index_owners"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 184,
+    "detail": "_map_subset"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 195,
+    "detail": "_bind_owners"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 203,
+    "detail": "validate_capacity"
+  }
+]

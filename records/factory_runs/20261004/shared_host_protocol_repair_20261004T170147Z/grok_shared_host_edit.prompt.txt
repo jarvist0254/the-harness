@@ -1,0 +1,723 @@
+You are the actual Grok editor in the explicitly user-authorized Qwen workhorse → Gemini reviewer → Grok editor pipeline. ROOT owns source application, native testing and quality admission. THIS job is tool-less source/spec artifact editing only; no code execution, file modification, auth, imports, compile, GPU, driver or global Factory. User authorizes MAX10 native children each Qwen/DeepSeek parent where supported; actual directHTTP Qwen children0 and this Grok tool-less CLI noagents0.
+
+Qwen returned complete PROPOSED protocol JSON but strict source intake refused it. Gemini returned actual REJECT review in CLI structured_output; wrapper's response parser failed on mixed markdown/trailing JSON. That parser receipt remains unchanged; provided review is extracted actual structured_output, not a rewritten review or approval.
+
+Correct Qwen's artifact into an HONEST strict REFUSED protocol object with changes=[] and a bounded host-domain fallback design UNLESS independently primary-spec evidence actually establishes the corresponding external-resource/alias ownership relationship. Repeated host-payload imports or identical host backing alone are NOT that proof. Do not force CPP edits or claim all shared-host methods impossible. Distinguish established spec text, unsupported inference and future runtime qualification. No fakePASS, no tolerance widening, no model/four-card/residency/directP2P/Intel claims.
+
+Real defects: first2changes search contract.md text absent from CPP; budget proposed in main AFTERbothinitialize allocations; corruption fill overwrites4bytes and lacks earlier-fill ordering; model changes reference to corrupted expected and demands0mismatches, destroying negativecontrol. Correct these facts and keep ORIGINAL expected vector independent. Fallback smoke DESIGN must require all-byte reference parity; producerGPU corruption BEFOREtransfer/release with exactlyone intendedbyte preservedneighbors and transfer-write ordering; private per-device allocation budget checked BEFOREallocation; finite5s fences and30s owned outerprocess; explicit failure/refusal/teardown. No allocation, GPU submission or patch is executed now.
+
+Primary pointers below were read during preparation. HOST_VISIBLE|HOST_COHERENT requirements do not magically prove original-pointer cache visibility or cross-driver alias ownership. Original import pointer is not vkMapMemory mapping; don't invent platform synchronization. For a robust fallback, explicitly staged actual producer readback → CPU copy → consumer upload has known host ownership boundaries, but it is a DIFFERENT transport with CPU payload transfer; don't retain CPU_FENCE_CONTROL_NO_CPU_PAYLOAD_TRANSFER or claim successful shared-import transport. Unproved no-copy host-domain alternatives remain prerequisites, not admitted behavior. Keep 256KiB payload and2MiB private budget; no source/full architecture rewrite.
+
+Output ONLY ONE complete JSON object with EXACT keys:
+status: PROPOSED|REFUSED;
+protocol_argument: nonempty string;
+changes: array of objects EXACT {search,replace,rationale}; REFUSED MUST[], PROPOSED1..8 meaningful nonoverlapping CPP searches matching snapshotonce;
+prerequisites, evidence_limits, smoke_plan: nonempty arrays of strings.
+This output is NOT an execution verdict. A reasoned refusal is the required useful correction when proof is absent. Provide precise primary URL/section citations, not fictional quotations. No markdown or token-budget filler.
+
+=== FULL ACTUAL QWEN JSON (REJECTED, UNCHANGED) ===
+
+{"status":"PROPOSED","protocol_argument":"Protocol correctness argument: The Vulkan specification (https://docs.vulkan.org/refpages/latest/refpages/source/VkImportMemoryHostPointerInfoEXT.html) explicitly permits the same host pointer to be imported into multiple instances. For HOST_VISIBLE imports, the general memory import rule (https://docs.vulkan.org/spec/latest/chapters/memory.html) states that import preserves contents; the 'undefined contents on import' restriction applies to non-host-visible types. Therefore, independently created producer/consumer buffer views bound to the same VirtualAlloc payload via VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT qualify as corresponding external resources because they alias the identical physical host backing. Ownership transfer semantics using VK_QUEUE_FAMILY_FOREIGN_EXT (https://docs.vulkan.org/spec/latest/chapters/synchronization.html) apply to these aliased views when the release/acquire ranges and queue families match exactly. However, three source defects prevent valid execution under this established model. First, the contract incorrectly claims host-import contents are undefined and that the CPU never initializes the payload; the spec says HOST_VISIBLE imports preserve contents, and the source does initialize via memset. Second, the corruption control modifies the original host pointer after the producer's release barrier but before the consumer's acquire. The synchronization chapter prohibits intervening modification between a release and its matching acquire; doing so invalidates the ownership transfer. Corruption must occur on the producing GPU before its release barrier, using correctly aligned transfer commands and independent expected bytes. Third, the 2 MiB private readback budget is checked only after both vkAllocateMemory calls succeed. Each allocation must be refused against its per-device share of the budget before vkAllocateMemory is called. The proposed changes repair these three blockers with minimal edits. Established steps: repeated host-pointer import is permitted; HOST_VISIBLE import preserves contents; FOREIGN ownership transfers require matching release/acquire barriers without intervening modification. Inferred steps: whether NVIDIA and AMD Windows drivers actually maintain byte parity across cross-vendor HOST_ALLOCATION imports sharing system RAM remains unproven until runtime. Cache requirements: HOST_COHERENT removes flush/invalidate needs for mapped memory, but the original host pointer is not a vkMapMemory mapping; platform cache maintenance for the original pointer requires appropriate synchronization, though coherent system RAM typically avoids stale caches. No noncoherent or device-local fallback is introduced.","changes":[{"search":"- Each shared buffer's `VkMemoryRequirements::size` is no larger than 256 KiB. Each import uses `allocationSize = 256 KiB`, binds at offset zero, and has exactly the same `VirtualAlloc` pointer. The allocation is created and both imports are bound before any GPU access, since host-import contents are undefined on import.","replace":"- Each shared buffer's `VkMemoryRequirements::size` is no larger than 256 KiB. Each import uses `allocationSize = 256 KiB`, binds at offset zero, and has exactly the same `VirtualAlloc` pointer. The allocation is created and both imports are bound before any GPU access. Because the selected memory type is HOST_VISIBLE, the Vulkan specification states that import preserves existing contents; the CPU zeroes the payload before import to establish a known baseline, which is host initialization, not GPU-produced data.","rationale":"Corrects the contract's false claim that host-import contents are undefined on import. The spec restricts undefined contents to non-host-visible imports. Acknowledges the actual CPU initialization in HostBlock and clarifies it is not GPU-produced data."},{"search":"The CPU constructs a separate expected byte vector before submission; it never initializes the shared payload.","replace":"The CPU constructs a separate expected byte vector before submission. The shared payload is initialized to zero by the CPU before import to establish a deterministic baseline; this host initialization is distinct from the GPU-produced fill patterns verified during each round.","rationale":"Corrects the false claim that the CPU never initializes the shared payload. The HostBlock constructor explicitly memsets the allocation. Clarifies the distinction between host initialization and GPU-produced verification data."},{"search":"        const VkDeviceSize readbackTotal = nvidia.readbackAllocationBytes + amd.readbackAllocationBytes;\n        if (readbackTotal > kReadbackBudget) throw Failure(\"private readback allocation budget exceeded\");","replace":"        const VkDeviceSize perDeviceReadbackBudget = kReadbackBudget / 2u;\n        if (nvidia.readbackAllocationBytes > perDeviceReadbackBudget)\n            throw Failure(\"NVIDIA private readback allocation exceeds per-device budget before vkAllocateMemory\");\n        if (amd.readbackAllocationBytes > perDeviceReadbackBudget)\n            throw Failure(\"AMD private readback allocation exceeds per-device budget before vkAllocateMemory\");\n        const VkDeviceSize readbackTotal = nvidia.readbackAllocationBytes + amd.readbackAllocationBytes;","rationale":"Moves the budget check to evaluate each device's readback requirement against its per-device share of the 2 MiB budget before vkAllocateMemory is called, rather than checking the sum after both allocations have already succeeded."},{"search":"    if (injectSingleByteCorruption) {\n        auto* bytes = static_cast<uint8_t*>(sharedHostPointer);\n        bytes[12345] ^= 0x01;\n    }\n\n    submitAndWait(consumer, [&](VkCommandBuffer cmd) {","replace":"    submitAndWait(consumer, [&](VkCommandBuffer cmd) {","rationale":"Removes the invalid host-side corruption that occurs after the producer release and before the consumer acquire. Intervening modification of the original host pointer violates the external ownership transfer rules. Corruption must instead be performed on the producing GPU before its release barrier."},{"search":"RoundResult runRound(Context& producer, Context& consumer, void* sharedHostPointer, uint8_t seed,\n                     bool injectSingleByteCorruption, const char* name) {\n    std::vector<uint8_t> expected = expectedPattern(seed);\n    submitAndWait(producer, [&](VkCommandBuffer cmd) {","replace":"RoundResult runRound(Context& producer, Context& consumer, void* sharedHostPointer, uint8_t seed,\n                     bool injectSingleByteCorruption, const char* name) {\n    std::vector<uint8_t> expected = expectedPattern(seed);\n    std::vector<uint8_t> verifyExpected = expected;\n    if (injectSingleByteCorruption) {\n        verifyExpected[12345] ^= 0x01;\n    }\n    submitAndWait(producer, [&](VkCommandBuffer cmd) {","rationale":"Creates an independent verification vector for the corruption round. When corruption is injected on the GPU before release, the expected bytes used for final comparison must reflect the corrupted state, while the original expected vector remains available if needed. This separates GPU-produced corruption from host verification expectations."},{"search":"        for (uint32_t chunk = 0; chunk < kChunkCount; ++chunk) {\n            const uint8_t byte = expected[chunk * static_cast<size_t>(kChunkBytes)];\n            const uint32_t fill = uint32_t(byte) * 0x01010101u;\n            vkCmdFillBuffer(cmd, producer.sharedBuffer,\n                            VkDeviceSize(chunk) * kChunkBytes, kChunkBytes, fill);\n        }","replace":"        for (uint32_t chunk = 0; chunk < kChunkCount; ++chunk) {\n            const uint8_t byte = expected[chunk * static_cast<size_t>(kChunkBytes)];\n            const uint32_t fill = uint32_t(byte) * 0x01010101u;\n            vkCmdFillBuffer(cmd, producer.sharedBuffer,\n                            VkDeviceSize(chunk) * kChunkBytes, kChunkBytes, fill);\n        }\n        if (injectSingleByteCorruption) {\n            const uint32_t corruptFill = uint32_t(verifyExpected[12345]) * 0x01010101u;\n            vkCmdFillBuffer(cmd, producer.sharedBuffer, 12344u, 4u, corruptFill);\n        }","rationale":"Performs the single-byte corruption on the producing GPU using a correctly aligned vkCmdFillBuffer command (offset 12344, size 4 bytes, both multiples of 4 as required by the spec) before the release barrier. This replaces the invalid host-side modification and ensures corruption is part of the producer's recorded work, maintaining valid ownership transfer semantics."},{"search":"    const auto* actual = static_cast<const uint8_t*>(consumer.readbackMapped);\n    for (size_t i = 0; i < expected.size(); ++i) {\n        if (actual[i] != expected[i]) {","replace":"    const auto* actual = static_cast<const uint8_t*>(consumer.readbackMapped);\n    const auto& compareTarget = injectSingleByteCorruption ? verifyExpected : expected;\n    for (size_t i = 0; i < compareTarget.size(); ++i) {\n        if (actual[i] != compareTarget[i]) {","rationale":"Uses the independent verification expected vector for comparison in the corruption round. Since corruption now occurs on the GPU before release, the consumer's readback will contain the corrupted bytes, and comparison must be against the modified expected values to correctly detect exactly one mismatch at offset 12345."},{"search":"    result.pass = injectSingleByteCorruption\n        ? (result.mismatchCount == 1 && result.firstMismatch == 12345 &&\n           result.actualAtMismatch == static_cast<uint8_t>(result.expectedAtMismatch ^ 0x01))\n        : (result.mismatchCount == 0);","replace":"    result.pass = injectSingleByteCorruption\n        ? (result.mismatchCount == 0)\n        : (result.mismatchCount == 0);","rationale":"Since corruption is now applied on the GPU and the comparison target is the verifyExpected vector that already incorporates the XOR 0x01 change at offset 12345, a successful corruption round should show zero mismatches against the modified expected vector. The previous logic looked for a mismatch against the uncorrupted expected vector, which was appropriate only for the invalid host-side corruption model."}],"prerequisites":["ROOT review admission of the shared-host protocol design draft","Capability query receipt SHA256 7ba345bd6fe0afff8bb2c96596bff74fd7b59e122a273357acb4d9984cd63274 confirming HOST_ALLOCATION importability on NVIDIA 0x10de and AMD 0x1002 with 4096-byte alignment","Source snapshot SHA256 21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815 available for exact search/replace application","Vulkan SDK headers providing VK_EXT_external_memory_host and VK_EXT_queue_family_foreign definitions","Windows VirtualAlloc API available for host pointer allocation with PAGE_READWRITE","Independent root review confirming that HOST_VISIBLE repeated imports constitute corresponding external resources for FOREIGN ownership transfer"],"evidence_limits":["SHARED_HOST_BACKING_NOT_VRAM_P2P: positive results only prove shared system RAM import, not VRAM residency or peer-to-peer DMA","No Intel device participated; vendor ID 0x8086 was NOT_ENUMERATED_BY_THIS_VULKAN_INSTANCE","No real imports, memory bindings, buffer operations, or GPU submissions have been executed; capability advertisements do not demonstrate functional transport","Cross-vendor NVIDIA-to-AMD host pointer aliasing behavior is inferred from specification text, not proven by driver execution","No performance, bandwidth, throughput, or latency measurements are claimed or possible from this design-only artifact","No four-card, multi-GPU, or pooled VRAM configurations are tested or implied","HOST_COHERENT system RAM behavior may differ from device-local memory; no noncoherent or device-local fallback is attempted or validated","Original host pointer cache maintenance relies on platform coherence for system RAM; explicit flush/invalidate is not implemented as HOST_COHERENT is required"],"smoke_plan":["Compile the repaired source against Vulkan 1.1 headers with VK_EXT_external_memory_host and VK_EXT_queue_family_foreign enabled","Execute the binary under a retained-process supervisor enforcing a 30-second outer timeout and 2 MiB stream caps","Verify runtime admission gates: exactly one NVIDIA 0x10de and one AMD 0x1002 device enumerated, distinct UUIDs, HOST_ALLOCATION importable on both, 4096-byte minimum alignment satisfied","Confirm VirtualAlloc returns a pointer aligned to both devices' minImportedHostPointerAlignment and buffer memory requirements alignment","Verify vkGetMemoryHostPointerPropertiesEXT succeeds on both devices and intersects with a HOST_VISIBLE|HOST_COHERENT memory type","Confirm each per-device readback allocation requirement is checked against the 1 MiB per-device budget before vkAllocateMemory is called","Execute Round 1 (NVIDIA produces, AMD consumes): verify 262144/262144 bytes match expected pattern with 5-second fence timeout","Execute Round 2 (AMD produces, NVIDIA consumes): verify 262144/262144 bytes match expected pattern with 5-second fence timeout","Execute Round 3 (NVIDIA produces with GPU-side corruption at offset 12344/4 bytes, AMD consumes): verify 262144/262144 bytes match the independently computed corrupted expected vector","On any fence timeout, allocation failure, or unsupported gate, confirm process emits NOT_CHECKED or FAIL JSON and terminates without freeing the host pointer while device work could remain active","On success, confirm normal teardown order: unmap/destroy readback buffers and memory, destroy shared buffers, free imported device memory, destroy command pools, destroy devices, destroy instances, then VirtualFree the shared allocation","Report all evidence fields including vendor IDs, UUIDs, alignment values, memory type indices, heap flags, allocation sizes, byte counts, mismatch offsets, fence outcomes, elapsed time, and transport label SHARED_HOST_BACKING_NOT_VRAM_P2P","If any driver rejects the repeated host pointer import or produces incorrect bytes, record as honest runtime failure distinct from unsupported capability refusal"]}
+
+=== ACTUAL GEMINI STRUCTURED REVIEW (UNMODIFIED VALUES) ===
+
+{
+  "findings": [
+    {
+      "exact_source": "- Each shared buffer's `VkMemoryRequirements::size` is no larger than 256 KiB... / The CPU constructs a separate expected byte vector before submission; it never initializes the shared payload.",
+      "minimal_fix": "Refuse and drop Changes 1 and 2 from the C++ patch entirely. Do not attempt to apply documentation revisions to source code.",
+      "reason": "Qwen Changes 1 and 2 target contract and specification markdown documentation paragraphs that do not exist within the C++ source file (SHA256 21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815). Patch intake fails immediately on these search chunks.",
+      "region": "Intake / Changes 1 & 2 (Contract text in absent documentation)"
+    },
+    {
+      "exact_source": "check(vkAllocateMemory(device, &readAlloc, nullptr, &readbackMemory), \"vkAllocateMemory(readback)\"); ... const VkDeviceSize readbackTotal = nvidia.readbackAllocationBytes + amd.readbackAllocationBytes;\\nif (readbackTotal > kReadbackBudget) throw Failure(\"private readback allocation budget exceeded\");",
+      "minimal_fix": "Enforce the readback budget check inside Context::initialize strictly before calling vkAllocateMemory (e.g., validating readReq.size against kPerDeviceReadbackBudget prior to readAlloc submission).",
+      "reason": "Qwen Change 3 places per-device budget validation in main() after nvidia.initialize() and amd.initialize() have already returned. In Context::initialize (lines 323-324), vkAllocateMemory has already been invoked. Checking the budget in main() fails the strict requirement that each device allocation must be evaluated and refused before vkAllocateMemory is executed.",
+      "region": "Lines 321-326 (Context::initialize) & Lines 509-511 (main readback budget check)"
+    },
+    {
+      "exact_source": "if (injectSingleByteCorruption) {\\n    const uint32_t corruptFill = uint32_t(verifyExpected[12345]) * 0x01010101u;\\n    vkCmdFillBuffer(cmd, producer.sharedBuffer, 12344u, 4u, corruptFill);\\n}",
+      "minimal_fix": "Perform single-byte corruption on the GPU before the release barrier using a mechanism that mutates only byte 12345 (e.g., a staging copy or compute/transfer write targeting only the exact byte), or if using 4-byte word writes, ensure the other 3 bytes in the word preserve their exact expected values.",
+      "reason": "vkCmdFillBuffer requires 4-byte alignment and 4-byte multiples. Invoking vkCmdFillBuffer at offset 12344 with size 4 overwrites 4 full bytes (12344, 12345, 12346, 12347) with replicated corruptFill, clobbering 3 unintended adjacent payload bytes. Furthermore, the fill lacks execution barrier ordering against the preceding chunk-fill loop.",
+      "region": "Lines 418-425 (runRound producer fill & Qwen Change 6 vkCmdFillBuffer)"
+    },
+    {
+      "exact_source": "const auto& compareTarget = injectSingleByteCorruption ? verifyExpected : expected;\\nfor (size_t i = 0; i < compareTarget.size(); ++i) {\\n...\\nresult.pass = injectSingleByteCorruption\\n    ? (result.mismatchCount == 0)\\n    : (result.mismatchCount == 0);",
+      "minimal_fix": "Keep the original expected vector independent and immutable. Verify consumer readback against the unaltered expected pattern and maintain the negative-control requirement that single-byte corruption injected before release produces exactly mismatchCount == 1 at index 12345.",
+      "reason": "Qwen mutated the expected baseline vector (verifyExpected) to incorporate the corrupted byte and redefined the negative-control pass condition to mismatchCount == 0. This alters the independent reference baseline and completely subverts the negative control, converting a tamper/corruption detection check into a false positive pass.",
+      "region": "Lines 400-405, 448-464 (Verification vectors & Negative-control pass logic)"
+    },
+    {
+      "exact_source": "independently created producer/consumer buffer views bound to the same VirtualAlloc payload via VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT qualify as corresponding external resources... Ownership transfer semantics using VK_QUEUE_FAMILY_FOREIGN_EXT apply to these aliased views",
+      "minimal_fix": "Mark Vulkan-level cross-device ownership transfer changes as REFUSED. Do not fabricate an unproved repair or false PASS. Implement a bounded, separately-labelled host-domain synchronization fallback (explicit host CPU/fence mediation labelled SHARED_HOST_BACKING_NOT_VRAM_P2P).",
+      "reason": "The Vulkan specification does not define distinct host-pointer imports across separate VkDevice instances and distinct vendor drivers (NVIDIA 0x10de and AMD 0x1002) as 'corresponding external resources' eligible for queue family ownership transfers via VK_QUEUE_FAMILY_FOREIGN_EXT. Foreign ownership transfers leave memory contents and aliased views undefined across independent driver instances without defined external handle correspondence. Furthermore, HOST_COHERENT does not grant cross-vendor GPU-to-GPU coherence without host-domain synchronization, and the raw VirtualAlloc pointer is not a vkMapMemory mapping.",
+      "region": "Protocol Architecture (VkImportMemoryHostPointerInfoEXT & VK_QUEUE_FAMILY_FOREIGN_EXT)"
+    }
+  ],
+  "safety_checks": [
+    "STATIC_ONLY_VERIFIED: Zero child subagents invoked (authorized max 10; actual 0), zero HTTP calls made (actual 0), zero edits made, zero compiles or GPU executions performed.",
+    "NOT_EXECUTION_ADMISSION: This review verdict is strictly a static defect analysis and does NOT constitute execution admission or runtime transport validation.",
+    "BUDGET_ORDERING_ENFORCED: Confirmed that readback budget validation must occur strictly before vkAllocateMemory, rejecting Qwen's post-initialization placement in main().",
+    "CORRUPTION_TIMING_ENFORCED: Confirmed that producer GPU corruption must occur strictly before the release barrier without modifying the independent reference baseline or destroying the negative control.",
+    "BOUNDED_TRANSPORT_CLASSIFICATION: Transport remains strictly classified as SHARED_HOST_BACKING_NOT_VRAM_P2P; cross-vendor peer-to-peer VRAM or unproved correspondence is rejected.",
+    "OMITTED_SOURCE_DISCLOSURE: Source lines outside the provided snippets (lines 1-71, 85-308, 332-333, 348-397, 466-499, and 520+) were omitted and not reviewed."
+  ],
+  "verdict": "REJECT"
+}
+
+=== ROOT ORIGINAL REJECTION ===
+
+# Shared host import prototype: not admitted
+
+The pinned draft (`21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815`) remains source only. ROOT read the source and current Khronos specification. No compile, memory import or GPU submission is admitted by this review.
+
+Three issues prevent using this draft as evidence of a valid transport:
+
+1. The producer releases one buffer view while the consumer acquires a different view of the same host payload in another instance. The specification permits repeated host-payload imports and defines FOREIGN ownership, but also says ownership transfer leaves other aliased resources' contents undefined. This review does not establish that the draft's two views qualify as the corresponding external resource. That question remains unresolved; byte parity alone would not resolve it.
+2. The negative control writes the original host pointer after the producer's release and before the consumer's acquire. The ownership rules prohibit an acquire after intervening modification other than a matching release. A revised control should corrupt on the producing GPU before its release, or use a separately justified host-domain protocol. The same original pointer is not inherently forbidden for HOST_VISIBLE imports; access still needs a correct synchronization protocol.
+3. The private readback budget is checked after both allocations. Each allocation must be checked against a per-device share of the budget before `vkAllocateMemory`. Capability and alignment failures must remain refusals.
+
+The contract also overstates undefined contents on import: that restriction is described for imports into non-host-visible memory. This draft explicitly requires HOST_VISIBLE and HOST_COHERENT types. General memory-import text requires preserving the imported contents. The source initializes host RAM before import, despite the contract saying it does not; that initialization cannot be described as GPU-produced data.
+
+Primary references read on 2026-10-04:
+
+- [Host pointer import](https://docs.vulkan.org/refpages/latest/refpages/source/VkImportMemoryHostPointerInfoEXT.html): same payload may be imported into multiple instances; original-pointer access and lifetime restrictions.
+- [Memory allocation](https://docs.vulkan.org/spec/latest/chapters/memory.html): import contents, host visibility and host cache synchronization.
+- [Synchronization](https://docs.vulkan.org/spec/latest/chapters/synchronization.html): external ownership, matching ranges, intervening modification and alias contents.
+
+This is a rejection of this protocol as presently justified, not evidence that all shared-host methods are impossible. The executed property query already found HOST_ALLOCATION import capability on the installed NVIDIA and AMD devices. No Intel device participated. A future successful shared-host test must remain labelled SHARED_HOST_BACKING_NOT_VRAM_P2P.
+
+
+=== PRIMARY REFERENCES READ ===
+
+# Primary Vulkan references read during preparation
+
+These notes are source-grounded constraints, not a native protocol acceptance. Retrieved 2026-10-04; the URLs point at the current specification and may evolve.
+
+1. https://docs.vulkan.org/refpages/latest/refpages/source/VkImportMemoryHostPointerInfoEXT.html — Description and host-pointer VUIDs. Repeated imports across instances are permitted, with platform failure possible. The original host pointer may remain usable with synchronization; the backing must outlive imports. Restrictions on undefined imported contents and alternate pointers concern non-host-visible imports. Actual-pointer alignment and allocation extent must be valid.
+2. https://docs.vulkan.org/spec/latest/chapters/memory.html — Memory-import discussion; Host External Memory; Host Access to Device Memory Objects. Import preserves contents generally. HOST_COHERENT removes mapped-range flush/invalidate requirements but not device availability/visibility. An original imported host pointer is not a vkMapMemory mapping; original-pointer cache maintenance requires appropriate platform synchronization. Noncoherent handling cannot be silently assumed or enabled by this draft.
+3. https://docs.vulkan.org/spec/latest/chapters/synchronization.html — Queue Family Ownership Transfer, particularly current web lines 7341–7380. FOREIGN can represent different devices/drivers; EXTERNAL is narrower. Correct release/acquire ordering and ranges are necessary. Intervening modification cannot be handwaved. Other resource aliases may have undefined contents after transfer; proving that two independently created views are corresponding external resources remains essential. A fence wait alone does not establish that correspondence.
+
+The output must distinguish established specification text from inference. If the corresponding-resource relationship cannot be established, refuse this external ownership protocol. A separately described host-domain fallback must establish its own synchronization and must not inherit the original no-CPU-payload-transfer label without proof.
+
+
+=== ACTUAL CAPABILITY QUERY ONLY ===
+
+# Vulkan external-host-memory capability query
+
+The root-admitted executable completed one read-only query. Status: `QUERY_COMPLETE`, exit 0, 0.297 seconds, PID 83372. The retained child process was absent after wait and again on independent process lookup. Both raw streams stayed below the 256 KiB caps (stdout 3,301 bytes; stderr 0). Full JSON parsed and passed the device/query-matrix checks. Source, source copy, executable, Python, admission, and controller hashes matched before and after; the parent environment fingerprint was unchanged.
+
+The Vulkan instance enumerated exactly two physical devices:
+
+| Device | `VK_EXT_external_memory_host` | Minimum imported host-pointer alignment | HOST_ALLOCATION, transfer-only | HOST_ALLOCATION, storage+transfer | HOST_MAPPED_FOREIGN_MEMORY, both usages |
+|---|---|---:|---|---|---|
+| NVIDIA GeForce RTX 5070 Ti (`10de:2c05`) | Advertised | 4,096 bytes | Importable and exportable; compatible handle mask `0x80` | Importable and exportable; compatible handle mask `0x80` | Not importable/exportable; feature mask `0x0` |
+| AMD Radeon(TM) Graphics (`1002:164e`) | Advertised | 4,096 bytes | Importable, not exportable; compatible handle mask `0x80` | Importable, not exportable; compatible handle mask `0x80` | Not importable/exportable; feature mask `0x0` |
+
+For both devices, the tested buffer flags were 0. The exact queried usages were `TRANSFER_SRC | TRANSFER_DST` and `STORAGE_BUFFER | TRANSFER_SRC | TRANSFER_DST`. The returned `0x80` compatibility mask corresponds to HOST_ALLOCATION. The NVIDIA feature mask `0x6` combines importable and exportable; AMD's `0x4` indicates importable only. Both HOST_MAPPED_FOREIGN_MEMORY queries returned no supported features. Intel vendor ID `0x8086` had zero devices in this Vulkan enumeration and is reported as `NOT_ENUMERATED_BY_THIS_VULKAN_INSTANCE` only.
+
+These are physical-device capability advertisements. No `VkDevice`, buffer, memory allocation, host-pointer import, semaphore, queue submission, payload transfer, or GPU work occurred. This does not prove successful import, usable cross-vendor sharing, direct GPU-to-GPU access, P2P, or physical residency. No Intel/NVIDIA link is established.
+
+Raw stdout SHA-256: `8c3e9fc93014f779f11feb241f945944c22392dede4b619783cff9c771cdcc3f`. Raw stderr SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`. Receipt SHA-256: `7ba345bd6fe0afff8bb2c96596bff74fd7b59e122a273357acb4d9984cd63274`. Full detail remains in `run_receipt.json` and `stdout.raw.log`.
+
+
+=== ORIGINAL CONTRACT (ROOT CORRECTIONS APPLY) ===
+
+# Shared host-allocation import fixture — design draft
+
+Status: **DESIGN ONLY — NOT COMPILED OR RUN**. This is a bounded, disposable experiment proposal. It is not a production feature, throughput benchmark, VRAM-sharing claim, or admission of the Qwen executor.
+
+## Question and labels
+
+Can a single Windows `VirtualAlloc` allocation, imported independently as `VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT` by one NVIDIA and one AMD Vulkan device, carry GPU-produced bytes to the other device and back, with the full returned payload checked on the CPU?
+
+The only allowed positive label is `SHARED_HOST_BACKING_NOT_VRAM_P2P`. A positive result means both Vulkan devices successfully imported and used the same host virtual allocation, and the producer's transfer writes were observed in the consumer's private readback. It does **not** establish device-local residency, VRAM-to-VRAM access, direct P2P, peer bandwidth, or an optimal transport path. Synchronization is `CPU_FENCE_CONTROL_NO_CPU_PAYLOAD_TRANSFER`: the CPU waits on each producer/consumer Vulkan fence and performs ownership control; it does not copy the payload between GPU contexts. The corruption case deliberately changes one host byte and is separately labeled.
+
+## Admission gates
+
+The previous exact capability query reported `HOST_ALLOCATION` importable on the installed NVIDIA (`0x10de`) and AMD (`0x1002`) devices, 4096-byte minimum host pointer alignment on both, and no `HOST_MAPPED_FOREIGN_MEMORY` support. That receipt was capability-only. This prototype must re-query at runtime and refuse before allocation or queue submission unless all the following hold:
+
+- Exactly one selected physical device has vendor ID `0x10de` and exactly one has `0x1002`; device UUIDs differ. Each selected device advertises `VK_EXT_external_memory_host` and `VK_EXT_queue_family_foreign`, and the latter is enabled when its device is created.
+- `vkGetPhysicalDeviceExternalBufferProperties` for flags `0`, usage `TRANSFER_SRC | TRANSFER_DST`, and handle `HOST_ALLOCATION` reports `IMPORTABLE` and includes `HOST_ALLOCATION` in `compatibleHandleTypes` on both devices. No exportability is required.
+- `VK_EXT_external_memory_host` reports a nonzero `minImportedHostPointerAlignment`; the actual pointer is aligned to both devices' minimum and to each resource's `VkMemoryRequirements::alignment`.
+- For the actual `VirtualAlloc` pointer, `vkGetMemoryHostPointerPropertiesEXT` succeeds on each device. Its returned `memoryTypeBits` intersect the buffer's requirement bits in a type with **both** `HOST_VISIBLE` and `HOST_COHERENT`. No noncoherent, device-local-only, or alternative-handle fallback is allowed.
+- Each shared buffer's `VkMemoryRequirements::size` is no larger than 256 KiB. Each import uses `allocationSize = 256 KiB`, binds at offset zero, and has exactly the same `VirtualAlloc` pointer. The allocation is created and both imports are bound before any GPU access, since host-import contents are undefined on import.
+- Each device has one transfer-capable queue. Each private readback allocation is host visible and coherent; total private Vulkan allocation requests stay at or below 2 MiB. The host payload is 256 KiB. Any failed query, alignment, allocation, bind, queue, or extension gate returns `NOT_CHECKED`/`REFUSED` without trying another memory type or transport.
+
+The selected Vulkan instances are intentionally separate, one per physical device. The source uses `VK_QUEUE_FAMILY_FOREIGN_EXT` for cross-instance handoff. It must never substitute `VK_QUEUE_FAMILY_EXTERNAL`: the latter is limited to the same physical device and driver, while `FOREIGN` is defined for resources accessed outside the current Vulkan instance and supports different devices/drivers when the extension is advertised and enabled.
+
+## Payload and rounds
+
+The payload is exactly 262,144 bytes, divided into 64 aligned 4,096-byte chunks. GPU producer work consists of 64 `vkCmdFillBuffer` commands, one per chunk, with deterministic but distinct 32-bit values derived from a fixed seed. The CPU constructs a separate expected byte vector before submission; it never initializes the shared payload. For each direction, the other GPU acquires the imported shared buffer and issues one `vkCmdCopyBuffer` into its own private readback buffer. After the consumer's fence signals, compare every payload byte against the producer's expected vector.
+
+Run sequentially:
+
+1. NVIDIA produces and AMD consumes; require 262,144/262,144 bytes equal.
+2. AMD produces and NVIDIA consumes; require 262,144/262,144 bytes equal.
+3. NVIDIA produces a fresh pattern and releases it; after that producer fence has signaled and before the AMD acquire, the CPU flips byte offset 12,345 in the shared `VirtualAlloc` payload. AMD consumes and the CPU compares all bytes to the uncorrupted expected vector. The negative control passes only if the full scan detects exactly one mismatch, at offset 12,345, with the returned byte equal to expected XOR `0x01`.
+
+No CPU payload copy is allowed between producer and consumer. The CPU may read the consumer's private readback for full verification and may mutate the one declared corruption byte only in round 3.
+
+## Ownership and synchronization protocol
+
+All imports/resources are created before the first GPU use. A newly created exclusive buffer has no owner until its first queue use; the first NVIDIA producer use is therefore the Vulkan-defined implicit first-use acquire on its local queue. Every subsequent use explicitly follows the external-ownership cycle below. For each imported buffer alias and exact `[0, 262144)` range:
+
+1. Producer records its writes, then a release `VkBufferMemoryBarrier` from its local transfer queue family to `VK_QUEUE_FAMILY_FOREIGN_EXT` (`TRANSFER_WRITE` to no destination access). Submit with a fence and wait at most 5 seconds.
+2. The CPU proceeds only after that producer fence signals. This is host-side control; no inter-device payload staging occurs.
+3. Consumer records a matching acquire barrier from `VK_QUEUE_FAMILY_FOREIGN_EXT` to its local transfer queue family (no source access to `TRANSFER_READ`), copies shared buffer to its private readback, adds a transfer-write-to-host-read barrier for the readback, and releases the shared range back to `FOREIGN_EXT` after the read.
+4. Submit with a consumer fence and wait at most 5 seconds. Only after it signals may the CPU inspect readback, alter the declared corruption byte, or begin the next round.
+
+The implementation must preserve Vulkan's exact matching release/acquire range and queue-family indices. It must not use `VK_QUEUE_FAMILY_EXTERNAL` for this cross-vendor path. In each context, later producer use reacquires its buffer from `FOREIGN_EXT`; consumer use also acquires from `FOREIGN_EXT`. The source draft explicitly relies on the external-memory ownership model applying to the corresponding buffer views independently bound to the same imported host payload. Root must review this alias/handoff assumption against the spec and driver model before any compile or run. If that correspondence cannot be justified, the fixture stops here rather than weakening ownership synchronization.
+
+Each individual `vkWaitForFences` timeout is 5 seconds. There is no infinite fence, queue-idle, or device-idle wait. A timeout or error after successful queue submission must terminate the child without running destructors that could free the host pointer while device work might remain active; process teardown is the cleanup boundary. Normal teardown occurs only after all submitted fences have signaled: unmap and destroy private readback buffers/memory, destroy each shared buffer before its imported `VkDeviceMemory`, destroy each device/instance, then `VirtualFree` the shared allocation. An outer retained-process supervisor must enforce 30 seconds total, capture bounded stdout/stderr, and verify child reaping before this prototype is ever run.
+
+## Evidence fields and interpretation
+
+The eventual runtime record should report selected vendor/device IDs and UUIDs, driver UUIDs, extension presence/enabled state, queried and pointer-specific handle/feature/type masks, minimum and actual pointer/resource alignment, per-device memory requirements and selected heap/type flags, allocation-request totals, all three byte counts/mismatch offsets, each fence outcome, and overall elapsed time. Transport text remains `SHARED_HOST_BACKING_NOT_VRAM_P2P`; there is no P2P or VRAM claim even on byte parity. Unsupported gates must be `NOT_CHECKED`/`REFUSED`, not coerced into a failure or success.
+
+## Primary references
+
+- [Vulkan memory allocation: host external memory](https://docs.vulkan.org/spec/latest/chapters/memory.html) — host pointer import, same payload imported multiple times, pointer alignment/type-bit query, contents undefined on import, host/device synchronization, payload lifetime.
+- [VK_EXT_queue_family_foreign](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_queue_family_foreign.html) — foreign queue family represents queues external to the instance and can include other physical devices/drivers; more restrictive than EXTERNAL.
+- [Vulkan synchronization and cache control](https://docs.vulkan.org/spec/latest/chapters/synchronization.html) — release/acquire barriers, exact ranges and queue family ownership, host fence synchronization.
+
+Those specifications define API semantics; they do not guarantee that either installed driver can successfully import the particular pointer, preserve the bytes across alias views, or execute the proposed cross-vendor handoff. Those are runtime questions for a separately admitted experiment.
+
+
+=== EXACT FULL CPP SNAPSHOT SHA21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815, UNAPPLIED ===
+
+// DESIGN-ONLY prototype. Do not compile or run before independent root review.
+// The inter-instance alias/FOREIGN ownership correspondence is an explicit
+// review gate; see contract.md.
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#include <vulkan/vulkan.h>
+
+#include <algorithm>
+#include <array>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <exception>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
+namespace {
+
+constexpr VkDeviceSize kPayloadBytes = 256u * 1024u;
+constexpr VkDeviceSize kChunkBytes = 4096u;
+constexpr uint32_t kChunkCount = static_cast<uint32_t>(kPayloadBytes / kChunkBytes);
+constexpr uint64_t kFenceTimeoutNs = 5'000'000'000ull;
+constexpr VkExternalMemoryHandleTypeFlagBits kHostHandle =
+    VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT;
+constexpr VkDeviceSize kReadbackBudget = 2u * 1024u * 1024u;
+
+struct Failure : std::runtime_error {
+    using std::runtime_error::runtime_error;
+};
+
+void check(VkResult result, const char* what) {
+    if (result != VK_SUCCESS) {
+        std::ostringstream message;
+        message << what << " returned VkResult " << static_cast<int>(result);
+        throw Failure(message.str());
+    }
+}
+
+[[noreturn]] void terminateWithPendingWork(const char* why) {
+    std::cerr << "{\"status\":\"FAIL\",\"reason\":\"" << why
+              << "\",\"cleanup\":\"PROCESS_EXIT_WITHOUT_VULKAN_DESTRUCTORS\"}\n";
+    // A submitted command may still refer to the imported host address. Avoid
+    // C++ stack unwinding / VirtualFree while that work could still be active.
+    ::ExitProcess(3);
+}
+
+std::string hexBytes(const uint8_t* bytes, size_t count) {
+    std::ostringstream out;
+    out << std::hex << std::setfill('0');
+    for (size_t i = 0; i < count; ++i) out << std::setw(2) << unsigned(bytes[i]);
+    return out.str();
+}
+
+bool hasExtension(VkPhysicalDevice physical, const char* wanted) {
+    uint32_t count = 0;
+    check(vkEnumerateDeviceExtensionProperties(physical, nullptr, &count, nullptr),
+          "vkEnumerateDeviceExtensionProperties(count)");
+    std::vector<VkExtensionProperties> props(count);
+    check(vkEnumerateDeviceExtensionProperties(physical, nullptr, &count, props.data()),
+          "vkEnumerateDeviceExtensionProperties(list)");
+    return std::any_of(props.begin(), props.end(), [&](const auto& p) {
+        return std::strcmp(p.extensionName, wanted) == 0;
+    });
+}
+
+struct HostBlock {
+    void* pointer = nullptr;
+    HostBlock() {
+        pointer = ::VirtualAlloc(nullptr, static_cast<SIZE_T>(kPayloadBytes),
+                                 MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+        if (!pointer) throw Failure("VirtualAlloc(256 KiB) failed");
+        std::memset(pointer, 0, static_cast<size_t>(kPayloadBytes));
+    }
+    ~HostBlock() {
+        if (pointer) ::VirtualFree(pointer, 0, MEM_RELEASE);
+    }
+    HostBlock(const HostBlock&) = delete;
+    HostBlock& operator=(const HostBlock&) = delete;
+};
+
+struct Context {
+    const char* label = "";
+    uint32_t requiredVendor = 0;
+    VkInstance instance = VK_NULL_HANDLE;
+    VkPhysicalDevice physical = VK_NULL_HANDLE;
+    VkPhysicalDeviceProperties properties{};
+    VkDevice device = VK_NULL_HANDLE;
+    VkQueue queue = VK_NULL_HANDLE;
+    uint32_t queueFamily = UINT32_MAX;
+    VkCommandPool commandPool = VK_NULL_HANDLE;
+    VkBuffer sharedBuffer = VK_NULL_HANDLE;
+    VkDeviceMemory sharedMemory = VK_NULL_HANDLE;
+    VkBuffer readbackBuffer = VK_NULL_HANDLE;
+    VkDeviceMemory readbackMemory = VK_NULL_HANDLE;
+    void* readbackMapped = nullptr;
+    VkDeviceSize sharedRequirementBytes = 0;
+    VkDeviceSize sharedRequirementAlignment = 0;
+    VkDeviceSize readbackAllocationBytes = 0;
+    VkDeviceSize minHostPointerAlignment = 0;
+    uint32_t pointerMemoryTypeBits = 0;
+    uint32_t bufferRequirementMemoryTypeBits = 0;
+    uint32_t importedMemoryTypeIndex = UINT32_MAX;
+    VkExternalMemoryFeatureFlags externalMemoryFeatures = 0;
+    VkExternalMemoryHandleTypeFlags compatibleHandleTypes = 0;
+    VkMemoryPropertyFlags importedTypeFlags = 0;
+    VkMemoryPropertyFlags importedHeapFlags = 0;
+    VkPhysicalDeviceIDProperties id{};
+    PFN_vkGetMemoryHostPointerPropertiesEXT getHostPointerProperties = nullptr;
+    bool hasUsedAlias = false;
+    bool inForeignOwnership = false;
+
+    ~Context() { destroyNormal(); }
+    Context() = default;
+    Context(const Context&) = delete;
+    Context& operator=(const Context&) = delete;
+
+    void destroyNormal() noexcept {
+        if (device) {
+            if (readbackMapped && readbackMemory) vkUnmapMemory(device, readbackMemory);
+            if (readbackBuffer) vkDestroyBuffer(device, readbackBuffer, nullptr);
+            if (sharedBuffer) vkDestroyBuffer(device, sharedBuffer, nullptr);
+            if (readbackMemory) vkFreeMemory(device, readbackMemory, nullptr);
+            if (sharedMemory) vkFreeMemory(device, sharedMemory, nullptr);
+            if (commandPool) vkDestroyCommandPool(device, commandPool, nullptr);
+            vkDestroyDevice(device, nullptr);
+        }
+        if (instance) vkDestroyInstance(instance, nullptr);
+        readbackMapped = nullptr;
+        readbackBuffer = sharedBuffer = VK_NULL_HANDLE;
+        readbackMemory = sharedMemory = VK_NULL_HANDLE;
+        commandPool = VK_NULL_HANDLE;
+        device = VK_NULL_HANDLE;
+        instance = VK_NULL_HANDLE;
+    }
+
+    void initialize(const char* name, uint32_t vendor, void* sharedHostPointer) {
+        label = name;
+        requiredVendor = vendor;
+
+        VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};
+        app.pApplicationName = "bounded_shared_host_import_fixture";
+        app.applicationVersion = 1;
+        app.pEngineName = "none";
+        app.engineVersion = 1;
+        app.apiVersion = VK_API_VERSION_1_1;
+        VkInstanceCreateInfo ici{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
+        ici.pApplicationInfo = &app;
+        check(vkCreateInstance(&ici, nullptr, &instance), "vkCreateInstance");
+
+        uint32_t physicalCount = 0;
+        check(vkEnumeratePhysicalDevices(instance, &physicalCount, nullptr),
+              "vkEnumeratePhysicalDevices(count)");
+        if (!physicalCount) throw Failure("no Vulkan physical devices enumerated");
+        std::vector<VkPhysicalDevice> devices(physicalCount);
+        check(vkEnumeratePhysicalDevices(instance, &physicalCount, devices.data()),
+              "vkEnumeratePhysicalDevices(list)");
+        std::vector<VkPhysicalDevice> vendorMatches;
+        for (VkPhysicalDevice candidate : devices) {
+            VkPhysicalDeviceProperties candidateProperties{};
+            vkGetPhysicalDeviceProperties(candidate, &candidateProperties);
+            if (candidateProperties.vendorID == requiredVendor) vendorMatches.push_back(candidate);
+        }
+        if (vendorMatches.size() != 1) {
+            throw Failure(std::string(label) + " must enumerate exactly one requested vendor device");
+        }
+        physical = vendorMatches.front();
+        vkGetPhysicalDeviceProperties(physical, &properties);
+
+        if (!hasExtension(physical, VK_EXT_EXTERNAL_MEMORY_HOST_EXTENSION_NAME))
+            throw Failure(std::string(label) + " lacks VK_EXT_external_memory_host");
+        if (!hasExtension(physical, VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME))
+            throw Failure(std::string(label) + " lacks VK_EXT_queue_family_foreign");
+
+        VkPhysicalDeviceExternalMemoryHostPropertiesEXT hostProperties{
+            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT};
+        id = {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES};
+        hostProperties.pNext = nullptr;
+        id.pNext = &hostProperties;
+        VkPhysicalDeviceProperties2 properties2{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2};
+        properties2.pNext = &id;
+        vkGetPhysicalDeviceProperties2(physical, &properties2);
+        minHostPointerAlignment = hostProperties.minImportedHostPointerAlignment;
+        if (!minHostPointerAlignment) throw Failure("zero minImportedHostPointerAlignment");
+
+        VkPhysicalDeviceExternalBufferInfo extInfo{
+            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO};
+        extInfo.flags = 0;
+        extInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+        extInfo.handleType = kHostHandle;
+        VkExternalBufferProperties extProps{VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES};
+        vkGetPhysicalDeviceExternalBufferProperties(physical, &extInfo, &extProps);
+        const auto& mp = extProps.externalMemoryProperties;
+        externalMemoryFeatures = mp.externalMemoryFeatures;
+        compatibleHandleTypes = mp.compatibleHandleTypes;
+        if (!(mp.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT) ||
+            !(mp.compatibleHandleTypes & kHostHandle)) {
+            throw Failure(std::string(label) + " HOST_ALLOCATION transfer buffer is not importable");
+        }
+        if (mp.externalMemoryFeatures & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT) {
+            throw Failure(std::string(label) + " HOST_ALLOCATION unexpectedly requires dedicated allocation");
+        }
+
+        uint32_t familyCount = 0;
+        vkGetPhysicalDeviceQueueFamilyProperties(physical, &familyCount, nullptr);
+        std::vector<VkQueueFamilyProperties> families(familyCount);
+        vkGetPhysicalDeviceQueueFamilyProperties(physical, &familyCount, families.data());
+        for (uint32_t i = 0; i < familyCount; ++i) {
+            if (families[i].queueCount && (families[i].queueFlags & VK_QUEUE_TRANSFER_BIT)) {
+                queueFamily = i;
+                break;
+            }
+        }
+        if (queueFamily == UINT32_MAX) throw Failure(std::string(label) + " has no transfer queue");
+
+        const float priority = 1.0f;
+        VkDeviceQueueCreateInfo qci{VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO};
+        qci.queueFamilyIndex = queueFamily;
+        qci.queueCount = 1;
+        qci.pQueuePriorities = &priority;
+        const std::array<const char*, 2> enabledExtensions = {
+            VK_EXT_EXTERNAL_MEMORY_HOST_EXTENSION_NAME,
+            VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME};
+        VkDeviceCreateInfo dci{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+        dci.queueCreateInfoCount = 1;
+        dci.pQueueCreateInfos = &qci;
+        dci.enabledExtensionCount = static_cast<uint32_t>(enabledExtensions.size());
+        dci.ppEnabledExtensionNames = enabledExtensions.data();
+        check(vkCreateDevice(physical, &dci, nullptr, &device), "vkCreateDevice");
+        vkGetDeviceQueue(device, queueFamily, 0, &queue);
+        if (!queue) throw Failure(std::string(label) + " returned a null transfer queue");
+        getHostPointerProperties = reinterpret_cast<PFN_vkGetMemoryHostPointerPropertiesEXT>(
+            vkGetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT"));
+        if (!getHostPointerProperties) throw Failure("host pointer properties entry point absent");
+
+        VkCommandPoolCreateInfo cpci{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
+        cpci.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
+        cpci.queueFamilyIndex = queueFamily;
+        check(vkCreateCommandPool(device, &cpci, nullptr, &commandPool), "vkCreateCommandPool");
+
+        VkExternalMemoryBufferCreateInfo externalBuffer{
+            VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO};
+        externalBuffer.handleTypes = kHostHandle;
+        VkBufferCreateInfo sharedInfo{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};
+        sharedInfo.pNext = &externalBuffer;
+        sharedInfo.size = kPayloadBytes;
+        sharedInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+        sharedInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        check(vkCreateBuffer(device, &sharedInfo, nullptr, &sharedBuffer), "vkCreateBuffer(shared)");
+
+        VkMemoryRequirements sharedReq{};
+        vkGetBufferMemoryRequirements(device, sharedBuffer, &sharedReq);
+        sharedRequirementBytes = sharedReq.size;
+        sharedRequirementAlignment = sharedReq.alignment;
+        bufferRequirementMemoryTypeBits = sharedReq.memoryTypeBits;
+        if (!sharedReq.alignment) throw Failure("zero shared-buffer memory alignment");
+        if (sharedReq.size > kPayloadBytes) throw Failure("shared buffer requirements exceed 256 KiB");
+        const uintptr_t hostAddress = reinterpret_cast<uintptr_t>(sharedHostPointer);
+        if ((hostAddress % minHostPointerAlignment) != 0 ||
+            (hostAddress % sharedReq.alignment) != 0) {
+            throw Failure(std::string(label) + " VirtualAlloc pointer fails host/resource alignment");
+        }
+
+        VkMemoryHostPointerPropertiesEXT pointerProps{
+            VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT};
+        check(getHostPointerProperties(device, kHostHandle, sharedHostPointer, &pointerProps),
+              "vkGetMemoryHostPointerPropertiesEXT");
+        pointerMemoryTypeBits = pointerProps.memoryTypeBits;
+        VkPhysicalDeviceMemoryProperties memoryProps{};
+        vkGetPhysicalDeviceMemoryProperties(physical, &memoryProps);
+        const uint32_t typeBits = sharedReq.memoryTypeBits & pointerProps.memoryTypeBits;
+        uint32_t importType = UINT32_MAX;
+        for (uint32_t i = 0; i < memoryProps.memoryTypeCount; ++i) {
+            if ((typeBits & (1u << i)) &&
+                (memoryProps.memoryTypes[i].propertyFlags &
+                 (VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)) ==
+                    (VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)) {
+                importType = i;
+                break;
+            }
+        }
+        if (importType == UINT32_MAX) throw Failure(std::string(label) + " has no coherent host import type intersection");
+        importedMemoryTypeIndex = importType;
+        importedTypeFlags = memoryProps.memoryTypes[importType].propertyFlags;
+        importedHeapFlags = memoryProps.memoryHeaps[memoryProps.memoryTypes[importType].heapIndex].flags;
+
+        VkImportMemoryHostPointerInfoEXT hostImport{
+            VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT};
+        hostImport.handleType = kHostHandle;
+        hostImport.pHostPointer = sharedHostPointer;
+        VkMemoryAllocateInfo mai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
+        mai.pNext = &hostImport;
+        mai.allocationSize = kPayloadBytes;
+        mai.memoryTypeIndex = importType;
+        check(vkAllocateMemory(device, &mai, nullptr, &sharedMemory), "vkAllocateMemory(host import)");
+        check(vkBindBufferMemory(device, sharedBuffer, sharedMemory, 0), "vkBindBufferMemory(shared)");
+
+        VkBufferCreateInfo readInfo{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};
+        readInfo.size = kPayloadBytes;
+        readInfo.usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+        readInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        check(vkCreateBuffer(device, &readInfo, nullptr, &readbackBuffer), "vkCreateBuffer(readback)");
+        VkMemoryRequirements readReq{};
+        vkGetBufferMemoryRequirements(device, readbackBuffer, &readReq);
+        uint32_t readType = UINT32_MAX;
+        for (uint32_t i = 0; i < memoryProps.memoryTypeCount; ++i) {
+            if ((readReq.memoryTypeBits & (1u << i)) &&
+                (memoryProps.memoryTypes[i].propertyFlags &
+                 (VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)) ==
+                    (VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)) {
+                readType = i;
+                break;
+            }
+        }
+        if (readType == UINT32_MAX) throw Failure(std::string(label) + " has no coherent private readback type");
+        readbackAllocationBytes = readReq.size;
+        VkMemoryAllocateInfo readAlloc{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
+        readAlloc.allocationSize = readReq.size;
+        readAlloc.memoryTypeIndex = readType;
+        check(vkAllocateMemory(device, &readAlloc, nullptr, &readbackMemory),
+              "vkAllocateMemory(readback)");
+        check(vkBindBufferMemory(device, readbackBuffer, readbackMemory, 0),
+              "vkBindBufferMemory(readback)");
+        check(vkMapMemory(device, readbackMemory, 0, VK_WHOLE_SIZE, 0, &readbackMapped),
+              "vkMapMemory(readback)");
+    }
+};
+
+void bufferBarrier(Context& c, VkCommandBuffer cmd, VkBuffer buffer,
+                   uint32_t srcFamily, uint32_t dstFamily,
+                   VkAccessFlags srcAccess, VkAccessFlags dstAccess,
+                   VkPipelineStageFlags srcStage, VkPipelineStageFlags dstStage) {
+    VkBufferMemoryBarrier barrier{VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER};
+    barrier.srcAccessMask = srcAccess;
+    barrier.dstAccessMask = dstAccess;
+    barrier.srcQueueFamilyIndex = srcFamily;
+    barrier.dstQueueFamilyIndex = dstFamily;
+    barrier.buffer = buffer;
+    barrier.offset = 0;
+    barrier.size = kPayloadBytes;
+    vkCmdPipelineBarrier(cmd, srcStage, dstStage, 0, 0, nullptr, 1, &barrier, 0, nullptr);
+}
+
+void submitAndWait(Context& c, const std::function<void(VkCommandBuffer)>& record,
+                   const char* label) {
+    VkCommandBufferAllocateInfo cai{VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    cai.commandPool = c.commandPool;
+    cai.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    cai.commandBufferCount = 1;
+    VkCommandBuffer cmd = VK_NULL_HANDLE;
+    check(vkAllocateCommandBuffers(c.device, &cai, &cmd), "vkAllocateCommandBuffers");
+    VkCommandBufferBeginInfo begin{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    begin.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    check(vkBeginCommandBuffer(cmd, &begin), "vkBeginCommandBuffer");
+    record(cmd);
+    check(vkEndCommandBuffer(cmd), "vkEndCommandBuffer");
+
+    VkFenceCreateInfo fci{VK_STRUCTURE_TYPE_FENCE_CREATE_INFO};
+    VkFence fence = VK_NULL_HANDLE;
+    check(vkCreateFence(c.device, &fci, nullptr, &fence), "vkCreateFence");
+    VkSubmitInfo submit{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submit.commandBufferCount = 1;
+    submit.pCommandBuffers = &cmd;
+    const VkResult queued = vkQueueSubmit(c.queue, 1, &submit, fence);
+    if (queued != VK_SUCCESS) terminateWithPendingWork("vkQueueSubmit failed; process teardown required");
+    const VkResult waited = vkWaitForFences(c.device, 1, &fence, VK_TRUE, kFenceTimeoutNs);
+    if (waited != VK_SUCCESS) terminateWithPendingWork("5-second CPU fence wait failed or timed out");
+    vkDestroyFence(c.device, fence, nullptr);
+    vkFreeCommandBuffers(c.device, c.commandPool, 1, &cmd);
+    (void)label;
+}
+
+std::vector<uint8_t> expectedPattern(uint8_t seed) {
+    std::vector<uint8_t> expected(static_cast<size_t>(kPayloadBytes));
+    for (uint32_t chunk = 0; chunk < kChunkCount; ++chunk) {
+        const uint8_t value = static_cast<uint8_t>(seed + chunk * 37u + (chunk >> 1));
+        std::fill(expected.begin() + chunk * static_cast<size_t>(kChunkBytes),
+                  expected.begin() + (chunk + 1) * static_cast<size_t>(kChunkBytes), value);
+    }
+    return expected;
+}
+
+struct RoundResult {
+    std::string name;
+    size_t bytesChecked = 0;
+    size_t mismatchCount = 0;
+    size_t firstMismatch = SIZE_MAX;
+    uint8_t expectedAtMismatch = 0;
+    uint8_t actualAtMismatch = 0;
+    bool pass = false;
+};
+
+RoundResult runRound(Context& producer, Context& consumer, void* sharedHostPointer, uint8_t seed,
+                     bool injectSingleByteCorruption, const char* name) {
+    std::vector<uint8_t> expected = expectedPattern(seed);
+    submitAndWait(producer, [&](VkCommandBuffer cmd) {
+        if (producer.inForeignOwnership) {
+            bufferBarrier(producer, cmd, producer.sharedBuffer, VK_QUEUE_FAMILY_FOREIGN_EXT,
+                          producer.queueFamily, 0, VK_ACCESS_TRANSFER_WRITE_BIT,
+                          VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT);
+            producer.inForeignOwnership = false;
+        }
+        for (uint32_t chunk = 0; chunk < kChunkCount; ++chunk) {
+            const uint8_t byte = expected[chunk * static_cast<size_t>(kChunkBytes)];
+            const uint32_t fill = uint32_t(byte) * 0x01010101u;
+            vkCmdFillBuffer(cmd, producer.sharedBuffer,
+                            VkDeviceSize(chunk) * kChunkBytes, kChunkBytes, fill);
+        }
+        bufferBarrier(producer, cmd, producer.sharedBuffer, producer.queueFamily,
+                      VK_QUEUE_FAMILY_FOREIGN_EXT, VK_ACCESS_TRANSFER_WRITE_BIT, 0,
+                      VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }, "producer");
+    producer.hasUsedAlias = true;
+    producer.inForeignOwnership = true;
+
+    if (injectSingleByteCorruption) {
+        auto* bytes = static_cast<uint8_t*>(sharedHostPointer);
+        bytes[12345] ^= 0x01;
+    }
+
+    submitAndWait(consumer, [&](VkCommandBuffer cmd) {
+        bufferBarrier(consumer, cmd, consumer.sharedBuffer, VK_QUEUE_FAMILY_FOREIGN_EXT,
+                      consumer.queueFamily, 0, VK_ACCESS_TRANSFER_READ_BIT,
+                      VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT);
+        VkBufferCopy copy{};
+        copy.srcOffset = 0;
+        copy.dstOffset = 0;
+        copy.size = kPayloadBytes;
+        vkCmdCopyBuffer(cmd, consumer.sharedBuffer, consumer.readbackBuffer, 1, &copy);
+        bufferBarrier(consumer, cmd, consumer.readbackBuffer, consumer.queueFamily,
+                      consumer.queueFamily, VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_HOST_READ_BIT,
+                      VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_HOST_BIT);
+        bufferBarrier(consumer, cmd, consumer.sharedBuffer, consumer.queueFamily,
+                      VK_QUEUE_FAMILY_FOREIGN_EXT, VK_ACCESS_TRANSFER_READ_BIT, 0,
+                      VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }, "consumer");
+    consumer.hasUsedAlias = true;
+    consumer.inForeignOwnership = true;
+
+    RoundResult result;
+    result.name = name;
+    result.bytesChecked = static_cast<size_t>(kPayloadBytes);
+    const auto* actual = static_cast<const uint8_t*>(consumer.readbackMapped);
+    for (size_t i = 0; i < expected.size(); ++i) {
+        if (actual[i] != expected[i]) {
+            if (result.mismatchCount == 0) {
+                result.firstMismatch = i;
+                result.expectedAtMismatch = expected[i];
+                result.actualAtMismatch = actual[i];
+            }
+            ++result.mismatchCount;
+        }
+    }
+    result.pass = injectSingleByteCorruption
+        ? (result.mismatchCount == 1 && result.firstMismatch == 12345 &&
+           result.actualAtMismatch == static_cast<uint8_t>(result.expectedAtMismatch ^ 0x01))
+        : (result.mismatchCount == 0);
+    return result;
+}
+
+void printRound(const RoundResult& r) {
+    std::cout << "{\"round\":\"" << r.name << "\",\"bytes_checked\":" << r.bytesChecked
+              << ",\"mismatch_count\":" << r.mismatchCount << ",\"first_mismatch_offset\":";
+    if (r.firstMismatch == SIZE_MAX) std::cout << "null";
+    else std::cout << r.firstMismatch;
+    std::cout << ",\"expected_byte_hex\":\"" << std::hex << std::setw(2) << std::setfill('0')
+              << unsigned(r.expectedAtMismatch) << "\",\"actual_byte_hex\":\""
+              << std::setw(2) << unsigned(r.actualAtMismatch) << std::dec
+              << "\",\"pass\":" << (r.pass ? "true" : "false") << "}\n";
+}
+
+void printDevice(const Context& c) {
+    std::cout << "{\"device\":\"" << c.label << "\",\"name\":\"" << c.properties.deviceName
+              << "\",\"vendor_id_hex\":\"0x" << std::hex << c.properties.vendorID
+              << "\",\"device_id_hex\":\"0x" << c.properties.deviceID
+              << "\",\"device_uuid\":\"" << hexBytes(c.id.deviceUUID, VK_UUID_SIZE)
+              << "\",\"driver_uuid\":\"" << hexBytes(c.id.driverUUID, VK_UUID_SIZE)
+              << "\",\"queue_family\":" << std::dec << c.queueFamily
+              << ",\"foreign_extension_enabled\":true,\"host_import_extension_enabled\":true"
+              << ",\"external_memory_features_hex\":\"0x" << std::hex << c.externalMemoryFeatures
+              << "\",\"compatible_handle_types_hex\":\"0x" << c.compatibleHandleTypes
+              << "\",\"min_host_pointer_alignment\":" << std::dec << c.minHostPointerAlignment
+              << ",\"buffer_requirement_alignment\":" << c.sharedRequirementAlignment
+              << ",\"buffer_requirement_size\":" << c.sharedRequirementBytes
+              << ",\"buffer_requirement_type_bits_hex\":\"0x" << std::hex
+              << c.bufferRequirementMemoryTypeBits << "\",\"pointer_type_bits_hex\":\"0x"
+              << c.pointerMemoryTypeBits << "\",\"selected_type_index\":" << std::dec
+              << c.importedMemoryTypeIndex << ",\"selected_type_flags_hex\":\"0x" << std::hex
+              << c.importedTypeFlags << "\",\"selected_heap_flags_hex\":\"0x"
+              << c.importedHeapFlags << "\"}\n";
+}
+
+}  // namespace
+
+int main() {
+    try {
+        HostBlock host;
+        Context nvidia;
+        Context amd;
+        nvidia.initialize("NVIDIA", 0x10de, host.pointer);
+        amd.initialize("AMD", 0x1002, host.pointer);
+        if (std::memcmp(nvidia.id.deviceUUID, amd.id.deviceUUID, VK_UUID_SIZE) == 0)
+            throw Failure("selected NVIDIA and AMD deviceUUID values are not distinct");
+        const VkDeviceSize readbackTotal = nvidia.readbackAllocationBytes + amd.readbackAllocationBytes;
+        if (readbackTotal > kReadbackBudget) throw Failure("private readback allocation budget exceeded");
+        printDevice(nvidia);
+        printDevice(amd);
+
+        RoundResult nvToAmd = runRound(nvidia, amd, host.pointer, 0x19, false, "NVIDIA_TO_AMD");
+        printRound(nvToAmd);
+        RoundResult amdToNv = runRound(amd, nvidia, host.pointer, 0x53, false, "AMD_TO_NVIDIA");
+        printRound(amdToNv);
+        RoundResult corrupt = runRound(nvidia, amd, host.pointer, 0x87, true,
+                                       "NVIDIA_TO_AMD_CORRUPTION_CONTROL");
+        printRound(corrupt);
+
+        const bool pass = nvToAmd.pass && amdToNv.pass && corrupt.pass;
+        std::cout << "{\"status\":\"" << (pass ? "PASS" : "FAIL")
+                  << "\",\"transport\":\"SHARED_HOST_BACKING_NOT_VRAM_P2P\"
+                  << ",\"sync\":\"CPU_FENCE_CONTROL_NO_CPU_PAYLOAD_TRANSFER\"
+                  << ",\"payload_bytes\":" << kPayloadBytes
+                  << ",\"private_readback_allocation_bytes\":" << readbackTotal
+                  << ",\"p2p_claim\":false,\"vram_residency_claim\":false}\n";
+        return pass ? 0 : 1;
+    } catch (const std::exception& e) {
+        std::cerr << "{\"status\":\"NOT_CHECKED\",\"reason\":\"" << e.what()
+                  << "\",\"transport\":\"SHARED_HOST_BACKING_NOT_VRAM_P2P\"}\n";
+        return 2;
+    }
+}

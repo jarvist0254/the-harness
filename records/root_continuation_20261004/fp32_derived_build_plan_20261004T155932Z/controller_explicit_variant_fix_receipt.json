@@ -1,0 +1,8 @@
+{
+  "before_sha256": "2611fcaa96bd921f33c3e8308d9c6181a958fbb6cfa8e1d09fe0d350e488a9e7",
+  "after_sha256": "c989cc4c8ccd915d499d1e441c5de6048064f1ca1aec37e00cbc4ecc81022202",
+  "ast": "PASS",
+  "scope": "ONE_COMPARISON_REPLACEMENT_ONLY_NONEXECUTING",
+  "reason": "Bind operative root admission to exact FA907; preserve historical frozen contract and original3CB lineage",
+  "controller_executed": false
+}

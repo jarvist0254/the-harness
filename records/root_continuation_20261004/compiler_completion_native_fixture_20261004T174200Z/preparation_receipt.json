@@ -1,0 +1,26 @@
+{
+  "utc": "2026-10-04T17:43:08.392724+00:00",
+  "status": "SOURCE_ONLY_AST_PASS_NOT_EXECUTED",
+  "files": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_native_fixture_20261004T174200Z\\BINDING_AND_ACCEPTANCE_PLAN.md",
+      "sha256": "0584d42d26e8cf21611623678042fda4f146995a0d54a38c3cd59f06b0c0000b"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_native_fixture_20261004T174200Z\\CONTRACT_PENDING_ROOT.json",
+      "sha256": "c1f51303df00fcd9d342c715bf6da2ecba37b96502d4fb231d21f4957e4ac79b"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_native_fixture_20261004T174200Z\\driver_PROPOSAL_NOT_EXECUTABLE.py",
+      "sha256": "b0c8717676063fff027e051c8cd198c5f927c711fef3b141c977eabe610209f4"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_native_fixture_20261004T174200Z\\worker_SOURCE_ONLY.py",
+      "sha256": "015f376a054758fec223833a3613f4345186a2dbfa4a935a5a0485ae58dd3dbe"
+    }
+  ],
+  "spec_path": "E:\\the_harness\\records\\root_continuation_20261004\\COMPILER_COMPLETION_TASK_SPEC.md",
+  "spec_sha256": "390080fa8e3d17af2acf983e94f713c6479bd118178ca3491a51ecf1e3e5fad2",
+  "adapter_api_invented": false,
+  "native_fixture_or_driver_execution": false
+}

@@ -1,0 +1,153 @@
+{
+  "credits_from_tokens": false,
+  "utc": "2026-10-04T21:49:04.5841119Z",
+  "helpers": [
+    {
+      "bytes": 8048,
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\invoke_owned_stream_research.v3.ps1"
+    },
+    {
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\provider_common.ps1"
+    },
+    {
+      "bytes": 582,
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\PURE_LIMIT_CONTROLS.json"
+    },
+    {
+      "bytes": 8011,
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_http_stream_research.v3.ps1"
+    },
+    {
+      "bytes": 774,
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\research_artifact.v3.ps1"
+    }
+  ],
+  "normalized_reasoning_and_content_each": 2097152,
+  "dedicated_token_plan_guard": true,
+  "scope": "SOURCE_ONLY_NO_CANDIDATE_IMPORT_COMPILE_EXECUTION_OR_PROMOTION",
+  "header_pin": {
+    "bytes": 1240682,
+    "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h"
+  },
+  "jobs": [
+    {
+      "thinking_budget_absent": true,
+      "prompt_pin": {
+        "bytes": 22995513,
+        "sha256": "7d336a4b7cbf0e050d333cb51bbe461a506c6d2a3563b7ea5646b9a49b732312",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_peer_compile_repair.prompt.txt"
+      },
+      "source_chars_max": 32000,
+      "snapshot_pin": {
+        "bytes": 23386,
+        "sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_peer_compile_repair.source.snapshot.txt"
+      },
+      "reasoning_effort": "xhigh",
+      "native_children_actual": 0,
+      "outer_seconds": 2430,
+      "api_excerpt_pin": {
+        "bytes": 22948118,
+        "sha256": "47737cf97075e5b4f183194b7fa50be3ba5caaf91a46382ee1bea0cf58bffc69",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_peer_compile_repair.api_excerpts.txt"
+      },
+      "spec_pin": {
+        "bytes": 2726,
+        "sha256": "e158f3b71ec0ec205020606c41b8cd85a3956afcc5e57fc35cd3df578caea4fe",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_peer_compile_repair.spec.txt"
+      },
+      "evidence_pins": [
+        {
+          "bytes": 5720,
+          "sha256": "7b5e7f417dbc5b371c4faf448b6ad93b64da5a4f14adb689db3d5e3bd1bae8ff",
+          "path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compile_qa_findings.md"
+        },
+        {
+          "bytes": 4836,
+          "sha256": "1fed15b9e1c06345b5219d14bbd85114c70fd9248b95150a4e6f5b273b510eee",
+          "path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compile.stderr.txt"
+        },
+        {
+          "bytes": 10326,
+          "sha256": "ed9225b28c7a495e9c554df209fd6b93c84937ba403fff25ba7a25a26761b173",
+          "path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compile_receipt.json"
+        }
+      ],
+      "launch_authorized": false,
+      "source_pin": {
+        "bytes": 23386,
+        "sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt"
+      },
+      "model": "qwen3.8-max",
+      "tests_chars_max": 16000,
+      "job": "qwen_l0_peer_compile_repair",
+      "enable_thinking": true,
+      "http_seconds": 2400
+    },
+    {
+      "thinking_budget_absent": true,
+      "prompt_pin": {
+        "bytes": 9834209,
+        "sha256": "cdcdd03ef33bb8df21fd061161efdc635356fe4b5c1198538d4745192f9bfe8b",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_query_measured_repair.prompt.txt"
+      },
+      "source_chars_max": 32000,
+      "snapshot_pin": {
+        "bytes": 14670,
+        "sha256": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_query_measured_repair.source.snapshot.txt"
+      },
+      "reasoning_effort": "xhigh",
+      "native_children_actual": 0,
+      "outer_seconds": 2430,
+      "api_excerpt_pin": {
+        "bytes": 9779723,
+        "sha256": "7d6dcf76d5a789d92d25147e6a6bfe95b9886a65f59f4eb4a24501d2d289591a",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_query_measured_repair.api_excerpts.txt"
+      },
+      "spec_pin": {
+        "bytes": 2754,
+        "sha256": "354db3a7955eace5a341db4d11806b093a352a384b6759f667e286aa57770099",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_20261004T214600Z\\qwen_l0_query_measured_repair.spec.txt"
+      },
+      "evidence_pins": [
+        {
+          "bytes": 4872,
+          "sha256": "d8793be2cf08dc337f50f84b6d3605e8da95fa0878785b0e14bd0d60be50b59f",
+          "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\STUB_ADJUDICATION_EXECUTED.md"
+        },
+        {
+          "bytes": 5495,
+          "sha256": "b551a78647c0deb835edefaab04368e15abf0650998a9d1f657f6c13d7af8427",
+          "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\actual_header_stub_DRAFT.cpp"
+        },
+        {
+          "bytes": 26277,
+          "sha256": "3fff2729f80d5231aa3132864b5f88e5f5c5e0cfb5e6f937405c3e8e98484e91",
+          "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\stub_build_20261004T213121Z\\runtime_receipt.json"
+        }
+      ],
+      "launch_authorized": false,
+      "source_pin": {
+        "bytes": 14670,
+        "sha256": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+        "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\source.original_untrusted.cpp"
+      },
+      "model": "qwen3.8-max",
+      "tests_chars_max": 16000,
+      "job": "qwen_l0_query_measured_repair",
+      "enable_thinking": true,
+      "http_seconds": 2400
+    }
+  ],
+  "status": "PREPARATION_ONLY_PENDING_ROOT_EXACT_ADMISSION",
+  "raw_stream_cap_bytes": 16777216
+}

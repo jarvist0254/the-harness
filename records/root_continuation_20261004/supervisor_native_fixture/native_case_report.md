@@ -1,0 +1,13 @@
+# Native supervisor fixture result
+
+The fixed Windows CPU fixture ran its four-worker natural baseline, then stopped on the first negative control because the supervisor reported `UNKNOWN_DRAIN`. No timeout, cancellation, or overflow case was started.
+
+Evidence is in `native_runs/native_20261004T142606Z/suite_receipt.json`; per-case controller stdout/stderr and receipts are beside it. The malformed admission draft is preserved in `fixture_admission_draft_rejected.json`; the fresh admission and all input hashes passed the prelaunch gate.
+
+The baseline completed in 0.235 seconds. Four distinct Python 3.10.11 workers were each assigned and resumed, exited with code 0, and returned the exact expected stdout and stderr markers (eight streams). Job active count was 0, the supervisor returned `PROCESS_COMPLETED` and `drain_proof=CLEANUP`, and `restart_receipt` matched the original terminal status/run ID/drain fields with reattach and replay false. An outer Toolhelp process snapshot found the controller and all four worker PIDs absent after completion. The receipt correctly leaves `whole_tree_certificate=false`.
+
+The nonzero worker completed in 0.171 seconds with exit code 3; the supervisor correctly returned `FAILED/nonzero_exit`, not `PROCESS_COMPLETED`, and `job_active_count=0`. Its PID and controller PID were absent in the outer process snapshot, and the restart receipt matched. However, `drain_proof=UNKNOWN_DRAIN`, so the case is not accepted and the remaining cases were stopped. The source's failure cleanup calls both `TerminateProcess` on owned workers and `TerminateJobObject`; the current receipt does not expose each native BOOL result, so the precise reason for the unknown drain is unverified. No retry or source edit was made.
+
+The exact source SHA-256 remained `4D8272AA5DBC330E4199B216BD9B3FD3D240C2C8D1C59E223E37D249C936F663`. Python was 3.10.11 at `C:\Users\thoma\AppData\Local\Programs\Python\Python310\python.exe`, SHA-256 `3CCE33D75D6FDAE4E004D0BDF149320B3147482A9CAF370079DCB9C191A1B260`. Fixture driver/controller/worker hashes and before/after comparisons are recorded per case. The static path verifies `KILL_ON_CLOSE` by calling `SetInformationJobObject`, querying `QueryInformationJobObject`, and checking the flag before worker launch; the baseline passing that gate is evidence of its execution, not an independently returned flag value.
+
+This is bounded experimental evidence only. No GPU, network, provider, or global Factory/Rolex queue was used. Resource high-water is unmeasured; process absence is point-in-time; this does not certify arbitrary descendants or production use.

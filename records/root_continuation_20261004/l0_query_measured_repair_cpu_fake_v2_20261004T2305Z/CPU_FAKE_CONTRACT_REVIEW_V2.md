@@ -1,0 +1,9 @@
+# CPU fake contract v2, pending root review
+
+This is a new synthetic contract file. The prior `cpu_fake_contract_pending_root_gate.cpp` with SHA `bea5c7b8012bd6b327f27be6517b0ba5f57ca975da0c4b31e62cc0d790df6840` remains unchanged and is not replaced by these proposed controls.
+
+The corrected `C_DRIVER_LIMIT` fixture sets `g_driver_count` to `LZQ_MAX_DRIVERS + 1` before the candidate's `zeDriverGet` count query. It no longer changes the count after driver enumeration has already completed. Each assertion emits its case, label, sequence number, result, and counters. When an assertion fails, the case's generated output is captured once, under a combined 96 KiB JSON-output budget; any limited prefix is marked incomplete. The collector constrains caller capacity and clamps an anomalous returned length before any test writes a terminator at that position.
+
+The candidate is included by absolute source path under `LZQ_TEST_NO_MAIN`. The fake defines the nine Level Zero functions referenced by the candidate using the pinned `ze_api.h` declarations. The prospective executable links only those stub definitions and the C++ standard library; it must not link or load `ze_loader`, CUDA, EGL, a driver, or GPU runtime. The separate compile controller demands a root admission manifest with action `CPU_FAKE_COMPILE_LINK_ONLY` and matching source/contract/header pins. It does not run the produced executable. CPU-fake execution requires a later separate root admission.
+
+The only existing measured verification is the candidate's object-only compilation in `l0_query_measured_repair_object_qa_20261004T2228Z` (27,176-byte object, compiler exit 0). The v2 CPU fake has not been compiled or executed. No hardware, Level Zero runtime, memory import, or peer-transfer claim follows from it.

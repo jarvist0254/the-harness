@@ -1,0 +1,14 @@
+{
+  "no_provider_children": true,
+  "companion_copied_exact_from": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\research_artifact.ps1",
+  "original_admission_preserved": true,
+  "auth_read": false,
+  "companion_sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+  "status": "LOCAL_SETUP_FAILURE_NO_PROVIDER_CHILD",
+  "paid_provider_job_started": false,
+  "source_execution": false,
+  "utc": "2026-10-04T21:35:34.4167441Z",
+  "error": "Frozen wrapper dot-sources research_artifact.ps1, absent from prepared copy set; failed before AssertLaunchContract or Process.Start",
+  "original_wrapper_unchanged": true,
+  "next_launch": "PENDING_ROOT_COMPANION_PIN_AND_DISTINCT_JOB_BINDING"
+}

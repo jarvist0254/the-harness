@@ -1,0 +1,22 @@
+{
+  "reasoning_tokens_included_not_added": 84824,
+  "complete_untrusted_code_artifacts": 2,
+  "known_usage_jobs": 3,
+  "credits": "NOT_CHECKED",
+  "actual_requests": 6,
+  "source_imported_compiled_executed": false,
+  "unknown_usage_jobs": 3,
+  "owned_wrapper_workers_reaped": true,
+  "native_children_actual": 0,
+  "prior_receipts_modified": false,
+  "observed_prompt_tokens": 3628,
+  "state": "CLOSED",
+  "utc": "2026-10-04T19:09:31.1545523Z",
+  "source_accepted": false,
+  "observed_provider_tokens": 104085,
+  "observed_completion_tokens": 100457,
+  "complete_refusal_artifacts": 1,
+  "known_credential_matches": 0,
+  "audit_sha256": "c261cca20bbd9151d3dc2ea61d95c5ec0f17cc5cc3856c1bd2891ee4f0c1c276",
+  "ledger_sha256": "20738828f90cd622fbb7de81996b3b2bd818d7046d7961689a7bfca9b47543c9"
+}

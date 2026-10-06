@@ -1,0 +1,9 @@
+{
+  "outer_deadline_seconds": 270,
+  "model": "qwen3.8-max",
+  "observed_process_start_utc": "2026-10-04T13:50:33.6287405Z",
+  "clock": "Stopwatch monotonic",
+  "pid": 68744,
+  "job": "qwen_bool_cleanup",
+  "identity": "retained System.Diagnostics.Process handle; no PID lookup"
+}

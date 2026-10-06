@@ -1,0 +1,16 @@
+{
+  "response_cap_bytes": 2097152,
+  "max_native_authorized_deepseek": 10,
+  "native_children_actual": 0,
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "prompt_sha256": "185B4683B745384357FAD4806A181E4A88DD091722646D3E08CE20906C8E53F5",
+  "enable_thinking": false,
+  "max_completion_tokens": 8192,
+  "source_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "pid": 58864,
+  "credential_saved": false,
+  "requested_model": "qwen3.8-max",
+  "max_native_authorized_qwen": 10,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\source_snapshot.cpp",
+  "http_deadline_seconds": 240
+}

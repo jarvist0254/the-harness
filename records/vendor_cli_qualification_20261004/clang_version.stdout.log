@@ -1,0 +1,4 @@
+AMD clang version 23.0.0git (https://github.com/ROCm/llvm-project.git 52226beb248fcdd136d084307a12207d2fc00220+PATCHED:1efe4605317a40d2170d33617075bd5675d0d558)
+Target: x86_64-pc-windows-msvc
+Thread model: posix
+InstalledDir: E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\bin

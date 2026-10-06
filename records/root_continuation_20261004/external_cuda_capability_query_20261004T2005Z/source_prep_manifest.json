@@ -1,0 +1,54 @@
+{
+  "status": "SOURCE_ONLY_PREPARED_PENDING_ROOT_REVIEW",
+  "source": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\external_cuda_capability_query_20261004T2005Z\\cuda_driver_capability_query.cpp",
+    "bytes": 10438,
+    "sha256": "d22e00d620d17edf1d6ab0271c977e02b480a92bc75074e41df77a263bc8c9f2"
+  },
+  "inputs": {
+    "cuda.h": {
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cuda.h",
+      "bytes": 1280649,
+      "sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072"
+    },
+    "cudaTypedefs.h": {
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cudaTypedefs.h",
+      "bytes": 93153,
+      "sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c"
+    },
+    "header_staging_note": {
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\CUDA_HEADER_STAGING.md",
+      "bytes": 4408,
+      "sha256": "52ad276e5dd9684a312da17b5814ed3d36be825a9e944b609919458118c42ff8"
+    },
+    "header_staging_manifest": {
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\staging_manifest.json",
+      "bytes": 1494,
+      "sha256": "a48c2286b286fc421e1bef18c2d050a62a891618a9f19696022fbfb6a6e9215d"
+    },
+    "license_notice": {
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\NVIDIA-EULA-and-notices.txt",
+      "bytes": 68070,
+      "sha256": "088381bc2d891e719a2a9398645b00bb45f3b24231473a8283ac7e3e66b8a028"
+    }
+  },
+  "runtime_library": {
+    "path": "/usr/lib/wsl/lib/libcuda.so.1",
+    "sha256": "00d5773a96ab7e18d087880b8ce02741863da15c487b434999f7932f3cbe1383",
+    "bytes": 175360,
+    "measurement": "Read-only WSL sha256sum; no CUDA API called."
+  },
+  "compiler": {
+    "path": "/usr/bin/c++",
+    "version": "NOT_CHECKED",
+    "sha256": "NOT_CHECKED"
+  },
+  "compile_or_runtime_executed": false,
+  "scope": "CUDA driver inventory only; no CUDA context, allocation, handle, copy, kernel, or P2P claim.",
+  "expected_exit_contract": {
+    "0": "QUERY_COMPLETE; per-device API results emitted, p2p_claim UNPROVEN",
+    "1": "QUERY_ERROR with exact API return code(s)",
+    "2": "NOT_CHECKED for missing pinned library/symbol or no CUDA device"
+  },
+  "expected_output_cap": "Source-level bounded to at most 32 device records; fixed 256-byte device-name buffer; JSON is intended to stay below 128 KiB. Not runtime-measured."
+}

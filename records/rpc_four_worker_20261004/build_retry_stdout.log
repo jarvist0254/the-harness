@@ -1,0 +1,60 @@
+-- llama.cpp version: 0.5.0-dev
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: AMD64
+-- CMAKE_GENERATOR_PLATFORM: 
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: /arch:AVX512 GGML_AVX512
+-- Using RPC backend
+--   RDMA transport disabled
+-- Including RPC backend
+-- ggml version: 0.25.3
+-- ggml commit:  0faee50-dirty
+-- Generating embedded license file for target: llama-app
+-- Configuring done (0.8s)
+-- Generating done (0.3s)
+-- Build files have been written to: E:/the_harness/records/build_cpu_rpc
+[1/36] Building C object ggml\src\CMakeFiles\ggml-base.dir\ggml-alloc.c.obj
+[2/36] Building CXX object ggml\src\CMakeFiles\ggml-base.dir\ggml.cpp.obj
+[3/36] Building C object ggml\src\CMakeFiles\ggml-base.dir\ggml.c.obj
+[4/36] Building CXX object ggml\src\CMakeFiles\ggml-base.dir\ggml-threading.cpp.obj
+[5/36] Building CXX object ggml\src\CMakeFiles\ggml-base.dir\ggml-backend.cpp.obj
+[6/36] Building CXX object ggml\src\CMakeFiles\ggml-base.dir\ggml-opt.cpp.obj
+[7/36] Building C object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\ggml-cpu.c.obj
+[8/36] Building CXX object ggml\src\CMakeFiles\ggml-base.dir\ggml-backend-meta.cpp.obj
+[9/36] Building C object ggml\src\CMakeFiles\ggml-base.dir\ggml-quants.c.obj
+[10/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\hbm.cpp.obj
+[11/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\ggml-cpu.cpp.obj
+[12/36] Building C object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\quants.c.obj
+[13/36] Building CXX object ggml\src\CMakeFiles\ggml-base.dir\gguf.cpp.obj
+[14/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\traits.cpp.obj
+[15/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\amx\amx.cpp.obj
+[16/36] Linking CXX shared library bin\ggml-base.dll
+[17/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\repack.cpp.obj
+[18/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\amx\mmq.cpp.obj
+[19/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\tiled\tiled-kernel.cpp.obj
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(290): warning C4068: unknown pragma 'GCC'
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(299): warning C4068: unknown pragma 'GCC'
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(307): warning C4068: unknown pragma 'GCC'
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(330): warning C4068: unknown pragma 'GCC'
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(339): warning C4068: unknown pragma 'GCC'
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(347): warning C4068: unknown pragma 'GCC'
+E:\the_harness\repos\llama.cpp\ggml\src\ggml-cpu\tiled\tiled-kernel.cpp(368): warning C4068: unknown pragma 'GCC'
+[20/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\binary-ops.cpp.obj
+[21/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\vec.cpp.obj
+[22/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\tiled\tiled.cpp.obj
+[23/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\unary-ops.cpp.obj
+[24/36] Building C object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\arch\x86\quants.c.obj
+[25/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\llamafile\sgemm.cpp.obj
+[26/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\ops.cpp.obj
+[27/36] Building CXX object ggml\src\ggml-rpc\CMakeFiles\ggml-rpc.dir\transport.cpp.obj
+[28/36] Building CXX object ggml\src\CMakeFiles\ggml.dir\ggml-backend-dl.cpp.obj
+[29/36] Building CXX object ggml\src\CMakeFiles\ggml-cpu.dir\ggml-cpu\arch\x86\repack.cpp.obj
+[30/36] Linking CXX shared library bin\ggml-cpu.dll
+[31/36] Building CXX object ggml\src\ggml-rpc\CMakeFiles\ggml-rpc.dir\ggml-rpc.cpp.obj
+[32/36] Building CXX object ggml\src\CMakeFiles\ggml.dir\ggml-backend-reg.cpp.obj
+[33/36] Linking CXX shared library bin\ggml-rpc.dll
+[34/36] Linking CXX shared library bin\ggml.dll
+[35/36] Building CXX object tools\rpc\CMakeFiles\ggml-rpc-server.dir\rpc-server.cpp.obj
+[36/36] Linking CXX executable bin\ggml-rpc-server.exe

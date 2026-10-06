@@ -1,0 +1,9 @@
+{
+  "jobs": [
+    {
+      "job": "qwen_compiler_stream",
+      "wrapper_pid": 59248,
+      "worker_pid": 93148
+    }
+  ]
+}

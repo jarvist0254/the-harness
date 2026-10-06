@@ -1,0 +1,36 @@
+{
+  "drain_unknown": false,
+  "usage": {
+    "input_tokens": 16817,
+    "cache_read_input_tokens": 2432,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 3653,
+    "reasoning_tokens": 1926,
+    "total_tokens": 22902
+  },
+  "exit_code": 0,
+  "provider_patch_applied": false,
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 16817,
+      "outputTokens": 3653,
+      "cacheReadInputTokens": 2432,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.03860224
+    }
+  },
+  "private_url_output_refused": false,
+  "parse_error_type": null,
+  "pipe_error": false,
+  "credential_saved": false,
+  "elapsed_seconds": 22.09,
+  "lane": "Grok",
+  "native_children_actual": 0,
+  "requested_model": "grok-4.7-build-fast",
+  "log_cap_exceeded": false,
+  "pid": 51436,
+  "status": "COMPLETE_PATCH_STAGED_UNAPPLIED",
+  "finish_reason": "end_turn",
+  "outer_killed": false
+}

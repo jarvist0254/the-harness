@@ -1,0 +1,1 @@
+{"status":"FAIL","api":"zeFenceHostSynchronize","ze_result":1,"reason":"corrupt_wait","resource_state":"TERMINAL_QUARANTINE","destruction_skipped":true,"cleanup_verified":false,"direct_transport_qualified":false,"exit_code":1}

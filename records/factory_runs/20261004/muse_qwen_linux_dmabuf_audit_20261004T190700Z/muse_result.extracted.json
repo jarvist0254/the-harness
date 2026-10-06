@@ -1,0 +1,36 @@
+{
+  "findings": [
+    {
+      "exact_source": "SOURCE lines 48-54: void external_buffer_caps(...) { VkPhysicalDeviceExternalBufferInfo info{}; info.sType=VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO; info.handleType=ht; /* no info.flags/info.usage assignment */ vkGetPhysicalDeviceExternalBufferProperties(pd,&info,&props); }",
+      "minimal_fix": "SOURCE line 51 fix: set info.flags=0 and info.usage to explicit transfer-relevant bits (e.g. VK_BUFFER_USAGE_TRANSFER_SRC_BIT|VK_BUFFER_USAGE_TRANSFER_DST_BIT, plus any claimed STORAGE usage) and query per-usage; document queried usage in JSON; never interpret usage=0 result as device capability.",
+      "reason": "SOURCE lines 49-54 leave info.usage=0 and info.flags=0; VkPhysicalDeviceExternalBufferInfo capability depends on usage, so usage=0 returns meaningless/zero externalMemoryFeatures. Counterexample: NVIDIA 5070Ti plus AMD gfx1036 could return exportable=false/importable=false for usage=0 even when DMA_BUF with TRANSFER usage is supported (false negative), or a reader could mistake the numbers for a general DMA_BUF verdict; it cannot prove (c) legal export/import for a specific allocation/resource type.",
+      "region": "SOURCE lines 48-54 external_buffer_caps query"
+    },
+    {
+      "exact_source": "TESTS lines ~28-40: for ti in range(len(mem_types)): ... if claims.get('dedicated_vram_p2p')=='PASS' and not (device_local and heap_device_local and not host_visible): errors.append(...dedicated_device_local_receipt...)",
+      "minimal_fix": "TESTS lines ~28-40 fix: never accept dedicated_vram_p2p/same_vendor_peer/cross_vendor_dma_buf_import as PASS from heap flags alone; require >=2 distinct deviceUUIDs plus DMA_BUF importable+exportable plus actual allocation/import/ownership/sync receipts, else REFUSE; keep default UNPROVEN per spec DEVICE_LOCAL-on-UMA!=dedicated-VRAM and host/imported-backing!=VRAM-P2P.",
+      "reason": "TESTS lines ~28-40 accept dedicated_vram_p2p PASS from one memory_type with device_local plus heap device_local plus not host_visible. Counterexamples: (1) single discrete NVIDIA 5070Ti alone satisfies flags with no peer, no DMA_BUF import, no zeDeviceCanAccessPeer/same-UUID proof; (2) AMD gfx1036 UMA reporting DEVICE_LOCAL still does not equal dedicated VRAM; (3) two devices with local heaps but incompatible handleTypes still pass. This conflates (a) device/memory discovery with (c)/(e) legal compatibility and P2P.",
+      "region": "TESTS lines ~28-40 dedicated_vram_p2p receipt check"
+    },
+    {
+      "exact_source": "TESTS lines ~40-48: if claims.get('cross_vendor_dma_buf_import')=='PASS': errors.append(...); if obj.get('legal_cross_vendor_dma_buf_p2p')=='PASS': errors.append(...); // no inspection of devices[].external_buffer_capabilities[].exportable/importable/compatible_handle_types/export_from_imported or external_semaphore/fence caps",
+      "minimal_fix": "TESTS fix: when any cross-vendor/DMA_BUF/P2P claim is PASS, require explicit DMA_BUF_EXT entry present with importable=true and exportable=true and nonzero compatible_handle_types/export_from_imported, plus corresponding semaphore/fence importable where synchronization is claimed; otherwise REFUSE. Also require >=2 devices.",
+      "reason": "TESTS never read external_buffer/semaphore/fence capability values. Counterexample: output with only OPAQUE_FD caps, or DMA_BUF entry with importable=false/exportable=false/compatible_handle_types=0, or missing DMA_BUF entry due to absent VK_EXT_external_memory_dma_buf, can still yield mock_contract_validator_pass=true via heap flags. Per supplied Vulkan-memory and external-host guidance, advertised extensions differ from legal resource aliasing and data-path proof.",
+      "region": "TESTS lines ~40-48 missing capability-value gate"
+    },
+    {
+      "exact_source": "SOURCE lines 47 and ~100-135: #if defined(VK_VERSION_1_1) guards vkGetPhysicalDeviceExternalBufferProperties/SemaphoreProperties/FenceProperties/Properties2 calls; no runtime prop.apiVersion>=VK_API_VERSION_1_1 check and no vkGetInstanceProcAddr NULL check. SOURCE lines ~86-105: if (vkEnumeratePhysicalDevices(...)!=VK_SUCCESS) and if (vkEnumerateDeviceExtensionProperties(...)!=VK_SUCCESS) exts.clear(), treating VK_INCOMPLETE as failure.",
+      "minimal_fix": "SOURCE fix: after vkGetPhysicalDeviceProperties add runtime guard to emit external_*_capabilities only when prop.apiVersion>=VK_API_VERSION_1_1 and function pointers non-NULL, else emit explicit not_queried reason; treat VK_INCOMPLETE as truncated-success (retain returned count, re-query or truncate) for vkEnumeratePhysicalDevices and vkEnumerateDeviceExtensionProperties.",
+      "reason": "SOURCE compile-time #if does not imply runtime loader/device 1.1 support; counterexample Vulkan 1.0 loader/device exposes NULL entry point and crash, or misread as absent capability. VK_INCOMPLETE is returned when counts change between count and list calls; counterexample device arrival/removal yields gpu_count=0 or exts.clear() and validator no_devices REFUSED, hiding present GPUs. This is result-code and ABI handling, not P2P proof.",
+      "region": "SOURCE lines 47-onwards version guard and enumerate result-code handling"
+    }
+  ],
+  "safety_checks": [
+    "NOT_CHECKED: actual driver cross-device DMA-BUF legal contracts, VkMemoryGetFdInfoKHR/getFdProperties, dedicated-allocation/memory-type/modifier/size/alignment/offset requirements, corresponding image/buffer resource compatibility, queue-family ownership transfer, and semaphore/fence payload synchronization were not executed or verified.",
+    "NOT_CHECKED: exact Vulkan header/loader/driver versions, VK_EXT_external_memory_dma_buf and VK_EXT_pci_bus_info availability, PCI ACS/IOMMU/BAR/link topology, LevelZero zeDeviceCanAccessPeer/root-subdevice identity, and CUDA same-device-UUID interop outcomes on NVIDIA 5070Ti/AMD gfx1036/Intel-absent host.",
+    "NOT_CHECKED: /dev/dri node presence, PCI UUID/LUID distinctness, and any real import/copy/transfer behavior; no runtime, device query, compilation, or file change was performed.",
+    "Checked from text: artifact is query-only; no vkAllocateMemory, vkGetMemoryFdKHR, fd import/export/open/close, queue submit, copy, timeout loop, or P2P transaction occurs, so FD ownership/closure and transfer synchronization have no exercisable path.",
+    "Checked from text: root status=UNPROVEN, legal_cross_vendor_dma_buf_p2p=UNPROVEN, host_memory_as_vram_p2p=REFUSED, actual_gpu_qualification=false, import_copy_path_disabled=true and per-device claims UNPROVEN with d3d_cross_adapter_system_memory=NOT_APPLICABLE_LINUX correctly avoid inferring (c)/(d)/(e) from (a)/(b)."
+  ],
+  "verdict": "ANALYSIS"
+}

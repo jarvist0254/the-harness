@@ -1,0 +1,18 @@
+{
+  "native_children_actual": 0,
+  "state": "SOURCE_ONLY_PENDING_ROOT_BINDING",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\qwen_shared_host_protocol\\protocol.raw.unaccepted.json",
+  "prompt_sha256": "638b2b81bb7fa2b23a0e43b5d76ff1441cb40f253b4db893ca9ca8a0274eb8a5",
+  "transport": "--prompt-file; no embedded Windows prompt argument",
+  "cpp_source_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "code_applied": false,
+  "expected_outcome": "Honest REFUSED unless independently established primary corresponding-resource proof, never fabricated CPP edits",
+  "prompt_utf16": 68544,
+  "gemini_review_sha256": "194e15e75747a10410889519f32d36d708a07c619053abe5d95b9854bafa2216",
+  "provider_launched": false,
+  "source_sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+  "job": "grok_shared_host_edit",
+  "gemini_review_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\gemini_shared_host_review\\review.structured_output.extracted.json",
+  "utc": "2026-10-04T17:21:49.0702641Z",
+  "model": "grok-4.7-build-fast"
+}

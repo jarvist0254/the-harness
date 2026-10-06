@@ -1,0 +1,33 @@
+{
+  "label": "defined_fake_symbols",
+  "argv": [
+    "C:\\windows\\system32\\wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--exec",
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "5s",
+    "/usr/bin/readelf",
+    "-Ws",
+    "/mnt/e/the_harness/records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/peer_copy_cpu_fake"
+  ],
+  "pid": 78752,
+  "started_utc": "2026-10-04T22:28:23.301+00:00",
+  "elapsed_seconds": 0.156,
+  "returncode": 1,
+  "outer_timeout": false,
+  "outer_killed_owned_wsl_client": true,
+  "stream_overflow": true,
+  "owned_wsl_client_exited": true,
+  "readers_joined": true,
+  "pipes_drained": true,
+  "reader_errors": [],
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.stdout.bin",
+  "stdout_sha256": "3501eb5efa4fd2040d990cf996bb979ce471d57abda66eafae4d2ccb0a9ec1de",
+  "stdout_bytes": 131072,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.stderr.bin",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_bytes": 0
+}

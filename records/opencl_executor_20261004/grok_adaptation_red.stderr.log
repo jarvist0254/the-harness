@@ -1,0 +1,71 @@
+..FEEE
+======================================================================
+ERROR: test_unknown_boolean_nonpositive_or_noninteger_limit_refuses (j_link.tests.test_grok_executor_review.MaxAllocationAdmission) (maximum='4096')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 38, in test_unknown_boolean_nonpositive_or_noninteger_limit_refuses
+    executor._check_device_memory(selected(maximum), plan)
+  File "E:\the_harness\j_link\opencl_executor.py", line 408, in _check_device_memory
+    if maximum and largest > maximum:
+TypeError: '>' not supported between instances of 'int' and 'str'
+
+======================================================================
+ERROR: test_boundary_is_first_change_in_vendor_not_first_device_owner (j_link.tests.test_grok_executor_review.VendorBoundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 84, in test_boundary_is_first_change_in_vendor_not_first_device_owner
+    self.assertEqual(executor._first_vendor_boundary(owners, 3, vendors), 1)
+AttributeError: module 'opencl_executor' has no attribute '_first_vendor_boundary'
+
+======================================================================
+ERROR: test_reverse_vendor_order_uses_its_first_actual_vendor_change (j_link.tests.test_grok_executor_review.VendorBoundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 90, in test_reverse_vendor_order_uses_its_first_actual_vendor_change
+    self.assertEqual(executor._first_vendor_boundary(owners, 3, vendors), 0)
+AttributeError: module 'opencl_executor' has no attribute '_first_vendor_boundary'
+
+======================================================================
+ERROR: test_same_vendor_devices_are_not_a_corruption_boundary (j_link.tests.test_grok_executor_review.VendorBoundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 95, in test_same_vendor_devices_are_not_a_corruption_boundary
+    self.assertIsNone(executor._first_vendor_boundary(owners, 3, vendors))
+AttributeError: module 'opencl_executor' has no attribute '_first_vendor_boundary'
+
+======================================================================
+FAIL: test_unknown_boolean_nonpositive_or_noninteger_limit_refuses (j_link.tests.test_grok_executor_review.MaxAllocationAdmission) (maximum=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 37, in test_unknown_boolean_nonpositive_or_noninteger_limit_refuses
+    with self.assertRaises(executor.RuntimeUnavailable):
+AssertionError: RuntimeUnavailable not raised
+
+======================================================================
+FAIL: test_unknown_boolean_nonpositive_or_noninteger_limit_refuses (j_link.tests.test_grok_executor_review.MaxAllocationAdmission) (maximum=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 37, in test_unknown_boolean_nonpositive_or_noninteger_limit_refuses
+    with self.assertRaises(executor.RuntimeUnavailable):
+AssertionError: RuntimeUnavailable not raised
+
+======================================================================
+FAIL: test_unknown_boolean_nonpositive_or_noninteger_limit_refuses (j_link.tests.test_grok_executor_review.MaxAllocationAdmission) (maximum=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 37, in test_unknown_boolean_nonpositive_or_noninteger_limit_refuses
+    with self.assertRaises(executor.RuntimeUnavailable):
+AssertionError: RuntimeUnavailable not raised
+
+======================================================================
+FAIL: test_unknown_runtime_limit_stops_child_before_gpu_execution (j_link.tests.test_grok_executor_review.MaxAllocationAdmission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_grok_executor_review.py", line 74, in test_unknown_runtime_limit_stops_child_before_gpu_execution
+    self.assertEqual(code, 2)
+AssertionError: 1 != 2
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.005s
+
+FAILED (failures=4, errors=4)

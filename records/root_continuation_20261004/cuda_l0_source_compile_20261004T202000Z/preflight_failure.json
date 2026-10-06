@@ -1,0 +1,8 @@
+{
+  "controller_sha256": "a67bc049496295ebea80e7d007b2a6c37e89feaad7de055557f3493374e5fba3",
+  "timestamp_utc": "2026-10-04T20:58:42.5691073Z",
+  "error": "FileNotFoundError: E:\\the_harness\\toolchains\\cuda_driver_headers_20261004\\include\\cuda.h",
+  "compiler_process_started": false,
+  "status": "PREFLIGHT_FAILED_BEFORE_WSL",
+  "candidate_modified": false
+}

@@ -1,0 +1,19 @@
+{
+  "owned_controller_pid": 11416,
+  "exit_code": 0,
+  "reaped": true,
+  "timeout": false,
+  "capture": {
+    "bytes": {
+      "runtime_controller.stderr.log": 0,
+      "runtime_controller.stdout.log": 1092
+    },
+    "overflow": [],
+    "errors": []
+  },
+  "readers_joined": true,
+  "seconds": 0.3119999999180436,
+  "controller_source_sha_before": "1c7c7421791504e5d2fbeb23b3d397d1a85d0a8f7eaea4c7871498358f2adda3",
+  "controller_source_sha_after": "1c7c7421791504e5d2fbeb23b3d397d1a85d0a8f7eaea4c7871498358f2adda3",
+  "scope": "Root-admitted CPU-only local actual-header stub cases, no real Level Zero/GPU loader or API calls"
+}

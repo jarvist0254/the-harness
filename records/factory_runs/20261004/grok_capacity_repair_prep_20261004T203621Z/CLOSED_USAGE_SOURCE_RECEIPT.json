@@ -1,0 +1,92 @@
+{
+  "reported_reasoning_already_in_output": true,
+  "source_execution": false,
+  "credits": "NOT_DERIVED_FROM_TOKENS",
+  "input_pins_after": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\source.qwen_untrusted.py",
+      "after": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+      "before": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+      "unchanged": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\tests_source.qwen_untrusted.txt",
+      "after": "aae6be310522f4d7a3152652ffd2816df186db72a317f5ead1372ec9dda95239",
+      "before": "aae6be310522f4d7a3152652ffd2816df186db72a317f5ead1372ec9dda95239",
+      "unchanged": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity.spec.txt",
+      "after": "8ab81aa30e7ccd104b2e8ae6fbb9d19c87b31fffb7fcb32880dc97f0c02d1bb8",
+      "before": "8ab81aa30e7ccd104b2e8ae6fbb9d19c87b31fffb7fcb32880dc97f0c02d1bb8",
+      "unchanged": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\run_output\\muse_review.extracted.json",
+      "after": "de2b5a98c4ad598c69db85e9a9c376d4e1840c892c9b1f4e3b67127f0e8a9fb0",
+      "before": "de2b5a98c4ad598c69db85e9a9c376d4e1840c892c9b1f4e3b67127f0e8a9fb0",
+      "unchanged": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\gemini_capacity_high\\review.pending_root_qa.json",
+      "after": "f3058220ca3f4433b35966aeb64296be0910051790d5761e93cdd1205cdf9408",
+      "before": "f3058220ca3f4433b35966aeb64296be0910051790d5761e93cdd1205cdf9408",
+      "unchanged": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\stdout.attempt3.raw.json",
+      "after": "86cc4fc6fb7062e758b27802944fad2c40c67d9703d2f5df8e18cdfad5eb3d71",
+      "before": "86cc4fc6fb7062e758b27802944fad2c40c67d9703d2f5df8e18cdfad5eb3d71",
+      "unchanged": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\capacity_independent_audit_v3.py",
+      "after": "440245bf69e5fde1f2d68c94797f971c068d2d3a87ffe6da5e0afd2de394329e",
+      "before": "440245bf69e5fde1f2d68c94797f971c068d2d3a87ffe6da5e0afd2de394329e",
+      "unchanged": true
+    }
+  ],
+  "cache_already_in_total": true,
+  "utc": "2026-10-04T20:49:55.4271856Z",
+  "secret_process_audit_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\SECRET_PROCESS_AUDIT_GROK_CAPACITY.json",
+  "job": "grok_capacity_high",
+  "internal_model_calls": 1,
+  "terminal": {
+    "private_url_output_refused": false,
+    "pipe_error": false,
+    "pid": 75996,
+    "requested_model": "grok-4.7-build-fast",
+    "usage": {
+      "input_tokens": 18763,
+      "cache_read_input_tokens": 1152,
+      "cache_creation_input_tokens": 0,
+      "output_tokens": 80715,
+      "reasoning_tokens": 72591,
+      "total_tokens": 100630
+    },
+    "parse_error_type": null,
+    "provider_patch_applied": false,
+    "exit_code": 0,
+    "credential_saved": false,
+    "elapsed_seconds": 534.13,
+    "native_children_actual": 0,
+    "finish_reason": "end_turn",
+    "log_cap_exceeded": false,
+    "outer_killed": false,
+    "model_usage": {
+      "grok-4.7-build-fast": {
+        "inputTokens": 18763,
+        "outputTokens": 80715,
+        "cacheReadInputTokens": 1152,
+        "cacheCreationInputTokens": 0,
+        "modelCalls": 1,
+        "costUSD": 0.35522656
+      }
+    },
+    "lane": "Grok",
+    "status": "COMPLETE_CORRECTION_STAGED_UNAPPLIED",
+    "drain_unknown": false
+  },
+  "candidate_acceptance": "PENDING_ROOT_STATIC_ADMISSION",
+  "provider_jobs": 1
+}

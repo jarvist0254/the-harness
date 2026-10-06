@@ -1,0 +1,13 @@
+{
+  "original_source_sha256": "6185dcf242e4c847544c07455468119d67fae35d5aaf341ebaa8d14a0b920aa6",
+  "derivative_source_sha256": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+  "original_fake_sha256": "bfff2acc383607b74fbca4e288f0dfff3ac99d3297f3f9947cca867b5c92353f",
+  "derivative_fake_sha256": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+  "original_RED": {
+    "total": 9,
+    "pass": 4,
+    "fail": 5
+  },
+  "execution": "NEW_EXECUTABLE_NOT_RUN",
+  "policy": "terminal quarantine, not GPU destruction certification"
+}

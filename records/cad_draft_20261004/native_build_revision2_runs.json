@@ -1,0 +1,43 @@
+[
+  {
+    "case": "compact",
+    "command": [
+      "E:\\tooling\\FreeCAD\\app\\FreeCAD_1.1.4-Windows-x86_64-py311\\bin\\freecadcmd.exe",
+      "E:\\the_harness\\records\\cad_draft_20261004\\run_compact_revision2.py"
+    ],
+    "pid": 46108,
+    "process_exit_code": 0,
+    "script_state_present": true,
+    "status": "VALID_DRAFT_BREP_NOT_FIT_QUALIFICATION",
+    "timed_out": false,
+    "seconds": 0.4369999999180436,
+    "source_sha256": "cf88c9ec845bf1ce2acead5e10771d8d13e9d4996b224ff96d1e8b57ec910cb7",
+    "solid_count": 1,
+    "body_interferences": []
+  },
+  {
+    "case": "universal",
+    "command": [
+      "E:\\tooling\\FreeCAD\\app\\FreeCAD_1.1.4-Windows-x86_64-py311\\bin\\freecadcmd.exe",
+      "E:\\the_harness\\records\\cad_draft_20261004\\run_universal_revision2.py"
+    ],
+    "pid": 8856,
+    "process_exit_code": 0,
+    "script_state_present": true,
+    "status": "REFUSED_BODY_INTERFERENCE",
+    "timed_out": false,
+    "seconds": 0.4380000000819564,
+    "source_sha256": "cf88c9ec845bf1ce2acead5e10771d8d13e9d4996b224ff96d1e8b57ec910cb7",
+    "solid_count": 1,
+    "body_interferences": [
+      {
+        "bay": "A",
+        "printed_overlap_mm3": 33000.000000000015
+      },
+      {
+        "bay": "C",
+        "printed_overlap_mm3": 33000.0
+      }
+    ]
+  }
+]

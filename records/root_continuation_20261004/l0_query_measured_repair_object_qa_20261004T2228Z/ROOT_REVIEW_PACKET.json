@@ -1,0 +1,35 @@
+{
+  "status": "OBJECT_COMPILE_COMPLETED_CPU_FAKE_PENDING_ROOT_REVIEW",
+  "scope": "PINNED_SOURCE_OBJECT_COMPILE_ONLY; SYNTHETIC_CPU_FAKE_NOT_COMPILED_OR_EXECUTED",
+  "candidate": {
+    "path": "E:/the_harness/records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/source.qwen_untrusted.cpp",
+    "sha256": "27d560b3f73dd830b68de9aac3316d7b8510c0218d54704156e273929ce23fe2"
+  },
+  "provider_tests_source_only": {
+    "path": "E:/the_harness/records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/tests_source.qwen_untrusted.txt",
+    "sha256": "df49c5aa406c27a9d1cee14ded78804ef95551a0eac703635c9268bb13f06ac8",
+    "executed": false
+  },
+  "header": {
+    "path": "E:/the_harness/records/toolchains/level_zero_20261004/sdk/include/level_zero/ze_api.h",
+    "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "version": "Level Zero API header v1.19-r1.19.12 from staged v1.34.0 source"
+  },
+  "compiler": {
+    "path": "/usr/bin/c++ in WSL Ubuntu 24.04",
+    "version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+  },
+  "compile_receipt_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/compile_receipt.json",
+  "compile_receipt_sha256": "66a0d44cc910da3d583b0107388c0b5d056b6d5ddc271d884cb914b5171b1b67",
+  "compile_status": "OBJECT_COMPILE_PASS",
+  "object_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/query_candidate.o",
+  "object_sha256": "1fa2833788b88605de3b450c6a63f10c88724e0e9f9b9e3080eea30282505022",
+  "cpu_fake_contract_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/cpu_fake_contract_pending_root_gate.cpp",
+  "cpu_fake_contract_sha256": "7a81ce1cc9b55995898a42191c8166dbc766569fa2db91d27fda1f48fd743529",
+  "cpu_fake_status": "PENDING_ROOT_REVIEW_NO_COMPILE_OR_EXECUTION",
+  "static_review_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/STATIC_REVIEW.md",
+  "static_review_sha256": "408537e96e9b5919e236fbffe3b32eeab0c71296d602699a8abdd05cf66e2362",
+  "native_gpu_or_level_zero_runtime_calls": false,
+  "transfer_or_peer_access_claimed": false
+}

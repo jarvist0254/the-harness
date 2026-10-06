@@ -1,0 +1,8 @@
+{
+  "job": "qwen_fp32_patch",
+  "utc": "2026-10-04T15:43:27.0490642Z",
+  "process_identity": "Current unified-exec shell executes owned wrapper directly; retained tool session",
+  "admission": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_QWEN_LAUNCH_ADMISSION_20261004T154200Z.json",
+  "wrapper_pid": 55480,
+  "model": "qwen3.8-max"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+    "sha256": "6bb4e7edb317044e34d426d44b0035c2ea57fb762aade601f81e3be599ca59f9",
+    "lines": 756,
+    "gate": "AST_ONLY_PASS_NO_IMPORT",
+    "error": null
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+    "sha256": "20d57e2270221ad313dfc16d5c15245e52b3106ae1ff41113fa38886dc0851c7",
+    "lines": 157,
+    "gate": "AST_ONLY_PASS_NO_IMPORT",
+    "error": null
+  }
+]

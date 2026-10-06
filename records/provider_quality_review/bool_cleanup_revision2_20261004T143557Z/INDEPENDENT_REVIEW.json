@@ -1,0 +1,226 @@
+{
+  "scope": "PASS_MOCK_ONLY_NO_NATIVE_OR_PRODUCTION_ADMISSION",
+  "source_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+  "tests": 44,
+  "failures": 0,
+  "errors": 0,
+  "forbidden_calls": [],
+  "previous_revision_same_tests": {
+    "sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+    "failures": 4,
+    "errors": 0,
+    "forbidden_calls": []
+  },
+  "new_direct_control_observations": [
+    {
+      "case": "__main__.Cases.test_direct_already_signaled_exit_three",
+      "prewait": 0,
+      "job_bool_result": 1,
+      "shutdown_result": [
+        0,
+        "CLEANUP"
+      ],
+      "owned": [
+        {
+          "ph": 101,
+          "exit_code": 3,
+          "wait": 0
+        }
+      ],
+      "calls": [
+        [
+          "wait",
+          101,
+          0
+        ],
+        [
+          "terminate_job",
+          102,
+          1
+        ],
+        [
+          "wait",
+          101,
+          8000
+        ],
+        [
+          "exit_code",
+          101
+        ]
+      ],
+      "scope": "Direct fake shutdown only; integer handles are invented, no native calls"
+    },
+    {
+      "case": "__main__.Cases.test_direct_job_bool_zero_after_root_exit",
+      "prewait": 0,
+      "job_bool_result": 0,
+      "shutdown_result": [
+        0,
+        "UNKNOWN_DRAIN"
+      ],
+      "owned": [
+        {
+          "ph": 101,
+          "exit_code": 3,
+          "wait": 0
+        }
+      ],
+      "calls": [
+        [
+          "wait",
+          101,
+          0
+        ],
+        [
+          "terminate_job",
+          102,
+          1
+        ],
+        [
+          "wait",
+          101,
+          8000
+        ],
+        [
+          "exit_code",
+          101
+        ]
+      ],
+      "scope": "Direct fake shutdown only; integer handles are invented, no native calls"
+    },
+    {
+      "case": "__main__.Cases.test_direct_running_root_still_terminated",
+      "prewait": 258,
+      "job_bool_result": 1,
+      "shutdown_result": [
+        0,
+        "CLEANUP"
+      ],
+      "owned": [
+        {
+          "ph": 101,
+          "exit_code": 3,
+          "wait": 0
+        }
+      ],
+      "calls": [
+        [
+          "wait",
+          101,
+          0
+        ],
+        [
+          "terminate_root",
+          101,
+          1
+        ],
+        [
+          "terminate_job",
+          102,
+          1
+        ],
+        [
+          "wait",
+          101,
+          8000
+        ],
+        [
+          "exit_code",
+          101
+        ]
+      ],
+      "scope": "Direct fake shutdown only; integer handles are invented, no native calls"
+    },
+    {
+      "case": "__main__.Cases.test_direct_uncertain_prewait_refused",
+      "prewait": "RAISE",
+      "job_bool_result": 1,
+      "shutdown_result": [
+        0,
+        "UNKNOWN_DRAIN"
+      ],
+      "owned": [
+        {
+          "ph": 101,
+          "exit_code": 3,
+          "wait": 0
+        }
+      ],
+      "calls": [
+        [
+          "wait",
+          101,
+          0
+        ],
+        [
+          "terminate_root",
+          101,
+          1
+        ],
+        [
+          "terminate_job",
+          102,
+          1
+        ],
+        [
+          "wait",
+          101,
+          8000
+        ],
+        [
+          "exit_code",
+          101
+        ]
+      ],
+      "scope": "Direct fake shutdown only; integer handles are invented, no native calls"
+    },
+    {
+      "case": "__main__.Cases.test_direct_uncertain_prewait_refused",
+      "prewait": 4294967295,
+      "job_bool_result": 1,
+      "shutdown_result": [
+        0,
+        "UNKNOWN_DRAIN"
+      ],
+      "owned": [
+        {
+          "ph": 101,
+          "exit_code": 3,
+          "wait": 0
+        }
+      ],
+      "calls": [
+        [
+          "wait",
+          101,
+          0
+        ],
+        [
+          "terminate_root",
+          101,
+          1
+        ],
+        [
+          "terminate_job",
+          102,
+          1
+        ],
+        [
+          "wait",
+          101,
+          8000
+        ],
+        [
+          "exit_code",
+          101
+        ]
+      ],
+      "scope": "Direct fake shutdown only; integer handles are invented, no native calls"
+    }
+  ],
+  "limitations": [
+    "Manifest validation and typed native ABI are injected, not qualified.",
+    "Fake scheduling demonstrates selected interleavings, not real concurrency.",
+    "CPython CloseHandle raises on failure and returns None on success; those tests use exceptions. Only ctypes job BOOL failure uses integer zero."
+  ]
+}

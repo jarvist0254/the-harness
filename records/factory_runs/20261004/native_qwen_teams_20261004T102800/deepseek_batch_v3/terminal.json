@@ -1,0 +1,7 @@
+{
+  "pid": 23056,
+  "exit_code": 1,
+  "outer_killed": false,
+  "model": "deepseek-v4-flash-0731",
+  "elapsed_seconds": 0.65
+}

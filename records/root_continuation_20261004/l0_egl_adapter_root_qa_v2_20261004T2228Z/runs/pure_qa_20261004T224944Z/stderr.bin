@@ -1,0 +1,110 @@
+test_callback_exception_is_recorded_and_cleanup_is_attempted (__main__.IndependentAdapterContract) ... ERROR
+test_completion_state_cannot_be_asserted_without_callback_evidence (__main__.IndependentAdapterContract) ... FAIL
+test_egl_fd_retention_on_success_is_not_reported_as_ready (__main__.IndependentAdapterContract) ... FAIL
+test_export_must_produce_a_usable_sync_file_fd (__main__.IndependentAdapterContract) ... FAIL
+test_false_text_does_not_satisfy_boolean_admission (__main__.IndependentAdapterContract) ... FAIL
+test_false_text_outcome_does_not_prove_completion (__main__.IndependentAdapterContract) ... FAIL
+test_host_relay_order_is_observable_without_claiming_ready (__main__.IndependentAdapterContract) ... FAIL
+test_infinite_or_nan_deadline_is_rejected_before_callbacks (__main__.IndependentAdapterContract) ... test_report_cannot_mutate_the_internal_event_ledger (__main__.IndependentAdapterContract) ... ERROR
+test_second_run_after_timeout_does_not_claim_new_completion (__main__.IndependentAdapterContract) ... ok
+
+======================================================================
+ERROR: test_callback_exception_is_recorded_and_cleanup_is_attempted (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 167, in test_callback_exception_is_recorded_and_cleanup_is_attempted
+    report = adapter.run(10.0, memory_fd, semaphore_fd)
+  File "E:\the_harness\records\factory_runs\20261004\l0_egl_sync_bridge_two_prep_20261004T212837Z\qwen_l0_egl_fence_adapter\source.qwen_untrusted.py", line 261, in run
+    outcome = self._call('producer_completion_wait', self.callbacks.producer_completion_wait, deadline)
+  File "E:\the_harness\records\factory_runs\20261004\l0_egl_sync_bridge_two_prep_20261004T212837Z\qwen_l0_egl_fence_adapter\source.qwen_untrusted.py", line 215, in _call
+    outcome = fn(*args, rem)
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 57, in callback
+    return overrides[name](*args)
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 163, in broken_wait
+    raise RuntimeError("synthetic callback failure")
+RuntimeError: synthetic callback failure
+
+======================================================================
+ERROR: test_report_cannot_mutate_the_internal_event_ledger (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 204, in test_report_cannot_mutate_the_internal_event_ledger
+    adapter.run(10.0, memory_fd, semaphore_fd)
+  File "E:\the_harness\records\factory_runs\20261004\l0_egl_sync_bridge_two_prep_20261004T212837Z\qwen_l0_egl_fence_adapter\source.qwen_untrusted.py", line 245, in run
+    outcome = self._call('memory_import', self.callbacks.memory_import, deadline, memory_fd, fail_on_error=False)
+  File "E:\the_harness\records\factory_runs\20261004\l0_egl_sync_bridge_two_prep_20261004T212837Z\qwen_l0_egl_fence_adapter\source.qwen_untrusted.py", line 215, in _call
+    outcome = fn(*args, rem)
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 57, in callback
+    return overrides[name](*args)
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 200, in fail_memory
+    return self.m.NativeOutcome(ok=False, detail="synthetic stop")
+TypeError: NativeOutcome.__init__() got an unexpected keyword argument 'detail'
+
+======================================================================
+FAIL: test_completion_state_cannot_be_asserted_without_callback_evidence (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 194, in test_completion_state_cannot_be_asserted_without_callback_evidence
+    self.assertNotIn("syncobj_host_signal", [name for name, _ in calls])
+AssertionError: 'syncobj_host_signal' unexpectedly found in ['syncobj_host_signal']
+
+======================================================================
+FAIL: test_egl_fd_retention_on_success_is_not_reported_as_ready (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 123, in test_egl_fd_retention_on_success_is_not_reported_as_ready
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+======================================================================
+FAIL: test_export_must_produce_a_usable_sync_file_fd (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 110, in test_export_must_produce_a_usable_sync_file_fd
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+======================================================================
+FAIL: test_false_text_does_not_satisfy_boolean_admission (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 142, in test_false_text_does_not_satisfy_boolean_admission
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+======================================================================
+FAIL: test_false_text_outcome_does_not_prove_completion (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 155, in test_false_text_outcome_does_not_prove_completion
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+======================================================================
+FAIL: test_host_relay_order_is_observable_without_claiming_ready (__main__.IndependentAdapterContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 91, in test_host_relay_order_is_observable_without_claiming_ready
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+======================================================================
+FAIL: test_infinite_or_nan_deadline_is_rejected_before_callbacks (__main__.IndependentAdapterContract) (deadline=inf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 133, in test_infinite_or_nan_deadline_is_rejected_before_callbacks
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+======================================================================
+FAIL: test_infinite_or_nan_deadline_is_rejected_before_callbacks (__main__.IndependentAdapterContract) (deadline=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z\test_adapter_independent_contract_v2.py", line 133, in test_infinite_or_nan_deadline_is_rejected_before_callbacks
+    self.assertNotEqual(report["result"], self.m.RESULT_READY)
+AssertionError: 'DECLARED_PROTOCOL_READY' == 'DECLARED_PROTOCOL_READY'
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.008s
+
+FAILED (failures=8, errors=2)

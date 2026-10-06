@@ -1,0 +1,48 @@
+{
+  "authorization": "PENDING_ROOT_SOURCE_ONLY_NO_LAUNCH",
+  "controller": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt4_job_probe.py",
+  "controller_sha256": "5c06efd624620b005c433eafd00e0bfa6672facbd0ddac6c3e8ace02a580566a",
+  "helper_sha256": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd",
+  "ast": "PASS",
+  "commands": [
+    {
+      "stage": "configure",
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt4.cmd",
+      "sha256": "b51d0012531295771e0643145047c1fd795ef76cf7f9e8236ed5f77088df95e8",
+      "old_sha256": "b607f4e5d5174c0ec79db567c737b724332663de724e1e58b4b8248d52400aac"
+    },
+    {
+      "stage": "build",
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt4.cmd",
+      "sha256": "51477a225417baee8de532e6ebe1ca191cbfa188c074bfdcffe389d0524c9175",
+      "old_sha256": "bef1532e7865ae6f83cd679a3f9762e75ffc8163db221d964d8319c815111ae5"
+    }
+  ],
+  "pending_admission": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\BUILD_ATTEMPT4_ADMISSION_PENDING_ROOT.json",
+  "pending_admission_sha256": "ee0da539c2ab1bd5cad23adb68f59acf92dc26b673192349730afe2b7fc144fa",
+  "admission_fields_changed": [
+    "controller_sha256",
+    "configure_cmd_sha256",
+    "build_cmd_sha256"
+  ],
+  "warning": "Copied historical authorization is data only; root must separately admit exact current controller/helper hashes",
+  "build_directory": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt4",
+  "build_directory_exists": false,
+  "runtime_evidence": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe",
+  "runtime_evidence_exists": false,
+  "limits": {
+    "configure_seconds": 120,
+    "build_seconds": 150,
+    "streams_each_bytes": 131072,
+    "trace_bytes": 131072,
+    "trace_interval_seconds": 5,
+    "maximum_pid_list": 64
+  },
+  "pure_tests": {
+    "run": 14,
+    "failures": 0,
+    "errors": 0,
+    "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\job_member_trace_pure_receipt.json"
+  },
+  "scope": "Read-only same-owned-job diagnostic; no command lines/environment/PID-based cleanup/control; no native tracer calls/configuration/build/GPU execution"
+}

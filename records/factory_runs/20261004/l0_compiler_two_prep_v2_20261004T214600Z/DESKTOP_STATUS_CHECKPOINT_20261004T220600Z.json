@@ -1,0 +1,65 @@
+{
+  "jobs": [
+    {
+      "owned_launch": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_peer_compile_repair.owned_launch.json",
+      "latest_progress": {
+        "observed_model": "qwen3.8-max",
+        "done": false,
+        "http": 200,
+        "raw_bytes": 1551919,
+        "finish_reason": null,
+        "usage_known": false,
+        "reasoning_bytes": 83508,
+        "frames": 5689,
+        "content_bytes": 0,
+        "seconds": 574.11
+      },
+      "usage": "UNKNOWN_PENDING_FINAL",
+      "model": "qwen3.8-max",
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_peer_compile_repair\\terminal.json",
+      "job": "qwen_l0_peer_compile_repair",
+      "observed_model_verified": true,
+      "state": "LIVE"
+    },
+    {
+      "owned_launch": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair.owned_launch.json",
+      "latest_progress": {
+        "frames": 5395,
+        "observed_model": "qwen3.8-max",
+        "usage_known": false,
+        "content_bytes": 0,
+        "done": false,
+        "raw_bytes": 1467513,
+        "seconds": 573.96,
+        "reasoning_bytes": 74880,
+        "finish_reason": null,
+        "http": 200
+      },
+      "usage": "UNKNOWN_PENDING_FINAL",
+      "model": "qwen3.8-max",
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\terminal.json",
+      "job": "qwen_l0_query_measured_repair",
+      "observed_model_verified": true,
+      "state": "LIVE"
+    },
+    {
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\grok_combined_high.owned_terminal.json",
+      "state": "LIVE",
+      "deadline_seconds": 600,
+      "reasoning_effort": "high",
+      "usage": "UNKNOWN_PENDING_TERMINAL",
+      "owned_launch": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\grok_combined_high.owned_launch.json",
+      "requested_model": "grok-4.7-build-fast",
+      "observed_model_verified": false,
+      "job": "grok_combined_high"
+    }
+  ],
+  "closed": 0,
+  "status": "READ_ONLY_DESKTOP_STATUS_CHECKPOINT",
+  "source_execution": false,
+  "utc": "2026-10-04T22:06:05.6952350Z",
+  "credits_from_tokens": false,
+  "live": 3,
+  "muse_launched": false,
+  "additional_paid_launches": 0
+}

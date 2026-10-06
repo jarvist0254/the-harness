@@ -1,0 +1,138 @@
+/*
+ * Copyright (C) 2025-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#include "framework/enum/measurement_type.h"
+#include "framework/l0/levelzero.h"
+#include "framework/l0/utility/error.h"
+#include "framework/l0/utility/kernel_helper_l0.h"
+#include "framework/l0/utility/usable_memory_helper.h"
+#include "framework/l0/utility/usm_helper.h"
+#include "framework/test_case/register_test_case.h"
+#include "framework/utility/memory_constants.h"
+
+#include "definitions/random_access_multi_resource.h"
+#include "level_zero/ze_api.h"
+
+#include <gtest/gtest.h>
+#include <iostream>
+#include <level_zero/zer_api.h>
+#include <random>
+
+static TestResult run(const RandomAccessMultiResourceArguments &arguments, Statistics &statistics) {
+    const size_t iterations = arguments.iterations;
+    const size_t firstSize = arguments.firstSize;
+    const size_t secondSize = arguments.secondSize;
+    const MeasurementType measurementType = MeasurementType::Gpu;
+
+    MeasurementFields typeSelector(MeasurementUnit::GigabytesPerSecond, measurementType);
+    if (isNoopRun()) {
+        statistics.pushUnitAndType(typeSelector.getUnit(), typeSelector.getType());
+        return TestResult::Nooped;
+    }
+
+    ExtensionProperties extensionProperties = ExtensionProperties::create();
+    LevelZero levelzero(extensionProperties);
+
+    ze_device_compute_properties_t computeProperties{ZE_STRUCTURE_TYPE_DEVICE_COMPUTE_PROPERTIES};
+    ASSERT_ZE_RESULT_SUCCESS(zeDeviceGetComputeProperties(levelzero.device, &computeProperties));
+
+    const uint32_t workItemCnt = 10 * MemoryConstants::megaByte;
+    const size_t srcBufferAccessElementSize = sizeof(uint32_t);
+    const size_t offsetAccessBytesPerThread = sizeof(uint32_t);
+
+    ze_device_properties_t deviceProperties{ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES};
+    ASSERT_ZE_RESULT_SUCCESS(zeDeviceGetProperties(levelzero.device, &deviceProperties));
+    if (deviceProperties.maxMemAllocSize < firstSize || deviceProperties.maxMemAllocSize < secondSize) {
+        return TestResult::DeviceNotCapable;
+    }
+
+    ze_device_memory_properties_t memProperties{ZE_STRUCTURE_TYPE_DEVICE_MEMORY_PROPERTIES};
+    uint32_t memPropertiesCount = 0;
+    ASSERT_ZE_RESULT_SUCCESS(zeDeviceGetMemoryProperties(levelzero.device, &memPropertiesCount, nullptr));
+    ASSERT_ZE_RESULT_SUCCESS(zeDeviceGetMemoryProperties(levelzero.device, &memPropertiesCount, &memProperties));
+
+    // Consider the 3 allocations used in the benchmark and additional size due to alignment requirements
+    const uint64_t maxMemoryRequiredByBenchmark = firstSize + secondSize + workItemCnt * offsetAccessBytesPerThread + 1;
+    // totalSize is the whole pool, which on integrated parts is shared with the host and overstates what can be committed
+    const uint64_t memoryAvailableToBenchmark = UsableMemoryHelper::query(levelzero.device).value_or(memProperties.totalSize);
+    if (memPropertiesCount == 0 || memoryAvailableToBenchmark < maxMemoryRequiredByBenchmark) {
+        return TestResult::DeviceNotCapable;
+    }
+
+    if ((firstSize / srcBufferAccessElementSize) > std::numeric_limits<uint32_t>::max() || (secondSize / srcBufferAccessElementSize) > std::numeric_limits<uint32_t>::max()) {
+        return TestResult::InvalidArgs;
+    }
+
+    // Create buffers
+    void *fstSrcBuffer{}, *sndSrcBuffer{}, *offsetBuffer{}, *result{};
+    ASSERT_ZE_RESULT_SUCCESS(UsmHelper::allocate(arguments.firstPlacement, levelzero, firstSize, &fstSrcBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(UsmHelper::allocate(arguments.secondPlacement, levelzero, secondSize, &sndSrcBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(UsmHelper::allocate(UsmRuntimeMemoryPlacement::Device, levelzero, 1, &result));
+    ASSERT_ZE_RESULT_SUCCESS(UsmHelper::allocate(UsmRuntimeMemoryPlacement::Shared, levelzero, workItemCnt * offsetAccessBytesPerThread, &offsetBuffer));
+
+    const uint32_t fstMaxPossibleAccessIndex = static_cast<uint32_t>((firstSize / srcBufferAccessElementSize) - 1);
+    const uint32_t sndMaxPossibleAccessIndex = static_cast<uint32_t>((secondSize / srcBufferAccessElementSize) - 1);
+    auto maxPossibleAccessIndex = std::max(fstMaxPossibleAccessIndex, sndMaxPossibleAccessIndex);
+    // Prepare offset bufffer
+    uint32_t *randBuff = reinterpret_cast<uint32_t *>(offsetBuffer);
+    const auto rngSeed = 0xBEEFu;
+    std::mt19937 generator(rngSeed);
+    std::uniform_int_distribution<uint32_t> distr(0, static_cast<uint32_t>(maxPossibleAccessIndex) - 1);
+    for (auto index = 0u; index < workItemCnt; index++) {
+        randBuff[index] = distr(generator);
+    }
+    ze_module_handle_t module{};
+    ze_kernel_handle_t kernel{};
+    auto kernelLoadRes = L0::KernelHelper::loadKernel(levelzero, "access_device_mem_random.cl", "access_multiple_resources_random", &kernel, &module, nullptr, ZE_KERNEL_FLAG_EXPLICIT_RESIDENCY);
+    if (kernelLoadRes != TestResult::Success) {
+        return kernelLoadRes;
+    }
+
+    // Configure dispatch parameters
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetGroupSize(kernel, computeProperties.maxGroupSizeX, 1, 1));
+    const ze_group_count_t dispatchTraits{workItemCnt / computeProperties.maxGroupSizeX, 1, 1};
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 0, sizeof(fstSrcBuffer), &fstSrcBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 1, sizeof(sndSrcBuffer), &sndSrcBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 2, sizeof(randBuff), &randBuff));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 3, sizeof(result), &result));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 4, sizeof(fstMaxPossibleAccessIndex), &fstMaxPossibleAccessIndex));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 5, sizeof(sndMaxPossibleAccessIndex), &sndMaxPossibleAccessIndex));
+
+    // Create command list
+    ze_command_list_handle_t cmdList;
+    ASSERT_ZE_RESULT_SUCCESS(zeCommandListCreateImmediate(levelzero.context, levelzero.device, &zeDefaultGPUImmediateCommandQueueDesc, &cmdList));
+
+    // Create event for gpu time measurement
+    ze_event_handle_t event{};
+    ze_event_counter_based_desc_t cbDesc{.stype = ZE_STRUCTURE_TYPE_EVENT_COUNTER_BASED_DESC, .pNext = nullptr, .flags = ZE_EVENT_COUNTER_BASED_FLAG_DEVICE_TIMESTAMP, .signal = 0, .wait = 0};
+    ASSERT_ZE_RESULT_SUCCESS(zeEventCounterBasedCreate(levelzero.context, levelzero.device, &cbDesc, &event));
+
+    const size_t bytesTransferred = workItemCnt * (srcBufferAccessElementSize * 2 + offsetAccessBytesPerThread);
+
+    // Benchmark
+    for (auto i = 0u; i < iterations; i++) {
+        ASSERT_ZE_RESULT_SUCCESS(zeCommandListAppendLaunchKernel(cmdList, kernel, &dispatchTraits, event, 0, nullptr));
+        ASSERT_ZE_RESULT_SUCCESS(zeEventHostSynchronize(event, std::numeric_limits<uint64_t>::max()));
+
+        ze_kernel_timestamp_result_t timestampResult{};
+        ASSERT_ZE_RESULT_SUCCESS(zeEventQueryKernelTimestamp(event, &timestampResult));
+        auto commandTime = levelzero.getAbsoluteKernelExecutionTime(timestampResult.global);
+        statistics.pushValue(commandTime, bytesTransferred, typeSelector.getUnit(), typeSelector.getType());
+    }
+
+    ASSERT_ZE_RESULT_SUCCESS(zeEventDestroy(event));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelDestroy(kernel));
+    ASSERT_ZE_RESULT_SUCCESS(zeModuleDestroy(module));
+    ASSERT_ZE_RESULT_SUCCESS(zeCommandListDestroy(cmdList));
+    ASSERT_ZE_RESULT_SUCCESS(zeMemFree(levelzero.context, fstSrcBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(zeMemFree(levelzero.context, sndSrcBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(zeMemFree(levelzero.context, offsetBuffer));
+    ASSERT_ZE_RESULT_SUCCESS(zeMemFree(levelzero.context, result));
+    return TestResult::Success;
+}
+
+static RegisterTestCaseImplementation<RandomAccessMultiResource> registerTestCase(run, Api::L0);

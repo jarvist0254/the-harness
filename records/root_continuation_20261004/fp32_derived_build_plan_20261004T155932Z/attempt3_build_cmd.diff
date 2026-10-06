@@ -1,0 +1,9 @@
+--- build_owned_build_attempt2.cmd
++++ build_owned_build_attempt3.cmd
+@@ -1,5 +1,6 @@
+ @echo off
+ set "PROCESSOR_ARCHITECTURE=AMD64"
++set "VSCMD_SKIP_SENDTELEMETRY=1"
+ call "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat"
+ if errorlevel 1 exit /b %errorlevel%
+ set "VULKAN_SDK=E:\the_harness\records\build_vulkan_real\toolchain\sdk"

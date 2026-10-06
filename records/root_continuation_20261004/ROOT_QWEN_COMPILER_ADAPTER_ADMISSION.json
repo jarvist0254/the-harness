@@ -1,0 +1,10 @@
+{
+  "provider_launch_authorized": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z",
+  "job_id": "qwen_compiler_completion",
+  "lane": "Qwen",
+  "model": "qwen3.8-max",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\supervisor_snapshot.py",
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "prompt_sha256": "3253ed7fcad7a77f63a184d5363d01c0634922eaae08646216b95436ed61867d"
+}

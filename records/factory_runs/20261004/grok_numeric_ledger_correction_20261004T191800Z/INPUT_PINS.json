@@ -1,0 +1,47 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py",
+    "label": "EXACT QWEN SOURCE",
+    "sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\tests_source.qwen_untrusted.txt",
+    "label": "EXACT QWEN TESTS UNEXECUTED BY MANAGER",
+    "sha256": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger.spec.txt",
+    "label": "ORIGINAL SPEC WITH EXPLICIT NEW TEMPORAL CORRECTION ABOVE",
+    "sha256": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_gemini_retry_20261004T191100Z\\gemini_review.extracted.json",
+    "label": "ACTUAL GEMINI REVIEW EXACT SCHEMA (raw concatenation failure preserved elsewhere)",
+    "sha256": "cbf1c938ec60706f0e5e679655bcdb0c7aa9fbe7acf1bd3af928164bcac22bc5"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\test_independent_ledger_red.py",
+    "label": "ROOT ACTUAL17 INDEPENDENT RED TESTS",
+    "sha256": "13f38d27153456da43f4ebc8bf7ceb69ef3f3262ff19d1180193f3a7fff95d34"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\AUDIT.md",
+    "label": "ROOT ACTUAL RED AUDIT",
+    "sha256": "a06084899a858bba2dd45181ca780a8f6669f0df875709a10f4e78fe0c7ebc89"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\execution_receipt.json",
+    "label": "ROOT ACTUAL RED RECEIPT",
+    "sha256": "9d1bb0cb263dce2b5f225880ce6549fef8810dcc008e49d51df7e14a5e44a6c3"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\actual_red_results.json",
+    "label": "ROOT ACTUAL RED RESULTS",
+    "sha256": "1d04c1449a29727ccadeec105d38d7230d91c7b9d5a2f0be68bcc109878c7781"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\fresh_dll_manifest.json",
+    "label": "ROOT TRUSTED NAMED DLL REGISTRY",
+    "sha256": "c69b080dbb0f0bcfa1d7f436f791e5f40a46600cdc7326f16f2fc8a5bb2d379f"
+  }
+]

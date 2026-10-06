@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+import os, sys, json
+CANDIDATE = os.environ.get('CANDIDATE_SOURCE_PATH')
+if not CANDIDATE and len(sys.argv) > 1:
+    CANDIDATE = sys.argv[1]
+FAILURES = []
+def check(name, cond, detail=''):
+    if not cond:
+        FAILURES.append(name + (': ' + detail if detail else ''))
+def qual_ok(r):
+    q = r.get('qualification')
+    if not isinstance(q, dict): return False, 'qualification missing'
+    if q.get('scope') != 'DEVICE_DMA_BUF_EXPORT_ONLY': return False, 'qualification scope'
+    if q.get('direct_transport_qualified') is not False: return False, 'direct_transport_qualified'
+    if q.get('intel_import') is not False: return False, 'intel_import'
+    if q.get('p2p') is not False: return False, 'p2p'
+    if q.get('cache_coherence') is not False: return False, 'cache_coherence'
+    return True, ''
+def receipt_ok(r):
+    if not isinstance(r, dict): return False, 'not dict'
+    if r.get('schema') != 'task5_cuda_dmabuf_export_v1': return False, 'schema'
+    status = r.get('status')
+    code = r.get('exit_code')
+    scope = r.get('scope')
+    if status not in ('DEVICE_DMA_BUF_EXPORT_OBSERVED', 'NOT_CHECKED', 'FAIL'): return False, 'status'
+    if not isinstance(code, int): return False, 'exit_code'
+    if not isinstance(scope, str): return False, 'scope'
+    ok, why = qual_ok(r)
+    if not ok: return False, why
+    if not isinstance(r.get('errors'), list): return False, 'errors'
+    if status == 'DEVICE_DMA_BUF_EXPORT_OBSERVED':
+        if code != 0: return False, 'success exit'
+        if scope != 'DEVICE_DMA_BUF_EXPORT_OBSERVED': return False, 'success scope'
+        a = r.get('allocation')
+        e = r.get('export')
+        rb = r.get('readback')
+        v = r.get('verification')
+        o = r.get('ownership')
+        if not isinstance(a, dict): return False, 'allocation'
+        if a.get('class') != 'DEVICE': return False, 'allocation class'
+        if a.get('api') != 'cuMemAlloc': return False, 'allocation api'
+        if int(a.get('requested_payload_bytes', 0)) != 65536: return False, 'payload'
+        aligned = int(a.get('aligned_range_bytes', 0))
+        page = int(a.get('page_size', 0))
+        if aligned > 1048576 or page <= 0 or aligned % page != 0: return False, 'range alignment'
+        base = str(a.get('base', ''))
+        if base.startswith('0x'):
+            try:
+                if int(base, 16) % page != 0: return False, 'base alignment'
+            except Exception:
+                return False, 'base hex'
+        if not isinstance(e, dict): return False, 'export'
+        if e.get('handle_type') != 'CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD': return False, 'handle_type'
+        if e.get('flags') != 'CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE': return False, 'flags'
+        if not isinstance(e.get('fd'), int) or e['fd'] < 0: return False, 'fd'
+        if 'fstat_size' not in e: return False, 'fstat_size'
+        if not isinstance(rb, dict) or rb.get('match') is not True: return False, 'readback'
+        if int(rb.get('words_checked', 0)) != 16384: return False, 'words_checked'
+        if not isinstance(v, dict): return False, 'verification'
+        if int(v.get('words_total', 0)) != 16384: return False, 'words_total'
+        if int(v.get('corruption_observed_mismatches', -1)) != 1: return False, 'corruption mismatches'
+        if int(v.get('final_observed_mismatches', -1)) != 0: return False, 'final mismatches'
+        if v.get('cpu_original_unchanged') is not True: return False, 'cpu original'
+        h = str(v.get('final_fnv1a64_hex', ''))
+        if len(h) != 16 or any(c not in '0123456789abcdef' for c in h): return False, 'hash'
+        if not isinstance(o, dict): return False, 'ownership'
+        if not (o.get('fd_closed') and o.get('allocation_freed') and o.get('cuda_context_destroyed')): return False, 'ownership'
+    elif status == 'NOT_CHECKED':
+        if code != 2: return False, 'not_checked exit'
+    elif status == 'FAIL':
+        if code != 1: return False, 'fail exit'
+    txt = json.dumps(r).lower()
+    for banned in ('intel import', 'p2p proven', 'cache coherence proven'):
+        if banned in txt: return False, 'overclaim'
+    return True, ''
+if CANDIDATE and os.path.isfile(CANDIDATE):
+    src = open(CANDIDATE, 'r', encoding='utf-8', errors='replace').read()
+    check('source_size', len(src) <= 16000, str(len(src)))
+    tokens = ['CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED','cuMemGetHandleForAddressRange','CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD','CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE','cuMemAlloc','cuMemsetD32','cuMemcpyDtoH','fstat','close','cuMemFree','NOT_CHECKED','DEVICE_DMA_BUF_EXPORT_OBSERVED','DEVICE_DMA_BUF_EXPORT_ONLY','direct_transport_qualified','valid_uuid','valid_pci','unknown_argument','duplicate_uuid','malformed_uuid','malformed_pci','cleanup_failed_after_abort','esc(','q(','fnv_hex']
+    for t in tokens:
+        check('token_' + t, t in src)
+    check('no_host_attr_substitution', 'HOST_ALLOC_DMA_BUF_SUPPORTED' not in src)
+    check('no_lossy_normhex', 'normHex' not in src)
+else:
+    check('candidate_path', False, 'CANDIDATE_SOURCE_PATH missing')
+qual = {'scope':'DEVICE_DMA_BUF_EXPORT_ONLY','direct_transport_qualified':False,'intel_import':False,'p2p':False,'cache_coherence':False}
+good = {'schema':'task5_cuda_dmabuf_export_v1','status':'DEVICE_DMA_BUF_EXPORT_OBSERVED','exit_code':0,'scope':'DEVICE_DMA_BUF_EXPORT_OBSERVED','qualification':qual,'driver_version':13040,'device':{'index':0,'uuid_hex':'00000000000000000000000000000000','pci_bus_id':'0000:01:00.0'},'allocation':{'class':'DEVICE','api':'cuMemAlloc','api_status':'CUDA_SUCCESS','requested_payload_bytes':65536,'aligned_range_bytes':65536,'base':'0x1000','page_size':4096,'bounded_max_bytes':1048576},'export':{'api':'cuMemGetHandleForAddressRange','api_status':'CUDA_SUCCESS','handle_type':'CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD','flags':'CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE','fd':3,'fstat_size':65536,'fstat_mode':0},'verification':{'words_total':16384,'corruption_index':0,'corruption_expected_value':'0xa5a5a5a5','corruption_observed_value':'0xa5a5a5a5','corruption_observed_mismatches':1,'final_expected_mismatches':0,'final_observed_mismatches':0,'cpu_original_unchanged':True,'final_fnv1a64_hex':'0123456789abcdef'},'readback':{'api':'cuMemcpyDtoH','api_status':'CUDA_SUCCESS','bytes':65536,'pattern':'0x5a5a5a5a','match':True,'words_checked':16384},'ownership':{'fd_closed':True,'allocation_freed':True,'cuda_context_destroyed':True},'errors':[]}
+unsupported = {'schema':'task5_cuda_dmabuf_export_v1','status':'NOT_CHECKED','exit_code':2,'scope':'ATTRIBUTE','qualification':qual,'reason':'attribute_false','errors':[]}
+cleanup_fail = {'schema':'task5_cuda_dmabuf_export_v1','status':'FAIL','exit_code':1,'scope':'CLEANUP','qualification':qual,'reason':'cleanup_failed_after_abort','ownership':{'fd_closed':False,'allocation_freed':True,'cuda_context_destroyed':True},'errors':[]}
+input_fail = {'schema':'task5_cuda_dmabuf_export_v1','status':'FAIL','exit_code':1,'scope':'INPUT','qualification':qual,'reason':'unknown_argument','errors':[]}
+wrong_host = dict(good)
+wrong_host['allocation'] = dict(good['allocation'])
+wrong_host['allocation']['class'] = 'HOST'
+misaligned = dict(good)
+misaligned['allocation'] = dict(good['allocation'])
+misaligned['allocation']['base'] = '0x1001'
+leaked = dict(good)
+leaked['ownership'] = dict(good['ownership'])
+leaked['ownership']['fd_closed'] = False
+badqual = dict(good)
+badqual['qualification'] = dict(qual)
+badqual['qualification']['direct_transport_qualified'] = True
+fixtures = [('good', good, True), ('unsupported_attr', unsupported, True), ('cleanup_fail', cleanup_fail, True), ('input_fail', input_fail, True), ('wrong_host', wrong_host, False), ('misaligned', misaligned, False), ('leaked_fd', leaked, False), ('badqual', badqual, False)]
+for name, receipt, expected in fixtures:
+    ok, why = receipt_ok(receipt)
+    check('fixture_' + name, ok == expected, why)
+instructions = ['Compile on Linux with CUDA 13.4 headers: g++ -std=c++17 candidate.cpp -o candidate -ldl -I/usr/local/cuda/include', 'Run under ROOT outer timeout: ./candidate --uuid=<32-lower-hex-uuid> or ./candidate --pci=0000:01:00.0', 'Exit 0 only DEVICE_DMA_BUF_EXPORT_OBSERVED; exit 2 NOT_CHECKED; exit 1 FAIL.', 'FD export only; no Intel import, P2P, or cache coherence qualification.']
+if FAILURES:
+    print(json.dumps({'tests':'task5-cuda-dmabuf-export-prep','passed':False,'failures':FAILURES,'native_execution':'NOT_PERFORMED'}, indent=1))
+    sys.exit(1)
+print(json.dumps({'tests':'task5-cuda-dmabuf-export-prep','passed':True,'native_execution':'NOT_PERFORMED','instructions':instructions}, indent=1))

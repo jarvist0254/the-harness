@@ -1,0 +1,26 @@
+[
+  {
+    "case": "compact",
+    "command": [
+      "E:\\tooling\\FreeCAD\\app\\FreeCAD_1.1.4-Windows-x86_64-py311\\bin\\freecadcmd.exe",
+      "E:\\the_harness\\records\\cad_draft_20261004\\run_compact.py"
+    ],
+    "pid": 31284,
+    "exit_code": 0,
+    "timed_out": false,
+    "seconds": 3.4680000003427267,
+    "source_sha256": "d2759f2b77714edc8eff06c059210b2fecaafe1d04cb43a83283d5744e6a9e45"
+  },
+  {
+    "case": "universal",
+    "command": [
+      "E:\\tooling\\FreeCAD\\app\\FreeCAD_1.1.4-Windows-x86_64-py311\\bin\\freecadcmd.exe",
+      "E:\\the_harness\\records\\cad_draft_20261004\\run_universal.py"
+    ],
+    "pid": 87712,
+    "exit_code": 0,
+    "timed_out": false,
+    "seconds": 0.4069999996572733,
+    "source_sha256": "d2759f2b77714edc8eff06c059210b2fecaafe1d04cb43a83283d5744e6a9e45"
+  }
+]

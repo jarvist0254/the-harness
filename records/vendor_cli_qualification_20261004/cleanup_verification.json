@@ -1,0 +1,32 @@
+[
+  {
+    "name": "hipconfig_version",
+    "pid": 37264,
+    "still_running": false
+  },
+  {
+    "name": "hipconfig_full",
+    "pid": 2772,
+    "still_running": false
+  },
+  {
+    "name": "hipcc_version",
+    "pid": 85256,
+    "still_running": false
+  },
+  {
+    "name": "clang_version",
+    "pid": 88488,
+    "still_running": false
+  },
+  {
+    "name": "hipinfo_devices",
+    "pid": 49992,
+    "still_running": false
+  },
+  {
+    "name": "clinfo_list",
+    "pid": 72344,
+    "still_running": false
+  }
+]

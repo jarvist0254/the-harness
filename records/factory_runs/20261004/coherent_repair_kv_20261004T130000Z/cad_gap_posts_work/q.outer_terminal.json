@@ -1,0 +1,9 @@
+{
+  "exit_code": 1,
+  "job": "q",
+  "identity": "retained process object",
+  "pid": 96428,
+  "log_overflow": false,
+  "seconds": 0.59,
+  "outer_killed": false
+}

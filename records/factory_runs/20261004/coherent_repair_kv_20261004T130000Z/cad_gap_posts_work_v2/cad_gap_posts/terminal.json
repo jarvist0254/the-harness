@@ -1,0 +1,19 @@
+{
+  "native_children": 0,
+  "status": "ERROR_ArgumentException",
+  "pid": 57736,
+  "http": 200,
+  "elapsed_seconds": 87.48,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 3590,
+    "total_tokens": 9413,
+    "completion_tokens": 5823,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 3590
+    }
+  },
+  "requested_model": "qwen3.8-max",
+  "observed_model": "qwen3.8-max"
+}

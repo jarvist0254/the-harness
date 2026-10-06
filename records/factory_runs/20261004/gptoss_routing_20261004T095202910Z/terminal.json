@@ -1,0 +1,9 @@
+{
+  "model": "gpt-oss-120b-medium",
+  "pid": 54040,
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 48.053996,
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\gptoss_routing_20261004T095202910Z",
+  "completed_at": "2026-10-04T09:52:51.0069295Z"
+}

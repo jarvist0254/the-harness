@@ -1,0 +1,10 @@
+{
+  "outer_deadline": 240,
+  "identity": "retained Process handle",
+  "native_children": 0,
+  "pid": 61016,
+  "credential_saved": false,
+  "model": "gemini-3.8-flash-medium",
+  "provider_deadline": 210,
+  "clock": "Stopwatch"
+}

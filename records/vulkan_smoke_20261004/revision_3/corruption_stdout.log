@@ -1,0 +1,13 @@
+Device 0: NVIDIA GeForce RTX 5070 Ti ID:11269 Vendor:4318
+Allocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:1 (advertised only)
+Allocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)
+Allocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)
+Allocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:1 (advertised only)
+Device 1: AMD Radeon(TM) Graphics ID:5710 Vendor:4098
+Allocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:3 (advertised only)
+Allocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)
+Allocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)
+Allocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:3 (advertised only)
+A_FULL_PARITY words:65536 bytes:262144 mismatches:0
+B_FULL_PARITY words:65536 bytes:262144 mismatches:1 transport:EXPLICIT_HOST_STAGED
+FAIL: Mismatches in B_host: 1

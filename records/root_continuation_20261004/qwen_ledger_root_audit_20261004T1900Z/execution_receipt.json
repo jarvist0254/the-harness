@@ -1,0 +1,25 @@
+{
+  "scope": "ROOT_ADMITTED_ACTUAL_FILE_PURE_RED_EVALUATION",
+  "pid": 91120,
+  "exit_code": 1,
+  "reaped": true,
+  "seconds": 0.6409999998286366,
+  "timeout": false,
+  "overflow": [],
+  "stream_bytes": {
+    "stdout.raw.log": 0,
+    "stderr.raw.log": 11395
+  },
+  "pins_before": {
+    "source": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1",
+    "provider_tests": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5",
+    "independent_tests": "13f38d27153456da43f4ebc8bf7ceb69ef3f3262ff19d1180193f3a7fff95d34"
+  },
+  "pins_after": {
+    "source": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1",
+    "provider_tests": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5",
+    "independent_tests": "13f38d27153456da43f4ebc8bf7ceb69ef3f3262ff19d1180193f3a7fff95d34"
+  },
+  "provider_tests_executed": false,
+  "native_gpu_network_execution": false
+}

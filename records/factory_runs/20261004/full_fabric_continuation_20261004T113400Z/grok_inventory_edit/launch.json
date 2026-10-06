@@ -1,0 +1,8 @@
+{
+  "deadline_seconds": 360,
+  "native_children_actual": 0,
+  "credential_saved": false,
+  "pid": 41160,
+  "model": "grok-4.7-build-fast",
+  "source_sha256": "8D9716A37F75559D32DF4DEA203C82CBC85CFAA684BB872370D19B49D09DC86C"
+}

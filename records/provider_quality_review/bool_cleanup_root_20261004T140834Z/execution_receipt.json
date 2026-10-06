@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_root_20261004T140834Z\\evaluate_root_actual.py"
+  ],
+  "pid": 40324,
+  "exit_code": 0,
+  "elapsed_seconds": 1.25,
+  "timeout": false,
+  "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "evaluator_sha256": "1418f06edc441139c8b5a9c6cfd2b83e9fd0d0c559e1aed2347d2a6b3c095e59",
+  "scope": "Independent pure/mock child, no native/process worker fixture"
+}

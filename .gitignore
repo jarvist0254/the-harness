@@ -1,0 +1,49 @@
+# The Harness Git Ignore Rules
+# Exclude model weights, toolchains, build binaries, external repos, and object files
+
+# Cloned repositories and cache
+repos/
+.qwen/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Large model weights and checkpoints
+*.gguf
+*.pt
+*.safetensors
+records/models/
+
+# Toolchains, vendor SDKs, and build directories
+records/toolchains/
+records/build_vulkan_real/toolchain/
+records/build_vulkan_real/build/
+records/build_vulkan_fp32_staging_20261004T155932Z/
+records/root_continuation_20261004/**/*.dll
+records/root_continuation_20261004/**/*.exe
+records/root_continuation_20261004/**/*.lib
+records/root_continuation_20261004/**/*.obj
+
+# Binary compilation outputs and libraries
+*.obj
+*.o
+*.lib
+*.a
+*.dll
+*.so
+*.dylib
+*.exe
+*.pdb
+*.exp
+*.ilk
+
+# Archives and compressed bundles
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# IDE configs
+.idea/
+.vscode/

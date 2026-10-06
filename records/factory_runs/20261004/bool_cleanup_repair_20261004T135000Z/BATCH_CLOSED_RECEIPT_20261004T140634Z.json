@@ -1,0 +1,37 @@
+{
+  "utc": "2026-10-04T14:07:25.152042+00:00",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z",
+  "state": "CLOSED_WITH_REASONED_REJECTION",
+  "source_qwen_path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+  "source_qwen_sha256": "6bb4e7edb317044e34d426d44b0035c2ea57fb762aade601f81e3be599ca59f9",
+  "root_mock_red": "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_20261004T135404Z\\qwen_RED_results.json",
+  "root_mock_result": "36cases18fail0errors0nativeattempts",
+  "gemini_review": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\gemini_bool_review\\review.json",
+  "grok_result": "TIMEOUT300.95s exit-1 emptystdout usageunknown noartifact",
+  "process_secret_audit": {
+    "credential_named_files": [],
+    "owned_pids_still_alive": [],
+    "owned_pids_checked": [
+      68744,
+      36508,
+      88900
+    ],
+    "credential_values_checked_count": 3,
+    "utc": "2026-10-04T14:06:34.1802607Z",
+    "matching_file_paths": [],
+    "limitations": "Checks exact configured Qwen environment credential strings and Grok token/key fields. No claim about every possible unknown credential or external log.",
+    "configured_credential_matches": 0,
+    "secret_values_printed": false,
+    "secret_values_saved": false,
+    "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z",
+    "text_files_checked": 45
+  },
+  "usage_ledger": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\USAGE_CLOSED_20261004T140634Z.json",
+  "manager_candidate_imports": 0,
+  "manager_native_fixtures": 0,
+  "manager_gpu_or_cad_runs": 0,
+  "accepted_modules_or_docs_modified": false,
+  "live_global_factory_modified": false,
+  "product_or_supervisor_qualification": "NOT_ACCEPTED",
+  "full_four8GB_integrated_core_goal": "OPEN_NOT_COMPLETE"
+}

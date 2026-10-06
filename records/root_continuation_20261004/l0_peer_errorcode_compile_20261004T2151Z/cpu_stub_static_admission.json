@@ -1,0 +1,13 @@
+{
+  "scope": "CPU_ONLY_OFFICIAL_HEADER_STUB_NO_DEVICE_NO_LEVEL_ZERO_LOADER",
+  "candidate_sha256": "6185dcf242e4c847544c07455468119d67fae35d5aaf341ebaa8d14a0b920aa6",
+  "original_sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+  "level_zero_header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "compiler": "/usr/bin/c++ GCC 13.3.0",
+  "candidate_object_sha256": "6a186a6893f550741c7a4dea208d9b95bcf412c9dacf333034b44203aa5177d4",
+  "mechanism": "Candidate object is linked only against fake_level_zero.cpp definitions compiled against the pinned official ze_api.h. No libze_loader is linked or loaded. Device handles and device allocations are synthetic; all allocations are host malloc buffers tagged by the fake API.",
+  "permitted_fake_cases": ["clean", "inject-corruption", "directed-peer-unavailable", "fence-timeout", "cleanup-failure", "malformed-cli", "surplus-cli-observation"],
+  "native_level_zero_or_gpu_calls": false,
+  "provider_tests": false,
+  "promoted_or_qualified_gpu_behavior": false
+}

@@ -1,0 +1,11 @@
+--- before
++++ revision1_json_hex.cpp
+@@ -32,7 +32,7 @@
+ static void lzq_u64(LzqW& w,uint64_t v){ char t[20]; int i=0; if(v==0){lzq_ch(w,'0');return;} while(v){t[i++]=char('0'+(v%10));v/=10;} while(i--)lzq_ch(w,t[i]); }
+ static void lzq_int(LzqW& w,int v){ if(v<0){lzq_ch(w,'-'); lzq_u64(w,uint64_t(-v));} else lzq_u64(w,uint64_t(v)); }
+ static void lzq_hex8(LzqW& w,uint32_t v,int nibbles){ for(int i=nibbles-1;i>=0;--i)lzq_ch(w,lzq_hex[(v>>(i*4))&15u]); }
+-static void lzq_hex32(LzqW& w,uint32_t v){ lzq_ch(w,'0'); lzq_ch(w,'x'); lzq_hex8(w,v,8); }
++static void lzq_hex32(LzqW& w,uint32_t v){ lzq_u64(w,uint64_t(v)); }
+ static void lzq_bool(LzqW& w,bool b){ lzq_str(w,b?Q(true):Q(false)); }
+ static void lzq_field(LzqW& w,const char* name){ lzq_ch(w,0x22); lzq_str(w,name); lzq_ch(w,0x22); lzq_ch(w,':'); }
+ static void lzq_comma(LzqW& w,bool& c){ if(c)lzq_ch(w,','); c=true; }

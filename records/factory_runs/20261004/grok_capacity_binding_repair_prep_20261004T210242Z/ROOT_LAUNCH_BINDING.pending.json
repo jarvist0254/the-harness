@@ -1,0 +1,11 @@
+{
+  "provider_launch_authorized": false,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z",
+  "job_id": "grok_capacity_binding_high",
+  "lane": "Grok",
+  "model": "grok-4.7-build-fast",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\source.grok_untrusted.py",
+  "source_sha256": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "prompt_sha256": "b3850fd5653d1176f418686fdef2a45500a73134c75c4218f482f707ed3250cc",
+  "authorization": "PENDING_ROOT_REVIEW_NO_LAUNCH"
+}

@@ -1,0 +1,14 @@
+{
+  "enable_thinking": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "User requests six concurrent Qwen3.8-max workhorse jobs, maximum supported thinking/xhigh. Maximum native child agents10 EACH Qwen/DeepSeek authorized where safely supported; this directHTTP call actualchildren0 and NO tools/launches. Return strict JSON EXACT status (PROPOSED|ANALYSIS|REFUSED), source, tests_source, analysis, prerequisites, evidence_limits, references. source/tests_source complete source strings OR empty if honest analysis/refusal; remaining fields nonempty arrays of strings. No markdown. Never fabricate execution, native tests, external API success, GPU/P2P/pooledVRAM/model qualification, physical memory evidence, benchmark or citation contents. Separate established API semantics from unverified hardware prerequisites. No purchase recommendation, BIOS/driver/runtime/system changes. Sources staged only not executed. Goal one correct distributed model across four discrete8GB physicalcards; presenthost NV5070Ti+AMDgfx1036IGPU, NO IntelGPU enumerated, SKUs undecided. Current LLM fixed numerical parity still fails; don't widen tolerance. Keep transport proof separate from capacity/arithmetic. Cite actual inspected primarysourceURLs and supplied localpins; unavailable fact NOT_CHECKED.\n\nTASK:\nIntel-NVIDIA native externalmemory interop proof requirements and bounded fixture source Windows/Linux. Can provide capabilitycollector/source rejectingunsupported bridge ifspecdoesnotestablishlegalcorrespondingresource. CUDA-Vulkaninterop requires matching deviceUUID/samedevice per https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/graphics-interop.html; not establishedIntel-NVIDIA bridge. Vulkan primary https://docs.vulkan.org/spec/latest/chapters/memory.html and https://github.khronos.org/Vulkan-Site/guide/latest/extensions/external.html. Enumerate exacthandle/exportimport/memorytype/dedicated/UUID/resourcecorrespondence/synchronization/ownershipproof; extensionsadvertisedalonearenotP2P. Hostallocationimport sharedHOSTbackingnotVRAMP2P. Generate bounded capability-only nativefixture ifcrossdevicealiassemanticsremainunproved; producerGPUnegativecontrol/fulldata-parityonlyafterlegalprotocol. TwoOSseparategates, no unprovedcudaimportIntelmemory launch. Need exactminimalprooflist and strictresultschema."
+    }
+  ],
+  "max_tokens": 16384,
+  "reasoning_effort": "xhigh",
+  "model": "qwen3.8-max",
+  "temperature": 0.1,
+  "stream": false
+}

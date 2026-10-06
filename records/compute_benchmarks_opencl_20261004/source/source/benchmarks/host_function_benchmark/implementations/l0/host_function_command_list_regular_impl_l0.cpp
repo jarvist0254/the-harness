@@ -1,0 +1,160 @@
+/*
+ * Copyright (C) 2025-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#include "framework/l0/levelzero.h"
+#include "framework/test_case/register_test_case.h"
+#include "framework/utility/file_helper.h"
+#include "framework/utility/timer.h"
+
+#include "definitions/host_function_command_list_regular.h"
+#include "utility/l0/host_function_utility_l0.h"
+
+#include <level_zero/ze_api.h>
+
+static TestResult run(const HostFunctionCommandListRegularArguments &arguments, Statistics &statistics) {
+    MeasurementFields typeSelector(MeasurementUnit::Nanoseconds, MeasurementType::Cpu);
+
+    if (isNoopRun()) {
+        statistics.pushUnitAndType(typeSelector.getUnit(), typeSelector.getType());
+        return TestResult::Nooped;
+    }
+
+    // Setup
+    bool useKernels = arguments.useKernels;
+    ExtensionProperties extensionProperties = ExtensionProperties::create();
+    extensionProperties.setHostFunctionFunctions(true);
+    LevelZero levelzero(extensionProperties);
+
+    Timer timer;
+    HostFunctions hostFunctions = getHostFunctions(arguments.useEmptyHostFunction);
+    auto &nCalls = arguments.amountOfCalls;
+
+    // Create kernel
+    auto spirvModule = FileHelper::loadBinaryFile("api_overhead_benchmark_eat_time.spv");
+    if (spirvModule.size() == 0) {
+        return TestResult::KernelNotFound;
+    }
+    ze_module_handle_t module;
+    ze_kernel_handle_t kernel;
+    ze_module_desc_t moduleDesc{ZE_STRUCTURE_TYPE_MODULE_DESC};
+    moduleDesc.format = ZE_MODULE_FORMAT_IL_SPIRV;
+    moduleDesc.pInputModule = reinterpret_cast<const uint8_t *>(spirvModule.data());
+    moduleDesc.inputSize = spirvModule.size();
+    ASSERT_ZE_RESULT_SUCCESS(zeModuleCreate(levelzero.context, levelzero.device, &moduleDesc, &module, nullptr));
+    ze_kernel_desc_t kernelDesc{ZE_STRUCTURE_TYPE_KERNEL_DESC};
+    kernelDesc.pKernelName = "eat_time";
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelCreate(module, &kernelDesc, &kernel));
+
+    // Configure kernel
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetGroupSize(kernel, 1u, 1u, 1u));
+    int kernelOperationsCount = static_cast<int>(arguments.kernelExecutionTime * 4);
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelSetArgumentValue(kernel, 0, sizeof(int), &kernelOperationsCount));
+
+    ze_event_counter_based_flags_t cbFlags = ZE_EVENT_COUNTER_BASED_FLAG_DEVICE_TIMESTAMP | ZE_EVENT_COUNTER_BASED_FLAG_NON_IMMEDIATE;
+
+    ze_event_counter_based_desc_t cbDesc{.stype = ZE_STRUCTURE_TYPE_EVENT_COUNTER_BASED_DESC, .pNext = nullptr, .flags = cbFlags, .signal = 0, .wait = 0};
+
+    std::vector<ze_event_handle_t> eventKernel1;
+    std::vector<ze_event_handle_t> eventKernel2;
+
+    if (useKernels) {
+        eventKernel1.resize(nCalls);
+        eventKernel2.resize(nCalls);
+
+        for (auto &event : eventKernel1) {
+            ASSERT_ZE_RESULT_SUCCESS(
+                zeEventCounterBasedCreate(levelzero.context,
+                                          levelzero.device,
+                                          &cbDesc,
+                                          &event));
+        }
+        for (auto &event : eventKernel2) {
+            ASSERT_ZE_RESULT_SUCCESS(
+                zeEventCounterBasedCreate(levelzero.context,
+                                          levelzero.device,
+                                          &cbDesc,
+                                          &event));
+        }
+    }
+    // Create command list with HostFunction
+    const ze_group_count_t dispatchTraits{1u, 1u, 1u};
+    ze_command_list_desc_t cmdListDesc{};
+    cmdListDesc.commandQueueGroupOrdinal = levelzero.commandQueueDesc.ordinal;
+    cmdListDesc.flags = ZE_COMMAND_LIST_FLAG_IN_ORDER;
+    ze_command_list_handle_t cmdList;
+    ASSERT_ZE_RESULT_SUCCESS(zeCommandListCreate(levelzero.context, levelzero.device, &cmdListDesc, &cmdList));
+
+    for (uint32_t callId = 0u; callId < nCalls; callId++) {
+        if (useKernels) {
+            ASSERT_ZE_RESULT_SUCCESS(zeCommandListAppendLaunchKernel(cmdList, kernel, &dispatchTraits, eventKernel1[callId], 0, nullptr));
+        }
+
+        ASSERT_ZE_RESULT_SUCCESS(levelzero.commandListAppendHostFunction(cmdList,
+                                                                         hostFunctions.function,
+                                                                         hostFunctions.userData,
+                                                                         nullptr,
+                                                                         nullptr,
+                                                                         0,
+                                                                         nullptr));
+        if (useKernels) {
+            ASSERT_ZE_RESULT_SUCCESS(zeCommandListAppendLaunchKernel(cmdList, kernel, &dispatchTraits, eventKernel2[callId], 1, &eventKernel1[callId]));
+        }
+    }
+
+    ASSERT_ZE_RESULT_SUCCESS(zeCommandListClose(cmdList));
+
+    // Benchmark
+    for (auto i = 0u; i < arguments.iterations; i++) {
+
+        // measure cmdlist with host functions
+        timer.measureStart();
+        ASSERT_ZE_RESULT_SUCCESS(zeCommandQueueExecuteCommandLists(levelzero.commandQueue, 1, &cmdList, nullptr));
+
+        if (arguments.measureCompletionTime == false) {
+            timer.measureEnd();
+        }
+
+        ASSERT_ZE_RESULT_SUCCESS(zeCommandQueueSynchronize(levelzero.commandQueue, std::numeric_limits<uint64_t>::max()));
+
+        if (arguments.measureCompletionTime) {
+            timer.measureEnd();
+        }
+
+        if (useKernels) {
+            std::chrono::nanoseconds duration{0};
+            for (auto j = 0u; j < nCalls; j++) {
+
+                auto hostFunctionDuration = levelzero.getAbsoluteTimeBetweenTwoKernels(eventKernel1[j], eventKernel2[j]);
+                if (hostFunctionDuration.has_value() == false) {
+                    return TestResult::Error;
+                }
+                duration += hostFunctionDuration.value();
+            }
+
+            duration /= nCalls;
+            statistics.pushValue(duration, typeSelector.getUnit(), typeSelector.getType());
+        } else {
+            auto duration = timer.get() / nCalls;
+            statistics.pushValue(duration, typeSelector.getUnit(), typeSelector.getType());
+        }
+    }
+
+    // Cleanup
+    for (auto &event : eventKernel1) {
+        ASSERT_ZE_RESULT_SUCCESS(zeEventDestroy(event));
+    }
+    for (auto &event : eventKernel2) {
+        ASSERT_ZE_RESULT_SUCCESS(zeEventDestroy(event));
+    }
+
+    ASSERT_ZE_RESULT_SUCCESS(zeCommandListDestroy(cmdList));
+    ASSERT_ZE_RESULT_SUCCESS(zeKernelDestroy(kernel));
+    ASSERT_ZE_RESULT_SUCCESS(zeModuleDestroy(module));
+    return TestResult::Success;
+};
+
+[[maybe_unused]] static RegisterTestCaseImplementation<HostFunctionCommandListRegular> registerTestCase(run, Api::L0, true);

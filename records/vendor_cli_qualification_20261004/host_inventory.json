@@ -1,0 +1,110 @@
+{
+  "search_scope": "PATH; fresh C D E manifest filename matches; known AMD/Intel ProgramFiles and user oneAPI locations; no recursive drive scan",
+  "timestamp_utc": "2026-10-04T11:44:28.6682218Z",
+  "commands": [
+    {
+      "name": "hipcc",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "hipconfig",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "amd-smi",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "rocm-smi",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "rocprof",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "rocprofv3",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "icx",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "dpcpp",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "icpx",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "sycl-ls",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "ze_info",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "TransferBench",
+      "paths": [
+        null
+      ],
+      "status": "NOT_FOUND_ON_PATH"
+    },
+    {
+      "name": "clinfo",
+      "paths": [
+        "C:\\windows\\system32\\clinfo.exe"
+      ],
+      "status": "FOUND_ON_PATH"
+    }
+  ],
+  "physical_display_devices": [
+    {
+      "Name": "NVIDIA GeForce RTX 5070 Ti",
+      "PNPDeviceID": "PCI\\VEN_10DE&DEV_2C05&SUBSYS_89F51043&REV_A1\\4FF4D438022DB04800",
+      "DriverVersion": "32.0.15.9186"
+    },
+    {
+      "Name": "AMD Radeon(TM) Graphics",
+      "PNPDeviceID": "PCI\\VEN_1002&DEV_164E&SUBSYS_7E471462&REV_C5\\4&48FFC35&0&0041",
+      "DriverVersion": "32.0.21030.2001"
+    }
+  ],
+  "no_intel_gpu_in_current_display_inventory": true
+}

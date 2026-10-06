@@ -1,0 +1,28 @@
+{
+  "requested_model": "grok-4.7-build-fast",
+  "exit_code": 0,
+  "outer_killed": false,
+  "status": "COMPLETE_PATCH_UNTRUSTED",
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 10522,
+      "outputTokens": 29377,
+      "cacheReadInputTokens": 1152,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.13455976
+    }
+  },
+  "stop_reason": "end_turn",
+  "elapsed_seconds": 139.35,
+  "vendor_reported_cost_usd": 0.13455976,
+  "usage": {
+    "input_tokens": 10522,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 29377,
+    "reasoning_tokens": 22781,
+    "total_tokens": 41051
+  },
+  "pid": 82312
+}

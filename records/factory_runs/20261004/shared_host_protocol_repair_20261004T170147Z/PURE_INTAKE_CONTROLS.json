@@ -1,0 +1,64 @@
+{
+  "native_children": 0,
+  "protocol_semantic_acceptance": "NOT_ADJUDICATED",
+  "provider_requests": 0,
+  "scope": "PURE_INTAKE_ONLY_ROOT_AUTHORIZED",
+  "fixture_import_compile_gpu_run": false,
+  "source_unchanged": true,
+  "credentials_read": false,
+  "utc": "2026-10-04T17:08:06.6437085Z",
+  "failed": 0,
+  "source_before_sha256": "21A0379E778BDB8C31E5DA7774410B59236E2B6F72A87EAF1B68FF584A666815",
+  "source_after_sha256": "21A0379E778BDB8C31E5DA7774410B59236E2B6F72A87EAF1B68FF584A666815",
+  "tests": [
+    {
+      "error_type": null,
+      "passed": true,
+      "name": "valid_refusal_empty_changes",
+      "expected_accept": true,
+      "actual_accept": true
+    },
+    {
+      "error_type": null,
+      "passed": true,
+      "name": "unique_source_proposed_intake_not_semantic_admission",
+      "expected_accept": true,
+      "actual_accept": true
+    },
+    {
+      "error_type": "RuntimeException",
+      "passed": true,
+      "name": "nonunique_search_refused",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "passed": true,
+      "name": "unknown_status_refused",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "passed": true,
+      "name": "unknown_authority_field_refused",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "passed": true,
+      "name": "refusal_with_three_fabricated_changes_refused",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "passed": true,
+      "name": "duplicate_json_key_refused",
+      "expected_accept": false,
+      "actual_accept": false
+    }
+  ],
+  "passed": 7
+}

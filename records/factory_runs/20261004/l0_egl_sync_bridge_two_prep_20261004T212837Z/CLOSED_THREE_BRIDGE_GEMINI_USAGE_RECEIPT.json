@@ -1,0 +1,88 @@
+{
+  "secret_process_audit": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\SECRET_PROCESS_AUDIT_BRIDGE_GEMINI.json",
+  "scope": "CLOSED_THREE_BRIDGE_GEMINI_PROVIDER_JOBS_SOURCE_ONLY",
+  "unknown_usage_jobs": 0,
+  "source_import_compile_execution": false,
+  "credits_remaining": "NOT_REFRESHED",
+  "total_reported_tokens": 165843,
+  "known_usage_jobs": 3,
+  "credits_from_tokens": false,
+  "jobs": [
+    {
+      "native_children_actual": 0,
+      "usage": {
+        "prompt_tokens": 10991,
+        "total_tokens": 51349,
+        "completion_tokens": 40358,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 10991
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 33320,
+          "text_tokens": 40358
+        }
+      },
+      "terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\terminal.json",
+      "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+      "provider": "Qwen",
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 863.94,
+      "source_accepted": false,
+      "terminal_sha256": "f02c5fd46e4e0ad7de5efee6fbb1fe312f53fa0a9b20f6f9f886accb714e0ae4",
+      "job": "qwen_l0_egl_fence_adapter"
+    },
+    {
+      "native_children_actual": 0,
+      "usage": {
+        "prompt_tokens": 11028,
+        "total_tokens": 56650,
+        "completion_tokens": 45622,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 11028
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 36867,
+          "text_tokens": 45622
+        }
+      },
+      "terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_checker\\terminal.json",
+      "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "provider": "Qwen",
+      "model": "qwen3.8-max",
+      "elapsed_seconds": 1041.48,
+      "source_accepted": false,
+      "terminal_sha256": "7ab04413973e4e6e05658d5d9f40e1d6e3e560062eaeb10b2ef0cb0e863ca8a5",
+      "job": "qwen_l0_egl_fence_checker"
+    },
+    {
+      "native_children_actual": 0,
+      "usage": {
+        "input_tokens": 30431,
+        "output_tokens": 27413,
+        "thinking_tokens": 24139,
+        "cache_read_tokens": 0,
+        "total_tokens": 57844
+      },
+      "terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_combined_dma_prep_20261004T211555Z\\gemini_combined_high_v3_with_companion.owned_terminal.json",
+      "status": "COMPLETE_REVIEW_STAGED",
+      "provider": "Gemini",
+      "model": "gemini-3.8-flash-high",
+      "elapsed_seconds": 88.86,
+      "source_accepted": false,
+      "terminal_sha256": "379659063882dd4b3204f02d6b267d15a0a6368b99293870ab35cf0c2f9c35a8",
+      "job": "gemini_combined_high_v3_with_companion"
+    }
+  ],
+  "local_no_child_startup_excluded": "gemini_combined_high LOCAL_SETUP_FAILURE_NO_CHILD",
+  "utc": "2026-10-04T21:54:22.3933497Z",
+  "provider_token_subtotals": {
+    "Qwen": 107999,
+    "Gemini": 57844
+  },
+  "live_jobs": 0,
+  "thinking_included_not_added": true,
+  "all_source_acceptance": "PENDING_ROOT_QA_OR_SCHEMA_REFUSED",
+  "paid_jobs": 3
+}

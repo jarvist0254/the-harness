@@ -1,0 +1,2420 @@
+{
+  "source_sha256": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\contained_supervisor.syntax_normalized.py": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\qualification_validator.corrected.py": "f024298ca0d597c8cfa04f00334924f957bb268b0734fb8ff6ce1ca5fa9378f0"
+  },
+  "observations": [
+    {
+      "case": "__main__.SupervisorCases.test_bad_read_never_process_completed",
+      "observation": {
+        "fake_api_calls": [
+          [
+            "fake_create_process",
+            108,
+            109
+          ],
+          [
+            "close",
+            107
+          ],
+          [
+            "close",
+            106
+          ],
+          [
+            "close",
+            105
+          ],
+          [
+            "close",
+            103
+          ],
+          [
+            "close",
+            101
+          ],
+          [
+            "close",
+            102
+          ],
+          [
+            "close",
+            104
+          ],
+          [
+            "wait",
+            108,
+            0
+          ],
+          [
+            "exit_code",
+            108
+          ],
+          [
+            "wait",
+            108,
+            8000
+          ],
+          [
+            "exit_code",
+            108
+          ],
+          [
+            "close",
+            109
+          ],
+          [
+            "close",
+            108
+          ]
+        ],
+        "fake_kernel_calls": [
+          [
+            "create_job"
+          ],
+          [
+            "assign",
+            108
+          ],
+          [
+            "resume",
+            109
+          ],
+          [
+            "close_job",
+            900
+          ]
+        ],
+        "allocated_fake_handles": [
+          [
+            "duplicate",
+            101
+          ],
+          [
+            "read",
+            102
+          ],
+          [
+            "write",
+            103
+          ],
+          [
+            "read",
+            104
+          ],
+          [
+            "write",
+            105
+          ],
+          [
+            "duplicate",
+            106
+          ],
+          [
+            "duplicate",
+            107
+          ],
+          [
+            "process",
+            108
+          ],
+          [
+            "thread",
+            109
+          ]
+        ]
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_bad_read_never_process_completed",
+      "observation": {
+        "result": {
+          "version": 1,
+          "run_id": "adversarial",
+          "status": "PROCESS_COMPLETED",
+          "failure_reason": "",
+          "containment_policy": "explicit_terminate",
+          "workers": [
+            {
+              "worker_id": "w1",
+              "pid": 10108,
+              "exit_code": 0,
+              "assigned": true,
+              "resumed": true
+            }
+          ],
+          "job_active_count": 0,
+          "drain_proof": "CLEANUP",
+          "whole_tree_certificate": false,
+          "logs": {
+            "w1": {
+              "stdout": "",
+              "stdout_bytes": 0,
+              "stdout_overflow": false,
+              "stdout_path": "w1.stdout.log",
+              "stderr": "",
+              "stderr_bytes": 0,
+              "stderr_overflow": false,
+              "stderr_path": "w1.stderr.log"
+            }
+          },
+          "reattach": false,
+          "replay": false
+        }
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_failed_job_termination_still_waits_roots",
+      "observation": {
+        "result": [
+          null,
+          "UNKNOWN"
+        ],
+        "fake_api_calls": [
+          [
+            "terminate_process",
+            123
+          ]
+        ],
+        "fake_kernel_calls": [
+          [
+            "terminate_job"
+          ]
+        ]
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_query_exception_still_closes_owned_handles",
+      "observation": {
+        "fake_api_calls": [
+          [
+            "fake_create_process",
+            108,
+            109
+          ],
+          [
+            "close",
+            107
+          ],
+          [
+            "close",
+            106
+          ],
+          [
+            "close",
+            105
+          ],
+          [
+            "close",
+            103
+          ],
+          [
+            "close",
+            101
+          ],
+          [
+            "close",
+            102
+          ],
+          [
+            "close",
+            104
+          ],
+          [
+            "wait",
+            108,
+            0
+          ],
+          [
+            "terminate_process",
+            108
+          ],
+          [
+            "wait",
+            108,
+            8000
+          ],
+          [
+            "exit_code",
+            108
+          ]
+        ],
+        "fake_kernel_calls": [
+          [
+            "create_job"
+          ],
+          [
+            "assign",
+            108
+          ],
+          [
+            "resume",
+            109
+          ],
+          [
+            "terminate_job"
+          ],
+          [
+            "close_job",
+            900
+          ]
+        ],
+        "allocated_fake_handles": [
+          [
+            "duplicate",
+            101
+          ],
+          [
+            "read",
+            102
+          ],
+          [
+            "write",
+            103
+          ],
+          [
+            "read",
+            104
+          ],
+          [
+            "write",
+            105
+          ],
+          [
+            "duplicate",
+            106
+          ],
+          [
+            "duplicate",
+            107
+          ],
+          [
+            "process",
+            108
+          ],
+          [
+            "thread",
+            109
+          ]
+        ]
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_second_pipe_failure_no_leaks",
+      "observation": {
+        "fake_api_calls": [
+          [
+            "close",
+            101
+          ]
+        ],
+        "fake_kernel_calls": [],
+        "allocated_fake_handles": [
+          [
+            "duplicate",
+            101
+          ],
+          [
+            "read",
+            102
+          ],
+          [
+            "write",
+            103
+          ]
+        ],
+        "slots": []
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_second_reader_start_no_double_close",
+      "observation": {
+        "fake_api_calls": [
+          [
+            "fake_create_process",
+            108,
+            109
+          ],
+          [
+            "close",
+            107
+          ],
+          [
+            "close",
+            106
+          ],
+          [
+            "close",
+            105
+          ],
+          [
+            "close",
+            103
+          ],
+          [
+            "close",
+            101
+          ],
+          [
+            "close",
+            102
+          ],
+          [
+            "close",
+            104
+          ],
+          [
+            "close",
+            102
+          ]
+        ],
+        "fake_kernel_calls": [
+          [
+            "assign",
+            108
+          ],
+          [
+            "resume",
+            109
+          ]
+        ],
+        "allocated_fake_handles": [
+          [
+            "duplicate",
+            101
+          ],
+          [
+            "read",
+            102
+          ],
+          [
+            "write",
+            103
+          ],
+          [
+            "read",
+            104
+          ],
+          [
+            "write",
+            105
+          ],
+          [
+            "duplicate",
+            106
+          ],
+          [
+            "duplicate",
+            107
+          ],
+          [
+            "process",
+            108
+          ],
+          [
+            "thread",
+            109
+          ]
+        ],
+        "slots": [
+          {
+            "data": "",
+            "overflow": false,
+            "bytes": 0,
+            "closed": true,
+            "stream": "stdout",
+            "worker_id": "w1"
+          },
+          {
+            "data": "",
+            "overflow": false,
+            "bytes": 0,
+            "closed": false,
+            "stream": "stderr",
+            "worker_id": "w1"
+          }
+        ]
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_second_writer_duplicate_failure_no_leaks",
+      "observation": {
+        "fake_api_calls": [
+          [
+            "close",
+            105
+          ],
+          [
+            "close",
+            103
+          ],
+          [
+            "close",
+            101
+          ],
+          [
+            "close",
+            104
+          ],
+          [
+            "close",
+            102
+          ]
+        ],
+        "fake_kernel_calls": [],
+        "allocated_fake_handles": [
+          [
+            "duplicate",
+            101
+          ],
+          [
+            "read",
+            102
+          ],
+          [
+            "write",
+            103
+          ],
+          [
+            "read",
+            104
+          ],
+          [
+            "write",
+            105
+          ],
+          [
+            "duplicate",
+            106
+          ]
+        ],
+        "slots": []
+      }
+    },
+    {
+      "case": "__main__.SupervisorCases.test_wait_exception_still_closes_owned_handles",
+      "observation": {
+        "fake_api_calls": [
+          [
+            "fake_create_process",
+            108,
+            109
+          ],
+          [
+            "close",
+            107
+          ],
+          [
+            "close",
+            106
+          ],
+          [
+            "close",
+            105
+          ],
+          [
+            "close",
+            103
+          ],
+          [
+            "close",
+            101
+          ],
+          [
+            "close",
+            102
+          ],
+          [
+            "close",
+            104
+          ],
+          [
+            "wait",
+            108,
+            0
+          ],
+          [
+            "terminate_process",
+            108
+          ],
+          [
+            "wait",
+            108,
+            8000
+          ]
+        ],
+        "fake_kernel_calls": [
+          [
+            "create_job"
+          ],
+          [
+            "assign",
+            108
+          ],
+          [
+            "resume",
+            109
+          ],
+          [
+            "terminate_job"
+          ],
+          [
+            "close_job",
+            900
+          ]
+        ],
+        "allocated_fake_handles": [
+          [
+            "duplicate",
+            101
+          ],
+          [
+            "read",
+            102
+          ],
+          [
+            "write",
+            103
+          ],
+          [
+            "read",
+            104
+          ],
+          [
+            "write",
+            105
+          ],
+          [
+            "duplicate",
+            106
+          ],
+          [
+            "duplicate",
+            107
+          ],
+          [
+            "process",
+            108
+          ],
+          [
+            "thread",
+            109
+          ]
+        ]
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_cpu_participants",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "CPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "CPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "numerical": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [
+              "p1",
+              "p2"
+            ],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_declared_tolerance_metric_inconsistency",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "numerical": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [
+              "p1",
+              "p2"
+            ],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-05,
+            "max_abs_error": 0,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_four_required_exactly_three_devices",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "FOUR_REQUIRED_CAPACITY"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "FOUR_REQUIRED_CAPACITY"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:03:00.0",
+              "physical_id": "p3",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "9ba54757a7fbc74ddef94b6728895a4353475f1778eed9e413bf54bdac4805e4"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer3",
+                  "owner": "p3",
+                  "weight_sha256": "2f2a0b177ade56c0cc3defea9d988ad5073b5fcba9da361380ab304579b0924e"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "capacity": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "source": "ACTUAL_ALLOCATOR",
+            "quant_sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+            "context": 2048,
+            "batch": 1,
+            "requirement_bytes": 8000000000,
+            "plans": [
+              {
+                "physical_id": "p1",
+                "assigned_bytes": 2666666666
+              },
+              {
+                "physical_id": "p2",
+                "assigned_bytes": 2666666666
+              },
+              {
+                "physical_id": "p3",
+                "assigned_bytes": 2666666668
+              }
+            ],
+            "single": {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "quant_sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+              "context": 2048,
+              "batch": 1,
+              "device_count": 1,
+              "physical_ids": [
+                "p1"
+              ],
+              "failure_kind": "ACTUAL_ALLOCATOR_OOM",
+              "artifact_sha256": "7e936c7bc364e43fea43ec2dba01371601f6c3a5d48d05aa3f8ccefbbe5cf7f7"
+            },
+            "three": {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "quant_sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+              "context": 2048,
+              "batch": 1,
+              "device_count": 3,
+              "physical_ids": [
+                "p1",
+                "p2",
+                "p3"
+              ],
+              "failure_kind": "ACTUAL_ALLOCATOR_OOM",
+              "artifact_sha256": "a940d54c563a8828ab703385fa67f47f3dd6bd5cdb4823c189aa0fd211855a19"
+            }
+          },
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "2f2a0b177ade56c0cc3defea9d988ad5073b5fcba9da361380ab304579b0924e",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "7e936c7bc364e43fea43ec2dba01371601f6c3a5d48d05aa3f8ccefbbe5cf7f7",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "9ba54757a7fbc74ddef94b6728895a4353475f1778eed9e413bf54bdac4805e4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "a940d54c563a8828ab703385fa67f47f3dd6bd5cdb4823c189aa0fd211855a19",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "2f2a0b177ade56c0cc3defea9d988ad5073b5fcba9da361380ab304579b0924e",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "7e936c7bc364e43fea43ec2dba01371601f6c3a5d48d05aa3f8ccefbbe5cf7f7",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "9ba54757a7fbc74ddef94b6728895a4353475f1778eed9e413bf54bdac4805e4",
+          "a940d54c563a8828ab703385fa67f47f3dd6bd5cdb4823c189aa0fd211855a19",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_llm_without_gpu",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "LLM_LOGIT_PARITY"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "LLM_LOGIT_PARITY"
+          ],
+          "devices": [],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "llm": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05,
+            "gguf_sha256": "3e6a903047b086c90553d1192fa3d9ca97ff453625dae19cd3840f471e038557",
+            "licensed": true,
+            "attention_ops": [
+              "attention"
+            ],
+            "kv_ops": [
+              "KV_write",
+              "KV_read"
+            ],
+            "vocab": 8,
+            "type": "NUMERICAL_ARRAY"
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "3e6a903047b086c90553d1192fa3d9ca97ff453625dae19cd3840f471e038557",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "3e6a903047b086c90553d1192fa3d9ca97ff453625dae19cd3840f471e038557",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_observed_llm_failure_refused",
+      "observation": {
+        "result": {
+          "status": "REFUSED",
+          "reasons": [
+            "LLM_FAILED_PARITY"
+          ],
+          "qualified_claims": []
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "LLM_LOGIT_PARITY"
+          ],
+          "devices": [],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "llm": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05,
+            "gguf_sha256": "3e6a903047b086c90553d1192fa3d9ca97ff453625dae19cd3840f471e038557",
+            "licensed": true,
+            "attention_ops": [
+              "attention"
+            ],
+            "kv_ops": [
+              "KV_write",
+              "KV_read"
+            ],
+            "vocab": 8,
+            "type": "NUMERICAL_ARRAY",
+            "observed_failure": true
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "3e6a903047b086c90553d1192fa3d9ca97ff453625dae19cd3840f471e038557",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "3e6a903047b086c90553d1192fa3d9ca97ff453625dae19cd3840f471e038557",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_other_participants",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "OTHER",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "OTHER",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "numerical": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [
+              "p1",
+              "p2"
+            ],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_positive_two_vendor_baseline",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "numerical": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [
+              "p1",
+              "p2"
+            ],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_tolerance_loosening_refused_baseline",
+      "observation": {
+        "result": {
+          "status": "REFUSED",
+          "reasons": [
+            "TOLERANCE_LOOSENED"
+          ],
+          "qualified_claims": []
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "numerical": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [
+              "p1",
+              "p2"
+            ],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 1,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05
+          },
+          "controls": [
+            {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "p1",
+                "p2"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_unrelated_workload_control",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "TWO_VENDOR_NUMERICAL"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer1",
+                  "owner": "p1",
+                  "weight_sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a"
+                }
+              ]
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 2000000000,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              },
+              "kernel": {
+                "completed": true,
+                "tensor_sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419"
+              },
+              "blocks": [
+                {
+                  "block_id": "layer2",
+                  "owner": "p2",
+                  "weight_sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8"
+                }
+              ]
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "numerical": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "physical_ids": [
+              "p1",
+              "p2"
+            ],
+            "array_sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+            "reference_sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+            "full_count": 8,
+            "finite_count": 8,
+            "violation_count": 0,
+            "rmse": 1e-06,
+            "max_abs_error": 1e-06,
+            "atol": 5e-05,
+            "rtol": 5e-05,
+            "predeclared_atol": 5e-05,
+            "predeclared_rtol": 5e-05
+          },
+          "controls": [
+            {
+              "model_sha256": "ae37b58cb36b49ba2fa40d907105437a8484de7910ca9c82bc50cc15067c4850",
+              "workload_sha256": "f991e3157850ad439017994dc304393641829679e591a321a7b90eff16332a4b",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "physical_ids": [
+                "elsewhere"
+              ],
+              "kind": "COMPARATOR_ONLY",
+              "scope": "COMPARE_ONLY",
+              "exit_code": 1,
+              "detected": true,
+              "artifact_sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f"
+            }
+          ],
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ae37b58cb36b49ba2fa40d907105437a8484de7910ca9c82bc50cc15067c4850",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "f991e3157850ad439017994dc304393641829679e591a321a7b90eff16332a4b",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "4bd9ef9adf308456229ed82a4776ad54528c8c0a260f65ffdff5dd779d196b4f",
+          "502aac177c8b99930b5f4cf65332d1a87c08a8ed0eb530c5ecba58ecc055bb90",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "97b2c6db1657b5a774a8c69f9a885d5c4968a0636363a87b55fed0dbf38ce3b8",
+          "ae37b58cb36b49ba2fa40d907105437a8484de7910ca9c82bc50cc15067c4850",
+          "df821dd3f7f14d81e3735d94405566ccb7a8b1e264a1ba125315196f23847c8a",
+          "e203d4460f8c0ec0eff674050e609b06f584195cef8c559c8269927be4a37419",
+          "e3d069d506aeda55d18d23194ead1895313100cdd7d532badcd17aabdb840db8",
+          "ebd2577b0115d4b2a36c0e4cd0ef5cb24f983bc563cd4ac3e79fd1929b7e34b4",
+          "f991e3157850ad439017994dc304393641829679e591a321a7b90eff16332a4b"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    },
+    {
+      "case": "__main__.ValidatorCases.test_zero_highwater_no_resident_or_kernel_capacity",
+      "observation": {
+        "result": {
+          "status": "QUALIFIED",
+          "reasons": [],
+          "qualified_claims": [
+            "DEDICATED_CAPACITY_GT_ONE_CARD",
+            "FOUR_REQUIRED_CAPACITY"
+          ]
+        },
+        "receipt": {
+          "schema": 1,
+          "timestamp": "2026-10-04T12:00:00+00:00",
+          "claims": [
+            "DEDICATED_CAPACITY_GT_ONE_CARD",
+            "FOUR_REQUIRED_CAPACITY"
+          ],
+          "devices": [
+            {
+              "pci_id": "0000:01:00.0",
+              "physical_id": "p1",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 0,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              }
+            },
+            {
+              "pci_id": "0000:02:00.0",
+              "physical_id": "p2",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 0,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              }
+            },
+            {
+              "pci_id": "0000:03:00.0",
+              "physical_id": "p3",
+              "vendor": "NVIDIA",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 0,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              }
+            },
+            {
+              "pci_id": "0000:04:00.0",
+              "physical_id": "p4",
+              "vendor": "AMD",
+              "device_class": "DISCRETE_GPU",
+              "memory": {
+                "kind": "DEDICATED",
+                "source": "ACTUAL_ALLOCATOR",
+                "total_bytes": 8000000000,
+                "free_bytes": 6000000000,
+                "reserve_bytes": 2000000000,
+                "usable_bytes": 6000000000,
+                "highwater_bytes": 0,
+                "measured_at": "2026-10-04T12:00:00+00:00"
+              }
+            }
+          ],
+          "bindings": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935"
+          },
+          "capacity": {
+            "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+            "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+            "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+            "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+            "source": "ACTUAL_ALLOCATOR",
+            "quant_sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+            "context": 2048,
+            "batch": 1,
+            "requirement_bytes": 8000000000,
+            "plans": [
+              {
+                "physical_id": "p1",
+                "assigned_bytes": 2000000000
+              },
+              {
+                "physical_id": "p2",
+                "assigned_bytes": 2000000000
+              },
+              {
+                "physical_id": "p3",
+                "assigned_bytes": 2000000000
+              },
+              {
+                "physical_id": "p4",
+                "assigned_bytes": 2000000000
+              }
+            ],
+            "single": {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "quant_sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+              "context": 2048,
+              "batch": 1,
+              "device_count": 1,
+              "physical_ids": [
+                "p1"
+              ],
+              "failure_kind": "ACTUAL_ALLOCATOR_OOM",
+              "artifact_sha256": "7e936c7bc364e43fea43ec2dba01371601f6c3a5d48d05aa3f8ccefbbe5cf7f7"
+            },
+            "three": {
+              "model_sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "workload_sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "build_sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "executable_sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "quant_sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+              "context": 2048,
+              "batch": 1,
+              "device_count": 3,
+              "physical_ids": [
+                "p1",
+                "p2",
+                "p3"
+              ],
+              "failure_kind": "ACTUAL_ALLOCATOR_OOM",
+              "artifact_sha256": "a940d54c563a8828ab703385fa67f47f3dd6bd5cdb4823c189aa0fd211855a19"
+            }
+          },
+          "artifacts": [
+            {
+              "sha256": "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "7e936c7bc364e43fea43ec2dba01371601f6c3a5d48d05aa3f8ccefbbe5cf7f7",
+              "role": "SYNTHETIC_TEST_ONLY"
+            },
+            {
+              "sha256": "a940d54c563a8828ab703385fa67f47f3dd6bd5cdb4823c189aa0fd211855a19",
+              "role": "SYNTHETIC_TEST_ONLY"
+            }
+          ]
+        },
+        "trusted_hashes": [
+          "198aa591ea5f1d3d7e15aa7fa8f72406ad2200d0c6b48561ce5b7b33d6887935",
+          "32f300e35d88b9187f358055cafeea0bf27a04744057910556871d55c961f3b1",
+          "633dd7df6cb278842e16df3b6d28d3b0c424b4176c52e6a119a1ab6df8a225be",
+          "7327d4d86dcf6bd569c05303ab188992c7ed923898b393c1cddf63973d7245ff",
+          "76fe88de8b20d1b707096d3bf357019330ed4c7da454c8096e8e40fc31ce7ac9",
+          "7e936c7bc364e43fea43ec2dba01371601f6c3a5d48d05aa3f8ccefbbe5cf7f7",
+          "a940d54c563a8828ab703385fa67f47f3dd6bd5cdb4823c189aa0fd211855a19"
+        ],
+        "trust_scope": "Synthetic unit fixture; not physical hardware evidence."
+      }
+    }
+  ],
+  "tests_run": 17,
+  "failure_count": 14,
+  "error_count": 0,
+  "failures": [
+    {
+      "test": "__main__.SupervisorCases.test_bad_read_never_process_completed",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 168, in test_bad_read_never_process_completed\n    r=self.run_fake(FakeAPI(bad_read=True),FakeKernel());observe(self.id(),{'result':r});self.assertNotEqual(r['status'],'PROCESS_COMPLETED','Malformed reader result cannot establish successful execution logs')\nAssertionError: 'PROCESS_COMPLETED' == 'PROCESS_COMPLETED' : Malformed reader result cannot establish successful execution logs\n"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_failed_job_termination_still_waits_roots",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 155, in test_failed_job_termination_still_waits_roots\n    r=cs._shutdown(deps(a),k,900,owned,True);observe(self.id(),{'result':r,'fake_api_calls':a.calls,'fake_kernel_calls':k.calls});self.assertTrue(any(c[0]=='wait' and c[1]==123 for c in a.calls),'Job termination failure cannot skip exact owned-root waits')\nAssertionError: False is not true : Job termination failure cannot skip exact owned-root waits\n"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_query_exception_still_closes_owned_handles",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 166, in test_query_exception_still_closes_owned_handles\n    roots=[h for pair in a.proc for h in pair];closed=[c[1] for c in a.calls if c[0]=='close'];self.assertTrue(roots and all(h in closed for h in roots),'Cleanup query exception must not bypass handle closure')\nAssertionError: False is not true : Cleanup query exception must not bypass handle closure\n"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_second_pipe_failure_no_leaks",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 148, in test_second_pipe_failure_no_leaks\n    a=self.spawn_fake(FakeAPI(fail_pipe=2));closed=[c[1] for c in a.calls if c[0]=='close'];self.assertEqual(set(closed),{h for _,h in a.alloc},'Successful first pipe pair must remain owned')\nAssertionError: Items in the second set but not the first:\n102\n103 : Successful first pipe pair must remain owned\n"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_second_reader_start_no_double_close",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 152, in test_second_reader_start_no_double_close\n    a=self.spawn_fake(FakeAPI(),True);reads=[h for kind,h in a.alloc if kind=='read'];closed=[c[1] for c in a.calls if c[0]=='close'];self.assertTrue(all(closed.count(h)==1 for h in reads),'Started reader already owns its handle; _spawn must not also close it')\nAssertionError: False is not true : Started reader already owns its handle; _spawn must not also close it\n"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_second_writer_duplicate_failure_no_leaks",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 150, in test_second_writer_duplicate_failure_no_leaks\n    a=self.spawn_fake(FakeAPI(fail_dup=3));closed=[c[1] for c in a.calls if c[0]=='close'];self.assertEqual(set(closed),{h for _,h in a.alloc},'Successful stdout duplicate must remain owned')\nAssertionError: Items in the second set but not the first:\n106 : Successful stdout duplicate must remain owned\n"
+    },
+    {
+      "test": "__main__.SupervisorCases.test_wait_exception_still_closes_owned_handles",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 160, in test_wait_exception_still_closes_owned_handles\n    roots=[h for pair in a.proc for h in pair];closed=[c[1] for c in a.calls if c[0]=='close'];self.assertTrue(roots and all(h in closed for h in roots),'Cleanup wait exception must not bypass handle closure')\nAssertionError: False is not true : Cleanup wait exception must not bypass handle closure\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_cpu_participants",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 72, in test_cpu_participants\n    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1,'CPU'),device(2,'CPU')],numerical=numerical(['p1','p2']),controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED')\nAssertionError: 'QUALIFIED' == 'QUALIFIED'\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_declared_tolerance_metric_inconsistency",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 82, in test_declared_tolerance_metric_inconsistency\n    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1),device(2)],numerical=e,controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED','RMSE cannot exceed max absolute error')\nAssertionError: 'QUALIFIED' == 'QUALIFIED' : RMSE cannot exceed max absolute error\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_four_required_exactly_three_devices",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 63, in test_four_required_exactly_three_devices\n    r=evaluate(self.id(),['FOUR_REQUIRED_CAPACITY'],[device(i) for i in range(1,4)],capacity=capacity(3));self.assertNotEqual(r['status'],'QUALIFIED','Three cards and no four-card run cannot prove FOUR_REQUIRED_CAPACITY')\nAssertionError: 'QUALIFIED' == 'QUALIFIED' : Three cards and no four-card run cannot prove FOUR_REQUIRED_CAPACITY\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_llm_without_gpu",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 77, in test_llm_without_gpu\n    r=evaluate(self.id(),['LLM_LOGIT_PARITY'],[],llm=self.llm(),controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED','No GPU execution evidence')\nAssertionError: 'QUALIFIED' == 'QUALIFIED' : No GPU execution evidence\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_other_participants",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 74, in test_other_participants\n    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1,'OTHER'),device(2,'OTHER')],numerical=numerical(['p1','p2']),controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED')\nAssertionError: 'QUALIFIED' == 'QUALIFIED'\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_unrelated_workload_control",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 70, in test_unrelated_workload_control\n    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1),device(2)],numerical=numerical(['p1','p2']),controls=[c]);self.assertNotEqual(r['status'],'QUALIFIED','Trusted unrelated comparator cannot qualify current model')\nAssertionError: 'QUALIFIED' == 'QUALIFIED' : Trusted unrelated comparator cannot qualify current model\n"
+    },
+    {
+      "test": "__main__.ValidatorCases.test_zero_highwater_no_resident_or_kernel_capacity",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py\", line 67, in test_zero_highwater_no_resident_or_kernel_capacity\n    r=evaluate(self.id(),['DEDICATED_CAPACITY_GT_ONE_CARD','FOUR_REQUIRED_CAPACITY'],ds,capacity=capacity(4));self.assertNotEqual(r['status'],'QUALIFIED','Plans and OOM labels do not prove actual allocation or successful inference')\nAssertionError: 'QUALIFIED' == 'QUALIFIED' : Plans and OOM labels do not prove actual allocation or successful inference\n"
+    }
+  ],
+  "errors": [],
+  "native_process_launches_blocked": true,
+  "forbidden_real_api_attempts": [],
+  "RUN_CONTAINMENT_FIXTURES_present": false,
+  "scope": "All evidence synthetic pure/mock. No worker process, native job, GPU or provider launched."
+}

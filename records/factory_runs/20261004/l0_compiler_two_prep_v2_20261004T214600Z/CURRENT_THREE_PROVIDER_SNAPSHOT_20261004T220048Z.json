@@ -1,0 +1,87 @@
+{
+  "live": 3,
+  "replacements_launched": 0,
+  "utc": "2026-10-04T22:00:48.2691464Z",
+  "native_children_actual": 0,
+  "jobs": [
+    {
+      "latest_progress": {
+        "observed_model": "qwen3.8-max",
+        "done": false,
+        "http": 200,
+        "raw_bytes": 685993,
+        "finish_reason": null,
+        "usage_known": false,
+        "reasoning_bytes": 39179,
+        "frames": 2506,
+        "content_bytes": 0,
+        "seconds": 257.14
+      },
+      "usage": "UNKNOWN_PENDING_FINAL",
+      "job": "qwen_l0_peer_compile_repair",
+      "launch": {
+        "observed_process_start_utc": "2026-10-04T21:56:29.3900133Z",
+        "credential_read_by_outer_wrapper": false,
+        "deadline_seconds": 2430,
+        "lane": "Qwen",
+        "prompt_sha256": "3b84c6d91803079d654b1442a21289426c667d5ae59215c1b2f6aabe9d68ffa6",
+        "native_children_actual": 0,
+        "identity": "retained Process object; no PID reattach",
+        "clock": "Stopwatch",
+        "pid": 89212,
+        "source_sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+        "requested_model": "qwen3.8-max"
+      },
+      "session": 63502
+    },
+    {
+      "latest_progress": {
+        "frames": 2348,
+        "observed_model": "qwen3.8-max",
+        "usage_known": false,
+        "content_bytes": 0,
+        "done": false,
+        "raw_bytes": 641428,
+        "seconds": 257.06,
+        "reasoning_bytes": 35364,
+        "finish_reason": null,
+        "http": 200
+      },
+      "usage": "UNKNOWN_PENDING_FINAL",
+      "job": "qwen_l0_query_measured_repair",
+      "launch": {
+        "clock": "Stopwatch",
+        "deadline_seconds": 2430,
+        "source_sha256": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+        "observed_process_start_utc": "2026-10-04T21:56:29.4511249Z",
+        "prompt_sha256": "0a0f67faefd51924442e7ca836eb5d50748162658308af9a51bd1da8e17af8b9",
+        "requested_model": "qwen3.8-max",
+        "pid": 89776,
+        "native_children_actual": 0,
+        "identity": "retained Process object; no PID reattach",
+        "credential_read_by_outer_wrapper": false,
+        "lane": "Qwen"
+      },
+      "session": 46149
+    },
+    {
+      "usage": "UNKNOWN_PENDING_TERMINAL",
+      "job": "grok_combined_high",
+      "launch": {
+        "pid": 22844,
+        "clock": "Stopwatch",
+        "prompt_sha256": "ae4a12fbe36ba4a891a3b80eed2cad549549729d8c96286386dec00b837669f6",
+        "lane": "Grok",
+        "deadline_seconds": 600,
+        "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+        "native_children_actual": 0,
+        "identity": "retained Process object; no PID reattach",
+        "credential_read_by_outer_wrapper": false,
+        "requested_model": "grok-4.7-build-fast",
+        "observed_process_start_utc": "2026-10-04T21:56:29.4954193Z"
+      },
+      "session": 83309
+    }
+  ],
+  "source_execution": false
+}

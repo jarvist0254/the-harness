@@ -1,0 +1,66 @@
+{
+  "reply32k_batch": "NOT_PREPARED_STOP_PRECEDED_ALL_COPY_OR_EDIT",
+  "scope": "TWO_OWNED_PROVIDER_REQUESTS_ONLY",
+  "independent_user_muse": "UNTOUCHED",
+  "replacement_requests": 0,
+  "source_promoted": false,
+  "jobs": [
+    {
+      "raw_sse_file_exists": false,
+      "job": "qwen_windows_cuda_capability",
+      "session_terminal_exit": 1,
+      "state": "STOPPED_BY_USER_RETAINED_SESSION_INTERRUPT",
+      "wrapper_pid_present": false,
+      "wrapper_pid": 82664,
+      "provider_usage": "UNKNOWN_NO_FINAL_USAGE",
+      "session": 28728,
+      "worker_pid_present": false,
+      "worker_pid": 85040,
+      "provider_terminal_exists": false,
+      "raw_capture_limit": "Worker held SSE in memory until normal terminal; interruption left no final raw SSE file. Existing request metadata/progress retained; no reconstruction or fabricated response.",
+      "last_progress": {
+        "content_bytes": 0,
+        "observed_model": "qwen3.8-max",
+        "reasoning_bytes": 182680,
+        "http": 200,
+        "usage_known": false,
+        "seconds": 988.59,
+        "done": false,
+        "finish_reason": null,
+        "frames": 15235,
+        "raw_bytes": 4116527
+      }
+    },
+    {
+      "raw_sse_file_exists": false,
+      "job": "qwen_intel_sysman_inventory",
+      "session_terminal_exit": 1,
+      "state": "STOPPED_BY_USER_RETAINED_SESSION_INTERRUPT",
+      "wrapper_pid_present": false,
+      "wrapper_pid": 37264,
+      "provider_usage": "UNKNOWN_NO_FINAL_USAGE",
+      "session": 84862,
+      "worker_pid_present": false,
+      "worker_pid": 68028,
+      "provider_terminal_exists": false,
+      "raw_capture_limit": "Worker held SSE in memory until normal terminal; interruption left no final raw SSE file. Existing request metadata/progress retained; no reconstruction or fabricated response.",
+      "last_progress": {
+        "observed_model": "qwen3.8-max",
+        "frames": 11002,
+        "usage_known": false,
+        "finish_reason": null,
+        "reasoning_bytes": 152412,
+        "http": 200,
+        "seconds": 982.46,
+        "raw_bytes": 2992862,
+        "done": false,
+        "content_bytes": 0
+      }
+    }
+  ],
+  "control": "write_stdin Ctrl-C on retained unified sessions, no process reattach/name-based/PID kill",
+  "global_factory": "UNTOUCHED_DISABLED",
+  "utc": "2026-10-04T23:10:28.5213836Z",
+  "user_stop_utc": "2026-10-04T23:08:32Z",
+  "native_or_generated_source_executed": false
+}

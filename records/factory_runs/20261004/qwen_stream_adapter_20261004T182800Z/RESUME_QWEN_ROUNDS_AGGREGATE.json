@@ -1,0 +1,47 @@
+{
+  "provider_internal_call_counts": "NOT_REPORTED",
+  "unknown_usage_attempts": 6,
+  "usage_tokens_are_not_credits": true,
+  "generated_source_execution": false,
+  "completed_advisory_artifacts": 1,
+  "actual_http_requests": 7,
+  "providers": {
+    "Grok": {
+      "observed_total_tokens": 0,
+      "requests": 0
+    },
+    "Qwen": {
+      "requests": 7,
+      "observed_total_tokens": 14223,
+      "unknown_usage_attempts": 6,
+      "model": "qwen3.8-max"
+    },
+    "Gemini": {
+      "observed_total_tokens": 0,
+      "requests": 0
+    }
+  },
+  "disabled_global_factory_started": false,
+  "observed_provider_token_total": 14223,
+  "observed_completion_tokens": 11798,
+  "source_promotion": false,
+  "native_children_actual": 0,
+  "scope": "ONLY thisresume sixconcurrentround plus distinctSSEadapterattempt",
+  "observed_input_tokens": 2425,
+  "other_agents_provider_calls_not_included": true,
+  "ledgers": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\USAGE_FINAL_QWEN_SIX.json",
+      "sha256": "825f8c97606eac737ae8efad510da102da94fb5528119878b4aec8c404ac9274"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_stream_adapter_20261004T182800Z\\USAGE_FINAL_STREAM.json",
+      "sha256": "bb7cdbfba15a5a31f4b33dd63462880fba2a487b9a1796118eb039997dc22bcd"
+    }
+  ],
+  "reported_reasoning_tokens_included_in_completion": 9380,
+  "distinct_task_scopes": 6,
+  "completed_adapter_or_fixture_source_artifacts": 0,
+  "maximum_native_authorized_each_qwen_deepseek": 10,
+  "credits": "NOT_CHECKED"
+}

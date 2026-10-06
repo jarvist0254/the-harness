@@ -1,0 +1,47 @@
+{
+  "findings": [
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\contained_supervisor.py",
+      "discriminating_test": "SupervisorCases.test_second_reader_start_no_double_close in test_actual_candidates.py: verify all(closed.count(h) == 1 for h in reads) when ImmediateThread.fail_second is True.",
+      "exact_source": "threads.append(thread)\ntransferred_reads.append(read_h)\nfor h in transferred_reads:\n    if h in reads:\n        reads.remove(h)",
+      "line": 395,
+      "minimal_fix": "Remove read_h from reads immediately upon each successful thread start: inside the loop, replace 'transferred_reads.append(read_h)' with 'reads.remove(read_h)' directly after 'thread.start()', and eliminate the deferred post-loop removal block.",
+      "reason": "Handle ownership transfer is deferred until after all reader threads have started. If thread.start() fails on the second reader, the loop aborts before removing reads[0] from the local reads list. In finally, _close_quiet closes all handles remaining in reads, causing a double close on reads[0] because thread 0 already closed it in _read_pipe.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\contained_supervisor.py",
+      "discriminating_test": "SupervisorCases.test_assign_failure_terminates_process in tests.candidate.py: with fail_assign=True, assert any(c[0] == 'terminate_process' for c in api.calls).",
+      "exact_source": "owned.append(rec)\nph = th = None\n_close_quiet(wapi.CloseHandle, close_after)\nif not kernel.AssignProcessToJobObject(job, rec[\"ph\"]):",
+      "line": 381,
+      "minimal_fix": "Do not clear local ph and th until AssignProcessToJobObject and ResumeThread succeed, or explicitly handle assign failure by terminating rec['ph'] and closing rec['th'] before raising WindowsJobError('ASSIGN_FAILED').",
+      "reason": "Local variables ph and th are set to None immediately upon appending to owned before AssignProcessToJobObject. If assignment fails, _spawn's finally block checks 'if ph is not None' to terminate the suspended child, which evaluates to False. The unassigned suspended process is never terminated in _spawn.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\qualification_validator.py",
+      "discriminating_test": "Evaluate receipt claiming DEDICATED_CAPACITY_GT_ONE_CARD and FOUR_REQUIRED_CAPACITY with plans and allocator OOMs present, but with device blocks or kernel completion omitted; assert result is NOT_CHECKED or REFUSED, not QUALIFIED.",
+      "exact_source": "def _capacity(receipt, bindings, devs, four_required):",
+      "line": 200,
+      "minimal_fix": "In _capacity, verify that participating discrete GPUs possess completed kernels (d['kernel']['completed'] is True), unique resident weight blocks (d['blocks']), and require matching numerical parity evidence (receipt.get('numerical')) for the claimed workload rather than inferring capacity solely from allocator plans and OOM claims.",
+      "reason": "Capacity qualification accepts allocation plans and allocator OOMs without checking that participating GPUs have actual resident weight blocks (blocks), completed kernels, or full numerical parity for the workload, violating the requirement that capacity cannot be inferred without resident weights, kernel completion, and numerical parity.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\tests.candidate.py",
+      "discriminating_test": "Run TestControlBinding.test_unrelated_workload_control_refused; observe assertion failure 'REFUSED' != 'NOT_CHECKED'.",
+      "exact_source": "def test_unrelated_workload_control_refused(self):\n    devs = [_gpu(1,'AMD'), _gpu(2,'NVIDIA')]\n    c = _ctrl(['gpu1','gpu2']); c['model_sha256'] = H('other')\n    r, t = _base(['TWO_VENDOR_NUMERICAL'], devs, numerical=_num_ev(['gpu1','gpu2']), controls=[c])\n    out = validate_result(r, now_utc=NOW, trusted_artifact_hashes=t)\n    self.assertEqual(out['status'], 'NOT_CHECKED')",
+      "line": 229,
+      "minimal_fix": "Update line 229 in tests.candidate.py to assert self.assertEqual(out['status'], 'REFUSED') and self.assertIn('BINDING_MISMATCH', out['reasons']) to match the actual validator behavior and test name.",
+      "reason": "When control binding mismatches the receipt binding, _good_control calls _require_binds which returns REFUSED with BINDING_MISMATCH. The test asserts status == 'NOT_CHECKED', contradicting both its own test name and the validator specification, causing test execution failure.",
+      "severity": "HIGH"
+    }
+  ],
+  "qualification_limits": [
+    "Static code and test analysis only; no native worker processes, job objects, or GPUs were spawned or executed.",
+    "Both candidates contain blocking defects in implementation and test suites preventing execution admission."
+  ],
+  "toolAction": "Submitting review findings",
+  "toolSummary": "Review completion",
+  "verdict": "STATIC_REJECTED"
+}

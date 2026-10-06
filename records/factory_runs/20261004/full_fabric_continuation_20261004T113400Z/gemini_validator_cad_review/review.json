@@ -1,0 +1,134 @@
+{
+  "findings": [
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\qualification_validator.py",
+      "exact_source": "    def is_valid_number(val: Any, allow_negative: bool = False) -> bool:",
+      "line": 42,
+      "minimal_fix": "Move is_valid_number definition out of validate_result into module scope so module-level functions can access it.",
+      "reason": "Helper function is_valid_number is defined inside validate_result local scope but called at module level in _validate_dedicated_capacity (lines 194, 200, 214, 240), _validate_transfer_p2p (lines 292, 295), and _validate_llm (line 330), causing immediate NameError on execution.",
+      "severity": "CRITICAL",
+      "test": "Call validate_result with claims containing DEDICATED_CAPACITY, TRANSFER_DIRECT_P2P, or LLM_INFERENCE; raises NameError: name 'is_valid_number' is not defined."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\tests.candidate.txt",
+      "exact_source": "        self.validator = validate_result_stub # Replace with actual import in production",
+      "line": 76,
+      "minimal_fix": "Import validate_result from qualification_validator instead of assigning validate_result_stub, and implement real assertions in test_shared_amd_memory and test_whole_model_replication instead of pass.",
+      "reason": "Candidate tests invoke a 50-line local mock stub (validate_result_stub) rather than the actual source qualification_validator.py, leaving the actual implementation untested and masking critical bugs like the is_valid_number NameError. Key fixtures test_shared_amd_memory (line 140) and test_whole_model_replication (line 210) are empty pass stubs.",
+      "severity": "CRITICAL",
+      "test": "Run unittest test suite with self.validator = validate_result imported from qualification_validator.py; suite fails immediately with NameError and unverified test fixtures."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\qualification_validator.py",
+      "exact_source": "        pci_id = dev.get(\"physical_pci_id\")",
+      "line": 114,
+      "minimal_fix": "Normalize physical_pci_id to canonical lowercase [domain:]bus:device.function hex format and strip whitespace/padding before duplicate checking and format verification.",
+      "reason": "_validate_four_gpu performs raw string membership check without normalizing PCI bus identifiers (e.g. casing, leading domain zeros, spacing), allowing alias representations of identical physical GPUs to bypass the distinct device check. Missing verification of known full physical PCI format.",
+      "severity": "HIGH",
+      "test": "Pass device list containing duplicate physical GPUs formatted with different casing or domain prefixes (e.g. '0000:01:00.0' and '01:00.0'); validator accepts them as distinct instead of REFUSED."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\qualification_validator.py",
+      "exact_source": "        parity = measurement.get(\"parity_check_passed\", False)",
+      "line": 299,
+      "minimal_fix": "Validate finite parity data with exact numerical bit error tolerances and hashes, rather than accepting bare boolean assertions. Require allocator exception/rejection evidence for 1-card and 3-card capacity refusals.",
+      "reason": "Validator accepts forged boolean flags (parity_check_passed: True, one_card_capacity_refusal: True, three_card_capacity_refusal: True, logits_reference_match: True) without verifying finite parity numerical metrics, exact tolerance hashes, or actual driver/allocator refusal payloads.",
+      "severity": "HIGH",
+      "test": "Submit receipt with synthetic boolean flags set to True but lacking parity tolerance metrics, allocator error logs, and numerical tensor diffs; validator improperly proves claims."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\qualification_validator.py",
+      "exact_source": "    ts = evidence.get(\"observed_timestamp\")",
+      "line": 176,
+      "minimal_fix": "Validate observed_timestamp against maximum staleness window relative to receipt execution time, and verify that memory_kind is DEDICATED on each individual device rather than a single top-level string.",
+      "reason": "observed_timestamp check only requires ts > 0, accepting arbitrary historical or stale timestamps (e.g. ts = 1000 from 1970). Memory kind is checked once at the top level rather than validating all 4 discrete cards as DEDICATED, and measured_peak_allocations items are not validated with is_valid_number.",
+      "severity": "HIGH",
+      "test": "Submit observed_timestamp = 1000 and devices with shared memory; validator accepts stale timestamp and passes DEDICATED_CAPACITY claim without per-device inspection."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\qualification_validator.py",
+      "exact_source": "    if is_valid_number(policy_mib) and policy_mib <= 32:",
+      "line": 240,
+      "minimal_fix": "Enforce that total_unique_resident_bytes exceeds discrete 8GB single-card budget and reject arbitrary policy caps that do not reflect physical VRAM pooling.",
+      "reason": "Validator only rejects policy limits <= 32 MiB, permitting artificial policy limits like 64 MiB or 512 MiB to pass as qualification for dedicated multi-card capacity without proving true discrete 8GB physical VRAM pooling or actual model capacity.",
+      "severity": "HIGH",
+      "test": "Submit artificial_policy_limit_mib = 64 with tiny resident bytes (1000 bytes); validator accepts receipt as qualifying multi-card pooling."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py",
+      "exact_source": "        fused = shapes[0]",
+      "line": 44,
+      "minimal_fix": "Assemble shapes in topological connectivity sequence or fuse all connected core components as a compound/union before asserting len(fused.Solids) == 1 on the completed core.",
+      "reason": "Incremental fusion loop immediately checks len(fused.Solids) == 1 after each fuse. shapes[0] is the bottom base plate (Z=0..4) and shapes[1] is the top plate (Z=206..210) separated by a 202 mm vertical gap. Fusing two disjoint shapes yields 2 solids, triggering RuntimeError('disconnected or invalid shape after fuse') on the very first iteration.",
+      "severity": "CRITICAL",
+      "test": "Execute build(cfg, out_dir); shapes[0].fuse(shapes[1]) creates 2 disjoint solids and crashes at line 48."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py",
+      "exact_source": "            b.Label = f'GPU_Box_{chr(65+i)}_Concept'",
+      "line": 53,
+      "minimal_fix": "Assign Label to the FreeCAD DocumentObject returned by doc.addObject('Part::Feature', ...), not to the underlying Part.TopoShape geometry.",
+      "reason": "Part.makeBox returns a Part.Shape / Part.TopoShape OCC BRep wrapper which does not possess a Label property in FreeCAD C++ bindings, causing AttributeError when setting b.Label or d_box.Label.",
+      "severity": "HIGH",
+      "test": "Run Part.makeBox(10,10,10).Label = 'test' in FreeCAD Python; raises AttributeError."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py",
+      "exact_source": "        d_box = Part.makeBox(uT, uL, uH, FreeCAD.Vector(dx, 0, bw+cH+gap))",
+      "line": 56,
+      "minimal_fix": "Orient Bay D rolled 90 degrees with X=uH (or cH), Y=uL (or cL), and Z=uT (or cT), and ensure core height and rail support accommodate the rolled dimension without intersecting the top plate.",
+      "reason": "d_box is created with dimensions (uT, uL, uH) = (68, 360, 165), remaining upright rather than rolled 90 degrees. Its Z extent reaches 132 + 165 = 297 mm, directly penetrating through the core top plate located at Z=206 mm.",
+      "severity": "HIGH",
+      "test": "Check d_box.BoundBox.ZMax (297 mm) against top plate shapes[1].BoundBox.ZMin (206 mm); d_box intersects and extends 91 mm above the top plate."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py",
+      "exact_source": "        for i in range(4):",
+      "line": 34,
+      "minimal_fix": "Loop range(3) for the 3 lower upright bays (A, B, C), and build separate independent structural support rails/posts for upper rolled Bay D within core_W.",
+      "reason": "Loop range(4) generates 4 upright bays across X. The 4th bay rails (i=3) extend from X=169 to X=211.5 mm, protruding completely outside the core width (core_W = 170 mm) into empty space without attachment to the base or back walls, leaving rolled Bay D without independent integrated support.",
+      "severity": "HIGH",
+      "test": "Calculate rail positions for i=3; rail X coordinate 211.5 mm exceeds core_W 170 mm, floating in empty space disconnected from the base plate."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py",
+      "exact_source": "    core_D = cL",
+      "line": 20,
+      "minimal_fix": "Set printed core depth based on structural rails allowing card overhang within print limits, and compute core_bbox_mm from fused.BoundBox.XLength, YLength, ZLength.",
+      "reason": "core_D is set to full card length cL (199 mm), which exceeds print limit lD (188 mm) at rotation 0, causing line 25 to raise ValueError before build even starts. Card overhang is explicitly permitted by the specification. Additionally, core_bbox_mm in state.json is hardcoded to analytical values rather than actual OCC BRep BoundBox dimensions.",
+      "severity": "HIGH",
+      "test": "Invoke build with default config at rot=0; raises ValueError: core bbox 170x199x210 exceeds print limit 200x188x254."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\tests.candidate.txt",
+      "exact_source": "        from draft_builder import build",
+      "line": 13,
+      "minimal_fix": "Import build from integrated_core_draft, and in integrated_core_draft move schema checks before FreeCAD/Part imports so GPU-free schema testing works without FreeCAD.",
+      "reason": "All tests import build from non-existent module draft_builder instead of integrated_core_draft, causing ModuleNotFoundError. Furthermore, integrated_core_draft imports FreeCAD at lines 4-5 before schema validation, preventing GPU-free parameter tests from running without FreeCAD installed.",
+      "severity": "HIGH",
+      "test": "Run python tests.candidate.txt in standard environment; fails with ModuleNotFoundError: No module named 'draft_builder'."
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py",
+      "exact_source": "        if v is None or not isinstance(v, (int,float)) or not math.isfinite(v) or v <= 0:",
+      "line": 11,
+      "minimal_fix": "Explicitly reject bool with if isinstance(v, bool): raise ValueError(...).",
+      "reason": "In Python, isinstance(True, int) is True, so boolean values passed for dimension parameters (e.g. gap = True) bypass validation and are accepted as 1.0 mm, violating strict bool/nonfinite schema handling.",
+      "severity": "MEDIUM",
+      "test": "Pass cfg['schema']['gap'] = True; build accepts True without raising ValueError."
+    }
+  ],
+  "missing_qualification": [
+    "Real GGUF model numerical reference verification with logits/tensor FP16/BF16 exact tolerance diffs instead of bare boolean assertions",
+    "Hardware allocator out-of-memory error trace/payload demonstrating genuine 1-card and 3-card capacity refusal on identical workload hash",
+    "Discrete 8GB physical VRAM allocation proof (>8GB total unique weight/KV resident bytes exceeding single 8GB card budget)",
+    "Canonical PCI bus normalization and vendor device identity validation (preventing alias forging and shared AMD APU qualification)",
+    "Finite parity transfer measurement with exact bit error rate and microsecond latency tolerances (excluding D3D12 L0 / host staging)",
+    "Continuous in-flight durability verification (WAL checkpoint identity, replay boundary, and worker kill/restart state recovery proofs rather than final atomic JSON)",
+    "FreeCAD physical BRep core connectivity and volume validation (monolithic single-solid core <= 200x188x254 mm print bbox with independent structural support for rolled Bay D and card overhang)",
+    "Pure GPU-free and CAD-free standalone parameter/schema unit test execution without importing FreeCAD or stubbing the validator"
+  ],
+  "toolAction": "Completing code review",
+  "toolSummary": "Complete candidate code review",
+  "verdict": "REFUSED"
+}

@@ -1,0 +1,26 @@
+{
+  "elapsed_seconds": 100.56,
+  "requested_model": "gemini-3.8-flash-medium",
+  "lane": "Gemini",
+  "provider_patch_applied": false,
+  "finish_reason": "NOT_REPORTED",
+  "pipe_error": false,
+  "log_cap_exceeded": false,
+  "usage": {
+    "input_tokens": 30267,
+    "output_tokens": 24025,
+    "thinking_tokens": 23515,
+    "cache_read_tokens": 0,
+    "total_tokens": 54292
+  },
+  "exit_code": 0,
+  "native_children_actual": 0,
+  "pid": 82588,
+  "private_url_output_refused": false,
+  "status": "COMPLETE_REVIEW_STAGED",
+  "outer_killed": false,
+  "credential_saved": false,
+  "parse_error_type": null,
+  "drain_unknown": false,
+  "model_usage": null
+}

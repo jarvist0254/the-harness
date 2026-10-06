@@ -1,0 +1,8 @@
+{
+  "process_identity": "Unified-exec shell executes owned wrapper directly; retained tool session",
+  "model": "grok-4.7-build-fast",
+  "job": "grok_fp32_patch",
+  "wrapper_pid": 31016,
+  "utc": "2026-10-04T16:02:42.2657639Z",
+  "admission": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_GROK_LAUNCH_ADMISSION_20261004T160400Z.json"
+}

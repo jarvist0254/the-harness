@@ -1,0 +1,79 @@
+/*
+ * Copyright (C) 2022-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#include "framework/ocl/opencl.h"
+#include "framework/test_case/register_test_case.h"
+#include "framework/utility/timer.h"
+
+#include "definitions/new_resources_submission_host.h"
+
+#include <gtest/gtest.h>
+
+static TestResult run(const NewResourcesSubmissionHostArguments &arguments, Statistics &statistics) {
+    MeasurementFields typeSelector(MeasurementUnit::Microseconds, MeasurementType::Cpu);
+
+    if (isNoopRun()) {
+        statistics.pushUnitAndType(typeSelector.getUnit(), typeSelector.getType());
+        return TestResult::Nooped;
+    }
+
+    // Setup
+    Opencl opencl;
+    Timer timer;
+    auto clHostMemAllocINTEL = (pfn_clHostMemAllocINTEL)clGetExtensionFunctionAddressForPlatform(opencl.platform, "clHostMemAllocINTEL");
+    auto clMemFreeINTEL = (pfn_clMemFreeINTEL)clGetExtensionFunctionAddressForPlatform(opencl.platform, "clMemFreeINTEL");
+    if (!clHostMemAllocINTEL || !clMemFreeINTEL) {
+        return TestResult::DriverFunctionNotFound;
+    }
+    cl_int retVal;
+
+    // Create kernel
+    const char *source = "__kernel void write(__global int *outBuffer) {  \n"
+                         "   outBuffer[get_global_id(0)] = 1;             \n"
+                         "}";
+    const auto sourceLength = strlen(source);
+    cl_program program = clCreateProgramWithSource(opencl.context, 1, &source, &sourceLength, &retVal);
+    ASSERT_CL_SUCCESS(retVal);
+    ASSERT_CL_SUCCESS(clBuildProgram(program, 1, &opencl.device, nullptr, nullptr, nullptr));
+    cl_kernel kernel = clCreateKernel(program, "write", &retVal);
+    ASSERT_CL_SUCCESS(retVal);
+
+    const size_t gws = 1;
+    const size_t lws = 1;
+    const size_t sizeInBytes = arguments.size;
+
+    // Keep the previous allocation alive while creating the next one so the driver hands out a fresh VA
+    void *previousHostMemory = nullptr;
+
+    // Benchmark
+    for (auto i = 0u; i < arguments.iterations; i++) {
+        timer.measureStart();
+        void *hostMemory = clHostMemAllocINTEL(opencl.context, nullptr, sizeInBytes, 0, &retVal);
+        ASSERT_CL_SUCCESS(clSetKernelArgSVMPointer(kernel, 0, hostMemory));
+        ASSERT_CL_SUCCESS(clEnqueueNDRangeKernel(opencl.commandQueue, kernel, 1, nullptr, &gws, &lws, 0, nullptr, nullptr));
+        ASSERT_CL_SUCCESS(clFinish(opencl.commandQueue));
+        timer.measureEnd();
+
+        ASSERT_CL_SUCCESS(retVal);
+        if (previousHostMemory != nullptr) {
+            ASSERT_CL_SUCCESS(clMemFreeINTEL(opencl.context, previousHostMemory));
+        }
+        previousHostMemory = hostMemory;
+
+        statistics.pushValue(timer.get(), typeSelector.getUnit(), typeSelector.getType());
+    }
+
+    // Cleanup
+    if (previousHostMemory != nullptr) {
+        ASSERT_CL_SUCCESS(clMemFreeINTEL(opencl.context, previousHostMemory));
+    }
+    ASSERT_CL_SUCCESS(clReleaseKernel(kernel));
+    ASSERT_CL_SUCCESS(clReleaseProgram(program));
+    return TestResult::Success;
+}
+
+static RegisterTestCaseImplementation<NewResourcesSubmissionHost> registerTestCase(run, Api::OpenCL, true);

@@ -1,0 +1,57 @@
+{
+  "utc": "2026-10-04T13:52:03.213826+00:00",
+  "scope": "Pure/mocked regression suites; not native hardware, capacity, physical fit or full-goal qualification",
+  "source_hashes_before": {
+    "j_link/device_inventory.py": "8a8f3ffc6d130e36847588b1e1d58d8e8013431b85b525e7bf389d84bf9a3100",
+    "j_link/opencl_executor.py": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387",
+    "j_link/tests/test_device_inventory.py": "2480d2d09baca56c06486623247bc564fd048e33f0a964f207767340b2c61413",
+    "cad/integrated_core.py": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+    "cad/tests/test_integrated_layout.py": "bcae89edf6544bcbb94bd177c886a1d38d97a14e80ce528d2b7ccbd2cdf65c95",
+    "cad/tests/test_gap_posts.py": "13f7ad59393bd1da024f48c85e734df9b273892a7c6325a829c55c093830427d"
+  },
+  "source_hashes_after": {
+    "j_link/device_inventory.py": "8a8f3ffc6d130e36847588b1e1d58d8e8013431b85b525e7bf389d84bf9a3100",
+    "j_link/opencl_executor.py": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387",
+    "j_link/tests/test_device_inventory.py": "2480d2d09baca56c06486623247bc564fd048e33f0a964f207767340b2c61413",
+    "cad/integrated_core.py": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+    "cad/tests/test_integrated_layout.py": "bcae89edf6544bcbb94bd177c886a1d38d97a14e80ce528d2b7ccbd2cdf65c95",
+    "cad/tests/test_gap_posts.py": "13f7ad59393bd1da024f48c85e734df9b273892a7c6325a829c55c093830427d"
+  },
+  "runs": [
+    {
+      "suite": "j_link",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "j_link/tests",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.25,
+      "test_methods": 79,
+      "reported_ok": true
+    },
+    {
+      "suite": "cad",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "cad/tests",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.09400000050663948,
+      "test_methods": 15,
+      "reported_ok": true
+    }
+  ],
+  "verdict": "PASS_CURRENT_PURE_SUITES"
+}

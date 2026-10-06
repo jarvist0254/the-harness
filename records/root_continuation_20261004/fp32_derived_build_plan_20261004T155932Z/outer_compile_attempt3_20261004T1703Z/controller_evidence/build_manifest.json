@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "run_id": "fp32_build",
+  "deadline_seconds": 600,
+  "startup_seconds": 10,
+  "log_limit_bytes": 131072,
+  "containment_policy": "kill_on_close",
+  "workers": [
+    {
+      "worker_id": "build",
+      "argv": [
+        "C:\\Windows\\System32\\cmd.exe",
+        "/d",
+        "/c",
+        "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt3.cmd"
+      ],
+      "executable_sha256": "8dd1ebb0b969370c70a5ee7f7ee347949aa7046aa5e1a33fcd7b1e9415b21fc3",
+      "cwd": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z"
+    }
+  ]
+}

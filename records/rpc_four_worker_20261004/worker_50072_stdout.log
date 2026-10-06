@@ -1,0 +1,8 @@
+Starting RPC server v7.0.0
+  endpoint       : 127.0.0.1:50072
+  local cache    : n/a
+Devices:
+  CPU: AMD Ryzen 7 7700 8-Core Processor               (64507 MiB, 7793 MiB free)
+  transport      : TCP
+Accepted client connection
+Client connection closed

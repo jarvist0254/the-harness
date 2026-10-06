@@ -1,0 +1,179 @@
+{
+  "currently_other_admitted_jobs": 2,
+  "source_import_execution": false,
+  "max_concurrent_provider_requests": 6,
+  "rolechain": "Qwenworkhorse→Muse actualaudit→Gemini actualMuse/source review→Grok actualfindings edit→ROOTQA",
+  "utc": "2026-10-04T20:25:39.7636578Z",
+  "normalized_each_cap_bytes": 2097152,
+  "source_chars_limit": 16000,
+  "http2400_outer2430": true,
+  "provider_launch_authorized": false,
+  "raw_cap_bytes": 16777216,
+  "dedicated_endpoint_guard": true,
+  "files": [
+    {
+      "bytes": 8048,
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "name": "invoke_owned_stream_research.v3.ps1"
+    },
+    {
+      "bytes": 9995,
+      "sha256": "f0e4d363396c2ac1744e3e7d9458120929f311d92cb8e31ba112b7c818f9bd22",
+      "name": "peer.source.snapshot.UNTRUSTED.txt"
+    },
+    {
+      "bytes": 4175,
+      "sha256": "2c22bc7d6fc7f566202e368beb8aa02197fcb6dfe5cbe7f349099c0ba0224e7c",
+      "name": "peer.tests.snapshot.UNTRUSTED.txt"
+    },
+    {
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "name": "provider_common.ps1"
+    },
+    {
+      "bytes": 21202,
+      "sha256": "763f70c617598d95120a85e0bd6d617531bb9f15a3024c5c4d3dcb82a79dc081",
+      "name": "qwen_cuda_export_repair.prompt.txt"
+    },
+    {
+      "bytes": 3484,
+      "sha256": "c9c0a2664a9ee9aaf516d69a8e5c7429426ebc67d88c05d36cc441fce662873b",
+      "name": "qwen_cuda_export_repair.spec.txt"
+    },
+    {
+      "bytes": 16828,
+      "sha256": "7f424a769bf1a1f348244bac26b864b3fe3cb33a03dfabc7ea2a2362a5a819db",
+      "name": "qwen_directed_receipt_repair.prompt.txt"
+    },
+    {
+      "bytes": 3909,
+      "sha256": "b5f91083a9e6bff33591665cf747a93f6db8558d3c8f88fcd70a0576bc9c3f9b",
+      "name": "qwen_directed_receipt_repair.spec.txt"
+    },
+    {
+      "bytes": 8011,
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "name": "qwen_http_stream_research.v3.ps1"
+    },
+    {
+      "bytes": 18322,
+      "sha256": "d7d4079972b0f358b3b0b8468df866e600ef8acd137b947f55ed485c59acae76",
+      "name": "qwen_l0_peer_repair.prompt.txt"
+    },
+    {
+      "bytes": 3725,
+      "sha256": "fd730309fbe8e589828c1d908f0cd22a1377a914c34bbda8b815bc437c1c88e6",
+      "name": "qwen_l0_peer_repair.spec.txt"
+    },
+    {
+      "bytes": 3482,
+      "sha256": "9e0a4dc0b23a28712dcc821ad909068838c551eb4b3ebcb6c9ad61fdd2b8b427",
+      "name": "qwen_l0_query_replacement.prompt.txt"
+    },
+    {
+      "bytes": 3482,
+      "sha256": "9e0a4dc0b23a28712dcc821ad909068838c551eb4b3ebcb6c9ad61fdd2b8b427",
+      "name": "qwen_l0_query_replacement.spec.txt"
+    },
+    {
+      "bytes": 773,
+      "sha256": "ae851878f0bb551909ae16b7a0f58202ba67cc1272df8f34daa53cbc2d5071f3",
+      "name": "research_artifact.v3.ps1"
+    }
+  ],
+  "tests_chars_limit": 8000,
+  "helper_origin": "already read/admitted privateV3, copiedunchanged",
+  "native_children_actual": 0,
+  "models_maxeffort_unchanged": true,
+  "jobs": [
+    {
+      "spec_sha256": "9e0a4dc0b23a28712dcc821ad909068838c551eb4b3ebcb6c9ad61fdd2b8b427",
+      "actual_input_pins": [],
+      "job_id": "qwen_l0_query_replacement",
+      "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_query_replacement.prompt.txt",
+      "provider_launch_authorized": false,
+      "model": "qwen3.8-max",
+      "reasoning_effort": "xhigh",
+      "prompt_chars": 3476,
+      "spec_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_query_replacement.spec.txt",
+      "prompt_sha256": "9e0a4dc0b23a28712dcc821ad909068838c551eb4b3ebcb6c9ad61fdd2b8b427"
+    },
+    {
+      "spec_sha256": "c9c0a2664a9ee9aaf516d69a8e5c7429426ebc67d88c05d36cc441fce662873b",
+      "actual_input_pins": [
+        {
+          "path": [
+            "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+          ],
+          "sha256": "91ec7a579d98f4a4be533842386bf8356f643420f47f6cfbc37d7d979b87cb43"
+        },
+        {
+          "path": [
+            "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\tests_source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+          ],
+          "sha256": "eec5ea8a23c94d1d7ef5cfcf43b2b9feb1fbeed4df28114ff29398725cb72f79"
+        }
+      ],
+      "job_id": "qwen_cuda_export_repair",
+      "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_cuda_export_repair.prompt.txt",
+      "provider_launch_authorized": false,
+      "model": "qwen3.8-max",
+      "reasoning_effort": "xhigh",
+      "prompt_chars": 21198,
+      "spec_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_cuda_export_repair.spec.txt",
+      "prompt_sha256": "763f70c617598d95120a85e0bd6d617531bb9f15a3024c5c4d3dcb82a79dc081"
+    },
+    {
+      "spec_sha256": "b5f91083a9e6bff33591665cf747a93f6db8558d3c8f88fcd70a0576bc9c3f9b",
+      "actual_input_pins": [
+        {
+          "path": [
+            "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+          ],
+          "sha256": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f"
+        },
+        {
+          "path": [
+            "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\tests_source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+          ],
+          "sha256": "fa250c767d0062c5af5055838dea9e256fe1e87bc2716d110c764e53c9413931"
+        }
+      ],
+      "job_id": "qwen_directed_receipt_repair",
+      "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair.prompt.txt",
+      "provider_launch_authorized": false,
+      "model": "qwen3.8-max",
+      "reasoning_effort": "xhigh",
+      "prompt_chars": 16818,
+      "spec_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair.spec.txt",
+      "prompt_sha256": "7f424a769bf1a1f348244bac26b864b3fe3cb33a03dfabc7ea2a2362a5a819db"
+    },
+    {
+      "spec_sha256": "fd730309fbe8e589828c1d908f0cd22a1377a914c34bbda8b815bc437c1c88e6",
+      "actual_input_pins": [
+        {
+          "path": [
+            "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\peer.source.snapshot.UNTRUSTED.txt"
+          ],
+          "sha256": "f0e4d363396c2ac1744e3e7d9458120929f311d92cb8e31ba112b7c818f9bd22"
+        },
+        {
+          "path": [
+            "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\peer.tests.snapshot.UNTRUSTED.txt"
+          ],
+          "sha256": "2c22bc7d6fc7f566202e368beb8aa02197fcb6dfe5cbe7f349099c0ba0224e7c"
+        }
+      ],
+      "job_id": "qwen_l0_peer_repair",
+      "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair.prompt.txt",
+      "provider_launch_authorized": false,
+      "model": "qwen3.8-max",
+      "reasoning_effort": "xhigh",
+      "prompt_chars": 18314,
+      "spec_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair.spec.txt",
+      "prompt_sha256": "d7d4079972b0f358b3b0b8468df866e600ef8acd137b947f55ed485c59acae76"
+    }
+  ],
+  "state": "FOUR_DISTINCT_P0_PROPOSALS_PENDING_ROOT_EXACT_ADMISSION"
+}

@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-04T23:05:27.888441+00:00",
+  "state": "LENGTH_NOT_ACCEPTED_NO_SCHEMA_PROMOTION",
+  "content_path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\LENGTH_POSTMORTEM_REVIEW_ONLY\\content.UNACCEPTED_PARTIAL_REVIEW_ONLY.txt",
+  "content_bytes": 50287,
+  "complete_source_string": true,
+  "source_chars": 43835,
+  "source_parse_error": null,
+  "reported_usage": {
+    "prompt_tokens": 56261,
+    "total_tokens": 155407,
+    "completion_tokens": 99146,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 56261
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 82758,
+      "text_tokens": 99146
+    }
+  },
+  "request_max_tokens": 16384,
+  "reasoning_effort": "xhigh",
+  "enable_thinking": true,
+  "thinking_budget_absent": true,
+  "finish_reason": "length",
+  "source_executed": false,
+  "explanation": "Reported completion99146 minus reasoning82758 =16388 tokens, near request max_tokens16384. Provider reports length despite DONE; service accounting semantics/inclusive differences cannot be proven from this response. No cap/deadline reached; completed source field alone does not satisfy full terminal JSON schema or acceptance."
+}

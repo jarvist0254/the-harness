@@ -1,0 +1,9 @@
+# Six concurrent Qwen Max workhorse attempts
+
+This isolated source-only round launched six distinct requests using configured dedicated ModelStudio endpoint and exact qwen3.8-max, enable_thinking=true, reasoning_effort=xhigh. The official QwenCloud thinking guide lists xhigh as the deepest named setting for this model; no simultaneous thinking_budget was supplied. It does not prove the backend internally used a particular token budget.
+
+One mixed-transport research request returned HTTP200, the exact model, finishstop and 14,223 reported total tokens:2,425 input plus11,798 completion. Reported9,380 reasoning tokens are already included in completion and are not added again. Its structured advisory has no source or tests and requires ROOT adjudication. Manager scope review flags three overstatements; no hardware or product qualification follows.
+
+The compiler adapter, Vulkan patch audit, Intel peer fixture, Intel-NVIDIA interop and four-card acceptance requests timed out at approximately330 seconds without returned headers/model/source/usage. Their consumption is UNKNOWN, not zero. All six owned wrappers and workers were reaped; point observations found all twelve PIDs absent. The audit found zero exact known credential matches across92 text artifacts, checking three configured strings; this is a bounded audit, not an assertion about all possible unknown secrets.
+
+USAGE_FINAL_QWEN_SIX.json deduplicates six actual HTTP attempts. No native child agents launched, no generated source imported/tested/executed, no global Factory restart, and no original supervisor or prior receipt mutation occurred. Tokens do not establish Credits or billing. A ROOT-authorized distinct streaming adapter investigation is separately recorded under qwen_stream_adapter_20261004T182800Z and is not counted again here.

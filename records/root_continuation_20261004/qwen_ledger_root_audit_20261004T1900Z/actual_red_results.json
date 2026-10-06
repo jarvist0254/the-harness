@@ -1,0 +1,25 @@
+{
+  "scope": "SYNTHETIC_PURE_ONLY",
+  "tests": 17,
+  "failures": [
+    "test_anonymous_duplicate_dll_hashes_not_fresh_five (__main__.Tests)",
+    "test_constructor_does_not_bypass_validation (__main__.Tests)",
+    "test_cpu_reference_threshold_accepts_reverse_boundary (__main__.Tests)",
+    "test_cpu_reference_threshold_rejects_001005 (__main__.Tests)",
+    "test_float_context_refused (__main__.Tests)",
+    "test_float_count_refused (__main__.Tests)",
+    "test_float_model_bytes_refused (__main__.Tests)",
+    "test_input_nested_metadata_cannot_change_ledger (__main__.Tests)",
+    "test_records_cannot_mutate_model_pass (__main__.Tests)",
+    "test_records_cannot_mutate_prior_state (__main__.Tests)",
+    "test_terminal_cannot_restart_by_omitting_prior (__main__.Tests)",
+    "test_terminal_cannot_restart_with_forged_prior (__main__.Tests)"
+  ],
+  "errors": [
+    "test_huge_int_logit_refuses_without_exception (__main__.Tests)",
+    "test_huge_int_metric_refuses_without_exception (__main__.Tests)",
+    "test_unhashable_model_key_refuses_without_exception (__main__.Tests)"
+  ],
+  "native_dependency_traps": [],
+  "source_sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1"
+}

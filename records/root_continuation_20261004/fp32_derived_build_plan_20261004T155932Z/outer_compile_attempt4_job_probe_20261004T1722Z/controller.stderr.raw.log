@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\fp32_derived_build_plan_20261004T155932Z\controller_attempt4_job_probe.py", line 155, in <module>
+    if __name__=='__main__':main()
+  File "E:\the_harness\records\root_continuation_20261004\fp32_derived_build_plan_20261004T155932Z\controller_attempt4_job_probe.py", line 122, in main
+    if result.get('status')!='PROCESS_COMPLETED' or result.get('drain_proof')!='CLEANUP' or result.get('job_active_count')!=0:raise RuntimeError('refused stage result/cleanup')
+RuntimeError: refused stage result/cleanup

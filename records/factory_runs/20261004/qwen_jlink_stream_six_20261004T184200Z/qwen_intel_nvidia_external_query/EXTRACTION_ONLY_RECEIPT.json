@@ -1,0 +1,10 @@
+{
+  "artifact_sha256": "6af54c0695a34ea2f1e85f2c1e224d6bb5002d42dea9f7f4d0188e243a6bf20c",
+  "root_admission": false,
+  "candidate_parsed_imported_compiled_executed": false,
+  "provider_status": "REFUSED",
+  "action": "Exact JSON source-string extraction only",
+  "job": "qwen_intel_nvidia_external_query",
+  "provider_tests_executed": false,
+  "files": []
+}

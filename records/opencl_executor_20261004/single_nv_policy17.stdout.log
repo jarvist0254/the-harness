@@ -1,0 +1,310 @@
+{
+  "status": "PASS",
+  "reason": "All GPU stages matched the independent CPU reference",
+  "timestamp_utc": "2026-10-04T11:08:22.709160+00:00",
+  "experimental": true,
+  "labels": [
+    "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+    "EXPLICIT_HOST_STAGED",
+    "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+  ],
+  "model": {
+    "name": "eight-layer residual MLP",
+    "width": 512,
+    "batch": 8,
+    "layers": 8,
+    "dtype": "float32",
+    "seed": 103004,
+    "operation": "relu(x + x @ W + b)",
+    "weight_fixture": "seeded dyadic integers [-2,2]/4096",
+    "input_fixture": "seeded uniform [1,2]",
+    "tolerance": {
+      "rtol": 5e-05,
+      "atol": 5e-05
+    }
+  },
+  "transport": "EXPLICIT_HOST_STAGED",
+  "memory_claim": "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF",
+  "devices": [
+    {
+      "id": "p0:d0",
+      "runtime_id": "p0:d0",
+      "physical_id": "pci:0000:01:slot0000",
+      "identity_confidence": "RUNTIME_REPORTED_PCI_NV",
+      "pci_identity": {
+        "domain": 0,
+        "bus": 1,
+        "slot_raw_nv": 0
+      },
+      "vendor": "NVIDIA Corporation",
+      "vendor_key": "NVIDIA",
+      "platform": "NVIDIA CUDA",
+      "platform_vendor": "NVIDIA Corporation",
+      "platform_version": "OpenCL 3.0 CUDA 13.1.123",
+      "name": "NVIDIA GeForce RTX 5070 Ti",
+      "device_version": "OpenCL 3.0 CUDA",
+      "driver_version": "591.86",
+      "global_mem_bytes_reported": 17094475776,
+      "max_mem_alloc_bytes_reported": 4273618944,
+      "host_unified_memory_reported": false,
+      "memory_classification": "DEVICE_LOCAL_MEMORY_REPORTED"
+    }
+  ],
+  "policy": {
+    "mib_per_device": 17,
+    "source": "POLICY_CAP_NOT_OBSERVED_FREE_MEMORY",
+    "allocations_by_device": {
+      "p0:d0": {
+        "assigned_layers": [
+          "layer_00",
+          "layer_01",
+          "layer_02",
+          "layer_03",
+          "layer_04",
+          "layer_05",
+          "layer_06",
+          "layer_07"
+        ],
+        "resident_weight_and_bias_bytes": 8404992,
+        "activation_ping_pong_bytes": 32768,
+        "planned_allocation_bytes": 8437760,
+        "policy_cap_bytes": 17825792,
+        "max_single_buffer_bytes_reported": 4273618944
+      }
+    }
+  },
+  "plan": {
+    "status": "PLANNED_NOT_ALLOCATED",
+    "hypothetical": true,
+    "policy_source": "POLICY_CAP_NOT_OBSERVED_FREE_MEMORY",
+    "policy_mib_per_device": 17,
+    "workspace_mib_per_device": 1,
+    "width": 512,
+    "batch": 8,
+    "layers": 8,
+    "seed": 103004,
+    "actual_layer_weight_bytes": 1050624,
+    "modeled_layer_mib": 2,
+    "workspace_bytes": 32768,
+    "total_actual_weight_bytes": 8404992,
+    "combined_model_buffer_bytes": 8437760,
+    "planner_result": {
+      "status": "PLANNED_NOT_ALLOCATED",
+      "hypothetical": true,
+      "unit": "MiB",
+      "objective": "capacity balance, not execution speed",
+      "block_memory_mib": 16,
+      "aggregate_free_mib": 17,
+      "aggregate_budget_mib": 16,
+      "devices": [
+        {
+          "id": "p0:d0",
+          "physical_id": "pci:0000:01:slot0000",
+          "vendor": "NVIDIA",
+          "free_mib": 17,
+          "reserve_mib": 0,
+          "workspace_mib": 1,
+          "budget_mib": 16,
+          "blocks": [
+            "layer_00",
+            "layer_01",
+            "layer_02",
+            "layer_03",
+            "layer_04",
+            "layer_05",
+            "layer_06",
+            "layer_07"
+          ],
+          "block_memory_mib": 16,
+          "remaining_budget_mib": 0
+        }
+      ],
+      "limitations": [
+        "No discovery, driver probe, allocator, leases or execution",
+        "memory_mib must include block weights and block-local KV/activation requirements",
+        "Extra embeddings/output/workspace must be represented explicitly",
+        "Free samples precede modeled reserves; do not double-subtract resident leases",
+        "Topology ordering is caller supplied; no transfer-time optimization"
+      ]
+    },
+    "layer_ownership": [
+      {
+        "device_id": "p0:d0",
+        "physical_id": "pci:0000:01:slot0000",
+        "layers": [
+          "layer_00",
+          "layer_01",
+          "layer_02",
+          "layer_03",
+          "layer_04",
+          "layer_05",
+          "layer_06",
+          "layer_07"
+        ]
+      }
+    ]
+  },
+  "layer_ownership": [
+    {
+      "device_id": "p0:d0",
+      "physical_id": "pci:0000:01:slot0000",
+      "layers": [
+        "layer_00",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07"
+      ]
+    }
+  ],
+  "layer_results": [
+    {
+      "layer": "layer_00",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "2b783c0265abc55c33e4c087f31c6e62434241581a9691f6c148dcf9af7367ec",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 2.9802322387695312e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_01",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "ad68ce0eec05a5a35d42a3da35aa517399e3a30bcfe38ad59c22c7582198355c",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 4.410743713378906e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_02",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "c803fbeed720f358f443bb870eb265d20548eff9669db13494d424e60c84e713",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 4.76837158203125e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_03",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "21f4e06aa0c4b9427994e035a234fc548760f3a6acd7d7332e4b64fa515e20d0",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 5.602836608886719e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_04",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "f4822db38b90d19bfaa1911e53d54649fb95f198c60010bfdf1f3fc4f59bbcab",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 7.3909759521484375e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_05",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "c30bba5f69fce14e589563f8b68211ef586de969e4d5bf8e9c19feb7a76e589b",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 8.106231689453125e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_06",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "0eeeda665231b3d7e1383848e2127687e497546c551ff1b3a86a389dba9918f2",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 7.152557373046875e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    },
+    {
+      "layer": "layer_07",
+      "owner_runtime_id": "p0:d0",
+      "weight_bias_sha256": "0a2b779d47ad5a219ad149ec3dd8da78095d788d19f995fc670f1d8e0b0d48a0",
+      "weight_bytes": 1048576,
+      "bias_bytes": 2048,
+      "weight_upload_count": 1,
+      "kernel_completed": true,
+      "activation_input_bytes": 16384,
+      "activation_readback_bytes": 16384,
+      "cpu_stage_max_abs_error": 8.344650268554688e-06,
+      "cpu_stage_parity": true,
+      "corruption_applied_after_layer": false
+    }
+  ],
+  "stats": {
+    "planned_layer_count": 8,
+    "kernels_enqueued": 8,
+    "kernels_completed": 8,
+    "weight_upload_count": 8,
+    "weight_upload_bytes": 8404992,
+    "activation_upload_count": 1,
+    "activation_readback_count": 8,
+    "activation_upload_bytes": 16384,
+    "activation_readback_bytes": 131072,
+    "cross_context_boundaries": 0,
+    "activation_boundary_staging_bytes": 0,
+    "events_completed": 17,
+    "cpu_reference_stages": 8,
+    "weights_resident_before_first_kernel": true
+  },
+  "stage_parity_all": true,
+  "final_parity": true,
+  "final_max_abs_error": 8.344650268554688e-06,
+  "max_stage_abs_error": 8.344650268554688e-06,
+  "corruption": {
+    "requested": false,
+    "applied_at_first_context_boundary": false,
+    "boundary_after_layer": null,
+    "detected_by_final_reference": null,
+    "control_status": "NOT_RUN"
+  },
+  "host_activation_buffer_bytes": 16384,
+  "combined_model_buffer_bytes": 8437760,
+  "child_pid": 492,
+  "child_exit_code": 0,
+  "elapsed_seconds": 0.7189999995753169,
+  "child_stderr": "E:\\the_harness\\j_link\\opencl_executor.py:567: RepeatedKernelRetrieval: Kernel 'residual_layer' has been retrieved more than once. Each retrieval creates a new, independent kernel, at possibly considerable expense. To avoid the expense, reuse the retrieved kernel instance. To avoid this warning, use cl.Kernel(prg, name).\n  kernel_event = runtime['program'].residual_layer(\n"
+}

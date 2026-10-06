@@ -1,0 +1,75 @@
+{
+  "before_sha256": "3e5423ce5085576389083b46f32519e5005f930004e3bc3e85aec98b7150c6ea",
+  "after_sha256": "9025908c04837fcbacf871eabe9dcb8ad575a8542d4a7da3f9e698288bd7d3ee",
+  "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_model_whitelist\\llama_logits_model_whitelist.cpp",
+  "replacements": [
+    {
+      "index": 0,
+      "unique_old_count": 1,
+      "old_sha256": "fd215bb52011c245e2a59498b63d42468b916baf18e2248c18afe9b96f3ed4ca",
+      "new_sha256": "11716d0725f6b4670fba811181fb8d050dbf54114d9fd07973d5665e50b399e0"
+    },
+    {
+      "index": 1,
+      "unique_old_count": 1,
+      "old_sha256": "67c51f624721fd080e5cee7c3f8ab1ed99a85276614f8e59db401edc7d796bed",
+      "new_sha256": "19f3ce70d08ee06f1772019ddc061a6d196658b9ae4e2bd09a1314b979ff0d82"
+    },
+    {
+      "index": 2,
+      "unique_old_count": 1,
+      "old_sha256": "1c63fbb2867569fa94d88d86ce807f267ead9287cda430290d8674181a17bfab",
+      "new_sha256": "3e71fd261ded190d64f329d75e84e99efedccf81d807bf65ef075068dbf95575"
+    },
+    {
+      "index": 3,
+      "unique_old_count": 1,
+      "old_sha256": "706d204c816d785a1949c197dc0ecb4f69cc14946ad7731e3ba34584d3339a5e",
+      "new_sha256": "6185744d7839e698b2fb7a7b433e98b268b0d111ff95c28c502c044fdb9725f4"
+    },
+    {
+      "index": 4,
+      "unique_old_count": 1,
+      "old_sha256": "905c2ad2558ed779083d31b647eb115b61f6e4073833a85ead930ecbd244727b",
+      "new_sha256": "954f8ba7336ae0c05232547ad6516e34bea4fd0d6da63a630f56a0ab1d55b165"
+    },
+    {
+      "index": 5,
+      "unique_old_count": 1,
+      "old_sha256": "39847fbaaca3ce42cd48df31d6be57dd269e72c511cbe02214fcffae7a8b8dcf",
+      "new_sha256": "b83a56d50d6ae9f735bf411b1d476883c7abd035316e9a33e1b1b73d358442d0"
+    },
+    {
+      "index": 6,
+      "unique_old_count": 1,
+      "old_sha256": "8fd429524fa48f0e4a0a3f07e3499933f8267a96c83795ea6e9adc6b55761119",
+      "new_sha256": "51023cdcc4bf1788f28b27e03c220a453b186d2b6f845881f774a6380bd4e18e"
+    },
+    {
+      "index": 7,
+      "unique_old_count": 1,
+      "old_sha256": "798d173dff9d1d17effb351894978c934abb9bab4f864694ff93ce4add393c4f",
+      "new_sha256": "cb5fe742cf439337b985c2b3913f5c440a6dbe9919705f55f27c098f283d1c61"
+    },
+    {
+      "index": 8,
+      "unique_old_count": 1,
+      "old_sha256": "c8f643b9d91797befcf58ff4ba65d7f8323351b74c39a3352dc5850a6eba70a2",
+      "new_sha256": "6b3098c72afaa03e10ac3c0e8449a020cde03b8dc9771650045fa080aebcbd03"
+    },
+    {
+      "index": 9,
+      "unique_old_count": 1,
+      "old_sha256": "03af67a3daa34c1688911d4f4a5523da1cb038e355a5ad30c0a4cb9ad9bea337",
+      "new_sha256": "75244ef1b7f7e9226afe863b51e6ce546a1cbf378bbc48eaa58ad9f8994eafc7"
+    }
+  ],
+  "lines": 83,
+  "execution": "NOT_RUN_PENDING_ROOT_CLEAN_API_STATIC_GATE",
+  "tokens_unchanged": true,
+  "tolerances_must_remain": {
+    "atol": 0.01,
+    "rtol": 0.01
+  },
+  "model_conversion_performed_by_factory": false
+}

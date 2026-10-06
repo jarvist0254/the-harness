@@ -1,0 +1,16 @@
+{
+  "planned_reasoning_effort": "xhigh",
+  "provider_launch_authorized": false,
+  "current_qwen_streams_not_restarted": true,
+  "allocation_cap_bytes": 1048576,
+  "spec_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\cuda_level_zero_sameprocess.PENDING_ROOT_REVIEW.spec.txt",
+  "payload_cap_bytes": 65536,
+  "source_max_chars": 8000,
+  "utc": "2026-10-04T19:52:27.9361479Z",
+  "state": "SOURCEONLY_PENDING_ROOT_PACKET_REVIEW",
+  "generated_execution": false,
+  "actual_native_children": 0,
+  "tests_max_chars": 6000,
+  "planned_model": "qwen3.8-max",
+  "spec_sha256": "a1af83e43c80c9b322690d4fd23640ef06af95c32e32f2d095d756aa43b6bb63"
+}

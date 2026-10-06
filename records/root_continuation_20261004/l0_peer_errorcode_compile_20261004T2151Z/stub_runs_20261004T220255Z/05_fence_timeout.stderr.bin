@@ -1,0 +1,8 @@
+FAKE_EVENT teardown_while_pending=fence
+FAKE_EVENT teardown_while_pending=list
+FAKE_EVENT teardown_while_pending=queue
+FAKE_EVENT teardown_while_pending=memory
+FAKE_EVENT teardown_while_pending=memory
+FAKE_EVENT teardown_while_pending=memory
+FAKE_EVENT teardown_while_pending=context
+FAKE_SUMMARY api_calls=34 context_creates=1 allocations=3 frees=3 pending_teardowns=7 wait_count=1 pending_at_exit=1 backing=HOST_MALLOC_ONLY

@@ -1,0 +1,55 @@
+....FFFFF
+======================================================================
+FAIL: test_surplus_cli_refused (__main__.Gates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_peer_timeout_local_repair_20261004T221307Z\test_receipt_requirements.py", line 17, in test_surplus_cli_refused
+    d=doc('surplus_cli');self.assertEqual((d['status'],d['exit_code']),('FAIL',1))
+AssertionError: Tuples differ: ('PEER_COPY_PAYLOAD_OBSERVED', 0) != ('FAIL', 1)
+
+First differing element 0:
+'PEER_COPY_PAYLOAD_OBSERVED'
+'FAIL'
+
+- ('PEER_COPY_PAYLOAD_OBSERVED', 0)
++ ('FAIL', 1)
+
+======================================================================
+FAIL: test_surplus_cli_zero_API_calls (__main__.Gates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_peer_timeout_local_repair_20261004T221307Z\test_receipt_requirements.py", line 18, in test_surplus_cli_zero_API_calls
+    def test_surplus_cli_zero_API_calls(self): self.assertRegex(read('surplus_cli','stderr'),r'api_calls=0(?: |$)')
+AssertionError: Regex didn't match: 'api_calls=0(?: |$)' not found in 'FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY\n'
+
+======================================================================
+FAIL: test_timeout_exact_api (__main__.Gates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_peer_timeout_local_repair_20261004T221307Z\test_receipt_requirements.py", line 12, in test_timeout_exact_api
+    def test_timeout_exact_api(self): self.assertEqual(doc('fence_timeout')['api'],'zeFenceHostSynchronize')
+AssertionError: 'zeCommandQueueExecuteCommandLists' != 'zeFenceHostSynchronize'
+- zeCommandQueueExecuteCommandLists
++ zeFenceHostSynchronize
+
+
+======================================================================
+FAIL: test_timeout_no_pending_destruction (__main__.Gates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_peer_timeout_local_repair_20261004T221307Z\test_receipt_requirements.py", line 13, in test_timeout_no_pending_destruction
+    def test_timeout_no_pending_destruction(self): self.assertNotIn('teardown_while_pending',read('fence_timeout','stderr'))
+AssertionError: 'teardown_while_pending' unexpectedly found in 'FAKE_EVENT teardown_while_pending=fence\nFAKE_EVENT teardown_while_pending=list\nFAKE_EVENT teardown_while_pending=queue\nFAKE_EVENT teardown_while_pending=memory\nFAKE_EVENT teardown_while_pending=memory\nFAKE_EVENT teardown_while_pending=memory\nFAKE_EVENT teardown_while_pending=context\nFAKE_SUMMARY api_calls=34 context_creates=1 allocations=3 frees=3 pending_teardowns=7 wait_count=1 pending_at_exit=1 backing=HOST_MALLOC_ONLY\n'
+
+======================================================================
+FAIL: test_timeout_quarantine_no_cleanup_claim (__main__.Gates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\l0_peer_timeout_local_repair_20261004T221307Z\test_receipt_requirements.py", line 15, in test_timeout_quarantine_no_cleanup_claim
+    d=doc('fence_timeout');self.assertEqual(d['status'],'FAIL');self.assertTrue(d.get('destruction_skipped'));self.assertIs(d.get('cleanup_verified'),False);self.assertEqual(d.get('resource_state'),'TERMINAL_QUARANTINE')
+AssertionError: None is not true
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.003s
+
+FAILED (failures=5)

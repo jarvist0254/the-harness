@@ -1,0 +1,140 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "openai"
+    }
+  },
+  "tools": {
+    "core": [
+      "agent",
+      "team_create",
+      "team_delete",
+      "list_agents",
+      "send_message",
+      "request_shutdown",
+      "task_create",
+      "task_update",
+      "task_list",
+      "task_get",
+      "task_stop"
+    ],
+    "exclude": [
+      "read_file",
+      "grep_search",
+      "glob",
+      "list_directory",
+      "run_shell_command",
+      "write_file",
+      "edit",
+      "notebook_edit",
+      "web_fetch",
+      "web_search",
+      "skill",
+      "tool_search",
+      "save_memory",
+      "schedule_task",
+      "computer_use",
+      "ask_user_question"
+    ]
+  },
+  "mcpServers": {},
+  "permissions": {
+    "deny": [
+      "read_file",
+      "grep_search",
+      "glob",
+      "list_directory",
+      "run_shell_command",
+      "write_file",
+      "edit",
+      "notebook_edit",
+      "web_fetch",
+      "web_search",
+      "skill",
+      "tool_search",
+      "save_memory",
+      "schedule_task",
+      "computer_use",
+      "ask_user_question"
+    ],
+    "allow": [
+      "agent",
+      "team_create",
+      "team_delete",
+      "list_agents",
+      "send_message",
+      "request_shutdown",
+      "task_create",
+      "task_update",
+      "task_list",
+      "task_get",
+      "task_stop"
+    ]
+  },
+  "context": {
+    "loadFromIncludeDirectories": false,
+    "fileName": "NO_CONTEXT_DISABLED.md"
+  },
+  "agents": {
+    "builtin": {
+      "exploreModel": "inherit"
+    },
+    "team": {
+      "maxTeammates": 10
+    }
+  },
+  "modelProviders": {
+    "openai": [
+      {
+        "id": "qwen3.8-flash",
+        "name": "[ModelStudio Token Plan for Global/Intl] qwen3.8-flash",
+        "capabilities": {
+          "reasoning": {
+            "thinking": true,
+            "efforts": [
+              "low",
+              "medium",
+              "xhigh"
+            ],
+            "defaultEffort": "xhigh",
+            "disableField": "reasoning_effort"
+          }
+        },
+        "baseUrl": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+        "envKey": "BAILIAN_TOKEN_PLAN_API_KEY",
+        "generationConfig": {
+          "contextWindowSize": 1000000,
+          "modalities": {
+            "image": true,
+            "video": true
+          }
+        }
+      }
+    ]
+  },
+  "memory": {
+    "enableManagedAutoMemory": false,
+    "enableTeamMemorySync": false,
+    "enableAutoSkill": false,
+    "enableTeamMemory": false,
+    "enableManagedAutoDream": false
+  },
+  "experimental": {
+    "agentTeam": true
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "model": {
+    "generationConfig": {
+      "maxRetries": 0,
+      "extra_body": {
+        "enable_thinking": false
+      },
+      "timeout": 120000
+    },
+    "maxSubagentDepth": 1,
+    "name": "qwen3.8-flash"
+  },
+  "$version": 4
+}

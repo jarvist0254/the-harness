@@ -1,0 +1,2885 @@
+/*
+ * Copyright (C) 2020-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#include "level_zero/core/source/context/context.h"
+
+#include "shared/source/command_stream/command_stream_receiver.h"
+#include "shared/source/debug_settings/debug_settings_manager.h"
+#include "shared/source/execution_environment/execution_environment.h"
+#include "shared/source/execution_environment/root_device_environment.h"
+#include "shared/source/helpers/aligned_memory.h"
+#include "shared/source/helpers/bindless_heaps_helper.h"
+#include "shared/source/helpers/debug_helpers.h"
+#include "shared/source/helpers/gfx_core_helper.h"
+#include "shared/source/helpers/ptr_math.h"
+#include "shared/source/memory_manager/allocation_properties.h"
+#include "shared/source/memory_manager/memory_manager.h"
+#include "shared/source/memory_manager/memory_operations_handler.h"
+#include "shared/source/memory_manager/pool_info.h"
+#include "shared/source/memory_manager/unified_memory_manager.h"
+#include "shared/source/os_interface/os_interface.h"
+#include "shared/source/os_interface/sys_calls_common.h"
+#include "shared/source/utilities/cpu_info.h"
+
+#include "level_zero/core/source/cmdlist/cmdlist.h"
+#include "level_zero/core/source/device/device.h"
+#include "level_zero/core/source/driver/driver_handle.h"
+#include "level_zero/core/source/event/event.h"
+#include "level_zero/core/source/gfx_core_helpers/l0_gfx_core_helper.h"
+#include "level_zero/core/source/helpers/properties_parser.h"
+#include "level_zero/core/source/image/image.h"
+#include "level_zero/core/source/memory/memory_operations_helper.h"
+#include "level_zero/core/source/module/module.h"
+#include "level_zero/driver_experimental/zex_memory.h"
+#include "level_zero/zer_api.h"
+
+#include <atomic>
+#include <cstring>
+
+namespace NEO {
+enum class AtomicAccessMode : uint32_t;
+} // namespace NEO
+
+namespace L0 {
+
+ze_result_t Context::destroy() {
+    this->driverHandle->svmAllocsManager->drainAllDeferFreeAllocsBlocking();
+    delete this;
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getStatus() {
+    for (auto device : this->driverHandle->devices) {
+        if (device->resourcesReleased) {
+            return ZE_RESULT_ERROR_DEVICE_LOST;
+        }
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+DriverHandle *Context::getDriverHandle() {
+    return this->driverHandle;
+}
+
+Context::Context(DriverHandle *driverHandle) {
+    this->driverHandle = driverHandle;
+
+    if (driverHandle == nullptr) {
+        return;
+    }
+
+    this->contextExt = createContextExt(driverHandle);
+
+    // Determine context settings based on device capabilities.
+    settings.enableSvmHeapReservation = true;
+    for (auto &device : this->driverHandle->devices) {
+        auto &productHelper = device->getNEODevice()->getProductHelper();
+        if (!productHelper.isSvmHeapReservationSupported()) {
+            settings.enableSvmHeapReservation = false;
+            break;
+        }
+    }
+    // NOTE: Calling a virtual method in a constructor is discouraged, but it's safe in
+    // this case because derived classes do not override this method. If derived class
+    // needs to override, then derived class ctor must call overriden function (example
+    // ContextDerived::isOpaqueHandleSupported) to enforce correct behavior.
+    // Using Class::method syntax to make it explicit which class method is called and
+    // avoid clang-tidy warning.
+    settings.useOpaqueHandle = Context::isOpaqueHandleSupported(&settings.handleType);
+    // Inherit IPC handle sharing setting from driver handle
+    settings.enableIpcHandleSharingByDefault = driverHandle->enableIpcHandleSharingByDefault;
+}
+
+Context::~Context() {
+    destroyContextExt(this->contextExt);
+}
+
+ze_result_t Context::allocHostMem(const ze_host_mem_alloc_desc_t *hostMemDesc,
+                                  size_t size,
+                                  size_t alignment,
+                                  void **ptr) {
+
+    if (NEO::debugManager.flags.ForceExtendedUSMBufferSize.get() >= 1) {
+        size += (MemoryConstants::pageSize * NEO::debugManager.flags.ForceExtendedUSMBufferSize.get());
+    }
+
+    bool relaxedSizeAllowed = NEO::debugManager.flags.AllowUnrestrictedSize.get();
+    if (hostMemDesc->pNext) {
+        const ze_base_desc_t *extendedDesc = reinterpret_cast<const ze_base_desc_t *>(hostMemDesc->pNext);
+        if (extendedDesc->stype == ZE_STRUCTURE_TYPE_RELAXED_ALLOCATION_LIMITS_EXP_DESC) {
+            const ze_relaxed_allocation_limits_exp_desc_t *relaxedLimitsDesc =
+                reinterpret_cast<const ze_relaxed_allocation_limits_exp_desc_t *>(extendedDesc);
+            if (!(relaxedLimitsDesc->flags & ZE_RELAXED_ALLOCATION_LIMITS_EXP_FLAG_MAX_SIZE)) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+            relaxedSizeAllowed = true;
+        }
+    }
+
+    if (size == 0 || (relaxedSizeAllowed == false &&
+                      (size > this->driverHandle->devices[0]->getNEODevice()->getDeviceInfo().maxMemAllocSize))) {
+        *ptr = nullptr;
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+
+    StructuresLookupTable lookupTable = {};
+
+    lookupTable.relaxedSizeAllowed = NEO::debugManager.flags.AllowUnrestrictedSize.get();
+    auto parseResult = prepareL0StructuresLookupTable(lookupTable, hostMemDesc->pNext);
+
+    if (parseResult != ZE_RESULT_SUCCESS) {
+        return parseResult;
+    }
+
+    if (lookupTable.isSharedHandle) {
+        if (lookupTable.sharedHandleType.isOpaqueFDHandle || lookupTable.sharedHandleType.isDMABUFHandle) {
+            ze_ipc_memory_flags_t flags = {};
+            if (hostMemDesc->flags & ZE_HOST_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+                flags |= ZE_IPC_MEMORY_FLAG_BIAS_UNCACHED;
+            }
+            *ptr = getMemHandlePtr(this->devices.begin()->second,
+                                   lookupTable.sharedHandleType.fd,
+                                   NEO::AllocationType::bufferHostMemory,
+                                   true,
+                                   0u,
+                                   flags,
+                                   0u,
+                                   nullptr, false, false, 0u)
+                       .second;
+            if (nullptr == *ptr) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+            closeExternalHandle(lookupTable.sharedHandleType.fd);
+        } else {
+            UNRECOVERABLE_IF(!lookupTable.sharedHandleType.isNTHandle);
+            *ptr = this->driverHandle->importNTHandle(this->devices.begin()->second,
+                                                      lookupTable.sharedHandleType.ntHandle,
+                                                      NEO::AllocationType::bufferHostMemory, true, 0, false, 0u)
+                       .second;
+            if (*ptr == nullptr) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+        }
+        return ZE_RESULT_SUCCESS;
+    }
+
+    NEO::UnifiedMemoryProperties unifiedMemoryProperties(InternalMemoryType::hostUnifiedMemory,
+                                                         alignment,
+                                                         this->rootDeviceIndices,
+                                                         this->deviceBitfields);
+
+    if (hostMemDesc->flags & ZE_HOST_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+        unifiedMemoryProperties.allocationFlags.flags.locallyUncachedResource = 1;
+    }
+
+    if (hostMemDesc->flags & ZE_HOST_MEM_ALLOC_FLAG_MEM_READ_ONLY) {
+        unifiedMemoryProperties.allocationFlags.flags.readOnly = 1;
+    }
+
+    if (hostMemDesc->flags & ZEX_HOST_MEM_ALLOC_FLAG_USE_HOST_PTR) {
+        unifiedMemoryProperties.allocationFlags.hostptr = reinterpret_cast<uintptr_t>(*ptr);
+    }
+
+    unifiedMemoryProperties.ipcHandleTypeFlags = lookupTable.ipcHandleTypeFlags;
+
+    if (lookupTable.isExternalMemmapSystem) {
+        unifiedMemoryProperties.allocationFlags.hostptr = reinterpret_cast<uintptr_t>(lookupTable.externalMemmapSystem.systemMemory);
+        unifiedMemoryProperties.isExternalMemmapAllocation = true;
+        auto usmPtr = this->driverHandle->svmAllocsManager->createUnifiedMemoryAllocation(lookupTable.externalMemmapSystem.size,
+                                                                                          unifiedMemoryProperties);
+        if (usmPtr) {
+            *ptr = usmPtr;
+            return ZE_RESULT_SUCCESS;
+        }
+        return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+    }
+
+    unifiedMemoryProperties.allocationFlags.flags.ipcSupportedAllocationByDefault = 0;
+    auto neoDevice = L0::Device::fromHandle(this->devices.begin()->second)->getNEODevice();
+    auto &productHelper = neoDevice->getProductHelper();
+    if (NEO::debugManager.flags.EnableipcSupportedAllocationByDefault.get()) {
+        unifiedMemoryProperties.allocationFlags.flags.ipcSupportedAllocationByDefault = productHelper.canShareMemoryWithoutNTHandle();
+    }
+    unifiedMemoryProperties.allocationFlags.flags.shareable = isShareableMemory(hostMemDesc->pNext, static_cast<uint32_t>(lookupTable.exportMemory), neoDevice, unifiedMemoryProperties.allocationFlags.flags.ipcSupportedAllocationByDefault);
+
+    if (false == lookupTable.exportMemory) {
+        if (size <= NEO::PoolInfo::getHostMaxPoolableSize()) {
+            this->driverHandle->initHostUsmAllocPoolOnce();
+            if (auto usmPtrFromPool = this->driverHandle->usmHostMemAllocPoolFacade.createUnifiedMemoryAllocation(size, unifiedMemoryProperties)) {
+                *ptr = usmPtrFromPool;
+                return ZE_RESULT_SUCCESS;
+            }
+        }
+    }
+
+    auto usmPtr = this->driverHandle->svmAllocsManager->createHostUnifiedMemoryAllocation(size,
+                                                                                          unifiedMemoryProperties);
+    if (usmPtr == nullptr) {
+        if (driverHandle->svmAllocsManager->getNumClaimableDeferFreeAllocs() > 0) {
+            this->driverHandle->svmAllocsManager->freeSVMAllocDeferImpl();
+            usmPtr = this->driverHandle->svmAllocsManager->createHostUnifiedMemoryAllocation(size,
+                                                                                             unifiedMemoryProperties);
+            if (usmPtr) {
+                *ptr = usmPtr;
+                return ZE_RESULT_SUCCESS;
+            }
+        }
+        return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+    }
+
+    *ptr = usmPtr;
+
+    return ZE_RESULT_SUCCESS;
+}
+
+bool Context::isDeviceDefinedForThisContext(Device *inDevice) {
+    uint32_t deviceIndex = inDevice->getRootDeviceIndex();
+    return this->getDevices().contains(deviceIndex);
+}
+
+ze_result_t Context::checkMemSizeLimit(Device *inDevice, size_t size, bool relaxedSizeAllowed, void **ptr) {
+    auto neoDevice = inDevice->getNEODevice();
+    if (size == 0 || (relaxedSizeAllowed == false &&
+                      (size > neoDevice->getDeviceInfo().maxMemAllocSize))) {
+        *ptr = nullptr;
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+
+    const auto physicalMemSize = inDevice->getDeviceMemoryPhysicalSizeInBytes();
+
+    uint64_t memSizeLimit = physicalMemSize;
+    if (physicalMemSize == 0) {
+        uint64_t globalMemSize = neoDevice->getDeviceInfo().globalMemSize;
+
+        uint32_t numSubDevices = neoDevice->getNumGenericSubDevices();
+        if ((!inDevice->isImplicitScalingCapable()) && (numSubDevices > 1)) {
+            globalMemSize = globalMemSize / numSubDevices;
+        }
+        memSizeLimit = globalMemSize;
+    }
+    if (relaxedSizeAllowed && (size > memSizeLimit)) {
+        *ptr = nullptr;
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::allocDeviceMem(ze_device_handle_t hDevice,
+                                    const ze_device_mem_alloc_desc_t *deviceMemDesc,
+                                    size_t size,
+                                    size_t alignment, void **ptr) {
+
+    if (NEO::debugManager.flags.ForceExtendedUSMBufferSize.get() >= 1) {
+        size += (MemoryConstants::pageSize * NEO::debugManager.flags.ForceExtendedUSMBufferSize.get());
+    }
+
+    auto device = Device::fromHandle(hDevice);
+    if (isDeviceDefinedForThisContext(device) == false) {
+        return ZE_RESULT_ERROR_DEVICE_LOST;
+    }
+
+    StructuresLookupTable lookupTable = {};
+
+    lookupTable.relaxedSizeAllowed = NEO::debugManager.flags.AllowUnrestrictedSize.get();
+    auto parseResult = prepareL0StructuresLookupTable(lookupTable, deviceMemDesc->pNext);
+
+    if (parseResult != ZE_RESULT_SUCCESS) {
+        return parseResult;
+    }
+
+    auto neoDevice = device->getNEODevice();
+    auto rootDeviceIndex = neoDevice->getRootDeviceIndex();
+    auto deviceBitfields = this->driverHandle->deviceBitfields;
+
+    deviceBitfields[rootDeviceIndex] = neoDevice->getDeviceBitfield();
+
+    if (lookupTable.isSharedHandle) {
+        if (lookupTable.sharedHandleType.isOpaqueFDHandle || lookupTable.sharedHandleType.isDMABUFHandle) {
+            ze_ipc_memory_flags_t flags = {};
+            if (deviceMemDesc->flags & ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+                flags |= ZE_IPC_MEMORY_FLAG_BIAS_UNCACHED;
+            }
+            *ptr = getMemHandlePtr(hDevice,
+                                   lookupTable.sharedHandleType.fd,
+                                   NEO::AllocationType::buffer,
+                                   false,
+                                   0u,
+                                   flags,
+                                   0u,
+                                   nullptr, false, false, 0u)
+                       .second;
+            if (nullptr == *ptr) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+            closeExternalHandle(lookupTable.sharedHandleType.fd);
+        } else {
+            UNRECOVERABLE_IF(!lookupTable.sharedHandleType.isNTHandle);
+            *ptr = this->driverHandle->importNTHandle(hDevice,
+                                                      lookupTable.sharedHandleType.ntHandle,
+                                                      NEO::AllocationType::buffer,
+                                                      false, 0, false, 0u)
+                       .second;
+            if (*ptr == nullptr) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+        }
+        return ZE_RESULT_SUCCESS;
+    }
+
+    ze_result_t checkResult = checkMemSizeLimit(device, size, lookupTable.relaxedSizeAllowed, ptr);
+    if (checkResult != ZE_RESULT_SUCCESS) {
+        return checkResult;
+    }
+
+    deviceBitfields[rootDeviceIndex] = neoDevice->getDeviceBitfield();
+    NEO::UnifiedMemoryProperties unifiedMemoryProperties(InternalMemoryType::deviceUnifiedMemory, alignment, this->driverHandle->rootDeviceIndices, deviceBitfields);
+    unifiedMemoryProperties.allocationFlags.flags.ipcSupportedAllocationByDefault = 0;
+    auto &productHelper = neoDevice->getProductHelper();
+    if (NEO::debugManager.flags.EnableipcSupportedAllocationByDefault.get()) {
+        unifiedMemoryProperties.allocationFlags.flags.ipcSupportedAllocationByDefault = productHelper.canShareMemoryWithoutNTHandle();
+    }
+    unifiedMemoryProperties.allocationFlags.flags.shareable = isShareableMemory(deviceMemDesc->pNext, static_cast<uint32_t>(lookupTable.exportMemory), neoDevice, unifiedMemoryProperties.allocationFlags.flags.ipcSupportedAllocationByDefault);
+    unifiedMemoryProperties.device = neoDevice;
+    unifiedMemoryProperties.allocationFlags.flags.compressedHint = isAllocationSuitableForCompression(lookupTable, *device, size);
+    unifiedMemoryProperties.allocationFlags.flags.uncompressedHint = lookupTable.uncompressedHint;
+
+    if (deviceMemDesc->flags & ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+        unifiedMemoryProperties.allocationFlags.flags.locallyUncachedResource = 1;
+    }
+
+    if (lookupTable.rayTracingMemory == true) {
+        unifiedMemoryProperties.allocationFlags.flags.resource48Bit = productHelper.is48bResourceNeededForRayTracing();
+        unifiedMemoryProperties.allocationFlags.allocFlags.rtAllocation = 1;
+    }
+
+    if (lookupTable.writeCombinedMemory) {
+        unifiedMemoryProperties.allocationFlags.allocFlags.allocWriteCombined = 1;
+    }
+
+    unifiedMemoryProperties.ipcHandleTypeFlags = lookupTable.ipcHandleTypeFlags;
+
+    if (false == lookupTable.exportMemory) {
+        if (size <= NEO::PoolInfo::getMaxPoolableSize(neoDevice->getGfxCoreHelper())) {
+            this->driverHandle->initDeviceUsmAllocPoolOnce();
+            if (auto usmPtrFromPool = neoDevice->getDeviceUsmMemAllocPoolFacade().createUnifiedMemoryAllocation(size, unifiedMemoryProperties)) {
+                *ptr = usmPtrFromPool;
+                return ZE_RESULT_SUCCESS;
+            }
+        }
+    }
+
+    void *usmPtr =
+        this->driverHandle->svmAllocsManager->createUnifiedMemoryAllocation(size, unifiedMemoryProperties);
+    if (usmPtr == nullptr) {
+        if (driverHandle->svmAllocsManager->getNumClaimableDeferFreeAllocs() > 0) {
+            this->driverHandle->svmAllocsManager->freeSVMAllocDeferImpl();
+            usmPtr =
+                this->driverHandle->svmAllocsManager->createUnifiedMemoryAllocation(size, unifiedMemoryProperties);
+        }
+    }
+    if (usmPtr == nullptr) {
+        return ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY;
+    }
+
+    ze_result_t ret{ZE_RESULT_SUCCESS};
+
+    if (this->driverHandle->getMemoryManager()->isLocalOnlyAllocationMode()) {
+        auto *allocData{this->driverHandle->svmAllocsManager->getSVMAlloc(usmPtr)};
+        DEBUG_BREAK_IF(allocData == nullptr);
+        auto *gpuAllocation{allocData->gpuAllocations.getDefaultGraphicsAllocation()};
+        DEBUG_BREAK_IF(gpuAllocation == nullptr);
+
+        if (allocData->memoryType == InternalMemoryType::deviceUnifiedMemory && gpuAllocation->storageInfo.localOnlyRequired) {
+            ret = this->makeMemoryResident(hDevice, usmPtr, size);
+        }
+    }
+    if (ret == ZE_RESULT_SUCCESS) {
+        *ptr = usmPtr;
+    }
+    return ret;
+}
+
+ze_result_t Context::allocSharedMem(ze_device_handle_t hDevice,
+                                    const ze_device_mem_alloc_desc_t *deviceMemDesc,
+                                    const ze_host_mem_alloc_desc_t *hostMemDesc,
+                                    size_t size,
+                                    size_t alignment,
+                                    void **ptr) {
+
+    if (NEO::debugManager.flags.ForceExtendedUSMBufferSize.get() >= 1) {
+        size += (MemoryConstants::pageSize * NEO::debugManager.flags.ForceExtendedUSMBufferSize.get());
+    }
+
+    auto device = Device::fromHandle(this->devices.begin()->second);
+    if (hDevice != nullptr) {
+        device = Device::fromHandle(hDevice);
+    }
+    auto neoDevice = device->getNEODevice();
+
+    StructuresLookupTable lookupTable = {};
+
+    lookupTable.relaxedSizeAllowed = NEO::debugManager.flags.AllowUnrestrictedSize.get();
+    auto parseResult = prepareL0StructuresLookupTable(lookupTable, deviceMemDesc->pNext);
+
+    if (parseResult != ZE_RESULT_SUCCESS) {
+        return parseResult;
+    }
+
+    ze_result_t checkResult = checkMemSizeLimit(device, size, lookupTable.relaxedSizeAllowed, ptr);
+    if (checkResult != ZE_RESULT_SUCCESS) {
+        return checkResult;
+    }
+
+    auto deviceBitfields = this->deviceBitfields;
+    NEO::Device *unifiedMemoryPropertiesDevice = nullptr;
+    if (hDevice) {
+        device = Device::fromHandle(hDevice);
+        if (isDeviceDefinedForThisContext(device) == false) {
+            return ZE_RESULT_ERROR_DEVICE_LOST;
+        }
+
+        neoDevice = device->getNEODevice();
+        auto rootDeviceIndex = neoDevice->getRootDeviceIndex();
+        unifiedMemoryPropertiesDevice = neoDevice;
+        deviceBitfields[rootDeviceIndex] = neoDevice->getDeviceBitfield();
+    }
+
+    NEO::UnifiedMemoryProperties unifiedMemoryProperties(InternalMemoryType::sharedUnifiedMemory,
+                                                         alignment,
+                                                         this->rootDeviceIndices,
+                                                         deviceBitfields);
+    unifiedMemoryProperties.device = unifiedMemoryPropertiesDevice;
+
+    if (deviceMemDesc->flags & ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+        unifiedMemoryProperties.allocationFlags.flags.locallyUncachedResource = 1;
+    }
+
+    if (deviceMemDesc->flags & ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_INITIAL_PLACEMENT) {
+        unifiedMemoryProperties.allocationFlags.allocFlags.usmInitialPlacementGpu = 1;
+    }
+
+    if (hostMemDesc->flags & ZE_HOST_MEM_ALLOC_FLAG_BIAS_INITIAL_PLACEMENT) {
+        unifiedMemoryProperties.allocationFlags.allocFlags.usmInitialPlacementCpu = 1;
+    }
+
+    if (lookupTable.rayTracingMemory) {
+        auto &productHelper = neoDevice->getProductHelper();
+        unifiedMemoryProperties.allocationFlags.flags.resource48Bit = productHelper.is48bResourceNeededForRayTracing();
+    }
+
+    if (hostMemDesc->flags & ZEX_HOST_MEM_ALLOC_FLAG_USE_HOST_PTR) {
+        unifiedMemoryProperties.allocationFlags.hostptr = reinterpret_cast<uintptr_t>(*ptr);
+    }
+
+    auto usmPtr = this->driverHandle->svmAllocsManager->createSharedUnifiedMemoryAllocation(size,
+                                                                                            unifiedMemoryProperties,
+                                                                                            static_cast<void *>(neoDevice->getSpecializedDevice<L0::Device>()));
+    if (usmPtr == nullptr) {
+        if (driverHandle->svmAllocsManager->getNumClaimableDeferFreeAllocs() > 0) {
+            this->driverHandle->svmAllocsManager->freeSVMAllocDeferImpl();
+            usmPtr = this->driverHandle->svmAllocsManager->createSharedUnifiedMemoryAllocation(size,
+                                                                                               unifiedMemoryProperties,
+                                                                                               static_cast<void *>(neoDevice->getSpecializedDevice<L0::Device>()));
+            if (usmPtr) {
+                *ptr = usmPtr;
+                return ZE_RESULT_SUCCESS;
+            }
+        }
+        return ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY;
+    }
+    *ptr = usmPtr;
+
+    return ZE_RESULT_SUCCESS;
+}
+
+void Context::freePeerAllocations(const void *ptr, bool blocking, Device *device) {
+    std::unique_lock<NEO::SpinLock> lock(device->peerAllocations.mutex);
+
+    auto iter = device->peerAllocations.allocations.find(ptr);
+    if (iter != device->peerAllocations.allocations.end()) {
+        auto peerAllocData = &iter->second;
+        auto peerAlloc = peerAllocData->gpuAllocations.getDefaultGraphicsAllocation();
+        auto peerPtr = reinterpret_cast<void *>(peerAlloc->getGpuAddress());
+        if (peerAllocData->mappedAllocData) {
+            const auto &gpuAllocations = peerAllocData->gpuAllocations;
+            for (const auto &graphicsAllocation : gpuAllocations.getGraphicsAllocations()) {
+                this->driverHandle->getMemoryManager()->freeGraphicsMemory(graphicsAllocation);
+            }
+        } else {
+            this->driverHandle->svmAllocsManager->freeSVMAlloc(peerPtr, blocking);
+        }
+        device->peerAllocations.allocations.erase(iter);
+    }
+
+    for (auto &subDevice : device->subDevices) {
+        this->freePeerAllocations(ptr, blocking, subDevice);
+    }
+}
+
+void Context::freePeerAllocationsFromAll(const void *ptr, bool blocking) {
+    for (auto &pairDevice : this->devices) {
+        this->freePeerAllocations(ptr, blocking, Device::fromHandle(pairDevice.second));
+    }
+}
+
+NEO::UsmPoolLookupResult Context::getUsmPoolOwningPtr(const void *ptr, NEO::SvmAllocationData *svmData) {
+    DEBUG_BREAK_IF(nullptr == svmData);
+
+    return this->driverHandle->getUsmPoolOwningPtr(ptr, svmData);
+}
+
+bool Context::tryFreeViaPooling(const void *ptr, NEO::SvmAllocationData *svmData, NEO::UsmMemAllocPool *usmPool, NEO::FreePolicyType policy) {
+    if (usmPool) {
+        [[maybe_unused]] bool status = false;
+        if (InternalMemoryType::hostUnifiedMemory == svmData->memoryType) {
+            status = driverHandle->usmHostMemAllocPoolFacade.freeSVMAlloc(ptr, policy);
+        } else {
+            status = svmData->device->getDeviceUsmMemAllocPoolFacade().freeSVMAlloc(ptr, policy);
+        }
+        DEBUG_BREAK_IF(false == status);
+        return true;
+    }
+    return false;
+}
+
+void Context::invokeMemFreeCallbacks(NEO::SvmAllocationData &svmData) {
+    std::vector<NEO::SvmAllocationData::MemFreeCallback> callbacks;
+    {
+        std::lock_guard<std::mutex> lock(this->driverHandle->svmAllocsManager->getMemFreeCallbacksMutex());
+        callbacks = std::exchange(svmData.memFreeCallbacks, {});
+    }
+    // Callbacks run outside the lock, so one that registers again does not deadlock. A callback
+    // must not free the memory being freed: the list is already empty, so the recursive free
+    // would run to completion and the outer free would then free the allocation a second time.
+    for (const auto &callback : callbacks) {
+        callback.function(callback.userData);
+    }
+}
+
+// call this before the chunk goes back to the pool: freeing the last chunk can trim
+// the pool away, and with it the address
+void Context::releaseIpcHandle(const void *ptr, NEO::UsmMemAllocPool *usmPool) {
+    const bool pooled = nullptr != usmPool;
+    const uint64_t addressForIpc = pooled ? usmPool->getPoolAddress() : reinterpret_cast<uint64_t>(ptr);
+    std::map<uint64_t, IpcHandleTracking *>::iterator ipcHandleIterator;
+    auto lockIPC = this->driverHandle->lockIPCHandleMap();
+    ipcHandleIterator = this->driverHandle->getIPCHandleMap().begin();
+    while (ipcHandleIterator != this->driverHandle->getIPCHandleMap().end()) {
+        if (ipcHandleIterator->second->ptr == addressForIpc) {
+            ipcHandleIterator->second->refcnt -= 1;
+            // pooled: close when the last export of this pool BO is released
+            // non-pooled: the allocation is going away, so its entry must not outlive it
+            if (ipcHandleIterator->second->refcnt == 0 || false == pooled) {
+                auto *memoryManager = driverHandle->getMemoryManager();
+                void *reservedHandleData = nullptr;
+                if (ipcHandleIterator->second->hasReservedHandleData) {
+                    reservedHandleData = ipcHandleIterator->second->opaqueData.reservedHandleData;
+                    memoryManager->closeInternalHandleWithReservedData(ipcHandleIterator->second->handle, ipcHandleIterator->second->handleId, ipcHandleIterator->second->alloc, reservedHandleData);
+                } else {
+                    memoryManager->closeInternalHandle(ipcHandleIterator->second->handle, ipcHandleIterator->second->handleId, ipcHandleIterator->second->alloc);
+                }
+                if ((settings.useOpaqueHandle == OpaqueHandlingType::sockets) && settings.handleType == IpcHandleType::fdHandle) {
+                    this->driverHandle->unregisterIpcHandleWithServer(ipcHandleIterator->second->handle);
+                }
+                // Clear the cached import handle when IPC memory is freed
+                this->driverHandle->clearCachedImportHandle(ipcHandleIterator->second->cacheID);
+                delete ipcHandleIterator->second;
+                this->driverHandle->getIPCHandleMap().erase(ipcHandleIterator->first);
+            }
+            break;
+        }
+        ipcHandleIterator++;
+    }
+}
+
+ze_result_t Context::freeMem(const void *ptr) {
+    return this->freeMem(ptr, false);
+}
+
+ze_result_t Context::freeMem(const void *ptr, bool blocking) {
+    auto allocation = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+    if (allocation == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    auto poolLookup = getUsmPoolOwningPtr(ptr, allocation);
+    if (poolLookup.pool && false == poolLookup.isAllocatedInPool()) {
+        // ptr is within usm pool address space but is not allocated
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    this->invokeMemFreeCallbacks(*allocation);
+
+    this->releaseIpcHandle(ptr, poolLookup.pool);
+
+    if (this->tryFreeViaPooling(ptr, allocation, poolLookup.pool,
+                                blocking ? NEO::FreePolicyType::blocking : NEO::FreePolicyType::none)) {
+        return ZE_RESULT_SUCCESS;
+    }
+
+    this->freePeerAllocationsFromAll(ptr, blocking);
+
+    this->driverHandle->svmAllocsManager->freeSVMAlloc(const_cast<void *>(ptr), blocking);
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::freeMemExt(const ze_memory_free_ext_desc_t *pMemFreeDesc,
+                                void *ptr) {
+    const bool blocking = pMemFreeDesc->freePolicy == ZE_DRIVER_MEMORY_FREE_POLICY_EXT_FLAG_BLOCKING_FREE;
+    if (blocking) {
+        return this->freeMem(ptr, true);
+    }
+    if (pMemFreeDesc->freePolicy == ZE_DRIVER_MEMORY_FREE_POLICY_EXT_FLAG_DEFER_FREE) {
+        auto allocation = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+        if (allocation == nullptr) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        auto poolLookup = getUsmPoolOwningPtr(ptr, allocation);
+        if (poolLookup.pool && false == poolLookup.isAllocatedInPool()) {
+            // ptr is within usm pool address space but is not allocated
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+
+        // Required, not just for parity with freeMem: the usm reuse cache hands this
+        // SvmAllocationData to the next allocation, so a list left behind here would fire
+        // for an unrelated pointer.
+        this->invokeMemFreeCallbacks(*allocation);
+
+        this->releaseIpcHandle(ptr, poolLookup.pool);
+
+        if (this->tryFreeViaPooling(ptr, allocation, poolLookup.pool, NEO::FreePolicyType::defer)) {
+            return ZE_RESULT_SUCCESS;
+        }
+
+        this->freePeerAllocationsFromAll(ptr, false);
+
+        this->driverHandle->svmAllocsManager->freeSVMAllocDefer(const_cast<void *>(ptr));
+        return ZE_RESULT_SUCCESS;
+    }
+    return this->freeMem(ptr, false);
+}
+
+ze_result_t Context::registerMemoryFreeCallback(zex_memory_free_callback_ext_desc_t *pfnCallbackDesc, void *ptr) {
+    auto allocation = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+    if (allocation == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    auto *usmPool = getUsmPoolOwningPtr(ptr, allocation).pool;
+    std::lock_guard<std::mutex> lock(this->driverHandle->svmAllocsManager->getMemFreeCallbacksMutex());
+    if (usmPool) {
+        // pooled chunks share one SvmAllocationData, so a list would fire callbacks of
+        // still-live chunks; keep only the newest until per-chunk storage exists
+        allocation->memFreeCallbacks.clear();
+    }
+    allocation->memFreeCallbacks.push_back({pfnCallbackDesc->pfnCallback, pfnCallbackDesc->pUserData});
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::makeMemoryResident(ze_device_handle_t hDevice, void *ptr, size_t size) {
+    Device *device = L0::Device::fromHandle(hDevice);
+    NEO::Device *neoDevice = device->getNEODevice();
+    if (auto poolLookup = neoDevice->getDeviceUsmMemAllocPoolFacade().getPoolContainingAlloc(ptr); poolLookup.pool && poolLookup.pool->isTrackingResidency()) {
+        auto result = poolLookup.pool->residencyOperation<NEO::UsmMemAllocPool::ResidencyOperationType::makeResident>(ptr);
+        return changeMemoryOperationStatusToL0ResultType(result);
+    }
+    for (auto peerL0Device : this->getDriverHandle()->devices) {
+        if (device == peerL0Device) {
+            continue;
+        }
+        auto peerDevice = peerL0Device->getNEODevice();
+        if (auto poolLookup = peerDevice->getDeviceUsmMemAllocPoolFacade().getPoolContainingAlloc(ptr); poolLookup.pool && poolLookup.pool->isTrackingResidency()) {
+            auto result = poolLookup.pool->residencyOperation<NEO::UsmMemAllocPool::ResidencyOperationType::makeResident>(ptr, neoDevice);
+            return changeMemoryOperationStatusToL0ResultType(result);
+        }
+    }
+    auto allocation = device->getDriverHandle()->resolveMemoryAllocation(device, ptr, size, true);
+    if (allocation == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    if (allocation->isLockedMemory()) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    NEO::MemoryOperationsHandler *memoryOperationsIface = neoDevice->getRootDeviceEnvironment().memoryOperationsInterface.get();
+    auto success = memoryOperationsIface->makeResident(neoDevice, ArrayRef<NEO::GraphicsAllocation *>(&allocation, 1), true, true);
+    ze_result_t res = changeMemoryOperationStatusToL0ResultType(success);
+
+    if (ZE_RESULT_SUCCESS == res) {
+        auto allocData = device->getDriverHandle()->getSvmAllocsManager()->getSVMAlloc(ptr);
+        if (allocData && allocData->memoryType == InternalMemoryType::sharedUnifiedMemory) {
+            auto driverHandle = device->getDriverHandle();
+            std::lock_guard<std::mutex> lock(driverHandle->sharedMakeResidentAllocationsLock);
+            driverHandle->sharedMakeResidentAllocations.emplace(ptr, allocation);
+        }
+    }
+
+    return res;
+}
+
+ze_result_t Context::evictMemory(ze_device_handle_t hDevice, void *ptr, size_t size) {
+    Device *device = L0::Device::fromHandle(hDevice);
+    NEO::Device *neoDevice = device->getNEODevice();
+    if (auto poolLookup = neoDevice->getDeviceUsmMemAllocPoolFacade().getPoolContainingAlloc(ptr); poolLookup.pool && poolLookup.pool->isTrackingResidency()) {
+        auto result = poolLookup.pool->residencyOperation<NEO::UsmMemAllocPool::ResidencyOperationType::evict>(ptr);
+        return changeMemoryOperationStatusToL0ResultType(result);
+    }
+    for (auto peerL0Device : this->getDriverHandle()->devices) {
+        if (device == peerL0Device) {
+            continue;
+        }
+        auto peerDevice = peerL0Device->getNEODevice();
+        if (auto poolLookup = peerDevice->getDeviceUsmMemAllocPoolFacade().getPoolContainingAlloc(ptr); poolLookup.pool && poolLookup.pool->isTrackingResidency()) {
+            auto result = poolLookup.pool->residencyOperation<NEO::UsmMemAllocPool::ResidencyOperationType::evict>(ptr, neoDevice);
+            return changeMemoryOperationStatusToL0ResultType(result);
+        }
+    }
+    auto allocation = device->getDriverHandle()->resolveMemoryAllocation(device, ptr, size, false);
+    if (allocation == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    {
+        auto driverHandle = device->getDriverHandle();
+        std::lock_guard<std::mutex> lock(driverHandle->sharedMakeResidentAllocationsLock);
+        driverHandle->sharedMakeResidentAllocations.erase(ptr);
+    }
+
+    NEO::MemoryOperationsHandler *memoryOperationsIface = neoDevice->getRootDeviceEnvironment().memoryOperationsInterface.get();
+    auto success = memoryOperationsIface->evict(neoDevice, *allocation);
+    return changeMemoryOperationStatusToL0ResultType(success);
+}
+
+ze_result_t Context::makeImageResident(ze_device_handle_t hDevice, ze_image_handle_t hImage) {
+    auto alloc = Image::fromHandle(hImage)->getAllocation();
+    auto implicitArgsAlloc = Image::fromHandle(hImage)->getImplicitArgsAllocation();
+
+    NEO::Device *neoDevice = L0::Device::fromHandle(hDevice)->getNEODevice();
+    NEO::MemoryOperationsHandler *memoryOperationsIface = neoDevice->getRootDeviceEnvironment().memoryOperationsInterface.get();
+    auto success = memoryOperationsIface->makeResident(neoDevice, ArrayRef<NEO::GraphicsAllocation *>(&alloc, 1), true, true);
+    if (implicitArgsAlloc) {
+        memoryOperationsIface->makeResident(neoDevice, ArrayRef<NEO::GraphicsAllocation *>(&implicitArgsAlloc, 1), true, true);
+    }
+    return changeMemoryOperationStatusToL0ResultType(success);
+}
+ze_result_t Context::evictImage(ze_device_handle_t hDevice, ze_image_handle_t hImage) {
+    auto alloc = Image::fromHandle(hImage)->getAllocation();
+    auto implicitArgsAlloc = Image::fromHandle(hImage)->getImplicitArgsAllocation();
+
+    NEO::Device *neoDevice = L0::Device::fromHandle(hDevice)->getNEODevice();
+    NEO::MemoryOperationsHandler *memoryOperationsIface = neoDevice->getRootDeviceEnvironment().memoryOperationsInterface.get();
+    auto success = memoryOperationsIface->evict(neoDevice, *alloc);
+    if (success == NEO::MemoryOperationsStatus::memoryNotFound) {
+        return ZE_RESULT_SUCCESS;
+    }
+    if (implicitArgsAlloc) {
+        memoryOperationsIface->evict(neoDevice, *implicitArgsAlloc);
+    }
+    return changeMemoryOperationStatusToL0ResultType(success);
+}
+
+ze_result_t Context::getMemAddressRange(const void *ptr,
+                                        void **pBase,
+                                        size_t *pSize) {
+    NEO::SvmAllocationData *allocData = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+    if (allocData) {
+        auto poolLookup = getUsmPoolOwningPtr(ptr, allocData);
+        if (poolLookup.pool) {
+            if (false == poolLookup.isAllocatedInPool()) {
+                // ptr is within usm pool address space but is not allocated
+                return ZE_RESULT_ERROR_ADDRESS_NOT_FOUND;
+            }
+            if (pBase) {
+                *pBase = poolLookup.pooledAllocationBasePtr;
+            }
+
+            if (pSize) {
+                *pSize = poolLookup.pooledAllocationSize;
+            }
+        } else {
+            NEO::GraphicsAllocation *alloc;
+            alloc = allocData->gpuAllocations.getDefaultGraphicsAllocation();
+            if (pBase) {
+                uint64_t *allocBase = reinterpret_cast<uint64_t *>(pBase);
+                *allocBase = alloc->getGpuAddress();
+            }
+
+            if (pSize) {
+                *pSize = allocData->size;
+            }
+        }
+
+        return ZE_RESULT_SUCCESS;
+    }
+    return ZE_RESULT_ERROR_ADDRESS_NOT_FOUND;
+}
+
+ze_result_t Context::closeIpcMemHandle(const void *ptr) {
+    return this->freeMem(ptr);
+}
+
+void Context::registerIpcHandleWithServer(uint64_t handleId) {
+    if (!isSocketHandleSharingSupported()) {
+        return;
+    }
+
+    if (!driverHandle->initializeIpcSocketServer()) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "Failed to initialize IPC socket server for handle %lu\n", handleId);
+    } else if (!driverHandle->registerIpcHandleWithServer(handleId, static_cast<int>(handleId))) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "Failed to register handle %lu with IPC socket server\n", handleId);
+    }
+}
+
+void Context::unregisterIpcHandleWithServer(uint64_t handleId) {
+    if (!isSocketHandleSharingSupported()) {
+        return;
+    }
+
+    driverHandle->unregisterIpcHandleWithServer(handleId);
+}
+
+ze_result_t Context::putIpcMemHandle(ze_ipc_mem_handle_t ipcHandle) {
+    if (isIpcRangeHandle(ipcHandle)) {
+        return putIpcRangeHandle(ipcHandle);
+    }
+    uint64_t handle = getIpcHandleKey(ipcHandle);
+    auto lock = driverHandle->lockIPCHandleMap();
+    closeIpcHandleTracking(handle);
+    return ZE_RESULT_SUCCESS;
+}
+
+uint64_t Context::getIpcHandleKey(const ze_ipc_mem_handle_t &ipcHandle) const {
+    uint64_t handle = 0;
+    if (settings.useOpaqueHandle) {
+        using IpcDataT = IpcOpaqueMemoryData;
+        const IpcDataT &ipcData = *reinterpret_cast<const IpcDataT *>(ipcHandle.data);
+        handle = ipcData.type == IpcHandleType::fdHandle
+                     ? static_cast<uint64_t>(ipcData.handle.fd)
+                     : ipcData.handle.reserved;
+    } else {
+        using IpcDataT = IpcMemoryData;
+        const IpcDataT &ipcData = *reinterpret_cast<const IpcDataT *>(ipcHandle.data);
+        handle = ipcData.handle;
+    }
+    return handle;
+}
+
+void Context::closeIpcHandleTracking(uint64_t handle) {
+    auto &ipcMap = driverHandle->getIPCHandleMap();
+    auto ipcIter = ipcMap.find(handle);
+    if (ipcIter != ipcMap.end()) {
+        IpcHandleTracking *trackIPC = ipcIter->second;
+        trackIPC->refcnt -= 1;
+        if (trackIPC->refcnt == 0) {
+            void *reservedHandleData = nullptr;
+            if (trackIPC->hasReservedHandleData) {
+                reservedHandleData = trackIPC->opaqueData.reservedHandleData;
+                driverHandle->getMemoryManager()->closeInternalHandleWithReservedData(handle, trackIPC->handleId, trackIPC->alloc, reservedHandleData);
+            } else {
+                driverHandle->getMemoryManager()->closeInternalHandle(handle, trackIPC->handleId, trackIPC->alloc);
+            }
+            if ((settings.useOpaqueHandle == OpaqueHandlingType::sockets) && settings.handleType == IpcHandleType::fdHandle) {
+                this->driverHandle->unregisterIpcHandleWithServer(handle);
+            }
+            // Clear the cached import handle when IPC handle is closed
+            this->driverHandle->clearCachedImportHandle(trackIPC->cacheID);
+            delete trackIPC;
+            ipcMap.erase(handle);
+        }
+    }
+}
+
+void Context::trackIpcEventPoolHandle(uint64_t handle, NEO::GraphicsAllocation *alloc) {
+    auto lock = driverHandle->lockIPCHandleMap();
+    auto &ipcMap = driverHandle->getIPCHandleMap();
+    auto ipcIter = ipcMap.find(handle);
+    if (ipcIter != ipcMap.end()) {
+        ipcIter->second->refcnt += 1;
+    } else {
+        IpcHandleTracking *handleTracking = new IpcHandleTracking;
+        handleTracking->alloc = alloc;
+        handleTracking->refcnt = 1;
+        handleTracking->handle = handle;
+        handleTracking->ptr = alloc ? alloc->getGpuAddress() : 0u;
+        ipcMap.emplace(handle, handleTracking);
+    }
+}
+
+void Context::releaseIpcEventPoolHandle(uint64_t handle) {
+    auto lock = driverHandle->lockIPCHandleMap();
+    auto &ipcMap = driverHandle->getIPCHandleMap();
+    auto ipcIter = ipcMap.find(handle);
+    if (ipcIter != ipcMap.end()) {
+        IpcHandleTracking *trackIPC = ipcIter->second;
+        trackIPC->refcnt -= 1;
+        if (trackIPC->refcnt == 0) {
+            driverHandle->getMemoryManager()->closeInternalHandle(handle, trackIPC->handleId, trackIPC->alloc);
+            if ((settings.useOpaqueHandle == OpaqueHandlingType::sockets) && settings.handleType == IpcHandleType::fdHandle) {
+                this->driverHandle->unregisterIpcHandleWithServer(handle);
+            }
+            delete trackIPC;
+            ipcMap.erase(handle);
+        }
+    }
+}
+
+ze_result_t Context::putIpcEventPoolHandle(ze_ipc_event_pool_handle_t ipcEventPoolHandle) {
+    // getIpcHandle always writes IpcOpaqueEventPoolData, so parse it as such (see event.h).
+    IpcOpaqueEventPoolData &ipcData = *reinterpret_cast<IpcOpaqueEventPoolData *>(ipcEventPoolHandle.data);
+    uint64_t handle = ipcData.handle.val;
+    auto lock = driverHandle->lockIPCHandleMap();
+    auto &ipcMap = driverHandle->getIPCHandleMap();
+    auto ipcIter = ipcMap.find(handle);
+    if (ipcIter != ipcMap.end()) {
+        IpcHandleTracking *trackIPC = ipcIter->second;
+        trackIPC->refcnt -= 1;
+        if (trackIPC->refcnt == 0) {
+            driverHandle->getMemoryManager()->closeInternalHandle(handle, trackIPC->handleId, trackIPC->alloc);
+            if ((settings.useOpaqueHandle == OpaqueHandlingType::sockets) && settings.handleType == IpcHandleType::fdHandle) {
+                this->driverHandle->unregisterIpcHandleWithServer(handle);
+            }
+            delete trackIPC;
+            ipcMap.erase(handle);
+        }
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getIpcHandleFromFd(uint64_t handle, ze_ipc_mem_handle_t *pIpcHandle) {
+    std::map<uint64_t, IpcHandleTracking *>::iterator ipcHandleIterator;
+    auto lock = driverHandle->lockIPCHandleMap();
+    auto &ipcMap = driverHandle->getIPCHandleMap();
+    auto ipcIter = ipcMap.find(handle);
+    if (ipcIter != ipcMap.end()) {
+        IpcHandleTracking *trackIPC = ipcIter->second;
+        if (settings.useOpaqueHandle) {
+            using IpcDataT = IpcOpaqueMemoryData;
+            IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(pIpcHandle->data);
+            ipcData = trackIPC->opaqueData;
+        } else {
+            using IpcDataT = IpcMemoryData;
+            IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(pIpcHandle->data);
+            ipcData = trackIPC->ipcData;
+        }
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getFdFromIpcHandle(ze_ipc_mem_handle_t ipcHandle, uint64_t *pHandle) {
+    uint64_t handle = 0;
+    if (settings.useOpaqueHandle) {
+        if (settings.handleType == IpcHandleType::fdHandle) {
+            using IpcDataOpaqueT = IpcOpaqueMemoryData;
+            IpcDataOpaqueT &ipcData = *reinterpret_cast<IpcDataOpaqueT *>(ipcHandle.data);
+            handle = static_cast<uint64_t>(ipcData.handle.fd);
+        } else {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+    } else {
+        using IpcDataT = IpcMemoryData;
+        IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(ipcHandle.data);
+        handle = ipcData.handle;
+    }
+    std::map<uint64_t, IpcHandleTracking *>::iterator ipcHandleIterator;
+    auto lock = this->driverHandle->lockIPCHandleMap();
+    ipcHandleIterator = this->driverHandle->getIPCHandleMap().find(handle);
+    if (ipcHandleIterator != this->driverHandle->getIPCHandleMap().end()) {
+        *pHandle = ipcHandleIterator->first;
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getIpcMemHandlesImpl(const void *ptr,
+                                          void *pNext,
+                                          uint32_t *numIpcHandles,
+                                          ze_ipc_mem_handle_t *pIpcHandles) {
+
+    if (pNext != nullptr) {
+        auto *baseProperties = reinterpret_cast<const ze_base_properties_t *>(pNext);
+        if (baseProperties->stype == ZE_STRUCTURE_TYPE_IPC_PHYS_MEM_HANDLE_RANGE_EXT_DESC) {
+            return getIpcRangeHandle(ptr, reinterpret_cast<const ze_ipc_phys_mem_handle_range_ext_desc_t *>(pNext), pIpcHandles);
+        }
+    }
+
+    NEO::UsmMemAllocPool *usmPool = nullptr;
+    InternalMemoryType type = InternalMemoryType::notSpecified;
+    NEO::GraphicsAllocation *alloc = nullptr;
+    bool fabricAccessibleHandle = false;
+    bool allocSupportsIpc = false;
+    uint64_t allocationBaseAddress = castToUint64(ptr);
+
+    NEO::SvmAllocationData *allocData = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+    if (!allocData) {
+        auto lock = this->driverHandle->getMemoryManager()->lockPhysicalMemoryAllocationMap();
+        auto it = this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().find(const_cast<void *>(ptr));
+        if (it == this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().end()) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        NEO::PhysicalMemoryAllocation *allocationNode = it->second;
+        alloc = allocationNode->allocation;
+        if (allocationNode->allocation->getAllocationType() == NEO::AllocationType::buffer) {
+            type = InternalMemoryType::reservedDeviceMemory;
+        } else {
+            type = InternalMemoryType::reservedHostMemory;
+        }
+        fabricAccessibleHandle = allocationNode->ipcHandleTypeFlags & ZE_IPC_MEM_HANDLE_TYPE_FLAG_FABRIC_ACCESSIBLE;
+        allocSupportsIpc = allocationNode->ipcHandleTypeFlags != 0;
+    } else {
+        type = allocData->memoryType;
+
+        auto poolLookup = getUsmPoolOwningPtr(ptr, allocData);
+
+        if (poolLookup.pool && false == poolLookup.isAllocatedInPool()) {
+            // ptr is within usm pool address space but is not allocated
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        usmPool = poolLookup.pool;
+        alloc = allocData->gpuAllocations.getDefaultGraphicsAllocation();
+        allocationBaseAddress = usmPool ? castToUint64(poolLookup.pooledAllocationBasePtr) : alloc->getGpuAddress();
+        fabricAccessibleHandle = allocData->ipcHandleTypeFlags & ZE_IPC_MEM_HANDLE_TYPE_FLAG_FABRIC_ACCESSIBLE;
+        allocSupportsIpc = allocData->ipcHandleTypeFlags != 0;
+    }
+
+    if (!allocSupportsIpc && !settings.enableIpcHandleSharingByDefault) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+    }
+    auto memoryManager = this->driverHandle->getMemoryManager();
+
+    auto rootDeviceEnv = memoryManager->peekExecutionEnvironment().rootDeviceEnvironments[alloc->getRootDeviceIndex()].get();
+    auto &l0GfxCoreHelper = rootDeviceEnv->getHelper<L0GfxCoreHelper>();
+    l0GfxCoreHelper.p2pDecompressBufferIfRequired(alloc, this->getDriverHandle());
+
+    if (numIpcHandles) {
+        uint32_t numHandles = alloc->getNumHandles();
+        if (*numIpcHandles == 0 || *numIpcHandles > numHandles) {
+            *numIpcHandles = numHandles;
+        }
+    }
+
+    if (pIpcHandles == nullptr) {
+        return ZE_RESULT_SUCCESS;
+    }
+
+    uint8_t ipcType = static_cast<uint8_t>(InternalIpcMemoryType::deviceUnifiedMemory);
+    if (type == InternalMemoryType::hostUnifiedMemory) {
+        ipcType = static_cast<uint8_t>(InternalIpcMemoryType::hostUnifiedMemory);
+    }
+
+    uint64_t physicalOffset = allocData ? allocData->mappedPhysicalOffset : 0u;
+    if (physicalOffset != 0) {
+        if (type == InternalMemoryType::reservedDeviceMemory) {
+            ipcType = static_cast<uint8_t>(InternalIpcMemoryType::reservedDeviceMemory);
+        } else if (type == InternalMemoryType::reservedHostMemory) {
+            ipcType = static_cast<uint8_t>(InternalIpcMemoryType::reservedHostMemory);
+        }
+    }
+
+    if (pNext) {
+        ze_base_properties_t *extendedProperties =
+            reinterpret_cast<ze_base_properties_t *>(pNext);
+        if (extendedProperties->stype != ZE_STRUCTURE_TYPE_IPC_MEM_HANDLE_TYPE_EXT_DESC) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        ze_ipc_mem_handle_type_ext_desc_t *ipcHandleTypeDesc = reinterpret_cast<ze_ipc_mem_handle_type_ext_desc_t *>(pNext);
+        if (ipcHandleTypeDesc->typeFlags & ZE_IPC_MEM_HANDLE_TYPE_FLAG_FABRIC_ACCESSIBLE) {
+            fabricAccessibleHandle = true;
+        }
+    }
+
+    uint32_t loopCount = numIpcHandles ? *numIpcHandles : 1u;
+    for (uint32_t i = 0u; i < loopCount; i++) {
+        uint8_t reservedHandleDataStorage[32] = {0};
+        void *reservedHandleData = nullptr;
+        uint64_t handle = 0;
+        if (settings.useOpaqueHandle) {
+            if (fabricAccessibleHandle) {
+                reservedHandleData = reservedHandleDataStorage;
+            }
+        }
+        int ret = alloc->createInternalHandle(memoryManager, i, handle, reservedHandleData);
+        if (ret < 0) {
+            return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+        }
+
+        if (allocData) {
+            allocData->isExportedAllocation = true;
+        }
+        if (usmPool) {
+            usmPool->markChunkExported(ptr);
+        }
+        memoryManager->registerIpcExportedAllocation(alloc);
+
+        if (settings.useOpaqueHandle) {
+            using IpcDataT = IpcOpaqueMemoryData;
+            IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(pIpcHandles[i].data);
+            setIPCHandleData<IpcDataT>(alloc, handle, ipcData, allocationBaseAddress, ipcType,
+                                       usmPool, settings.handleType, reservedHandleData, physicalOffset);
+        } else {
+            using IpcDataT = IpcMemoryData;
+            IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(pIpcHandles[i].data);
+            setIPCHandleData<IpcDataT>(alloc, handle, ipcData, allocationBaseAddress, ipcType,
+                                       usmPool, settings.handleType, nullptr, physicalOffset);
+        }
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+uint64_t IpcOpaqueMemoryData::computeCacheID() const noexcept {
+    // Copy values to avoid misaligned reference binding due to #pragma pack(1)
+    uint64_t poolOffsetCopy = poolOffset;
+
+    return Context::computeIpcCacheId(normalizeIPCHandle(*this), poolOffsetCopy, static_cast<uint32_t>(processId), static_cast<uint8_t>(type), memoryType);
+}
+
+uint64_t Context::computeIpcCacheId(uint64_t handle, uint64_t poolOffset, uint32_t processId, uint8_t handleType, uint8_t memoryType) {
+    uint64_t hash = 0;
+
+    ipcHashCombine(hash, handle);
+    ipcHashCombine(hash, poolOffset);
+    ipcHashCombine(hash, processId);
+    ipcHashCombine(hash, handleType);
+    ipcHashCombine(hash, memoryType);
+
+    return hash;
+}
+
+ze_result_t Context::getIpcMemHandle(const void *ptr,
+                                     void *pNext,
+                                     ze_ipc_mem_handle_t *pIpcHandle) {
+    return getIpcMemHandlesImpl(ptr, pNext, nullptr, pIpcHandle);
+}
+
+ze_result_t Context::getIpcMemHandles(const void *ptr,
+                                      uint32_t *numIpcHandles,
+                                      ze_ipc_mem_handle_t *pIpcHandles) {
+    DEBUG_BREAK_IF(numIpcHandles == nullptr);
+    return getIpcMemHandlesImpl(ptr, nullptr, numIpcHandles, pIpcHandles);
+}
+
+ze_result_t Context::openIpcMemHandle(ze_device_handle_t hDevice,
+                                      const ze_ipc_mem_handle_t &pIpcHandle,
+                                      ze_ipc_memory_flags_t flags,
+                                      void **ptr) {
+    uint64_t handle;
+    uint8_t type;
+    unsigned int processId;
+    uint64_t poolOffset;
+    uint64_t cacheID;
+    bool compressedMemory = false;
+    void *reservedHandleData = nullptr;
+
+    if (isIpcRangeHandle(pIpcHandle)) {
+        return openIpcRangeHandle(hDevice, pIpcHandle, flags, ptr);
+    }
+
+    bool isOpaqueHandle = false;
+    getDataFromIpcHandle(hDevice, pIpcHandle, handle, type, processId, poolOffset, cacheID, reservedHandleData, compressedMemory, isOpaqueHandle);
+
+    NEO::AllocationType allocationType = NEO::AllocationType::unknown;
+    uint64_t physicalOffset = 0;
+    bool applyVaOffset = true;
+    if (type == static_cast<uint8_t>(InternalIpcMemoryType::deviceUnifiedMemory)) {
+        allocationType = NEO::AllocationType::buffer;
+    } else if (type == static_cast<uint8_t>(InternalIpcMemoryType::hostUnifiedMemory)) {
+        allocationType = NEO::AllocationType::bufferHostMemory;
+    } else if (type == static_cast<uint8_t>(InternalIpcMemoryType::reservedDeviceMemory)) {
+        allocationType = NEO::AllocationType::buffer;
+        physicalOffset = poolOffset;
+        applyVaOffset = false;
+    } else if (type == static_cast<uint8_t>(InternalIpcMemoryType::reservedHostMemory)) {
+        // Reserved host memory imports the whole shared object mapped contiguously, with the
+        // GPU virtual address equal to the CPU virtual address. The exporter's physical offset
+        // therefore resolves to a plain VA offset on the returned pointer (as with pooled host
+        // memory) - unlike reserved device memory, it does not need a bind-time physical offset.
+        allocationType = NEO::AllocationType::bufferHostMemory;
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    *ptr = getMemHandlePtr(hDevice,
+                           handle,
+                           allocationType,
+                           allocationType == NEO::AllocationType::bufferHostMemory,
+                           processId,
+                           flags,
+                           cacheID,
+                           reservedHandleData,
+                           compressedMemory,
+                           isOpaqueHandle,
+                           physicalOffset)
+               .second;
+    if (nullptr == *ptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (applyVaOffset) {
+        *ptr = ptrOffset(*ptr, poolOffset);
+    }
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::openIpcMemHandles(ze_device_handle_t hDevice,
+                                       uint32_t numIpcHandles,
+                                       ze_ipc_mem_handle_t *pIpcHandles,
+                                       ze_ipc_memory_flags_t flags,
+                                       void **pptr) {
+    std::vector<NEO::osHandle> handles;
+    handles.reserve(numIpcHandles);
+
+    uint64_t poolOffset = 0u;
+    for (uint32_t i = 0; i < numIpcHandles; i++) {
+        uint64_t handle;
+        uint8_t type;
+        unsigned int processId;
+        uint64_t cacheID;
+        bool compressedMemory = false;
+        bool isOpaqueHandle = false;
+        void *reservedHandleData = nullptr;
+        getDataFromIpcHandle(hDevice, pIpcHandles[i], handle, type, processId, poolOffset, cacheID, reservedHandleData, compressedMemory, isOpaqueHandle);
+
+        if (type != static_cast<uint8_t>(InternalIpcMemoryType::deviceUnifiedMemory)) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+
+        handles.push_back(static_cast<NEO::osHandle>(handle));
+    }
+
+    auto device = Device::fromHandle(hDevice);
+    auto neoDevice = device->getNEODevice();
+    if (device->isImplicitScalingCapable()) {
+        neoDevice = device->getNEODevice()->getRootDevice();
+    }
+    NEO::SvmAllocationData allocDataInternal(neoDevice->getRootDeviceIndex());
+    *pptr = this->driverHandle->importFdHandles(neoDevice, flags, handles, nullptr, nullptr, allocDataInternal, false, {});
+    if (nullptr == *pptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    *pptr = ptrOffset(*pptr, poolOffset);
+
+    return ZE_RESULT_SUCCESS;
+}
+
+bool Context::isIpcRangeHandle(const ze_ipc_mem_handle_t &ipcHandle) const {
+    if (!settings.useOpaqueHandle) {
+        return false;
+    }
+    IpcOpaqueMemoryData opaqueData{};
+    std::memcpy(&opaqueData, ipcHandle.data, sizeof(opaqueData));
+    const bool validHandleType = (opaqueData.type == IpcHandleType::fdHandle) || (opaqueData.type == IpcHandleType::ntHandle);
+    return validHandleType && (opaqueData.memoryType == static_cast<uint8_t>(InternalIpcMemoryType::ipcRangeTransport));
+}
+
+ze_result_t Context::encodeIpcHandleForRangeAllocation(NEO::GraphicsAllocation *alloc, uint64_t ptrAddress, uint8_t ipcType, uint64_t physicalOffset, void *reservedHandleData, ze_ipc_mem_handle_t &ipcHandle) {
+    auto memoryManager = this->driverHandle->getMemoryManager();
+    uint64_t handle = 0;
+    // A non-null reservedHandleData requests fabric (cross-OS) handle data; createInternalHandle fills it
+    // and setIPCHandleData stores it in the handle so it can be imported on another OS.
+    int ret = alloc->createInternalHandle(memoryManager, 0u, handle, reservedHandleData);
+    if (ret < 0) {
+        return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+    }
+    memoryManager->registerIpcExportedAllocation(alloc);
+
+    std::memset(ipcHandle.data, 0, sizeof(ipcHandle.data));
+    using IpcDataT = IpcOpaqueMemoryData;
+    IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(ipcHandle.data);
+    setIPCHandleData<IpcDataT>(alloc, handle, ipcData, ptrAddress, ipcType, nullptr, settings.handleType, reservedHandleData, physicalOffset);
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getIpcRangeHandle(const void *ptr,
+                                       const ze_ipc_phys_mem_handle_range_ext_desc_t *desc,
+                                       ze_ipc_mem_handle_t *pIpcHandle) {
+    if (pIpcHandle == nullptr || desc == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    if (ptr == nullptr) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_INVALID_NULL_POINTER - ptr is null\n");
+        return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+    }
+    if (desc->size == 0) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_INVALID_SIZE - range size is 0\n");
+        return ZE_RESULT_ERROR_INVALID_SIZE;
+    }
+
+    // Range IPC is supported only on the opaque IPC handle path; legacy handle data is not supported.
+    if (!settings.useOpaqueHandle) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+    }
+
+    const uint32_t maxHandleCount = getMaxIpcRangeHandleCount();
+    if (maxHandleCount == 0u) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+    }
+
+    auto memoryManager = this->driverHandle->getMemoryManager();
+    std::vector<ze_ipc_mem_handle_t> handles;
+    std::vector<uint64_t> handleKeys;
+
+    const uint64_t rangeStart = reinterpret_cast<uint64_t>(ptr);
+    const uint64_t rangeEnd = rangeStart + desc->size;
+
+    // Snapshot the contiguous mapped allocations of the range while holding the reservation-map
+    // lock, then perform the fd export (createInternalHandle ioctl) outside the lock to avoid
+    // holding a global lock across ioctls and any lock-order inversion with the memory manager mutex.
+    struct RangeChunk {
+        NEO::GraphicsAllocation *alloc;
+        uint64_t mappedStart;
+        uint64_t physicalOffset;
+        bool isHost;
+    };
+    std::vector<RangeChunk> chunkAllocations;
+    bool reservationFound = false;
+    {
+        auto lock = memoryManager->lockVirtualMemoryReservationMap();
+        auto &reservationMap = memoryManager->getVirtualMemoryReservationMap();
+
+        // ptr need not be the reservation base; locate the reservation whose virtual address
+        // range contains ptr.
+        NEO::VirtualMemoryReservation *reservation = nullptr;
+        auto it = reservationMap.lower_bound(const_cast<void *>(ptr));
+        if (it != reservationMap.end() && reinterpret_cast<uint64_t>(it->first) == rangeStart) {
+            reservation = it->second;
+        } else if (it != reservationMap.begin()) {
+            auto prev = std::prev(it);
+            // lower_bound guarantees prev's base is below rangeStart, so only the end needs checking.
+            const uint64_t prevEnd = reinterpret_cast<uint64_t>(prev->first) + prev->second->virtualAddressRange.size;
+            if (rangeStart < prevEnd) {
+                reservation = prev->second;
+            }
+        }
+
+        if (reservation != nullptr) {
+            reservationFound = true;
+            uint64_t expectedNext = rangeStart;
+
+            for (auto &mappedPair : reservation->mappedAllocations) {
+                NEO::MemoryMappedRange *range = mappedPair.second;
+                const uint64_t mappedStart = reinterpret_cast<uint64_t>(range->ptr);
+                const uint64_t mappedEnd = mappedStart + range->size;
+                if (mappedStart >= rangeEnd) {
+                    break;
+                }
+                if (mappedEnd <= rangeStart) {
+                    continue;
+                }
+                // A mapping that starts past the next expected address leaves a hole in the range.
+                if (mappedStart > expectedNext) {
+                    PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                                 "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_ADDRESS_NOT_FOUND - hole in range [0x%llx, 0x%llx): expected mapping at 0x%llx but next mapping starts at 0x%llx\n",
+                                 static_cast<unsigned long long>(rangeStart), static_cast<unsigned long long>(rangeEnd),
+                                 static_cast<unsigned long long>(expectedNext), static_cast<unsigned long long>(mappedStart));
+                    return ZE_RESULT_ERROR_ADDRESS_NOT_FOUND;
+                }
+                NEO::GraphicsAllocation *alloc = range->mappedAllocation.allocation;
+                if (alloc == nullptr) {
+                    PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                                 "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_ADDRESS_NOT_FOUND - mapping at 0x%llx has no backing graphics allocation\n",
+                                 static_cast<unsigned long long>(mappedStart));
+                    return ZE_RESULT_ERROR_ADDRESS_NOT_FOUND;
+                }
+                const bool isHost = (alloc->getAllocationType() == NEO::AllocationType::bufferHostMemory);
+                chunkAllocations.push_back({alloc, mappedStart, range->mappedPhysicalOffset, isHost});
+                expectedNext = mappedEnd;
+            }
+
+            if (expectedNext < rangeEnd) {
+                PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                             "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_ADDRESS_NOT_FOUND - range [0x%llx, 0x%llx) not fully mapped: coverage ends at 0x%llx\n",
+                             static_cast<unsigned long long>(rangeStart), static_cast<unsigned long long>(rangeEnd),
+                             static_cast<unsigned long long>(expectedNext));
+                return ZE_RESULT_ERROR_ADDRESS_NOT_FOUND;
+            }
+        }
+    }
+
+    if (!reservationFound) {
+        // ptr is not part of a virtual-memory reservation. When it is a normal allocation and the
+        // requested range fits within that allocation, export it through the regular single-handle
+        // IPC path instead of treating it as a range. Only a size exceeding the allocation is invalid.
+        NEO::SvmAllocationData *allocData = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+        size_t effectiveAllocSize = 0u;
+        if (allocData != nullptr) {
+            // Bound against the pooled sub-allocation, not the whole USM pool, so an oversized request is
+            // rejected instead of exporting past ptr's allocation (matches getMemAddressRange).
+            auto usmPoolLookup = getUsmPoolOwningPtr(ptr, allocData);
+            effectiveAllocSize = usmPoolLookup.pool ? usmPoolLookup.pooledAllocationSize : allocData->size;
+        }
+        if (allocData != nullptr && desc->size <= effectiveAllocSize) {
+            return getIpcMemHandle(ptr, nullptr, pIpcHandle);
+        }
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_INVALID_ARGUMENT - ptr 0x%llx is not a virtual-memory reservation and requested size exceeds the allocation (svmAlloc=%p allocSize=%zu requestedSize=%zu)\n",
+                     static_cast<unsigned long long>(rangeStart), static_cast<void *>(allocData),
+                     effectiveAllocSize, desc->size);
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (chunkAllocations.empty()) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_ADDRESS_NOT_FOUND - no mapped chunks found within range [0x%llx, 0x%llx)\n",
+                     static_cast<unsigned long long>(rangeStart), static_cast<unsigned long long>(rangeEnd));
+        return ZE_RESULT_ERROR_ADDRESS_NOT_FOUND;
+    }
+
+    // A range must be homogeneous: a host/device mix cannot merge into one contiguous allocation.
+    const bool rangeIsHost = chunkAllocations.front().isHost;
+    for (auto &chunk : chunkAllocations) {
+        if (chunk.isHost != rangeIsHost) {
+            PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                         "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_INVALID_ARGUMENT - range mixes host and device reserved memory\n");
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+    }
+
+    // A fabric-accessible request chained onto the range desc makes every exported handle (the transport
+    // and each chunk) carry cross-OS fabric handle data, so the whole range can be imported on another OS.
+    bool fabricAccessible = false;
+    for (auto extDesc = reinterpret_cast<const ze_base_desc_t *>(desc->pNext); extDesc != nullptr;
+         extDesc = reinterpret_cast<const ze_base_desc_t *>(extDesc->pNext)) {
+        if (extDesc->stype == ZE_STRUCTURE_TYPE_IPC_MEM_HANDLE_TYPE_EXT_DESC) {
+            auto typeDesc = reinterpret_cast<const ze_ipc_mem_handle_type_ext_desc_t *>(extDesc);
+            if (typeDesc->typeFlags & ZE_IPC_MEM_HANDLE_TYPE_FLAG_FABRIC_ACCESSIBLE) {
+                fabricAccessible = true;
+            }
+        }
+    }
+
+    // Each chunk consumes an OS Handle on export/import, so reject a range that exceeds max handle count.
+    if (chunkAllocations.size() > maxHandleCount) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_UNSUPPORTED_SIZE - %zu handles exceeds the maximum of %u\n",
+                     chunkAllocations.size(), maxHandleCount);
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+
+    const size_t transportSize = sizeof(IpcRangeTransportHeader) + chunkAllocations.size() * sizeof(ze_ipc_mem_handle_t);
+    handles.reserve(chunkAllocations.size());
+    handleKeys.reserve(chunkAllocations.size());
+    for (auto &chunk : chunkAllocations) {
+        // A non-zero physical offset selects the reserved type so setIPCHandleData stores it in poolOffset.
+        uint8_t ipcType;
+        if (chunk.isHost) {
+            ipcType = static_cast<uint8_t>(chunk.physicalOffset != 0 ? InternalIpcMemoryType::reservedHostMemory : InternalIpcMemoryType::hostUnifiedMemory);
+        } else {
+            ipcType = static_cast<uint8_t>(chunk.physicalOffset != 0 ? InternalIpcMemoryType::reservedDeviceMemory : InternalIpcMemoryType::deviceUnifiedMemory);
+        }
+        uint8_t reservedHandleDataStorage[sizeof(IpcOpaqueMemoryData::reservedHandleData)] = {0};
+        void *reservedHandleData = fabricAccessible ? reservedHandleDataStorage : nullptr;
+        ze_ipc_mem_handle_t ipcHandle = {};
+        auto result = encodeIpcHandleForRangeAllocation(chunk.alloc, chunk.mappedStart, ipcType, chunk.physicalOffset, reservedHandleData, ipcHandle);
+        if (result != ZE_RESULT_SUCCESS) {
+            releaseIpcRangeChunkHandles(handleKeys);
+            return result;
+        }
+        handles.push_back(ipcHandle);
+        handleKeys.push_back(getIpcHandleKey(ipcHandle));
+    }
+
+    // The transport host buffer carries the header + per-chunk handles and is itself exported as the
+    // returned range handle. shareable is deliberately left unset: it routes the allocation through the
+    // KMD path (MemoryPool::systemCpuInaccessible, cpuPtr == nullptr), which defeats the CPU access the
+    // exporter needs to write the blob and the importer to read it back.
+    NEO::UnifiedMemoryProperties transportProperties(InternalMemoryType::hostUnifiedMemory,
+                                                     MemoryConstants::pageSize,
+                                                     this->rootDeviceIndices,
+                                                     this->deviceBitfields);
+    void *transportPtr = this->driverHandle->svmAllocsManager->createHostUnifiedMemoryAllocation(transportSize, transportProperties);
+    if (transportPtr == nullptr) {
+        PRINT_STRING(NEO::debugManager.flags.PrintDebugMessages.get(), stderr,
+                     "zeMemGetIpcHandleWithProperties(range): ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY - failed to allocate %zu bytes of host transport memory to store %zu range IPC handles\n",
+                     transportSize, handles.size());
+        releaseIpcRangeChunkHandles(handleKeys);
+        return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+    }
+
+    auto transportSvmData = this->driverHandle->svmAllocsManager->getSVMAlloc(transportPtr);
+    auto transportAlloc = transportSvmData ? transportSvmData->gpuAllocations.getDefaultGraphicsAllocation() : nullptr;
+    if (transportAlloc == nullptr) {
+        this->freeMem(transportPtr);
+        releaseIpcRangeChunkHandles(handleKeys);
+        return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+    }
+
+    uint8_t transportReservedHandleData[sizeof(IpcOpaqueMemoryData::reservedHandleData)] = {0};
+    auto encodeResult = encodeIpcHandleForRangeAllocation(transportAlloc, reinterpret_cast<uint64_t>(transportPtr),
+                                                          static_cast<uint8_t>(InternalIpcMemoryType::hostUnifiedMemory), 0u,
+                                                          fabricAccessible ? transportReservedHandleData : nullptr, *pIpcHandle);
+    if (encodeResult != ZE_RESULT_SUCCESS) {
+        this->freeMem(transportPtr);
+        releaseIpcRangeChunkHandles(handleKeys);
+        return encodeResult;
+    }
+    // Stamp the discriminator read back by isIpcRangeHandle. The real host-vs-device merge path is
+    // carried in the header (rangeIsHost), so this byte is free to mark the handle as a range transport.
+    reinterpret_cast<IpcOpaqueMemoryData *>(pIpcHandle->data)->memoryType = static_cast<uint8_t>(InternalIpcMemoryType::ipcRangeTransport);
+
+    IpcRangeTransportHeader header{};
+    header.magic = ipcRangeHandleMagic;
+    header.version = ipcRangeTransportVersion;
+    header.numHandles = static_cast<uint32_t>(handles.size());
+    // First chunk is exported whole; carry the delta from its base to ptr so an interior ptr resolves correctly.
+    header.leadingOffset = rangeStart - chunkAllocations.front().mappedStart;
+    header.rangeIsHost = rangeIsHost ? 1u : 0u;
+
+    auto transportBase = reinterpret_cast<uint8_t *>(transportPtr);
+    std::memcpy(transportBase, &header, sizeof(header));
+    std::memcpy(transportBase + sizeof(header), handles.data(), handles.size() * sizeof(ze_ipc_mem_handle_t));
+
+    {
+        std::lock_guard<std::mutex> lock(this->ipcRangeTransportMutex);
+        IpcRangeTransportEntry entry;
+        entry.baseAddress = ptr;
+        entry.transportPtr = transportPtr;
+        entry.transportHandleKey = getIpcHandleKey(*pIpcHandle);
+        entry.handleKeys = std::move(handleKeys);
+        this->ipcRangeTransports.push_back(std::move(entry));
+        this->ipcRangeTransportsPresent.store(true, std::memory_order_release);
+    }
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::openIpcRangeHandle(ze_device_handle_t hDevice,
+                                        const ze_ipc_mem_handle_t &ipcHandle,
+                                        ze_ipc_memory_flags_t flags,
+                                        void **pptr) {
+    if (pptr == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    // Range IPC is supported only on the opaque IPC handle path; legacy handle data is not supported.
+    if (!settings.useOpaqueHandle) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+    }
+
+    if (getMaxIpcRangeHandleCount() == 0u) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+    }
+
+    // The range handle is the transport buffer's opaque IPC handle. Import that single shareable host
+    // allocation through the normal path, read the header + per-chunk handles out of its bytes, then
+    // release it - the transport carries no user data of its own.
+    uint64_t transportHandle = 0;
+    uint8_t transportType = 0;
+    unsigned int transportProcessId = 0;
+    uint64_t transportPoolOffset = 0;
+    uint64_t transportCacheID = 0;
+    bool transportCompressed = false;
+    bool transportIsOpaque = false;
+    void *transportReservedHandleData = nullptr;
+    getDataFromIpcHandle(hDevice, ipcHandle, transportHandle, transportType, transportProcessId, transportPoolOffset, transportCacheID, transportReservedHandleData, transportCompressed, transportIsOpaque);
+
+    auto transportImport = getMemHandlePtr(hDevice,
+                                           transportHandle,
+                                           NEO::AllocationType::bufferHostMemory,
+                                           true,
+                                           transportProcessId,
+                                           flags,
+                                           transportCacheID,
+                                           transportReservedHandleData,
+                                           transportCompressed,
+                                           transportIsOpaque,
+                                           0u);
+    NEO::GraphicsAllocation *transportAllocation = transportImport.first;
+    void *transportPtr = transportImport.second;
+    if (transportPtr == nullptr || transportAllocation == nullptr) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    IpcRangeTransportHeader header{};
+    std::memcpy(&header, transportPtr, sizeof(header));
+    if (header.magic != ipcRangeHandleMagic || header.version != ipcRangeTransportVersion || header.numHandles == 0) {
+        this->freeMem(transportPtr);
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    // numHandles is peer-controlled; reject a header claiming more handles than the imported transport holds.
+    const uint64_t requiredTransportSize = sizeof(IpcRangeTransportHeader) + static_cast<uint64_t>(header.numHandles) * sizeof(ze_ipc_mem_handle_t);
+    if (requiredTransportSize > transportAllocation->getUnderlyingBufferSize()) {
+        this->freeMem(transportPtr);
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    const bool rangeIsHost = (header.rangeIsHost != 0);
+
+    std::vector<ze_ipc_mem_handle_t> ipcHandles(header.numHandles);
+    std::memcpy(ipcHandles.data(), reinterpret_cast<uint8_t *>(transportPtr) + sizeof(header), header.numHandles * sizeof(ze_ipc_mem_handle_t));
+
+    this->freeMem(transportPtr);
+
+    auto device = Device::fromHandle(hDevice);
+    auto neoDevice = device->getNEODevice();
+    if (device->isImplicitScalingCapable()) {
+        neoDevice = device->getNEODevice()->getRootDevice();
+    }
+
+    std::vector<NEO::osHandle> handles;
+    handles.reserve(header.numHandles);
+    // importOpaqueHandleWithFallback creates a fresh per-chunk handle (on Linux a new fd plus an import-cache
+    // entry). If a later chunk is rejected or the merged allocation fails to build, chunks 0..i-1 already
+    // imported here would leak because no allocation ever takes ownership of them. Track {importHandle, cacheID}
+    // per chunk and release them on every failure exit - the import-side counterpart of releaseIpcRangeChunkHandles.
+    std::vector<std::pair<uint64_t, uint64_t>> importedChunks;
+    importedChunks.reserve(header.numHandles);
+    // Per-chunk physical offset (carried in each chunk's poolOffset) so the importer reproduces each object at the same offset.
+    std::vector<uint64_t> physicalOffsets;
+    physicalOffsets.reserve(header.numHandles);
+    for (uint32_t i = 0; i < header.numHandles; i++) {
+        uint64_t handle;
+        uint8_t type;
+        unsigned int processId;
+        uint64_t cacheID;
+        uint64_t chunkPoolOffset = 0u;
+        bool compressedMemory = false;
+        bool isOpaqueHandle = false;
+        void *reservedHandleData = nullptr;
+        getDataFromIpcHandle(hDevice, ipcHandles[i], handle, type, processId, chunkPoolOffset, cacheID, reservedHandleData, compressedMemory, isOpaqueHandle);
+
+        // Each chunk must match the range's memory class (reserved or plain variant of it).
+        const bool chunkIsHost = (type == static_cast<uint8_t>(InternalIpcMemoryType::hostUnifiedMemory)) ||
+                                 (type == static_cast<uint8_t>(InternalIpcMemoryType::reservedHostMemory));
+        const bool chunkIsDevice = (type == static_cast<uint8_t>(InternalIpcMemoryType::deviceUnifiedMemory)) ||
+                                   (type == static_cast<uint8_t>(InternalIpcMemoryType::reservedDeviceMemory));
+        if ((rangeIsHost && !chunkIsHost) || (!rangeIsHost && !chunkIsDevice)) {
+            releaseImportedRangeChunkHandles(importedChunks);
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+
+        // Only opaque per-chunk handles are accepted. A non-opaque handle means legacy handle data
+        // (unsupported for range) or a handle modified by the user, so reject it.
+        if (!isOpaqueHandle) {
+            releaseImportedRangeChunkHandles(importedChunks);
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        auto importResult = importOpaqueHandleWithFallback(handle, processId, cacheID, reservedHandleData, neoDevice, true);
+        if (!importResult.success) {
+            releaseImportedRangeChunkHandles(importedChunks);
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        handles.push_back(static_cast<NEO::osHandle>(importResult.importHandle));
+        importedChunks.push_back({importResult.importHandle, cacheID});
+        physicalOffsets.push_back(chunkPoolOffset);
+    }
+
+    auto memoryManager = this->driverHandle->getMemoryManager();
+    NEO::SvmAllocationData allocDataInternal(neoDevice->getRootDeviceIndex());
+    NEO::GraphicsAllocation *rangeAllocation = nullptr;
+    if (rangeIsHost) {
+        // Host reserved memory uses CPU mmap and cannot go through the device merge.
+        NEO::AllocationProperties hostProperties{neoDevice->getRootDeviceIndex(),
+                                                 MemoryConstants::pageSize,
+                                                 NEO::AllocationType::bufferHostMemory,
+                                                 neoDevice->getDeviceBitfield()};
+        rangeAllocation = memoryManager->createHostAllocationFromMultipleSharedHandles(handles, hostProperties, physicalOffsets, false);
+        if (rangeAllocation == nullptr) {
+            releaseImportedRangeChunkHandles(importedChunks);
+            return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+        }
+        allocDataInternal.gpuAllocations.addAllocation(rangeAllocation);
+        allocDataInternal.cpuAllocation = nullptr;
+        allocDataInternal.size = rangeAllocation->getUnderlyingBufferSize();
+        allocDataInternal.memoryType = InternalMemoryType::hostUnifiedMemory;
+        allocDataInternal.device = neoDevice;
+        allocDataInternal.isImportedAllocation = true;
+        rangeAllocation->setIsImported();
+        allocDataInternal.setAllocId(++this->driverHandle->svmAllocsManager->allocationsCounter);
+        this->driverHandle->getSvmAllocsManager()->insertSVMAlloc(allocDataInternal);
+        *pptr = reinterpret_cast<void *>(rangeAllocation->getGpuAddress());
+    } else {
+        *pptr = this->driverHandle->importFdHandles(neoDevice, flags, handles, nullptr, &rangeAllocation, allocDataInternal, false, physicalOffsets);
+        if (nullptr == *pptr) {
+            releaseImportedRangeChunkHandles(importedChunks);
+            return ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY;
+        }
+    }
+
+    // PRIME_FD_TO_HANDLE transfers ownership to the merged BOs; the temporary fds are no longer needed.
+    releaseImportedRangeChunkHandles(importedChunks);
+
+    // Shift the merged base by the exporter's intra-chunk offset so an interior ptr resolves to its window.
+    // The SVM entry stays keyed on the merged base and spans the whole imported chunks (the SVM range
+    // tracker keys on getGpuAddressWithoutOffset and looks up by base+size, so it must cover every byte the
+    // importer can dereference); zeMemGetAddressRange therefore reports the merged allocation extent, not the
+    // exporter's sub-window.
+    if (header.leadingOffset != 0) {
+        *pptr = reinterpret_cast<void *>(reinterpret_cast<uint8_t *>(*pptr) + header.leadingOffset);
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::putIpcRangeHandle(const ze_ipc_mem_handle_t &ipcHandle) {
+    const uint64_t transportHandleKey = getIpcHandleKey(ipcHandle);
+
+    std::lock_guard<std::mutex> lock(this->ipcRangeTransportMutex);
+    for (auto it = this->ipcRangeTransports.begin(); it != this->ipcRangeTransports.end(); ++it) {
+        if (it->transportHandleKey == transportHandleKey) {
+            releaseIpcRangeChunkHandles(it->handleKeys);
+            releaseIpcRangeTransport(it->transportPtr);
+            this->ipcRangeTransports.erase(it);
+            break;
+        }
+    }
+    this->ipcRangeTransportsPresent.store(!this->ipcRangeTransports.empty(), std::memory_order_release);
+
+    return ZE_RESULT_SUCCESS;
+}
+
+void Context::releaseIpcRangeChunkHandles(const std::vector<uint64_t> &handleKeys) {
+    if (handleKeys.empty()) {
+        return;
+    }
+    auto lock = driverHandle->lockIPCHandleMap();
+    for (auto handle : handleKeys) {
+        closeIpcHandleTracking(handle);
+    }
+}
+
+void Context::releaseIpcRangeTransport(const void *transportPtr) {
+    if (transportPtr == nullptr) {
+        return;
+    }
+    // freeMem closes the exported transport IPC handle (matched by ptr in the IPC handle map) and frees
+    // the host allocation in one step.
+    this->freeMem(transportPtr);
+}
+
+bool Context::releaseIpcRangeTransportForPtr(const void *ptr) {
+    if (!this->ipcRangeTransportsPresent.load(std::memory_order_acquire)) {
+        return false;
+    }
+    std::lock_guard<std::mutex> lock(this->ipcRangeTransportMutex);
+    bool released = false;
+    for (auto it = this->ipcRangeTransports.begin(); it != this->ipcRangeTransports.end();) {
+        if (it->baseAddress == ptr) {
+            releaseIpcRangeChunkHandles(it->handleKeys);
+            releaseIpcRangeTransport(it->transportPtr);
+            it = this->ipcRangeTransports.erase(it);
+            released = true;
+        } else {
+            ++it;
+        }
+    }
+    this->ipcRangeTransportsPresent.store(!this->ipcRangeTransports.empty(), std::memory_order_release);
+    return released;
+}
+
+ze_result_t Context::openEventPoolIpcHandle(const ze_ipc_event_pool_handle_t &ipcEventPoolHandle,
+                                            ze_event_pool_handle_t *eventPoolHandle) {
+    return EventPool::openEventPoolIpcHandle(ipcEventPoolHandle, eventPoolHandle, driverHandle, this, this->numDevices, this->deviceHandles.data());
+}
+
+ze_result_t Context::openCounterBasedIpcHandle(const IpcCounterBasedEventData &ipcData, ze_event_handle_t *phEvent) {
+    return Event::openCounterBasedIpcHandle(ipcData, phEvent, driverHandle, this, this->numDevices, this->deviceHandles.data());
+}
+
+ze_result_t Context::handleAllocationExtensions(NEO::GraphicsAllocation *alloc, ze_memory_type_t type, void *pNext, DriverHandle *driverHandle) {
+    if (pNext != nullptr) {
+        ze_base_properties_t *extendedProperties =
+            reinterpret_cast<ze_base_properties_t *>(pNext);
+        if (extendedProperties->stype == ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_FD) {
+            ze_external_memory_export_fd_t *extendedMemoryExportProperties =
+                reinterpret_cast<ze_external_memory_export_fd_t *>(extendedProperties);
+            if (type == ZE_MEMORY_TYPE_SHARED) {
+                return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+            }
+            ze_ipc_mem_handle_t ipcHandle;
+            uint64_t handle = 0;
+            auto result = getIpcMemHandle(reinterpret_cast<void *>(alloc->getGpuAddress()), nullptr, &ipcHandle);
+            if (result != ZE_RESULT_SUCCESS) {
+                // If this memory is not an SVM Allocation like Images, then retrieve only the handle untracked.
+                auto ret = alloc->peekInternalHandle(driverHandle->getMemoryManager(), handle, nullptr);
+                if (ret < 0) {
+                    return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+                }
+            } else {
+                using IpcDataT = IpcMemoryData;
+                IpcDataT &ipcData = *reinterpret_cast<IpcDataT *>(ipcHandle.data);
+                handle = ipcData.handle;
+            }
+            extendedMemoryExportProperties->fd = static_cast<int>(handle);
+        } else if (extendedProperties->stype == ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_WIN32) {
+            ze_external_memory_export_win32_handle_t *exportStructure = reinterpret_cast<ze_external_memory_export_win32_handle_t *>(extendedProperties);
+            if (exportStructure->flags != ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_WIN32) {
+                return ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION;
+            }
+            uint64_t handle = 0;
+            int ret = alloc->peekInternalHandle(driverHandle->getMemoryManager(), handle, nullptr);
+            if (ret < 0) {
+                return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+            }
+            exportStructure->handle = reinterpret_cast<void *>(handle);
+        } else if (extendedProperties->stype == ZE_STRUCTURE_TYPE_MEMORY_SUB_ALLOCATIONS_EXP_PROPERTIES) {
+            const auto numHandles = alloc->getNumHandles();
+            if (numHandles > 0) {
+                ze_memory_sub_allocations_exp_properties_t *extendedSubAllocProperties =
+                    reinterpret_cast<ze_memory_sub_allocations_exp_properties_t *>(extendedProperties);
+                if (extendedSubAllocProperties->pCount == nullptr) {
+                    return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+                }
+                if ((*extendedSubAllocProperties->pCount == 0) || (*extendedSubAllocProperties->pCount > numHandles)) {
+                    *extendedSubAllocProperties->pCount = numHandles;
+                }
+                if (extendedSubAllocProperties->pSubAllocations) {
+                    for (uint32_t i = 0; i < *extendedSubAllocProperties->pCount; i++) {
+                        extendedSubAllocProperties->pSubAllocations[i].base = reinterpret_cast<void *>(alloc->getHandleAddressBase(i));
+                        extendedSubAllocProperties->pSubAllocations[i].size = alloc->getHandleSize(i);
+                    }
+                    // If pSubAllocations nullptr, then user getting Count first and calling second time
+                }
+                return ZE_RESULT_SUCCESS;
+            }
+            return ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION;
+        } else {
+            return ZE_RESULT_ERROR_INVALID_ENUMERATION;
+        }
+    }
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getMemAllocProperties(const void *ptr,
+                                           ze_memory_allocation_properties_t *pMemAllocProperties,
+                                           ze_device_handle_t *phDevice) {
+    const auto alloc = driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+    if (nullptr == alloc) {
+        pMemAllocProperties->type = ZE_MEMORY_TYPE_UNKNOWN;
+        return ZE_RESULT_SUCCESS;
+    }
+
+    pMemAllocProperties->type = Context::parseUSMType(alloc->memoryType);
+    pMemAllocProperties->pageSize = alloc->pageSizeForAlignment;
+    pMemAllocProperties->id = alloc->getAllocId();
+
+    if (phDevice != nullptr) {
+        if (alloc->device == nullptr) {
+            *phDevice = nullptr;
+        } else {
+            auto device = static_cast<NEO::Device *>(alloc->device)->getSpecializedDevice<Device>();
+            DEBUG_BREAK_IF(device == nullptr);
+            *phDevice = device->toHandle();
+        }
+    }
+    if (pMemAllocProperties->pNext == nullptr) {
+        return ZE_RESULT_SUCCESS;
+    }
+    return handleAllocationExtensions(alloc->gpuAllocations.getDefaultGraphicsAllocation(),
+                                      pMemAllocProperties->type,
+                                      pMemAllocProperties->pNext,
+                                      driverHandle);
+}
+
+ze_result_t Context::getImageAllocProperties(Image *image, ze_image_allocation_ext_properties_t *pAllocProperties) {
+    NEO::GraphicsAllocation *alloc = image->getAllocation();
+
+    if (alloc == nullptr) {
+        return ZE_RESULT_ERROR_UNKNOWN;
+    }
+
+    pAllocProperties->id = 0;
+
+    return handleAllocationExtensions(alloc, ZE_MEMORY_TYPE_DEVICE, pAllocProperties->pNext, driverHandle);
+}
+
+ze_result_t Context::setAtomicAccessAttribute(ze_device_handle_t hDevice, const void *ptr, size_t size, ze_memory_atomic_attr_exp_flags_t attr) {
+    if (nullptr == hDevice) {
+        // no support for atomics for multi-device shared allocations at the moment
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    auto device = Device::fromHandle(hDevice);
+    auto allocData = device->getDriverHandle()->getSvmAllocsManager()->getSVMAlloc(ptr);
+    const bool sharedSystemAllocEnabled = device->getNEODevice()->areSharedSystemAllocationsAllowed();
+
+    if (allocData == nullptr && !sharedSystemAllocEnabled) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (allocData != nullptr) {
+        ze_memory_allocation_properties_t memoryProperties = {};
+        this->getMemAllocProperties(ptr, &memoryProperties, &hDevice);
+        if (memoryProperties.type != ZE_MEMORY_TYPE_SHARED) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+    }
+
+    const bool isSharedSystemAlloc = ((allocData == nullptr) && sharedSystemAllocEnabled);
+
+    auto attrEval = static_cast<uint32_t>(attr);
+
+    ze_device_memory_access_properties_t memProp;
+    device->getMemoryAccessProperties(&memProp);
+    NEO::AtomicAccessMode mode = NEO::AtomicAccessMode::invalid;
+
+    if (attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_DEVICE_ATOMICS) {
+        auto deviceAllocCapabilities = memProp.deviceAllocCapabilities;
+        if (!(deviceAllocCapabilities & ZE_MEMORY_ACCESS_CAP_FLAG_ATOMIC)) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        mode = NEO::AtomicAccessMode::device;
+    }
+    if (attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_HOST_ATOMICS) {
+        auto hostAllocCapabilities = memProp.hostAllocCapabilities;
+        if (!(hostAllocCapabilities & ZE_MEMORY_ACCESS_CAP_FLAG_ATOMIC)) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+        mode = NEO::AtomicAccessMode::host;
+    }
+
+    if (attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_SYSTEM_ATOMICS) {
+        if (isSharedSystemAlloc) {
+            auto sharedSystemAllocCapabilities = memProp.sharedSystemAllocCapabilities;
+            if (!(sharedSystemAllocCapabilities & ZE_MEMORY_ACCESS_CAP_FLAG_CONCURRENT_ATOMIC)) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+        } else {
+            auto sharedSingleDeviceAllocCapabilities = memProp.sharedSingleDeviceAllocCapabilities;
+            auto sharedCrossDeviceAllocCapabilities = memProp.sharedCrossDeviceAllocCapabilities;
+            if ((!(sharedSingleDeviceAllocCapabilities & ZE_MEMORY_ACCESS_CAP_FLAG_CONCURRENT_ATOMIC)) &&
+                (!(sharedCrossDeviceAllocCapabilities & ZE_MEMORY_ACCESS_CAP_FLAG_CONCURRENT_ATOMIC))) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+        }
+        mode = NEO::AtomicAccessMode::system;
+    }
+
+    if (attr == 0) {
+        if (isSharedSystemAlloc) {
+            auto sharedSystemAllocCapabilities = memProp.sharedSystemAllocCapabilities;
+            if (!(sharedSystemAllocCapabilities & ZE_MEMORY_ACCESS_CAP_FLAG_CONCURRENT_ATOMIC)) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+        }
+        mode = NEO::AtomicAccessMode::none;
+    }
+
+    if ((attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_NO_HOST_ATOMICS) || (attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_NO_ATOMICS) || (attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_NO_DEVICE_ATOMICS) || (attrEval & ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_NO_SYSTEM_ATOMICS)) {
+        mode = NEO::AtomicAccessMode::none;
+    }
+
+    if (mode == NEO::AtomicAccessMode::invalid) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (isSharedSystemAlloc) {
+        auto unifiedMemoryManager = driverHandle->getSvmAllocsManager();
+        if (!unifiedMemoryManager->sharedSystemAtomicAccess(*device->getNEODevice(), mode, ptr, size)) {
+            return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+        }
+    } else {
+        auto memoryManager = device->getDriverHandle()->getMemoryManager();
+        auto alloc = allocData->gpuAllocations.getGraphicsAllocation(device->getRootDeviceIndex());
+        memoryManager->setAtomicAccess(alloc, size, mode, device->getRootDeviceIndex());
+        device->atomicAccessAllocations[allocData] = attr;
+    }
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getAtomicAccessAttribute(ze_device_handle_t hDevice, const void *ptr, size_t size, ze_memory_atomic_attr_exp_flags_t *pAttr) {
+
+    auto device = Device::fromHandle(hDevice);
+    auto allocData = device->getDriverHandle()->getSvmAllocsManager()->getSVMAlloc(ptr);
+    const bool sharedSystemAllocEnabled = device->getNEODevice()->areSharedSystemAllocationsAllowed();
+    const bool isSharedSystemAlloc = ((allocData == nullptr) && sharedSystemAllocEnabled);
+
+    if (allocData == nullptr && !sharedSystemAllocEnabled) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (isSharedSystemAlloc) {
+
+        auto unifiedMemoryManager = driverHandle->getSvmAllocsManager();
+        auto mode = unifiedMemoryManager->getSharedSystemAtomicAccess(*device->getNEODevice(), ptr, size);
+        switch (mode) {
+        case NEO::AtomicAccessMode::device:
+            *pAttr = ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_DEVICE_ATOMICS;
+            break;
+        case NEO::AtomicAccessMode::host:
+            *pAttr = ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_HOST_ATOMICS;
+            break;
+        case NEO::AtomicAccessMode::system:
+            *pAttr = ZE_MEMORY_ATOMIC_ATTR_EXP_FLAG_SYSTEM_ATOMICS;
+            break;
+        case NEO::AtomicAccessMode::none:
+            *pAttr = 0;
+            break;
+        default:
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+    } else {
+        if (auto it = device->atomicAccessAllocations.find(allocData); it != device->atomicAccessAllocations.end()) {
+            *pAttr = it->second;
+            return ZE_RESULT_SUCCESS;
+        }
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::mapDeviceMemToHost(const void *ptr, void **pptr, void *pNext) {
+
+    if (pNext) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;
+    }
+
+    auto allocData = this->driverHandle->svmAllocsManager->getSVMAlloc(ptr);
+    if (!allocData) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    auto gpuAllocation = allocData->gpuAllocations.getDefaultGraphicsAllocation();
+    if (gpuAllocation->isCompressionEnabled()) {
+        return ZE_RESULT_ERROR_INCOMPATIBLE_RESOURCE;
+    }
+
+    auto cpuPtr = this->driverHandle->memoryManager->lockResource(gpuAllocation);
+    if (!cpuPtr) {
+        return ZE_RESULT_ERROR_INCOMPATIBLE_RESOURCE;
+    }
+
+    auto poolLookup = getUsmPoolOwningPtr(ptr, allocData);
+    *pptr = ptrOffset(cpuPtr, poolLookup.pool ? poolLookup.pool->getOffsetInPool(ptr) : 0u);
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::createModule(ze_device_handle_t hDevice,
+                                  const ze_module_desc_t *desc,
+                                  ze_module_handle_t *phModule,
+                                  ze_module_build_log_handle_t *phBuildLog) {
+    return L0::Device::fromHandle(hDevice)->createModule(desc, phModule, phBuildLog, ModuleType::user);
+}
+
+ze_result_t Context::createSampler(ze_device_handle_t hDevice,
+                                   const ze_sampler_desc_t *pDesc,
+                                   ze_sampler_handle_t *phSampler) {
+    return L0::Device::fromHandle(hDevice)->createSampler(pDesc, phSampler);
+}
+
+ze_result_t Context::createCommandQueue(ze_device_handle_t hDevice,
+                                        const ze_command_queue_desc_t *desc,
+                                        ze_command_queue_handle_t *commandQueue) {
+    return L0::Device::fromHandle(hDevice)->createCommandQueue(desc, commandQueue, this->getPowerHint());
+}
+
+ze_result_t Context::createCommandList(ze_device_handle_t hDevice,
+                                       const ze_command_list_desc_t *desc,
+                                       ze_command_list_handle_t *commandList,
+                                       uint32_t estimatedNumberOfCommands) {
+    auto ret = L0::Device::fromHandle(hDevice)->createCommandList(desc, commandList, estimatedNumberOfCommands);
+    if (*commandList) {
+        L0::CommandList::fromHandle(*commandList)->setCmdListContext(this->toHandle());
+    }
+    return ret;
+}
+
+ze_result_t Context::createCommandListImmediate(ze_device_handle_t hDevice,
+                                                const ze_command_queue_desc_t *desc,
+                                                ze_command_list_handle_t *commandList) {
+    auto ret = L0::Device::fromHandle(hDevice)->createCommandListImmediate(desc, commandList, this->getPowerHint());
+    if (*commandList) {
+        L0::CommandList::fromHandle(*commandList)->setCmdListContext(this->toHandle());
+    }
+    return ret;
+}
+
+ze_result_t Context::activateMetricGroups(zet_device_handle_t hDevice,
+                                          uint32_t count,
+                                          zet_metric_group_handle_t *phMetricGroups) {
+    return L0::Device::fromHandle(hDevice)->activateMetricGroupsDeferred(count, phMetricGroups);
+}
+
+NEO::VirtualMemoryReservation *Context::findSupportedVirtualReservation(const void *ptr, size_t size) {
+    void *address = const_cast<void *>(ptr);
+    auto allocation = this->driverHandle->getMemoryManager()->getVirtualMemoryReservationMap().lower_bound(address);
+    if (allocation != this->driverHandle->getMemoryManager()->getVirtualMemoryReservationMap().end()) {
+        if (ptr == allocation->first && ptrOffset(reinterpret_cast<uint64_t>(allocation->first), allocation->second->virtualAddressRange.size) >= ptrOffset(reinterpret_cast<uint64_t>(address), size)) {
+            return allocation->second;
+        }
+    }
+    if (allocation != this->driverHandle->getMemoryManager()->getVirtualMemoryReservationMap().begin()) {
+        allocation--;
+        if (ptrOffset(allocation->first, allocation->second->virtualAddressRange.size) >= ptrOffset(address, size)) {
+            return allocation->second;
+        }
+    }
+    return nullptr;
+}
+
+ze_result_t Context::reserveVirtualMem(const void *pStart,
+                                       size_t size,
+                                       void **pptr) {
+
+    if (alignUp(size, MemoryConstants::pageSize) != size) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+
+    NEO::AddressRange addressRange{};
+    uint32_t reservedOnRootDeviceIndex = 0;
+    uint64_t reservationBase = 0;
+    size_t reservationTotalSize = 0;
+    size_t foldHeadroom = 0;
+
+    bool reserveOnSvmHeap = true;
+    uint64_t maxCpuVa = 0;
+
+    if (this->driverHandle->getMemoryManager()->peek32bit()) {
+        maxCpuVa = maxNBitValue(32);
+    } else {
+        maxCpuVa = NEO::CpuInfo::getInstance().getMaxCpuVirtualAddress();
+    }
+
+    uint64_t requiredStartAddress = castToUint64(pStart);
+
+    if (requiredStartAddress > maxCpuVa) {
+        reserveOnSvmHeap = false;
+    }
+
+    reserveOnSvmHeap &= settings.enableSvmHeapReservation;
+    reserveOnSvmHeap &= NEO::debugManager.flags.EnableReservingInSvmRange.get();
+
+    if (reserveOnSvmHeap) {
+
+        // A folded physical offset places object byte 0 below the reported pointer, so keep owned space there.
+        reservationTotalSize = alignUp(size, MemoryConstants::pageSize2M) + MemoryConstants::pageSize2M + virtualMemoryFoldHeadroom;
+        addressRange = this->driverHandle->getMemoryManager()->reserveCpuAddressWithZeroBaseRetry(requiredStartAddress, reservationTotalSize);
+        if (addressRange.address == 0) {
+            return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+        }
+        DEBUG_BREAK_IF(addressRange.address + reservationTotalSize > maxCpuVa);
+
+        reservationBase = addressRange.address;
+        addressRange.address = alignUp(addressRange.address, MemoryConstants::pageSize2M) + virtualMemoryFoldHeadroom;
+        addressRange.size = size;
+        // Alignment padding is owned too, so a claim beyond this would overlap the reservation itself.
+        foldHeadroom = addressRange.address - reservationBase;
+    } else {
+
+        bool useStartAddressHint = (requiredStartAddress != 0ULL);
+
+        NEO::HeapIndex heap;
+        size_t pageSize;
+
+        auto alignedSize = getPageAlignedSizeRequired(pStart, size, &heap, &pageSize);
+
+        if (!useStartAddressHint && (alignedSize != size)) {
+            return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+        }
+
+        if (useStartAddressHint) {
+            requiredStartAddress = alignUp(requiredStartAddress, pageSize);
+        }
+
+        addressRange = this->driverHandle->getMemoryManager()->reserveGpuAddressOnHeap(requiredStartAddress, alignedSize, this->driverHandle->rootDeviceIndices, &reservedOnRootDeviceIndex, heap, pageSize);
+
+        if (addressRange.address == 0) {
+            return ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY;
+        }
+        reservationBase = addressRange.address;
+        reservationTotalSize = addressRange.size;
+    }
+
+    NEO::VirtualMemoryReservation *virtualMemoryReservation = new NEO::VirtualMemoryReservation;
+    virtualMemoryReservation->virtualAddressRange = addressRange;
+    virtualMemoryReservation->isSvmReservation = reserveOnSvmHeap;
+    virtualMemoryReservation->rootDeviceIndex = reservedOnRootDeviceIndex;
+    virtualMemoryReservation->flags.readWrite = false;
+    virtualMemoryReservation->flags.readOnly = false;
+    virtualMemoryReservation->flags.noAccess = true;
+    virtualMemoryReservation->reservationSize = size;
+    virtualMemoryReservation->reservationBase = reservationBase;
+    virtualMemoryReservation->reservationTotalSize = reservationTotalSize;
+    virtualMemoryReservation->foldPrefixSize = foldHeadroom;
+    virtualMemoryReservation->foldHeadroomSize = foldHeadroom;
+    auto lock = this->driverHandle->getMemoryManager()->lockVirtualMemoryReservationMap();
+    this->driverHandle->getMemoryManager()->getVirtualMemoryReservationMap().emplace(reinterpret_cast<void *>(virtualMemoryReservation->virtualAddressRange.address), virtualMemoryReservation);
+    *pptr = reinterpret_cast<void *>(virtualMemoryReservation->virtualAddressRange.address);
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::freeVirtualMem(const void *ptr,
+                                    size_t size) {
+    ze_result_t result = ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    {
+        auto lock = this->driverHandle->getMemoryManager()->lockVirtualMemoryReservationMap();
+        auto &reservationMap = this->driverHandle->getMemoryManager()->getVirtualMemoryReservationMap();
+        auto it = reservationMap.find(const_cast<void *>(ptr));
+        if (it != reservationMap.end()) {
+            for (auto &pairDevice : this->devices) {
+                this->freePeerAllocations(ptr, false, Device::fromHandle(pairDevice.second));
+            }
+
+            NEO::VirtualMemoryReservation *virtualMemoryReservation = it->second;
+            if (virtualMemoryReservation->reservationSize != size) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+            const size_t claimedBelowReservation = virtualMemoryReservation->foldPrefixSize - std::min(virtualMemoryReservation->foldPrefixSize, virtualMemoryReservation->foldHeadroomSize);
+            if (claimedBelowReservation > 0u) {
+                const uint64_t claimedBase = virtualMemoryReservation->virtualAddressRange.address - virtualMemoryReservation->foldPrefixSize;
+                this->driverHandle->getMemoryManager()->freeCpuAddress({claimedBase, claimedBelowReservation});
+            }
+            NEO::AddressRange addressRange{virtualMemoryReservation->reservationBase, virtualMemoryReservation->reservationTotalSize};
+            if (virtualMemoryReservation->isSvmReservation) {
+                this->driverHandle->getMemoryManager()->freeCpuAddress(addressRange);
+            } else {
+                this->driverHandle->getMemoryManager()->freeGpuAddress(addressRange, virtualMemoryReservation->rootDeviceIndex);
+            }
+            delete virtualMemoryReservation;
+            reservationMap.erase(it);
+            result = ZE_RESULT_SUCCESS;
+        }
+    }
+
+    // Release the exported range transport outside the reservation-map lock to avoid holding it across
+    // the internal-handle close ioctls.
+    if (result == ZE_RESULT_SUCCESS) {
+        this->releaseIpcRangeTransportForPtr(ptr);
+    }
+
+    return result;
+}
+
+size_t Context::getPageAlignedSizeRequired(const void *pStart, size_t size, NEO::HeapIndex *heapRequired, size_t *pageSizeRequired) {
+    [[maybe_unused]] NEO::HeapIndex heap;
+
+    auto pageSize = this->driverHandle->getMemoryManager()->selectAlignmentAndHeap(reinterpret_cast<uint64_t>(pStart), size, &heap);
+
+    if (heapRequired) {
+        *heapRequired = heap;
+    }
+
+    if (pageSizeRequired) {
+        *pageSizeRequired = pageSize;
+    }
+    // Given a size larger than the pageSize, then round the size up to the next pageSize alignment if unaligned
+    if (size > pageSize) {
+        if (size % pageSize > 0) {
+            return ((size + pageSize - 1) & ~(pageSize - 1));
+        } else {
+            return size;
+        }
+    }
+    return pageSize;
+}
+
+ze_result_t Context::queryVirtualMemPageSizeWithStartAddress(ze_device_handle_t hDevice,
+                                                             const void *pStart,
+                                                             size_t size,
+                                                             size_t *pagesize) {
+    // Retrieve the page size and heap required for this allocation size requested.
+    getPageAlignedSizeRequired(pStart, size, nullptr, pagesize);
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::queryVirtualMemPageSize(ze_device_handle_t hDevice,
+                                             size_t size,
+                                             size_t *pagesize) {
+    return queryVirtualMemPageSizeWithStartAddress(hDevice, nullptr, size, pagesize);
+}
+
+ze_result_t Context::createPhysicalMem(ze_device_handle_t hDevice,
+                                       ze_physical_mem_desc_t *desc,
+                                       ze_physical_mem_handle_t *phPhysicalMemory) {
+
+    auto device = Device::fromHandle(hDevice);
+
+    StructuresLookupTable lookupTable = {};
+    auto parseResult = prepareL0StructuresLookupTable(lookupTable, desc->pNext);
+    if (parseResult != ZE_RESULT_SUCCESS) {
+        return parseResult;
+    }
+
+    bool importMemory = false;
+    int importFd = -1;
+    if (desc->pNext) {
+        const ze_base_desc_t *extendedDesc = reinterpret_cast<const ze_base_desc_t *>(desc->pNext);
+        if (extendedDesc->stype == ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_DESC) {
+            const ze_external_memory_export_desc_t *exportDesc =
+                reinterpret_cast<const ze_external_memory_export_desc_t *>(extendedDesc);
+            if (!(exportDesc->flags & ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF) &&
+                !(exportDesc->flags & ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_FD)) {
+                return ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION;
+            }
+        } else if (extendedDesc->stype == ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMPORT_FD) {
+            const ze_external_memory_import_fd_t *importDesc =
+                reinterpret_cast<const ze_external_memory_import_fd_t *>(extendedDesc);
+            if (!(importDesc->flags & ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF) &&
+                !(importDesc->flags & ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_FD)) {
+                return ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION;
+            }
+            importMemory = true;
+            importFd = importDesc->fd;
+        } else if (extendedDesc->stype != ZE_STRUCTURE_TYPE_IPC_MEM_HANDLE_TYPE_EXT_DESC) {
+            // ZE_STRUCTURE_TYPE_IPC_MEM_HANDLE_TYPE_EXT_DESC is handled by prepareL0StructuresLookupTable
+            return ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION;
+        }
+    }
+
+    bool isPhysicalDeviceMem = true;
+    auto allocType = NEO::AllocationType::unknown;
+    NEO::Device *neoDevice = nullptr;
+    uint32_t rootDeviceIndex = 0;
+    NEO::DeviceBitfield deviceBitfield{};
+
+    if ((desc->flags & ZE_PHYSICAL_MEM_FLAG_ALLOCATE_ON_HOST) != 0) {
+        if (!isAligned<MemoryConstants::pageSize>(desc->size)) {
+            return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+        }
+        isPhysicalDeviceMem = false;
+        allocType = NEO::AllocationType::bufferHostMemory;
+        rootDeviceIndex = this->rootDeviceIndices.at(0);
+        deviceBitfield = this->deviceBitfields.at(rootDeviceIndex);
+    } else {
+        if ((getPageAlignedSizeRequired(desc->size, nullptr, nullptr) != desc->size)) {
+            return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+        }
+        neoDevice = device->getNEODevice();
+        allocType = NEO::AllocationType::buffer;
+        rootDeviceIndex = neoDevice->getRootDeviceIndex();
+        deviceBitfield = neoDevice->getDeviceBitfield();
+    }
+
+    NEO::AllocationProperties properties{rootDeviceIndex, true, desc->size, allocType, false, false, deviceBitfield};
+    properties.flags.forceSystemMemory = !isPhysicalDeviceMem;
+    properties.flags.isUSMHostAllocation = !isPhysicalDeviceMem;
+    properties.flags.isHostInaccessibleAllocation = isPhysicalDeviceMem;
+
+    NEO::GraphicsAllocation *allocation = nullptr;
+
+    if (importMemory) {
+        NEO::MemoryManager::OsHandleData osHandleData{static_cast<uint64_t>(importFd)};
+        allocation = this->driverHandle->getMemoryManager()->createPhysicalGraphicsMemoryFromSharedHandle(osHandleData, properties);
+    } else {
+        properties.flags.shareable = true;
+        allocation = this->driverHandle->getMemoryManager()->allocatePhysicalGraphicsMemory(properties);
+    }
+
+    if (!allocation) {
+        return ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY;
+    }
+    NEO::PhysicalMemoryAllocation *physicalMemoryAllocation = new NEO::PhysicalMemoryAllocation;
+    physicalMemoryAllocation->allocation = allocation;
+    physicalMemoryAllocation->device = neoDevice;
+    physicalMemoryAllocation->ipcHandleTypeFlags = lookupTable.ipcHandleTypeFlags;
+    auto lock = this->driverHandle->getMemoryManager()->lockPhysicalMemoryAllocationMap();
+    this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().emplace(reinterpret_cast<void *>(allocation), physicalMemoryAllocation);
+    *phPhysicalMemory = reinterpret_cast<ze_physical_mem_handle_t>(allocation);
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::getPhysicalMemProperties(ze_physical_mem_handle_t hPhysicalMemory,
+                                              ze_physical_mem_properties_t *pMemProperties) {
+    auto lock = this->driverHandle->getMemoryManager()->lockPhysicalMemoryAllocationMap();
+    auto it = this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().find(static_cast<void *>(hPhysicalMemory));
+    if (it == this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().end()) {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+    auto allocation = it->second->allocation;
+
+    pMemProperties->size = allocation->getUnderlyingBufferSize();
+
+    if (pMemProperties->pNext) {
+        ze_base_properties_t *extendedProperties =
+            reinterpret_cast<ze_base_properties_t *>(pMemProperties->pNext);
+        if (extendedProperties->stype == ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_FD) {
+            ze_external_memory_export_fd_t *extendedMemoryExportProperties =
+                reinterpret_cast<ze_external_memory_export_fd_t *>(extendedProperties);
+            uint64_t handle = 0;
+            auto ret = allocation->peekInternalHandle(this->driverHandle->getMemoryManager(), handle, nullptr);
+            if (ret < 0) {
+                return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+            }
+            extendedMemoryExportProperties->fd = static_cast<int>(handle);
+        } else {
+            return ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION;
+        }
+    }
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::destroyPhysicalMem(ze_physical_mem_handle_t hPhysicalMemory) {
+    std::map<void *, NEO::PhysicalMemoryAllocation *>::iterator it;
+    auto lock = this->driverHandle->getMemoryManager()->lockPhysicalMemoryAllocationMap();
+    it = this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().find(static_cast<void *>(hPhysicalMemory));
+    if (it != this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().end()) {
+        NEO::PhysicalMemoryAllocation *allocationNode = it->second;
+        this->driverHandle->getMemoryManager()->freeGraphicsMemoryImpl(allocationNode->allocation);
+        this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().erase(it);
+        delete allocationNode;
+    }
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::mapVirtualMem(const void *ptr,
+                                   size_t size,
+                                   ze_physical_mem_handle_t hPhysicalMemory,
+                                   size_t offset,
+                                   ze_memory_access_attribute_t access) {
+    std::map<void *, NEO::PhysicalMemoryAllocation *>::iterator physicalIt;
+    NEO::PhysicalMemoryAllocation *allocationNode = nullptr;
+
+    auto lockPhysical = this->driverHandle->getMemoryManager()->lockPhysicalMemoryAllocationMap();
+    physicalIt = this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().find(static_cast<void *>(hPhysicalMemory));
+    if (physicalIt != this->driverHandle->getMemoryManager()->getPhysicalMemoryAllocationMap().end()) {
+        allocationNode = physicalIt->second;
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    size_t pageSizeRequired = 0;
+    if (getPageAlignedSizeRequired(size, nullptr, &pageSizeRequired) != size) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+    if (!isAligned(castToUint64(ptr), pageSizeRequired)) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_ALIGNMENT;
+    }
+
+    if (offset) {
+        size_t alignedOffset = getPageAlignedSizeRequired(offset, nullptr, nullptr);
+        if (alignedOffset != offset) {
+            return ZE_RESULT_ERROR_UNSUPPORTED_ALIGNMENT;
+        }
+
+        // offset + size must stay within the physical allocation, otherwise the bind
+        // would run past the physical BO. Checked overflow-safe against the size.
+        const size_t physicalSize = allocationNode->allocation->getUnderlyingBufferSize();
+        if ((offset > physicalSize) || ((physicalSize - offset) < size)) {
+            return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        }
+    }
+
+    NEO::VirtualMemoryReservation *virtualMemoryReservation = nullptr;
+    auto lockVirtual = this->driverHandle->getMemoryManager()->lockVirtualMemoryReservationMap();
+
+    // Physical device memory may currently back only a single virtual address mapping; host
+    // physical memory does support multiple mappings, so this restriction is limited to device
+    // memory. Reject the request if this device physical handle is already mapped to a reserved VA.
+    if (allocationNode->allocation->getAllocationType() == NEO::AllocationType::buffer) {
+        for (const auto &reservationPair : this->driverHandle->getMemoryManager()->getVirtualMemoryReservationMap()) {
+            for (const auto &mappedPair : reservationPair.second->mappedAllocations) {
+                if (mappedPair.second->physicalHandle == static_cast<void *>(hPhysicalMemory)) {
+                    return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+                }
+            }
+        }
+    }
+
+    virtualMemoryReservation = findSupportedVirtualReservation(ptr, size);
+    if (virtualMemoryReservation) {
+        switch (access) {
+        case ZE_MEMORY_ACCESS_ATTRIBUTE_NONE:
+            virtualMemoryReservation->flags.readOnly = false;
+            virtualMemoryReservation->flags.noAccess = true;
+            virtualMemoryReservation->flags.readWrite = false;
+            break;
+        case ZE_MEMORY_ACCESS_ATTRIBUTE_READWRITE:
+            virtualMemoryReservation->flags.readOnly = false;
+            virtualMemoryReservation->flags.noAccess = false;
+            virtualMemoryReservation->flags.readWrite = true;
+            break;
+        case ZE_MEMORY_ACCESS_ATTRIBUTE_READONLY:
+            virtualMemoryReservation->flags.readWrite = false;
+            virtualMemoryReservation->flags.noAccess = false;
+            virtualMemoryReservation->flags.readOnly = true;
+            break;
+        default:
+            return ZE_RESULT_ERROR_INVALID_ENUMERATION;
+        }
+        if (virtualMemoryReservation->mappedAllocations.size() > 0) {
+            std::map<void *, NEO::MemoryMappedRange *>::iterator physicalMapIt;
+            physicalMapIt = virtualMemoryReservation->mappedAllocations.find(const_cast<void *>(ptr));
+            if (physicalMapIt != virtualMemoryReservation->mappedAllocations.end()) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+        }
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (allocationNode->allocation->getAllocationType() == NEO::AllocationType::buffer) {
+        if (!this->driverHandle->getMemoryManager()->mapPhysicalDeviceMemoryToVirtualMemory(allocationNode->allocation, reinterpret_cast<uint64_t>(ptr), size, &virtualMemoryReservation->flags, offset)) {
+            return ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY;
+        }
+        NEO::SvmAllocationData allocData(allocationNode->allocation->getRootDeviceIndex());
+        allocData.gpuAllocations.addAllocation(allocationNode->allocation);
+        allocData.cpuAllocation = nullptr;
+        allocData.device = allocationNode->device;
+        allocData.size = size;
+        allocData.pageSizeForAlignment = MemoryConstants::pageSize64k;
+        allocData.setAllocId(++this->driverHandle->svmAllocsManager->allocationsCounter);
+        allocData.memoryType = InternalMemoryType::reservedDeviceMemory;
+        allocData.virtualReservationData = virtualMemoryReservation;
+        allocData.ipcHandleTypeFlags = allocationNode->ipcHandleTypeFlags;
+        allocData.mappedPhysicalOffset = offset;
+        NEO::MemoryMappedRange *mappedRange = new NEO::MemoryMappedRange;
+        mappedRange->ptr = ptr;
+        mappedRange->size = size;
+        mappedRange->mappedAllocation = *allocationNode;
+        mappedRange->physicalHandle = static_cast<void *>(hPhysicalMemory);
+        mappedRange->mappedPhysicalOffset = offset;
+        virtualMemoryReservation->mappedAllocations.emplace(const_cast<void *>(ptr), mappedRange);
+        this->driverHandle->getSvmAllocsManager()->insertSVMAlloc(allocData);
+        NEO::MemoryOperationsHandler *memoryOperationsIface = allocationNode->device->getRootDeviceEnvironment().memoryOperationsInterface.get();
+        auto success = memoryOperationsIface->makeResident(allocationNode->device, ArrayRef<NEO::GraphicsAllocation *>(&allocationNode->allocation, 1), false, true);
+        ze_result_t res = changeMemoryOperationStatusToL0ResultType(success);
+        return res;
+    } else {
+        RootDeviceIndicesContainer rootDeviceIndicesVector(this->rootDeviceIndices);
+        auto maxRootDeviceIndex = *std::max_element(rootDeviceIndicesVector.begin(), rootDeviceIndicesVector.end(), std::less<uint32_t const>());
+        NEO::SvmAllocationData allocData(maxRootDeviceIndex);
+        auto memoryManager = this->driverHandle->getMemoryManager();
+        const size_t previousFoldPrefix = virtualMemoryReservation->foldPrefixSize;
+        if ((offset != 0u) && memoryManager->isPhysicalHostMemoryOffsetFoldRequired(allocationNode->allocation->getRootDeviceIndex())) {
+            // Object byte 0 lands at (ptr - offset); anywhere but the base reaches back over a mapped window.
+            if (castToUint64(ptr) != virtualMemoryReservation->virtualAddressRange.address) {
+                return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+            }
+            if (offset > previousFoldPrefix) {
+                if (!memoryManager->reserveExactCpuAddress(castToUint64(ptr) - offset, offset - previousFoldPrefix)) {
+                    return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+                }
+                virtualMemoryReservation->foldPrefixSize = offset;
+            }
+        }
+        if (!memoryManager->mapPhysicalHostMemoryToVirtualMemory(rootDeviceIndices, allocData.gpuAllocations, allocationNode->allocation, castToUint64(ptr), size, offset)) {
+            if (virtualMemoryReservation->foldPrefixSize != previousFoldPrefix) {
+                const uint64_t claimedBase = castToUint64(ptr) - virtualMemoryReservation->foldPrefixSize;
+                memoryManager->freeCpuAddress({claimedBase, virtualMemoryReservation->foldPrefixSize - previousFoldPrefix});
+                virtualMemoryReservation->foldPrefixSize = previousFoldPrefix;
+            }
+            return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;
+        }
+        allocData.cpuAllocation = nullptr;
+        allocData.device = nullptr;
+        allocData.size = size;
+        allocData.pageSizeForAlignment = MemoryConstants::pageSize2M;
+        allocData.setAllocId(++this->driverHandle->svmAllocsManager->allocationsCounter);
+        allocData.memoryType = InternalMemoryType::reservedHostMemory;
+        allocData.virtualReservationData = virtualMemoryReservation;
+        allocData.ipcHandleTypeFlags = allocationNode->ipcHandleTypeFlags;
+        allocData.mappedPhysicalOffset = offset;
+        NEO::MemoryMappedRange *mappedRange = new NEO::MemoryMappedRange;
+        mappedRange->ptr = ptr;
+        mappedRange->size = size;
+        mappedRange->mappedAllocation = *allocationNode;
+        mappedRange->mappedAllocation.allocation = allocData.gpuAllocations.getGraphicsAllocation(allocationNode->allocation->getRootDeviceIndex());
+        mappedRange->physicalHandle = static_cast<void *>(hPhysicalMemory);
+        mappedRange->mappedPhysicalOffset = offset;
+        virtualMemoryReservation->mappedAllocations.emplace(const_cast<void *>(ptr), mappedRange);
+        this->driverHandle->getSvmAllocsManager()->insertSVMAlloc(allocData);
+        return ZE_RESULT_SUCCESS;
+    }
+}
+
+ze_result_t Context::unMapVirtualMem(const void *ptr, size_t size) {
+    size_t pageSizeRequired = 0;
+    if (getPageAlignedSizeRequired(size, nullptr, &pageSizeRequired) != size) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_SIZE;
+    }
+
+    if (!isAligned(castToUint64(ptr), pageSizeRequired)) {
+        return ZE_RESULT_ERROR_UNSUPPORTED_ALIGNMENT;
+    }
+
+    auto memManager = this->driverHandle->getMemoryManager();
+    auto lockVirtual = memManager->lockVirtualMemoryReservationMap();
+    NEO::SVMAllocsManager *svmAllocsManager = this->driverHandle->getSvmAllocsManager();
+
+    const uint64_t rangeStart = castToUint64(ptr);
+    const uint64_t rangeEnd = rangeStart + size;
+
+    auto &reservationMap = memManager->getVirtualMemoryReservationMap();
+
+    auto getReservationBounds = [&]() {
+        auto reservationBegin = reservationMap.lower_bound(const_cast<void *>(ptr));
+
+        if (reservationBegin != reservationMap.begin()) {
+            auto prev = std::prev(reservationBegin);
+            const uint64_t prevEnd = castToUint64(prev->first) + prev->second->virtualAddressRange.size;
+            if (prevEnd > rangeStart) {
+                reservationBegin = prev;
+            }
+        }
+
+        auto reservationEnd = std::find_if_not(
+            reservationBegin,
+            reservationMap.end(),
+            [&](auto &reservation) { return castToUint64(reservation.first) < rangeEnd; });
+
+        return std::pair{reservationBegin, reservationEnd};
+    };
+
+    bool anyFailed = false;
+    auto [reservationBegin, reservationEnd] = getReservationBounds();
+
+    std::for_each(reservationBegin, reservationEnd, [&](auto &reservation) {
+        NEO::VirtualMemoryReservation *virtualMemoryReservation = reservation.second;
+        auto &mappedAllocations = virtualMemoryReservation->mappedAllocations;
+
+        auto mapBeginIt = mappedAllocations.lower_bound(reinterpret_cast<void *>(rangeStart));
+        auto mapEndIt = std::find_if_not(
+            mapBeginIt,
+            mappedAllocations.end(),
+            [&](auto &alloc) { return castToUint64(alloc.first) < rangeEnd; });
+
+        for (auto &it = mapBeginIt; it != mapEndIt;) {
+            auto &alloc = *it;
+            const uint64_t mappingVa = castToUint64(alloc.first);
+            const size_t mappingSize = alloc.second->size;
+            const uint64_t mappingEnd = mappingVa + mappingSize;
+
+            if (mappingEnd > rangeEnd) {
+                ++it;
+                continue;
+            }
+            NEO::PhysicalMemoryAllocation *physicalAllocation = &alloc.second->mappedAllocation;
+            auto allocation = physicalAllocation->allocation;
+            NEO::SvmAllocationData *allocData = svmAllocsManager->getSVMAlloc(
+                reinterpret_cast<void *>(allocation->getGpuAddress()));
+            DEBUG_BREAK_IF(allocData == nullptr);
+
+            bool retVal = false;
+            if (allocation->getAllocationType() == NEO::AllocationType::buffer) {
+                svmAllocsManager->removeSVMAlloc(*allocData);
+                if (allocation->getBindlessOffset() != std::numeric_limits<uint64_t>::max()) {
+                    if (auto bindlessHeapsHelper = physicalAllocation->device->getBindlessHeapsHelper(); bindlessHeapsHelper != nullptr) {
+                        bindlessHeapsHelper->releaseSSToReusePool(allocation->getBindlessInfo());
+                    }
+                    allocation->setBindlessInfo({});
+                }
+                NEO::OsContext *osContext = &physicalAllocation->device->getDefaultEngine().commandStreamReceiver->getOsContext();
+                retVal = memManager->unMapPhysicalDeviceMemoryFromVirtualMemory(
+                    allocation, mappingVa, mappingSize, osContext, virtualMemoryReservation->rootDeviceIndex);
+            } else {
+                NEO::MultiGraphicsAllocation gpuAllocations = allocData->gpuAllocations;
+                svmAllocsManager->removeSVMAlloc(*allocData);
+                retVal = memManager->unMapPhysicalHostMemoryFromVirtualMemory(
+                    gpuAllocations, allocation, mappingVa, mappingSize, virtualMemoryReservation->isSvmReservation);
+            }
+
+            if (!retVal) {
+                anyFailed = true;
+            }
+
+            delete alloc.second;
+            it = mappedAllocations.erase(it);
+        }
+    });
+
+    return anyFailed ? ZE_RESULT_ERROR_UNKNOWN : ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::setVirtualMemAccessAttribute(const void *ptr,
+                                                  size_t size,
+                                                  ze_memory_access_attribute_t access) {
+    NEO::VirtualMemoryReservation *virtualMemoryReservation = nullptr;
+    auto lockVirtual = this->driverHandle->getMemoryManager()->lockVirtualMemoryReservationMap();
+    virtualMemoryReservation = findSupportedVirtualReservation(ptr, size);
+    if (virtualMemoryReservation) {
+        NEO::MemoryFlags flagsBefore = virtualMemoryReservation->flags;
+        switch (access) {
+        case ZE_MEMORY_ACCESS_ATTRIBUTE_NONE:
+            virtualMemoryReservation->flags.readOnly = false;
+            virtualMemoryReservation->flags.noAccess = true;
+            virtualMemoryReservation->flags.readWrite = false;
+            break;
+        case ZE_MEMORY_ACCESS_ATTRIBUTE_READWRITE:
+            virtualMemoryReservation->flags.readOnly = false;
+            virtualMemoryReservation->flags.noAccess = false;
+            virtualMemoryReservation->flags.readWrite = true;
+            break;
+        case ZE_MEMORY_ACCESS_ATTRIBUTE_READONLY:
+            virtualMemoryReservation->flags.readWrite = false;
+            virtualMemoryReservation->flags.noAccess = false;
+            virtualMemoryReservation->flags.readOnly = true;
+            break;
+        default:
+            return ZE_RESULT_ERROR_INVALID_ENUMERATION;
+        }
+        if (flagsBefore != virtualMemoryReservation->flags &&
+            virtualMemoryReservation->mappedAllocations.size() > 0) {
+            std::map<void *, NEO::MemoryMappedRange *>::iterator physicalMapIt;
+            physicalMapIt = virtualMemoryReservation->mappedAllocations.find(const_cast<void *>(ptr));
+            if (physicalMapIt != virtualMemoryReservation->mappedAllocations.end()) {
+                // mappedAllocation.allocation is the mapped allocation on the host path, not the key of the physical map.
+                auto physicalHandle = reinterpret_cast<ze_physical_mem_handle_t>(physicalMapIt->second->physicalHandle);
+                auto mappedOffset = static_cast<size_t>(physicalMapIt->second->mappedPhysicalOffset);
+                lockVirtual.unlock();
+                auto result = unMapVirtualMem(ptr, size);
+                if (result != ZE_RESULT_SUCCESS) {
+                    return result;
+                }
+                return mapVirtualMem(ptr, size, physicalHandle, mappedOffset, access);
+            }
+        }
+        return ZE_RESULT_SUCCESS;
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+}
+
+ze_result_t Context::getVirtualMemAccessAttribute(const void *ptr,
+                                                  size_t size,
+                                                  ze_memory_access_attribute_t *access,
+                                                  size_t *outSize) {
+    NEO::VirtualMemoryReservation *virtualMemoryReservation = nullptr;
+    auto lockVirtual = this->driverHandle->getMemoryManager()->lockVirtualMemoryReservationMap();
+    virtualMemoryReservation = findSupportedVirtualReservation(ptr, size);
+    if (virtualMemoryReservation) {
+        if (virtualMemoryReservation->flags.readWrite) {
+            *access = ZE_MEMORY_ACCESS_ATTRIBUTE_READWRITE;
+        } else if (virtualMemoryReservation->flags.readOnly) {
+            *access = ZE_MEMORY_ACCESS_ATTRIBUTE_READONLY;
+        } else {
+            *access = ZE_MEMORY_ACCESS_ATTRIBUTE_NONE;
+        }
+        *outSize = virtualMemoryReservation->virtualAddressRange.size;
+        return ZE_RESULT_SUCCESS;
+    } else {
+        return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    }
+}
+
+ze_result_t Context::createEventPool(const ze_event_pool_desc_t *desc,
+                                     uint32_t numDevices,
+                                     ze_device_handle_t *phDevices,
+                                     ze_event_pool_handle_t *phEventPool) {
+    ze_result_t result;
+    EventPool *eventPool = EventPool::create(this->driverHandle, this, numDevices, phDevices, desc, result);
+
+    if (eventPool == nullptr) {
+        return result;
+    }
+
+    *phEventPool = eventPool->toHandle();
+
+    return ZE_RESULT_SUCCESS;
+}
+
+ze_result_t Context::createImage(ze_device_handle_t hDevice,
+                                 const ze_image_desc_t *desc,
+                                 ze_image_handle_t *phImage) {
+    return L0::Device::fromHandle(hDevice)->createImage(desc, phImage);
+}
+
+bool Context::isAllocationSuitableForCompression(const StructuresLookupTable &structuresLookupTable, Device &device, size_t allocSize) {
+    auto &hwInfo = device.getHwInfo();
+    auto &gfxCoreHelper = device.getGfxCoreHelper();
+    auto neoDevice = device.getNEODevice();
+    auto &l0GfxCoreHelper = neoDevice->getRootDeviceEnvironment().getHelper<L0GfxCoreHelper>();
+
+    if (!l0GfxCoreHelper.usmCompressionSupported(hwInfo) || !gfxCoreHelper.isBufferSizeSuitableForCompression(allocSize) || structuresLookupTable.uncompressedHint) {
+        return false;
+    }
+
+    if (l0GfxCoreHelper.forceDefaultUsmCompressionSupport() && !structuresLookupTable.rayTracingMemory) {
+        return true;
+    }
+
+    return structuresLookupTable.compressedHint;
+}
+
+ze_result_t Context::getPitchFor2dImage(
+    ze_device_handle_t hDevice,
+    size_t imageWidth,
+    size_t imageHeight,
+    unsigned int elementSizeInBytes,
+    size_t *rowPitch) {
+
+    return Image::getPitchFor2dImage(hDevice, imageWidth, imageHeight, elementSizeInBytes, rowPitch);
+}
+
+template <typename IpcDataT>
+void Context::setIPCHandleData(NEO::GraphicsAllocation *graphicsAllocation, uint64_t handle, IpcDataT &ipcData, uint64_t ptrAddress, uint8_t type, NEO::UsmMemAllocPool *usmPool, IpcHandleType handleType, void *reservedHandleData, uint64_t physicalOffset) {
+    std::map<uint64_t, IpcHandleTracking *>::iterator ipcHandleIterator;
+
+    ipcData = {};
+    bool hasReservedData = reservedHandleData != nullptr;
+    if constexpr (std::is_same_v<IpcDataT, IpcMemoryData>) {
+        ipcData.handle = handle;
+        ipcData.type = type;
+    }
+    if constexpr (std::is_same_v<IpcDataT, IpcOpaqueMemoryData>) {
+        ipcData.memoryType = type;
+        ipcData.processId = NEO::SysCalls::getCurrentProcessId();
+        ipcData.type = handleType;
+        if (handleType == IpcHandleType::ntHandle) {
+            ipcData.handle.reserved = handle;
+            ipcData.opaqueHandle.reserved = handle;
+        } else if (handleType == IpcHandleType::fdHandle) {
+            // For fdHandle, we store the handle as an int
+            ipcData.handle.fd = static_cast<int>(handle);
+            ipcData.opaqueHandle.fd = static_cast<int>(handle);
+        }
+        ipcData.compressedMemory = graphicsAllocation->isCompressionEnabled();
+        memset(ipcData.reservedHandleData, 0, sizeof(IpcOpaqueMemoryData::reservedHandleData));
+        if (reservedHandleData) {
+            std::memcpy(ipcData.reservedHandleData, reservedHandleData, sizeof(IpcOpaqueMemoryData::reservedHandleData));
+        }
+    }
+
+    if (usmPool) {
+        ipcData.poolOffset = usmPool->getOffsetInPool(addrToPtr(ptrAddress));
+        ptrAddress = usmPool->getPoolAddress();
+    } else if (physicalOffset != 0) {
+        ipcData.poolOffset = physicalOffset;
+    }
+
+    auto lock = this->driverHandle->lockIPCHandleMap();
+    ipcHandleIterator = this->driverHandle->getIPCHandleMap().find(handle);
+    if (ipcHandleIterator != this->driverHandle->getIPCHandleMap().end()) {
+        ipcHandleIterator->second->refcnt += 1;
+    } else {
+        IpcHandleTracking *handleTracking = new IpcHandleTracking;
+        handleTracking->alloc = graphicsAllocation;
+        handleTracking->refcnt = 1;
+        handleTracking->ptr = ptrAddress;
+        handleTracking->handle = handle;
+        handleTracking->hasReservedHandleData = hasReservedData;
+        if constexpr (std::is_same_v<IpcDataT, IpcMemoryData>) {
+            handleTracking->ipcData = ipcData;
+        } else {
+            handleTracking->opaqueData = ipcData;
+        }
+        this->driverHandle->getIPCHandleMap().emplace(handle, handleTracking);
+
+        if constexpr (std::is_same_v<IpcDataT, IpcOpaqueMemoryData>) {
+            registerIpcHandleWithServer(handle);
+        }
+    }
+}
+
+std::once_flag Context::opaqueHandleResourcesOnceFlag;
+
+void Context::initOpaqueHandleResources() {
+    std::call_once(Context::opaqueHandleResourcesOnceFlag, [this]() {
+        initOpaqueHandleResourcesImpl();
+    });
+}
+
+uint8_t Context::isWddmOpaqueHandleSupported(IpcHandleType *handleType) {
+    *handleType = IpcHandleType::ntHandle;
+    return OpaqueHandlingType::nthandle;
+}
+
+template void Context::setIPCHandleData<IpcMemoryData>(NEO::GraphicsAllocation *, uint64_t, IpcMemoryData &, uint64_t, uint8_t, NEO::UsmMemAllocPool *, IpcHandleType, void *, uint64_t);
+template void Context::setIPCHandleData<IpcOpaqueMemoryData>(NEO::GraphicsAllocation *, uint64_t, IpcOpaqueMemoryData &, uint64_t, uint8_t, NEO::UsmMemAllocPool *, IpcHandleType, void *, uint64_t);
+} // namespace L0

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_20261004T135404Z\\evaluate_baseline_complete.py"
+  ],
+  "pid": 84816,
+  "exit": 1,
+  "seconds": 1.031000000424683,
+  "timeout": false,
+  "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "evaluator_sha256": "17cef3304a27b21468b3f50a2932270b9c934d5ffa447dd4a409e0bfd85d6ccf"
+}

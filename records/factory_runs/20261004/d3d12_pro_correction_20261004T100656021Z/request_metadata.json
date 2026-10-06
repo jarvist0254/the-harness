@@ -1,0 +1,6 @@
+{
+  "model": "deepseek-v4-pro-0813",
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "timeout_seconds": 180,
+  "credential_persisted": false
+}

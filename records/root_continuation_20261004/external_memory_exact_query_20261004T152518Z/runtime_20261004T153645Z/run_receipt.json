@@ -1,0 +1,176 @@
+{
+  "capability_results_are_not_transfer_proof": true,
+  "cleanup_wait_failed": false,
+  "command": [
+    "E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z\\attempt_004\\external_memory_query.exe"
+  ],
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z\\attempt_004",
+  "elapsed_seconds": 0.297,
+  "exit_code": 0,
+  "input_hashes_after": {
+    "admission": "aa1488cf31f47360182af264d3f8ae0da44146d4bfe9a9d89534c32d367a3a01",
+    "controller": "693a8a1e17bbd1410ae9714630e0b1ad98ca2704261cfdfa3ad9838708063e46",
+    "exe": "67c69e60c12780415bfd62858536078e09d2749cc539ee3928079657bbc718b5",
+    "python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source_copy": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+    "source_original": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c"
+  },
+  "input_hashes_before": {
+    "admission": "aa1488cf31f47360182af264d3f8ae0da44146d4bfe9a9d89534c32d367a3a01",
+    "controller": "693a8a1e17bbd1410ae9714630e0b1ad98ca2704261cfdfa3ad9838708063e46",
+    "exe": "67c69e60c12780415bfd62858536078e09d2749cc539ee3928079657bbc718b5",
+    "python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source_copy": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+    "source_original": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c"
+  },
+  "input_hashes_unchanged": true,
+  "json_validation": {
+    "amd_enumerated": true,
+    "intel_devices_enumerated": 0,
+    "intel_enumeration_status": "NOT_ENUMERATED_BY_THIS_VULKAN_INSTANCE",
+    "json_valid": true,
+    "nvidia_enumerated": true,
+    "per_device_capabilities": [
+      {
+        "name": "NVIDIA GeForce RTX 5070 Ti",
+        "queries": [
+          {
+            "compatible_handle_types_hex": "0x80",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x80",
+            "exportable": true,
+            "external_memory_features_hex": "0x6",
+            "flags": 0,
+            "handle": "HOST_ALLOCATION",
+            "importable": true,
+            "usage": "TRANSFER_SRC|TRANSFER_DST"
+          },
+          {
+            "compatible_handle_types_hex": "0x80",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x80",
+            "exportable": true,
+            "external_memory_features_hex": "0x6",
+            "flags": 0,
+            "handle": "HOST_ALLOCATION",
+            "importable": true,
+            "usage": "STORAGE_BUFFER|TRANSFER_SRC|TRANSFER_DST"
+          },
+          {
+            "compatible_handle_types_hex": "0x0",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x0",
+            "exportable": false,
+            "external_memory_features_hex": "0x0",
+            "flags": 0,
+            "handle": "HOST_MAPPED_FOREIGN_MEMORY",
+            "importable": false,
+            "usage": "TRANSFER_SRC|TRANSFER_DST"
+          },
+          {
+            "compatible_handle_types_hex": "0x0",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x0",
+            "exportable": false,
+            "external_memory_features_hex": "0x0",
+            "flags": 0,
+            "handle": "HOST_MAPPED_FOREIGN_MEMORY",
+            "importable": false,
+            "usage": "STORAGE_BUFFER|TRANSFER_SRC|TRANSFER_DST"
+          }
+        ],
+        "status": "QUERIED",
+        "vendor": "NVIDIA"
+      },
+      {
+        "name": "AMD Radeon(TM) Graphics",
+        "queries": [
+          {
+            "compatible_handle_types_hex": "0x80",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x80",
+            "exportable": false,
+            "external_memory_features_hex": "0x4",
+            "flags": 0,
+            "handle": "HOST_ALLOCATION",
+            "importable": true,
+            "usage": "TRANSFER_SRC|TRANSFER_DST"
+          },
+          {
+            "compatible_handle_types_hex": "0x80",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x80",
+            "exportable": false,
+            "external_memory_features_hex": "0x4",
+            "flags": 0,
+            "handle": "HOST_ALLOCATION",
+            "importable": true,
+            "usage": "STORAGE_BUFFER|TRANSFER_SRC|TRANSFER_DST"
+          },
+          {
+            "compatible_handle_types_hex": "0x0",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x0",
+            "exportable": false,
+            "external_memory_features_hex": "0x0",
+            "flags": 0,
+            "handle": "HOST_MAPPED_FOREIGN_MEMORY",
+            "importable": false,
+            "usage": "TRANSFER_SRC|TRANSFER_DST"
+          },
+          {
+            "compatible_handle_types_hex": "0x0",
+            "dedicated_only": false,
+            "export_from_imported_handle_types_hex": "0x0",
+            "exportable": false,
+            "external_memory_features_hex": "0x0",
+            "flags": 0,
+            "handle": "HOST_MAPPED_FOREIGN_MEMORY",
+            "importable": false,
+            "usage": "STORAGE_BUFFER|TRANSFER_SRC|TRANSFER_DST"
+          }
+        ],
+        "status": "QUERIED",
+        "vendor": "AMD"
+      }
+    ],
+    "physical_device_count": 2,
+    "qualification_interpretation": "Capability advertisement only; no import, memory transfer, device allocation, direct peer access, P2P, or residency test occurred.",
+    "query_complete": true
+  },
+  "json_validation_error": null,
+  "native_scope": "Vulkan instance/physical-device capability queries only; no VkDevice, buffers, allocation, import, semaphore, queue, or GPU work",
+  "overflowed": false,
+  "parent_environment_sha256_after": "d775450626fd1fc817aa17de459609353efff3df463c89913427ee37e283e0e4",
+  "parent_environment_sha256_before": "d775450626fd1fc817aa17de459609353efff3df463c89913427ee37e283e0e4",
+  "parent_environment_unchanged": true,
+  "pid": 83372,
+  "process_present_after_wait": false,
+  "runtime_admission_hash": "aa1488cf31f47360182af264d3f8ae0da44146d4bfe9a9d89534c32d367a3a01",
+  "runtime_executable_hash": "67c69e60c12780415bfd62858536078e09d2749cc539ee3928079657bbc718b5",
+  "runtime_python_hash": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "runtime_source_hash": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+  "start_utc": "2026-10-04T15:39:40Z",
+  "status": "QUERY_COMPLETE",
+  "stderr": {
+    "captured_bytes": 0,
+    "observed_bytes": 0,
+    "overflow": false,
+    "path": "stderr.raw.log",
+    "reader_error": null,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "write_error": null
+  },
+  "stdout": {
+    "captured_bytes": 3301,
+    "observed_bytes": 3301,
+    "overflow": false,
+    "path": "stdout.raw.log",
+    "reader_error": null,
+    "sha256": "8c3e9fc93014f779f11feb241f945944c22392dede4b619783cff9c771cdcc3f",
+    "write_error": null
+  },
+  "streams_written_and_read": true,
+  "timed_out": false,
+  "timeout_seconds": 10.0
+}

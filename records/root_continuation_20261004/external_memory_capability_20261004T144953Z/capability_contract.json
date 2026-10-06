@@ -1,0 +1,25 @@
+{
+  "query_kind": "single_read_only_vulkaninfo_device_and_extension_query",
+  "tool": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Bin\\vulkaninfoSDK.exe",
+  "sdk_root": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk",
+  "expected_sdk_version": "LunarG Vulkan SDK 1.4.363.0 copy-only extraction",
+  "tool_file_version": "1.4.363.0",
+  "tool_sha256": "3dd853ca5acb16f6bc99fd00b5bb40783acf65b386aa9f6a3fdfa36122d52273",
+  "build_cmake_cache": "E:\\the_harness\\records\\build_vulkan_real\\build\\CMakeCache.txt",
+  "build_source_provenance": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\source_provenance.json",
+  "arguments": [],
+  "timeout_seconds": 30,
+  "stdout_cap_bytes": 2097152,
+  "stderr_cap_bytes": 2097152,
+  "extensions_of_interest": [
+    "VK_EXT_external_memory_host",
+    "VK_KHR_external_memory_win32",
+    "VK_KHR_external_semaphore_win32"
+  ],
+  "properties_if_reported": [
+    "minImportedHostPointerAlignment",
+    "VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT external buffer features",
+    "VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT external buffer features"
+  ],
+  "constraints": ["no instance/device contexts created by this harness", "no buffer or semaphore allocation/import", "no driver/SDK install or system configuration change", "no P2P or physical-VRAM conclusion"]
+}

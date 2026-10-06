@@ -1,0 +1,43 @@
+{
+  "scope": "ACTUAL_FA907_RUN_WORKERS_AND_EMIT_PURE_MOCK_ONLY",
+  "tests": 4,
+  "failures": 0,
+  "errors": 0,
+  "results": [
+    {
+      "case": "job_close",
+      "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+      "drain_proof": "UNKNOWN_DRAIN",
+      "caller_refused": true,
+      "memory_writes": 3,
+      "native_process_calls": []
+    },
+    {
+      "case": "owned_close",
+      "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+      "drain_proof": "UNKNOWN_DRAIN",
+      "caller_refused": true,
+      "memory_writes": 3,
+      "native_process_calls": []
+    },
+    {
+      "case": "reader",
+      "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+      "drain_proof": "UNKNOWN_DRAIN",
+      "caller_refused": true,
+      "memory_writes": 3,
+      "native_process_calls": []
+    },
+    {
+      "case": "shutdown",
+      "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+      "drain_proof": "UNKNOWN_DRAIN",
+      "caller_refused": true,
+      "memory_writes": 3,
+      "native_process_calls": []
+    }
+  ],
+  "native_calls": [],
+  "base_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "driver_sha256": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d"
+}

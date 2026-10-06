@@ -1,0 +1,13 @@
+{
+  "provider_launch_authorized": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_focused_prep_20261004T213535Z",
+  "job_id": "grok_capacity_binding_focused_high",
+  "lane": "Grok",
+  "model": "grok-4.7-build-fast",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\source.grok_untrusted.py",
+  "source_sha256": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "prompt_sha256": "88e33d38e0e96c8b07bd6290c3d2459bd771f5c13579d9d690875c875b7bc800",
+  "authorization": "ROOT_EXPLICIT_COMPACT_SOURCE_ONLY_LAUNCH_ADMISSION_AFTER_FIVE_PURE_CONTROLS",
+  "root_approved_packet_sha256": "dbc4763b95552560b5fe86bb79a5cd133fcd7bb6c1f6cb4c241adc5456cf408d",
+  "pure_intake_receipt_sha256": "a9ad65c231a7d3586f476e7b195d3652ccbc7c67c95621dffb136005a0ea3829"
+}

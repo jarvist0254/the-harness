@@ -1,0 +1,38 @@
+{
+  "command": [
+    "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Bin\\vulkaninfoSDK.exe"
+  ],
+  "cwd": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Bin",
+  "device_context_or_resource_allocation": false,
+  "elapsed_seconds": 30.032,
+  "exit_code": 1,
+  "limitations": [
+    "extension support is not an interoperability guarantee",
+    "no cross-vendor memory import or allocation was attempted",
+    "no physical VRAM/P2P claim"
+  ],
+  "pid": 78124,
+  "readers_finished": true,
+  "sdk_version_from_file_version": "1.4.363.0",
+  "status": "TIMEOUT",
+  "stderr_capture": {
+    "captured_bytes": 508,
+    "observed_bytes": 508,
+    "truncated": false
+  },
+  "stderr_path": "vulkaninfo_20261004T145207Z.stderr.txt",
+  "stderr_sha256": "448c7bb9a14bbfd6606d5628edc338f32ca16f1b7b42dcd84cfcdcb45d8c944c",
+  "stdout_capture": {
+    "captured_bytes": 184323,
+    "observed_bytes": 184323,
+    "truncated": false
+  },
+  "stdout_path": "vulkaninfo_20261004T145207Z.stdout.txt",
+  "stdout_sha256": "7be055aecb25c6f46099b8fadf69b7e751a0c656fb71422aff57bacde2b421af",
+  "timed_out": true,
+  "tool_hash_unchanged": true,
+  "tool_sha256_after": "3dd853ca5acb16f6bc99fd00b5bb40783acf65b386aa9f6a3fdfa36122d52273",
+  "tool_sha256_before": "3dd853ca5acb16f6bc99fd00b5bb40783acf65b386aa9f6a3fdfa36122d52273",
+  "vulkaninfo_help_or_driver_install": false,
+  "vulkaninfo_path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Bin\\vulkaninfoSDK.exe"
+}

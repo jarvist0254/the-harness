@@ -1,0 +1,5 @@
+{
+  "canonical": "{\"binary_sha256\":\"d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4\",\"cpp_workload_sha256\":\"cdbdb8530e40fa03f667e060ca1b8b41fa620a3b903ef0a80b9dfecb2b11dd22\",\"environment_delta\":{\"GGML_VK_DISABLE_F16\":\"1\",\"GGML_VK_DISABLE_FUSION\":\"1\"},\"model_sha256\":\"bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80\",\"runtime_status\":\"NUMERIC_PARITY_FAIL\",\"selected_device\":\"Vulkan0\",\"source_sha256\":\"2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371\",\"static_manifest_sha256\":\"d53d1ddd20ddb2ab147daf6aaf6d5e45a23aeb209750d28f54ea4f5d05fa3d88\"}",
+  "runtime_cpp_workload_sha256": "cdbdb8530e40fa03f667e060ca1b8b41fa620a3b903ef0a80b9dfecb2b11dd22",
+  "sha256": "b3056a95f4d28547e96a52c8247325d7bb88a35cd1f97086ef043e83bb916f0b"
+}

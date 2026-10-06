@@ -1,0 +1,46 @@
+{
+  "status": "PENDING_ROOT_STATIC_REVIEW_AND_SEPARATE_COMPILE_LINK_ADMISSION",
+  "scope": "SYNTHETIC_CPU_STUB_ONLY_NO_LEVEL_ZERO_LOADER_NO_DRIVER_NO_GPU",
+  "candidate_path": "E:/the_harness/records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/source.qwen_untrusted.cpp",
+  "candidate_sha256": "27d560b3f73dd830b68de9aac3316d7b8510c0218d54704156e273929ce23fe2",
+  "contract_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_cpu_fake_v2_20261004T2305Z/cpu_fake_contract_v2_pending_root_gate.cpp",
+  "contract_sha256": "9c20b97392dcb2d2e076021c6c1e38ceb0c67c12ebd0f0e79acf8a07521f3ab5",
+  "compile_controller_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_cpu_fake_v2_20261004T2305Z/compile_cpu_fake_v2.ps1",
+  "compile_controller_sha256": "31a98b675c84e9e33fa7b3752e98e381c65d18a27f6969f5857deb169e0b945e",
+  "header_path": "E:/the_harness/records/toolchains/level_zero_20261004/sdk/include/level_zero/ze_api.h",
+  "header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "compiler": "/usr/bin/c++",
+  "compiler_version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "symbols_statically_defined": [
+    "zeInit",
+    "zeDriverGet",
+    "zeDeviceGet",
+    "zeDeviceGetSubDevices",
+    "zeDeviceGetProperties",
+    "zeDeviceGetExternalMemoryProperties",
+    "zeDeviceGetCommandQueueGroupProperties",
+    "zeDeviceCanAccessPeer",
+    "zeDeviceGetP2PProperties"
+  ],
+  "link_dependencies": [
+    "Pinned Level Zero ze_api.h",
+    "C++17 standard library only",
+    "The nine candidate Level Zero entry points above are defined by the CPU fake. Do not link ze_loader or any runtime library."
+  ],
+  "source_changes": [
+    "Original bea5c7b8012bd6b327f27be6517b0ba5f57ca975da0c4b31e62cc0d790df6840 fake preserved untouched.",
+    "Driver limit case now initializes the count above LZQ_MAX_DRIVERS before zeDriverGet count query; no late mutation during zeDeviceGet.",
+    "Every check prints assertion label, case, index, result, cumulative counters.",
+    "First failure in each case includes bounded generated JSON or a marked bounded prefix; combined raw JSON budget is 96 KiB.",
+    "collect clamps requested capacity to actual test buffer and checks returned n <= cap before callers terminate the buffer."
+  ],
+  "compile_command": "/usr/bin/c++ -std=c++17 -Wall -Wextra -I /mnt/e/the_harness/records/toolchains/level_zero_20261004/sdk/include/level_zero -DLZQ_ACTUAL_SOURCE_PATH=\"/mnt/e/the_harness/records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/source.qwen_untrusted.cpp\" /mnt/e/the_harness/records/root_continuation_20261004/l0_query_measured_repair_cpu_fake_v2_20261004T2305Z/cpu_fake_contract_v2_pending_root_gate.cpp -o /mnt/e/the_harness/records/root_continuation_20261004/l0_query_measured_repair_cpu_fake_v2_20261004T2305Z/cpu_fake_contract_v2.exe",
+  "compile_deadline_seconds": 85,
+  "outer_compile_deadline_seconds": 90,
+  "per_stream_cap_bytes": 131072,
+  "expected_provider_test_execution": false,
+  "expected_fake_execution": false,
+  "fake_execution_requires_separate_admission": true,
+  "hardware_or_transport_claim": false
+}

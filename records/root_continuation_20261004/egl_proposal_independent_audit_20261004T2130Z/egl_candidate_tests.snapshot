@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+# Pure parse/guard tests for candidate source file. Takes candidate path as argv[1]. No execution, no compilation.
+import sys, os
+
+REQUIRED_TOKENS=(
+ 'Linux-only',
+ 'ROOT exact-pin admission',
+ 'EGL_PLATFORM_DEVICE_EXT',
+ 'EGL_DRM_RENDER_NODE_FILE_EXT',
+ '0x10de',
+ 'ARGB8888',
+ 'MODIFIER_LINEAR',
+ 'external_only',
+ 'EGL_IMAGE_PRESERVED_KHR',
+ 'TEXTURE_2D',
+ 'GLES3.1',
+ 'texelFetch',
+ 'SSBO',
+ 'NOT_CHECKED',
+ 'NOT_CHECKED2',
+ 'FAIL1',
+ 'ROOT_EXACT_PIN_ADMIT',
+ '--contract',
+ '--mode',
+ '--admission',
+ 'PRODUCER_CONSUMER_SYNC_BRIDGE',
+ 'direct_transport_qualified',
+ 'residency_topology_unproven',
+ 'Driver-owned FD never close',
+ 'dup-owned FD close after import returns',
+ 'one-word fault',
+ 'all 16384 words',
+ 'GPU_CONSUMER_IMPORTED_IMAGE_PAYLOAD_OBSERVED'
+)
+PROHIBITED_CODE_TOKENS=(
+ 'cudaMalloc(',
+ 'cuMemImport(',
+ 'cuExternalMemoryImport(',
+ 'glFlush(',
+ 'time.sleep(',
+ 'DMA_BUF_IOCTL_SYNC(',
+ 'zeMemAllocDevice(',
+ 'zeImageCreate('
+)
+
+def fail(msg):
+    print(msg)
+    return 1
+
+def main():
+    if len(sys.argv) != 2:
+        return fail('usage: tests.py candidate_source_path')
+    path=sys.argv[1]
+    if not os.path.isfile(path):
+        return fail('candidate source missing')
+    try:
+        with open(path,'r',encoding='utf-8',errors='replace') as fh:
+            src=fh.read()
+    except OSError:
+        return fail('candidate source unreadable')
+    if len(src) == 0 or len(src) > 32000:
+        return fail('candidate source length out of bounds')
+    for token in REQUIRED_TOKENS:
+        if token not in src:
+            return fail('missing required token: ' + token)
+    for token in PROHIBITED_CODE_TOKENS:
+        if token in src:
+            return fail('prohibited code token present: ' + token)
+    if src.count('def emit(') < 1:
+        return fail('missing deterministic emit helper')
+    if 'parse_contract(' not in src:
+        return fail('missing contract parser')
+    if 'probe_selected_nvidia_consumer(' not in src:
+        return fail('missing bounded consumer probe')
+    if 'validate_contract(' not in src:
+        return fail('missing contract validation')
+    if 'NOT_CHECKED' not in src or 'NOT_CHECKED2' not in src:
+        return fail('missing honest NOT_CHECKED gates')
+    if 'PRODUCER_CONSUMER_SYNC_BRIDGE' not in src:
+        return fail('missing isolated unavailable sync bridge phase')
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())

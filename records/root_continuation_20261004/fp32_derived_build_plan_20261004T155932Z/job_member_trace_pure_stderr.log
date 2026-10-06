@@ -1,0 +1,19 @@
+test_cap_without_accounting_change (__main__.Cases) ... ok
+test_close_false_recorded (__main__.Cases) ... ok
+test_no_native_trap_invoked (__main__.Cases) ... ok
+test_nonmember_no_image_still_close (__main__.Cases) ... ok
+test_observation_exception_diagnostic_only (__main__.Cases) ... ok
+test_original_exception_identity (__main__.Cases) ... ok
+test_original_none_identity (__main__.Cases) ... ok
+test_original_positive_identity (__main__.Cases) ... ok
+test_original_zero_identity (__main__.Cases) ... ok
+test_over64_unknown (__main__.Cases) ... ok
+test_partial_list_unknown (__main__.Cases) ... ok
+test_query_false_unknown (__main__.Cases) ... ok
+test_rate_five_seconds (__main__.Cases) ... ok
+test_typed_query_owned_job_and_image (__main__.Cases) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.007s
+
+OK

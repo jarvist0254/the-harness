@@ -1,0 +1,24 @@
+# Actual-header CPU stub: measured RED collector behavior
+
+The exact candidate9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694 was compiled/linked inside the previously admitted b551a786 stub, using the real official headerc3fb4067. No candidate changes, `LZQ_TEST_NO_HEADER`, fake enum macro or Level Zero loader/GPU-library linking occurred. PE imports were inspected before execution: KERNEL32, VCRUNTIME140 and six api-ms-win-crt libraries only; no LoadLibrary/GetProcAddress or GPU-loader import. Nine called Level Zero query functions were defined locally in the same CPU translation unit.
+
+Actual build CMD root57592 exited0, assigned/resumed, final Jobactive0/CLEANUP; outer34616 reaped2.047s. The reused build outer helper's historical scope string mentions `/c` and no linking; the actual pinned CMD performs the explicitly admitted **CPU stub link**, followed by dumpbin. This annotation corrects the reused descriptive label without rewriting old receipts. No stub runtime occurred until after the full import table was read.
+
+| Case | Owned child | Exit | Strict stdout JSON | External-property queries | Peer queries | Property queries |
+|---|---:|---:|---|---:|---:|---:|
+| normal two roots |69288|0|REFUSED: unquoted hex|0|2|2|
+| injected DEVICE_LOST init |47496|2|valid, status NOT_CHECKED2|0|0|0|
+| duplicate root handle |35532|0|REFUSED: unquoted hex|0|6|3|
+
+All three case jobs: assigned/resumed, final Jobactive0, drainCLEANUP, durable restart exactly matches current receipt, no overflow, exact raw byte/log reconciliation. Each deadline10s, per-stream128KiB. Outer runtime controller11416 exited0/reaped0.312s, no timeout/reader error. Source/header/stub/executable/tool/controller pins remained unchanged. Outer success means the observation controller completed; it does not grant semantic PASS to malformed collector output.
+
+## Proved defects and precise correction requirements
+
+1. **Invalid JSON numeric encoding.** Candidate35 and58 emit `"vendor":0x00008086` and `"device":0x00001234` without JSON quotes. Both normal and duplicate cases fail the unchanged strict decoder. Emit decimal JSON integers or explicitly documented quoted hex strings; do not normalize collector output in the test to manufacture valid JSON.
+2. **The real external-properties query is compiled out.** Candidate49 uses `#if defined(ZE_STRUCTURE_TYPE_DEVICE_EXTERNAL_MEMORY_PROPERTIES)`. The official header307 declares this token as an enum, not a macro. Actual independent counter is0 rather than2 for the two legal synthetic roots, and raw external_memory values are null. The stub provides the genuine official query signature and would return DMA_BUF flags; it is never called. Use the pinned header's actual available API, or a documented real version/function-availability guard, not `defined(enum)`. Unsupported query errors must remain unknown with actual result codes; do not report false absence of capability.
+3. **Genuine initialization failure mislabeled as missing capability and wrong schema enum.** Candidate53 returned exactly `{"status":"NOT_CHECKED2","stage":"zeInit","result_code":1879048193,"note":"init_missing","cleanup_uncertainty":"none_no_l0_objects_created"}` for locally injected ZE_RESULT_ERROR_DEVICE_LOST. Preserve the result code, classify genuine attempted failure FAIL/exit1, and reserve exact NOT_CHECKED/exit2 for documented missing prerequisites. Do not suffix status names with exit numbers. Other FAIL1/OK status names need adjudication against the frozen actual receipt schema before promotion.
+4. **Physical root count is enumeration count.** Candidate55 increments lzq_rootCount for each enumerated root without handle/UUID deduplication. The duplicate-root fixture repeats identical root0 handle/full UUID and root1 once; raw stdout reports physical_root_devices3 and property counter3, despite only two local synthetic identities. JSON validity remains refused; the raw scalar observation is preserved separately, not treated as a successfully parsed receipt. Resolve roots/aliases and either expose an explicitly named enumerated-row count or an actually deduplicated physical-root count. Do not count alias rows as physical cards.
+
+The normal raw can_matrix fragment is `[-1,1,0,-1]`, matching the independently supplied asymmetric synthetic relation; its surrounding complete artifact is invalid JSON and unqualified. This is not evidence of Intel devices or hardware P2P. No actual driver, context, allocation, queue, transfer, native GPU API, provider tests or physical capability was executed. All old intake budget refusals remain preserved.
+
+Raw evidence resides under `stub_build_20261004T213121Z/runtime_normal`, `runtime_init_error`, `runtime_duplicate_root`; detailed exact pins and statuses: `runtime_receipt.json`; PE table: `pe_imports.raw.txt`; outer cleanup: `runtime_outer_receipt.json`.

@@ -1,0 +1,19 @@
+{
+  "adjudicator":"ROOT",
+  "authority":"Existing user-authorized bounded smoke tests and independent negative controls",
+  "source":"records/root_continuation_20261004/fp32_staging_operator_fixture_revision2_20261004T155012Z/fp32_staging_operator.cpp",
+  "source_sha256":"f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59",
+  "executable":"records/root_continuation_20261004/fp32_staging_operator_fixture_revision2_20261004T155012Z/compile_original_20261004T155012Z/fp32_staging_operator.exe",
+  "executable_sha256":"ad449a153447080836e25a5ca264ebd4b3afa5b14dbb239b11a5bad5be117b5b",
+  "controller_python_sha256":"3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "command_arguments":["--device","Vulkan0"],
+  "runtime_libraries":"Copy exactly five original build/bin ggml DLLs by checked hashes into a new runtime folder. Observe actual loaded paths/hashes through retained process handle where available; no global PATH changes.",
+  "child_environment":{"GGML_VK_DISABLE_F16":"1","GGML_VK_DISABLE_FUSION":"1","GGML_VK_DISABLE_COOPMAT":"1","GGML_VK_DISABLE_COOPMAT2":"1"},
+  "timeout_seconds":30,
+  "capture_limit_bytes_per_stream":1048576,
+  "fixed_numeric_gate":{"atol":0.00002,"rtol":0.000002,"full_outputs_per_case":2048,"valid_cases":6},
+  "root_review":"Two fixture-only edits independently read: six legal input layouts replace forbidden transposed-A cases; explicit transposed-A guard precedes ggml_mul_mat. Data, shapes, fixed tolerance, independent double reference, ownership checks and caps unchanged. Old crash is not numerical RED evidence.",
+  "purpose":"Obtain source-bound before-patch numerical RED; preserve failure as a failed operator workload, not model acceptance.",
+  "guards":["Retained hidden owned process, no shell, monotonic timeout and bounded concurrent drains","Pins before/after, parent environment unchanged, reap and independent PID absence","No concurrent GPU job","Stop on native/API/ownership/unsupported/hash/log/timeout failure; no unchanged retry","No AMD or corruption follow-up admitted by this receipt"],
+  "limits":["Fixed tiny operator fixture only","No model, P2P, Intel or capacity qualification","Driver-global allocations are not hard-bounded by public API"]
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "job_id": "qwen_vulkan_patch_audit",
+    "actual_native_children": 0,
+    "enable_thinking": true,
+    "model": "qwen3.8-max",
+    "provider_launch_authorized": true,
+    "source_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+    "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+    "reasoning_effort": "xhigh",
+    "prompt_sha256": "6dd5ad4cf9bb350d0d6e9da5fd73d6784f1baaf0c0e287db60bd12801caeece6",
+    "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\ggml-vulkan.candidate_snapshot.cpp",
+    "lane": "Qwen",
+    "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+  },
+  {
+    "job_id": "qwen_intel_peer_fixture",
+    "actual_native_children": 0,
+    "enable_thinking": true,
+    "model": "qwen3.8-max",
+    "provider_launch_authorized": true,
+    "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+    "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+    "reasoning_effort": "xhigh",
+    "prompt_sha256": "eab94178a52eaf93084f9bda37eec92e3292dcfce0eb0ee3a0038e5d2c125a72",
+    "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+    "lane": "Qwen",
+    "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+  },
+  {
+    "job_id": "qwen_intel_nvidia_interop",
+    "actual_native_children": 0,
+    "enable_thinking": true,
+    "model": "qwen3.8-max",
+    "provider_launch_authorized": true,
+    "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+    "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+    "reasoning_effort": "xhigh",
+    "prompt_sha256": "07e8f289afffdca66b71615e93a9c9f2f3cc986114592c80ec4e9d232104159a",
+    "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+    "lane": "Qwen",
+    "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+  },
+  {
+    "job_id": "qwen_four_card_acceptance",
+    "actual_native_children": 0,
+    "enable_thinking": true,
+    "model": "qwen3.8-max",
+    "provider_launch_authorized": true,
+    "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+    "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+    "reasoning_effort": "xhigh",
+    "prompt_sha256": "e43e98f618373729d2c6513821f3f99cb42406fa93291546a3d17df01f34d4af",
+    "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+    "lane": "Qwen",
+    "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+  },
+  {
+    "job_id": "qwen_mixed_transport_research",
+    "actual_native_children": 0,
+    "enable_thinking": true,
+    "model": "qwen3.8-max",
+    "provider_launch_authorized": true,
+    "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+    "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+    "reasoning_effort": "xhigh",
+    "prompt_sha256": "4bfbf8ec176f19c95802aabcb6f48df05f5eec09266d17e38ca877e02031f54d",
+    "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+    "lane": "Qwen",
+    "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+  }
+]

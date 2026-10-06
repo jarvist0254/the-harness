@@ -1,0 +1,310 @@
+{
+  "source": "import sys\nimport ctypes\nimport ctypes.wintypes\nimport struct\nimport time\n\n# Constants\nVK_SUCCESS = 0\nVK_ERROR_INITIALIZATION_FAILED = -3\nVK_STRUCTURE_TYPE_APPLICATION_INFO = 0\nVK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO = 1\nVK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 = 1000059000\nVK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES = 6\nVK_STRUCTURE_TYPE_DEVICE_CREATE_INFO = 3\nVK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO = 7\nVK_STRUCTURE_TYPE_BUFFER_CREATE_INFO = 14\nVK_STRUCTURE_TYPE_FENCE_CREATE_INFO = 8\nVK_STRUCTURE_TYPE_SUBMIT_INFO = 2\nVK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO = 39\nVK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO = 40\nVK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO = 42\nVK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET = 44 # Not used but for ref\nVK_STRUCTURE_TYPE_COPY_BUFFER_INFO = 15\nVK_STRUCTURE_TYPE_FILL_BUFFER_INFO = 16\nVK_STRUCTURE_TYPE_MEMORY_BARRIER = 1\nVK_ACCESS_TRANSFER_READ_BIT = 0x00000008\nVK_ACCESS_TRANSFER_WRITE_BIT = 0x00000010\nVK_PIPELINE_STAGE_TRANSFER_BIT = 0x00000004\nVK_IMAGE_LAYOUT_UNDEFINED = 0\nVK_IMAGE_LAYOUT_GENERAL = 1\nVK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL = 1000124001\nVK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL = 1000124002\nVK_SHARING_MODE_EXCLUSIVE = 0\nVK_QUEUE_TRANSFER_BIT = 0x00000002\nVK_QUEUE_GRAPHICS_BIT = 0x00000001\nVK_QUEUE_COMPUTE_BIT = 0x00000004\nVK_MEMORY_PROPERTY_HOST_VISIBLE_BIT = 0x00000001\nVK_MEMORY_PROPERTY_HOST_COHERENT_BIT = 0x00000002\nVK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT = 0x00000001\nVK_BUFFER_USAGE_TRANSFER_SRC_BIT = 0x00000001\nVK_BUFFER_USAGE_TRANSFER_DST_BIT = 0x00000002\nVK_BUFFER_USAGE_UNIFORM_BUFFER_BIT = 0x00000004\nVK_BUFFER_USAGE_STORAGE_BUFFER_BIT = 0x00000008\nVK_BUFFER_USAGE_VERTEX_BUFFER_BIT = 0x00000010\nVK_BUFFER_USAGE_INDEX_BUFFER_BIT = 0x00000020\nVK_BUFFER_USAGE_INDIRECT_BUFFER_BIT = 0x00000040\nVK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT = 0x00000080\nVK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_TRANSFER_SRC_BIT\nVK_COMMAND_BUFFER_LEVEL_PRIMARY = 0\nVK_COMMAND_BUFFER_LEVEL_SECONDARY = 1\nVK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT = 0x00000001\nVK_COMMAND_POOL_CREATE_TRANSIENT_BIT = 0x00000002\nVK_FENCE_CREATE_SIGNALED_BIT = 0x00000001\nVK_WHOLE_SIZE = 0xFFFFFFFFFFFFFFFF\nVK_NULL_HANDLE = 0\nVK_MAX_EXTENSION_NAME_SIZE = 256\nVK_MAX_DESCRIPTION_SIZE = 256\nVK_API_VERSION_1_0 = (1 << 22)\nVK_API_VERSION_1_1 = (1 << 22) | (1 << 12)\nVK_API_VERSION_1_2 = (1 << 22) | (2 << 12)\nVK_API_VERSION_1_3 = (1 << 22) | (3 << 12)\n\n# Types\nclass VkBool32(ctypes.c_uint32):\n    pass\n\nclass VkDeviceSize(ctypes.c_uint64):\n    pass\n\nclass VkInstance(ctypes.c_void_p):\n    pass\n\nclass VkPhysicalDevice(ctypes.c_void_p):\n    pass\n\nclass VkDevice(ctypes.c_void_p):\n    pass\n\nclass VkQueue(ctypes.c_void_p):\n    pass\n\nclass VkBuffer(ctypes.c_void_p):\n    pass\n\nclass VkFence(ctypes.c_void_p):\n    pass\n\nclass VkCommandPool(ctypes.c_void_p):\n    pass\n\nclass VkCommandBuffer(ctypes.c_void_p):\n    pass\n\nclass VkDeviceMemory(ctypes.c_void_p):\n    pass\n\nclass VkResult(ctypes.c_int32):\n    pass\n\nclass VkStructureType(ctypes.c_int32):\n    pass\n\nclass VkAccessFlags(ctypes.c_uint32):\n    pass\n\nclass VkPipelineStageFlags(ctypes.c_uint32):\n    pass\n\nclass VkImageLayout(ctypes.c_int32):\n    pass\n\nclass VkSharingMode(ctypes.c_int32):\n    pass\n\nclass VkBufferUsageFlags(ctypes.c_uint32):\n    pass\n\nclass VkMemoryPropertyFlags(ctypes.c_uint32):\n    pass\n\nclass VkCommandBufferLevel(ctypes.c_int32):\n    pass\n\nclass VkCommandPoolCreateFlags(ctypes.c_uint32):\n    pass\n\nclass VkFenceCreateFlags(ctypes.c_uint32):\n    pass\n\nclass VkSubmitInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('waitSemaphoreCount', ctypes.c_uint32),\n        ('pWaitSemaphores', ctypes.POINTER(VkSemaphore)),\n        ('pWaitDstStageMask', ctypes.POINTER(VkPipelineStageFlags)),\n        ('commandBufferCount', ctypes.c_uint32),\n        ('pCommandBuffers', ctypes.POINTER(VkCommandBuffer)),\n        ('signalSemaphoreCount', ctypes.c_uint32),\n        ('pSignalSemaphores', ctypes.POINTER(VkSemaphore))\n    ]\n\nclass VkSemaphore(ctypes.c_void_p):\n    pass\n\nclass VkApplicationInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('pApplicationName', ctypes.c_char_p),\n        ('applicationVersion', ctypes.c_uint32),\n        ('pEngineName', ctypes.c_char_p),\n        ('engineVersion', ctypes.c_uint32),\n        ('apiVersion', ctypes.c_uint32)\n    ]\n\nclass VkInstanceCreateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', ctypes.c_uint32),\n        ('pApplicationInfo', ctypes.POINTER(VkApplicationInfo)),\n        ('enabledLayerCount', ctypes.c_uint32),\n        ('ppEnabledLayerNames', ctypes.POINTER(ctypes.c_char_p)),\n        ('enabledExtensionCount', ctypes.c_uint32),\n        ('ppEnabledExtensionNames', ctypes.POINTER(ctypes.c_char_p))\n    ]\n\nclass VkPhysicalDeviceProperties(ctypes.Structure):\n    _fields_ = [\n        ('apiVersion', ctypes.c_uint32),\n        ('driverVersion', ctypes.c_uint32),\n        ('vendorID', ctypes.c_uint32),\n        ('deviceID', ctypes.c_uint32),\n        ('deviceType', ctypes.c_int32),\n        ('deviceName', ctypes.c_char * 256),\n        ('pipelineCacheUUID', ctypes.c_ubyte * 16),\n        ('limits', ctypes.c_byte * 1024) # Simplified, not using limits fields directly\n    ]\n\nclass VkPhysicalDeviceFeatures(ctypes.Structure):\n    _fields_ = [('robustBufferAccess', VkBool32)] + [(f'feature_{i}', VkBool32) for i in range(1, 100)]\n\nclass VkPhysicalDeviceFeatures2(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('features', VkPhysicalDeviceFeatures)\n    ]\n\nclass VkQueueFamilyProperties(ctypes.Structure):\n    _fields_ = [\n        ('queueFlags', ctypes.c_uint32),\n        ('queueCount', ctypes.c_uint32),\n        ('timestampValidBits', ctypes.c_uint32),\n        ('minImageTransferGranularity', ctypes.c_uint32 * 3)\n    ]\n\nclass VkDeviceQueueCreateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', ctypes.c_uint32),\n        ('queueFamilyIndex', ctypes.c_uint32),\n        ('queueCount', ctypes.c_uint32),\n        ('pQueuePriorities', ctypes.POINTER(ctypes.c_float))\n    ]\n\nclass VkDeviceCreateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', ctypes.c_uint32),\n        ('queueCreateInfoCount', ctypes.c_uint32),\n        ('pQueueCreateInfos', ctypes.POINTER(VkDeviceQueueCreateInfo)),\n        ('enabledLayerCount', ctypes.c_uint32),\n        ('ppEnabledLayerNames', ctypes.POINTER(ctypes.c_char_p)),\n        ('enabledExtensionCount', ctypes.c_uint32),\n        ('ppEnabledExtensionNames', ctypes.POINTER(ctypes.c_char_p)),\n        ('pEnabledFeatures', ctypes.POINTER(VkPhysicalDeviceFeatures))\n    ]\n\nclass VkMemoryAllocateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('allocationSize', VkDeviceSize),\n        ('memoryTypeIndex', ctypes.c_uint32)\n    ]\n\nclass VkMemoryRequirements(ctypes.Structure):\n    _fields_ = [\n        ('size', VkDeviceSize),\n        ('alignment', VkDeviceSize),\n        ('memoryTypeBits', ctypes.c_uint32)\n    ]\n\nclass VkMemoryType(ctypes.Structure):\n    _fields_ = [\n        ('propertyFlags', VkMemoryPropertyFlags),\n        ('heapIndex', ctypes.c_uint32)\n    ]\n\nclass VkMemoryHeap(ctypes.Structure):\n    _fields_ = [\n        ('size', VkDeviceSize),\n        ('flags', ctypes.c_uint32)\n    ]\n\nclass VkPhysicalDeviceMemoryProperties(ctypes.Structure):\n    _fields_ = [\n        ('memoryTypeCount', ctypes.c_uint32),\n        ('memoryTypes', VkMemoryType * 32),\n        ('memoryHeapCount', ctypes.c_uint32),\n        ('memoryHeaps', VkMemoryHeap * 16)\n    ]\n\nclass VkBufferCreateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', ctypes.c_uint32),\n        ('size', VkDeviceSize),\n        ('usage', VkBufferUsageFlags),\n        ('sharingMode', VkSharingMode),\n        ('queueFamilyIndexCount', ctypes.c_uint32),\n        ('pQueueFamilyIndices', ctypes.POINTER(ctypes.c_uint32))\n    ]\n\nclass VkFenceCreateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', VkFenceCreateFlags)\n    ]\n\nclass VkCommandPoolCreateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', VkCommandPoolCreateFlags),\n        ('queueFamilyIndex', ctypes.c_uint32)\n    ]\n\nclass VkCommandBufferAllocateInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('commandPool', VkCommandPool),\n        ('level', VkCommandBufferLevel),\n        ('commandBufferCount', ctypes.c_uint32)\n    ]\n\nclass VkCommandBufferBeginInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('flags', ctypes.c_uint32),\n        ('pInheritanceInfo', ctypes.c_void_p)\n    ]\n\nclass VkCopyBufferInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('srcBuffer', VkBuffer),\n        ('dstBuffer', VkBuffer),\n        ('regionCount', ctypes.c_uint32),\n        ('pRegions', ctypes.POINTER(VkBufferCopy))\n    ]\n\nclass VkBufferCopy(ctypes.Structure):\n    _fields_ = [\n        ('srcOffset', VkDeviceSize),\n        ('dstOffset', VkDeviceSize),\n        ('size', VkDeviceSize)\n    ]\n\nclass VkFillBufferInfo(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('dstBuffer', VkBuffer),\n        ('data', ctypes.c_uint32),\n        ('offset', VkDeviceSize),\n        ('range', VkDeviceSize)\n    ]\n\nclass VkMemoryBarrier(ctypes.Structure):\n    _fields_ = [\n        ('sType', VkStructureType),\n        ('pNext', ctypes.c_void_p),\n        ('srcAccessMask', VkAccessFlags),\n        ('dstAccessMask', VkAccessFlags)\n    ]\n\ndef check_result(res, func_name):\n    if res != VK_SUCCESS:\n        raise RuntimeError(f\"Vulkan call {func_name} failed with result {res}\")\n    return res\n\ndef get_proc_addr(instance, name):\n    vkGetInstanceProcAddr = vulkan_dll.vkGetInstanceProcAddr\n    vkGetInstanceProcAddr.restype = ctypes.c_void_p\n    vkGetInstanceProcAddr.argtypes = [VkInstance, ctypes.c_char_p]\n    addr = vkGetInstanceProcAddr(instance, name.encode('utf-8'))\n    if not addr:\n        raise RuntimeError(f\"Failed to get proc address for {name}\")\n    return addr\n\ndef main():\n    global vulkan_dll\n    try:\n        vulkan_dll = ctypes.WinDLL('vulkan-1.dll')\n    except OSError:\n        print(\"UNSUPPORTED: Vulkan loader not found\")\n        return\n\n    # Create Instance\n    app_info = VkApplicationInfo()\n    app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO\n    app_info.pApplicationName = b\"SmokeTest\"\n    app_info.applicationVersion = 1\n    app_info.pEngineName = b\"None\"\n    app_info.engineVersion = 1\n    app_info.apiVersion = VK_API_VERSION_1_0\n\n    inst_create_info = VkInstanceCreateInfo()\n    inst_create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO\n    inst_create_info.pApplicationInfo = ctypes.pointer(app_info)\n\n    instance = VkInstance()\n    vkCreateInstance = get_proc_addr(None, 'vkCreateInstance')\n    vkCreateInstance_func = ctypes.CFUNCTYPE(VkResult, ctypes.POINTER(VkInstanceCreateInfo), ctypes.c_void_p, ctypes.POINTER(VkInstance))(vkCreateInstance)\n    res = vkCreateInstance_func(ctypes.pointer(inst_create_info), None, ctypes.pointer(instance))\n    check_result(res, \"vkCreateInstance\")\n\n    try:\n        # Enumerate Physical Devices\n        vkEnumeratePhysicalDevices = get_proc_addr(instance, 'vkEnumeratePhysicalDevices')\n        vkEnumPhysDev_func = ctypes.CFUNCTYPE(VkResult, VkInstance, ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(VkPhysicalDevice))(vkEnumeratePhysicalDevices)\n        \n        device_count = ctypes.c_uint32(0)\n        res = vkEnumPhysDev_func(instance, ctypes.pointer(device_count), None)\n        check_result(res, \"vkEnumeratePhysicalDevices count\")\n        \n        if device_count.value < 2:\n            print(\"UNSUPPORTED: Less than 2 physical devices\")\n            return\n\n        physical_devices = (VkPhysicalDevice * device_count.value)()\n        res = vkEnumPhysDev_func(instance, ctypes.pointer(device_count), physical_devices)\n        check_result(res, \"vkEnumeratePhysicalDevices\")\n\n        # Get Properties and Memory Info for each device\n        vkGetPhysicalDeviceProperties = get_proc_addr(instance, 'vkGetPhysicalDeviceProperties')\n        vkGetProps_func = ctypes.CFUNCTYPE(None, VkPhysicalDevice, ctypes.POINTER(VkPhysicalDeviceProperties))(vkGetPhysicalDeviceProperties)\n        \n        vkGetPhysicalDeviceMemoryProperties = get_proc_addr(instance, 'vkGetPhysicalDeviceMemoryProperties')\n        vkGetMemProps_func = ctypes.CFUNCTYPE(None, VkPhysicalDevice, ctypes.POINTER(VkPhysicalDeviceMemoryProperties))(vkGetPhysicalDeviceMemoryProperties)\n\n        vkGetPhysicalDeviceQueueFamilyProperties = get_proc_addr(instance, 'vkGetPhysicalDeviceQueueFamilyProperties')\n        vkGetQueueProps_func = ctypes.CFUNCTYPE(None, VkPhysicalDevice, ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(VkQueueFamilyProperties))(vkGetPhysicalDeviceQueueFamilyProperties)\n\n        selected_devices = []\n        device_infos = [] # Store props and memprops for later
+        
+        for i in range(device_count.value):\n            pd = physical_devices[i]\n            props = VkPhysicalDeviceProperties()\n            vkGetProps_func(pd, ctypes.pointer(props))
+            
+            mem_props = VkPhysicalDeviceMemoryProperties()
+            vkGetMemProps_func(pd, ctypes.pointer(mem_props))
+
+            q_count = ctypes.c_uint32(0)
+            vkGetQueueProps_func(pd, ctypes.pointer(q_count), None)
+            queue_families = (VkQueueFamilyProperties * q_count.value)()
+            vkGetQueueProps_func(pd, ctypes.pointer(q_count), queue_families)
+
+            transfer_family_idx = -1
+            for j, qf in enumerate(queue_families):
+                if qf.queueFlags & VK_QUEUE_TRANSFER_BIT:
+                    transfer_family_idx = j
+                    break
+            
+            if transfer_family_idx == -1:
+                continue
+
+            # Check for Host Visible Coherent memory type
+            host_visible_coherent_type_idx = -1
+            for k in range(mem_props.memoryTypeCount):
+                flags = mem_props.memoryTypes[k].propertyFlags
+                if (flags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) and (flags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT):
+                    host_visible_coherent_type_idx = k
+                    break
+            
+            if host_visible_coherent_type_idx == -1:
+                # Try just Host Visible if Coherent is missing? Spec says prefer coherent. 
+                # If no coherent, we might need flush/invalidate. For simplicity/smoke test, let's require coherent or fail UNSUPPORTED if strict.
+                # The prompt says \"prefer COHERENT or UNSUPPORTED rather than invent\". So if no coherent, mark as unsupported candidate?
+                # Actually, we can use non-coherent with flush/invalidate. But implementing that adds complexity.
+                # Let's stick to requiring HOST_VISIBLE_COHERENT for this smoke test to keep it simple and robust.
+                continue
+
+            selected_devices.append({
+                'pd': pd,
+                'props': props,
+                'mem_props': mem_props,
+                'transfer_family': transfer_family_idx,
+                'host_vis_coh_mem_type': host_visible_coherent_type_idx
+            })
+
+        if len(selected_devices) < 2:
+            print(\"UNSUPPORTED: Could not find 2 suitable devices with Transfer Queue and HostVisibleCoherent Memory\")
+            return
+
+        dev_a = selected_devices[0]
+        dev_b = selected_devices[1]
+
+        print(f\"Device A: {dev_a['props'].deviceName.decode('utf-8', errors='ignore')} Type:{dev_a['props'].deviceType} ID:{hex(dev_a['props'].deviceID)} Vendor:{hex(dev_a['props'].vendorID)}\")
+        print(f\"Device B: {dev_b['props'].deviceName.decode('utf-8', errors='ignore')} Type:{dev_b['props'].deviceType} ID:{hex(dev_b['props'].deviceID)} Vendor:{hex(dev_b['props'].vendorID)}\")
+
+        # Helper to create logical device
+        def create_logical_device(dev_info):
+            priority = ctypes.c_float(1.0)
+            queue_create_info = VkDeviceQueueCreateInfo()
+            queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO # Wait, sType for QueueCreateInfo is different? No, it's 3? 
+            # Correction: VkDeviceQueueCreateInfo sType is VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO which is 2? 
+            # Let's check standard values. 
+            # VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO = 2
+            queue_create_info.sType = 2 
+            queue_create_info.queueFamilyIndex = dev_info['transfer_family']
+            queue_create_info.queueCount = 1
+            queue_create_info.pQueuePriorities = ctypes.pointer(priority)
+
+            device_create_info = VkDeviceCreateInfo()
+            device_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO
+            device_create_info.queueCreateInfoCount = 1
+            device_create_info.pQueueCreateInfos = ctypes.pointer(queue_create_info)
+            device_create_info.enabledExtensionCount = 0
+            device_create_info.ppEnabledExtensionNames = None
+            device_create_info.pEnabledFeatures = None
+
+            device = VkDevice()
+            vkCreateDevice = get_proc_addr(instance, 'vkCreateDevice')
+            vkCreateDevice_func = ctypes.CFUNCTYPE(VkResult, VkPhysicalDevice, ctypes.POINTER(VkDeviceCreateInfo), ctypes.c_void_p, ctypes.POINTER(VkDevice))(vkCreateDevice)
+            res = vkCreateDevice_func(dev_info['pd'], ctypes.pointer(device_create_info), None, ctypes.pointer(device))
+            check_result(res, \"vkCreateDevice\")
+            
+            queue = VkQueue()
+            vkGetDeviceQueue = get_proc_addr(device, 'vkGetDeviceQueue')
+            vkGetDeviceQueue_func = ctypes.CFUNCTYPE(None, VkDevice, ctypes.c_uint32, ctypes.c_uint32, ctypes.POINTER(VkQueue))(vkGetDeviceQueue)
+            vkGetDeviceQueue_func(device, dev_info['transfer_family'], 0, ctypes.pointer(queue))
+            
+            return device, queue
+
+        device_a, queue_a = create_logical_device(dev_a)
+        device_b, queue_b = create_logical_device(dev_b)
+
+        # Allocate Buffers on Device A (Host Staged Source)
+        buffer_size = 256 * 1024 # 256 KiB
+        
+        # Create Buffer A (Source)
+        buf_create_info = VkBufferCreateInfo()
+        buf_create_info.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO
+        buf_create_info.size = buffer_size
+        buf_create_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT
+        buf_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE
+        
+        buffer_a = VkBuffer()
+        vkCreateBuffer = get_proc_addr(device_a, 'vkCreateBuffer')
+        vkCreateBuffer_func = ctypes.CFUNCTYPE(VkResult, VkDevice, ctypes.POINTER(VkBufferCreateInfo), ctypes.c_void_p, ctypes.POINTER(VkBuffer))(vkCreateBuffer)
+        res = vkCreateBuffer_func(device_a, ctypes.pointer(buf_create_info), None, ctypes.pointer(buffer_a))
+        check_result(res, \"vkCreateBuffer A\")
+
+        # Get Memory Requirements
+        vkGetBufferMemoryRequirements = get_proc_addr(device_a, 'vkGetBufferMemoryRequirements')
+        vkGetBufMemReq_func = ctypes.CFUNCTYPE(None, VkDevice, VkBuffer, ctypes.POINTER(VkMemoryRequirements))(vkGetBufferMemoryRequirements)
+        mem_reqs = VkMemoryRequirements()
+        vkGetBufMemReq_func(device_a, buffer_a, ctypes.pointer(mem_reqs))
+
+        # Find compatible memory type index (already have host_vis_coh_mem_type from selection, but must ensure it supports the buffer's memoryTypeBits)
+        # In practice, usually all types support buffers, but we should verify.
+        target_mem_type_idx = -1
+        for i in range(dev_a['mem_props'].memoryTypeCount):
+            if (mem_reqs.memoryTypeBits & (1 << i)):
+                if (dev_a['mem_props'].memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) and \\
+                   (dev_a['mem_props'].memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT):
+                    target_mem_type_idx = i
+                    break
+        
+        if target_mem_type_idx == -1:
+             print(\"UNSUPPORTED: No compatible HostVisibleCoherent memory type for buffer\")
+             return
+
+        alloc_info = VkMemoryAllocateInfo()
+        alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO
+        alloc_info.allocationSize = mem_reqs.size
+        alloc_info.memoryTypeIndex = target_mem_type_idx
+
+        memory_a = VkDeviceMemory()
+        vkAllocateMemory = get_proc_addr(device_a, 'vkAllocateMemory')
+        vkAllocMem_func = ctypes.CFUNCTYPE(VkResult, VkDevice, ctypes.POINTER(VkMemoryAllocateInfo), ctypes.c_void_p, ctypes.POINTER(VkDeviceMemory))(vkAllocateMemory)
+        res = vkAllocMem_func(device_a, ctypes.pointer(alloc_info), None, ctypes.pointer(memory_a))
+        check_result(res, \"vkAllocateMemory A\")
+
+        vkBindBufferMemory = get_proc_addr(device_a, 'vkBindBufferMemory')
+        vkBindBufMem_func = ctypes.CFUNCTYPE(VkResult, VkDevice, VkBuffer, VkDeviceMemory, VkDeviceSize)(vkBindBufferMemory)
+        res = vkBindBufMem_func(device_a, buffer_a, memory_a, 0)
+        check_result(res, \"vkBindBufferMemory A\")
+
+        # Map Memory A
+        vkMapMemory = get_proc_addr(device_a, 'vkMapMemory')
+        vkMapMem_func = ctypes.CFUNCTYPE(VkResult, VkDevice, VkDeviceMemory, VkDeviceSize, VkDeviceSize, ctypes.c_uint32, ctypes.POINTER(ctypes.c_void_p))(vkMapMemory)
+        mapped_ptr_a = ctypes.c_void_p()
+        res = vkMapMem_func(device_a, memory_a, 0, VK_WHOLE_SIZE, 0, ctypes.pointer(mapped_ptr_a))
+        check_result(res, \"vkMapMemory A\")
+
+        # Fill Mapped Memory with pattern 0x1234abcd
+        # We need to write 32-bit integers. 
+        # Use ctypes.cast to array of uint32
+        data_array = (ctypes.c_uint32 * (buffer_size // 4)).from_address(mapped_ptr_a.value)
+        pattern = 0x1234abcd
+        for i in range(len(data_array)):
+            data_array[i] = pattern
+
+        # Unmap
+        vkUnmapMemory = get_proc_addr(device_a, 'vkUnmapMemory')
+        vkUnmapMem_func = ctypes.CFUNCTYPE(None, VkDevice, VkDeviceMemory)(vkUnmapMemory)
+        vkUnmapMem_func(device_a, memory_a)
+
+        # Create Command Pool and Buffer for Device A
+        cmd_pool_info = VkCommandPoolCreateInfo()
+        cmd_pool_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO
+        cmd_pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT
+        cmd_pool_info.queueFamilyIndex = dev_a['transfer_family']
+
+        command_pool_a = VkCommandPool()
+        vkCreateCommandPool = get_proc_addr(device_a, 'vkCreateCommandPool')
+        vkCreateCmdPool_func = ctypes.CFUNCTYPE(VkResult, VkDevice, ctypes.POINTER(VkCommandPoolCreateInfo), ctypes.c_void_p, ctypes.POINTER(VkCommandPool))(vkCreateCommandPool)
+        res = vkCreateCmdPool_func(device_a, ctypes.pointer(cmd_pool_info), None, ctypes.pointer(command_pool_a))
+        check_result(res, \"vkCreateCommandPool A\")
+
+        cmd_alloc_info = VkCommandBufferAllocateInfo()
+        cmd_alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO
+        cmd_alloc_info.commandPool = command_pool_a
+        cmd_alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY
+        cmd_alloc_info.commandBufferCount = 1
+
+        command_buffer_a = VkCommandBuffer()
+        vkAllocateCommandBuffers = get_proc_addr(device_a, 'vkAllocateCommandBuffers')
+        vkAllocCmdBufs_func = ctypes.CFUNCTYPE(VkResult, VkDevice, ctypes.POINTER(VkCommandBufferAllocateInfo), ctypes.POINTER(VkCommandBuffer))(vkAllocateCommandBuffers)
+        res = vkAllocCmdBufs_func(device_a, ctypes.pointer(cmd_alloc_info), ctypes.pointer(command_buffer_a))
+        check_result(res, \"vkAllocateCommandBuffers A\")
+
+        # Begin Recording
+        cmd_begin_info = VkCommandBufferBeginInfo()
+        cmd_begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO
+        cmd_begin_info.flags = 0
+        
+        vkBeginCommandBuffer = get_proc_addr(device_a, 'vkBeginCommandBuffer')
+        vkBeginCmdBuf_func = ctypes.CFUNCTYPE(VkResult, VkCommandBuffer, ctypes.POINTER(VkCommandBufferBeginInfo))(vkBeginCommandBuffer)
+        res = vkBeginCmdBuf_func(command_buffer_a, ctypes.pointer(cmd_begin_info))
+        check_result(res, \"vkBeginCommandBuffer A\")
+
+        # Record Fill Buffer (Optional step, but prompt asked for vkCmdFillBuffer with 0x1234abcd full buffer)
+        # Note: We already filled via CPU map. vkCmdFillBuffer is a GPU-side fill. 
+        # The prompt says: \"record vkCmdFillBuffer with 0x1234abcd full buffer\". 
+        # This implies doing the fill on the GPU side into the same buffer? Or a different one?
+        # \"Allocate 256KiB transfer buffer deviceA HOST_VISIBLE... record vkCmdFillBuffer... submit... read mapped memory and verify\".
+        # If we fill via CPU, then submit a fill command, the fill command overwrites it.
+        # Let's follow the prompt strictly: Use vkCmdFillBuffer to populate the buffer.
+        
+        fill_info = VkFillBufferInfo()
+        fill_info.sType = VK_STRUCTURE_TYPE_FILL_BUFFER_INFO
+        fill_info.dstBuffer = buffer_a
+        fill_info.data = pattern
+        fill_info.offset = 0
+        fill_info.range = VK_WHOLE_SIZE
+
+        vkCmdFillBuffer = get_proc_addr(device_a, 'vkCmdFillBuffer')
+        vkCmdFill_func = ctypes.CFUNCTYPE(None, VkCommandBuffer, VkBuffer, ctypes.c_uint32, VkDeviceSize, VkDeviceSize)(vkCmdFillBuffer)
+        vkCmdFill_func(command_buffer_a, buffer_a, pattern, 0, VK_WHOLE_SIZE)
+
+        vkEndCommandBuffer = get_proc_addr(device_a, 'vkEndCommandBuffer')
+        vkEndCmdBuf_func = ctypes.CFUNCTYPE(VkResult, VkCommandBuffer)(vkEndCommandBuffer)
+        res = vkEndCmdBuf_func(command_buffer_a)
+        check_result(res, \"vkEndCommandBuffer A\")
+
+        # Create Fence A
+        fence_info = VkFenceCreateInfo()
+        fence_info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO
+        fence_info.flags = 0
+
+        fence_a = VkFence()
+        vkCreateFence = get_proc_addr(device_a, 'vkCreateFence')
+        vkCreateFence_func = ctypes.CFUNCTYPE(VkResult, VkDevice, ctypes.POINTER(VkFenceCreateInfo), ctypes.c_void_p, ctypes.POINTER(VkFence))(vkCreateFence)
+        res = vkCreateFence_func(device_a, ctypes.pointer(fence_info), None, ctypes.pointer(fence_a))
+        check_result(res, \"vkCreateFence A\")
+
+        # Submit Command Buffer A
+        submit_info = VkSubmitInfo()
+        submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO
+        submit_info.commandBufferCount = 1
+        submit_info.pCommandBuffers = ctypes.pointer(command_buffer_a)
+        submit_info.signalSemaphoreCount = 0
+        submit_info.waitSemaphoreCount = 0
+
+        vkQueueSubmit = get_proc_addr(device_a, 'vkQueueSubmit')
+        vkQueueSubmit_func = ctypes.CFUNCTYPE(VkResult, VkQueue, ctypes.c_uint32, ctypes.POINTER(VkSubmitInfo), VkFence)(vkQueueSubmit)
+        res = vkQueueSubmit_func(queue_a, 1, ctypes.pointer(submit_info), fence_a)
+        check_result(res, \"vkQueueSubmit A\")
+
+        # Wait for Fence A
+        vkWaitForFences = get_proc_addr(device_a, 'vkWaitForFences')
+        vkWaitFunc = ctypes.CFUNCTYPE(VkResult, VkDevice, ctypes.c_uint32, ctypes.POINTER(VkFence), VkBool32, ctypes.c_uint64)(vkWaitForFences)
+        fences_arr = (VkFence * 1)(fence_a)
+        timeout_ns = 10_000_000_000
+        res = vkWaitFunc(device_a, 1, fences_arr, True, timeout_ns)
+        check_result(res, \"vkWaitForFences A\")
+
+        # Verify Content of Buffer A by mapping again
+        mapped_ptr_a_verify = ctypes.c_void_p()
+        res = vkMapMem_func(device_a, memory_a, 0, VK_WHOLE_SIZE, 0, ctypes.pointer(mapped_ptr_a_verify))
+        check_result(res, \"vkMapMemory A Verify\")
+
+        data_array_verify = (ctypes.c_uint32 * (buffer_size // 4)).from_address(mapped_ptr_a_verify.value)
+        mismatch_found = False
+        for i in range(len(data_array_verify)):
+            if data_array_verify[i] != pattern:
+                mismatch_found = True
+                break
+        
+        vkUnmapMem_func(device_a, memory_a)
+
+        if mismatch_found:
+            print(\"FAIL: Buffer A content mismatch after GPU Fill\")
+            return
+
+        print(\"PASS: Buffer A verified\")
+
+        # Now Transport to Device B
+        # Prompt: \"CPU stage read bytes into 256KiB buffer B on second device\"
+        # This implies reading from A (which we did via map/verify above, but we unmapped).
+        # We need to read A again into CPU memory, then write to B's buffer.
+        
+        # Re-map A to read
+        mapped_ptr_a_read = ctypes.c_void_p()
+        res = vkMapMem_func(device_a, memory_a, 0, VK_WHOLE_SIZE, 0, ctypes.pointer(mapped_ptr_a_read))
+        check_result(res, \"vkMapMemory A Read\")
+        
+        # Copy to CPU buffer
+        cpu_staging_buffer = ctypes.create_string_buffer(buffer_size)
+        ctypes.memmove(cpu_staging_buffer, mapped_ptr_a_read.value, buffer_size)
+        
+        vkUnmapMem_func(device_a, memory_a)
+
+        # Create Buffer B on Device B (Destination)
+        buf_create_info_b = VkBufferCreateInfo()
+        buf_create_info_b.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO
+        buf_create_info_b.size = buffer_size
+        buf_create_info_b.usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_TRANSFER_SRC_BIT # Src for copy back?
+        buf_create_info_b.sharingMode = VK_SHARING_MODE_EXCLUSIVE
+
+        buffer_b = VkBuffer()
+        res = vkCreateBuffer_func(device_b, ctypes.pointer(buf_create_info_b), None, ctypes.pointer(buffer_b))
+        check_result(res, \"vkCreateBuffer B\")
+
+        vkGetBufMemReq_func_b = ctypes.CFUNCTYPE(None, VkDevice, VkBuffer, ctypes.POINTER(VkMemoryRequirements))(get_proc_addr(device_b, 'vkGetBufferMemoryRequirements'))
+        mem_reqs_b = VkMemoryRequirements()
+        vkGetBufMemReq_func_b(device_b, buffer_b, ctypes.pointer(mem_reqs_b))
+
+        # Find Host Visible Coherent Mem Type for B
+        target_mem_type_idx_b = -1
+        for i in range(dev_b['mem_props'].memoryTypeCount):
+

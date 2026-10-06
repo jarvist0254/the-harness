@@ -1,0 +1,3 @@
+{"event":"start","policy":"kill_on_close","seq":1}
+{"event":"resumed","worker_id":"timeout_worker","pid":69224,"seq":2}
+{"event":"terminal","status":"TIMEOUT","failure_reason":"deadline","seq":3}

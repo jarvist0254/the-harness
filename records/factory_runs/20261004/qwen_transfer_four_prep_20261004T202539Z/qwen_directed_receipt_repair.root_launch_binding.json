@@ -1,0 +1,16 @@
+{
+  "authority": "ROOT explicit exact v2 four-call admission",
+  "source_execution": false,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z",
+  "other_live_qwen": 1,
+  "utc": "2026-10-04T20:34:16.2059729Z",
+  "lane": "Qwen",
+  "source_sha256": "9e44296cdb39e4e746fbb242a090b19a50ab7613121e6d25245d2d60699e869d",
+  "prompt_sha256": "8f62af3585077b7a3fea5ff90699c9c7fa22a2a476124143e2d98a206902c8cc",
+  "native_children_actual": 0,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair.v2.spec.txt",
+  "job_id": "qwen_directed_receipt_repair",
+  "packet_sha256": "2767389e7e4f604f76bd73b367b2174bc5b63a48ad000593e8589bea25f3145d",
+  "provider_launch_authorized": true,
+  "model": "qwen3.8-max"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PREPARED_PENDING_ROOT_AUTHORIZATION",
+  "provider_launched": false,
+  "model": "grok-4.7-build-fast",
+  "reasoning_effort": "high",
+  "owned_deadline_seconds": 600,
+  "stream_cap_bytes": 2097152,
+  "source_contract_max_chars": 32768,
+  "tests_contract_max_chars": 16384,
+  "prompt_bytes": 16800,
+  "candidate_source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\source.grok_untrusted.py",
+  "candidate_source_sha256": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "pins": {
+    "invoke_owned_capacity_editor.ps1": "4c31e32ca8baf6d8b231c38a0a8e3845c667341b6e85f87e5449b08d2b974005",
+    "provider_common.ps1": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+    "research_artifact.ps1": "458c5e8b30dc91cb490e324c6572ad4b7b642f7ce068ad2d9b43905d93b931b6",
+    "grok_capacity_binding_focused_high.prompt.txt": "88e33d38e0e96c8b07bd6290c3d2459bd771f5c13579d9d690875c875b7bc800",
+    "ROOT_LAUNCH_BINDING.pending.json": "c35dfa9c9c5a7758d1f468c50e55da24e19fdc2083c5a20e6903fb932368c30c"
+  },
+  "prior_timeout_receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z\\FINAL_TIMEOUT_RECEIPT.json",
+  "prior_timeout_receipt_sha256": "2b8a04ae0ae6ffadb6a9ecf3d8f24c13a628555a2de39dc4a5ab6d2e325da2e3",
+  "independent47_result_path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_grok_root_audit_20261004T205640Z\\stdout.raw.json",
+  "independent47_result_sha256": "6b01aba1b1b29ca2eae440cfbf5644a583dfac7092c40cd706dd34f9bb3eb238",
+  "only_three_measured_binding_repairs": true,
+  "native_gpu_provider_execution": false
+}

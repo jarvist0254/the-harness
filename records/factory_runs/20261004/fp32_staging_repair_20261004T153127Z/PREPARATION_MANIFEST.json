@@ -1,0 +1,50 @@
+{
+  "state": "PREPARATION_ONLY_NO_PROVIDER_LAUNCH",
+  "batch": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "previous_helpers_inspected": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\provider_job_v2.ps1",
+      "sha256": "1768cdd16287dba036dfde249bc5b85675fdbc54e596639b91bdef79c3a74e71"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\launch_qwen_retry_owned.ps1",
+      "sha256": "d20b1f381593b1bbb03945dac2db3af556504e11e74617a88546556116abf1b1"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\launch_gemini_layer_review.ps1",
+      "sha256": "569f2fd421a83782fbfe8bdb3014b9cb78557ec1df8c4052bea1532e2e4a52c6"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\launch_grok_capture_edit.ps1",
+      "sha256": "1850bf81a8e8a8f824fb9f3085fb1df3d42cd05de4a87b44f5e733d1baa313b8"
+    }
+  ],
+  "models": {
+    "Qwen": "qwen3.8-max",
+    "Gemini": "gemini-3.8-flash-medium",
+    "Grok": "grok-4.7-build-fast"
+  },
+  "base_cpp_source_pin": {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+    "sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+    "function_start": 6270,
+    "function_end": 6552,
+    "excerpt_sha256": "c84be41420009d9b0de50570e6a1b8ac2dc23cad62027afa39101ffee2d8a871",
+    "root_report": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_analysis_20261004T152847Z\\REPORT.md",
+    "root_source_pins": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_analysis_20261004T152847Z\\source_pins.json",
+    "prompt_sha256": "b8c65a481a8097a74bba8f9e1c61b98494a4edab3217405457dc5b5e7a592865"
+  },
+  "credentials_read_at_preparation": false,
+  "network_provider_native_gpu_calls": 0,
+  "native_children_actual": 0,
+  "native_maximum_authorized_each_qwen_deepseek_parent": 10,
+  "limits": {
+    "http_seconds": 240,
+    "qwen_outer_seconds": 270,
+    "max_completion_tokens": 8192,
+    "raw_response_bytes": 2097152,
+    "cli_gemini_seconds": 240,
+    "cli_grok_seconds": 300
+  },
+  "prior_phase_manifest": "Five frozen batches47jobs2515200observedtokens+2unknown; sixthpreparationnotcounted"
+}

@@ -1,0 +1,12 @@
+{
+  "intake_original_status": "REFUSED",
+  "provider_declared_status": "PROPOSED",
+  "source_bytes": 9995,
+  "source_chars": 9995,
+  "source_sha256": "f0e4d363396c2ac1744e3e7d9458120929f311d92cb8e31ba112b7c818f9bd22",
+  "raw_answer_sha256": "846ae31da7d3535bdd8adc379af014eac0eac2212f7615be58ba40ef9de2ea56",
+  "header_path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+  "header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "extraction": "Exact UTF8 source string, no trimming/newline conversion or edits",
+  "runtime_linking": "NOT_RUN"
+}

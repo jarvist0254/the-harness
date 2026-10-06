@@ -1,0 +1,327 @@
+[
+  {
+    "case": "clean",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 0,
+    "json": {
+      "status": "PEER_COPY_PAYLOAD_OBSERVED",
+      "exit_code": 0,
+      "inject_corruption": false,
+      "direct_transport_qualified": false,
+      "payload_observed_only": true,
+      "bytes": 65536,
+      "words": 16384,
+      "timeout_ns": 10000000000,
+      "mismatch_count": 0,
+      "fault_index": null,
+      "src": {
+        "uuid": "00112233445566778899aabbccddeeff",
+        "vendorId": "0x8086",
+        "deviceId": 4096
+      },
+      "dst": {
+        "uuid": "ffeeddccbbaa99887766554433221100",
+        "vendorId": "0x8086",
+        "deviceId": 4097
+      },
+      "peer": {
+        "can_src_to_dst": true,
+        "can_dst_to_src": true,
+        "p2p_src_to_dst": true,
+        "p2p_dst_to_src": true,
+        "access_src_to_dst": true,
+        "access_dst_to_src": true,
+        "copy_device": "src"
+      },
+      "queues": {
+        "fill": {
+          "device": "src",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        },
+        "copy": {
+          "device": "src",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        },
+        "readback": {
+          "device": "dst",
+          "ordinal": 0,
+          "kind": "COPY",
+          "numQueues": 1
+        }
+      },
+      "allocations": {
+        "src": {
+          "ptr": 99181477352576,
+          "bytes": 65536,
+          "declared_owner": "00112233445566778899aabbccddeeff",
+          "actual_owner": "00112233445566778899aabbccddeeff",
+          "memory_type": "DEVICE",
+          "api": "zeMemAllocDevice"
+        },
+        "dst": {
+          "ptr": 99181477418240,
+          "bytes": 65536,
+          "declared_owner": "ffeeddccbbaa99887766554433221100",
+          "actual_owner": "ffeeddccbbaa99887766554433221100",
+          "memory_type": "DEVICE",
+          "api": "zeMemAllocDevice"
+        },
+        "host": {
+          "ptr": 99181477483872,
+          "bytes": 65536,
+          "declared_owner": null,
+          "actual_owner": null,
+          "memory_type": "HOST",
+          "api": "zeMemAllocHost"
+        }
+      },
+      "cleanup_errors": [],
+      "api_sequence": "zeInit,zeDriverGet,zeDeviceGet,zeDeviceGetProperties,zeDeviceGetCommandQueueGroupProperties,zeDeviceCanAccessPeer,zeDeviceGetP2PProperties,zeContextCreateEx,zeMemAllocDevice,zeMemAllocHost,zeMemGetAllocProperties,zeCommandQueueCreate,zeCommandListCreate,zeCommandListAppendMemoryFill,zeCommandListAppendMemoryCopy,zeCommandListClose,zeFenceCreate,zeCommandQueueExecuteCommandLists,zeFenceHostSynchronize",
+      "fake_summary_line": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\02_clean.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\02_clean.stderr.bin"
+  },
+  {
+    "case": "corrupt",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100",
+      "--inject-corruption"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "reason": "payload_mismatch",
+      "inject_corruption": true,
+      "direct_transport_qualified": false,
+      "mismatch_count": 1,
+      "first_bad_index": 8192,
+      "expected": 1515870810,
+      "got": 3735928559,
+      "bytes": 65536,
+      "words": 16384,
+      "timeout_ns": 10000000000,
+      "fault_index": 8192,
+      "cleanup_errors": [],
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=66 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=4 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=66 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=4 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\03_corrupt.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\03_corrupt.stderr.bin"
+  },
+  {
+    "case": "peer_unavailable",
+    "mode": "peer_unavailable",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 2,
+    "json": {
+      "status": "NOT_CHECKED",
+      "reason": "directed_peer_access_unsupported",
+      "exit_code": 2,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=11 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=11 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\04_peer_unavailable.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\04_peer_unavailable.stderr.bin"
+  },
+  {
+    "case": "fence_timeout",
+    "mode": "fence_timeout",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "zeFenceHostSynchronize",
+      "ze_result": 1,
+      "reason": "fill_wait",
+      "resource_state": "TERMINAL_QUARANTINE",
+      "destruction_skipped": true,
+      "cleanup_verified": false,
+      "direct_transport_qualified": false,
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_PENDING api_calls=27 pending=1 allocations=3 frees=0 wait_count=1 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_PENDING api_calls=27 pending=1 allocations=3 frees=0 wait_count=1 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\05_fence_timeout.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\05_fence_timeout.stderr.bin"
+  },
+  {
+    "case": "cleanup_failure",
+    "mode": "cleanup_failure",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "reason": "cleanup_failed",
+      "cleanup_errors": [
+        "zeMemFree[2]=2147483646"
+      ],
+      "inject_corruption": false,
+      "mismatch_count": 0,
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=58 context_creates=1 allocations=3 frees=3 pending_teardowns=0 wait_count=3 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\06_cleanup_failure.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\06_cleanup_failure.stderr.bin"
+  },
+  {
+    "case": "malformed_cli",
+    "mode": "clean",
+    "argv": [
+      "bad_uuid",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 2,
+    "json": {
+      "status": "NOT_CHECKED",
+      "reason": "uuid_must_be_32_lower_hex",
+      "exit_code": 2,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\07_malformed_cli.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\07_malformed_cli.stderr.bin"
+  },
+  {
+    "case": "surplus_cli",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100",
+      "unexpected"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "CLI",
+      "ze_result": 2013265924,
+      "ze_result_name": "ERROR",
+      "reason": "surplus_argument",
+      "cleanup_errors": [],
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\08_surplus_cli.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\08_surplus_cli.stderr.bin"
+  },
+  {
+    "case": "duplicate_flag_cli",
+    "mode": "clean",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100",
+      "--inject-corruption",
+      "--inject-corruption"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "CLI",
+      "ze_result": 2013265924,
+      "ze_result_name": "ERROR",
+      "reason": "duplicate_flag",
+      "cleanup_errors": [],
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_SUMMARY api_calls=0 context_creates=0 allocations=0 frees=0 pending_teardowns=0 wait_count=0 pending_at_exit=0 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\09_duplicate_flag_cli.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\09_duplicate_flag_cli.stderr.bin"
+  },
+  {
+    "case": "fence_timeout_copy",
+    "mode": "fence_timeout_copy",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "zeFenceHostSynchronize",
+      "ze_result": 1,
+      "reason": "peer_copy_wait",
+      "resource_state": "TERMINAL_QUARANTINE",
+      "destruction_skipped": true,
+      "cleanup_verified": false,
+      "direct_transport_qualified": false,
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_PENDING api_calls=36 pending=1 allocations=3 frees=0 wait_count=2 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_PENDING api_calls=36 pending=1 allocations=3 frees=0 wait_count=2 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\10_fence_timeout_copy.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\10_fence_timeout_copy.stderr.bin"
+  },
+  {
+    "case": "fence_timeout_readback",
+    "mode": "fence_timeout_readback",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "zeFenceHostSynchronize",
+      "ze_result": 1,
+      "reason": "read_wait",
+      "resource_state": "TERMINAL_QUARANTINE",
+      "destruction_skipped": true,
+      "cleanup_verified": false,
+      "direct_transport_qualified": false,
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_PENDING api_calls=45 pending=1 allocations=3 frees=0 wait_count=3 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_PENDING api_calls=45 pending=1 allocations=3 frees=0 wait_count=3 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\11_fence_timeout_readback.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\11_fence_timeout_readback.stderr.bin"
+  },
+  {
+    "case": "fence_timeout_corrupt",
+    "mode": "fence_timeout_corrupt",
+    "argv": [
+      "00112233445566778899aabbccddeeff",
+      "ffeeddccbbaa99887766554433221100",
+      "--inject-corruption"
+    ],
+    "exit": 1,
+    "json": {
+      "status": "FAIL",
+      "api": "zeFenceHostSynchronize",
+      "ze_result": 1,
+      "reason": "corrupt_wait",
+      "resource_state": "TERMINAL_QUARANTINE",
+      "destruction_skipped": true,
+      "cleanup_verified": false,
+      "direct_transport_qualified": false,
+      "exit_code": 1,
+      "fake_summary_line": "FAKE_PENDING api_calls=33 pending=1 allocations=3 frees=0 wait_count=2 backing=HOST_MALLOC_ONLY"
+    },
+    "stderr_summary": "FAKE_PENDING api_calls=33 pending=1 allocations=3 frees=0 wait_count=2 backing=HOST_MALLOC_ONLY",
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\12_fence_timeout_corrupt.stdout.bin",
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_runs_20261004T225852Z\\12_fence_timeout_corrupt.stderr.bin"
+  }
+]

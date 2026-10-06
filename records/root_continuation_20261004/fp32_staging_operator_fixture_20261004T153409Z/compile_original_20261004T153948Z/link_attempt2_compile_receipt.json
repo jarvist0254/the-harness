@@ -1,0 +1,38 @@
+{
+  "scope": "COMPILE_ONLY_NO_FIXTURE_OR_GPU_EXECUTION",
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\compile_original.cmd",
+    "E:\the_harness\records\build_vulkan_real\build"
+  ],
+  "pid": 78884,
+  "exit_code": 2,
+  "elapsed_seconds": 3.0159999998286366,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "stream_cap_each": 1048576,
+  "streams": {
+    "stderr": {
+      "observed_bytes": 1100,
+      "captured_bytes": 1100,
+      "truncated": false
+    },
+    "stdout": {
+      "observed_bytes": 528,
+      "captured_bytes": 528,
+      "truncated": false
+    }
+  },
+  "source_headers_libs_unchanged": true,
+  "child_presence_after_wait": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "outputs": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\fp32_staging_operator.obj",
+      "bytes": 149546,
+      "sha256": "d39ad311c3d924c60820554a270e1f0e0f6f160c9ce2f83af26b030e52a0a92e"
+    }
+  ],
+  "launcher_correction": "First cmd list embedded quoted call string was incorrectly escaped by Windows argument serialization and failed before compilation. Raw first receipt preserved. Retry uses separate unquoted no-space batch/build paths."
+}

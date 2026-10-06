@@ -1,0 +1,11 @@
+{
+  "admitted": true,
+  "phase": "query",
+  "controller_sha256": "9bd42551d8d231200edc2aadf3b264698c2f3b31c30be4c176de39ffafd5bbb6",
+  "source_sha256": "d22e00d620d17edf1d6ab0271c977e02b480a92bc75074e41df77a263bc8c9f2",
+  "cuda_h_sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072",
+  "typedefs_h_sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c",
+  "library_sha256": "00d5773a96ab7e18d087880b8ce02741863da15c487b434999f7932f3cbe1383",
+  "binary_sha256": "51e3bc833f97dd8de57dac17ad7ba7c03abe71ba0b2645c715a520ce7d4a7ec4",
+  "authorization": "Explicit ROOT message admitted one driver-inventory run conditional on compile exit 0 and unchanged source/header/library pins. No context, memory, transfer, or kernel operation admitted."
+}

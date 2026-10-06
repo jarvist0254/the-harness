@@ -1,0 +1,47 @@
+{
+  "native_cli_balance": "NOT_CHECKED_NO_INSTALLED_GETTER_FOUND",
+  "path_bl_available": false,
+  "no_installs_or_auth_changes": true,
+  "exact_paths": [
+    {
+      "path": "C:\\Users\\thoma\\AppData\\Roaming\\npm\\bl.cmd",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\thoma\\AppData\\Roaming\\npm\\node_modules\\bailian-cli\\package.json",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\thoma\\AppData\\Roaming\\npm\\node_modules\\@modelstudio\\cli\\package.json",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\thoma\\.bailian\\bin\\bl.exe",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\thoma\\.local\\bin\\bl.exe",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\thoma\\AppData\\Local\\bailian\\bin\\bl.exe",
+      "exists": false
+    }
+  ],
+  "provider_presence": [
+    {
+      "model": "qwen3.8-max",
+      "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+      "credential_present": true,
+      "dedicated_token_plan_prefix_confirmed": true,
+      "credential_value_saved": false
+    },
+    {
+      "model": "qwen3.8-flash",
+      "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+      "credential_present": true,
+      "dedicated_token_plan_prefix_confirmed": true,
+      "credential_value_saved": false
+    }
+  ]
+}

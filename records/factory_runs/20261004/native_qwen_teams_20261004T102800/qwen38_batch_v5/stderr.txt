@@ -1,0 +1,3 @@
+⚠ Safe mode: --core-tools flag is ignored (settings-sourced core tools are also disabled).
+⚠ SAFE MODE — all customizations disabled (hooks, extensions, skills, MCP servers, QWEN.md). Restart without --safe-mode to resume normal operation.
+

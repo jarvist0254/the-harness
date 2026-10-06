@@ -1,0 +1,32 @@
+test_consistent_but_untrusted_clean_baseline_must_refuse (__main__.Controls) ... FAIL
+test_same_physical_uuid_and_pci_must_not_classify_peer (__main__.Controls) ... FAIL
+test_unregistered_self_reported_residency_not_device_p2p (__main__.Controls) ... FAIL
+
+======================================================================
+FAIL: test_consistent_but_untrusted_clean_baseline_must_refuse (__main__.Controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\directed_receipt_pure_audit_20261004T203000Z\test_independent_directed.py", line 30, in test_consistent_but_untrusted_clean_baseline_must_refuse
+    self.assertNotEqual(o['status'],'EVIDENCE_CONSISTENT','matching receipt/control hashes do not match trusted baseline')
+AssertionError: 'EVIDENCE_CONSISTENT' == 'EVIDENCE_CONSISTENT' : matching receipt/control hashes do not match trusted baseline
+
+======================================================================
+FAIL: test_same_physical_uuid_and_pci_must_not_classify_peer (__main__.Controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\directed_receipt_pure_audit_20261004T203000Z\test_independent_directed.py", line 34, in test_same_physical_uuid_and_pci_must_not_classify_peer
+    self.assertNotEqual(o['classification'],'DEVICE_P2P','different vendor labels cannot distinguish same physical identity')
+AssertionError: 'DEVICE_P2P' == 'DEVICE_P2P' : different vendor labels cannot distinguish same physical identity
+
+======================================================================
+FAIL: test_unregistered_self_reported_residency_not_device_p2p (__main__.Controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\directed_receipt_pure_audit_20261004T203000Z\test_independent_directed.py", line 37, in test_unregistered_self_reported_residency_not_device_p2p
+    self.assertNotEqual(o['classification'],'DEVICE_P2P','boolean residency and arbitrary measurement hash are not bound to registry')
+AssertionError: 'DEVICE_P2P' == 'DEVICE_P2P' : boolean residency and arbitrary measurement hash are not bound to registry
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=3)

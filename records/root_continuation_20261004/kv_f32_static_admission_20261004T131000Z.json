@@ -1,0 +1,19 @@
+{
+  "utc": "2026-10-04T13:07:34.346825+00:00",
+  "source": "records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp",
+  "sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "admission": "CLEAN_COMPILE_AND_GPU_FREE_SELF_TEST_ONLY",
+  "runtime": "PENDING_GEMINI_REVIEW_AND_ROOT_ADJUDICATION",
+  "checks": [
+    "Both contexts use owned context params and apply_kv_types",
+    "F32 overrides both K and V; default retains llama defaults",
+    "workload hash includes KV requested and params-derived K/V representation",
+    "Whitelists, tolerances, independent CPU copy and RAII ownership preserved",
+    "Duplicate/malformed CLI options rejected; unknown model/device remain rejected"
+  ],
+  "limits": [
+    "kv_actual_k/v are context parameter selections; native stderr cache type/size logs are required for runtime confirmation",
+    "Derived F32 representation is separate from original Q8_0; no four-card/P2P/capacity claim"
+  ],
+  "next": "Clean pinned includes/libs, source hash freeze, self-test and malformed CLI negatives; root authorizes runtime only after results+review"
+}

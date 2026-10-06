@@ -1,0 +1,36 @@
+{
+  "record_kind": "local snapshot of root task admission; not a signed or root-authored admission artifact",
+  "admitted_task": "Run two sequential single-device F32/KV-F32 numeric diagnostics using the already accepted source/binary/model; NV Vulkan0 first, then AMD Vulkan1.",
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "binary_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "model_sha256": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+  "model_bytes": 2390150816,
+  "device_cases": ["NV: Vulkan0", "AMD: Vulkan1"],
+  "args": ["--kv-f32"],
+  "child_environment_delta": {
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1"
+  },
+  "workload": {
+    "tokens": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    "requested_n_ctx": 128,
+    "actual_n_ctx": 256,
+    "n_batch": 32,
+    "n_ubatch": 32,
+    "n_threads": 4,
+    "atol": 0.01,
+    "rtol": 0.01,
+    "flash_attn": "disabled"
+  },
+  "execution_bounds": {
+    "timeout_seconds_per_run": 60,
+    "drain_seconds_after_timeout": 8,
+    "hidden_window": true,
+    "owned_process_handle_only": true,
+    "run_order": ["Vulkan0", "Vulkan1"],
+    "stop_on": ["timeout", "native API uncertainty", "wrong device or cache type", "less than 29/29 GPU layer offload", "input hash change"],
+    "numeric_parity_failure": "valid single-device diagnostic; still run the other independent baseline if native execution gates pass",
+    "reverse_or_corruption_controls": "not admitted"
+  },
+  "scope_limits": ["no C++ source changes", "no rebuild", "no driver or global environment edits", "not mixed-vendor execution", "not production qualification"]
+}

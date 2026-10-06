@@ -1,0 +1,74 @@
+[
+  {
+    "filename": "drm-mm-main.rst",
+    "url": "https://raw.githubusercontent.com/torvalds/linux/master/Documentation/gpu/drm-mm.rst",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "size_bytes": 20890,
+    "sha256": "f1e469f6bae68190013b46d9035f71230a19910e0a2b02c8152b2d8f9ee9b215"
+  },
+  {
+    "filename": "dma-buf-main.rst",
+    "url": "https://raw.githubusercontent.com/torvalds/linux/master/Documentation/driver-api/dma-buf.rst",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "size_bytes": 14534,
+    "sha256": "673338947fd0ed5369d5457f7a7cc98dcd1485e9678f4c429715c82cffc178de"
+  },
+  {
+    "filename": "EGL_ANDROID_native_fence_sync.txt",
+    "url": "https://registry.khronos.org/EGL/extensions/ANDROID/EGL_ANDROID_native_fence_sync.txt",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/plain",
+    "size_bytes": 12033,
+    "sha256": "96fb65aeeb4d06e5f23c099faab610e015c355bc0f1a54a3f3cd10fb738dfda1"
+  },
+  {
+    "filename": "EGL_KHR_wait_sync.txt",
+    "url": "https://registry.khronos.org/EGL/extensions/KHR/EGL_KHR_wait_sync.txt",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/plain",
+    "size_bytes": 11216,
+    "sha256": "46f5b9273c134931a22d33430b63a9579df50cd748398943c88d2084925f3410"
+  },
+  {
+    "filename": "eglspec.1.5.pdf",
+    "url": "https://registry.khronos.org/EGL/specs/eglspec.1.5.pdf",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "application/pdf",
+    "size_bytes": 433708,
+    "sha256": "1939a5876bf0db89b83cbda80844683693c7b74d83a9b428f0bdc48087f59f1d"
+  },
+  {
+    "filename": "level_zero_event_v1.19.12.html",
+    "url": "https://oneapi-src.github.io/level-zero-spec/level-zero/latest/core/api/apis/event.html",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "size_bytes": 229396,
+    "sha256": "65bd7e432ee0318b5e8d1964424ac30c0df4e49f1610fe7e427156e6328cf077"
+  },
+  {
+    "filename": "level_zero_command_list_v1.19.12.html",
+    "url": "https://oneapi-src.github.io/level-zero-spec/level-zero/latest/core/api/apis/command_list.html",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "size_bytes": 274040,
+    "sha256": "aa69efe1985eae596d4d1ed141336151d80a7fca9cc666151b2f14f2941bee4c"
+  },
+  {
+    "filename": "level_zero_prog_v1.19.12.html",
+    "url": "https://oneapi-src.github.io/level-zero-spec/level-zero/latest/core/PROG.html",
+    "fetched_utc": "2026-10-04T21:44:08Z",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "size_bytes": 335494,
+    "sha256": "8f3595b23055520a6baa7555a73e6c5d5c951c3f03a6a2d8c575f24633baae53"
+  }
+]

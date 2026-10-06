@@ -1,0 +1,190 @@
+{
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z",
+  "native_agents_actual": 0,
+  "previous_ledger_preserved": "E:\\the_harness\\records\\factory_runs\\20261004\\provider_usage_ledger_FINAL_20261004T112000.json",
+  "calls": [
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 101.33,
+      "vendor_reported_cost_usd": null,
+      "completion_tokens": 4654,
+      "prompt_tokens": 10214,
+      "usage": {
+        "prompt_tokens": 10214,
+        "total_tokens": 14868,
+        "completion_tokens": 4654,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 10214
+        }
+      },
+      "usage_available": true,
+      "observed_model": "qwen3.8-max",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\supervisor_v2\\terminal.json",
+      "requested_model": "qwen3.8-max",
+      "total_tokens": 14868,
+      "http": 200,
+      "call_id": "supervisor_v2",
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "exit_code": null
+    },
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 78.27,
+      "vendor_reported_cost_usd": null,
+      "completion_tokens": 5882,
+      "prompt_tokens": 6948,
+      "usage": {
+        "prompt_tokens": 6948,
+        "total_tokens": 12830,
+        "completion_tokens": 5882,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 6948
+        }
+      },
+      "usage_available": true,
+      "observed_model": "qwen3.8-flash",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\validator_v2\\terminal.json",
+      "requested_model": "qwen3.8-flash",
+      "total_tokens": 12830,
+      "http": 200,
+      "call_id": "validator_v2",
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "exit_code": null
+    },
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 129.42,
+      "vendor_reported_cost_usd": null,
+      "completion_tokens": 27434,
+      "prompt_tokens": 58776,
+      "usage": {
+        "input_tokens": 58776,
+        "output_tokens": 27434,
+        "thinking_tokens": 21972,
+        "cache_read_tokens": 183623,
+        "total_tokens": 86210
+      },
+      "usage_available": true,
+      "observed_model": null,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\gemini_candidate_review\\terminal.json",
+      "requested_model": "gemini-3.8-flash-medium",
+      "total_tokens": 86210,
+      "http": null,
+      "call_id": "gemini_candidate_review",
+      "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+      "exit_code": 0
+    },
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 48.78,
+      "vendor_reported_cost_usd": 0.05642232,
+      "completion_tokens": 8138,
+      "prompt_tokens": 17073,
+      "usage": {
+        "input_tokens": 17073,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 8138,
+        "reasoning_tokens": 6244,
+        "total_tokens": 25211
+      },
+      "usage_available": true,
+      "observed_model": null,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_context_padding\\terminal.json",
+      "requested_model": "grok-4.7-build-fast",
+      "total_tokens": 25211,
+      "http": null,
+      "call_id": "grok_context_padding",
+      "status": "COMPLETE_PATCH_UNTRUSTED",
+      "exit_code": 0
+    },
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 125.28,
+      "vendor_reported_cost_usd": 0.15950896,
+      "completion_tokens": 22977,
+      "prompt_tokens": 48067,
+      "usage": {
+        "input_tokens": 48067,
+        "cache_read_input_tokens": 1152,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 22977,
+        "reasoning_tokens": 15578,
+        "total_tokens": 72196
+      },
+      "usage_available": true,
+      "observed_model": null,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_single_device\\terminal.json",
+      "requested_model": "grok-4.7-build-fast",
+      "total_tokens": 72196,
+      "http": null,
+      "call_id": "grok_single_device",
+      "status": "COMPLETE_PATCH_UNTRUSTED",
+      "exit_code": 0
+    },
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 262.1,
+      "vendor_reported_cost_usd": 0.19758488,
+      "completion_tokens": 41126,
+      "prompt_tokens": 21617,
+      "usage": {
+        "input_tokens": 21617,
+        "cache_read_input_tokens": 1152,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 41126,
+        "reasoning_tokens": 27725,
+        "total_tokens": 63895
+      },
+      "usage_available": true,
+      "observed_model": null,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\terminal.json",
+      "requested_model": "grok-4.7-build-fast",
+      "total_tokens": 63895,
+      "http": null,
+      "call_id": "grok_supervisor_repair",
+      "status": "COMPLETE_PATCH_UNTRUSTED",
+      "exit_code": 0
+    },
+    {
+      "actual_native_children": 0,
+      "product_accepted": false,
+      "seconds": 224.98,
+      "vendor_reported_cost_usd": 0.1977236,
+      "completion_tokens": 42042,
+      "prompt_tokens": 18971,
+      "usage": {
+        "input_tokens": 18971,
+        "cache_read_input_tokens": 1152,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 42042,
+        "reasoning_tokens": 27326,
+        "total_tokens": 62165
+      },
+      "usage_available": true,
+      "observed_model": null,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\terminal.json",
+      "requested_model": "grok-4.7-build-fast",
+      "total_tokens": 62165,
+      "http": null,
+      "call_id": "grok_validator_repair",
+      "status": "COMPLETE_PATCH_UNTRUSTED",
+      "exit_code": 0
+    }
+  ],
+  "counting_rule": "One row per actual provider request; copied/extracted source/review and gate artifacts are not extra inference calls. Token totals are provider-reported; do not add cache/thinking twice or equate them with monthly dashboard units. Vendor cost is reported evidence, not billing settlement.",
+  "unknown_usage_calls": 0,
+  "live_global_factory_modified": false,
+  "native_agents_maximum_authorized_per_terminal": 10,
+  "call_count": 7,
+  "generated_utc": "2026-10-04T12:41:35.3711600Z",
+  "observed_token_total": 337375.0
+}

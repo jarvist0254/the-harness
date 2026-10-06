@@ -1,0 +1,9 @@
+{
+  "http_deadline_seconds": 240,
+  "max_native_authorized_qwen": 10,
+  "model": "qwen3.8-max",
+  "pid": 88068,
+  "credential_saved": false,
+  "native_children": 0,
+  "max_native_authorized_deepseek": 10
+}

@@ -1,0 +1,7 @@
+{
+  "http_status": 200,
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\architecture_max_nonthinking_20261004T101055904Z",
+  "status": "REVIEW_GENERATED",
+  "model": "qwen3.8-max",
+  "seconds": 31.1161036
+}

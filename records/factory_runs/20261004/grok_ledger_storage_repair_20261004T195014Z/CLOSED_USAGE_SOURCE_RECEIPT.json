@@ -1,0 +1,73 @@
+{
+  "tokens_not_credits": true,
+  "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high.owned_terminal.json",
+  "state": "CLOSED_PROVIDER_SOURCE_DELIVERED_INVALID_STATUS_ENUM_UNTRUSTED",
+  "source_execution": false,
+  "source_extract_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\EXTRACTED_SOURCE_SCHEMA_REFUSAL_PINS.json",
+  "native_children_actual": 0,
+  "owned_session52525_reaped": true,
+  "accepted_functionality": false,
+  "credits": "NOT_CHECKED",
+  "reasoning_included_not_added": true,
+  "provider_jobs": 1,
+  "usage": {
+    "input_tokens": 23950,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 91827,
+    "reasoning_tokens": 75121,
+    "total_tokens": 116929
+  },
+  "reported_total_tokens": 116929,
+  "utc": "2026-10-04T20:05:12.0603764Z",
+  "inputs_unchanged_checks": [
+    {
+      "expected_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+      "actual_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py"
+    },
+    {
+      "expected_sha256": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+      "actual_sha256": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py"
+    },
+    {
+      "expected_sha256": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+      "actual_sha256": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_independent_same17_adapted.py"
+    },
+    {
+      "expected_sha256": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3",
+      "actual_sha256": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_additional_storage_and_legal_transition.py"
+    },
+    {
+      "expected_sha256": "88aa5e950319050136be28ca84a374ed8b429249cf9d238fbbd017b7470d7afd",
+      "actual_sha256": "88aa5e950319050136be28ca84a374ed8b429249cf9d238fbbd017b7470d7afd",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\AUDIT_EXECUTED_FOLLOWUP.md"
+    },
+    {
+      "expected_sha256": "b9dd2b41c72d96db13666e2fdcdb87d466cd8f0dd9988c304304c35861f7c645",
+      "actual_sha256": "b9dd2b41c72d96db13666e2fdcdb87d466cd8f0dd9988c304304c35861f7c645",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\adjudication_executed.json"
+    },
+    {
+      "expected_sha256": "a51df653ee566242c07a6c32575d69dc386b276fde01539c861c3ef9c4e900ba",
+      "actual_sha256": "a51df653ee566242c07a6c32575d69dc386b276fde01539c861c3ef9c4e900ba",
+      "unchanged": true,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\execution_receipt.json"
+    }
+  ],
+  "configured_secrets_matches": 0,
+  "reported_internal_model_calls": 1,
+  "owned_pids_absent": [
+    57160,
+    77572
+  ]
+}

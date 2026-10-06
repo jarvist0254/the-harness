@@ -1,0 +1,40 @@
+{
+  "findings": [
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\integrated_core.fence_extracted.py",
+      "discriminating_test": "def test_printed_bbox_matches_actual_printed_part_height():\n    cfg = default_config('compact')\n    layout = plan_layout(cfg)\n    assert layout['printed_bbox_mm'][2] == layout['beam_top_mm'] == 150.0\n    assert layout['print_bbox_mm'][2] == layout['beam_top_mm'] == 150.0\n    assert layout['core_bbox_mm'][2] == layout['beam_top_mm'] == 150.0\n    cfg_u = default_config('universal')\n    layout_u = plan_layout(cfg_u)\n    assert layout_u['printed_bbox_mm'][2] == layout_u['beam_top_mm'] == 199.0\n",
+      "exact_source": "printed_height = min(254.0, d_base + d['thickness'] + 8.0)\nif d_base >= printed_height:\n    raise ValueError('D support elevation cannot fit the printed core')\nwidth, depth = dims['core_width_mm'], dims['core_depth_mm']\nprint_bbox = [depth, width, printed_height]  # 90 degree rotation around Z\nif any(actual > limit for actual, limit in zip(print_bbox, [200, 188, 254])):\n    raise ValueError('Actual planned core exceeds conservative print envelope')\ngpu_bbox = [max(span, d['height']), max(c['length'] for c in cards),\n            d_base + d['thickness'] - base_top]\n            \ncore_bbox = [width, depth, printed_height]",
+      "line": 104,
+      "minimal_fix": "printed_height = post_height\nif printed_height > 254.0:\n    raise ValueError('Printed core exceeds conservative vertical print envelope 254 mm')\nwidth, depth = dims['core_width_mm'], dims['core_depth_mm']\nprint_bbox = [depth, width, printed_height]  # 90 degree rotation around Z\nif any(actual > limit for actual, limit in zip(print_bbox, [200, 188, 254])):\n    raise ValueError('Actual planned core exceeds conservative print envelope')\ngpu_bbox = [max(span, d['height']), max(c['length'] for c in cards),\n            d_base + d['thickness'] - base_top]\n            \ncore_bbox = [width, depth, printed_height]",
+      "reason": "printed_height is derived from the hypothetical GPU D bounding box (d_base + d['thickness'] + 8.0 = 200mm in compact, 249mm in universal) rather than the actual printed parts. Since the 4 gap posts and D-beams terminate at beam_top (150mm compact, 199mm universal), the actual built BRep solid has core.BoundBox.ZLength == 150.0mm. In build(), line 184 checks 'any(abs(a-b) > 1e-6 for a, b in zip(actual, layout[\\\"printed_bbox_mm\\\"]))', which will raise RuntimeError('Actual geometry differs from declared print bounds') due to a 50mm mismatch. The print bbox must reflect actual printed parts, not GPU envelope height.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\tests.fence_extracted.py",
+      "discriminating_test": "def test_root_importability():\n    import importlib\n    mod = importlib.import_module('integrated_core')\n    assert hasattr(mod, 'plan_layout')\n    assert hasattr(mod, 'default_config')\n",
+      "exact_source": "from acceptedcad.integrated_core import default_config, plan_layout",
+      "line": 6,
+      "minimal_fix": "from integrated_core import default_config, plan_layout",
+      "reason": "tests.fence_extracted.py hardcodes import from 'acceptedcad.integrated_core' (also in line 249: 'import acceptedcad.integrated_core as mod') based on a file header comment. Under Root-ONLY admission, this causes ModuleNotFoundError when executed in the standard test root without an installed 'acceptedcad' package. Imports must be root-relative.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\tests.fence_extracted.py",
+      "discriminating_test": "def test_core_bbox_matches_beam_top_exactly():\n    for profile, expected_beam_top in [('compact', 150.0), ('universal', 199.0)]:\n        layout = plan_layout(default_config(profile))\n        assert math.isclose(layout['core_bbox_mm'][2], expected_beam_top, abs_tol=1e-6)\n        assert math.isclose(layout['printed_bbox_mm'][2], expected_beam_top, abs_tol=1e-6)\n",
+      "exact_source": "def test_core_bbox_derived_not_gpu_top():\n    layout = plan_layout(default_config('compact'))\n    bbox = layout['core_bbox_mm']\n    dims = layout['dimensions']\n    \n    assert math.isclose(bbox[0], dims['core_width_mm'], abs_tol=1e-6)\n    assert math.isclose(bbox[1], dims['core_depth_mm'], abs_tol=1e-6)\n    assert bbox[2] <= 254.0",
+      "line": 141,
+      "minimal_fix": "def test_core_bbox_derived_not_gpu_top():\n    layout = plan_layout(default_config('compact'))\n    bbox = layout['core_bbox_mm']\n    dims = layout['dimensions']\n    \n    assert math.isclose(bbox[0], dims['core_width_mm'], abs_tol=1e-6)\n    assert math.isclose(bbox[1], dims['core_depth_mm'], abs_tol=1e-6)\n    assert math.isclose(bbox[2], layout['beam_top_mm'], abs_tol=1e-6)",
+      "reason": "test_core_bbox_derived_not_gpu_top asserts weak upper bound 'bbox[2] <= 254.0' rather than asserting equality with the actual derived printed core height (beam_top_mm = 150.0), allowing the GPU top (200.0) bug in plan_layout to silently pass.",
+      "severity": "MAJOR"
+    }
+  ],
+  "qualification_limits": [
+    "PSU interfaces, receiver hole datums, safe support patches, cable bends, fan plenum remain NULL and unqualified.",
+    "Thermal performance, slicer mass, print orientation warpage, brim, removal sweeps, and dynamic socket/shroud loads remain unmeasured and unvalidated.",
+    "No production STL or FITPASS certificate is granted; assembly envelopes and core remain DRAFT_UNQUALIFIED.",
+    "Native BRep connectedness and multiFuse validity require native FreeCAD execution gate; static code review passes structural geometry inspection only and does not execute native CAD kernels."
+  ],
+  "toolAction": "Completing substantive mechanical code review",
+  "toolSummary": "Mechanical CAD code review verdict",
+  "verdict": "STATIC_REJECTED"
+}

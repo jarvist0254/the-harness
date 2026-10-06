@@ -1,0 +1,55 @@
+{
+  "utc": "2026-10-04T15:05:58.767716+00:00",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z",
+  "state": "SIX_PROVIDER_JOBS_CLOSED_ROOT_QA_PENDING",
+  "provider_jobs": 6,
+  "native_children_actual": 0,
+  "cpp_capture_scope": "NOT_CHECKED_NO_COMPLETE_CANDIDATE",
+  "cpp_attempt1": "QwenMax HTTPtimeout240.75s usageUNKNOWN noresponse",
+  "cpp_attempt2": "QwenFlash HTTP200 finishlength16000completion134.48s reported36988tokens; partialNOT_ACCEPTED",
+  "python_original_comparator": "Qwen56A55D independentRED62cases21fail0errors0forbidden",
+  "gemini_review": "STATIC_REJECTED actualPythononly; C++NOT_CHECKED",
+  "grok_corrected_artifacts": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\grok_capture_edit\\capture_comparator.grok_corrected.py",
+      "sha256": "2786a0213039cdeb1654dd1de7688e9f628672a963355fcfef6ebe94cba87495",
+      "syntax_only": "PASS_NO_IMPORT"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\grok_capture_edit\\test_capture_comparator.grok_corrected.py",
+      "sha256": "aacde5983be983eb303837a045a6a85278dae08bef7ae1b1ea1d6eeede98fa47",
+      "syntax_only": "PASS_NO_IMPORT"
+    }
+  ],
+  "grok_review_gate": "PENDING_ROOT_INDEPENDENT_IMPORT_ADMISSION; pre/postfstat notincluded, componentchecks notracefree",
+  "grok_cli_internal_model_calls": 1,
+  "grok_qualification": "No native/model/GPU/production approval",
+  "usage_ledger": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\USAGE_FINAL_SIX_20261004T150416Z.json",
+  "secret_process_audit": {
+    "secret_values_saved": false,
+    "owned_pids_checked": [
+      95288,
+      91568,
+      82652,
+      88488,
+      61016,
+      3928
+    ],
+    "secret_values_printed": false,
+    "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z",
+    "owned_pids_still_alive": [],
+    "limitations": "Checks exact configured Qwen environment credential strings and Grok token/key fields. No claim about every possible unknown credential or external log.",
+    "utc": "2026-10-04T15:04:16.9213167Z",
+    "text_files_checked": 82,
+    "matching_file_paths": [],
+    "credential_values_checked_count": 3,
+    "configured_credential_matches": 0,
+    "credential_named_files": []
+  },
+  "manager_candidate_imports": 0,
+  "manager_native_compiler_gpu_cad_runs": 0,
+  "accepted_modules_docs_globalfactory_modified": false,
+  "old_ledgers_receipts_preserved": true,
+  "full_four8GB_integrated_core_goal": "OPEN_NOT_COMPLETE",
+  "originalQ8_and_failed_fixedtolerance_results": "UNCHANGED_PRESERVED"
+}

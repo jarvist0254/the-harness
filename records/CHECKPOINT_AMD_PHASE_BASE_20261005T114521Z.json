@@ -1,0 +1,14 @@
+{
+  "label": "AMD_PHASE_BASE",
+  "utc": "20261005T114521Z",
+  "file_count": 7,
+  "files": {
+    "j_link/amd_probe.py": "de1790300fa751525d3cb22d9f8c549c1db35424cb4ff72e773c9e8bd77970e0",
+    "j_link/amd_future_matrix.py": "690369e8f562d3cbedcf6a8d3c9310902f1f2c9a4aeaff257c644eaba8a2d149",
+    "j_link/tests/test_amd_matrix.py": "b9c273c72843c6a73464d332924c46777c72d07042f69680977c229cdc765e6a",
+    "j_link/transport.py": "48b2188a65e4e2d6961e54ef7fe292745cd3df15cbd822f5a9118837972a459f",
+    "j_link/tests/test_transport.py": "c70f4e692c30d500497e442f2a0470320276fd6c63c5d57c7ab0e446f3ad478e",
+    "docs/13_AMD_ARCHITECTURE.md": "6f32c73eb142f4950e7c810ac5dd4bd86c74b4b4f801348c5961b56eb33914b4",
+    "docs/14_THREE_VENDOR_MATRIX.md": "5084a85907d6999b714dc3c193ac2adf38f67f3c2eaef6add2bd2a90059c4042"
+  }
+}

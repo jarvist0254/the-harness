@@ -1,0 +1,36 @@
+{
+  "model": "gemini-3.8-flash-high",
+  "pid": 47476,
+  "exit_code": 0,
+  "elapsed_seconds": 76.74,
+  "status": "PARSE_OR_SCHEMA_ERROR",
+  "outer_killed": false,
+  "log_cap_exceeded": false,
+  "pipe_error": false,
+  "drain_unknown": false,
+  "private_url_output_refused": false,
+  "stdout_bytes": 12482,
+  "stderr_bytes": 78,
+  "stdout_sha256": "6502C153FAA7F1E84CDE1F6114B8C21440842995F03527FB67A54E0E3FFB2536",
+  "stderr_sha256": "3A7F8550106D86ABB322E8ED0FB30A0296C0E97C6BE03D5A8033B99D16737459",
+  "usage": {
+    "input_tokens": 45637,
+    "output_tokens": 16073,
+    "thinking_tokens": 13862,
+    "cache_read_tokens": 30531,
+    "total_tokens": 61710
+  },
+  "model_usage": "UNKNOWN",
+  "tool_calls": "UNKNOWN",
+  "subagents": "UNKNOWN",
+  "input_pins_unchanged": true,
+  "input_pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py": "6DFB6A72A1310D23CF435C73F32DCD0B6A57B85CEF774C9A47C8748CE3E68DC1",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\tests_source.qwen_untrusted.txt": "612325517BF27FD37D2A3AA0C96906C013F97CA48D4A8BFC1E9934AB674CA2A5",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger.spec.txt": "A871BE94DD72A9AF787B50CF3B69B85BC370F78DBCA0CDDC61EA1B42E00DD0E9"
+  },
+  "credential_saved": false,
+  "provider_edit": false,
+  "source_execution": false,
+  "parse_error_type": "PropertyNotFoundException"
+}

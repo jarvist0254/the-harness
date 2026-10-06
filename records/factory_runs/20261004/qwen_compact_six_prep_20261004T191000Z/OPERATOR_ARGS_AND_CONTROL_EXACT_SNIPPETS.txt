@@ -1,0 +1,29 @@
+ if(layout && a.view->nb[1]==size_t(K)*a.view->nb[0] && a.view->nb[0]==sizeof(float))throw Refusal("noncontiguous control did not discriminate");
+ return a;
+}
+struct Case {const char *name;int x,y;};
+int main(int argc,char **argv){
+ std::string device;bool corrupt=false;
+ for(int i=1;i<argc;++i){const std::string arg=argv[i];if(arg=="--device"&&device.empty()&&i+1<argc)device=argv[++i];else if(arg=="--inject-corruption"&&!corrupt)corrupt=true;else{std::cout<<"{\"status\":\"NOT_CHECKED\",\"reason\":\"arguments\"}\n";return 2;}}
+ if(device!="Vulkan0"&&device!="Vulkan1"){std::cout<<"{\"status\":\"NOT_CHECKED\",\"reason\":\"explicit device required\"}\n";return 2;}
+ try{
+  for(const char *flag:{"GGML_VK_DISABLE_F16","GGML_VK_DISABLE_FUSION","GGML_VK_DISABLE_COOPMAT","GGML_VK_DISABLE_COOPMAT2"}){const char *v=std::getenv(flag);if(!v||std::strcmp(v,"1"))throw Refusal("required child flag absent");}
+   const size_t planned=ggml_backend_alloc_ctx_tensors_from_buft_size(r.ctx,buft);if(!planned||planned>TENSOR_CAP)throw Refusal("planned allocation cap");
+   r.buffer=ggml_backend_alloc_ctx_tensors(r.ctx,backend.value);
+   if(!r.buffer||ggml_backend_buffer_get_size(r.buffer)>TENSOR_CAP||ggml_backend_buft_get_device(ggml_backend_buffer_get_type(r.buffer))!=dev)throw Refusal("allocated buffer ownership/cap");
+   for(auto t:{x.base,y.base,x.view,y.view,z})if(!t->buffer||ggml_backend_buft_get_device(ggml_backend_buffer_get_type(t->buffer))!=dev)throw Refusal("tensor buffer ownership");
+   ggml_backend_tensor_set(x.base,x.bytes.data(),0,x.bytes.size()*4);ggml_backend_tensor_set(y.base,y.bytes.data(),0,y.bytes.size()*4);
+   if(ggml_backend_graph_compute(backend.value,graph)!=GGML_STATUS_SUCCESS)throw std::runtime_error("GPU graph execution failed");ggml_backend_synchronize(backend.value);
+   std::vector<float> actual(size_t(M)*N*B);ggml_backend_tensor_get(z,actual.data(),0,actual.size()*4);
+   const bool injected=corrupt&&ci+1==sizeof(cases)/sizeof(cases[0]);if(injected)actual.back()+=8.0f;
+   double max_abs=0,sum_sq=0;size_t failures=0,nonfinite=0;
+   for(int b=0;b<B;++b)for(int n=0;n<N;++n)for(int m=0;m<M;++m){
+    double expected=0;for(int k=0;k<K;++k)expected+=double(input(k,m,b,false))*double(input(k,n,b,true));
+    const float value=actual[size_t(b)*M*N+size_t(n)*M+m];if(!std::isfinite(value)){++nonfinite;++failures;continue;}
+    const double diff=std::abs(double(value)-expected);max_abs=std::max(max_abs,diff);sum_sq+=diff*diff;if(diff>ATOL+RTOL*std::abs(expected))++failures;
+   }
+   passed=passed&&!failures;if(ci)std::cout<<',';
+   std::cout<<"{\"name\":"<<quote(cases[ci].name)<<",\"outputs\":"<<actual.size()<<",\"x_bytes\":"<<ggml_nbytes(x.base)<<",\"y_bytes\":"<<ggml_nbytes(y.base)<<",\"output_bytes\":"<<ggml_nbytes(z)<<",\"allocated_bytes\":"<<ggml_backend_buffer_get_size(r.buffer)<<",\"shape_checked\":true,\"buffer_owner_checked\":true,\"graph_status\":\"SUCCESS\",\"finite_count\":"<<actual.size()-nonfinite<<",\"fail_count\":"<<failures<<",\"max_abs\":"<<max_abs<<",\"rmse\":"<<std::sqrt(sum_sq/actual.size())<<",\"corruption_injected\":"<<(injected?"true":"false")<<'}';
+  }
+  std::cout<<"],\"status\":"<<quote(passed?"OPERATOR_PARITY_PASS":"OPERATOR_PARITY_FAIL")<<"}\n";return passed?0:1;
+ }catch(const Refusal &e){std::cerr<<"NOT_CHECKED: "<<e.what()<<'\n';return 2;}catch(const std::exception &e){std::cerr<<"FAIL: "<<e.what()<<'\n';return 1;}

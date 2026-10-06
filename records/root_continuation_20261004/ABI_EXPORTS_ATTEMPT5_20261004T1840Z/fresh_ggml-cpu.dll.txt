@@ -1,0 +1,89 @@
+
+Dump of file E:\the_harness\records\build_vulkan_fp32_staging_20261004T155932Z\build_attempt5\bin\ggml-cpu.dll
+
+File Type: DLL
+
+  Section contains the following exports for ggml-cpu.dll
+
+    00000000 characteristics
+    FFFFFFFF time date stamp
+        0.00 version
+           1 ordinal base
+          64 number of functions
+          64 number of names
+
+    ordinal hint RVA      name
+
+          1    0 00009620 ggml_backend_cpu_init
+          2    1 00009710 ggml_backend_cpu_reg
+          3    2 00009730 ggml_backend_cpu_set_abort_callback
+          4    3 000097B0 ggml_backend_cpu_set_n_threads
+          5    4 00009810 ggml_backend_cpu_set_threadpool
+          6    5 00009890 ggml_backend_cpu_set_use_ref
+          7    6 000098F0 ggml_backend_is_cpu
+          8    7 00004570 ggml_cpu_bf16_to_fp32
+          9    8 00004620 ggml_cpu_fp16_to_fp32
+         10    9 00001470 ggml_cpu_fp32_to_bf16
+         11    A 00001140 ggml_cpu_fp32_to_fp16
+         12    B 00001000 ggml_cpu_fp32_to_fp32
+         13    C 00001020 ggml_cpu_fp32_to_i32
+         14    D 00004710 ggml_cpu_get_rvv_vlen
+         15    E 00004710 ggml_cpu_get_sve_cnt
+         16    F 00004710 ggml_cpu_has_amx_int8
+         17   10 00004710 ggml_cpu_has_arm_fma
+         18   11 00004720 ggml_cpu_has_avx
+         19   12 00004720 ggml_cpu_has_avx2
+         20   13 00004710 ggml_cpu_has_avx512
+         21   14 00004710 ggml_cpu_has_avx512_bf16
+         22   15 00004710 ggml_cpu_has_avx512_vbmi
+         23   16 00004710 ggml_cpu_has_avx512_vnni
+         24   17 00004710 ggml_cpu_has_avx_vnni
+         25   18 00004720 ggml_cpu_has_bmi2
+         26   19 00004710 ggml_cpu_has_dotprod
+         27   1A 00004720 ggml_cpu_has_f16c
+         28   1B 00004720 ggml_cpu_has_fma
+         29   1C 00004710 ggml_cpu_has_fp16_va
+         30   1D 00004720 ggml_cpu_has_llamafile
+         31   1E 00004710 ggml_cpu_has_matmul_int8
+         32   1F 00004710 ggml_cpu_has_neon
+         33   20 00004710 ggml_cpu_has_riscv_v
+         34   21 00004710 ggml_cpu_has_sme
+         35   22 00004710 ggml_cpu_has_sme2
+         36   23 00004720 ggml_cpu_has_sse3
+         37   24 00004720 ggml_cpu_has_ssse3
+         38   25 00004710 ggml_cpu_has_sve
+         39   26 00004710 ggml_cpu_has_vsx
+         40   27 00004710 ggml_cpu_has_vxe
+         41   28 00004710 ggml_cpu_has_wasm_simd
+         42   29 00004730 ggml_cpu_init
+         43   2A 00004B90 ggml_get_f32_1d
+         44   2B 00004D20 ggml_get_f32_nd
+         45   2C 00004E40 ggml_get_i32_1d
+         46   2D 000050C0 ggml_get_i32_nd
+         47   2E 00005490 ggml_get_type_traits_cpu
+         48   2F 000054B0 ggml_graph_compute
+         49   30 00005AB0 ggml_graph_compute_with_ctx
+         50   31 00005B20 ggml_graph_plan
+         51   32 00006370 ggml_is_numa
+         52   33 00006380 ggml_new_f32
+         53   34 000063F0 ggml_new_i32
+         54   35 00006460 ggml_numa_init
+         55   36 00006490 ggml_set_f32
+         56   37 00006750 ggml_set_f32_1d
+         57   38 000068E0 ggml_set_f32_nd
+         58   39 00006A00 ggml_set_i32
+         59   3A 00006CB0 ggml_set_i32_1d
+         60   3B 00006F30 ggml_set_i32_nd
+         61   3C 00007270 ggml_threadpool_free
+         62   3D 000072B0 ggml_threadpool_new
+         63   3E 000074E0 ggml_threadpool_pause
+         64   3F 000074E0 ggml_threadpool_resume
+
+  Summary
+
+       86000 .data
+        7000 .pdata
+       2E000 .rdata
+        1000 .reloc
+        1000 .rsrc
+       DE000 .text

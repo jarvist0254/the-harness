@@ -1,0 +1,7 @@
+{
+  "outer_deadline": 240,
+  "credential_saved": false,
+  "pid": 41100,
+  "model": "gemini-3.8-flash-high",
+  "provider_deadline": 210
+}

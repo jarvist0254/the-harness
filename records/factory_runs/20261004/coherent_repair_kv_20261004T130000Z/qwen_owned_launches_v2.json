@@ -1,0 +1,20 @@
+[
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "supervisor_coherent",
+    "observed_process_start_utc": "2026-10-04T13:03:31.1387324Z",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "pid": 8748,
+    "outer_deadline_seconds": 270,
+    "model": "qwen3.8-max"
+  },
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "validator_coherent",
+    "observed_process_start_utc": "2026-10-04T13:03:31.1577589Z",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "pid": 19864,
+    "outer_deadline_seconds": 270,
+    "model": "qwen3.8-max"
+  }
+]

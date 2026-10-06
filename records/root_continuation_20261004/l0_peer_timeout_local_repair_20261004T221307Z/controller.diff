@@ -1,0 +1,100 @@
+--- 
++++ 
+@@ -3,36 +3,36 @@
+ from datetime import datetime,timezone
+ from pathlib import Path
+ 
+-ROOT=Path(r"E:\the_harness\records\root_continuation_20261004\l0_peer_errorcode_compile_20261004T2151Z")
+-SRC=ROOT/"peer_copy_compile.cpp"
+-FAKE=ROOT/"fake_level_zero.cpp"
+-FAKEOBJ=ROOT/"fake_level_zero.o"
++ROOT=Path(r"E:\the_harness\records\root_continuation_20261004\l0_peer_timeout_local_repair_20261004T221307Z")
++SRC=ROOT/"peer_copy_local.cpp"
++FAKE=ROOT/"fake_level_zero_local.cpp"
++FAKEOBJ=ROOT/"fake_level_zero_local.o"
+ EXE=ROOT/"peer_copy_cpu_fake"
+-OBJ=ROOT/"peer_copy_compile.o"
+-ADMIT=ROOT/"cpu_stub_execution_admission.json"
+-REVIEW=ROOT/"cpu_stub_static_abi_review.md"
++OBJ=ROOT/"peer_copy_local.o"
++ADMIT=ROOT/"cpu_stub_execution_admission.pending.json"
++REVIEW=ROOT/"STATIC_REVIEW.md"
+ HDR=Path(r"E:\the_harness\records\toolchains\level_zero_20261004\sdk\include\level_zero\ze_api.h")
+ PYTHON=Path(r"C:\Users\thoma\AppData\Local\Programs\Python\Python310\python.exe")
+ WSL=Path(r"C:\windows\system32\wsl.exe")
+ DISTRO="Ubuntu-24.04"
+-LINUX_ROOT="/mnt/e/the_harness/records/root_continuation_20261004/l0_peer_errorcode_compile_20261004T2151Z"
++LINUX_ROOT="/mnt/e/the_harness/records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z"
+ LINUX_INC="/mnt/e/the_harness/records/toolchains/level_zero_20261004/sdk/include"
+-LINUX_FAKE=LINUX_ROOT+"/fake_level_zero.cpp"
+-LINUX_OBJ=LINUX_ROOT+"/peer_copy_compile.o"
+-LINUX_FAKE_OBJ=LINUX_ROOT+"/fake_level_zero.o"
++LINUX_FAKE=LINUX_ROOT+"/fake_level_zero_local.cpp"
++LINUX_OBJ=LINUX_ROOT+"/peer_copy_local.o"
++LINUX_FAKE_OBJ=LINUX_ROOT+"/fake_level_zero_local.o"
+ LINUX_EXE=LINUX_ROOT+"/peer_copy_cpu_fake"
+ CXX="/usr/bin/c++"
+ TIMEOUT="/usr/bin/timeout"
+ READELF="/usr/bin/readelf"
+-EXPECTED={"source":"6185dcf242e4c847544c07455468119d67fae35d5aaf341ebaa8d14a0b920aa6",
+-"fake":"bfff2acc383607b74fbca4e288f0dfff3ac99d3297f3f9947cca867b5c92353f".replace(" ",""),
++EXPECTED={"source":"284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
++"fake":"96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2".replace(" ",""),
+ "header":"c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+-"object":"6a186a6893f550741c7a4dea208d9b95bcf412c9dacf333034b44203aa5177d4",
++"object":"888754880338f9752254dab8a6173239cff630f366716e11f8a4c7705efa6b80",
+ "python":"3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+ "wsl":"7e9f5cee6d641481e5a942f0e08563bae9c17ee55f0aad888f9aa0be9a5d4757",
+ "cxx":"1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+-"fakeobj":"953d3e5cb163dc0113a6f3a51e861e4c972bb08830052195baf69a2da031ae6e",
+-"exe":"0e4d30423a391f9cf8dc078f5f0be2ab30aca68f2456e9664eee4307922b7cdc"}
++"fakeobj":"PENDING_ROOT_LINK_PIN",
++"exe":"PENDING_ROOT_LINK_PIN"}
+ CAP=128*1024
+ CREATE_NO_WINDOW=getattr(subprocess,"CREATE_NO_WINDOW",0x08000000)
+ UUIDS=["00112233445566778899aabbccddeeff","ffeeddccbbaa99887766554433221100"]
+@@ -80,13 +80,13 @@
+  if admission.get("scope")!="STATIC_ABI_AND_STUB_LINK_ADMISSION_FOR_CPU_TESTS_ONLY" or admission.get("admitted") is not True or admission.get("candidate_source_sha256")!=EXPECTED["source"] or admission.get("official_header_sha256")!=EXPECTED["header"] or admission.get("static_review_sha256")!=sha(REVIEW):raise SystemExit("refuse: static ABI/stub admission mismatch")
+  if mode=="run" and (sha(FAKEOBJ)!=admission.get("fake_object_sha256") or sha(EXE)!=admission.get("fake_executable_sha256")):raise SystemExit("refuse: execution artifacts differ from static admission")
+  stamp=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ");rd=ROOT/("stub_build_"+stamp if mode=="build" else "stub_runs_"+stamp);rd.mkdir(exist_ok=False)
+- li=[LINUX_ROOT+"/peer_copy_compile.cpp",LINUX_FAKE,LINUX_INC+"/level_zero/ze_api.h",CXX]
+- if mode=="run":li.extend([LINUX_ROOT+"/fake_level_zero.o",LINUX_ROOT+"/peer_copy_cpu_fake"])
++ li=[LINUX_ROOT+"/peer_copy_local.cpp",LINUX_FAKE,LINUX_INC+"/level_zero/ze_api.h",CXX]
++ if mode=="run":li.extend([LINUX_ROOT+"/fake_level_zero_local.o",LINUX_ROOT+"/peer_copy_cpu_fake"])
+  hashes=lambda:run("pins",wsl(bounded(["/usr/bin/sha256sum",*li],5,2)),12,rd,1)
+  results=[];pre=hashes();results.append(pre)
+  if pre["returncode"]!=0 or pre["outer_timeout"] or pre["stream_overflow"]:raise SystemExit("refuse: WSL pin preflight failed")
+  premap={line.split(None,1)[1].lstrip(" *"):line.split(None,1)[0].lower() for line in Path(pre["stdout_path"]).read_text(encoding="utf-8").splitlines()}
+- need={LINUX_ROOT+"/peer_copy_compile.cpp":EXPECTED["source"],LINUX_FAKE:EXPECTED["fake"],LINUX_INC+"/level_zero/ze_api.h":EXPECTED["header"],CXX:EXPECTED["cxx"]}
++ need={LINUX_ROOT+"/peer_copy_local.cpp":EXPECTED["source"],LINUX_FAKE:EXPECTED["fake"],LINUX_INC+"/level_zero/ze_api.h":EXPECTED["header"],CXX:EXPECTED["cxx"]}
+  if any(premap.get(k)!=v for k,v in need.items()):raise SystemExit("refuse: WSL visible pin mismatch")
+  if mode=="build":
+   for index,label,args,limit in [
+@@ -104,7 +104,11 @@
+    (5,"fence_timeout","fence_timeout",UUIDS,1,"FAIL"),
+    (6,"cleanup_failure","cleanup_failure",UUIDS,1,"FAIL"),
+    (7,"malformed_cli","clean",["bad_uuid",UUIDS[1]],2,"NOT_CHECKED"),
+-   (8,"surplus_cli","clean",UUIDS+["unexpected"],0,"PEER_COPY_PAYLOAD_OBSERVED")]
++   (8,"surplus_cli","clean",UUIDS+["unexpected"],1,"FAIL"),
++   (9,"duplicate_flag_cli","clean",UUIDS+["--inject-corruption","--inject-corruption"],1,"FAIL"),
++   (10,"fence_timeout_copy","fence_timeout_copy",UUIDS,1,"FAIL"),
++   (11,"fence_timeout_readback","fence_timeout_readback",UUIDS,1,"FAIL"),
++   (12,"fence_timeout_corrupt","fence_timeout_corrupt",UUIDS+["--inject-corruption"],1,"FAIL")]
+   cases_results=[]
+   for index,label,fakemode,args,expected_exit,expected_status in cases:
+    argv=wsl(bounded(["/usr/bin/env","HARNESS_FAKE_MODE="+fakemode,LINUX_EXE,*args],5,3))
+@@ -113,11 +117,11 @@
+    doc=parse_json(rr["stdout_path"])
+    if doc.get("status")!=expected_status:raise SystemExit("stub JSON status mismatch: "+label)
+    err=Path(rr["stderr_path"]).read_text(encoding="utf-8",errors="replace")
+-   if "FAKE_SUMMARY" not in err or "backing=HOST_MALLOC_ONLY" not in err:raise SystemExit("missing fake-only trace: "+label)
+-   doc["fake_summary_line"]=[line for line in err.splitlines() if line.startswith("FAKE_SUMMARY")][0]
++   if (("FAKE_SUMMARY" not in err and "FAKE_PENDING" not in err) or "backing=HOST_MALLOC_ONLY" not in err):raise SystemExit("missing fake-only trace: "+label)
++   doc["fake_summary_line"]=[line for line in err.splitlines() if line.startswith(("FAKE_SUMMARY","FAKE_PENDING"))][-1]
+    cases_results.append({"case":label,"mode":fakemode,"argv":args,"exit":expected_exit,"json":doc,"stderr_summary":doc["fake_summary_line"],"stdout_path":rr["stdout_path"],"stderr_path":rr["stderr_path"]})
+   (rd/"case_results.json").write_text(json.dumps(cases_results,indent=2)+"\n",encoding="utf-8")
+- after=run("pins_after",wsl(bounded(["/usr/bin/sha256sum",*li],5,2)),12,rd,9 if mode=="run" else 5);results.append(after)
++ after=run("pins_after",wsl(bounded(["/usr/bin/sha256sum",*li],5,2)),12,rd,13 if mode=="run" else 5);results.append(after)
+  if after["returncode"]!=0 or after["outer_timeout"] or after["stream_overflow"]:raise SystemExit("post-run pins failed")
+  aftermap={line.split(None,1)[1].lstrip(" *"):line.split(None,1)[0].lower() for line in Path(after["stdout_path"]).read_text(encoding="utf-8").splitlines()}
+  if any(aftermap.get(k)!=premap.get(k) for k in li):raise SystemExit("before/after input hash changed")

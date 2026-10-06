@@ -1,0 +1,9 @@
+{
+  "name": "deepseek-v6-isolated-review",
+  "description": "Isolated source-only read-only review batch (deepseek_batch_v6): (1) Vulkan transfer-buffer/barriers/memory, (4) OpenCL negative-control & bytes evidence, (6) RPC four-CPU-worker pipeline evidence. Three read-only named teammates, no nested workers, stdout-only reports.",
+  "createdAt": 1791110014073,
+  "leadAgentId": "leader@deepseek-v6-isolated-review",
+  "leadSessionId": "f7e75537-771d-4861-be8c-47f6d2253541",
+  "leadPid": 68388,
+  "members": []
+}

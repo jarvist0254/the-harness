@@ -1,0 +1,7 @@
+Get-Content: E:\the_harness\records\factory_runs\20261004\coherent_repair_kv_20261004T130000Z\cad_gap_posts_work\provider_job_v2.ps1:4
+Line |
+   4 |  $prompt=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot ($Job+ .
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path
+     | 'E:\the_harness\records\factory_runs\20261004\coherent_repair_kv_20261004T130000Z\cad_gap_posts_work\c.prompt.txt' because it does not exist.
+

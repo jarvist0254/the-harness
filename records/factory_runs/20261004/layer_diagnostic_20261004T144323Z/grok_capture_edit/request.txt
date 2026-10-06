@@ -1,0 +1,800 @@
+Actual Grok editor after Qwen workhorse and Gemini review of exact CURRENT Python artifacts. User MAXIMUM10 native child agents EACH Qwen/DeepSeek parent authorized; this tool-lessCLI actualnativechildren0. No tools/imports/native/GPU/compiler/globalchanges. C++scope STOPPED NOT_CHECKED afterQwen timeout+truncatedretry: doNOTinventCPP/helper/realLLMpass. Edit ONLY supplied Python comparator+independenttests. Return JSONONLY {source,test_source,notes}, complete corrected comparator<=400lines and complete corrected actualtests, no proseonly/no placeholders. Root alone admits mocked/pure imports. Existing rawsource/reviews immutable.
+Frozencontract+ROOTclarifications mandatory. Actualcomparator SHA56A55D66798F476CC0CD39D0FD21942B046D24E13985E76AF41ECF85CA9DE1DA, independenttests53173520F595635DC06582C8ABD86C390F4790660B35D49D28FB3A87D0095ACD. Comparator must keyword-only requiredexpected pins, strictfieldsets rejectauthority-bearingextras, exactinteger types(notbool/float forcontext/modelbytes/dims/stride/ordinal/nbytes),64lowerhex (inthex permitting uppercase is insufficient), canonicalattn_norm-0 not-00 alias, exact16inttokens0..15, selecteddevicesexactexpected order, allsource/exe/model/workloadmatchesbothpasses pins. expected{} ormissingpins refusal. Diagnostic only notnativeproof; commonworkloadsharedintentnames vsCPUdevices[] outsidehash.
+STRICTscope: malformed/missing/extra/reordered/op/dim-mismatch artifacts refuseCaptureError (or explicitNOT_CHECKED); NOTnumericDIAGNOSTIC_DIVERGENCE. Validfullfinitearrays genuine numericalthresholdfailure DIAGNOSTIC_DIVERGENCE; exact0.01atol/rtol only rejectbothdeviations/bool. ALLnodesstatistics inclwithin-tolerance noise, exactmismatchcount, bounded8samples total summary128KiB; separate first_noise and first_threshold_violation namedobjectsordinal/name, retainbackcompatiblefirst_divergent_ordinal+stats forfirstthreshold. fullper-elementtol .01+.01absCPU notglobalscale. Resultkey' result' exactspellingwithoutspace -> result.
+RootsymlinkactualRED falselyMATCH: inspect ORIGINAL lexicalabsoluteROOT allcomponents via lstat before realpath; rejectsymlink/reparse root+parent/file, errorinspection mustfailclosed notpass; usepathlibabsolute ancestor correctlyWindowsdrive andPOSIX root. ReadfileBOUNDED max+1 withsizecheck+actuallen/hashes, handlefilegrowth safelybounds withoutpromiseatomicuntrustedfilesystemsecurity. Validateallnode metadata andsum beforebinaryreading, tensor<=16MiB pass<=64MiB manifest<=128KiB; combined128MiB alreadyfollows64+64, redundantcheckoptional no fakeindependentbug. Catch JSONdecode/type/I/O/struct errors asCaptureError consistentAPI, no barecatch fabricateMATCH.
+Actual independentQA62cases21fail0errors0native atrecords/provider_quality_review/layer_diagnostic_RED_20261004T145150Z: absentexpected,short/reversetokens,floatmodelbytes/context/ordinal/strides,canonicalalias,authorityextras,tolbothdirections,actualrootsymlink; structuralproofmismatcherroneousnumericdivergence; floatnbytesescapedstruct.error; noallnodestatistics. Preserve successfultrueSHA/truncated/nonfinite/per-elementreference controls. Fixtests `_run` threecalls positionalNone,exp -> expected=exp. Require actualCANDIDATE_PATH abs.py environment no '/opt' fabricatedfallback; loaded actualnewmodule notstale. Negativeassertions MUSTkeepmalformedmismatchednameCaptureError. Don'tregressfixtures missingexpectedallpins. Adddiscriminatingactualtests forrootambiguities/metadatafloats/root symlink/exacttolerance/noise beforethreshold, no stubs/comparatorimplementation copy. No testPASS untilrootrun.
+Geminiadjudication: validexpectedpins/tokens/tol/rootsymlink/statistics/invalidtestcallfindings. REJECTits suggestionchangingmismatched-name testtonumericdivergence contraryrootcontract. Combined64+64cannotexceed128, don'ttreatasindependentvulnerability. 142possibleuniquenamescannotconstruct145otherwisevalidnodebudget testcase; do notfakecapcontrol. No claimphysicalGPU/modelproductionqualification.
+
+ROOTCONTRACT:
+{
+  "schema_name": "LLAMA_CAPTURE_V1",
+  "api": "compare_artifacts(cpu_root,gpu_root,*,expected,atol=0.01,rtol=0.01)->dict; CaptureError exported; GPU-free import, standardlibrary only",
+  "manifest_file": "manifest.json",
+  "maximum_manifest_bytes": 131072,
+  "maximum_tensor_bytes": 16777216,
+  "maximum_bytes_per_pass": 67108864,
+  "maximum_nodes_per_pass": 144,
+  "root_io": "Read-only each manifest and tensor inside its resolved input root; reject symlink/reparse component including root and filenames; no writes, no DLL/import candidate",
+  "manifest_required": {
+    "schema": "exact string LLAMA_CAPTURE_V1",
+    "status": "COMPLETE exact, no READY",
+    "diagnostic_intrusive": "bool true",
+    "qualification": "DIAGNOSTIC_ONLY exact",
+    "origin": {
+      "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+      "source_sha256": "matches expected64lowerhex",
+      "executable_sha256": "matches expected64lowerhex",
+      "model_sha256": "exact either officialQ8 9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031 or derivedF32 bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80; must match expected and otherpass",
+      "model_bytes": "639446688 or2390150816 accordingmodelhash exactintnotbool",
+      "workload_sha256": "matches expected64lowerhex bothpasses",
+      "role": "CPU_REFERENCE onCPU orVULKAN_DIAGNOSTIC onGPU",
+      "devices": "CPU[]; GPU exactly selected expected_devices one/two unique Vulkan0/Vulkan1 names",
+      "tokens": "list[int]0..15 exactnotbool",
+      "n_ctx_requested": 128,
+      "n_ctx_actual": 256,
+      "n_batch": 32,
+      "n_ubatch": 32,
+      "n_threads": 4,
+      "kv_type_k": "F32",
+      "kv_type_v": "F32",
+      "flash_attention": false,
+      "vulkan_disable_f16": "CPUfalse/GPUtrue",
+      "vulkan_disable_fusion": "CPUfalse/GPUtrue"
+    },
+    "captures": "nonempty orderedlist ofstrictnodes"
+  },
+  "node_required": {
+    "ordinal": "exactint0-basedordered contiguous",
+    "name": "attn_norm-N,ffn_inp-N,ffn_norm-N,ffn_out-N,l_out-N N0..27 orresult_norm/result_output; no duplicatecanonicalnames",
+    "op": "nonempty exactstrings matchesCPU/GPU",
+    "dtype": "F32_LE exact",
+    "dims": "fourpositive exactint dimensions, no bool",
+    "strides": "fourpositive exactint byte strides MUSTcontiguousF32 4,4*d0,...",
+    "nbytes": "productdims*4 checkedbounded",
+    "sha256": "64lowerhex actualrawbytesSHA matches",
+    "file": "relativepathstrict noabsolute/drive/colon/..; leaf filenames only recommended and confined"
+  },
+  "expected_required": [
+    "source_sha256",
+    "executable_sha256",
+    "model_sha256",
+    "model_bytes",
+    "workload_sha256",
+    "devices"
+  ],
+  "result": "Only DIAGNOSTIC_MATCH / DIAGNOSTIC_DIVERGENCE / NOT_CHECKED; neverGPU/model/capacity/productionPASS. fullarrayfinite and fixed elementatol+rtol*absCPU; compare byteorders and allnodes; first divergent OBSERVED whitelist node ordinal, maxabs/RMSE/failedcounts bounded8samples; controlisCOMPARATOR_ONLY nottransportproof",
+  "negative_cases": [
+    "duplicateJSONkeys",
+    "schemaunknown",
+    "boolordinal/dim/bytes",
+    "empty/missingnodes",
+    "truncateddata",
+    "wrongbytehash",
+    "nonfiniteNaN/Inf",
+    "mismatchedname/op/dims/order",
+    "wrongsource/executable/model/workload",
+    "READY/nonintrusive/claimedqualification",
+    "CPUrole/devicefalsecontrol",
+    "symlinkresolvedescape",
+    "oversizefiles",
+    "unknownextra fields where authority-bearing",
+    "per-elementrtol notglobalreference scale",
+    "finite versus NaN comparatornegative",
+    "perturbcopieddatawithupdatedownhash mustDIAGNOSTIC_DIVERGENCE but nevertransportPASS"
+  ]
+}
+ROOTCLARIFICATIONS:
+{
+  "utc": "2026-10-04T14:48:03.339408+00:00",
+  "root_authority": "parent root adjudication, separate record frozen initialcontract preserved",
+  "tokens": "EXACT list(range16), type(x)isint no bool",
+  "tolerances": "THIS diagnostic API only atol==0.01 andrtol==0.01 finiteint/float excludingbool; refusebothwideningandnarrowing. Reportfullmax/RMSE/exactmismatchcount allnodes; firstbyte/noise divergence distinctfirstthresholdviolation",
+  "common_workload": "SHA256canonicalsharedexperimentmanifest includes intendedorderedGPU[Vulkan0,Vulkan1], commoncapturefixtureSHA notoldbaseSHA, executable/model/KV/tokens/ctx/batch/declarationchildflags. CPUorigin.devices=[] outsidecommonhash, GPUoriginexactorderedexpected",
+  "scope": "Declarative inputpin match is notnativeexecutionproof; mandatoryintrusive diagnostic-only. NO broad schemaadapterauthorization."
+}
+ACTUALCOMPARATOR:
+import json
+import hashlib
+import math
+import os
+import struct
+from typing import Any, Dict, List, Optional
+
+class CaptureError(Exception):
+    pass
+
+def _strict_pairs(pairs: List[tuple]) -> dict:
+    seen = set()
+    for k, v in pairs:
+        if k in seen:
+            raise CaptureError(f"Duplicate JSON key: {k}")
+        seen.add(k)
+    return dict(pairs)
+
+def _parse_json(data: bytes) -> Any:
+    try:
+        text = data.decode('utf-8')
+    except UnicodeDecodeError:
+        raise CaptureError("Manifest not valid UTF-8")
+    return json.loads(text, object_pairs_hook=_strict_pairs)
+
+def _is_64hex(v: Any) -> bool:
+    if not isinstance(v, str) or len(v) != 64:
+        return False
+    try:
+        int(v, 16)
+        return True
+    except ValueError:
+        return False
+
+def _validate_origin(o: dict, role: str, exp: dict) -> None:
+    if o.get('pinned_commit') != '0faee5004297c3bcfa40b7bf11750127b8c1fd7d':
+        raise CaptureError("Bad pinned_commit")
+    for f in ('source_sha256', 'executable_sha256', 'workload_sha256'):
+        v = o.get(f)
+        if not _is_64hex(v):
+            raise CaptureError(f"Bad {f}")
+        if f in exp and v != exp[f]:
+            raise CaptureError(f"Mismatch {f}")
+    ms = o.get('model_sha256')
+    mb = o.get('model_bytes')
+    valid_models = {
+        '9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031': 639446688,
+        'bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80': 2390150816
+    }
+    if ms not in valid_models:
+        raise CaptureError("Bad model_sha256")
+    if mb != valid_models[ms]:
+        raise CaptureError("Bad model_bytes")
+    if 'model_sha256' in exp and ms != exp['model_sha256']:
+        raise CaptureError("Mismatch model_sha256")
+    if 'model_bytes' in exp and mb != exp['model_bytes']:
+        raise CaptureError("Mismatch model_bytes")
+    if role == 'CPU_REFERENCE':
+        if o.get('role') != 'CPU_REFERENCE': raise CaptureError("Bad CPU role")
+        if o.get('devices') != []: raise CaptureError("CPU devices must be []")
+        if o.get('vulkan_disable_f16') is not False: raise CaptureError("CPU vulkan_disable_f16")
+        if o.get('vulkan_disable_fusion') is not False: raise CaptureError("CPU vulkan_disable_fusion")
+    elif role == 'VULKAN_DIAGNOSTIC':
+        if o.get('role') != 'VULKAN_DIAGNOSTIC': raise CaptureError("Bad GPU role")
+        devs = o.get('devices')
+        if not isinstance(devs, list) or len(devs) not in (1, 2): raise CaptureError("GPU devices count")
+        if len(set(devs)) != len(devs): raise CaptureError("GPU devices not unique")
+        for d in devs:
+            if not isinstance(d, str) or d not in ('Vulkan0', 'Vulkan1'): raise CaptureError("Bad device name")
+        if 'devices' in exp and devs != exp['devices']: raise CaptureError("Mismatch devices")
+        if o.get('vulkan_disable_f16') is not True: raise CaptureError("GPU vulkan_disable_f16")
+        if o.get('vulkan_disable_fusion') is not True: raise CaptureError("GPU vulkan_disable_fusion")
+    else:
+        raise CaptureError("Unknown role")
+    toks = o.get('tokens')
+    if not isinstance(toks, list) or not all(isinstance(t, int) and not isinstance(t, bool) and 0 <= t <= 15 for t in toks):
+        raise CaptureError("Bad tokens")
+    for k, v in [('n_ctx_requested', 128), ('n_ctx_actual', 256), ('n_batch', 32), ('n_ubatch', 32), ('n_threads', 4)]:
+        if o.get(k) != v: raise CaptureError(f"Bad {k}")
+    if o.get('kv_type_k') != 'F32' or o.get('kv_type_v') != 'F32': raise CaptureError("Bad kv_type")
+    if o.get('flash_attention') is not False: raise CaptureError("Bad flash_attention")
+
+def _validate_node(n: dict, idx: int, seen: set) -> None:
+    if n.get('ordinal') != idx or isinstance(n.get('ordinal'), bool):
+        raise CaptureError(f"Bad ordinal {idx}")
+    name = n.get('name')
+    valid_prefixes = ('attn_norm-', 'ffn_inp-', 'ffn_norm-', 'ffn_out-', 'l_out-')
+    ok = name in ('result_norm', 'result_output')
+    if not ok and isinstance(name, str):
+        for p in valid_prefixes:
+            if name.startswith(p):
+                suf = name[len(p):]
+                if suf.isdigit() and 0 <= int(suf) <= 27:
+                    ok = True
+                    break
+    if not ok:
+        raise CaptureError(f"Bad node name {name}")
+    if name in seen:
+        raise CaptureError(f"Duplicate name {name}")
+    seen.add(name)
+    if not isinstance(n.get('op'), str) or not n['op']:
+        raise CaptureError("Bad op")
+    if n.get('dtype') != 'F32_LE':
+        raise CaptureError("Bad dtype")
+    dims = n.get('dims')
+    if not isinstance(dims, list) or len(dims) != 4:
+        raise CaptureError("Bad dims")
+    for d in dims:
+        if not isinstance(d, int) or isinstance(d, bool) or d <= 0:
+            raise CaptureError("Bad dim value")
+    strides = n.get('strides')
+    exp_strides = [4, 4*dims[0], 4*dims[0]*dims[1], 4*dims[0]*dims[1]*dims[2]]
+    if strides != exp_strides:
+        raise CaptureError("Bad strides")
+    nbytes = n.get('nbytes')
+    exp_nbytes = dims[0]*dims[1]*dims[2]*dims[3]*4
+    if nbytes != exp_nbytes or isinstance(nbytes, bool):
+        raise CaptureError("Bad nbytes")
+    if nbytes > 16777216:
+        raise CaptureError("Tensor too large")
+    sha = n.get('sha256')
+    if not _is_64hex(sha):
+        raise CaptureError("Bad sha256")
+    f = n.get('file')
+    if not isinstance(f, str) or os.path.isabs(f) or ':' in f or '..' in f or '/' in f or '\\' in f:
+        raise CaptureError("Bad file path")
+
+def _safe_resolve(root: str, fname: str) -> str:
+    root_r = os.path.realpath(root)
+    full = os.path.join(root_r, fname)
+    full_r = os.path.realpath(full)
+    if not full_r.startswith(root_r + os.sep) and full_r != root_r:
+        raise CaptureError("Path escapes root")
+    parts = os.path.normpath(full).split(os.sep)
+    for i in range(len(parts)):
+        p = os.sep.join(parts[:i+1]) if i > 0 else parts[0]
+        if not p:
+            continue
+        try:
+            if os.path.islink(p):
+                raise CaptureError("Symlink detected")
+            st = os.stat(p)
+            if hasattr(st, 'st_file_attributes'):
+                if st.st_file_attributes & 0x400:
+                    raise CaptureError("Reparse point detected")
+        except OSError:
+            pass
+    return full_r
+
+def _read_tensor(root: str, node: dict) -> bytes:
+    path = _safe_resolve(root, node['file'])
+    sz = os.path.getsize(path)
+    if sz != node['nbytes']:
+        raise CaptureError("Size mismatch")
+    with open(path, 'rb') as f:
+        data = f.read()
+    h = hashlib.sha256(data).hexdigest()
+    if h != node['sha256']:
+        raise CaptureError("SHA256 mismatch")
+    fmt = f'<{node["nbytes"]//4}f'
+    vals = struct.unpack(fmt, data)
+    for v in vals:
+        if not math.isfinite(v):
+            raise CaptureError("Non-finite value")
+    return data
+
+def _load_root(root: str, role: str, expected: dict) -> tuple:
+    if not os.path.isdir(root):
+        raise CaptureError("Root not dir")
+    mpath = _safe_resolve(root, 'manifest.json')
+    if os.path.getsize(mpath) > 131072:
+        raise CaptureError("Manifest too large")
+    with open(mpath, 'rb') as f:
+        raw = f.read()
+    m = _parse_json(raw)
+    if m.get('schema') != 'LLAMA_CAPTURE_V1':
+        raise CaptureError("Bad schema")
+    if m.get('status') != 'COMPLETE':
+        raise CaptureError("Bad status")
+    if m.get('diagnostic_intrusive') is not True:
+        raise CaptureError("Not intrusive")
+    if m.get('qualification') != 'DIAGNOSTIC_ONLY':
+        raise CaptureError("Bad qualification")
+    o = m.get('origin')
+    if not isinstance(o, dict):
+        raise CaptureError("Missing origin")
+    _validate_origin(o, role, expected)
+    caps = m.get('captures')
+    if not isinstance(caps, list) or len(caps) == 0:
+        raise CaptureError("Empty captures")
+    if len(caps) > 144:
+        raise CaptureError("Too many nodes")
+    total = sum(c.get('nbytes', 0) for c in caps if isinstance(c.get('nbytes'), int))
+    if total > 67108864:
+        raise CaptureError("Pass too large")
+    seen = set()
+    for i, c in enumerate(caps):
+        _validate_node(c, i, seen)
+    tensors = []
+    for c in caps:
+        tensors.append(_read_tensor(root, c))
+    return caps, tensors
+
+def compare_artifacts(cpu_root: str, gpu_root: str, *args, expected: Optional[dict] = None, atol: float = 0.01, rtol: float = 0.01, **kwargs) -> dict:
+    if expected is None:
+        expected = {}
+    if not isinstance(expected, dict):
+        raise CaptureError("expected must be dict")
+    if isinstance(atol, bool) or isinstance(rtol, bool):
+        raise CaptureError("Tolerance cannot be bool")
+    if not isinstance(atol, (int, float)) or not isinstance(rtol, (int, float)):
+        raise CaptureError("Tolerance must be numeric")
+    if atol < 0 or rtol < 0 or not math.isfinite(atol) or not math.isfinite(rtol):
+        raise CaptureError("Tolerance must be finite non-negative")
+    atol, rtol = float(atol), float(rtol)
+    cpu_nodes, cpu_tensors = _load_root(cpu_root, 'CPU_REFERENCE', expected)
+    gpu_nodes, gpu_tensors = _load_root(gpu_root, 'VULKAN_DIAGNOSTIC', expected)
+    if len(cpu_nodes) != len(gpu_nodes):
+        return {'result': 'DIAGNOSTIC_DIVERGENCE', 'reason': 'node_count_mismatch'}
+    for i, (cn, gn) in enumerate(zip(cpu_nodes, gpu_nodes)):
+        if cn['name'] != gn['name'] or cn['op'] != gn['op'] or cn['dims'] != gn['dims'] or cn['dtype'] != gn['dtype'] or cn['strides'] != gn['strides']:
+            return {'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': i, 'reason': 'metadata_mismatch'}
+    result = 'DIAGNOSTIC_MATCH'
+    first_div = None
+    stats = {}
+    for i, (ct, gt) in enumerate(zip(cpu_tensors, gpu_tensors)):
+        nf = len(ct) // 4
+        cv = struct.unpack(f'<{nf}f', ct)
+        gv = struct.unpack(f'<{nf}f', gt)
+        max_abs = 0.0
+        sum_sq = 0.0
+        failed = 0
+        samples = []
+        for j in range(nf):
+            c_val, g_val = cv[j], gv[j]
+            diff = abs(c_val - g_val)
+            if diff > max_abs:
+                max_abs = diff
+            sum_sq += diff * diff
+            tol = atol + rtol * abs(c_val)
+            if diff > tol:
+                failed += 1
+                if len(samples) < 8:
+                    samples.append({'index': j, 'cpu': c_val, 'gpu': g_val, 'diff': diff})
+        rmse = math.sqrt(sum_sq / nf) if nf > 0 else 0.0
+        if failed > 0:
+            result = 'DIAGNOSTIC_DIVERGENCE'
+            if first_div is None:
+                first_div = i
+                stats = {'max_abs': max_abs, 'rmse': rmse, 'failed_count': failed, 'samples': samples}
+    out = {'result': result, 'comparator': 'COMPARATOR_ONLY'}
+    if first_div is not None:
+        out['first_divergent_ordinal'] = first_div
+        out['stats'] = stats
+    return out
+
+
+ACTUALINDEPENDENTTESTSOURCE:
+import unittest
+import tempfile
+import os
+import json
+import struct
+import hashlib
+import importlib.util
+import sys
+import math
+
+CANDIDATE_PATH = os.environ.get('CANDIDATE_PATH', '/opt/comparator/compare_artifacts.py')
+
+def _load_candidate():
+    spec = importlib.util.spec_from_file_location('candidate_module', CANDIDATE_PATH)
+    if spec is None or spec.loader is None:
+        raise ImportError(f'Cannot load candidate from {CANDIDATE_PATH}')
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules['candidate_module'] = mod
+    spec.loader.exec_module(mod)
+    return mod.compare_artifacts, mod.CaptureError
+
+def _sha256_bytes(b):
+    return hashlib.sha256(b).hexdigest()
+
+def _make_tensor_f32(dims, val=1.0):
+    total = 1
+    for d in dims:
+        total *= d
+    return struct.pack(f'<{total}f', *([val] * total))
+
+def _base_origin(role='CPU_REFERENCE', devices=None, model_sha='9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031', model_bytes=639446688, vulkan_disable_f16=False, vulkan_disable_fusion=False):
+    if devices is None:
+        devices = [] if role == 'CPU_REFERENCE' else ['Vulkan0']
+    return {
+        'pinned_commit': '0faee5004297c3bcfa40b7bf11750127b8c1fd7d',
+        'source_sha256': 'a' * 64,
+        'executable_sha256': 'b' * 64,
+        'model_sha256': model_sha,
+        'model_bytes': model_bytes,
+        'workload_sha256': 'c' * 64,
+        'role': role,
+        'devices': devices,
+        'tokens': list(range(16)),
+        'n_ctx_requested': 128,
+        'n_ctx_actual': 256,
+        'n_batch': 32,
+        'n_ubatch': 32,
+        'n_threads': 4,
+        'kv_type_k': 'F32',
+        'kv_type_v': 'F32',
+        'flash_attention': False,
+        'vulkan_disable_f16': vulkan_disable_f16,
+        'vulkan_disable_fusion': vulkan_disable_fusion
+    }
+
+def _base_node(ordinal=0, name='attn_norm-0', op='RMS_NORM', dims=None, val=1.0, fname=None):
+    if dims is None:
+        dims = [1, 2, 3, 4]
+    data = _make_tensor_f32(dims, val)
+    sha = _sha256_bytes(data)
+    d0, d1, d2, d3 = dims
+    strides = [4, 4*d0, 4*d0*d1, 4*d0*d1*d2]
+    if fname is None:
+        fname = f'node_{ordinal}.bin'
+    return {
+        'ordinal': ordinal,
+        'name': name,
+        'op': op,
+        'dtype': 'F32_LE',
+        'dims': dims,
+        'strides': strides,
+        'nbytes': len(data),
+        'sha256': sha,
+        'file': fname
+    }, data
+
+def _write_root(path, manifest_dict, tensors_dict):
+    with open(os.path.join(path, 'manifest.json'), 'w') as f:
+        json.dump(manifest_dict, f)
+    for fname, data in tensors_dict.items():
+        with open(os.path.join(path, fname), 'wb') as f:
+            f.write(data)
+
+def _build_valid_pair(cpu_val=1.0, gpu_val=1.0):
+    cpu_node, cpu_data = _base_node(val=cpu_val)
+    gpu_node, gpu_data = _base_node(val=gpu_val)
+    cpu_manifest = {
+        'schema': 'LLAMA_CAPTURE_V1',
+        'status': 'COMPLETE',
+        'diagnostic_intrusive': True,
+        'qualification': 'DIAGNOSTIC_ONLY',
+        'origin': _base_origin('CPU_REFERENCE', []),
+        'captures': [cpu_node]
+    }
+    gpu_manifest = {
+        'schema': 'LLAMA_CAPTURE_V1',
+        'status': 'COMPLETE',
+        'diagnostic_intrusive': True,
+        'qualification': 'DIAGNOSTIC_ONLY',
+        'origin': _base_origin('VULKAN_DIAGNOSTIC', ['Vulkan0'], vulkan_disable_f16=True, vulkan_disable_fusion=True),
+        'captures': [gpu_node]
+    }
+    expected = {
+        'source_sha256': 'a' * 64,
+        'executable_sha256': 'b' * 64,
+        'model_sha256': '9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031',
+        'model_bytes': 639446688,
+        'workload_sha256': 'c' * 64,
+        'devices': ['Vulkan0']
+    }
+    return cpu_manifest, {'node_0.bin': cpu_data}, gpu_manifest, {'node_0.bin': gpu_data}, expected
+
+class TestContract(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.compare, cls.CaptureError = _load_candidate()
+
+    def _run(self, cpu_m, cpu_t, gpu_m, gpu_t, exp):
+        with tempfile.TemporaryDirectory() as td:
+            cpu_root = os.path.join(td, 'cpu')
+            gpu_root = os.path.join(td, 'gpu')
+            os.makedirs(cpu_root)
+            os.makedirs(gpu_root)
+            _write_root(cpu_root, cpu_m, cpu_t)
+            _write_root(gpu_root, gpu_m, gpu_t)
+            return self.compare(cpu_root, gpu_root, None, exp, atol=0.01, rtol=0.01)
+
+    def test_01_match(self):
+        cm, ct, gm, gt, exp = _build_valid_pair(1.0, 1.0)
+        res = self._run(cm, ct, gm, gt, exp)
+        self.assertEqual(res['result'], 'DIAGNOSTIC_MATCH')
+
+    def test_02_divergence(self):
+        cm, ct, gm, gt, exp = _build_valid_pair(1.0, 2.0)
+        res = self._run(cm, ct, gm, gt, exp)
+        self.assertEqual(res['result'], 'DIAGNOSTIC_DIVERGENCE')
+
+    def test_03_duplicate_json_keys(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        raw = json.dumps(cm)
+        raw = raw.replace('"schema":', '"schema": "X", "schema":', 1)
+        with tempfile.TemporaryDirectory() as td:
+            cpu_root = os.path.join(td, 'cpu')
+            gpu_root = os.path.join(td, 'gpu')
+            os.makedirs(cpu_root); os.makedirs(gpu_root)
+            with open(os.path.join(cpu_root, 'manifest.json'), 'w') as f: f.write(raw)
+            _write_root(gpu_root, gm, gt)
+            for fname, data in ct.items():
+                with open(os.path.join(cpu_root, fname), 'wb') as f: f.write(data)
+            with self.assertRaises(self.CaptureError):
+                self.compare(cpu_root, gpu_root, None, exp, atol=0.01, rtol=0.01)
+
+    def test_04_schema_unknown(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['schema'] = 'UNKNOWN'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_05_bool_ordinal(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['captures'][0]['ordinal'] = True
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_06_empty_captures(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['captures'] = []
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_07_truncated_data(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        ct['node_0.bin'] = ct['node_0.bin'][:-4]
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_08_wrong_byte_hash(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['captures'][0]['sha256'] = '0' * 64
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_09_nonfinite_nan(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        bad = bytearray(ct['node_0.bin'])
+        struct.pack_into('<f', bad, 0, float('nan'))
+        ct['node_0.bin'] = bytes(bad)
+        cm['captures'][0]['sha256'] = _sha256_bytes(ct['node_0.bin'])
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_10_mismatched_name(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['captures'][0]['name'] = 'ffn_inp-0'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_11_wrong_source(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        exp['source_sha256'] = 'z' * 64
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_12_ready_status(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['status'] = 'READY'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_13_cpu_role_device_false_control(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['origin']['role'] = 'VULKAN_DIAGNOSTIC'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_14_symlink_escape(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        try:
+            with tempfile.TemporaryDirectory() as td:
+                cpu_root = os.path.join(td, 'cpu')
+                gpu_root = os.path.join(td, 'gpu')
+                os.makedirs(cpu_root); os.makedirs(gpu_root)
+                _write_root(gpu_root, gm, gt)
+                with open(os.path.join(cpu_root, 'manifest.json'), 'w') as f: json.dump(cm, f)
+                target = os.path.join(td, 'escape.bin')
+                with open(target, 'wb') as f: f.write(ct['node_0.bin'])
+                link_path = os.path.join(cpu_root, 'node_0.bin')
+                os.symlink(target, link_path)
+                with self.assertRaises(self.CaptureError):
+                    self.compare(cpu_root, gpu_root, None, exp, atol=0.01, rtol=0.01)
+        except OSError:
+            self.skipTest('Symlink unsupported on this platform/permissions')
+
+    def test_15_oversize_file(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        ct['node_0.bin'] = b'\x00' * (16777216 + 1)
+        cm['captures'][0]['nbytes'] = len(ct['node_0.bin'])
+        cm['captures'][0]['sha256'] = _sha256_bytes(ct['node_0.bin'])
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_16_per_element_rtol_not_global(self):
+        cm, ct, gm, gt, exp = _build_valid_pair(cpu_val=1000.0, gpu_val=1005.0)
+        res = self._run(cm, ct, gm, gt, exp)
+        self.assertEqual(res['result'], 'DIAGNOSTIC_MATCH')
+
+    def test_17_perturb_updated_hash_divergence(self):
+        cm, ct, gm, gt, exp = _build_valid_pair(1.0, 1.0)
+        bad = bytearray(gt['node_0.bin'])
+        struct.pack_into('<f', bad, 0, 999.0)
+        gt['node_0.bin'] = bytes(bad)
+        gm['captures'][0]['sha256'] = _sha256_bytes(gt['node_0.bin'])
+        res = self._run(cm, ct, gm, gt, exp)
+        self.assertEqual(res['result'], 'DIAGNOSTIC_DIVERGENCE')
+
+    def test_18_corrupt_byte_unchanged_hash_fails_metadata(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        bad = bytearray(gt['node_0.bin'])
+        bad[0] = (bad[0] + 1) % 256
+        gt['node_0.bin'] = bytes(bad)
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_19_wrong_dtype(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['captures'][0]['dtype'] = 'F16_LE'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_20_wrong_dims(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['captures'][0]['dims'] = [1, 2, 3, 5]
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_21_duplicate_node(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        n2, d2 = _base_node(ordinal=1, name='attn_norm-0')
+        gm['captures'].append(n2)
+        gt[n2['file']] = d2
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_22_out_of_order(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        n1, d1 = _base_node(ordinal=0, name='attn_norm-0')
+        n2, d2 = _base_node(ordinal=1, name='attn_norm-1')
+        gm['captures'] = [n2, n1]
+        gt = {n1['file']: d1, n2['file']: d2}
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_23_bool_numeric_dim(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['captures'][0]['dims'] = [True, 2, 3, 4]
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_24_bytes_limit_exceeded(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['captures'][0]['nbytes'] = 67108865
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_25_fake_ready(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['status'] = 'READY'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_26_kv_wrong(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['origin']['kv_type_k'] = 'F16'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_27_expected_wrong_model(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        exp['model_sha256'] = '0' * 64
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_28_mismatched_model_context(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        gm['origin']['n_ctx_actual'] = 512
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_29_device_mismatch(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        exp['devices'] = ['Vulkan1']
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_30_huge_ref_does_not_cover_low_value(self):
+        cm, ct, gm, gt, exp = _build_valid_pair(cpu_val=1e6, gpu_val=1e6)
+        n2, d2 = _base_node(ordinal=1, name='attn_norm-1', val=1.0)
+        cm['captures'].append(n2)
+        ct[n2['file']] = d2
+        n2g, d2g = _base_node(ordinal=1, name='attn_norm-1', val=2.0)
+        gm['captures'].append(n2g)
+        gt[n2g['file']] = d2g
+        res = self._run(cm, ct, gm, gt, exp)
+        self.assertEqual(res['result'], 'DIAGNOSTIC_DIVERGENCE')
+
+    def test_31_diagnostic_intrusive_false(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['diagnostic_intrusive'] = False
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+    def test_32_qualification_wrong(self):
+        cm, ct, gm, gt, exp = _build_valid_pair()
+        cm['qualification'] = 'PRODUCTION'
+        with self.assertRaises(self.CaptureError):
+            self._run(cm, ct, gm, gt, exp)
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+ACTUALGEMINIREVIEW (adjudicateasabove):
+{
+  "findings": [
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+      "discriminating_test": "def test_missing_expected_pins_rejected(self):\n    cm, ct, gm, gt, exp = _build_valid_pair()\n    del exp['source_sha256']\n    with self.assertRaises(self.CaptureError):\n        self.compare(cpu_root, gpu_root, expected=exp)",
+      "exact_source": "def compare_artifacts(cpu_root: str, gpu_root: str, *args, expected: Optional[dict] = None, atol: float = 0.01, rtol: float = 0.01, **kwargs) -> dict:",
+      "line": 204,
+      "minimal_fix": "def compare_artifacts(cpu_root: str, gpu_root: str, *, expected: dict, atol: float = 0.01, rtol: float = 0.01) -> dict:\n    if not isinstance(expected, dict):\n        raise CaptureError(\"expected must be dict\")\n    for req in ('source_sha256', 'executable_sha256', 'model_sha256', 'model_bytes', 'workload_sha256', 'devices'):\n        if req not in expected:\n            raise CaptureError(f\"Missing required expected pin: {req}\")",
+      "reason": "Contract specifies 'compare_artifacts(cpu_root,gpu_root,*,expected,atol=0.01,rtol=0.01)->dict' with 'expected' keyword-only and all pins in 'expected_required' mandatory. Accepting '*args' and defaulting 'expected=None' allowed callers to pass positional arguments that silently bypassed expected pins entirely, and origin checks used 'if f in exp' rather than enforcing all required pins.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+      "discriminating_test": "def test_refuse_tolerance_widening_or_narrowing(self):\n    cm, ct, gm, gt, exp = _build_valid_pair()\n    with self.assertRaises(self.CaptureError):\n        self.compare(cpu_root, gpu_root, expected=exp, atol=0.05, rtol=0.01)\n    with self.assertRaises(self.CaptureError):\n        self.compare(cpu_root, gpu_root, expected=exp, atol=0.01, rtol=0.001)",
+      "exact_source": "    if isinstance(atol, bool) or isinstance(rtol, bool):\n        raise CaptureError(\"Tolerance cannot be bool\")\n    if not isinstance(atol, (int, float)) or not isinstance(rtol, (int, float)):\n        raise CaptureError(\"Tolerance must be numeric\")\n    if atol < 0 or rtol < 0 or not math.isfinite(atol) or not math.isfinite(rtol):\n        raise CaptureError(\"Tolerance must be finite non-negative\")\n    atol, rtol = float(atol), float(rtol)",
+      "line": 209,
+      "minimal_fix": "    if isinstance(atol, bool) or isinstance(rtol, bool):\n        raise CaptureError(\"Tolerance cannot be bool\")\n    if not isinstance(atol, (int, float)) or not isinstance(rtol, (int, float)):\n        raise CaptureError(\"Tolerance must be numeric\")\n    if not math.isfinite(atol) or not math.isfinite(rtol):\n        raise CaptureError(\"Tolerance must be finite\")\n    if float(atol) != 0.01 or float(rtol) != 0.01:\n        raise CaptureError(\"Refuse tolerance widening/narrowing: atol and rtol must be exactly 0.01\")\n    atol, rtol = 0.01, 0.01",
+      "reason": "Contract and ROOT_CONTRACT_CLARIFICATION require: 'THIS diagnostic API only atol==0.01 andrtol==0.01 finiteint/float excludingbool; refusebothwideningandnarrowing.' Current implementation allows arbitrary non-negative numeric tolerances, failing to reject widening or narrowing.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+      "discriminating_test": "def test_invalid_tokens_subset_or_length(self):\n    cm, ct, gm, gt, exp = _build_valid_pair()\n    cm['origin']['tokens'] = [0, 1, 2]\n    with self.assertRaises(self.CaptureError):\n        self.compare(cpu_root, gpu_root, expected=exp)",
+      "exact_source": "    toks = o.get('tokens')\n    if not isinstance(toks, list) or not all(isinstance(t, int) and not isinstance(t, bool) and 0 <= t <= 15 for t in toks):\n        raise CaptureError(\"Bad tokens\")",
+      "line": 75,
+      "minimal_fix": "    toks = o.get('tokens')\n    if not isinstance(toks, list) or len(toks) != 16 or toks != list(range(16)) or any(type(t) is not int for t in toks):\n        raise CaptureError(\"Bad tokens: must be exact list(range(16)) of int excluding bool\")",
+      "reason": "Contract requires 'tokens: list[int]0..15 exactnotbool' and ROOT_CONTRACT_CLARIFICATION mandates 'tokens: EXACT list(range16), type(x)isint no bool'. Current code permits any sublist or duplicate list of integers between 0 and 15 (e.g. [0, 1] or [0]*16).",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+      "discriminating_test": "def test_all_nodes_reported_and_noise_separated_from_threshold_violation(self):\n    cm, ct, gm, gt, exp = _build_two_node_pair(val0_cpu=1.0, val0_gpu=1.0001, val1_cpu=1.0, val1_gpu=1.5)\n    res = self.compare(cpu_root, gpu_root, expected=exp)\n    self.assertEqual(len(res['nodes']), 2)\n    self.assertIsNotNone(res['first_noise'])\n    self.assertEqual(res['first_noise']['ordinal'], 0)\n    self.assertIsNotNone(res['first_threshold_violation'])\n    self.assertEqual(res['first_threshold_violation']['ordinal'], 1)",
+      "exact_source": "    result = 'DIAGNOSTIC_MATCH'\n    first_div = None\n    stats = {}\n    for i, (ct, gt) in enumerate(zip(cpu_tensors, gpu_tensors)):\n        nf = len(ct) // 4\n        cv = struct.unpack(f'<{nf}f', ct)\n        gv = struct.unpack(f'<{nf}f', gt)\n        max_abs = 0.0\n        sum_sq = 0.0\n        failed = 0\n        samples = []\n        for j in range(nf):\n            c_val, g_val = cv[j], gv[j]\n            diff = abs(c_val - g_val)\n            if diff > max_abs:\n                max_abs = diff\n            sum_sq += diff * diff\n            tol = atol + rtol * abs(c_val)\n            if diff > tol:\n                failed += 1\n                if len(samples) < 8:\n                    samples.append({'index': j, 'cpu': c_val, 'gpu': g_val, 'diff': diff})\n        rmse = math.sqrt(sum_sq / nf) if nf > 0 else 0.0\n        if failed > 0:\n            result = 'DIAGNOSTIC_DIVERGENCE'\n            if first_div is None:\n                first_div = i\n                stats = {'max_abs': max_abs, 'rmse': rmse, 'failed_count': failed, 'samples': samples}\n    out = {'result': result, 'comparator': 'COMPARATOR_ONLY'}\n    if first_div is not None:\n        out['first_divergent_ordinal'] = first_div\n        out['stats'] = stats\n    return out",
+      "line": 223,
+      "minimal_fix": "    result = 'DIAGNOSTIC_MATCH'\n    first_noise = None\n    first_threshold_violation = None\n    node_reports = []\n    for i, (cn, ct, gt) in enumerate(zip(cpu_nodes, cpu_tensors, gpu_tensors)):\n        nf = len(ct) // 4\n        cv = struct.unpack(f'<{nf}f', ct)\n        gv = struct.unpack(f'<{nf}f', gt)\n        max_abs = 0.0\n        sum_sq = 0.0\n        exact_mismatch_count = 0\n        failed_count = 0\n        samples = []\n        for j in range(nf):\n            c_val, g_val = cv[j], gv[j]\n            diff = abs(c_val - g_val)\n            if diff > 0.0:\n                exact_mismatch_count += 1\n                if first_noise is None:\n                    first_noise = {'ordinal': i, 'name': cn['name'], 'index': j, 'diff': diff}\n            if diff > max_abs:\n                max_abs = diff\n            sum_sq += diff * diff\n            tol = atol + rtol * abs(c_val)\n            if diff > tol:\n                failed_count += 1\n                if first_threshold_violation is None:\n                    first_threshold_violation = {'ordinal': i, 'name': cn['name'], 'index': j, 'diff': diff, 'tol': tol}\n                if len(samples) < 8:\n                    samples.append({'index': j, 'cpu': c_val, 'gpu': g_val, 'diff': diff, 'tol': tol})\n        rmse = math.sqrt(sum_sq / nf) if nf > 0 else 0.0\n        node_reports.append({\n            'ordinal': i,\n            'name': cn['name'],\n            'max_abs': max_abs,\n            'rmse': rmse,\n            'exact_mismatch_count': exact_mismatch_count,\n            'failed_count': failed_count,\n            'samples': samples\n        })\n        if failed_count > 0:\n            result = 'DIAGNOSTIC_DIVERGENCE'\n    out = {\n        'result': result,\n        'comparator': 'COMPARATOR_ONLY',\n        'first_noise': first_noise,\n        'first_threshold_violation': first_threshold_violation,\n        'nodes': node_reports\n    }\n    return out",
+      "reason": "Contract and root clarification demand: 'Report ALL nodes max/RMSE/exactmismatch and separate FIRST_NOISE vs FIRST_THRESHOLD_VIOLATION; no globalreference scale.' Current code only saves stats for the first divergent node, computes no exactmismatch count, and does not separate first_noise (diff > 0.0) from first_threshold_violation (diff > tol).",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+      "discriminating_test": "def test_combined_budget_exceeded(self):\n    # Two passes whose individual sizes pass per-pass limit but combined exceed 128 MiB must raise CaptureError\n    pass",
+      "exact_source": "    cpu_nodes, cpu_tensors = _load_root(cpu_root, 'CPU_REFERENCE', expected)\n    gpu_nodes, gpu_tensors = _load_root(gpu_root, 'VULKAN_DIAGNOSTIC', expected)",
+      "line": 216,
+      "minimal_fix": "    cpu_nodes, cpu_tensors = _load_root(cpu_root, 'CPU_REFERENCE', expected)\n    gpu_nodes, gpu_tensors = _load_root(gpu_root, 'VULKAN_DIAGNOSTIC', expected)\n    total_combined = sum(c['nbytes'] for c in cpu_nodes) + sum(g['nbytes'] for g in gpu_nodes)\n    if total_combined > 134217728:\n        raise CaptureError(\"Combined passes exceed total budget limit of 128MiB\")",
+      "reason": "Contract and prompt require: 'budgets128KiBmanifest/16MiBtensor/64MiBperpass/128MiBtotal'. The comparator only checks per-pass tensor sizes in _load_root and fails to enforce the 128 MiB aggregate limit across both passes.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+      "discriminating_test": "def test_root_symlink_reparse_rejected(self):\n    # Passing a symlinked root directory must be rejected before realpath resolution\n    pass",
+      "exact_source": "def _safe_resolve(root: str, fname: str) -> str:\n    root_r = os.path.realpath(root)",
+      "line": 128,
+      "minimal_fix": "def _safe_resolve(root: str, fname: str) -> str:\n    norm_root = os.path.abspath(root)\n    parts = norm_root.split(os.sep)\n    for i in range(len(parts)):\n        p = os.sep.join(parts[:i+1]) if i > 0 else parts[0]\n        if not p: continue\n        try:\n            if os.path.islink(p): raise CaptureError(f\"Symlink in root: {p}\")\n            st = os.lstat(p)\n            if getattr(st, 'st_file_attributes', 0) & 0x400:\n                raise CaptureError(f\"Reparse point in root: {p}\")\n        except OSError: pass\n    root_r = os.path.realpath(root)",
+      "reason": "Contract specifies: 'reject symlink/reparse component including root and filenames'. Resolving root with os.path.realpath(root) before inspecting components allows symlinked roots to bypass detection. Furthermore, inspecting path components with os.stat follows symlinks instead of inspecting link attributes via os.lstat.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_tests\\test_capture_comparator.py",
+      "discriminating_test": "def test_strict_keyword_only_expected(self):\n    cm, ct, gm, gt, exp = _build_valid_pair()\n    with self.assertRaises(TypeError):\n        self.compare(cpu_root, gpu_root, None, exp)",
+      "exact_source": "            return self.compare(cpu_root, gpu_root, None, exp, atol=0.01, rtol=0.01)",
+      "line": 126,
+      "minimal_fix": "            return self.compare(cpu_root, gpu_root, expected=exp, atol=0.01, rtol=0.01)",
+      "reason": "Test runner helper _run passes 'None, exp' as positional arguments 3 and 4, violating the contract API 'compare_artifacts(cpu_root, gpu_root, *, expected, atol=0.01, rtol=0.01)'. When paired with the candidate comparator, 'exp' was captured into '*args' and 'expected' defaulted to None -> {}, masking missing pin validation. Lines 151 and 230 also contain the same invalid positional call pattern.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_tests\\test_capture_comparator.py",
+      "discriminating_test": "def test_metadata_mismatch_returns_divergence(self):\n    cm, ct, gm, gt, exp = _build_valid_pair()\n    gm['captures'][0]['name'] = 'ffn_inp-0'\n    res = self.compare(cpu_root, gpu_root, expected=exp)\n    self.assertEqual(res['result'], 'DIAGNOSTIC_DIVERGENCE')",
+      "exact_source": "    def test_10_mismatched_name(self):\n        cm, ct, gm, gt, exp = _build_valid_pair()\n        gm['captures'][0]['name'] = 'ffn_inp-0'\n        with self.assertRaises(self.CaptureError):\n            self._run(cm, ct, gm, gt, exp)",
+      "line": 192,
+      "minimal_fix": "    def test_10_mismatched_name(self):\n        cm, ct, gm, gt, exp = _build_valid_pair()\n        gm['captures'][0]['name'] = 'ffn_inp-0'\n        res = self._run(cm, ct, gm, gt, exp)\n        self.assertEqual(res['result'], 'DIAGNOSTIC_DIVERGENCE')\n        self.assertEqual(res.get('reason'), 'metadata_mismatch')",
+      "reason": "capture_comparator.py line 222 returns {'result': 'DIAGNOSTIC_DIVERGENCE', ...} for node metadata mismatches, but test_10 expects CaptureError to be raised, creating an immediate test suite failure against the candidate implementation.",
+      "severity": "HIGH"
+    }
+  ],
+  "qualification_limits": [
+    "C++ scope explicitly NOT_CHECKED due to incomplete upstream candidate: original Qwen Max HTTP timeout 240.75s, retry Qwen Flash finish_reason=length partial candidate rejected per instructions. C++ review scope not checked; only Python comparator and test artifacts evaluated.",
+    "A 142-unique node whitelist (5 prefix categories * 28 layers + result_norm + result_output = 142 max canonical nodes) mathematically cannot isolate a 145-node overflow cap test without violating node uniqueness or canonical whitelist restrictions; do not fake that qualification.",
+    "Static review unexecuted: no native child agents invoked, no shell commands executed, no native compilation or GPU execution performed."
+  ],
+  "toolAction": "Submitting static review findings",
+  "toolSummary": "Static review findings",
+  "verdict": "STATIC_REJECTED"
+}
+

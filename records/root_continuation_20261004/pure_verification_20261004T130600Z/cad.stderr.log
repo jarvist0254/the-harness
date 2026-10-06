@@ -1,0 +1,13 @@
+test_a_card_outside_core_cannot_claim_integral_support (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_all_cards_must_reach_both_nominal_support_footprints (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_body_gaps_and_independent_integrated_supports (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_d_beam_cannot_intrude_into_lower_card_bodies (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_fourth_card_rolls_same_fixture_dimensions (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_invalid_dimensions_and_fixed_print_limit_are_refused (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_structural_primitives_must_have_positive_sizes (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_universal_boxes_are_not_silently_certified (test_integrated_layout.IntegratedLayoutTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.017s
+
+OK

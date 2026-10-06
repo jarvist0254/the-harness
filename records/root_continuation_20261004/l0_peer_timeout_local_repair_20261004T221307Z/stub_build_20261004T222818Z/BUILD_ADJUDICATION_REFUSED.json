@@ -1,0 +1,59 @@
+{
+  "status": "BUILD_LINK_PASS_SYMBOL_INSPECTION_REFUSED_CAP",
+  "controller_exit_code": 1,
+  "fake_executable_executed": false,
+  "scope": "CPU fake build only; no real loader/driver/GPU",
+  "source_sha256": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+  "fake_source_sha256": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+  "controller_sha256": "5e9b5964bf0805fd9d91a48ff65f23e84d85c63b96d4ba1293a9a8bd63ee3c4d",
+  "header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "object_sha256": "888754880338f9752254dab8a6173239cff630f366716e11f8a4c7705efa6b80",
+  "fake_object_sha256": "ab9ec1703fe507cb8f043b51646f79a92f640f02e02627cbe4f8b0d786eac1f1",
+  "executable_sha256": "1b889f1f11884b8b9d0cd92fb7badd3c6468035cdea8a3a4ac358f6535e27c40",
+  "raw_dynamic_dependencies": [
+    "libstdc++.so.6",
+    "libgcc_s.so.1",
+    "libc.so.6"
+  ],
+  "symbol_capture": {
+    "label": "defined_fake_symbols",
+    "argv": [
+      "C:\\windows\\system32\\wsl.exe",
+      "-d",
+      "Ubuntu-24.04",
+      "--exec",
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "5s",
+      "/usr/bin/readelf",
+      "-Ws",
+      "/mnt/e/the_harness/records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/peer_copy_cpu_fake"
+    ],
+    "pid": 78752,
+    "started_utc": "2026-10-04T22:28:23.301+00:00",
+    "elapsed_seconds": 0.156,
+    "returncode": 1,
+    "outer_timeout": false,
+    "outer_killed_owned_wsl_client": true,
+    "stream_overflow": true,
+    "owned_wsl_client_exited": true,
+    "readers_joined": true,
+    "pipes_drained": true,
+    "reader_errors": [],
+    "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.stdout.bin",
+    "stdout_sha256": "3501eb5efa4fd2040d990cf996bb979ce471d57abda66eafae4d2ccb0a9ec1de",
+    "stdout_bytes": 131072,
+    "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0
+  },
+  "per_stage_receipts": [
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\01_pins.receipt.json",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\02_fake_object.receipt.json",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\03_link_cpu_fake.receipt.json",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\04_no_level_zero_dependency.receipt.json",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.receipt.json"
+  ],
+  "no_runtime_admission": true
+}

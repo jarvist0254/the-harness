@@ -1,0 +1,59 @@
+#include <level_zero/ze_api.h>
+#include <algorithm>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+// CPU-only fake Level Zero implementation. Allocations are ordinary host malloc
+// buffers tagged with synthetic API owner metadata; they are not device memory.
+namespace {
+struct FakeDriver {} driver_obj;
+struct FakeDevice { unsigned index; std::string uuid; } src_obj{0,"00112233445566778899aabbccddeeff"}, dst_obj{1,"ffeeddccbbaa99887766554433221100"};
+struct FakeContext {} context_obj;
+struct FakeQueue { ze_device_handle_t device{}; };
+struct Op { bool fill=false; void *dst=nullptr; const void *src=nullptr; size_t size=0; std::vector<unsigned char> pattern; };
+struct FakeList { ze_device_handle_t device{}; std::vector<Op> ops; };
+struct FakeFence { ze_command_queue_handle_t queue{}; };
+struct Allocation { ze_device_handle_t owner{}; ze_memory_type_t type=ZE_MEMORY_TYPE_UNKNOWN; size_t size=0; };
+std::vector<std::unique_ptr<FakeQueue>> queues;
+std::vector<std::unique_ptr<FakeList>> lists;
+std::vector<std::unique_ptr<FakeFence>> fences;
+std::unordered_map<void*,Allocation> allocations;
+bool pending=false;
+unsigned wait_count=0, allocation_count=0, free_count=0, api_calls=0, pending_teardowns=0;
+unsigned context_create_count=0;
+std::string mode(){const char *p=std::getenv("HARNESS_FAKE_MODE");return p?p:"clean";}
+void teardown(const char *name){if(pending){++pending_teardowns;std::fprintf(stderr,"FAKE_EVENT teardown_while_pending=%s\n",name);}}
+void parse_uuid(const std::string&s,uint8_t*out){for(size_t i=0;i<16;++i){auto v=[](char c)->unsigned{return c<='9'?unsigned(c-'0'):unsigned(c-'a'+10);};out[i]=uint8_t((v(s[2*i])<<4)|v(s[2*i+1]));}}
+struct Summary { ~Summary(){std::fprintf(stderr,"FAKE_SUMMARY api_calls=%u context_creates=%u allocations=%u frees=%u pending_teardowns=%u wait_count=%u pending_at_exit=%u backing=HOST_MALLOC_ONLY\n",api_calls,context_create_count,allocation_count,free_count,pending_teardowns,wait_count,pending?1u:0u);} } summary;
+}
+
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeInit(ze_init_flags_t){++api_calls;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeDriverGet(uint32_t *count,ze_driver_handle_t *drivers){++api_calls;if(!count)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;if(!drivers){*count=1;return ZE_RESULT_SUCCESS;}if(*count<1)return ZE_RESULT_ERROR_INVALID_SIZE;drivers[0]=reinterpret_cast<ze_driver_handle_t>(&driver_obj);*count=1;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeDeviceGet(ze_driver_handle_t,uint32_t *count,ze_device_handle_t *devices){++api_calls;if(!count)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;if(!devices){*count=2;return ZE_RESULT_SUCCESS;}if(*count<2)return ZE_RESULT_ERROR_INVALID_SIZE;devices[0]=reinterpret_cast<ze_device_handle_t>(&src_obj);devices[1]=reinterpret_cast<ze_device_handle_t>(&dst_obj);*count=2;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeDeviceGetProperties(ze_device_handle_t h,ze_device_properties_t *p){++api_calls;if(!p)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;auto*d=reinterpret_cast<FakeDevice*>(h);p->type=ZE_DEVICE_TYPE_GPU;p->vendorId=0x8086;p->deviceId=uint16_t(0x1000+d->index);p->subdeviceId=0;parse_uuid(d->uuid,p->uuid.id);return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeDeviceGetCommandQueueGroupProperties(ze_device_handle_t,uint32_t *count,ze_command_queue_group_properties_t *p){++api_calls;if(!count)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;if(!p){*count=1;return ZE_RESULT_SUCCESS;}if(*count<1)return ZE_RESULT_ERROR_INVALID_SIZE;p[0].flags=ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COPY|ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COMPUTE;p[0].numQueues=1;*count=1;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeDeviceCanAccessPeer(ze_device_handle_t,ze_device_handle_t,ze_bool_t *value){++api_calls;if(!value)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;*value=mode()=="peer_unavailable"?0:1;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeDeviceGetP2PProperties(ze_device_handle_t,ze_device_handle_t,ze_device_p2p_properties_t *p){++api_calls;if(!p)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;p->flags=mode()=="peer_unavailable"?0:ZE_DEVICE_P2P_PROPERTY_FLAG_ACCESS;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeContextCreateEx(ze_driver_handle_t,const ze_context_desc_t*,uint32_t,ze_device_handle_t*,ze_context_handle_t *out){++api_calls;++context_create_count;if(!out)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;*out=reinterpret_cast<ze_context_handle_t>(&context_obj);return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeMemAllocDevice(ze_context_handle_t,const ze_device_mem_alloc_desc_t*,size_t size,size_t,ze_device_handle_t device,void **out){++api_calls;if(!out)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;void*p=std::malloc(size);if(!p)return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;allocations[p]={device,ZE_MEMORY_TYPE_DEVICE,size};*out=p;++allocation_count;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeMemAllocHost(ze_context_handle_t,const ze_host_mem_alloc_desc_t*,size_t size,size_t,void **out){++api_calls;if(!out)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;void*p=std::malloc(size);if(!p)return ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY;allocations[p]={nullptr,ZE_MEMORY_TYPE_HOST,size};*out=p;++allocation_count;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeMemGetAllocProperties(ze_context_handle_t,const void *ptr,ze_memory_allocation_properties_t *props,ze_device_handle_t *device){++api_calls;auto it=allocations.find(const_cast<void*>(ptr));if(it==allocations.end())return ZE_RESULT_ERROR_INVALID_ARGUMENT;if(!props)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;props->type=it->second.type;if(device)*device=it->second.owner;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandQueueCreate(ze_context_handle_t,ze_device_handle_t device,const ze_command_queue_desc_t*,ze_command_queue_handle_t *out){++api_calls;if(!out)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;auto p=std::make_unique<FakeQueue>();p->device=device;*out=reinterpret_cast<ze_command_queue_handle_t>(p.get());queues.push_back(std::move(p));return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandListCreate(ze_context_handle_t,ze_device_handle_t device,const ze_command_list_desc_t*,ze_command_list_handle_t *out){++api_calls;if(!out)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;auto p=std::make_unique<FakeList>();p->device=device;*out=reinterpret_cast<ze_command_list_handle_t>(p.get());lists.push_back(std::move(p));return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandListAppendMemoryFill(ze_command_list_handle_t h,void *ptr,const void *pattern,size_t pattern_size,size_t size,ze_event_handle_t,uint32_t,ze_event_handle_t*){++api_calls;if(!h||!ptr||!pattern||pattern_size==0)return ZE_RESULT_ERROR_INVALID_ARGUMENT;Op op;op.fill=true;op.dst=ptr;op.size=size;op.pattern.resize(pattern_size);std::memcpy(op.pattern.data(),pattern,pattern_size);reinterpret_cast<FakeList*>(h)->ops.push_back(std::move(op));return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandListAppendMemoryCopy(ze_command_list_handle_t h,void *dst,const void *src,size_t size,ze_event_handle_t,uint32_t,ze_event_handle_t*){++api_calls;if(!h||!dst||!src)return ZE_RESULT_ERROR_INVALID_ARGUMENT;Op op;op.dst=dst;op.src=src;op.size=size;reinterpret_cast<FakeList*>(h)->ops.push_back(op);return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandListClose(ze_command_list_handle_t){++api_calls;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeFenceCreate(ze_command_queue_handle_t q,const ze_fence_desc_t*,ze_fence_handle_t *out){++api_calls;if(!out)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;auto p=std::make_unique<FakeFence>();p->queue=q;*out=reinterpret_cast<ze_fence_handle_t>(p.get());fences.push_back(std::move(p));return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandQueueExecuteCommandLists(ze_command_queue_handle_t,uint32_t count,ze_command_list_handle_t *handles,ze_fence_handle_t){++api_calls;if(!handles)return ZE_RESULT_ERROR_INVALID_NULL_POINTER;for(uint32_t i=0;i<count;++i){auto*l=reinterpret_cast<FakeList*>(handles[i]);for(const auto&op:l->ops){if(op.fill){auto*d=static_cast<unsigned char*>(op.dst);for(size_t n=0;n<op.size;++n)d[n]=op.pattern[n%op.pattern.size()];}else std::memmove(op.dst,op.src,op.size);}}pending=true;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeFenceHostSynchronize(ze_fence_handle_t,uint64_t timeout){++api_calls;++wait_count;if(timeout!=10000000000ULL)return ZE_RESULT_ERROR_INVALID_ARGUMENT;if(mode()=="fence_timeout"&&wait_count==1)return ZE_RESULT_NOT_READY;pending=false;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeFenceDestroy(ze_fence_handle_t){++api_calls;teardown("fence");return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandListDestroy(ze_command_list_handle_t){++api_calls;teardown("list");return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeCommandQueueDestroy(ze_command_queue_handle_t){++api_calls;teardown("queue");return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeMemFree(ze_context_handle_t,void *ptr){++api_calls;teardown("memory");auto it=allocations.find(ptr);if(it==allocations.end())return ZE_RESULT_ERROR_INVALID_ARGUMENT;if(mode()=="cleanup_failure"&&free_count==0){++free_count;return ZE_RESULT_ERROR_UNKNOWN;}std::free(ptr);allocations.erase(it);++free_count;return ZE_RESULT_SUCCESS;}
+extern "C" ZE_APIEXPORT ze_result_t ZE_APICALL zeContextDestroy(ze_context_handle_t){++api_calls;teardown("context");return ZE_RESULT_SUCCESS;}

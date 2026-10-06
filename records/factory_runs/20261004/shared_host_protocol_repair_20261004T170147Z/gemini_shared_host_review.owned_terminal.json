@@ -1,0 +1,26 @@
+{
+  "parse_error_type": "MethodInvocationException",
+  "finish_reason": null,
+  "native_children_actual": 0,
+  "pid": 37448,
+  "drain_unknown": false,
+  "status": "PARSE_OR_SCHEMA_ERROR",
+  "credential_saved": false,
+  "model_usage": null,
+  "lane": "Gemini",
+  "exit_code": 0,
+  "private_url_output_refused": false,
+  "outer_killed": false,
+  "requested_model": "gemini-3.8-flash-medium",
+  "pipe_error": false,
+  "log_cap_exceeded": false,
+  "provider_patch_applied": false,
+  "usage": {
+    "input_tokens": 38203,
+    "output_tokens": 8474,
+    "thinking_tokens": 5283,
+    "cache_read_tokens": 25420,
+    "total_tokens": 46677
+  },
+  "elapsed_seconds": 64.4
+}

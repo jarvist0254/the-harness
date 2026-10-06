@@ -1,0 +1,8 @@
+{
+  "including_terminating_nul_utf16_code_units": 28276,
+  "native_calls": 0,
+  "utf16_code_units": 28275,
+  "dotnet_runtime": ".NET 10.0.12",
+  "method": "Actual installed .NET Process.BuildCommandLine via managed Reflection.Emit; no Process.Start/native call",
+  "process_started": false
+}

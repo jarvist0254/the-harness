@@ -1,0 +1,36 @@
+{
+  "scope": "ROOT_AUTHORIZED_LOCAL_EXPERIMENTAL_COLLECTOR_DERIVATIVE_PENDING_PROMOTION",
+  "original_source_sha256": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+  "edits_in_order": [
+    {
+      "revision": "revision1_json_hex.cpp",
+      "scope": "SOURCE_ONLY_INTERMEDIATE_NOT_EXECUTED",
+      "sha256": "31c77ab193dd305435ee8ca2b4e1c727d4a218a9446a00d2c389992ec9fac8bc",
+      "actions": 1
+    },
+    {
+      "revision": "revision2_actual_external_query.cpp",
+      "scope": "SOURCE_ONLY_INTERMEDIATE_NOT_EXECUTED",
+      "sha256": "4f05c4516f0a2804259d05ddd3e448ca3b6fd4221fabb2e6bccb6cda4f05407d",
+      "actions": 5
+    },
+    {
+      "revision": "revision3_status_and_scope.cpp",
+      "scope": "SOURCE_ONLY_INTERMEDIATE_NOT_EXECUTED",
+      "sha256": "c9a1651eb826e789130f2ce9ac686e10df8a7b8de702c7950834c92a40402fbb",
+      "actions": "exact status/error classification and explicit transport refusal"
+    },
+    {
+      "revision": "revision4_root_alias_dedup.cpp",
+      "scope": "SOURCE_ONLY_INTERMEDIATE_NOT_EXECUTED",
+      "sha256": "8ca43a5325a32ef10e3e958bc08ccfc1d95e62d43626dcc1f46edfb2f80b314e",
+      "actions": 3
+    }
+  ],
+  "final_source_sha256": "8ca43a5325a32ef10e3e958bc08ccfc1d95e62d43626dcc1f46edfb2f80b314e",
+  "stub_only_include_changed": true,
+  "stub_sha256": "66785049f13506fdec1ae5dd4de2053a1b9bbc05425099c4641b772d7234afe7",
+  "initial_test_RED": "7 tests,6 failures,1 pass",
+  "source_execution": false,
+  "native_GPU_loader_or_API_execution": false
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "sha256": "5B43AE71E0ED320B1D999890E9D9BAC1613725BC2881300953EE5212900BE4D9",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\TASK_INTERFACES.json"
+  },
+  {
+    "sha256": "8D9716A37F75559D32DF4DEA203C82CBC85CFAA684BB872370D19B49D09DC86C",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\inventory\\device_inventory.py"
+  },
+  {
+    "sha256": "956A78204A37EE30B0E17B53841D9B1A21F74C8B06C064B43FC8EC7E0B939A46",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\inventory\\tests.candidate.txt"
+  },
+  {
+    "sha256": "00758CA6B4160791C0EBBA96B6597519A9A134D295904B0AC362BDBE0F7CC5C2",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\supervisor\\rpc_supervisor.py"
+  },
+  {
+    "sha256": "C080F393549BEEBE383DCA820B054E24B6D3C56A7B8B386AF647B033EE1D976F",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\supervisor\\tests.candidate.txt"
+  },
+  {
+    "sha256": "891E323C4B1636C37A4DEFDA12305B261B63DF78676C256B98DD2C52B09F2975",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\llama_spec\\llama_qualification_spec.json"
+  }
+]

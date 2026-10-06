@@ -1,0 +1,392 @@
+Grok4.7-build-fast HIGH source-only corrective editor. No tools/source import/native/compiler/GPU calls, no filesystem/product edits. Native childagents0; user authorizes max10 EACHQwen/DeepSeek only where real supported, not this HTTP/CLI tool-less source editor. Return ONE complete strict JSON exact status,source,tests_source,analysis,prerequisites,evidence_limits,references, statusPROPOSED|ANALYSIS|REFUSED. Source/tests STRING<=32000/16000, explanations arrays1..40 nonemptystrings<=8192. Complete actual replacementC++collector + behavioral actual-header-stub tests against actualsourcefile, not grep or duplicated implementation. Generated proposal untrustedROOTgates. Full actual source5e8 and stub/test7controls/fullMuse11/Gem11reviewfields supplied. Muse/Gem advisory, ROOT filters below authority. Preserve original7controls/history: ROOTCPUstub sevenGREEN only, NO physical/driver/P2Pqualification or actualhardware observation. No hardware Intel exists currenthost.
+Fix actual fail-open output truncation: receipt always valid complete boundedJSON or deliberate nonzero exit with valid bounded failureJSON; no invalidprefixexit0. Native integer widths/JSONquotes/controlchar/UUID numeric schema strict. PASS/FAIL/NOT_CHECKED exact enums/exits0/1/2; scope QUERY_COLLECTOR_ONLY direct_transport_qualifiedfalse. Loaderabsence documentedmissingprereq vs zeInit UNINITIALIZED: doesnotprove missingdrivercause, record exactcodes/classification; genuine DEVICE_LOST/count/query error failure notunsupported. All countcaps/mutation/error branches, original externalenumquery notdefined(enum), full128UUID identities/physicalalias lineage, GPUtype filtering. Physical rootGPU directedpair coverage MUST independent of cappedsubdevice expansion: rootsfirst, track directedrootmatrix and separatealiases/subnodes, no silent16nodesubdevicecrowding. Dedupe exacthandle and UUIDphysical aliases with lineage; knownPCIifavailable notfabricateddomain. zeDeviceCanAccessPeer actualdirected results separate zeDeviceGetP2PProperties and externalcaps, query-onlynotcopy/P2Pproof. Preserve genuine unsupported entries as explicitstatus/codes.
+ROOT FILTERS: sentinel unsupported versus diagonal distinguished by pair/indexmetadata, needn't arbitrarymatrixredesign. INT_MIN JSONhelper staticpotential, reachabilityunproved in currentlyboundedcallers; harden ifneeded without inventing measuredtrigger. noargs vs --json sameJSON isNOTitselfbug. Controlcharacterlossiness a data/JSONidentity issue, NOTP2P. No cardinality claims fromlogicaltype ordedicatedVRAM guesses. Do not mechanically apply everyGem/Muse suggestion. Tests expand genuineinit/errors/countmutation/duplicateUUID/subdevicecrowding/rootcoverage/outputcap/truncation/escape cases under actualofficialheader stub; no realdriverload. Fixedcappedenumerationloop and validshutdown/logschemas, no contexts/alloc/copy. Any unsupported API symbols check suppliedactualheader; do notinvent ZE_RESULT_ERROR_FAILURE. Queryresourcecleanup/errorcode accurately preserved. Complete source thenROOT static/compile/stubQA, no claim provider testsran.
+
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp", "bytes": 15764, "sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6"}
+#ifndef LZQ_TEST_NO_HEADER
+#include <ze_api.h>
+#endif
+#include <cstdint>
+#include <cstring>
+#include <cstdio>
+#ifndef Q
+#define Q(x) #x
+#endif
+#ifndef ZE_MAX_DEVICE_NAME
+#define ZE_MAX_DEVICE_NAME 256
+#endif
+#define LZQ_MAX_DRIVERS 32u
+#define LZQ_MAX_ROOTS 256u
+#define LZQ_MAX_SUBS 64u
+#define LZQ_MAX_NODES 96u
+#define LZQ_MAX_P2P 16u
+#define LZQ_MAX_QG 8u
+#define LZQ_OUT_BYTES 131072u
+struct LzqNode { ze_device_handle_t h; uint32_t driver; int root; int parent; uint32_t sub; bool is_sub; ze_device_uuid_t uuid; uint32_t vendor; uint32_t device; ze_device_type_t type; uint32_t subdeviceId; char name[ZE_MAX_DEVICE_NAME]; bool ext_ok; ze_result_t ext_r; uint64_t ext_import; uint64_t ext_export; uint32_t q_count; uint32_t q_queues[LZQ_MAX_QG]; uint64_t q_flags[LZQ_MAX_QG]; bool q_truncated; };
+static LzqNode lzq_nodes[LZQ_MAX_NODES];
+static uint32_t lzq_nodeCount=0;
+static uint32_t lzq_rootCount=0;
+static uint32_t lzq_subCount=0;
+static bool lzq_trunc=false;
+static int lzq_exit=0;
+struct LzqW { char* b; size_t n; size_t cap; bool trunc; };
+static void lzq_raw(LzqW& w,const char* s,size_t l){ if(w.trunc||w.n+l>=w.cap){w.trunc=true;return;} memcpy(w.b+w.n,s,l); w.n+=l; }
+static void lzq_str(LzqW& w,const char* s){ lzq_raw(w,s,strlen(s)); }
+static void lzq_ch(LzqW& w,char c){ lzq_raw(w,&c,1); }
+static const char lzq_hex[16]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+static void lzq_u64(LzqW& w,uint64_t v){ char t[20]; int i=0; if(v==0){lzq_ch(w,'0');return;} while(v){t[i++]=char('0'+(v%10));v/=10;} while(i--)lzq_ch(w,t[i]); }
+static void lzq_int(LzqW& w,int v){ if(v<0){lzq_ch(w,'-'); lzq_u64(w,uint64_t(-v));} else lzq_u64(w,uint64_t(v)); }
+static void lzq_hex8(LzqW& w,uint32_t v,int nibbles){ for(int i=nibbles-1;i>=0;--i)lzq_ch(w,lzq_hex[(v>>(i*4))&15u]); }
+static void lzq_hex32(LzqW& w,uint32_t v){ lzq_u64(w,uint64_t(v)); }
+static void lzq_bool(LzqW& w,bool b){ lzq_str(w,b?Q(true):Q(false)); }
+static void lzq_field(LzqW& w,const char* name){ lzq_ch(w,0x22); lzq_str(w,name); lzq_ch(w,0x22); lzq_ch(w,':'); }
+static void lzq_comma(LzqW& w,bool& c){ if(c)lzq_ch(w,','); c=true; }
+static void lzq_strVal(LzqW& w,const char* s){ lzq_ch(w,0x22); lzq_str(w,s); lzq_ch(w,0x22); }
+static void lzq_uuid(LzqW& w,const ze_device_uuid_t& u){ lzq_ch(w,0x22); for(int i=0;i<16;++i){ uint8_t b=u.id[i]; lzq_ch(w,lzq_hex[b>>4]); lzq_ch(w,lzq_hex[b&15]); } lzq_ch(w,0x22); }
+static void lzq_esc(LzqW& w,const char* s){ lzq_ch(w,0x22); for(const unsigned char* p=(const unsigned char*)s;*p;++p){ unsigned char c=*p; if(c==0x22){lzq_ch(w,0x5c);lzq_ch(w,0x22);} else if(c==0x5c){lzq_ch(w,0x5c);lzq_ch(w,0x5c);} else if(c<0x20){lzq_ch(w,' ');} else lzq_ch(w,char(c)); } lzq_ch(w,0x22); }
+static bool lzq_unsupp(ze_result_t r){ return r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE || r==ZE_RESULT_ERROR_UNSUPPORTED_SIZE; }
+static const char* lzq_typeStr(ze_device_type_t t){ if(t==ZE_DEVICE_TYPE_GPU) return Q(GPU); if(t==ZE_DEVICE_TYPE_CPU) return Q(CPU); return Q(UNKNOWN); }
+static size_t lzq_emit_simple(LzqW& w,const char* status,const char* stage,ze_result_t r,const char* note,int exitCode){ lzq_exit=exitCode; w.n=0; w.trunc=false; lzq_ch(w,'{'); lzq_field(w,Q(status)); lzq_strVal(w,status); lzq_ch(w,','); lzq_field(w,Q(stage)); lzq_strVal(w,stage); lzq_ch(w,','); lzq_field(w,Q(result_code)); lzq_u64(w,uint64_t(r)); lzq_ch(w,','); lzq_field(w,Q(note)); lzq_strVal(w,note); lzq_ch(w,','); lzq_field(w,Q(direct_transport_qualified)); lzq_bool(w,false); lzq_ch(w,','); lzq_field(w,Q(cleanup_uncertainty)); lzq_strVal(w,Q(none_no_l0_objects_created)); lzq_ch(w,'}'); return w.n; }
+struct LzqPair { uint32_t src; uint32_t dst; bool same_root; bool self; bool can_valid; bool can; ze_result_t can_r; bool props_valid; uint64_t props_flags; ze_result_t props_r; };
+static LzqPair lzq_pairs[LZQ_MAX_P2P*LZQ_MAX_P2P];
+static int lzq_canMat[LZQ_MAX_P2P*LZQ_MAX_P2P];
+static ze_result_t lzq_fillNode(ze_device_handle_t h,uint32_t driverIdx,int rootNode,int parent,uint32_t subIdx,bool isSub){ if(lzq_nodeCount>=LZQ_MAX_NODES) return ZE_RESULT_ERROR_INVALID_SIZE; LzqNode& n=lzq_nodes[lzq_nodeCount]; memset(&n,0,sizeof(n)); n.h=h; n.driver=driverIdx; n.root=rootNode; n.parent=parent; n.sub=subIdx; n.is_sub=isSub; ze_device_properties_t p; memset(&p,0,sizeof(p)); p.stype=ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES; p.pNext=nullptr; ze_result_t r=zeDeviceGetProperties(h,&p); if(r!=ZE_RESULT_SUCCESS) return r; if(!isSub){ for(uint32_t k=0;k<lzq_nodeCount;++k){ const LzqNode& prior=lzq_nodes[k]; if(!prior.is_sub && (prior.h==h || memcmp(prior.uuid.id,p.uuid.id,sizeof(p.uuid.id))==0)) return ZE_RESULT_SUCCESS; } } n.uuid=p.uuid; n.vendor=p.vendorId; n.device=p.deviceId; n.type=p.type; n.subdeviceId=p.subdeviceId; memcpy(n.name,p.name,ZE_MAX_DEVICE_NAME); n.name[ZE_MAX_DEVICE_NAME-1]=0; uint32_t qc=0; r=zeDeviceGetCommandQueueGroupProperties(h,&qc,nullptr); if(r==ZE_RESULT_SUCCESS){ uint32_t take=qc; if(take>LZQ_MAX_QG){take=LZQ_MAX_QG;n.q_truncated=true;} if(take>0){ ze_command_queue_group_properties_t qp[LZQ_MAX_QG]; for(uint32_t i=0;i<take;++i){ memset(&qp[i],0,sizeof(qp[i])); qp[i].stype=ZE_STRUCTURE_TYPE_COMMAND_QUEUE_GROUP_PROPERTIES; qp[i].pNext=nullptr; } uint32_t got=take; r=zeDeviceGetCommandQueueGroupProperties(h,&got,qp); if(r==ZE_RESULT_SUCCESS){ if(got>take) return ZE_RESULT_ERROR_INVALID_SIZE; n.q_count=got; for(uint32_t i=0;i<got;++i){ n.q_flags[i]=uint64_t(qp[i].flags); n.q_queues[i]=qp[i].numQueues; } } else if(!lzq_unsupp(r)) return r; } } else if(!lzq_unsupp(r)) return r;
+ ze_device_external_memory_properties_t ep; memset(&ep,0,sizeof(ep)); ep.stype=ZE_STRUCTURE_TYPE_DEVICE_EXTERNAL_MEMORY_PROPERTIES; ep.pNext=nullptr; r=zeDeviceGetExternalMemoryProperties(h,&ep); n.ext_r=r; if(r==ZE_RESULT_SUCCESS){ n.ext_ok=true; n.ext_import=uint64_t(ep.memoryAllocationImportTypes); n.ext_export=uint64_t(ep.memoryAllocationExportTypes); } else if(!lzq_unsupp(r)) return r;
+ ++lzq_nodeCount; if(isSub) ++lzq_subCount; return ZE_RESULT_SUCCESS; }
+size_t lzq_collect(char* out,size_t cap){ LzqW w{out,0,cap,false}; lzq_nodeCount=0; lzq_rootCount=0; lzq_subCount=0; lzq_trunc=false; ze_result_t r=zeInit(ZE_INIT_FLAG_GPU_ONLY); if(r!=ZE_RESULT_SUCCESS){ bool missing=r==ZE_RESULT_ERROR_UNINITIALIZED || r==ZE_RESULT_ERROR_DEPENDENCY_UNAVAILABLE || r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE; return lzq_emit_simple(w,missing?Q(NOT_CHECKED):Q(FAIL),Q(zeInit),r,missing?Q(init_missing):Q(init_failed),missing?2:1); }
+uint32_t driverCount=0; r=zeDriverGet(&driverCount,nullptr); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDriverGet_count),r,Q(query_failed),1); if(driverCount==0) return lzq_emit_simple(w,Q(NOT_CHECKED),Q(zeDriverGet_count),ZE_RESULT_SUCCESS,Q(no_drivers),2); uint32_t dTake=driverCount; if(dTake>LZQ_MAX_DRIVERS){dTake=LZQ_MAX_DRIVERS;lzq_trunc=true;} ze_driver_handle_t drivers[LZQ_MAX_DRIVERS]; uint32_t dGot=dTake; r=zeDriverGet(&dGot,drivers); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDriverGet_handles),r,Q(query_failed),1); if(dGot>dTake) return lzq_emit_simple(w,Q(FAIL),Q(zeDriverGet_handles),ZE_RESULT_ERROR_INVALID_SIZE,Q(count_change),1);
+for(uint32_t di=0;di<dGot;++di){ uint32_t rc=0; r=zeDeviceGet(drivers[di],&rc,nullptr); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGet_count),r,Q(query_failed),1); uint32_t take=rc; if(take>LZQ_MAX_ROOTS){take=LZQ_MAX_ROOTS;lzq_trunc=true;} if(lzq_nodeCount+take>LZQ_MAX_NODES){take=(lzq_nodeCount<LZQ_MAX_NODES?LZQ_MAX_NODES-lzq_nodeCount:0);lzq_trunc=true;} if(take==0){ if(rc>0) lzq_trunc=true; continue; } ze_device_handle_t roots[LZQ_MAX_ROOTS]; uint32_t got=take; r=zeDeviceGet(drivers[di],&got,roots); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGet_handles),r,Q(query_failed),1); if(got>take) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGet_handles),ZE_RESULT_ERROR_INVALID_SIZE,Q(count_change),1); for(uint32_t ri=0;ri<got;++ri){ bool repeated=false; for(uint32_t k=0;k<lzq_nodeCount;++k){ if(!lzq_nodes[k].is_sub && lzq_nodes[k].h==roots[ri]){repeated=true;break;} } if(repeated)continue; uint32_t beforeRoot=lzq_nodeCount; int rootNode=(int)lzq_nodeCount; r=lzq_fillNode(roots[ri],di,rootNode,-1,0,false); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGetProperties_root),r,Q(query_failed),1); if(lzq_nodeCount==beforeRoot)continue; ++lzq_rootCount; uint32_t sc=0; r=zeDeviceGetSubDevices(roots[ri],&sc,nullptr); if(r!=ZE_RESULT_SUCCESS){ if(lzq_unsupp(r)) sc=0; else return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGetSubDevices_count),r,Q(query_failed),1); } uint32_t stake=sc; if(stake>LZQ_MAX_SUBS){stake=LZQ_MAX_SUBS;lzq_trunc=true;} if(lzq_nodeCount+stake>LZQ_MAX_NODES){stake=(lzq_nodeCount<LZQ_MAX_NODES?LZQ_MAX_NODES-lzq_nodeCount:0);lzq_trunc=true;} if(stake==0){ if(sc>0) lzq_trunc=true; continue; } ze_device_handle_t subs[LZQ_MAX_SUBS]; uint32_t sgot=stake; r=zeDeviceGetSubDevices(roots[ri],&sgot,subs); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGetSubDevices_handles),r,Q(query_failed),1); if(sgot>stake) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGetSubDevices_handles),ZE_RESULT_ERROR_INVALID_SIZE,Q(count_change),1); for(uint32_t si=0;si<sgot;++si){ r=lzq_fillNode(subs[si],di,rootNode,rootNode,si+1,true); if(r!=ZE_RESULT_SUCCESS) return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGetProperties_sub),r,Q(query_failed),1); } } }
+if(lzq_nodeCount==0) return lzq_emit_simple(w,Q(NOT_CHECKED),Q(zeDeviceGet),ZE_RESULT_SUCCESS,Q(no_devices),2);
+uint32_t pCount=lzq_nodeCount<LZQ_MAX_P2P?lzq_nodeCount:LZQ_MAX_P2P; bool pTrunc=lzq_nodeCount>pCount; uint32_t pairCount=0; for(uint32_t i=0;i<pCount;++i){ for(uint32_t j=0;j<pCount;++j){ LzqPair& p=lzq_pairs[pairCount]; p.src=i; p.dst=j; p.same_root=lzq_nodes[i].root==lzq_nodes[j].root; p.self=(i==j); p.can_valid=false; p.can=false; p.can_r=ZE_RESULT_SUCCESS; p.props_valid=false; p.props_flags=0; p.props_r=ZE_RESULT_SUCCESS; int mv=-1; if(i!=j){ ze_bool_t can=0; r=zeDeviceCanAccessPeer(lzq_nodes[i].h,lzq_nodes[j].h,&can); if(r==ZE_RESULT_SUCCESS){ p.can_valid=true; p.can=(can!=0); mv=p.can?1:0; } else if(lzq_unsupp(r)){ p.can_r=r; } else return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceCanAccessPeer),r,Q(query_failed),1); if(p.can_valid&&p.can){ ze_device_p2p_properties_t pp; memset(&pp,0,sizeof(pp)); pp.stype=ZE_STRUCTURE_TYPE_DEVICE_P2P_PROPERTIES; pp.pNext=nullptr; r=zeDeviceGetP2PProperties(lzq_nodes[i].h,lzq_nodes[j].h,&pp); if(r==ZE_RESULT_SUCCESS){ p.props_valid=true; p.props_flags=uint64_t(pp.flags); } else if(lzq_unsupp(r)){ p.props_r=r; } else return lzq_emit_simple(w,Q(FAIL),Q(zeDeviceGetP2PProperties),r,Q(query_failed),1); } } lzq_canMat[i*pCount+j]=mv; ++pairCount; } }
+w.n=0; w.trunc=false; lzq_exit=0; lzq_ch(w,'{'); lzq_field(w,Q(status)); lzq_strVal(w,Q(PASS)); lzq_ch(w,','); lzq_field(w,Q(collector)); lzq_strVal(w,Q(levelzero_query_only)); lzq_ch(w,','); lzq_field(w,Q(init_flag)); lzq_strVal(w,Q(ZE_INIT_FLAG_GPU_ONLY)); lzq_ch(w,','); lzq_field(w,Q(drivers)); lzq_u64(w,dGot); lzq_ch(w,','); lzq_field(w,Q(physical_root_devices)); lzq_u64(w,lzq_rootCount); lzq_ch(w,','); lzq_field(w,Q(subdevice_nodes)); lzq_u64(w,lzq_subCount); lzq_ch(w,','); lzq_field(w,Q(node_total)); lzq_u64(w,lzq_nodeCount); lzq_ch(w,','); lzq_field(w,Q(inventory_truncated)); lzq_bool(w,lzq_trunc); lzq_ch(w,','); lzq_field(w,Q(inventory_truncated_int)); lzq_u64(w,lzq_trunc?1:0); lzq_ch(w,','); lzq_field(w,Q(devices)); lzq_ch(w,'['); bool dc=false; for(uint32_t i=0;i<lzq_nodeCount;++i){ LzqNode& n=lzq_nodes[i]; lzq_comma(w,dc); lzq_ch(w,'{'); bool f=false; lzq_comma(w,f); lzq_field(w,Q(node_index)); lzq_u64(w,i); lzq_comma(w,f); lzq_field(w,Q(driver_index)); lzq_u64(w,n.driver); lzq_comma(w,f); lzq_field(w,Q(root_node)); lzq_int(w,n.root); lzq_comma(w,f); lzq_field(w,Q(parent_node)); lzq_int(w,n.parent); lzq_comma(w,f); lzq_field(w,Q(is_subdevice)); lzq_bool(w,n.is_sub); lzq_comma(w,f); lzq_field(w,Q(subdevice_index)); lzq_u64(w,n.sub); lzq_comma(w,f); lzq_field(w,Q(uuid)); lzq_uuid(w,n.uuid); lzq_comma(w,f); lzq_field(w,Q(vendor)); lzq_hex32(w,n.vendor); lzq_comma(w,f); lzq_field(w,Q(device)); lzq_hex32(w,n.device); lzq_comma(w,f); lzq_field(w,Q(type)); lzq_strVal(w,lzq_typeStr(n.type)); lzq_comma(w,f); lzq_field(w,Q(type_value)); lzq_u64(w,uint64_t(n.type)); lzq_comma(w,f); lzq_field(w,Q(subdevice_id)); lzq_u64(w,n.subdeviceId); lzq_comma(w,f); lzq_field(w,Q(name)); lzq_esc(w,n.name); lzq_comma(w,f); lzq_field(w,Q(pci_domain)); lzq_str(w,Q(null)); lzq_comma(w,f); lzq_field(w,Q(external_memory)); if(n.ext_ok){ lzq_ch(w,'{'); bool ef=false; lzq_comma(w,ef); lzq_field(w,Q(import_flags)); lzq_u64(w,n.ext_import); lzq_comma(w,ef); lzq_field(w,Q(export_flags)); lzq_u64(w,n.ext_export); lzq_ch(w,'}'); } else lzq_str(w,Q(null)); lzq_comma(w,f); lzq_field(w,Q(external_memory_result_code)); lzq_u64(w,uint64_t(n.ext_r)); lzq_comma(w,f); lzq_field(w,Q(queue_groups)); lzq_ch(w,'['); bool qc=false; for(uint32_t q=0;q<n.q_count;++q){ lzq_comma(w,qc); lzq_ch(w,'{'); bool qf=false; lzq_comma(w,qf); lzq_field(w,Q(flags)); lzq_u64(w,n.q_flags[q]); lzq_comma(w,qf); lzq_field(w,Q(numQueues)); lzq_u64(w,n.q_queues[q]); lzq_ch(w,'}'); } lzq_ch(w,']'); lzq_comma(w,f); lzq_field(w,Q(queue_groups_truncated)); lzq_bool(w,n.q_truncated); lzq_ch(w,'}'); } lzq_ch(w,']'); lzq_ch(w,','); lzq_field(w,Q(p2p)); lzq_ch(w,'{'); bool pc=false; lzq_comma(w,pc); lzq_field(w,Q(truncated)); lzq_bool(w,pTrunc); lzq_comma(w,pc); lzq_field(w,Q(node_count)); lzq_u64(w,pCount); lzq_comma(w,pc); lzq_field(w,Q(can_matrix)); lzq_ch(w,'['); bool mc=false; for(uint32_t k=0;k<pCount*pCount;++k){ lzq_comma(w,mc); lzq_int(w,lzq_canMat[k]); } lzq_ch(w,']'); lzq_comma(w,pc); lzq_field(w,Q(pairs)); lzq_ch(w,'['); bool prc=false; for(uint32_t k=0;k<pairCount;++k){ LzqPair& p=lzq_pairs[k]; lzq_comma(w,prc); lzq_ch(w,'{'); bool pf=false; lzq_comma(w,pf); lzq_field(w,Q(src)); lzq_u64(w,p.src); lzq_comma(w,pf); lzq_field(w,Q(dst)); lzq_u64(w,p.dst); lzq_comma(w,pf); lzq_field(w,Q(same_root)); lzq_bool(w,p.same_root); lzq_comma(w,pf); lzq_field(w,Q(self)); lzq_bool(w,p.self); lzq_comma(w,pf); lzq_field(w,Q(can_access)); if(p.can_valid) lzq_bool(w,p.can); else lzq_str(w,Q(null)); lzq_comma(w,pf); lzq_field(w,Q(can_result_code)); if(p.self) lzq_str(w,Q(null)); else lzq_u64(w,uint64_t(p.can_r)); lzq_comma(w,pf); lzq_field(w,Q(props_flags)); if(p.props_valid) lzq_u64(w,p.props_flags); else lzq_str(w,Q(null)); lzq_comma(w,pf); lzq_field(w,Q(props_result_code)); if(p.can_valid&&p.can) lzq_u64(w,uint64_t(p.props_r)); else lzq_str(w,Q(null)); lzq_ch(w,'}'); } lzq_ch(w,']'); lzq_ch(w,'}'); lzq_ch(w,','); lzq_field(w,Q(direct_transport_qualified)); lzq_bool(w,false); lzq_ch(w,','); lzq_field(w,Q(cleanup_uncertainty)); lzq_strVal(w,Q(none_no_l0_objects_created)); lzq_ch(w,','); lzq_field(w,Q(output_truncated)); lzq_bool(w,w.trunc); lzq_ch(w,','); lzq_field(w,Q(output_truncated_int)); lzq_u64(w,w.trunc?1:0); lzq_ch(w,'}'); return w.n; }
+#ifndef LZQ_TEST_NO_MAIN
+int main(int argc,char** argv){ bool json=false; for(int i=1;i<argc;++i){ const char* a=argv[i]; if(a[0]=='-'&&a[1]=='-'&&a[2]=='j'&&a[3]=='s'&&a[4]=='o'&&a[5]=='n'&&a[6]==0){ if(json){ static char bad[512]; LzqW bw{bad,0,sizeof(bad),false}; size_t n=lzq_emit_simple(bw,Q(FAIL),Q(args),ZE_RESULT_SUCCESS,Q(duplicate_json),1); fwrite(bad,1,n,stdout); fputc(10,stdout); return 1; } json=true; } else { static char bad[512]; LzqW bw{bad,0,sizeof(bad),false}; size_t n=lzq_emit_simple(bw,Q(FAIL),Q(args),ZE_RESULT_SUCCESS,Q(bad_arguments),1); fwrite(bad,1,n,stdout); fputc(10,stdout); return 1; } } static char out[LZQ_OUT_BYTES]; size_t n=lzq_collect(out,sizeof(out)); fwrite(out,1,n,stdout); fputc(10,stdout); return lzq_exit; }
+#endif
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\actual_header_stub_local_revision2.cpp", "bytes": 5591, "sha256": "78250c8d9e780295e3385cf5d5dc88a6c4028064e7383658aaaa00f6f5c7f91d"}
+// SOURCE ONLY. Not compiled, linked or executed. Await Root admission.
+// The official header's supported ZE_APIEXPORT override only suppresses DLL
+// export decoration; all enum values, structs, types and signatures are real.
+#define ZE_APIEXPORT
+#define LZQ_TEST_NO_MAIN 1
+#include "source.local_derivative_revision2.cpp"
+
+static int scenario = 0; // 0 two roots; 1 init failure; 2 duplicate root handle
+static unsigned external_queries = 0;
+static unsigned peer_queries = 0;
+static unsigned property_queries = 0;
+static ze_driver_handle_t driver() { return reinterpret_cast<ze_driver_handle_t>(uintptr_t(0x100)); }
+static ze_device_handle_t device(unsigned i) { return reinterpret_cast<ze_device_handle_t>(uintptr_t(0x200 + i)); }
+static bool known(ze_device_handle_t h) { return h == device(0) || h == device(1); }
+
+extern "C" ze_result_t ZE_APICALL zeInit(ze_init_flags_t flags) {
+    if (flags != ZE_INIT_FLAG_GPU_ONLY) return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    return scenario == 1 ? ZE_RESULT_ERROR_DEVICE_LOST : ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDriverGet(uint32_t* count, ze_driver_handle_t* handles) {
+    if (!count) return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+    if (!handles) { *count = 1; return ZE_RESULT_SUCCESS; }
+    if (*count) { handles[0] = driver(); *count = 1; }
+    return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceGet(ze_driver_handle_t h, uint32_t* count, ze_device_handle_t* handles) {
+    if (h != driver()) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!count) return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+    const uint32_t available = scenario == 2 ? 3 : 2;
+    if (!handles) { *count = available; return ZE_RESULT_SUCCESS; }
+    const uint32_t take = *count < available ? *count : available;
+    for (uint32_t i = 0; i < take; ++i) handles[i] = scenario == 2 && i < 2 ? device(0) : device(i ? 1 : 0);
+    *count = take; return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceGetSubDevices(ze_device_handle_t h, uint32_t* count, ze_device_handle_t*) {
+    if (!known(h)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!count) return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+    *count = 0; return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceGetProperties(ze_device_handle_t h, ze_device_properties_t* p) {
+    if (!known(h)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!p || p->stype != ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES || p->pNext) return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    const unsigned i = h == device(0) ? 0 : 1;
+    p->type = ZE_DEVICE_TYPE_GPU; p->vendorId = 0x8086; p->deviceId = 0x1234 + i;
+    p->subdeviceId = 0;
+    for (unsigned j = 0; j < 16; ++j) p->uuid.id[j] = uint8_t(16*i+j);
+    std::strcpy(p->name, i ? "SYNTHETIC Intel root1" : "SYNTHETIC Intel root0");
+    ++property_queries; return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceGetCommandQueueGroupProperties(ze_device_handle_t h, uint32_t* count, ze_command_queue_group_properties_t* p) {
+    if (!known(h)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!count) return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+    if (!p) { *count = 1; return ZE_RESULT_SUCCESS; }
+    if (*count) {
+        if (p[0].stype != ZE_STRUCTURE_TYPE_COMMAND_QUEUE_GROUP_PROPERTIES || p[0].pNext) return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+        p[0].flags = ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COMPUTE; p[0].numQueues = 1; *count = 1;
+    }
+    return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceGetExternalMemoryProperties(ze_device_handle_t h, ze_device_external_memory_properties_t* p) {
+    ++external_queries;
+    if (!known(h)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!p || p->stype != ZE_STRUCTURE_TYPE_DEVICE_EXTERNAL_MEMORY_PROPERTIES || p->pNext) return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    p->memoryAllocationImportTypes = ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF;
+    p->memoryAllocationExportTypes = ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF;
+    return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceCanAccessPeer(ze_device_handle_t src, ze_device_handle_t dst, ze_bool_t* out) {
+    if (!known(src) || !known(dst)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!out) return ZE_RESULT_ERROR_INVALID_NULL_POINTER;
+    *out = src == device(0) && dst == device(1); ++peer_queries; return ZE_RESULT_SUCCESS;
+}
+extern "C" ze_result_t ZE_APICALL zeDeviceGetP2PProperties(ze_device_handle_t src, ze_device_handle_t dst, ze_device_p2p_properties_t* p) {
+    if (!known(src) || !known(dst)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE;
+    if (!p || p->stype != ZE_STRUCTURE_TYPE_DEVICE_P2P_PROPERTIES || p->pNext) return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+    p->flags = src == device(0) && dst == device(1) ? ZE_DEVICE_P2P_PROPERTY_FLAG_ACCESS : 0;
+    return ZE_RESULT_SUCCESS;
+}
+int main(int argc, char** argv) {
+    if (argc == 2 && std::strcmp(argv[1], "init_error") == 0) scenario = 1;
+    else if (argc == 2 && std::strcmp(argv[1], "duplicate_root") == 0) scenario = 2;
+    else if (argc != 1) return 2;
+    static char output[LZQ_OUT_BYTES];
+    const size_t bytes = lzq_collect(output, sizeof(output));
+    std::fwrite(output, 1, bytes, stdout); std::fputc('\n', stdout);
+    std::fprintf(stderr, "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":%u,\"peer_queries\":%u,\"property_queries\":%u,\"candidate_exit\":%d}\n", external_queries, peer_queries, property_queries, lzq_exit);
+    return lzq_exit;
+}
+
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\test_measured_requirements.py", "bytes": 2257, "sha256": "6009ac0454f59858a3d49b6156f39c82d1f18145e87fd1f59121f2275f16824b"}
+"""Receipt-based independent requirements; actual candidate runs supply data."""
+import json, os, pathlib, re, unittest
+ROOT=pathlib.Path(os.environ['LZQ_RECEIPT_ROOT'])
+REPORT=json.loads((ROOT/'runtime_receipt.json').read_text())
+CASES={c['case']:c for c in REPORT['cases']}
+class MeasuredRequirements(unittest.TestCase):
+    def test_normal_full_artifact_is_strict_JSON(self):
+        self.assertTrue(CASES['normal']['strict_stdout_json']['valid'])
+    def test_normal_queries_actual_external_properties(self):
+        self.assertEqual(CASES['normal']['independent_stub_counters']['external_queries'],2)
+    def test_duplicate_root_queries_two_physical_owners_only(self):
+        self.assertEqual(CASES['duplicate_root']['independent_stub_counters']['external_queries'],2)
+        raw=(ROOT/'runtime_duplicate_root'/'stub.stdout.log').read_text()
+        # Scalar observation only; this never repairs invalid collector JSON.
+        self.assertEqual(int(re.search(r'"physical_root_devices":(\d+)',raw).group(1)),2)
+    def test_device_lost_is_attempted_failure(self):
+        parsed=CASES['init_error']['strict_stdout_json']
+        self.assertTrue(parsed['valid'])
+        self.assertEqual(parsed['value']['status'],'FAIL')
+        self.assertEqual(CASES['init_error']['result']['workers'][0]['exit_code'],1)
+        self.assertEqual(parsed['value']['result_code'],1879048193)
+    def test_no_transport_qualification_from_queries(self):
+        for case in CASES.values():
+            self.assertTrue(case['strict_stdout_json']['valid'])
+            self.assertIs(case['strict_stdout_json']['value'].get('direct_transport_qualified'),False)
+    def test_directed_relation_preserved(self):
+        self.assertTrue(CASES['normal']['strict_stdout_json']['valid'])
+        value=CASES['normal']['strict_stdout_json']['value']
+        self.assertEqual(value['p2p']['can_matrix'],[-1,1,0,-1])
+        self.assertEqual(value['p2p']['node_count'],2)
+        self.assertEqual(CASES['normal']['independent_stub_counters']['peer_queries'],2)
+    def test_all_owned_cleanup_proofs_are_complete(self):
+        self.assertTrue(REPORT['hashes_unchanged'])
+        self.assertTrue(REPORT['all_cases_cleanup_verified'])
+if __name__=='__main__':unittest.main(verbosity=2)
+
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\ADJUDICATION.md", "bytes": 1644, "sha256": "5f0aadf18c8c5d09615d11f6155a92b50db2092566581c2358dc2fcbe6221d35"}
+# Local query collector adjudication
+
+Seven independent receipt checks: original baseline 1 PASS / 6 FAIL; final derivative 7 PASS / 0 FAIL. Three actual CPU-only stub processes ran against the official header and ordinary CRT. The original source, stub, failed receipts and logs remain immutable.
+
+Normal and duplicate-root cases both queried external properties exactly twice and retained asymmetric directed peer values [-1, 1, 0, -1]. DEVICE_LOST returned FAIL / exit 1 with original result 1879048193. Every artifact states direct_transport_qualified false.
+
+The derivative fixes JSON integer encoding, unconditional genuine external-properties query, strict status mapping, root-handle/full-UUID deduplication, and retains peer/property error codes. Four sequential source snapshots record individual changes; only the final revision was compiled and run. The stub differs only in its included candidate path.
+
+All owned jobs reached active process count 0 / CLEANUP, bounded raw streams reconciled, restart receipts matched and pins were unchanged. PE imports were inspected before execution: ordinary CRT and KERNEL32, with no GPU loader or dynamic load entry points. The compile wrapper's inherited /c descriptive label is historical; its pinned command actually linked this admitted CPU-only stub.
+
+This proves synthetic collector behavior, not physical identity, capability, P2P or payload transfer. Different handles with the same UUID, unsupported-property branches and malformed returned counts remain NOT_CHECKED. Promotion is PENDING_ROOT_FULL_SOURCE_REVIEW. Exact hashes and raw references are in ADJUDICATION.json.
+
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_output\\parsed_review.json", "bytes": 10956, "sha256": "f88cdad706e88a7af8fa4aad0c6d214d16ead6706a2e9ee1468e5a6092bbf5a1"}
+{
+  "findings": [
+    {
+      "exact_source": "bool missing=r==ZE_RESULT_ERROR_UNINITIALIZED || r==ZE_RESULT_ERROR_DEPENDENCY_UNAVAILABLE || r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;",
+      "minimal_fix": "Narrow NOT_CHECKED/exit-2 to documented missing-prerequisite codes only (e.g. DEPENDENCY_UNAVAILABLE/UNSUPPORTED_FEATURE with loader-missing evidence); map UNINITIALIZED and all other non-success init codes to FAIL/exit-1 while preserving actual result_code.",
+      "reason": "Static fact: source maps UNINITIALIZED to missing/NOT_CHECKED exit 2. Stub observation: init_error case injects only DEVICE_LOST and measured GREEN shows FAIL exit 1 result_code 1879048193; no stub case exercises UNINITIALIZED so the mapping is unmeasured. Physical hypothesis: on real hardware/driver UNINITIALIZED need not mean missing driver and would be misreported as NOT_CHECKED instead of attempted-failure FAIL.",
+      "region": "source.local_derivative_revision2.cpp lzq_collect zeInit status mapping"
+    },
+    {
+      "exact_source": "w.n=0; w.trunc=false; lzq_exit=0;",
+      "minimal_fix": "Make bounded-output truncation fail-closed: if w.trunc or lzq_trunc causes incomplete JSON, emit a minimal valid FAIL/truncated envelope that fits cap or return FAIL with nonzero exit; never return PASS exit 0 with a truncated prefix.",
+      "reason": "Static fact: final PASS path resets trunc then emits full inventory into fixed 131072 cap with trunc flag but keeps lzq_exit 0 even if output_truncated becomes true. Stub observation: normal/duplicate cases are small and GREEN shows valid JSON with no truncation, so fail-open path is unobserved. Physical hypothesis: large real inventories could emit an invalid JSON prefix yet exit 0 PASS, misread as success and transport qualification.",
+      "region": "source.local_derivative_revision2.cpp final PASS emit output_truncated handling"
+    },
+    {
+      "exact_source": "int mv=-1;",
+      "minimal_fix": "Use three distinct matrix sentinels (e.g. self=-1, false=0, true=1, unknown/unsupported=-2) and document them; keep pairs.can_valid/can_result_code as ground truth.",
+      "reason": "Static fact: mv starts -1 for self diagonal and stays -1 when CanAccessPeer returns unsupported, then stored in lzq_canMat. Stub observation: normal measured matrix [-1,1,0,-1] has no unsupported case, so collision is unobserved. Physical hypothesis: on real drivers with unsupported P2P query, unknown would be indistinguishable from self in can_matrix, corrupting directed-graph interpretation.",
+      "region": "source.local_derivative_revision2.cpp P2P can_matrix sentinel"
+    },
+    {
+      "exact_source": "static void lzq_int(LzqW& w,int v){ if(v<0){lzq_ch(w,'-'); lzq_u64(w,uint64_t(-v));} else lzq_u64(w,uint64_t(v)); }",
+      "minimal_fix": "Convert via int64_t or unsigned arithmetic that is safe for INT_MIN, e.g. int64_t t=v; if(t<0){ch('-'); u64(-(t+1)+1);} before emitting.",
+      "reason": "Static fact: -v on int with v==INT_MIN is signed-overflow UB. Stub observation: only small values -1/indices are emitted in measured cases, so UB never triggers. Physical hypothesis: future error/index values hitting INT_MIN would be undefined behavior in collector output path, independent of hardware.",
+      "region": "source.local_derivative_revision2.cpp lzq_int helper"
+    },
+    {
+      "exact_source": "uint32_t pCount=lzq_nodeCount<LZQ_MAX_P2P?lzq_nodeCount:LZQ_MAX_P2P; bool pTrunc=lzq_nodeCount>pCount;",
+      "minimal_fix": "Guarantee physical-root directed coverage independent of subdevice order: select P2P set by roots first (or document enumerated-window semantics and add p2p window indices), and add a stub case where subdevices fill the first 16 slots.",
+      "reason": "Static fact: P2P pairs iterate first pCount nodes in enumeration order where each root is immediately followed by its subs. Stub observation: normal/duplicate cases have 2 nodes 0 subs so pCount 2 covers both roots with peer_queries 2 and matrix [-1,1,0,-1]. Physical hypothesis: subdevice-heavy real topology could fill the 16-slot window with one root plus subs, silently dropping inter-root directed edges while still PASS exit 0.",
+      "region": "source.local_derivative_revision2.cpp P2P window selection"
+    },
+    {
+      "exact_source": "static bool lzq_unsupp(ze_result_t r){ return r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE || r==ZE_RESULT_ERROR_UNSUPPORTED_SIZE; }",
+      "minimal_fix": "Add independent stub discriminators for UNSUPPORTED_FEATURE/SIZE on external-memory, queue-group, CanAccessPeer and P2PProperties plus one genuine non-unsupported error, asserting null-vs-value encoding and preserved result codes without changing the seven controls.",
+      "reason": "Static fact: unsupported branches preserve actual codes and emit nulls, otherwise FAIL. Stub observation: supplied stub always returns SUCCESS for those APIs (external_queries 2, peer_queries 2), so unsupported and genuine-error branches have zero stub observations. Physical hypothesis: real drivers returning unsupported vs genuine errors would take unproven branches; seven PASS cannot distinguish false absence from unknown capability.",
+      "region": "test_measured_requirements.py plus stub unsupported/error branch coverage gap"
+    },
+    {
+      "exact_source": "if(dGot>dTake) return lzq_emit_simple(w,Q(FAIL),Q(zeDriverGet_handles),ZE_RESULT_ERROR_INVALID_SIZE,Q(count_change),1);",
+      "minimal_fix": "Add malformed-count stub cases where second-phase count exceeds first-phase take and where count shrinks, independent of implementation; specify retry-vs-FAIL contract per Header count semantics instead of only synthesizing INVALID_SIZE.",
+      "reason": "Static fact: all two-phase queries treat growth as FAIL count_change with synthesized INVALID_SIZE, no bounded retry. Stub observation: stub returns stable counts so no count-mutation path is measured. Physical hypothesis: real loader/driver count races or malformed drivers could trigger this; current behavior asserts failure without proving retry safety or bounded handling.",
+      "region": "source.local_derivative_revision2.cpp bounded two-phase enumeration count mutation"
+    },
+    {
+      "exact_source": "if(!prior.is_sub && (prior.h==h || memcmp(prior.uuid.id,p.uuid.id,sizeof(p.uuid.id))==0)) return ZE_RESULT_SUCCESS;",
+      "minimal_fix": "Add distinct-handle same-full-UUID stub case and cross-driver alias policy plus subdevice-lineage assertions; document whether UUID equality deduplicates across drivers and whether second enumeration subs are intentionally ignored.",
+      "reason": "Static fact: root dedup covers same-handle and same-128-bit-UUID, returning without increment. Stub observation: duplicate_root case repeats identical handle device(0) twice, yielding external_queries 2 and physical_root_devices 2; distinct handles sharing one UUID are explicitly NOT_CHECKED per adjudication. Physical hypothesis: real UUID aliasing, per-driver duplicate UUIDs, or same root re-enumerated with different subs have unproven dedup/lineage behavior.",
+      "region": "source.local_derivative_revision2.cpp root handle and full-UUID dedup lineage"
+    },
+    {
+      "exact_source": "ze_result_t r=zeInit(ZE_INIT_FLAG_GPU_ONLY);",
+      "minimal_fix": "Document GPU_ONLY intent and add a mixed-type stub case (GPU plus CPU/FPGA root) asserting whether non-GPU nodes are included, filtered, or labeled; do not silently count them as physical GPU roots.",
+      "reason": "Static fact: collector inits GPU_ONLY but records any returned type with GPU/CPU/UNKNOWN labels and counts all toward physical_root_devices. Stub observation: stub returns only two GPU roots, so filtering behavior is unobserved. Physical hypothesis: real driver returning CPU or other types under GPU_ONLY would be counted as physical roots without qualified GPU-type semantics.",
+      "region": "source.local_derivative_revision2.cpp ZE_INIT_FLAG_GPU_ONLY versus type handling"
+    },
+    {
+      "exact_source": "if(json){ static char bad[512];",
+      "minimal_fix": "Specify --json contract (no-op versus required flag) and add independent arg cases for no-args, --json, duplicate --json and bad arguments asserting status/exit without relying on collector output normalization.",
+      "reason": "Static fact: json flag is parsed and duplicate/bad args yield FAIL exit 1, but successful --json versus no-flag paths emit identical output. Stub observation: seven controls run lzq_collect directly and never exercise main arg branches. Physical hypothesis: CLI misuse on real deployments has no qualified status/exit evidence beyond static code.",
+      "region": "source.local_derivative_revision2.cpp main argument handling test gap"
+    },
+    {
+      "exact_source": "static void lzq_esc(LzqW& w,const char* s){ lzq_ch(w,0x22); for(const unsigned char* p=(const unsigned char*)s;*p;++p){ unsigned char c=*p; if(c==0x22){lzq_ch(w,0x5c);lzq_ch(w,0x22);} else if(c==0x5c){lzq_ch(w,0x5c);lzq_ch(w,0x5c);} else if(c<0x20){lzq_ch(w,' ');} else lzq_ch(w,char(c)); } lzq_ch(w,0x22); }",
+      "minimal_fix": "Document lossy control-character mapping and add a device-name case with quotes, backslash, controls and max-length name asserting strict-JSON validity and truncation behavior; consider documented escaping rather than space substitution if fidelity matters.",
+      "reason": "Static fact: esc produces valid JSON by replacing bytes below 0x20 with space and copying other bytes raw. Stub observation: stub names are simple SYNTHETIC Intel root strings, so escaping edge paths are unmeasured. Physical hypothesis: real device names with controls, quotes, backslash, non-ASCII or full 256-char names could lose fidelity or interact with output truncation while tests still report PASS.",
+      "region": "source.local_derivative_revision2.cpp device-name JSON escaping"
+    }
+  ],
+  "safety_checks": [
+    "Collector-only scope preserved: PASS and simple paths hardcode direct_transport_qualified false, no P2P transfer or allocation path exists in source",
+    "DEVICE_LOST preserves actual result_code 1879048193 with FAIL exit 1 per GREEN receipt; no code normalizes it to missing",
+    "Strict JSON validity for normal case and directed matrix [-1,1,0,-1] with peer_queries 2 are stub-scoped, not hardware P2P proof",
+    "Duplicate-root dedup for identical handle measured as 2 external queries and 2 roots; distinct-handle same-UUID remains NOT_CHECKED",
+    "No Intel hardware, driver, context, allocation, queue, transport or capacity execution is claimed from CPU stub evidence",
+    "Seven-control GREEN 7PASS/0FAIL does not qualify truncation, unsupported, count-mutation, mixed-type or arg paths",
+    "Source, stub, test and receipt pins cited as unchanged; no promotion or provider launch is authorized by this review"
+  ],
+  "verdict": "REQUEST_CHANGES"
+}
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high\\review.pending_root_qa.json", "bytes": 12938, "sha256": "0b405573f32bb91e0d4b9de8d299c30698225c9b6c4e38fc5b48826b8d1d1529"}
+{
+  "findings": [
+    {
+      "exact_source": "bool missing=r==ZE_RESULT_ERROR_UNINITIALIZED || r==ZE_RESULT_ERROR_DEPENDENCY_UNAVAILABLE || r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE;",
+      "minimal_fix": "Narrow NOT_CHECKED/exit-2 to documented missing-prerequisite codes only (e.g. DEPENDENCY_UNAVAILABLE or loader-missing evidence); map UNINITIALIZED and all other non-success init codes to FAIL/exit-1 while preserving actual result_code.",
+      "reason": "Static fact: source maps UNINITIALIZED, DEPENDENCY_UNAVAILABLE, and UNSUPPORTED_FEATURE to missing/NOT_CHECKED exit 2 with note init_missing. Stub observation: init_error case injects only DEVICE_LOST and measured GREEN shows FAIL exit 1 result_code 1879048193; no stub case exercises UNINITIALIZED so the mapping is unmeasured. Static/measured fact vs physical hypothesis: UNINITIALIZED indicates driver/subsystem initialization failure or uninitialized state; it does not prove a missing-driver cause (which is typically loader absence or DEPENDENCY_UNAVAILABLE). Treating UNINITIALIZED as missing-prerequisite risks misclassifying attempted initialization failure as benign absence.",
+      "region": "source.local_derivative_revision2.cpp lzq_collect zeInit status mapping"
+    },
+    {
+      "exact_source": "w.n=0; w.trunc=false; lzq_exit=0;",
+      "minimal_fix": "Make bounded-output truncation fail-closed: if w.trunc or lzq_trunc causes incomplete JSON, emit a minimal valid FAIL/truncated envelope that fits cap or return FAIL with nonzero exit; never return PASS exit 0 with a truncated prefix.",
+      "reason": "Static fact: final PASS path resets w.trunc then emits full inventory into fixed 131072 cap with trunc flag but keeps lzq_exit 0 even if output_truncated becomes true. Stub observation: normal/duplicate cases are small (~1-2 KB) and GREEN shows valid JSON with no truncation, so fail-open path is unobserved. Physical hypothesis: large real inventories exceeding 128 KB emit an unclosed, syntactically invalid JSON prefix yet exit 0 PASS, which downstream consumers could misinterpret as successful collection. Truncation must be fail-closed.",
+      "region": "source.local_derivative_revision2.cpp final PASS emit output_truncated handling"
+    },
+    {
+      "exact_source": "int mv=-1;",
+      "minimal_fix": "Use distinct sentinels in can_matrix (e.g. self=-1, false=0, true=1, unsupported/unknown=-2) while keeping pairs metadata (can_valid, can_result_code, self) as authoritative ground truth; avoid forcing automatic matrix redesign since pair/index metadata already disambiguates.",
+      "reason": "Static fact: mv starts -1 for self diagonal and remains -1 when CanAccessPeer returns unsupported, stored into lzq_canMat. However, in the pairs array, each element records self (bool), can_access (null/bool), and can_result_code (null for self, actual code for unsupported), providing explicit disambiguating metadata. Stub observation: normal measured matrix [-1,1,0,-1] has no unsupported case, so collision is unobserved in testing. Static/measured fact vs physical hypothesis: while can_matrix collapses self and unsupported to -1, pair metadata already disambiguates them; distinct sentinels resolve ambiguity without requiring a full matrix redesign.",
+      "region": "source.local_derivative_revision2.cpp P2P can_matrix sentinel"
+    },
+    {
+      "exact_source": "static void lzq_int(LzqW& w,int v){ if(v<0){lzq_ch(w,'-'); lzq_u64(w,uint64_t(-v));} else lzq_u64(w,uint64_t(v)); }",
+      "minimal_fix": "Convert via int64_t or unsigned arithmetic safe for INT_MIN (e.g. int64_t t=v; if(t<0){lzq_ch(w,'-'); lzq_u64(w,uint64_t(-t));} else lzq_u64(w,uint64_t(t));) before emitting.",
+      "reason": "Static fact: -v on 32-bit two's-complement signed int with v==INT_MIN is signed-overflow undefined behavior in C++. Stub observation: measured cases only emit small values (-1, indices, matrix values -1/0/1), so UB never triggers in tests. Static/measured fact vs physical hypothesis: INT_MIN helper risk is a static potential; reachability by bounded callers (n.root, n.parent, lzq_canMat) is unproved and statically unreachable in current code. Defensive conversion resolves the helper risk cleanly.",
+      "region": "source.local_derivative_revision2.cpp lzq_int helper"
+    },
+    {
+      "exact_source": "uint32_t pCount=lzq_nodeCount<LZQ_MAX_P2P?lzq_nodeCount:LZQ_MAX_P2P; bool pTrunc=lzq_nodeCount>pCount;",
+      "minimal_fix": "Guarantee physical-root directed coverage independent of subdevice order: prioritize physical root devices over subdevices in P2P candidate selection (e.g. populate roots first up to LZQ_MAX_P2P, or evaluate root-level P2P window), and add a stub case where subdevices fill initial slots to verify inter-root coverage is preserved.",
+      "reason": "Static fact: P2P pairs iterate the first pCount nodes (capped at LZQ_MAX_P2P=16) in flat enumeration order where each root is immediately followed by its subdevices. Stub observation: normal/duplicate cases have 2 nodes and 0 subs so pCount 2 covers both roots with peer_queries 2 and matrix [-1,1,0,-1]. Physical hypothesis: subdevice-heavy real topology (e.g. root with >=15 subdevices) fills the 16-slot window with root 0 and its tiles, silently dropping subsequent physical roots from inter-root P2P evaluation while still reporting PASS exit 0.",
+      "region": "source.local_derivative_revision2.cpp P2P window selection"
+    },
+    {
+      "exact_source": "static bool lzq_unsupp(ze_result_t r){ return r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE || r==ZE_RESULT_ERROR_UNSUPPORTED_SIZE; }",
+      "minimal_fix": "Add independent stub discriminators for UNSUPPORTED_FEATURE/SIZE on external-memory, queue-group, CanAccessPeer, and P2PProperties plus genuine non-unsupported errors, asserting null-vs-value encoding and preserved result codes without changing the seven controls.",
+      "reason": "Static fact: unsupported branches preserve actual result codes and emit nulls while continuing enumeration, whereas genuine non-unsupported errors abort to FAIL exit 1. Stub observation: supplied stub always returns SUCCESS for these APIs (external_queries 2, peer_queries 2), leaving both unsupported branches and genuine-error paths unexercised. Physical hypothesis: real drivers returning unsupported vs genuine errors take unproven execution branches; seven PASS controls cannot verify false absence versus unknown capability or error aborts.",
+      "region": "test_measured_requirements.py plus stub unsupported/error branch coverage gap"
+    },
+    {
+      "exact_source": "if(dGot>dTake) return lzq_emit_simple(w,Q(FAIL),Q(zeDriverGet_handles),ZE_RESULT_ERROR_INVALID_SIZE,Q(count_change),1);",
+      "minimal_fix": "Add malformed-count stub cases where second-phase count exceeds first-phase take and where count shrinks; specify retry-vs-FAIL contract per Level Zero count semantics instead of only synthesizing INVALID_SIZE, ensuring bounded execution without infinite loops.",
+      "reason": "Static fact: all two-phase queries treat count growth (dGot > dTake) as FAIL count_change with synthesized INVALID_SIZE without bounded retry; count shrinkage is unvalidated. Stub observation: stub returns static counts so count-mutation paths are unmeasured. Physical hypothesis: real loader/driver count races or dynamic device changes could trigger this; current behavior asserts failure without proving retry safety or bounded handling.",
+      "region": "source.local_derivative_revision2.cpp bounded two-phase enumeration count mutation"
+    },
+    {
+      "exact_source": "if(!prior.is_sub && (prior.h==h || memcmp(prior.uuid.id,p.uuid.id,sizeof(p.uuid.id))==0)) return ZE_RESULT_SUCCESS;",
+      "minimal_fix": "Add distinct-handle same-full-UUID stub case and cross-driver alias policy plus subdevice-lineage assertions; document whether UUID equality deduplicates across drivers and whether subdevices of subsequent enumerations are intentionally ignored.",
+      "reason": "Static fact: root deduplication checks identical handle and identical 128-bit UUID, returning ZE_RESULT_SUCCESS before incrementing lzq_nodeCount, skipping subsequent subdevice queries for that handle. Stub observation: duplicate_root case tests identical handle device(0) twice; distinct handles sharing one UUID or cross-driver aliases are unmeasured and remain NOT_CHECKED. Physical hypothesis: real UUID aliasing, virtualized functions, or cross-driver duplicate roots could silently drop subdevices of aliased roots without lineage tracking.",
+      "region": "source.local_derivative_revision2.cpp root handle and full-UUID dedup lineage"
+    },
+    {
+      "exact_source": "ze_result_t r=zeInit(ZE_INIT_FLAG_GPU_ONLY);",
+      "minimal_fix": "Document GPU_ONLY intent and add a mixed-type stub case (GPU plus CPU/FPGA root) asserting whether non-GPU nodes are included, filtered, or labeled; do not silently count non-GPU roots as physical GPU roots.",
+      "reason": "Static fact: collector inits with ZE_INIT_FLAG_GPU_ONLY but records any returned device type (GPU, CPU, UNKNOWN) and increments lzq_rootCount (physical_root_devices) for all roots unconditionally. Stub observation: stub returns only GPU roots, so filtering and mixed-type handling are unobserved. Physical hypothesis: real drivers returning non-GPU devices under GPU_ONLY would have them counted toward physical_root_devices, conflating non-GPU roots with physical GPU counts.",
+      "region": "source.local_derivative_revision2.cpp ZE_INIT_FLAG_GPU_ONLY versus type handling"
+    },
+    {
+      "exact_source": "if(json){ static char bad[512];",
+      "minimal_fix": "Document CLI contract confirming JSON as default output mode with optional --json flag; add independent automated CLI test cases for no-args, --json, duplicate --json, and invalid arguments asserting status notes and exit codes.",
+      "reason": "Static fact: json flag is parsed, and duplicate or bad args yield FAIL exit 1, but successful --json versus no-flag paths emit identical JSON output. Stub observation: seven controls call lzq_collect directly via C linkage, never exercising main argument branches. Static/measured fact vs physical hypothesis: no-args and --json producing the same JSON is standard CLI design for a dedicated JSON collector and not a correctness bug; however, CLI argument handling and error branches remain unexercised in automated test suites.",
+      "region": "source.local_derivative_revision2.cpp main argument handling test gap"
+    },
+    {
+      "exact_source": "static void lzq_esc(LzqW& w,const char* s){ lzq_ch(w,0x22); for(const unsigned char* p=(const unsigned char*)s;*p;++p){ unsigned char c=*p; if(c==0x22){lzq_ch(w,0x5c);lzq_ch(w,0x22);} else if(c==0x5c){lzq_ch(w,0x5c);lzq_ch(w,0x5c);} else if(c<0x20){lzq_ch(w,' ');} else lzq_ch(w,char(c)); } lzq_ch(w,0x22); }",
+      "minimal_fix": "Document lossy control-character mapping and add a device-name stub case with quotes, backslashes, control characters, and 256-byte maximum length asserting strict JSON validity and buffer boundary behavior without forcing speculative changes.",
+      "reason": "Static fact: lzq_esc guarantees valid JSON syntax by replacing bytes below 0x20 with space and escaping quotes and backslashes. Stub observation: stub device names are clean synthetic ASCII strings, leaving escape edge cases unmeasured. Static/measured fact vs physical hypothesis: space substitution is lossy for whitespace control characters but produces valid JSON; testing boundary escapes and full-length strings verifies buffer safety without requiring speculative formatting changes.",
+      "region": "source.local_derivative_revision2.cpp device-name JSON escaping"
+    }
+  ],
+  "safety_checks": [
+    "Collector-only scope preserved: PASS and simple paths hardcode direct_transport_qualified false; collector never allocates memory, creates command queues/lists, or performs P2P data transfer.",
+    "DEVICE_LOST preserves actual result_code 1879048193 with FAIL exit 1 per GREEN receipt; no code normalizes it to missing.",
+    "Strict JSON validity for normal case and directed matrix [-1,1,0,-1] with peer_queries 2 are stub-scoped, not hardware P2P proof.",
+    "Duplicate-root dedup for identical handle measured as 2 external queries and 2 roots; distinct-handle same-UUID remains NOT_CHECKED.",
+    "No Intel hardware, driver, context, allocation, queue, transport, memory residency or VRAM capacity is claimed or qualified from CPU stub evidence.",
+    "Seven-control GREEN 7PASS/0FAIL confirms scoped stub conformance but does not qualify truncation, unsupported features, count-mutation, mixed-type, or CLI arg paths.",
+    "Source, stub, test, and receipt pins remain advisory; no promotion, runtime approval, or provider launch is authorized by this static review."
+  ],
+  "verdict": "REQUEST_CHANGES"
+}
+
+FULL EXACT INPUT {"path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\ROOT_ADDITIONAL_COLLECTOR_SCOPE_GAPS_20261004T220600Z.json", "bytes": 1165, "sha256": "2e143883a4890886afda93fd7158c5cafa8b29bcd32ea1bd7a7ec3acce42cdb4"}
+{
+  "existing_seven_control_success": "PRESERVED_SCOPED_CPU_HEADER_STUB_7_PASS_0_FAIL",
+  "status": "ADDITIONAL_GAPS_UNQUALIFIED_BY_SEVEN_STUB_CONTROLS",
+  "source_execution_or_promotion": false,
+  "muse_provider_launch_authorized": false,
+  "utc": "2026-10-04T22:06:05.6438031Z",
+  "source_sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+  "historical_red": "PRESERVED_ORIGINAL_1_PASS_6_FAIL_AND_MEASURED_FOUR_DEFECTS",
+  "authority": "ROOT explicit additional scope gaps before collector promotion",
+  "gaps": [
+    "zeInit UNINITIALIZED does not establish that the cause is a missing driver.",
+    "JSON output truncation may emit an invalid prefix while returning exit0; bounded output needs fail-closed observation.",
+    "Duplicate fullUUID aliases and GPU-type filtering are not qualified by current seven controls.",
+    "Physical-root directed-peer coverage when subdevices fill the first16 node slots is not qualified.",
+    "Unsupported results, genuine API errors, enumeration count mutation and bounded retry branches need independent discriminating cases."
+  ],
+  "prior_prompt_packet_unchanged": true
+}

@@ -1,0 +1,175 @@
+PINNED SUPERVISOR _shutdown and run_workers EXCERPTS WITH FILE LINE NUMBERS
+
+544: def _shutdown(deps, kernel, job, owned, terminate, deadline):
+545:     wapi = deps["_winapi"]
+546:     terminate_ok = True
+547:     if terminate:
+548:         for rec in owned:
+549:             if rec["ph"] is not None:
+550:                 try:
+551:                     before_termination = wapi.WaitForSingleObject(rec["ph"], 0)
+552:                 except Exception:
+553:                     before_termination = None
+554:                     terminate_ok = False
+555:                 if before_termination == _WAIT_OBJECT_0:
+556:                     # A signaled process handle remains signaled after exit.
+557:                     # TerminateProcess on that exited object returns access
+558:                     # denied; skip that redundant call, retain the exit status,
+559:                     # and still terminate/query the Job to cover descendants.
+560:                     continue
+561:                 if before_termination != _WAIT_TIMEOUT:
+562:                     terminate_ok = False
+563:                 try:
+564:                     terminated = wapi.TerminateProcess(rec["ph"], 1)
+565:                 except Exception:
+566:                     terminate_ok = False
+567:                 else:
+568:                     if terminated is False or terminated == 0:
+569:                         terminate_ok = False
+570:         try:
+571:             job_terminated = kernel.TerminateJobObject(job, 1)
+572:         except Exception:
+573:             terminate_ok = False
+574:         else:
+575:             if not job_terminated:
+576:                 terminate_ok = False
+577:     waits_ok = True
+578:     for rec in owned:
+579:         if rec["ph"] is None:
+580:             waits_ok = False
+581:             continue
+582:         left = int(max(0.0, deadline - _monotonic()) * 1000)
+583:         try:
+584:             waited = wapi.WaitForSingleObject(rec["ph"], left)
+585:         except Exception:
+586:             waits_ok = False
+587:             rec["wait"] = None
+588:             continue
+589:         rec["wait"] = waited
+590:         if waited != _WAIT_OBJECT_0:
+591:             waits_ok = False
+592:             continue
+593:         try:
+594:             rec["exit_code"] = wapi.GetExitCodeProcess(rec["ph"])
+595:         except Exception:
+596:             waits_ok = False
+597:     counts = None
+598:     try:
+599:         counts = _accounting(deps, kernel, job)
+600:     except Exception:
+601:         counts = None
+602:     if counts is None or not waits_ok or not terminate_ok:
+603:         return (None if counts is None else counts[0]), "UNKNOWN_DRAIN"
+604:     active = counts[0]
+605:     if active != 0:
+606:         return active, "UNKNOWN_DRAIN"
+607:     return active, "CLEANUP"
+608: 
+609: 
+
+681: def run_workers(manifest, output_root, *, cancel_event=None):
+682:     if not _windows():
+683:         raise NotImplementedError("NOT_IMPLEMENTED")
+684:     if cancel_event is None:
+685:         cancel_event = threading.Event()
+686:     spec = _validate(manifest, output_root)
+687:     deps = _imports()
+688:     kernel = _kernel(deps)
+689:     job = _open_job(deps, kernel, spec["run_id"])
+690:     owned, threads, slots = [], [], []
+691:     overflow_event = threading.Event()
+692:     status, reason, active, drain = "UNKNOWN", "init", None, "UNKNOWN_DRAIN"
+693:     result = None
+694:     try:
+695:         spec["output"].mkdir()
+696:         try:
+697:             _journal(spec, {"event": "start", "policy": spec["policy"]})
+698:         except Exception:
+699:             status, reason = "FAILED", "UNKNOWN_DURABILITY"
+700:             raise
+701:         if spec["policy"] == "kill_on_close":
+702:             _enable_kill_on_close(deps, kernel, job)
+703:         status, reason = _launch_and_wait(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event)
+704:         active = spec.get("active")
+705:     except WindowsJobError as exc:
+706:         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+707:             status, reason = "FAILED", exc.code
+708:     except Exception:
+709:         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+710:             status, reason = "FAILED", "EXCEPTION"
+711:     finally:
+712:         cleanup_deadline = _monotonic() + 8.0
+713:         try:
+714:             try:
+715:                 active2, drain = _shutdown(deps, kernel, job, owned, status != "PROCESS_COMPLETED", cleanup_deadline)
+716:                 if active2 is not None:
+717:                     active = active2
+718:             except Exception:
+719:                 drain = "UNKNOWN_DRAIN"
+720:             join_certain = False
+721:             try:
+722:                 join_certain = _join(threads, 2, cleanup_deadline)
+723:             except Exception:
+724:                 join_certain = False
+725:             readers_unresolved = join_certain is not True
+726:             for thread in threads:
+727:                 try:
+728:                     if thread.is_alive():
+729:                         readers_unresolved = True
+730:                 except Exception:
+731:                     readers_unresolved = True
+732:             if readers_unresolved or drain not in ("CLEANUP", "UNKNOWN_DRAIN"):
+733:                 drain = "UNKNOWN_DRAIN"
+734:             if drain != "CLEANUP" and status == "PROCESS_COMPLETED":
+735:                 status, reason = "UNKNOWN", "proof_incomplete"
+736:             if any(
+737:                 slot.get("bad_read") or slot.get("close_uncertain") or slot.get("closed") is not True
+738:                 for slot in slots
+739:             ):
+740:                 if status == "PROCESS_COMPLETED":
+741:                     status, reason = "UNKNOWN", "bad_read" if any(slot.get("bad_read") for slot in slots) else "close_uncertain"
+742:                 drain = "UNKNOWN_DRAIN"
+743:             owned_closed = False
+744:             try:
+745:                 owned_closed = _close_owned(deps["_winapi"], owned)
+746:             except Exception:
+747:                 owned_closed = False
+748:             if owned_closed is not True or spec.get("parent_close_uncertain") or any(rec.get("close_uncertain") for rec in owned):
+749:                 drain = "UNKNOWN_DRAIN"
+750:                 if status == "PROCESS_COMPLETED":
+751:                     status, reason = "UNKNOWN", "close_uncertain"
+752:             job_close_ok = True
+753:             try:
+754:                 jres = kernel.CloseHandle(job)
+755:                 if not jres:
+756:                     job_close_ok = False
+757:             except Exception:
+758:                 job_close_ok = False
+759:             if not job_close_ok:
+760:                 if status == "PROCESS_COMPLETED":
+761:                     status, reason = "UNKNOWN", "job_close_failed"
+762:                 drain = "UNKNOWN_DRAIN"
+763:             try:
+764:                 if spec["output"].is_dir():
+765:                     result = _emit(spec, status, reason, owned, slots, active, drain)
+766:                 else:
+767:                     result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": "UNKNOWN_DRAIN", "whole_tree_certificate": False, "reattach": False, "replay": False}
+768:             except Exception:
+769:                 if status not in ("CANCELLED", "TIMEOUT"):
+770:                     status, reason = "FAILED", "UNKNOWN_DURABILITY"
+771:                 result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "durability": "UNKNOWN_DURABILITY", "whole_tree_certificate": False, "reattach": False, "replay": False}
+772:                 # Never leave a prior successful receipt after a failed terminal
+773:                 # journal commit. This best-effort refusal is not a durability
+774:                 # certificate; a failed write remains UNKNOWN_DURABILITY.
+775:                 try:
+776:                     if spec["output"].is_dir():
+777:                         _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", json.dumps(result).encode())
+778:                 except Exception:
+779:                     pass
+780:         except Exception:
+781:             pass
+782:     if result is None:
+783:         result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "whole_tree_certificate": False, "reattach": False, "replay": False}
+784:     return result
+785: 
+786: 

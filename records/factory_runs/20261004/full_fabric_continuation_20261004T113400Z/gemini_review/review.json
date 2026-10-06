@@ -1,0 +1,149 @@
+{
+  "findings": [
+    {
+      "artifact": "device_inventory.py",
+      "exact_source": "PCI_RE = re.compile(r'^([0-9a-fA-F]{4}):([0-9a-fA-F]{2}):([0-9a-fA-F]{2})\\.([0-7])$')",
+      "line": 7,
+      "minimal_fix": "Change regex to re.compile(r'^([0-9a-fA-F]{4,8}):([0-9a-fA-F]{2}):([0-9a-fA-F]{2})\\.([0-7])$') and in _normalize_pci return f\"{dom.zfill(8)}:{bus}:{dev}.{fn}\".",
+      "reason": "Standard nvidia-smi CSV query-gpu output formats pci.bus_id with an 8-hex digit domain (e.g. 00000000:01:00.0). PCI_RE strictly requires 4 hex digits ({4}), causing all standard 8-hex nvidia-smi bus IDs to fail matching and return None (unqualified). Furthermore, line 38 normalizes with zfill(4) instead of full 8-hex PCI domain representation.",
+      "severity": "CRITICAL",
+      "test": "def test_nvidia_8hex_domain_normalization(self): sample={'vendor':'nvidia','tool':'nvidia-smi','tool_version':'550','sampled_at_utc':NOW.isoformat(),'exit_code':0,'format':'csv','stdout':'pci.bus_id,name,memory.total,memory.free,memory.used,uuid\\\\n00000000:01:00.0,RTX,16384 MiB,12000 MiB,4384 MiB,GPU-1\\\\n'}; res=normalize_inventory([sample], now_utc=NOW, max_age_seconds=5); self.assertEqual(res['devices'][0]['physical_id'], '00000000:01:00.0')"
+    },
+    {
+      "artifact": "device_inventory.py",
+      "exact_source": "fresh = 'FRESH' if ts and (now_utc - ts).total_seconds() <= max_age else 'STALE'",
+      "line": 122,
+      "minimal_fix": "Change condition to: fresh = 'FRESH' if ts and 0 <= (now_utc - ts).total_seconds() <= max_age else 'STALE'",
+      "reason": "If a sample has a future timestamp (ts > now_utc), (now_utc - ts).total_seconds() is negative. Because any negative number is <= max_age (e.g. -100 <= 5 is True), future timestamps are incorrectly classified as FRESH rather than nonallocatable/STALE.",
+      "severity": "HIGH",
+      "test": "def test_future_timestamp_marked_stale(self): future_ts=(NOW + timedelta(seconds=60)).isoformat(); sample={'vendor':'nvidia','tool':'nvidia-smi','tool_version':'550','sampled_at_utc':future_ts,'exit_code':0,'format':'csv','stdout':'pci.bus_id,name,memory.total,memory.free,memory.used,uuid\\\\n0000:01:00.0,RTX,16384 MiB,12000 MiB,4384 MiB,GPU-1\\\\n'}; res=normalize_inventory([sample], now_utc=NOW, max_age_seconds=5); self.assertEqual(res['devices'][0]['freshness_status'], 'STALE')"
+    },
+    {
+      "artifact": "device_inventory.py",
+      "exact_source": "del by_phys[pid]",
+      "line": 275,
+      "minimal_fix": "Maintain a conflicted_pids = set() collection. When a conflict occurs, record conflicted_pids.add(pid) and delete from by_phys. In the loop, check if pid in conflicted_pids and skip immediately.",
+      "reason": "When contradictory samples arrive for the same physical_id (e.g. vendor mismatch or total memory mismatch), del by_phys[pid] deletes the entry. If a third sample for the same physical_id arrives later in the batch, it hits 'else: by_phys[pid] = d' and is resurrected into qualified devices, violating the contract that contradictory totals/vendors yield conflict and no qualified record.",
+      "severity": "HIGH",
+      "test": "def test_contradictory_samples_not_resurrected(self): s1={'vendor':'nvidia','tool':'nvidia-smi','tool_version':'1','sampled_at_utc':NOW.isoformat(),'exit_code':0,'format':'csv','stdout':'pci.bus_id,name,memory.total,memory.free,memory.used,uuid\\\\n0000:01:00.0,A,16384 MiB,1000 MiB,15384 MiB,U1\\\\n'}; s2={'vendor':'nvidia','tool':'nvidia-smi','tool_version':'1','sampled_at_utc':NOW.isoformat(),'exit_code':0,'format':'csv','stdout':'pci.bus_id,name,memory.total,memory.free,memory.used,uuid\\\\n0000:01:00.0,A,8192 MiB,1000 MiB,7192 MiB,U1\\\\n'}; s3=dict(s2); res=normalize_inventory([s1, s2, s3], now_utc=NOW, max_age_seconds=5); self.assertEqual([d for d in res['devices'] if d['physical_id']=='0000:01:00.0'], [])"
+    },
+    {
+      "artifact": "device_inventory.py",
+      "exact_source": "for d in inventory_result.get('devices', []):",
+      "line": 292,
+      "minimal_fix": "Add check at beginning of loop: if not d.get('physical_id'): refused.append({'device': None, 'reason': 'missing_physical_id'}); continue",
+      "reason": "normalize_inventory includes unqualified devices (records with missing physical_id) in result['devices']. get_admission_snapshot iterates over all devices and only checks freshness_status, memory_kind, and observed_free_bytes. It never validates that physical_id is non-null, causing unqualified devices with fresh dedicated free memory to be admitted into eligible.",
+      "severity": "HIGH",
+      "test": "def test_admission_snapshot_refuses_unqualified_device(self): inv={'devices':[{'physical_id':None,'vendor_key':'nvidia','aliases':[],'memory_kind':'DEDICATED','advertised_total_bytes':16384*1048576,'observed_free_bytes':12000*1048576,'freshness_status':'FRESH'}]}; snap=get_admission_snapshot(inv, now_utc=NOW, max_age_seconds=5); self.assertEqual(len(snap['eligible']), 0); self.assertTrue(any(r.get('reason')=='missing_physical_id' for r in snap['refused']))"
+    },
+    {
+      "artifact": "inventory/tests.candidate.txt",
+      "exact_source": "from inventory_adapter import normalize_inventory, get_admission_snapshot",
+      "line": 4,
+      "minimal_fix": "Change import to: from device_inventory import normalize_inventory, get_admission_snapshot",
+      "reason": "The candidate tests file imports from 'inventory_adapter', but the actual candidate module is named 'device_inventory.py'. Executing the test file fails immediately with ModuleNotFoundError.",
+      "severity": "CRITICAL",
+      "test": "def test_import_candidate_module(self): import device_inventory; self.assertTrue(hasattr(device_inventory, 'normalize_inventory'))"
+    },
+    {
+      "artifact": "device_inventory.py",
+      "exact_source": "mem_kind = sample.get('memory_kind', 'DEDICATED')",
+      "line": 123,
+      "minimal_fix": "Set mem_kind = sample.get('memory_kind') or ('DEDICATED' if is_known_discrete_nvidia(name) else 'UNKNOWN')",
+      "reason": "Defaulting unconditionally to DEDICATED for NVIDIA violates the frozen interface specification requiring explicit sample memory_kind for ambiguous products (e.g. Tegra, Grace Hopper, Jetson) where memory is shared with the host CPU.",
+      "severity": "MEDIUM",
+      "test": "def test_ambiguous_nvidia_product_requires_explicit_kind(self): sample={'vendor':'nvidia','tool':'nvidia-smi','tool_version':'550','sampled_at_utc':NOW.isoformat(),'exit_code':0,'format':'csv','stdout':'pci.bus_id,name,memory.total,memory.free,memory.used,uuid\\\\n0000:01:00.0,NVIDIA Tegra Orin,16384 MiB,12000 MiB,4384 MiB,GPU-1\\\\n'}; res=normalize_inventory([sample], now_utc=NOW, max_age_seconds=5); self.assertEqual(res['devices'][0]['memory_kind'], 'UNKNOWN')"
+    },
+    {
+      "artifact": "rpc_supervisor.py",
+      "exact_source": "ctypes.cast(ctypes.byref(info),ctypes.POINTER(ctypes.c_uint32))[0]=0x2000",
+      "line": 85,
+      "minimal_fix": "Properly declare JOBOBJECT_BASIC_LIMIT_INFORMATION with LimitFlags at byte offset 16 (index 4 of c_uint32 array), write to index 4: ctypes.cast(ctypes.byref(info), ctypes.POINTER(ctypes.c_uint32))[4] = 0x2000, and ensure 64-bit struct padding is used (sizeof 112 bytes for JOBOBJECT_EXTENDED_LIMIT_INFORMATION).",
+      "reason": "Writing 0x2000 to DWORD offset 0 of JOBOBJECT_EXTENDED_LIMIT_INFORMATION writes to PerProcessUserTimeLimit.LowPart, NOT LimitFlags. In Win32, LimitFlags is located at byte offset 16 (DWORD index 4). LimitFlags remains 0, so JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE is never set, leaving processes uncontained upon supervisor termination. Additionally, defining BasicLimitInformation as c_byte*48 is the 32-bit layout; on 64-bit Windows, pointer alignment requires 64 bytes, causing SetInformationJobObject to receive an invalid structure size.",
+      "severity": "CRITICAL",
+      "test": "def test_job_object_limit_flags_memory_offset(self): info=JOBOBJECT_EXTENDED_LIMIT_INFORMATION(); ptr=ctypes.cast(ctypes.byref(info), ctypes.POINTER(ctypes.c_uint32)); self.assertEqual(ptr[0], 0); self.assertEqual(ptr[4], 0x2000)"
+    },
+    {
+      "artifact": "rpc_supervisor.py",
+      "exact_source": "try:p=lf.launch(args,str(lp),ns) if self.launcher else lf.Popen(args,stdout=open(lp,'wb'),stderr=subprocess.STDOUT,start_new_session=ns)",
+      "line": 138,
+      "minimal_fix": "Eliminate spawn-before-assignment race: spawn worker processes with Windows flag CREATE_SUSPENDED (via ctypes CreateProcessW), assign process handle to JobObject, then call ResumeThread; or return NOT_IMPLEMENTED error code if safe containment cannot be implemented.",
+      "reason": "subprocess.Popen spawns an actively running process before containment.assign(p.pid) is called. If the process terminates, crashes, or spawns child processes in that window, containment assignment fails or grandchildren escape. The frozen interface expressly requires eliminating this race via CREATE_SUSPENDED + assign + ResumeThread or returning NOT_IMPLEMENTED.",
+      "severity": "CRITICAL",
+      "test": "def test_spawning_uses_create_suspended(self): with unittest.mock.patch('subprocess.Popen') as mock_popen: s=Supervisor(self.base, str(self.root)); self.assertRaises(NotImplementedError, s.run)"
+    },
+    {
+      "artifact": "rpc_supervisor.py",
+      "exact_source": "if self.state!=State.READY:self._fail_all();self.state=State.FAILED;return self.state",
+      "line": 147,
+      "minimal_fix": "Check if self.state == State.CANCELLED before overwriting state: if self.state == State.CANCELLED: return self.state",
+      "reason": "When cancel() is called during startup, it sets self.state = State.CANCELLED and tears down processes. When the startup loop finishes, line 147 checks if self.state != State.READY and unconditionally overwrites self.state to State.FAILED, clobbering the CANCELLED state and committing a false FAILED receipt to the journal.",
+      "severity": "HIGH",
+      "test": "def test_cancel_preserves_cancelled_state(self): fl=FakeLauncher(hang_ports={10000}); s=Supervisor(self.base, str(self.root), fl); t=threading.Thread(target=s.run); t.start(); time.sleep(0.1); s.cancel(); t.join(timeout=2); self.assertEqual(s.state, State.CANCELLED)"
+    },
+    {
+      "artifact": "rpc_supervisor.py",
+      "exact_source": "self.state=State.COMPLETED",
+      "line": 152,
+      "minimal_fix": "When the deadline loop expires without workers completing their batch/task, set self.state = State.FAILED with reason 'deadline_exceeded', or return timeout error instead of COMPLETED.",
+      "reason": "The deadline loop runs until time.monotonic() - self.start_time >= self.deadline. When the deadline expires while workers are still running, the supervisor treats the timeout as a successful completion and sets State.COMPLETED. A deadline timeout is an execution failure, and marking it COMPLETED is a false completion receipt.",
+      "severity": "HIGH",
+      "test": "def test_deadline_expiration_fails_run(self): fl=FakeLauncher(); self.base['deadline_seconds']=0.2; s=Supervisor(self.base, str(self.root), fl); res=s.run(); self.assertNotEqual(res, State.COMPLETED)"
+    },
+    {
+      "artifact": "rpc_supervisor.py",
+      "exact_source": "def assign(self,pid:int)->bool:self.pgid=pid;return True",
+      "line": 97,
+      "minimal_fix": "Change self.pgid: Optional[int] to self.pgids: List[int] = []. Append pid on each assign(), and in teardown() iterate over all self.pgids calling os.killpg(pgid, signal.SIGKILL).",
+      "reason": "In PosixContainment, self.pgid stores a single integer. When assign(p.pid) is called for each of the 4 workers, each call overwrites self.pgid with the newest PID. In teardown(), os.killpg is called ONLY on the 4th worker's PGID, leaving workers 0, 1, and 2 uncontained and orphaned.",
+      "severity": "HIGH",
+      "test": "def test_posix_containment_tracks_all_pgids(self): c=PosixContainment(); c.assign(101); c.assign(102); c.assign(103); c.assign(104); self.assertEqual(set(c.pgids), {101, 102, 103, 104})"
+    },
+    {
+      "artifact": "rpc_supervisor.py",
+      "exact_source": "stdout=open(lp,'wb')",
+      "line": 138,
+      "minimal_fix": "Manage file handles explicitly: keep file descriptors in a list and close them in teardown(); enforce MAX_LOG_BYTES truncation on worker log files.",
+      "reason": "open(lp, 'wb') opens file descriptors without storing references or closing them in teardown(), causing resource descriptor leaks. Furthermore, MAX_LOG_BYTES is never applied to worker logs, permitting unbounded disk consumption.",
+      "severity": "MEDIUM",
+      "test": "def test_log_file_handles_closed_on_teardown(self): s=Supervisor(self.base, str(self.root), FakeLauncher()); s.run(); self.assertTrue(all(f.closed for f in s.log_handles))"
+    },
+    {
+      "artifact": "llama_qualification_spec.json",
+      "exact_source": "{\"specification\":\"llama.cpp Mixed-Vulkan Model Qualification\",\"commit\":\"0faee5004297c3bcfa40b7bf11750127b8c1fd7d\",",
+      "line": 1,
+      "minimal_fix": "Wrap the specification inside a top-level JSON envelope with 'source' containing the qualification specification and 'tests' containing the discriminating case table.",
+      "reason": "TASK_INTERFACES.json specifies: 'Return JSON source field containing JSON spec (not Python) and tests field containing JSON discriminating case table.' The candidate file returns the specification directly at the root and completely omits the required 'tests' discriminating case table.",
+      "severity": "HIGH",
+      "test": "def test_llama_spec_envelope_schema(self): with open('llama_qualification_spec.json') as f: data=json.load(f); self.assertIn('source', data); self.assertIn('tests', data); self.assertIsInstance(data['tests'], list)"
+    },
+    {
+      "artifact": "llama_qualification_spec.json",
+      "exact_source": "\"wall_time_max_seconds\":null,\"warmup_repeat_count\":null",
+      "line": 1,
+      "minimal_fix": "Set explicit integer values for wall_time_max_seconds (e.g. 180) and warmup_repeat_count (e.g. 3).",
+      "reason": "TASK_INTERFACES.json requires explicit bounded wall time and warmup repeat counts ('boundedwall, warmuprepeatcount explicit'). Leaving wall_time_max_seconds and warmup_repeat_count as null leaves test runs unbounded against hung kernels or deadlocks.",
+      "severity": "MEDIUM",
+      "test": "def test_execution_bounds_explicit(self): with open('llama_qualification_spec.json') as f: data=json.load(f); bounds=data.get('execution_bounds', {}); self.assertIsInstance(bounds.get('wall_time_max_seconds'), int); self.assertIsInstance(bounds.get('warmup_repeat_count'), int)"
+    },
+    {
+      "artifact": "llama_qualification_spec.json",
+      "exact_source": "\"operator_graph_extraction\":\"Use test-backend-ops --test-file <path> where <path> is generated by test-export-graph-ops from the actual selected model. Do not guess operator lists.\"",
+      "line": 1,
+      "minimal_fix": "Populate checked_source_operators list in flags_operators_audit extracted from test-backend-ops.cpp.",
+      "reason": "TASK_INTERFACES.json requires: 'Identify exact checkedsource backendtests flags/operators list vs flagsrequiringbinaryhelp verification'. The candidate lists test-backend-ops CLI options but omits the checked-source operator list from test-backend-ops.cpp.",
+      "severity": "MEDIUM",
+      "test": "def test_checked_source_operators_present(self): with open('llama_qualification_spec.json') as f: data=json.load(f); self.assertTrue(len(data.get('flags_operators_audit', {}).get('checked_source_operators', [])) > 0)"
+    }
+  ],
+  "missing_qualification": [
+    "Physical hardware topology evidence: Current fixture only captures 1 discrete NVIDIA RTX 5070 Ti + 1 integrated AMD gfx1036. Four discrete 8GB physical cards are not yet present or enumerated.",
+    "Real model memory pooling proof: Current evidence relies on tiny MLP / policy MB limits (<=32MiB) and RPC loopback transport; real GGUF model attention/KV allocation exceeding the largest single usable dedicated VRAM (>12GB/16GB) is not demonstrated.",
+    "Vulkan multi-device tensor split validation: Direct P2P vs host-staged Vulkan cross-device transfers have not been measured or benchmarked across discrete cards.",
+    "Windows process tree containment verification: rpc_supervisor.py contains fatal ctypes offset errors in Win32 JobObject LimitFlags and spawns uncontained processes before assignment, failing strict process containment qualification.",
+    "Contradiction and resurrection immunity in inventory adapter: device_inventory.py does not persist conflicted PCI IDs in a tombstone set, allowing subsequent matching samples to resurrect contradictory devices."
+  ],
+  "toolAction": "Submitting review verdict",
+  "toolSummary": "Finish review",
+  "verdict": "REJECTED"
+}

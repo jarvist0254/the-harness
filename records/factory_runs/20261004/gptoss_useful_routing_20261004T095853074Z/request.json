@@ -1,0 +1,22 @@
+{
+  "executable": "C:\\Users\\thoma\\AppData\\Local\\agy\\bin\\agy.exe",
+  "argv": [
+    "--model",
+    "gpt-oss-120b-medium",
+    "--mode",
+    "plan",
+    "--sandbox",
+    "--output-format",
+    "json",
+    "--print-timeout",
+    "120s",
+    "--log-file",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\gptoss_useful_routing_20261004T095853074Z\\provider.log",
+    "--json-schema",
+    "{\"type\":\"object\",\"required\":[\"routes\"],\"additionalProperties\":false,\"properties\":{\"routes\":{\"type\":\"array\",\"minItems\":6,\"maxItems\":6,\"items\":{\"type\":\"object\",\"required\":[\"task_id\",\"model\",\"reason\"],\"additionalProperties\":false,\"properties\":{\"task_id\":{\"type\":\"string\"},\"model\":{\"type\":\"string\",\"enum\":[\"gemini-3.8-flash-high\",\"qwen3.8-flash\",\"deepseek-v4-flash-0731\"]},\"reason\":{\"type\":\"string\"}}}}}}",
+    "--print",
+    "Routing-only assignment. Do not use any tools, inspect files, execute commands, modify files, or perform jobs. Return exactly one JSON object with routes array, each row task_id/model/reason, no extra properties, no prose. Assign exactly these 6 distinct task IDs: D3D12_STAGED_CROSSADAPTER_CPP (C++17 implementation of 256KiB shared crossadapter-buffer smoke); VULKAN_SEPARATE_DEVICE_CPP (C++17 no-submit separate-device transfer smoke); OPENCL_BRIDGE_REVIEW (independent review of Qwen-authored bridge code); MECHANICAL_FOUR_BAY_REVIEW (independent dimensional/design review of Qwen-authored mechanical4bay artifacts); PYRE_REUSE_AUDIT_REVIEW (review another model source-reuse audit); FINAL_EVIDENCE_AUDIT (independent audit of mixed-provider build/test/NOT_CHECKED evidence). Candidate exact model IDs: gemini-3.8-flash-high, qwen3.8-flash, deepseek-v4-flash-0731. Never assign Qwen-authored reviews to qwen3.8-flash. Gemini is independent from DeepSeek and Qwen; DeepSeek and Qwen share transport but differ in inference family. Grok-4.7 is excluded because launcher says unauthenticated, never substitute grok4.5. Prefer task fit then independent review. Models are listed/configured; execution qualification is separate. No jobs are executed by this routing request. All future outputs would be scoped to E:\\the_harness only. Use concise reasons."
+  ],
+  "cwd": "E:\\the_harness\\records\\factory_runs\\20261004\\gptoss_useful_routing_20261004T095853074Z",
+  "outer_timeout_seconds": 150
+}

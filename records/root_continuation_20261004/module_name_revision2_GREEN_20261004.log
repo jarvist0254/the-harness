@@ -1,0 +1,7 @@
+test_truncated_path_remains_refused (__main__.ModuleNameTests) ... ok
+test_zero_api_result_is_oserror (__main__.ModuleNameTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK

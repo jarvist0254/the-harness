@@ -1,0 +1,27 @@
+test_assigned_integer_not_boolean (__main__.ContractTests) ... ok
+test_bad_read_from_exit_query (__main__.ContractTests) ... ok
+test_bad_read_from_wait_signal (__main__.ContractTests) ... ok
+test_bool_exit_refused (__main__.ContractTests) ... ok
+test_bool_wait_refused (__main__.ContractTests) ... ok
+test_cancel_from_exit_query (__main__.ContractTests) ... ok
+test_cancel_from_wait_signal (__main__.ContractTests) ... ok
+test_deadline_from_exit_query (__main__.ContractTests) ... ok
+test_exit_exception (__main__.ContractTests) ... ok
+test_guard_bad_read_before_wait (__main__.ContractTests) ... ok
+test_guard_deadline_before_wait (__main__.ContractTests) ... ok
+test_guard_overflow_before_wait (__main__.ContractTests) ... ok
+test_multiple_workers (__main__.ContractTests) ... ok
+test_nonzero_exit_refused (__main__.ContractTests) ... ok
+test_overflow_from_exit_query (__main__.ContractTests) ... ok
+test_resumed_integer_not_boolean (__main__.ContractTests) ... ok
+test_success_requests_cleanup (__main__.ContractTests) ... ok
+test_timeout (__main__.ContractTests) ... ok
+test_unexpected_wait (__main__.ContractTests) ... ok
+test_uses_private_supervisor_clock (__main__.ContractTests) ... ok
+test_wait_exception (__main__.ContractTests) ... ok
+test_wrong_policy_refused (__main__.ContractTests) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.011s
+
+OK

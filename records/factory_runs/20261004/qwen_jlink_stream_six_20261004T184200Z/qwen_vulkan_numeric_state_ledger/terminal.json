@@ -1,0 +1,36 @@
+{
+  "credential_saved": false,
+  "frames": 10684,
+  "native_children_actual": 0,
+  "normalized_cap_exceeded": false,
+  "parse_error_type": null,
+  "done": true,
+  "known_secret_match_refused": false,
+  "pid": 88240,
+  "content_bytes": 26437,
+  "http": 200,
+  "finish_reason": "stop",
+  "observed_model": "qwen3.8-max",
+  "usage_known": true,
+  "elapsed_seconds": 839.37,
+  "usage": {
+    "prompt_tokens": 1351,
+    "total_tokens": 41072,
+    "completion_tokens": 39721,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 1351
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 32458,
+      "text_tokens": 39721
+    }
+  },
+  "reasoning_bytes": 125768,
+  "raw_bytes": 2911831,
+  "provider_patch_applied": false,
+  "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+  "requested_model": "qwen3.8-max",
+  "response_cap_exceeded": false,
+  "timeout": false
+}

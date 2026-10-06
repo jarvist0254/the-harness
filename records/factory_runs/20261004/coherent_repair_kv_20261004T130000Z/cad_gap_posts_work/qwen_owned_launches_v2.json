@@ -1,0 +1,29 @@
+[
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "c",
+    "outer_deadline_seconds": 270,
+    "pid": 93148,
+    "model": "a",
+    "observed_process_start_utc": "2026-10-04T13:20:53.2349443Z",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup"
+  },
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "q",
+    "outer_deadline_seconds": 270,
+    "pid": 96428,
+    "model": "w",
+    "observed_process_start_utc": "2026-10-04T13:20:53.2489678Z",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup"
+  },
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "i",
+    "outer_deadline_seconds": 270,
+    "pid": 22560,
+    "model": "n",
+    "observed_process_start_utc": "2026-10-04T13:20:53.2566461Z",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup"
+  }
+]

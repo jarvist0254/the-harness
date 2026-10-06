@@ -1,0 +1,157 @@
+{
+  "counting_rule": "One row per actual provider request; copied/extracted source/review and gate artifacts are not extra inference calls. Token totals are provider-reported; do not add cache/thinking twice or equate them with monthly dashboard units. Vendor cost is reported evidence, not billing settlement.",
+  "call_count": 6,
+  "live_global_factory_modified": false,
+  "calls": [
+    {
+      "total_tokens": 73654,
+      "seconds": 102.74,
+      "status": "COMPLETE_PATCH_UNTRUSTED",
+      "observed_model": null,
+      "product_accepted": false,
+      "completion_tokens": 19786,
+      "prompt_tokens": 52716,
+      "call_id": "grok_kv_f32",
+      "http": null,
+      "requested_model": "grok-4.7-build-fast",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\terminal.json",
+      "usage_available": true,
+      "vendor_reported_cost_usd": 0.15281232,
+      "usage": {
+        "input_tokens": 52716,
+        "cache_read_input_tokens": 1152,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 19786,
+        "reasoning_tokens": 12680,
+        "total_tokens": 73654
+      },
+      "exit_code": 0,
+      "actual_native_children": 0
+    },
+    {
+      "total_tokens": 39206,
+      "seconds": 213.34,
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "observed_model": "qwen3.8-max",
+      "product_accepted": false,
+      "completion_tokens": 12039,
+      "prompt_tokens": 27167,
+      "call_id": "supervisor_coherent",
+      "http": 200,
+      "requested_model": "qwen3.8-max",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\terminal.json",
+      "usage_available": true,
+      "vendor_reported_cost_usd": null,
+      "usage": {
+        "prompt_tokens": 27167,
+        "total_tokens": 39206,
+        "completion_tokens": 12039,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 27167
+        }
+      },
+      "exit_code": null,
+      "actual_native_children": 0
+    },
+    {
+      "total_tokens": 38393,
+      "seconds": 221.82,
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "observed_model": "qwen3.8-max",
+      "product_accepted": false,
+      "completion_tokens": 12680,
+      "prompt_tokens": 25713,
+      "call_id": "validator_coherent",
+      "http": 200,
+      "requested_model": "qwen3.8-max",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\terminal.json",
+      "usage_available": true,
+      "vendor_reported_cost_usd": null,
+      "usage": {
+        "prompt_tokens": 25713,
+        "total_tokens": 38393,
+        "completion_tokens": 12680,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 25713
+        }
+      },
+      "exit_code": null,
+      "actual_native_children": 0
+    },
+    {
+      "total_tokens": 160577,
+      "seconds": 166.68,
+      "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+      "observed_model": null,
+      "product_accepted": false,
+      "completion_tokens": 50882,
+      "prompt_tokens": 109695,
+      "call_id": "gemini_kv_review",
+      "http": null,
+      "requested_model": "gemini-3.8-flash-medium",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\gemini_kv_review\\terminal.json",
+      "usage_available": true,
+      "vendor_reported_cost_usd": null,
+      "usage": {
+        "input_tokens": 109695,
+        "output_tokens": 50882,
+        "thinking_tokens": 50112,
+        "cache_read_tokens": 208440,
+        "total_tokens": 160577
+      },
+      "exit_code": 0,
+      "actual_native_children": 0
+    },
+    {
+      "total_tokens": 139566,
+      "seconds": 121.96,
+      "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+      "observed_model": null,
+      "product_accepted": false,
+      "completion_tokens": 24191,
+      "prompt_tokens": 115375,
+      "call_id": "gemini_coherent_review",
+      "http": null,
+      "requested_model": "gemini-3.8-flash-medium",
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\gemini_coherent_review\\terminal.json",
+      "usage_available": true,
+      "vendor_reported_cost_usd": null,
+      "usage": {
+        "input_tokens": 115375,
+        "output_tokens": 24191,
+        "thinking_tokens": 21827,
+        "cache_read_tokens": 391954,
+        "total_tokens": 139566
+      },
+      "exit_code": 0,
+      "actual_native_children": 0
+    },
+    {
+      "total_tokens": null,
+      "seconds": null,
+      "status": "IN_FLIGHT_OR_MISSING_TERMINAL",
+      "observed_model": null,
+      "product_accepted": false,
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "call_id": "grok_coherent_narrow",
+      "http": null,
+      "requested_model": null,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_coherent_narrow\\terminal.json",
+      "usage_available": false,
+      "vendor_reported_cost_usd": null,
+      "usage": null,
+      "exit_code": null,
+      "actual_native_children": 0
+    }
+  ],
+  "generated_utc": "2026-10-04T13:15:52.1368382Z",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z",
+  "native_agents_actual": 0,
+  "previous_ledger_preserved": "E:\\the_harness\\records\\factory_runs\\20261004\\provider_usage_ledger_FINAL_20261004T112000.json",
+  "native_agents_maximum_authorized_per_terminal": 10,
+  "unknown_usage_calls": 1,
+  "observed_token_total": 451396.0
+}

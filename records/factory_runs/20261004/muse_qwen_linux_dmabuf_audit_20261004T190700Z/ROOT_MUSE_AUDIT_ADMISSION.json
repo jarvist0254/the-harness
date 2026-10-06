@@ -1,0 +1,44 @@
+{
+  "authority": "ROOT-delegated source-only adversarial review of supplied Qwen Intel/DMA-BUF candidate",
+  "provider": "Muse 1.4.2 Meta",
+  "source_execution": false,
+  "compile_or_native": false,
+  "user_live_muse_session_touched": false,
+  "max_deadline_seconds": 300,
+  "max_capture_bytes": 2097152,
+  "inputs": {
+    "run_muse_job.py": {
+      "sha256": "DB22545730884BED4EAE8B182F66D22E7532744E7F11A8F4DFF544F19B2D5792",
+      "bytes": 22236
+    },
+    "prompt.txt": {
+      "sha256": "087B8A6DE4FAA2379677499B6B1D903DF28B0A0FF0663533459FAE8071E2FB9C",
+      "bytes": 23856
+    },
+    "output_schema.json": {
+      "sha256": "2019A3013444C654B9C82B4551AB3DBE26D41C57E6A6AF08DF73B80DCCEF6F64",
+      "bytes": 906
+    },
+    "source.snapshot.cpp": {
+      "sha256": "7052C8EBAA49D9807F6428B5A1ED6779A093392BCCF6EF3266B254C0EAC3CB5B",
+      "bytes": 13928
+    },
+    "tests.snapshot.txt": {
+      "sha256": "6363369CF5BA49B2B82397893D42D622F35EF5BD434DDFFEFD578733B6568E76",
+      "bytes": 2901
+    },
+    "spec.snapshot.txt": {
+      "sha256": "7714B45230DBD5DB30A52A186B5934C8A944B60D21053A762EF34D0169D5D8CC",
+      "bytes": 4700
+    },
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe": {
+      "sha256": "39A97806D315ECE0FC5CDBB88C903EF5BC77655F32E66DC22D267A212C5030BA",
+      "bytes": 443192056
+    },
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": {
+      "sha256": "3CCE33D75D6FDAE4E004D0BDF149320B3147482A9CAF370079DCB9C191A1B260",
+      "bytes": 103192
+    }
+  },
+  "result_usage": "record provider usage only if returned; otherwise UNKNOWN"
+}

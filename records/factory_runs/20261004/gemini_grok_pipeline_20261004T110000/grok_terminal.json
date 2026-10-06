@@ -1,0 +1,9 @@
+{
+  "model": "grok-4.7",
+  "seconds": 245.61,
+  "outer_killed": true,
+  "usage": null,
+  "state": "NOT_ACCEPTED",
+  "exit_code": -1,
+  "pid": 38600
+}

@@ -1,0 +1,11 @@
+{
+  "pid": 46804,
+  "mode": "plan",
+  "model": "gemini-3.8-flash-high",
+  "provider_deadline_seconds": 210,
+  "outer_deadline_seconds": 240,
+  "source_sha256": "765B2BE5E976DFB6709F3D0E7754F71696E2B9287CC87120A767E8820F69DF94",
+  "credential_persisted": false,
+  "executable": "C:\\Users\\thoma\\AppData\\Local\\agy\\bin\\agy.exe",
+  "sandbox": true
+}

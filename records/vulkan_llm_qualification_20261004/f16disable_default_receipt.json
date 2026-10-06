@@ -1,0 +1,20 @@
+{
+  "pid": 59080,
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile_contextfix\\llama_logits_qual.exe --model E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf --expected-sha256 9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031 --devices Vulkan0,Vulkan1",
+  "child_environment_delta": {
+    "GGML_VK_DISABLE_F16": "1"
+  },
+  "timed_out": false,
+  "exit_code": -1073741515,
+  "elapsed_ms": 41,
+  "process_present_after": false,
+  "stdout": "records\\vulkan_llm_qualification_20261004\\f16disable_default.stdout.json",
+  "stderr": "records\\vulkan_llm_qualification_20261004\\f16disable_default.stderr.log",
+  "source_sha256": "54ad6fd03cadf8b302b4f6705aec9ab280253277a2f5e00468e59b379cecd2fc",
+  "executable_sha256": "9ffe782754b8f1858742848f471dc2215db70b080e0dcfae30b8331527f30cb8",
+  "model_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "model_bytes": 639446688,
+  "original_workload_sha256": "e1d585014035ad4a9433ff709f1ecdeaac5f7f85d87dfad0d02767dc8636eedf",
+  "composite_experiment_sha256": "ffe53384583ecc38b35651c38255535ad86bc5d48d43f0006bd5e1d1274535a4",
+  "runtime_json": null
+}

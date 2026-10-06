@@ -1,0 +1,129 @@
+[
+  {
+    "case": "reverse",
+    "parent_pid": 47260,
+    "finished": true,
+    "parent_exit": 0,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\reverse.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\reverse.stderr.log",
+    "status": "PASS",
+    "reason": "All GPU stages matched the independent CPU reference",
+    "child_pid": 86028,
+    "child_exit_code": 0,
+    "elapsed_seconds": 2.093999999575317,
+    "vendors": [
+      "AMD",
+      "NVIDIA"
+    ],
+    "kernels_completed": 8,
+    "final_parity": true,
+    "stage_parity_all": true,
+    "corruption_control": "NOT_RUN"
+  },
+  {
+    "case": "corruption",
+    "parent_pid": 31756,
+    "finished": true,
+    "parent_exit": 1,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\corruption.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\corruption.stderr.log",
+    "status": "FAIL",
+    "reason": "Measured GPU stage or final output mismatch against independent CPU reference",
+    "child_pid": 48308,
+    "child_exit_code": 1,
+    "elapsed_seconds": 1.5159999998286366,
+    "vendors": [
+      "NVIDIA",
+      "AMD"
+    ],
+    "kernels_completed": 8,
+    "final_parity": false,
+    "stage_parity_all": false,
+    "corruption_control": "PASS"
+  },
+  {
+    "case": "budget1",
+    "parent_pid": 88476,
+    "finished": true,
+    "parent_exit": 2,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\budget1.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\budget1.stderr.log",
+    "status": "REFUSED",
+    "reason": "Indivisible block layer_00 cannot fit any device budget",
+    "child_pid": 28000,
+    "child_exit_code": 2,
+    "elapsed_seconds": 0.5630000000819564
+  },
+  {
+    "case": "duplicate_ids",
+    "parent_pid": 52516,
+    "finished": true,
+    "parent_exit": 2,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\duplicate_ids.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\duplicate_ids.stderr.log",
+    "status": "REFUSED",
+    "reason": "Duplicate explicit runtime device ID",
+    "child_pid": null,
+    "child_exit_code": null,
+    "elapsed_seconds": null
+  },
+  {
+    "case": "missing_id",
+    "parent_pid": 96800,
+    "finished": true,
+    "parent_exit": 2,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\missing_id.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\missing_id.stderr.log",
+    "status": "NOT_CHECKED",
+    "reason": "Unavailable OpenCL runtime device ID(s): ['p9:d9']",
+    "child_pid": 73424,
+    "child_exit_code": 2,
+    "elapsed_seconds": 0.4689999995753169
+  },
+  {
+    "case": "single_nv_policy9",
+    "parent_pid": 8312,
+    "finished": true,
+    "parent_exit": 2,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\single_nv_policy9.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\single_nv_policy9.stderr.log",
+    "status": "REFUSED",
+    "reason": "Total block memory exceeds usable aggregate budget",
+    "child_pid": 38572,
+    "child_exit_code": 2,
+    "elapsed_seconds": 0.375
+  },
+  {
+    "case": "single_nv_policy17",
+    "parent_pid": 91420,
+    "finished": true,
+    "parent_exit": 0,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\single_nv_policy17.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\single_nv_policy17.stderr.log",
+    "status": "PASS",
+    "reason": "All GPU stages matched the independent CPU reference",
+    "child_pid": 492,
+    "child_exit_code": 0,
+    "elapsed_seconds": 0.7189999995753169,
+    "vendors": [
+      "NVIDIA"
+    ],
+    "kernels_completed": 8,
+    "final_parity": true,
+    "stage_parity_all": true,
+    "corruption_control": "NOT_RUN"
+  },
+  {
+    "case": "single_nv_corruption",
+    "parent_pid": 13844,
+    "finished": true,
+    "parent_exit": 2,
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\single_nv_corruption.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\single_nv_corruption.stderr.log",
+    "status": "REFUSED",
+    "reason": "Corruption requires an inter-device activation boundary",
+    "child_pid": 42604,
+    "child_exit_code": 2,
+    "elapsed_seconds": 0.3600000003352761
+  }
+]

@@ -1,0 +1,6 @@
+--- immutable-provider-source.cpp
++++ compile-only-derived-source.cpp
+@@ before workload_canon @@
++static bool sha256_bytes(const uint8_t* data, size_t n, uint8_t out[32]);
++static std::string hex32(const uint8_t h[32]);
+ static std::string workload_canon(...)

@@ -1,0 +1,18 @@
+[
+  {
+    "name": "hip_host_vs",
+    "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && cl /nologo /EHsc /O2 /I\"E:\\tmp\\PyReExperimental\\rocm\\Lib\\site-packages\\_rocm_sdk_core\\include\" hip_module_host.cpp /Fe:hip_vector.exe /link /LIBPATH:\"E:\\tmp\\PyReExperimental\\rocm\\Lib\\site-packages\\_rocm_sdk_core\\lib\" amdhip64.lib\"",
+    "pid": 64016,
+    "exit_code": 2,
+    "stdout": "hip_module_host.cpp\r\nE:\\tmp\\PyReExperimental\\rocm\\Lib\\site-packages\\_rocm_sdk_core\\include\\hip/linker_types.h(119): fatal error C1189: #error:  (\"Must define exactly one of __HIP_PLATFORM_AMD__ or __HIP_PLATFORM_NVIDIA__\");\r\n",
+    "stderr": ""
+  },
+  {
+    "name": "intel_compile_vs",
+    "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && \"E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\clang++.exe\" -fsycl -O2 intel_vector.cpp -o intel_vector.exe -L\"E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\lib\"\"",
+    "pid": 89920,
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

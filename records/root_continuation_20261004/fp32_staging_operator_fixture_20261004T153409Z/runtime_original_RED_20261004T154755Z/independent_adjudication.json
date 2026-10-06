@@ -1,0 +1,28 @@
+{
+  "status": "NATIVE_ASSERTION_STOP_FULL_FIXTURE_NOT_CHECKED",
+  "exit_hex": "0xc0000409",
+  "completed_case_observation": {
+    "name": "contiguous",
+    "outputs": 2048,
+    "x_bytes": 16384,
+    "y_bytes": 16384,
+    "output_bytes": 8192,
+    "allocated_bytes": 40960,
+    "shape_checked": true,
+    "buffer_owner_checked": true,
+    "graph_status": "SUCCESS",
+    "finite_count": 2048,
+    "fail_count": 0,
+    "max_abs": 4.1721637188629757e-05,
+    "rmse": 1.2425247232802841e-05,
+    "corruption_injected": false
+  },
+  "completed_case_origin": "One complete case object recovered from incomplete stdout; not a valid full receipt or seven-case PASS.",
+  "failing_case": "X_transpose construction before GPU graph; ggml_mul_mat requires !ggml_is_transposed(a)",
+  "source_assertion": "Pinned ggml/src/ggml.c:3355",
+  "remaining_cases": "NOT_CHECKED",
+  "precision_red": "NOT_CHECKED; crash is not numerical F16 discrimination",
+  "module_binding": "OBSERVED_EXACT_FIVE_LOCAL_DLL_PATHS_AND_MATCHING_HASHES",
+  "followups": "No retry/other-device/corruption run",
+  "scope": "ONE_OPERATOR_RUN_ONLY"
+}

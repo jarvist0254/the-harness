@@ -1,0 +1,14 @@
+{
+  "verdict": "STATIC_REVIEW_COMPLETE_PURE_EXECUTION_PENDING",
+  "accepted": false,
+  "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+  "provider_tests_sha256": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+  "candidate_imported": false,
+  "candidate_or_provider_tests_executed": false,
+  "same17_adapted_tests_sha256": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+  "additional_tests_sha256": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3",
+  "candidate_native_gpu_provider_calls": false,
+  "source_and_provider_tests_unchanged": true,
+  "mutation_hypothesis_execution_status": "NOT_CHECKED",
+  "existing_Qwen_RED_not_reused_as_GREEN": true
+}

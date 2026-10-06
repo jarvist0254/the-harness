@@ -1,0 +1,213 @@
+test_alive_exception_remaining_cleanup (__main__.Cases) ... FAIL
+test_baseline (__main__.Cases) ... ok
+test_cleanup_clock_starts_after_work (__main__.Cases) ... FAIL
+test_close_failure_01 (__main__.Cases) ... FAIL
+test_close_failure_02 (__main__.Cases) ... FAIL
+test_close_failure_03 (__main__.Cases) ... FAIL
+test_close_failure_04 (__main__.Cases) ... FAIL
+test_close_failure_05 (__main__.Cases) ... FAIL
+test_close_failure_06 (__main__.Cases) ... FAIL
+test_close_failure_07 (__main__.Cases) ... FAIL
+test_close_failure_08 (__main__.Cases) ... FAIL
+test_close_failure_09 (__main__.Cases) ... FAIL
+test_close_failure_10 (__main__.Cases) ... FAIL
+test_close_failure_11 (__main__.Cases) ... FAIL
+test_close_failure_12 (__main__.Cases) ... FAIL
+test_close_failure_13 (__main__.Cases) ... FAIL
+test_close_failure_14 (__main__.Cases) ... FAIL
+test_close_failure_15 (__main__.Cases) ... ok
+test_close_failure_16 (__main__.Cases) ... ok
+test_close_failure_17 (__main__.Cases) ... ok
+test_close_failure_18 (__main__.Cases) ... ok
+test_close_failure_19 (__main__.Cases) ... ok
+test_job_close_boolean_false (__main__.Cases) ... ok
+test_job_close_exception (__main__.Cases) ... ok
+test_job_close_integer_zero (__main__.Cases) ... ok
+test_join_exception_unknown (__main__.Cases) ... FAIL
+test_log_write_rejection (__main__.Cases) ... ok
+test_read_failure_01 (__main__.Cases) ... ok
+test_read_failure_02 (__main__.Cases) ... ok
+test_read_failure_03 (__main__.Cases) ... ok
+test_read_failure_04 (__main__.Cases) ... ok
+test_receipt_write_rejection (__main__.Cases) ... ok
+test_terminal_journal_durable_receipt (__main__.Cases) ... FAIL
+test_terminate_boolean_false (__main__.Cases) ... ok
+test_terminate_integer_zero (__main__.Cases) ... ok
+test_total_monotonic_join_budget (__main__.Cases) ... ok
+
+======================================================================
+FAIL: test_alive_exception_remaining_cleanup (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 234, in test_alive_exception_remaining_cleanup
+    CONFIG['alive_raise']=True;l,a,k,r,e=self.exercise();self.assertTrue(l.all_attempted(),'Inspection errors must not bypass remaining owned closes');self.assert_uncertain(r)
+AssertionError: False is not true : Inspection errors must not bypass remaining owned closes
+
+======================================================================
+FAIL: test_cleanup_clock_starts_after_work (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 232, in test_cleanup_clock_starts_after_work
+    CONFIG['elapsed_launch']=True;l,a,k,r,e=self.exercise();calls=[c for c in a.calls if c[0]=='wait_root' and c[2]>0];self.assertTrue(calls,'Twenty-second successful work must receive a fresh cleanup wait budget')
+AssertionError: [] is not true : Twenty-second successful work must receive a fresh cleanup wait budget
+
+======================================================================
+FAIL: test_close_failure_01 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_02 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_03 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_04 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_05 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_06 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_07 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_08 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_09 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_10 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_11 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_12 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_13 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_14 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 238, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 196, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_join_exception_unknown (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 222, in test_join_exception_unknown
+    l,a,k,r,e=self.exercise(mode='DEFERRED');self.assertTrue(l.all_attempted());self.assert_uncertain(r)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_terminal_journal_durable_receipt (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_20261004T135404Z\evaluate_qwen.py", line 209, in test_terminal_journal_durable_receipt
+    last=OBS[-1];self.assertNotEqual(last['restart_receipt']['status'],'PROCESS_COMPLETED','Restart must not return stale successful receipt after failed terminal commit')
+AssertionError: 'PROCESS_COMPLETED' == 'PROCESS_COMPLETED' : Restart must not return stale successful receipt after failed terminal commit
+
+----------------------------------------------------------------------
+Ran 36 tests in 0.449s
+
+FAILED (failures=18)

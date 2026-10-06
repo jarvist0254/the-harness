@@ -1,0 +1,186 @@
+{
+  "source_sha256": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "profiles": [
+    {
+      "profile": "compact",
+      "GPU_poses_equal": true,
+      "six_clipped_shoes_equal": true,
+      "post_boxes": [
+        {
+          "origin_mm": [
+            -31.0,
+            0.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            150.0
+          ]
+        },
+        {
+          "origin_mm": [
+            -31.0,
+            190.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            150.0
+          ]
+        },
+        {
+          "origin_mm": [
+            21.0,
+            0.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            150.0
+          ]
+        },
+        {
+          "origin_mm": [
+            21.0,
+            190.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            150.0
+          ]
+        }
+      ],
+      "gap_side_clearance_mm": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "printed_bbox_mm": [
+        188.0,
+        200.0,
+        150.0
+      ],
+      "all_16_post_body_box_intersection_volumes_mm3": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "profile": "universal",
+      "GPU_poses_equal": true,
+      "six_clipped_shoes_equal": true,
+      "post_boxes": [
+        {
+          "origin_mm": [
+            -45.0,
+            0.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            199.0
+          ]
+        },
+        {
+          "origin_mm": [
+            -45.0,
+            190.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            199.0
+          ]
+        },
+        {
+          "origin_mm": [
+            35.0,
+            0.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            199.0
+          ]
+        },
+        {
+          "origin_mm": [
+            35.0,
+            190.0,
+            0.0
+          ],
+          "size_mm": [
+            10.0,
+            10.0,
+            199.0
+          ]
+        }
+      ],
+      "gap_side_clearance_mm": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "printed_bbox_mm": [
+        188.0,
+        200.0,
+        199.0
+      ],
+      "all_16_post_body_box_intersection_volumes_mm3": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "AST_top_level_stdlib_definitions_only": true,
+  "accepted_source_sha256_after": "326133a489430f5167bec29a87c28af8ea652e2fe40701d64c153399b85f372c"
+}

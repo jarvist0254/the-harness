@@ -1,0 +1,49 @@
+{
+  "authorization_sha256": "cb3dfaa9c23e65638504987ac1e23a2aa845af6854835696ea82143b33d4dd4e",
+  "authorization": "ROOT_ADMITTED_FIVE_FIXED_NATIVE_CPU_FIXTURES",
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "fixture_driver.py",
+    "--run"
+  ],
+  "working_directory": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\native_fixture_prepared",
+  "outer_deadline_seconds": 45,
+  "elapsed_seconds": 2.639625,
+  "driver_pid": 38032,
+  "create_no_window": true,
+  "driver_finished": true,
+  "timeout_kill_attempted_on_retained_driver_only": false,
+  "driver_drained": true,
+  "driver_exit_code": 0,
+  "driver_pid_absent_after_wait": true,
+  "stdout_bytes": 230,
+  "stderr_bytes": 0,
+  "each_stream_cap_bytes": 2097152,
+  "streams_within_cap": true,
+  "input_hashes_before": {
+    "root_admission": "cb3dfaa9c23e65638504987ac1e23a2aa845af6854835696ea82143b33d4dd4e",
+    "source": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "driver": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+    "controller": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+    "contract": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc",
+    "prepared_admission": "38dccba35270518c2d282370a76dd7f437a3e0d4e488e075549a15a124d102ba",
+    "python310": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "baseline": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c"
+  },
+  "input_hashes_after": {
+    "root_admission": "cb3dfaa9c23e65638504987ac1e23a2aa845af6854835696ea82143b33d4dd4e",
+    "source": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "driver": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+    "controller": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+    "contract": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc",
+    "prepared_admission": "38dccba35270518c2d282370a76dd7f437a3e0d4e488e075549a15a124d102ba",
+    "python310": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "baseline": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c"
+  },
+  "input_hashes_unchanged": true,
+  "native_fixture_status": "DRIVER_RETURNED_ZERO",
+  "note": "Root-admitted exact five-case CPU fixture only; no build/GPU/provider/global queue use."
+}

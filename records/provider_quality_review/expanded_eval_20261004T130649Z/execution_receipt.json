@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\expanded_eval_20261004T130649Z\\expanded_evaluator.py"
+  ],
+  "pid": 86844,
+  "exit": 1,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "seconds": 1.25,
+  "fixture_env_removed": true,
+  "evaluator_sha256": "043dfe3444a8ef7d2f9b5524e0c6c44512e4bdd4c020c2558e56df7a7ecb5fb5",
+  "tasklist_after": "INFO: No tasks are running which match the specified criteria.\r\n"
+}

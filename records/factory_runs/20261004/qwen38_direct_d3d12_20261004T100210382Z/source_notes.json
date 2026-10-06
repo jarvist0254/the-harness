@@ -1,0 +1,12 @@
+[
+  "Enumerates physical DXGI adapters excluding software.",
+  "Creates two distinct D3D12 devices with explicit copy queues.",
+  "Allocates 256KiB shared buffer with SHARED_CROSS_ADAPTER heap flags.",
+  "Uses ALLOW_CROSS_ADAPTER resource flag and row-major layout.",
+  "Producer fills deterministic byte pattern and copies to shared buffer.",
+  "Consumer opens shared handle and copies to local readback buffer.",
+  "CPU verifies every byte matches the expected pattern.",
+  "Handles resource state transitions correctly between devices.",
+  "Checks all HRESULTs and uses bounded waits via events.",
+  "No graphics windows or shaders required."
+]

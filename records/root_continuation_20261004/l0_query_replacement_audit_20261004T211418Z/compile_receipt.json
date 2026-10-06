@@ -1,0 +1,112 @@
+{
+  "scope": "ROOT_ADMITTED_COMPILER_ONLY_NO_LINK_NO_RUNTIME",
+  "status": "COMPILE_SUCCEEDED",
+  "result": {
+    "version": 1,
+    "run_id": "l0_query_replacement_compile_only",
+    "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+    "failure_reason": "compiler_root_exited_zero",
+    "containment_policy": "kill_on_close",
+    "workers": [
+      {
+        "worker_id": "compile",
+        "pid": 11976,
+        "exit_code": 0,
+        "assigned": true,
+        "resumed": true
+      }
+    ],
+    "job_active_count": 0,
+    "drain_proof": "CLEANUP",
+    "whole_tree_certificate": false,
+    "logs": {
+      "compile": {
+        "stdout": "**********************************************************************\r\n** Visual Studio 2026 Developer Command Prompt v18.0\r\n** Copyright (c) 2026 Microsoft Corporation\r\n**********************************************************************\r\n[vcvarsall.bat] Environment initialized for: 'x64'\r\nsource.original_untrusted.cpp\r\n",
+        "stdout_bytes": 326,
+        "stdout_overflow": false,
+        "stdout_path": "compile.stdout.log",
+        "stderr": "",
+        "stderr_bytes": 0,
+        "stderr_overflow": false,
+        "stderr_path": "compile.stderr.log"
+      }
+    },
+    "reattach": false,
+    "replay": false
+  },
+  "restart": {
+    "version": 1,
+    "run_id": "l0_query_replacement_compile_only",
+    "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+    "failure_reason": "compiler_root_exited_zero",
+    "containment_policy": "kill_on_close",
+    "workers": [
+      {
+        "worker_id": "compile",
+        "pid": 11976,
+        "exit_code": 0,
+        "assigned": true,
+        "resumed": true
+      }
+    ],
+    "job_active_count": 0,
+    "drain_proof": "CLEANUP",
+    "whole_tree_certificate": false,
+    "logs": {
+      "compile": {
+        "stdout": "**********************************************************************\r\n** Visual Studio 2026 Developer Command Prompt v18.0\r\n** Copyright (c) 2026 Microsoft Corporation\r\n**********************************************************************\r\n[vcvarsall.bat] Environment initialized for: 'x64'\r\nsource.original_untrusted.cpp\r\n",
+        "stdout_bytes": 326,
+        "stdout_overflow": false,
+        "stdout_path": "compile.stdout.log",
+        "stderr": "",
+        "stderr_bytes": 0,
+        "stderr_overflow": false,
+        "stderr_path": "compile.stderr.log"
+      }
+    },
+    "reattach": false,
+    "replay": false
+  },
+  "cleanup_verified": true,
+  "pins_before": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "C:\\Windows\\System32\\cmd.exe": "8dd1ebb0b969370c70a5ee7f7ee347949aa7046aa5e1a33fcd7b1e9415b21fc3",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\link.exe": "3e173cdf4a8ea9493d26ce007da3dba0e053f4002fa981fb47699db0f1da91a3",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe": "c5cecf8e663f105217ff5805bb1d748f7de2fe3767312974b677b3c818883d2c",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe": "65db0d7b4f10ba0f55973fd9356543a556da9ec1c777a0c05f05a0329c8a100a",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.26100.0\\um\\x64\\Cfgmgr32.Lib": "c09d8bbd1512d9b03d0648a82f335b983cd301277fe3551afcedb047f0a0f9ba",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_runs\\suite_1791138717588329600\\suite_receipt.json": "6fd02f03f84a9ef3884210e50c720b70b7873a744b19372155994f784b8c2cdb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\source.original_untrusted.cpp": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+    "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\compile_controller.py": "df6735c7c1f02f26bee2ba3ea3c12a0c3c3c1d053a2d4cd459f2255850fcd257",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\compile_only.cmd": "1d956cfa78f32142016a4203120e829195227971c2265eb5f24f3607458bb041"
+  },
+  "pins_after": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "C:\\Windows\\System32\\cmd.exe": "8dd1ebb0b969370c70a5ee7f7ee347949aa7046aa5e1a33fcd7b1e9415b21fc3",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\link.exe": "3e173cdf4a8ea9493d26ce007da3dba0e053f4002fa981fb47699db0f1da91a3",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe": "c5cecf8e663f105217ff5805bb1d748f7de2fe3767312974b677b3c818883d2c",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe": "65db0d7b4f10ba0f55973fd9356543a556da9ec1c777a0c05f05a0329c8a100a",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.26100.0\\um\\x64\\Cfgmgr32.Lib": "c09d8bbd1512d9b03d0648a82f335b983cd301277fe3551afcedb047f0a0f9ba",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_runs\\suite_1791138717588329600\\suite_receipt.json": "6fd02f03f84a9ef3884210e50c720b70b7873a744b19372155994f784b8c2cdb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\source.original_untrusted.cpp": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+    "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\compile_controller.py": "df6735c7c1f02f26bee2ba3ea3c12a0c3c3c1d053a2d4cd459f2255850fcd257",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\compile_only.cmd": "1d956cfa78f32142016a4203120e829195227971c2265eb5f24f3607458bb041"
+  },
+  "hashes_unchanged": true,
+  "provider_tests_executed": false,
+  "candidate_runtime_executed": false
+}

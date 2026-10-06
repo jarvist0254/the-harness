@@ -1,0 +1,33 @@
+{
+  "changes": [
+    {
+      "search": "    // TODO: Clean up this logic to pick src1 type by capability\n    // Reformat and convert to fp16 if non-contiguous, or for coopmat2 for better perf\n    const bool x_non_contig = (ctx->device->coopmat2 && src0->type == GGML_TYPE_F32) ||\n                              !ggml_vk_dim01_contiguous(src0);\n    // If src0 is BF16, try to use a BF16 x BF16 multiply\n    ggml_type f16_type = src0->type == GGML_TYPE_BF16 ? GGML_TYPE_BF16 : GGML_TYPE_F16;",
+      "replace": "    // TODO: Clean up this logic to pick src1 type by capability\n    // Reformat and convert to fp16 if non-contiguous, or for coopmat2 for better perf\n    const bool x_non_contig = (ctx->device->coopmat2 && src0->type == GGML_TYPE_F32) ||\n                              !ggml_vk_dim01_contiguous(src0);\n    // If src0 is BF16, try to use a BF16 x BF16 multiply\n    const bool f32_preserve = src0->type == GGML_TYPE_F32 && src1->type == GGML_TYPE_F32 && !ctx->device->fp16 && !ctx->device->coopmat_support && !ctx->device->coopmat2;\n    ggml_type f16_type = f32_preserve ? GGML_TYPE_F32 : (src0->type == GGML_TYPE_BF16 ? GGML_TYPE_BF16 : GGML_TYPE_F16);"
+    },
+    {
+      "search": "    const uint64_t qx_sz = ggml_type_size(src0->type) * x_ne / ggml_blck_size(src0->type);\n    const uint64_t qy_sz = ggml_type_size(src1->type) * y_ne / ggml_blck_size(src1->type);\n    const uint64_t x_sz = !qx_needs_dequant ? qx_sz : sizeof(ggml_fp16_t) * x_ne;",
+      "replace": "    const uint64_t qx_sz = ggml_type_size(src0->type) * x_ne / ggml_blck_size(src0->type);\n    const uint64_t qy_sz = ggml_type_size(src1->type) * y_ne / ggml_blck_size(src1->type);\n    const uint64_t x_sz = !qx_needs_dequant ? qx_sz : ggml_type_size(f16_type) * x_ne;"
+    },
+    {
+      "search": "    const uint64_t y_sz = quantize_y ? (ggml_vk_align_size(y_ne, 128) * ggml_type_size(GGML_TYPE_Q8_1) / ggml_blck_size(GGML_TYPE_Q8_1)) : (y_f32_kernel ? sizeof(float) * y_ne : sizeof(ggml_fp16_t) * y_ne);",
+      "replace": "    const uint64_t y_sz = quantize_y ? (ggml_vk_align_size(y_ne, 128) * ggml_type_size(GGML_TYPE_Q8_1) / ggml_blck_size(GGML_TYPE_Q8_1)) : ggml_type_size(y_f32_kernel ? GGML_TYPE_F32 : f16_type) * y_ne;"
+    }
+  ],
+  "rationale": [
+    "(1) Adds f32_preserve only when both src0 and src1 are GGML_TYPE_F32 and device fp16, coopmat_support, and coopmat2 are all false. Under that predicate f16_type is GGML_TYPE_F32 so later map lookups request F32 pipelines. Otherwise f16_type stays the original BF16-if-src0-BF16 else F16 selection.",
+    "(2) Staged X bytes use ggml_type_size(f16_type) * x_ne when qx_needs_dequant is true, and the original qx_sz when it is false. Direct qx_sz and qy_sz formulas are unchanged.",
+    "(3) The quantize_y Q8_1 alignment formula is unchanged. The non-quantized Y size is ggml_type_size(y_f32_kernel ? GGML_TYPE_F32 : f16_type) * y_ne, so the byte count follows the selected type: F32 when y_f32_kernel is true, otherwise f16_type.",
+    "Under the admitted all-F32, no-fp16, no-coopmat predicate, quantize_y is cleared because ggml_vk_get_mul_mat_mat_pipeline_map for F32/Q8_1 returns nullptr and the existing null-map fallback sets quantize_y false. F32 input alone does not disable it, and device integer_dot_product alone does not prove the Q8_1 path stays enabled. The shown FP32-only shader list registers F32/F32, F32/F16, F16/F16, F16/F32, and BF16/BF16 matmul pipelines, not an F32/Q8_1 map.",
+    "If applied, this patch changes staging allocation sizes and copy-pipeline selection for that predicate. It is unapplied. No runtime branch trace or causation is proven. The remaining 3 model mismatches are not solved by static review. Gemini findings[] empty and verdict PASS are static-review evidence only, not execution approval.",
+    "Optional trace suggestion, not a fourth edit: a separately labelled log of f32_preserve, f16_type, quantize_y after the null-map fallback, qx_needs_dequant, qy_needs_dequant, y_f32_kernel, x_sz, and y_sz could be added later if root wants a branch trace. It is not part of this patch."
+  ],
+  "safety_checks": [
+    "Predicate is only src0->type == GGML_TYPE_F32 && src1->type == GGML_TYPE_F32 && !ctx->device->fp16 && !ctx->device->coopmat_support && !ctx->device->coopmat2. Selected type is GGML_TYPE_F32 under that predicate and the original BF16/F16 choice otherwise.",
+    "x_non_contig and y_non_contig expressions are unmodified. Layout staging flags stay as written.",
+    "X size is qx_sz on the direct path and ggml_type_size(f16_type) * x_ne on the staged path. qx_sz and qy_sz formulas are unchanged.",
+    "Non-quantized Y size is ggml_type_size(y_f32_kernel ? GGML_TYPE_F32 : f16_type) * y_ne. The Q8_1 quantize_y alignment formula is textually unchanged.",
+    "quantize_y under this predicate is disabled by the missing F32/Q8_1 pipeline-map fallback, not by F32 input alone. integer_dot_product by itself is not proof the quant path remains on.",
+    "Pipeline map lookups, GGML_ASSERT(mmp_map != nullptr), other assertions, cache identity, sync, padding, prealloc limits, descriptor ranges, offsets, direct qx/qy, split_k, and the quantized legacy formula stay in place. No CPU fallback, tolerance change, vector change, or MUL_MAT_ID broadening.",
+    "The proposed patch changes staging allocation and copy selection behavior for this predicate, and it remains unapplied. Static review does not prove a runtime branch trace, does not prove causation, and does not clear the remaining 3 model mismatches."
+  ]
+}

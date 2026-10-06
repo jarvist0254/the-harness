@@ -1,0 +1,10 @@
+{
+  "pid": 6168,
+  "exit_code": "0",
+  "source_sha256": "5D52219D3948BA75E82C475CB8AFD71B1ADD5E07A1841961F5480C99781FBFCA",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile_retry.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile_retry.stderr.log",
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\compile_logits_fixture.cmd",
+  "ran_executable": false,
+  "retry_reason": "first attempt used nonexistent MSVC folder 14.51.36246; actual vcvars path is 14.51.36231"
+}

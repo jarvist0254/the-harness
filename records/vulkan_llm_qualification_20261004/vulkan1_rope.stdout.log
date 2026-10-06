@@ -1,0 +1,15 @@
+Testing 3 devices
+
+Backend 1/3: Vulkan0
+  Skipping
+Backend 2/3: Vulkan1
+  Device description: AMD Radeon(TM) Graphics
+  Device memory: 48379 MB (45960 MB free)
+
+  ROPE(type=f32,ne_a=[128,32,2,1],n_dims=128,mode=0,n_ctx=512,fs=1.000000,ef=0.000000,af=1.000000,ff=0,v=0,inplace=0,n_offs=0): [1;32mOK[0m
+  1/1 tests passed
+  Backend Vulkan1: [1;32mOK[0m
+Backend 3/3: CPU
+  Skipping
+3/3 backends passed
+[1;32mOK[0m

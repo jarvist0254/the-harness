@@ -1,0 +1,15 @@
+{
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z",
+  "maximum_provider_jobs": 4,
+  "source_sha256": "60391680917cbbe84fe432596c399dccc064c1fc5658a1cc6401c5becf8b0f21",
+  "root_cause_contract": "TypednativeBOOL0 differsfromCPythonwrapperNone; terminalemissionmustfollowreleasechecks; onesharedcleanupdeadline",
+  "provider_order": [
+    "Qwenimplementation",
+    "GeminiactualsourceReview",
+    "GrokactualfindingsEdit",
+    "optionalGeminiFinalReview"
+  ],
+  "actual_native_children": 0,
+  "authorized_native_maximum_each_qwen_deepseek": 10,
+  "no_manager_import_or_fixture_execution": true
+}

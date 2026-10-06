@@ -1,0 +1,33 @@
+{
+  "input_count": 25,
+  "mismatches": [],
+  "pins_after": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\cpu_stub_controller_phase_pinned.py": "5e9b5964bf0805fd9d91a48ff65f23e84d85c63b96d4ba1293a9a8bd63ee3c4d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.cpp": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.cpp": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.o": "888754880338f9752254dab8a6173239cff630f366716e11f8a4c7705efa6b80",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.o": "ab9ec1703fe507cb8f043b51646f79a92f640f02e02627cbe4f8b0d786eac1f1",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_cpu_fake": "1b889f1f11884b8b9d0cd92fb7badd3c6468035cdea8a3a4ac358f6535e27c40",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\test_receipt_requirements.py": "8b8565714c70fdbd0fe0ce063d0b376c83d76aa8b2da34d717cc122060ae16ca",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\test_extended_receipt_requirements.py": "112888e31170da74fc01a73f6d03089ef4e85cc1abb7d36fa2ad2b34158f9deb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\requirements_RED.stderr.log": "4eac979513a1804c8e288248d63b7093bbce24da975f5dd1ce1b1e5ba17ec8a5",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\STATIC_REVIEW.md": "b6b1abe7b9614f909ff82632edcea314b2b020bc233ced495237071e49c4e7b2",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\RESIDUAL_GAPS.md": "84fb68961fcab67da396fae27a3b5228159df75f838f32b8b4f973cdda1f0710",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\symbol_inspection_20261004T225008Z\\INSPECTION_RECEIPT.json": "599195da11af41607a729e559fdf8af1b023b88cd9b6c5d9e2c294aa9a9c9840",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\symbol_inspection_20261004T225008Z\\01_filtered_symbols.stdout.bin": "662769c37aa7a561685b711550bd1632f9f4baa8c1b92397a105480c9bc9886d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\ROOT_SYMBOL_INSPECTION_ADMISSION.json": "4e9f53a981046a96d377a3bcb1bf713dd73b2f57736520609e7a1ae8a61b9fce",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\05_defined_fake_symbols.receipt.json": "707c2f4b42521ed828e163c7ebe170ab821157da01a8cb2b825157a7abbc6c3f",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\BUILD_ADJUDICATION_REFUSED.json": "06d77b5bf7caf41c089be61b997d8c635edf9a44a430f13aeb656a6726e0eb7f",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\OVERFLOW_HASH_PATH_CLARIFICATION.json": "aa54a5b4f6b80963fef19565742114a47f651b15f89095e87f64d38e0fdb3a06",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\compile_receipt.json": "efc885fd3e8d0e0e2d85e07ee771ca04de33e534cac13ae8b8e65d104b8070db",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\controller.diff": "de142b8d1cd4c6e84249e828fe0b1b3fb3b207c381222609d819158031829a82",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\cpu_stub_controller_DRAFT.py": "856cd956a38f91a40e6b41aef2de691cc9106fb2c68cebe8574c1fc48e6f7550",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\derivation_receipt.json": "6abb5e93118725640b5e6f4205f6d6af7e0015e4516fac4137e46414f375cec6",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\object_compile_controller.py": "c751526a40b8e22bc155f8e92d3ce7eba3e522e62b6546db87259fe9c80a068d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\requirements_RED.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\source.diff": "630f372ea63236f40cd19516fc216ed8fcec07364526c7c198d7952647c3fffb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub.diff": "8e4330d273ddd524b3238e9dbbb73293628018cd27991d27dde63af04c0ced38"
+  },
+  "admission_sha256": "021245e3fa4de8ea74e17f07d9a9733f853dd9638bb9579cea1ad5355c00351b",
+  "original_admission_sha256": "021245e3fa4de8ea74e17f07d9a9733f853dd9638bb9579cea1ad5355c00351b"
+}

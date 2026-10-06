@@ -1,0 +1,25 @@
+{
+  "status": "SOURCE_ONLY_PENDING_ROOT_ADMISSION",
+  "scope": "One read-only filtered symbol inspection, no rebuild/no executable run",
+  "argv": [
+    "C:/Windows/System32/wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--exec",
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=2s",
+    "5s",
+    "/bin/bash",
+    "-o",
+    "pipefail",
+    "-c",
+    "/usr/bin/readelf -Ws /mnt/e/the_harness/records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/peer_copy_cpu_fake | /usr/bin/awk '$7 == \"UND\" || $8 ~ /^ze/ {print} END {print \"FULL_TABLE_ROWS\", NR}'"
+  ],
+  "rationale": "Every undefined symbol and every ze-prefixed defined symbol is retained; no relevant dynamic-load/GPU symbol is discarded. Pipeline failure propagates via pipefail. Full row count is diagnostic only, not completeness authentication.",
+  "stream_cap_bytes": 131072,
+  "outer_seconds": 12,
+  "executable_sha256": "1b889f1f11884b8b9d0cd92fb7badd3c6468035cdea8a3a4ac358f6535e27c40",
+  "source_sha256": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+  "fake_source_sha256": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2"
+}

@@ -1,0 +1,238 @@
+{
+  "candidate_module_imported": true,
+  "cases": [
+    {
+      "case": "baseline",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "missing_paths_invented_spans",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "string_claim",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "integer_claim",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "duplicate_artifact_name",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "consumer_without_producer",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "contradictory_payload_claim",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "string_false_operation",
+      "result": {
+        "accepted_prerequisites": [
+          "prep_only:no allocation or GPU work"
+        ],
+        "errors": [],
+        "notes": [
+          "No physical transport qualification; declared prerequisites only"
+        ],
+        "ok": true,
+        "rejected_claims": [],
+        "schema_version": "INTEL_L0_EGL_DMA_BUF_PREP_v1",
+        "status": "ANALYSIS",
+        "unresolved_gates": [
+          "intel_raw_l0_export_linear_layout",
+          "intel_raw_l0_cache_flush_or_visibility",
+          "l0_to_egl_fence_bridge",
+          "physical_backing_residency",
+          "p2p_transport_measurement",
+          "native_linux_runtime",
+          "windows_wsl_support",
+          "minigbm_symbol_binding_and_l0_import_qualification",
+          "vulkan_conflict_preserved"
+        ]
+      }
+    },
+    {
+      "case": "malformed_producer_type",
+      "detail": "'list' object has no attribute 'get'",
+      "exception": "AttributeError"
+    }
+  ],
+  "guard_observations": {
+    "blocked_imports": [],
+    "blocked_open": [],
+    "native_calls": 0,
+    "process_calls": 0
+  },
+  "native_api_execution": false,
+  "native_calls": 0,
+  "network_calls": 0,
+  "note": "Candidate validator functions were called on owned JSON fixtures only; no GPU/API/ctypes/process/network operation occurred.",
+  "process_calls": 0,
+  "source_sha256": "9da36c9700d1ecedde8f63913d4d72a953bfaf572e87df6753fc8388ca9742b0"
+}

@@ -1,0 +1,41 @@
+{
+  "unknown_closed_usage_jobs": 15,
+  "scope": "READ_ONLY_STATUS_NO_ADDITIONAL_LAUNCH",
+  "new_five_wave_status": "PREPARATION_ONLY_NO_PROVIDER_LAUNCH",
+  "gemini_collector_revision": "PREPARATION_ONLY_PENDING_ROOT_READ_ADMISSION",
+  "remaining_gates": [
+    "Actualconsumer stop/DONE/model/usage/strictartifact schema",
+    "Allprovider source remains untrusted untilROOT static/API/behavior/native admission",
+    "Gemini collector actualsource/Muse semantic review pending exactlaunch admission",
+    "Five newworkhorse packets pendingROOT source/provenance/diff review",
+    "NoIntelhardware/directP2P/fourphysicalcapacity qualification"
+  ],
+  "Qwen_closed_observed_tokens": 1204873,
+  "source_accepted_since_2231UTC": 0,
+  "manager_closed_usage_observed": 1664124,
+  "manager_closed_ledger": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\SCOPED_RESUME_40_CLOSED_PLUS_CONSUMER_LIVE.json",
+  "new_terminal_outputs_since_2231UTC": [],
+  "utc": "2026-10-04T22:40:40.6299292Z",
+  "credits_not_tokens": true,
+  "live_provider_jobs": {
+    "model": "qwen3.8-max",
+    "usage": "UNKNOWN_PENDING_FINAL",
+    "job": "qwen_nv_egl_payload_consumer",
+    "wrapper_pid": 6344,
+    "session": 99295,
+    "latest": {
+      "usage_known": false,
+      "http": 200,
+      "observed_model": "qwen3.8-max",
+      "reasoning_bytes": 167286,
+      "finish_reason": null,
+      "content_bytes": 0,
+      "raw_bytes": 3507518,
+      "frames": 12936,
+      "done": false,
+      "seconds": 815.33
+    },
+    "worker_pid": 26840,
+    "http": 200
+  }
+}

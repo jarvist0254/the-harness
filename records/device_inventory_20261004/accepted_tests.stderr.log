@@ -1,0 +1,36 @@
+test_actual_captured_unit_headers_and_identity (j_link.tests.test_device_inventory.CapturedNvidiaTests) ... ok
+test_arbitrary_total_unit_is_not_stripped (j_link.tests.test_device_inventory.CapturedNvidiaTests) ... ok
+test_duplicate_canonical_header_refused (j_link.tests.test_device_inventory.CapturedNvidiaTests) ... ok
+test_free_unknown_unit_is_not_stripped (j_link.tests.test_device_inventory.CapturedNvidiaTests) ... ok
+test_live_fixture_age_is_rechecked (j_link.tests.test_device_inventory.CapturedNvidiaTests) ... ok
+test_8hex_nv_and_4hex_amd_same_identity_no_resurrection (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_8hex_nvidia_canonical_4hex_and_dedup (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_admission_rechecks_stale_at_later_now (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_future_timestamp_not_admitted (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_kind_and_total_contradiction_tombstone (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_missing_physical_id_refused (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_naive_timestamp_and_naive_now_refused (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_nonintegral_floats_rejected (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_quoted_csv_name_and_declared_header (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_same_name_does_not_dedup (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_segment_above_ffff_and_device_32_rejected (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_unknown_classification_fail_closed (j_link.tests.test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_eligible_and_refused (j_link.tests.test_device_inventory.TestAdmissionSnapshot) ... ok
+test_shared_refused_for_dedicated (j_link.tests.test_device_inventory.TestAdmissionSnapshot) ... ok
+test_unknown_free_not_allocatable (j_link.tests.test_device_inventory.TestAdmissionSnapshot) ... ok
+test_amd_json_dedicated (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_amd_shared_not_vram (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_amd_unsupported_schema_rejected (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_intel_json_valid (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_invalid_bool_memory (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_missing_pci_unqualified (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_nonzero_exit_refusal (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_nvidia_csv_valid (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_nvidia_na_memory (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_stale_sample (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+test_vendor_contradiction_conflict (j_link.tests.test_device_inventory.TestNormalizeInventory) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.006s
+
+OK

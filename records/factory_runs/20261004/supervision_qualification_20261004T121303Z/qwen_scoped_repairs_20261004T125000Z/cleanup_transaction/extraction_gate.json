@@ -1,0 +1,31 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\qwen_scoped_repairs_20261004T125000Z\\cleanup_transaction\\contained_supervisor.cleanup_candidate.py",
+  "sha256": "34e7b319aa54f88526bc345df29c1f27a3d8dc915a25ea69886915d2a8926943",
+  "source_gate": "AST_ONLY_PASS_NO_IMPORT",
+  "test_gate": "AST_ONLY_PASS_NO_IMPORT",
+  "replacements": [
+    {
+      "index": 0,
+      "count": 1
+    },
+    {
+      "index": 1,
+      "count": 1
+    },
+    {
+      "index": 2,
+      "count": 1
+    },
+    {
+      "index": 3,
+      "count": 1
+    },
+    {
+      "index": 4,
+      "count": 1
+    }
+  ],
+  "baseline_sha256": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+  "scope": "cleanup_transaction",
+  "execution_admitted": false
+}

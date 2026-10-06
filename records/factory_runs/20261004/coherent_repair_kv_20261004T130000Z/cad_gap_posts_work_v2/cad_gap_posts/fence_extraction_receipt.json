@@ -1,0 +1,8 @@
+{
+  "provider_format": "PYTHON_FENCES_NOT_REQUESTED_JSON",
+  "raw_terminal": "ERROR_ArgumentException_JSON_SCHEMA_DEVIATION",
+  "api_result": "HTTP200_FINISH_STOP",
+  "blocks": 2,
+  "extraction": "EXACT_FENCED_CONTENT_NO_SOURCE_EDITS",
+  "imports_execution": "NOT_RUN"
+}

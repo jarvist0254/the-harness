@@ -1,0 +1,15 @@
+{
+  "manifest_generated": "2026-10-04 03:38:48 local",
+  "pinned_repo": "repos/llama.cpp",
+  "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "tracked_and_untracked_dirty_path_count": 126,
+  "cmake": "cmake version 4.0.2",
+  "ninja": "1.11.1.git.kitware.jobserver-1",
+  "vs_root": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community",
+  "cl_version": "19.51.36246.0",
+  "glslc_on_path": false,
+  "vulkaninfo_on_path": true,
+  "vulkan_loader_exists": true,
+  "current_sdk": "1.4.363.0",
+  "current_sdk_sha256": "94a82d378f7a5e3e54c9db7d2fb7016af136e14ac0a18dbf0f2f67a36352d141"
+}

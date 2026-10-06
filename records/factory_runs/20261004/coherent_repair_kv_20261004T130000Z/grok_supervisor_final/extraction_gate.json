@@ -1,0 +1,20 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_supervisor_final\\contained_supervisor.grok_final.py",
+  "sha256": "60391680917cbbe84fe432596c399dccc064c1fc5658a1cc6401c5becf8b0f21",
+  "spans": [
+    {
+      "index": 0,
+      "count": 1
+    },
+    {
+      "index": 1,
+      "count": 1
+    },
+    {
+      "index": 2,
+      "count": 1
+    }
+  ],
+  "gate": "AST_ONLY_PASS_NO_IMPORT",
+  "runtime_admitted": false
+}

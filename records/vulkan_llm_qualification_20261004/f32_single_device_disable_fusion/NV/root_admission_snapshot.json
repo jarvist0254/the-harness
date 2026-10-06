@@ -1,0 +1,47 @@
+{
+  "actual_context": 256,
+  "admission": "Root chat admission; bounded single-device F32/KV-F32 diagnostics",
+  "atol": 0.01,
+  "batch": 32,
+  "binary_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "device": "Vulkan0",
+  "model_bytes": 2390150816,
+  "model_sha256": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+  "numeric_parity_failure": "valid diagnostic; continue to the other independent single-device baseline only if execution gates and cleanup are sound",
+  "outer_timeout_seconds": 60,
+  "requested_context": 128,
+  "reverse_or_corruption_controls": "not admitted in this task",
+  "rtol": 0.01,
+  "runtime_env_delta": {
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1"
+  },
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "stop_if": [
+    "timeout",
+    "native API uncertainty",
+    "less than 29/29 layer offload",
+    "wrong device/KV types",
+    "input hash change"
+  ],
+  "threads": 4,
+  "tokens": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "ubatch": 32
+}

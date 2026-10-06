@@ -1,0 +1,9 @@
+{
+  "source_binding_note": "ROOT launch receipt binds actual Gemini review194e; earlier preparation Qwen source field remains preserved",
+  "prompt_sha256": "638b2b81bb7fa2b23a0e43b5d76ff1441cb40f253b4db893ca9ca8a0274eb8a5",
+  "source_before_sha256": "194e15e75747a10410889519f32d36d708a07c619053abe5d95b9854bafa2216",
+  "wrapper_pid": 7748,
+  "actual_source": "gemini_shared_host_review/review.structured_output.extracted.json",
+  "admission_sha256": "abb9728d2a3017a6c8465d3d2c4a9bf519ac0dacfdf2062c300d351155193f87",
+  "utc": "2026-10-04T17:25:44.9918424Z"
+}

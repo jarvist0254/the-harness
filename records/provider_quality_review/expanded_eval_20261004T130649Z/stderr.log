@@ -1,0 +1,381 @@
+test_blocked_reader_uncertain (__main__.SupervisorExpanded) ... ok
+test_cancel_during_join (__main__.SupervisorExpanded) ... FAIL
+test_close_first (__main__.SupervisorExpanded) ... FAIL
+test_close_job_false (__main__.SupervisorExpanded) ... FAIL
+test_close_reader (__main__.SupervisorExpanded) ... FAIL
+test_close_root_thread (__main__.SupervisorExpanded) ... FAIL
+test_exit_raises (__main__.SupervisorExpanded) ... FAIL
+test_first_pipe (__main__.SupervisorExpanded) ... ok
+test_first_thread_construct (__main__.SupervisorExpanded) ... ok
+test_first_thread_start (__main__.SupervisorExpanded) ... ok
+test_log_write (__main__.SupervisorExpanded) ... ok
+test_native_broken_pipe_healthy_eof (__main__.SupervisorExpanded) ... ok
+test_pipe_bad_data (__main__.SupervisorExpanded) ... FAIL
+test_pipe_bool_error (__main__.SupervisorExpanded) ... FAIL
+test_pipe_error_code (__main__.SupervisorExpanded) ... FAIL
+test_pipe_raises (__main__.SupervisorExpanded) ... FAIL
+test_query_failure (__main__.SupervisorExpanded) ... ok
+test_query_raises (__main__.SupervisorExpanded) ... FAIL
+test_receipt_write (__main__.SupervisorExpanded) ... ok
+test_resumed_journal (__main__.SupervisorExpanded) ... ok
+test_second_assign (__main__.SupervisorExpanded) ... ok
+test_second_pipe (__main__.SupervisorExpanded) ... FAIL
+test_second_process_create (__main__.SupervisorExpanded) ... ok
+test_second_resume (__main__.SupervisorExpanded) ... ok
+test_second_thread_construct (__main__.SupervisorExpanded) ... FAIL
+test_second_thread_start (__main__.SupervisorExpanded) ... FAIL
+test_start_journal (__main__.SupervisorExpanded) ... ok
+test_stderr_duplicate (__main__.SupervisorExpanded) ... FAIL
+test_stdin_duplicate (__main__.SupervisorExpanded) ... ok
+test_stdout_duplicate (__main__.SupervisorExpanded) ... ok
+test_successful_fake_baseline (__main__.SupervisorExpanded) ... ok
+test_terminal_journal (__main__.SupervisorExpanded) ... ok
+test_terminate_false (__main__.SupervisorExpanded) ... FAIL
+test_terminate_raises (__main__.SupervisorExpanded) ... FAIL
+test_wait_failed (__main__.SupervisorExpanded) ... ok
+test_wait_raises (__main__.SupervisorExpanded) ... FAIL
+test_wait_timeout (__main__.SupervisorExpanded) ... ok
+test_bad_artifact_trust (__main__.ValidatorExpanded) ... ok
+test_control_dimensions_only (__main__.ValidatorExpanded) ... FAIL
+test_control_physical_ids_only (__main__.ValidatorExpanded) ... FAIL
+test_cpu_participants_consistent_host_memory (__main__.ValidatorExpanded) ... FAIL
+test_failed_four_success_only (__main__.ValidatorExpanded) ... FAIL
+test_four_baseline (__main__.ValidatorExpanded) ... ok
+test_highwater_only_zero (__main__.ValidatorExpanded) ... FAIL
+test_missing_four_success_only (__main__.ValidatorExpanded) ... FAIL
+test_missing_gpu_completion_only (__main__.ValidatorExpanded) ... FAIL
+test_missing_tolerance_declaration (__main__.ValidatorExpanded) ... FAIL
+test_no_gpu_llm_consistent_control_ids (__main__.ValidatorExpanded) ... FAIL
+test_nonnumeric_control_exit (__main__.ValidatorExpanded) ... ok
+test_observed_failed_llm_parity (__main__.ValidatorExpanded) ... ok
+test_only_three_card_count (__main__.ValidatorExpanded) ... FAIL
+test_other_participants (__main__.ValidatorExpanded) ... FAIL
+test_rmse_only_contradiction (__main__.ValidatorExpanded) ... FAIL
+test_unbound_llm_model (__main__.ValidatorExpanded) ... FAIL
+test_unrelated_control_workload_only (__main__.ValidatorExpanded) ... FAIL
+
+======================================================================
+FAIL: test_cancel_during_join (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 185, in test_cancel_during_join
+    l,a,k,r,e=self.exercise(mode='CANCEL_JOIN');self.assertIsNone(e);self.assertEqual(r['status'],'CANCELLED')
+AssertionError: 'PROCESS_COMPLETED' != 'CANCELLED'
+- PROCESS_COMPLETED
++ CANCELLED
+
+
+======================================================================
+FAIL: test_close_first (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 174, in test_close_first
+    def test_close_first(self):self.close_failure(close_at=1)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 173, in close_failure
+    l,a,k,r,e=self.exercise(**kw);self.assertTrue(l.all_attempted(),'One close failure cannot prevent later closes');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP','Failed handle release cannot be called cleanup-proven')
+AssertionError: False is not true : Failed handle release cannot be called cleanup-proven
+
+======================================================================
+FAIL: test_close_job_false (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 177, in test_close_job_false
+    def test_close_job_false(self):self.close_failure(job_close_false=True)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 173, in close_failure
+    l,a,k,r,e=self.exercise(**kw);self.assertTrue(l.all_attempted(),'One close failure cannot prevent later closes');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP','Failed handle release cannot be called cleanup-proven')
+AssertionError: False is not true : Failed handle release cannot be called cleanup-proven
+
+======================================================================
+FAIL: test_close_reader (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 175, in test_close_reader
+    def test_close_reader(self):self.close_failure(close_at=6)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 173, in close_failure
+    l,a,k,r,e=self.exercise(**kw);self.assertTrue(l.all_attempted(),'One close failure cannot prevent later closes');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP','Failed handle release cannot be called cleanup-proven')
+AssertionError: False is not true : Failed handle release cannot be called cleanup-proven
+
+======================================================================
+FAIL: test_close_root_thread (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 176, in test_close_root_thread
+    def test_close_root_thread(self):self.close_failure(close_at=15)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 173, in close_failure
+    l,a,k,r,e=self.exercise(**kw);self.assertTrue(l.all_attempted(),'One close failure cannot prevent later closes');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP','Failed handle release cannot be called cleanup-proven')
+AssertionError: False is not true : Failed handle release cannot be called cleanup-proven
+
+======================================================================
+FAIL: test_exit_raises (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 169, in test_exit_raises
+    def test_exit_raises(self):self.termination_waits(exit_error=True)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 163, in termination_waits
+    self.assertTrue(all(any(c[0]=='wait_root' and c[1]==p for c in a.calls) for p,t in a.roots),'Every exact owned root still needs wait attempts');self.assertTrue(l.all_attempted(),'Cleanup cannot skip owned handles');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP')
+AssertionError: False is not true : Cleanup cannot skip owned handles
+
+======================================================================
+FAIL: test_pipe_bad_data (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 180, in test_pipe_bad_data
+    def test_pipe_bad_data(self):self.read_rejects('BAD')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 179, in read_rejects
+    l,a,k,r,e=self.exercise(read=read);self.assertTrue(r is None or r['status']!='PROCESS_COMPLETED','Pipe errors cannot silently complete');self.assertTrue(l.all_attempted())
+AssertionError: False is not true : Pipe errors cannot silently complete
+
+======================================================================
+FAIL: test_pipe_bool_error (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 181, in test_pipe_bool_error
+    def test_pipe_bool_error(self):self.read_rejects('BOOL_ERROR')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 179, in read_rejects
+    l,a,k,r,e=self.exercise(read=read);self.assertTrue(r is None or r['status']!='PROCESS_COMPLETED','Pipe errors cannot silently complete');self.assertTrue(l.all_attempted())
+AssertionError: False is not true : Pipe errors cannot silently complete
+
+======================================================================
+FAIL: test_pipe_error_code (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 182, in test_pipe_error_code
+    def test_pipe_error_code(self):self.read_rejects('ERR_CODE')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 179, in read_rejects
+    l,a,k,r,e=self.exercise(read=read);self.assertTrue(r is None or r['status']!='PROCESS_COMPLETED','Pipe errors cannot silently complete');self.assertTrue(l.all_attempted())
+AssertionError: False is not true : Pipe errors cannot silently complete
+
+======================================================================
+FAIL: test_pipe_raises (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 183, in test_pipe_raises
+    def test_pipe_raises(self):self.read_rejects('ERROR')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 179, in read_rejects
+    l,a,k,r,e=self.exercise(read=read);self.assertTrue(r is None or r['status']!='PROCESS_COMPLETED','Pipe errors cannot silently complete');self.assertTrue(l.all_attempted())
+AssertionError: False is not true : Pipe errors cannot silently complete
+
+======================================================================
+FAIL: test_query_raises (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 170, in test_query_raises
+    def test_query_raises(self):self.termination_waits(query='RAISE')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 163, in termination_waits
+    self.assertTrue(all(any(c[0]=='wait_root' and c[1]==p for c in a.calls) for p,t in a.roots),'Every exact owned root still needs wait attempts');self.assertTrue(l.all_attempted(),'Cleanup cannot skip owned handles');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP')
+AssertionError: False is not true : Cleanup cannot skip owned handles
+
+======================================================================
+FAIL: test_second_pipe (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 145, in test_second_pipe
+    def test_second_pipe(self):self.allocation(pipe=2)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 143, in allocation
+    l,a,k,r,e=self.exercise(n=kw.pop('n',1),**kw);self.assertTrue(l.exact_once(),'All successfully allocated handles must close exactly once')
+AssertionError: False is not true : All successfully allocated handles must close exactly once
+
+======================================================================
+FAIL: test_second_thread_construct (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 150, in test_second_thread_construct
+    def test_second_thread_construct(self):self.allocation(construct=2)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 143, in allocation
+    l,a,k,r,e=self.exercise(n=kw.pop('n',1),**kw);self.assertTrue(l.exact_once(),'All successfully allocated handles must close exactly once')
+AssertionError: False is not true : All successfully allocated handles must close exactly once
+
+======================================================================
+FAIL: test_second_thread_start (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 152, in test_second_thread_start
+    def test_second_thread_start(self):self.allocation(start=2)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 143, in allocation
+    l,a,k,r,e=self.exercise(n=kw.pop('n',1),**kw);self.assertTrue(l.exact_once(),'All successfully allocated handles must close exactly once')
+AssertionError: False is not true : All successfully allocated handles must close exactly once
+
+======================================================================
+FAIL: test_stderr_duplicate (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 148, in test_stderr_duplicate
+    def test_stderr_duplicate(self):self.allocation(dup=3)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 143, in allocation
+    l,a,k,r,e=self.exercise(n=kw.pop('n',1),**kw);self.assertTrue(l.exact_once(),'All successfully allocated handles must close exactly once')
+AssertionError: False is not true : All successfully allocated handles must close exactly once
+
+======================================================================
+FAIL: test_terminate_false (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 164, in test_terminate_false
+    def test_terminate_false(self):self.termination_waits(termination='FALSE',read='BAD')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 162, in termination_waits
+    at=next(i for i,x in enumerate(l.events) if x[0]=='terminate_job');self.assertTrue(all(any(c[0]=='wait_root' and c[1]==p for c in l.events[at+1:]) for p,t in a.roots),'Failed job termination must not skip subsequent root waits')
+AssertionError: False is not true : Failed job termination must not skip subsequent root waits
+
+======================================================================
+FAIL: test_terminate_raises (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 165, in test_terminate_raises
+    def test_terminate_raises(self):self.termination_waits(termination='RAISE',read='BAD')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 162, in termination_waits
+    at=next(i for i,x in enumerate(l.events) if x[0]=='terminate_job');self.assertTrue(all(any(c[0]=='wait_root' and c[1]==p for c in l.events[at+1:]) for p,t in a.roots),'Failed job termination must not skip subsequent root waits')
+AssertionError: False is not true : Failed job termination must not skip subsequent root waits
+
+======================================================================
+FAIL: test_wait_raises (__main__.SupervisorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 166, in test_wait_raises
+    def test_wait_raises(self):self.termination_waits(wait='RAISE')
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 163, in termination_waits
+    self.assertTrue(all(any(c[0]=='wait_root' and c[1]==p for c in a.calls) for p,t in a.roots),'Every exact owned root still needs wait attempts');self.assertTrue(l.all_attempted(),'Cleanup cannot skip owned handles');self.assertTrue(r is None or r.get('drain_proof')!='CLEANUP')
+AssertionError: False is not true : Every exact owned root still needs wait attempts
+
+======================================================================
+FAIL: test_control_dimensions_only (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 242, in test_control_dimensions_only
+    b=self.fixture(['TWO_VENDOR_NUMERICAL']);b['controls'][0]['dimensions']=[2,4];self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_control_physical_ids_only (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 244, in test_control_physical_ids_only
+    b=self.fixture(['TWO_VENDOR_NUMERICAL']);b['controls'][0]['physical_ids']=['p1','p2'];self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_cpu_participants_consistent_host_memory (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 254, in test_cpu_participants_consistent_host_memory
+    self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_failed_four_success_only (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 238, in test_failed_four_success_only
+    b=self.fixture();b['capacity']['four']['status']='FAIL';b['capacity']['four']['violation_count']=1;self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_highwater_only_zero (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 232, in test_highwater_only_zero
+    self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_missing_four_success_only (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 236, in test_missing_four_success_only
+    b=self.fixture();b['capacity'].pop('four');self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_missing_gpu_completion_only (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 234, in test_missing_gpu_completion_only
+    b=self.fixture();b['devices'][0]['kernel']['completed']=False;self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_missing_tolerance_declaration (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 267, in test_missing_tolerance_declaration
+    b=self.fixture(['TWO_VENDOR_NUMERICAL']);b['numerical'].pop('predeclared_atol');b['numerical'].pop('predeclared_rtol');self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_no_gpu_llm_consistent_control_ids (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 261, in test_no_gpu_llm_consistent_control_ids
+    def test_no_gpu_llm_consistent_control_ids(self):self.rejects(self.llm_fixture())
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_only_three_card_count (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 228, in test_only_three_card_count
+    b['capacity']['four']['device_count']=3;b['capacity']['four']['physical_ids']=['p1','p2','p3'];b['numerical']['physical_ids']=['p1','p2','p3'];b['controls'][0]['physical_ids']=['p1','p2','p3'];self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_other_participants (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 258, in test_other_participants
+    self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_rmse_only_contradiction (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 246, in test_rmse_only_contradiction
+    b=self.fixture(['TWO_VENDOR_NUMERICAL']);b['numerical']['rmse']=1e-5;b['numerical']['max_abs_error']=0;self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_unbound_llm_model (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 265, in test_unbound_llm_model
+    b=self.llm_fixture();b['devices']=[h.device(i) for i in range(1,5)];b['llm']['physical_ids']=['p1','p2','p3','p4'];b['controls'][0]['physical_ids']=['p1','p2','p3','p4'];b['llm']['gguf_sha256']=h.H('different_model');self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_unrelated_control_workload_only (__main__.ValidatorExpanded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 240, in test_unrelated_control_workload_only
+    b=self.fixture(['TWO_VENDOR_NUMERICAL']);b['controls'][0]['workload_sha256']=h.H('another_workload');self.rejects(b)
+  File "E:\the_harness\records\provider_quality_review\expanded_eval_20261004T130649Z\expanded_evaluator.py", line 222, in rejects
+    def rejects(self,body,missing_hash=None):self.assertNotEqual(self.check(body,missing_hash)['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+----------------------------------------------------------------------
+Ran 55 tests in 0.394s
+
+FAILED (failures=32)

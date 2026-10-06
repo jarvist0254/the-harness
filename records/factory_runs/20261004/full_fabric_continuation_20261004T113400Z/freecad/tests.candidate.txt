@@ -1,0 +1,78 @@
+import unittest, os, sys, json, math
+
+FREECAD_CMD = r'E:\tooling\FreeCAD\app\FreeCAD_1.1.4-Windows-x86_64-py311\bin\freecadcmd.exe'
+HAS_FREECAD = os.path.isfile(FREECAD_CMD)
+
+def get_schema():
+    return {'compact_L':199,'compact_H':116,'compact_T':40,'gap':12,'margin':13,
+            'universal_L':360,'universal_H':165,'universal_T':68,
+            'base_wall':4,'rail_w':5,'foot_h':6}
+
+class TestSchemaValidation(unittest.TestCase):
+    def test_negative_dimension(self):
+        from draft_builder import build
+        cfg = {'schema': get_schema(), 'selected_print_rotation_quarterturn': 0}
+        cfg['schema']['compact_L'] = -1
+        with self.assertRaises(ValueError):
+            build(cfg, './out_neg')
+    def test_nonfinite_dimension(self):
+        from draft_builder import build
+        cfg = {'schema': get_schema(), 'selected_print_rotation_quarterturn': 0}
+        cfg['schema']['gap'] = float('inf')
+        with self.assertRaises(ValueError):
+            build(cfg, './out_inf')
+    def test_invalid_rotation(self):
+        from draft_builder import build
+        cfg = {'schema': get_schema(), 'selected_print_rotation_quarterturn': 7}
+        with self.assertRaises(ValueError):
+            build(cfg, './out_rot')
+    def test_missing_schema_key(self):
+        from draft_builder import build
+        s = get_schema()
+        del s['gap']
+        cfg = {'schema': s, 'selected_print_rotation_quarterturn': 0}
+        with self.assertRaises(ValueError):
+            build(cfg, './out_miss')
+
+class TestBBoxLimits(unittest.TestCase):
+    def test_exceeds_print_volume(self):
+        from draft_builder import build
+        s = get_schema()
+        s['compact_L'] = 500
+        cfg = {'schema': s, 'selected_print_rotation_quarterturn': 0}
+        with self.assertRaises(ValueError):
+            build(cfg, './out_big')
+
+class TestArtifactRefusal(unittest.TestCase):
+    def test_refuse_existing(self):
+        from draft_builder import build
+        d = './out_exist'
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, 'dummy.txt'), 'w') as f:
+            f.write('x')
+        cfg = {'schema': get_schema(), 'selected_print_rotation_quarterturn': 0}
+        with self.assertRaises(FileExistsError):
+            build(cfg, d)
+
+@unittest.skipUnless(HAS_FREECAD, 'FreeCADCmd not found at expected path')
+class TestFreeCADBuild(unittest.TestCase):
+    def test_build_produces_draft(self):
+        from draft_builder import build
+        d = './out_cad_test'
+        if os.path.exists(d):
+            import shutil; shutil.rmtree(d)
+        cfg = {'schema': get_schema(), 'selected_print_rotation_quarterturn': 0}
+        state = build(cfg, d)
+        self.assertEqual(state['status'], 'DRAFT_UNQUALIFIED')
+        self.assertFalse(state['measured'])
+        self.assertFalse(state['qualified'])
+        self.assertEqual(state['solid_count'], 1)
+        self.assertTrue(os.path.isfile(os.path.join(d, 'draft_core_4bay.FCStd')))
+        self.assertTrue(os.path.isfile(os.path.join(d, 'draft_core_4bay.step')))
+        self.assertFalse(os.path.isfile(os.path.join(d, 'draft.stl')))
+        self.assertEqual(state['gates']['fit'], 'NO_FITS_PASS')
+        self.assertEqual(state['gates']['collision'], 'CONCEPT_COLLISION')
+
+if __name__ == '__main__':
+    unittest.main()
+

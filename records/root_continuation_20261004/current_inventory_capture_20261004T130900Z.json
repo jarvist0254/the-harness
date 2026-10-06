@@ -1,0 +1,69 @@
+{
+  "created_utc": "2026-10-04T13:08:32.482132+00:00",
+  "command": [
+    "C:\\Windows\\System32\\nvidia-smi.exe",
+    "--query-gpu=pci.bus_id,name,memory.total,memory.free,memory.used,uuid",
+    "--format=csv,nounits"
+  ],
+  "exit_code": 0,
+  "stdout": "pci.bus_id, name, memory.total [MiB], memory.free [MiB], memory.used [MiB], uuid\n00000000:01:00.0, NVIDIA GeForce RTX 5070 Ti, 16303, 14670, 1326, GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c\n",
+  "stderr": "",
+  "sample_start_utc": "2026-10-04T13:08:32.441245+00:00",
+  "checked_at_utc": "2026-10-04T13:08:32.482132+00:00",
+  "sample_age_seconds": 0.040887,
+  "source_sha256": "8a8f3ffc6d130e36847588b1e1d58d8e8013431b85b525e7bf389d84bf9a3100",
+  "fresh_admission": {
+    "eligible": [
+      {
+        "physical_id": "0000:01:00.0",
+        "vendor_key": "nvidia",
+        "aliases": [
+          "0000:01:00.0",
+          "nv-name:NVIDIA GeForce RTX 5070 Ti",
+          "nv-uuid:GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        ],
+        "memory_kind": "DEDICATED",
+        "advertised_total_bytes": 17094934528,
+        "observed_free_bytes": 15382609920,
+        "sample_timestamp": "2026-10-04T13:08:32.441245+00:00",
+        "freshness_status": "FRESH",
+        "source": {
+          "tool": "nvidia-smi",
+          "exit_code": 0,
+          "uuid": "GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        }
+      }
+    ],
+    "refused": []
+  },
+  "synthetic_age_6s_admission": {
+    "eligible": [],
+    "refused": [
+      {
+        "device": "0000:01:00.0",
+        "reason": "stale"
+      }
+    ]
+  },
+  "same_capture_marked_shared_admission": {
+    "eligible": [],
+    "refused": [
+      {
+        "device": "0000:01:00.0",
+        "reason": "not_dedicated"
+      }
+    ]
+  },
+  "same_capture_exit_False_refusal": {
+    "devices": [],
+    "conflicts": [],
+    "refusals": [
+      {
+        "reason": "nonzero_exit",
+        "tool": "nvidia-smi",
+        "exit_code": false
+      }
+    ]
+  },
+  "scope": "Actual current-hash NVIDIA CSV capture; synthetic denial mutations; no allocation/reservation; AMD/Intel parser schemas not live-qualified"
+}

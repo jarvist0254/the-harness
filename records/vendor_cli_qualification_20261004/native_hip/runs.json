@@ -1,0 +1,21 @@
+[
+  {
+    "command": [
+      "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\hip_vector.exe"
+    ],
+    "pid": 85996,
+    "exit_code": 0,
+    "stdout": "{\"status\":\"PASS\",\"arch\":\"gfx1036\",\"device_index\":0,\"integrated\":1,\"pci_bus\":116,\"buffer_bytes\":1048576,\"kernel_completed\":true,\"mismatch_count\":0,\"max_abs_error\":0,\"corruption_applied\":false}\r\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\hip_vector.exe",
+      "--inject-corruption"
+    ],
+    "pid": 22008,
+    "exit_code": 1,
+    "stdout": "{\"status\":\"FAIL\",\"arch\":\"gfx1036\",\"device_index\":0,\"integrated\":1,\"pci_bus\":116,\"buffer_bytes\":1048576,\"kernel_completed\":true,\"mismatch_count\":1,\"max_abs_error\":1,\"corruption_applied\":true}\r\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,142 @@
+{
+  "scope": "ORIGINAL_OPERATOR_RED_VULKAN0_ONLY_NOT_MODEL_OR_CAPACITY",
+  "admission": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_OPERATOR_RED_RUNTIME_ADMISSION_20261004T154400Z.json",
+  "command": [
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\fp32_staging_operator.exe",
+    "--device",
+    "Vulkan0"
+  ],
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z",
+  "pid": 44708,
+  "exit_code": 3221226505,
+  "elapsed_seconds": 1.0470000002533197,
+  "timeout": false,
+  "timeout_seconds": 30,
+  "streams": {
+    "stdout": {
+      "observed_bytes": 543,
+      "captured_bytes": 543,
+      "truncated": false,
+      "sha256": "66d2b75e7445485f13b55c2efb5bdd2ed863c805bc9c89f519cac4d79719b4c3"
+    },
+    "stderr": {
+      "observed_bytes": 517,
+      "captured_bytes": 517,
+      "truncated": false,
+      "sha256": "ca48ae6181580338ad514a54b3562961b16154fbc024725f66fc9a435b1e7ef9"
+    }
+  },
+  "copy_pins": [
+    {
+      "source": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\fp32_staging_operator.exe",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\fp32_staging_operator.exe",
+      "sha256_before": "35a93fe5fa473332b93d68af331f82829f885febecf8a7fc1c1fbbefb2487c95",
+      "copy_sha256_before": "35a93fe5fa473332b93d68af331f82829f885febecf8a7fc1c1fbbefb2487c95",
+      "source_sha256_after": "35a93fe5fa473332b93d68af331f82829f885febecf8a7fc1c1fbbefb2487c95",
+      "copy_sha256_after": "35a93fe5fa473332b93d68af331f82829f885febecf8a7fc1c1fbbefb2487c95"
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-base.dll",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-base.dll",
+      "sha256_before": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9",
+      "copy_sha256_before": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9",
+      "source_sha256_after": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9",
+      "copy_sha256_after": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9"
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-cpu.dll",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-cpu.dll",
+      "sha256_before": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52",
+      "copy_sha256_before": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52",
+      "source_sha256_after": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52",
+      "copy_sha256_after": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52"
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-rpc.dll",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-rpc.dll",
+      "sha256_before": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a",
+      "copy_sha256_before": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a",
+      "source_sha256_after": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a",
+      "copy_sha256_after": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a"
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-vulkan.dll",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-vulkan.dll",
+      "sha256_before": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00",
+      "copy_sha256_before": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00",
+      "source_sha256_after": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00",
+      "copy_sha256_after": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00"
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml.dll",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml.dll",
+      "sha256_before": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab",
+      "copy_sha256_before": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab",
+      "source_sha256_after": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab",
+      "copy_sha256_after": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab"
+    }
+  ],
+  "all_input_hashes_unchanged": true,
+  "source_sha256_before": "74c34a8726c26d6d1349caa2dca1f2e16a8a5b5295c78cc8d4a5f1842434f754",
+  "source_sha256_after": "74c34a8726c26d6d1349caa2dca1f2e16a8a5b5295c78cc8d4a5f1842434f754",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "parent_flags_unchanged": true,
+  "child_flags": {
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1",
+    "GGML_VK_DISABLE_COOPMAT": "1",
+    "GGML_VK_DISABLE_COOPMAT2": "1"
+  },
+  "module_trace_status": "OBSERVED_EXACT_FIVE_LOCAL_DLL_PATHS_AND_MATCHING_HASHES",
+  "module_observations": [
+    {
+      "elapsed_seconds": 0.0,
+      "relevant_paths": [],
+      "module_count": 0
+    },
+    {
+      "elapsed_seconds": 0.06300000008195639,
+      "relevant_paths": [],
+      "module_count": 4
+    },
+    {
+      "elapsed_seconds": 0.125,
+      "relevant_paths": [
+        "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml.dll",
+        "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-base.dll",
+        "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-vulkan.dll",
+        "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-rpc.dll",
+        "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-cpu.dll"
+      ],
+      "module_count": 36
+    }
+  ],
+  "module_errors": [],
+  "loaded_dlls": {
+    "ggml.dll": {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml.dll",
+      "sha256_after": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab"
+    },
+    "ggml-base.dll": {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-base.dll",
+      "sha256_after": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9"
+    },
+    "ggml-vulkan.dll": {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-vulkan.dll",
+      "sha256_after": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00"
+    },
+    "ggml-rpc.dll": {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-rpc.dll",
+      "sha256_after": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a"
+    },
+    "ggml-cpu.dll": {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\runtime_original_RED_20261004T154755Z\\ggml-cpu.dll",
+      "sha256_after": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52"
+    }
+  },
+  "json_parse_error": "Expecting ',' delimiter: line 1 column 544 (char 543)",
+  "runtime_json": null,
+  "child_presence_after_wait": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "qualification": "NO_MODEL_NO_P2P_NO_4CARD_NO_PHYSICAL_RESIDENCY",
+  "followups": "NOT_RUN: no retry, otherdevice or corruption admitted"
+}

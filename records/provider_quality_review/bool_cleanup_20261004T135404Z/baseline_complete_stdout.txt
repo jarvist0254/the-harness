@@ -1,0 +1,15 @@
+{
+  "scope": "MOCK_ONLY_NOT_NATIVE_QUALIFICATION",
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_supervisor_final\\contained_supervisor.grok_final.py",
+  "source_sha256": "60391680917cbbe84fe432596c399dccc064c1fc5658a1cc6401c5becf8b0f21",
+  "ast_import_gate": "PASS",
+  "actual_native_process_calls": [],
+  "tests_run": 36,
+  "failures": 23,
+  "errors": 0,
+  "limitations": [
+    "Manifest validation and typed native ABI are injected, not qualified.",
+    "Fake scheduling demonstrates selected interleavings, not real concurrency.",
+    "CPython CloseHandle raises on failure and returns None on success; those tests use exceptions. Only ctypes job BOOL failure uses integer zero."
+  ]
+}

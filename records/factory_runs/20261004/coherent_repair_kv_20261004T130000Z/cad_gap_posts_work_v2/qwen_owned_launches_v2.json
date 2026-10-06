@@ -1,0 +1,9 @@
+{
+  "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+  "outer_deadline_seconds": 270,
+  "job": "cad_gap_posts",
+  "clock": "Stopwatch monotonic",
+  "observed_process_start_utc": "2026-10-04T13:22:15.5529666Z",
+  "pid": 57736,
+  "model": "qwen3.8-max"
+}

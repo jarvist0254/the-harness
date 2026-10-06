@@ -1,0 +1,40 @@
+{
+  "utc": "2026-10-04T15:45:55.167004+00:00",
+  "check": "DATA_ONLY_TEXT_MATCH_NO_REPLACEMENT_APPLIED",
+  "regions": [
+    {
+      "region": 1,
+      "search_matches_in_function": 1,
+      "first_source_line": 6314,
+      "search_sha256": "3cfcd7b37ab47eb39783a8e2cc24bcdced58cedfbd834b73869661afce8b4adb",
+      "replace_sha256": "a31e6afa166dd84b780c8b688a9b5ad36db687928f4f520b1d64a64eb08f1861",
+      "search_bytes": 448,
+      "replace_bytes": 652
+    },
+    {
+      "region": 2,
+      "search_matches_in_function": 1,
+      "first_source_line": 6379,
+      "search_sha256": "0f32e26e7a24ae69255afda96cbcf05e475eb7a245d243be1b59586e05f21cf5",
+      "replace_sha256": "70c45b5d6cb2a7e2cd78d3493d5825061b890be92284df3d1f984cf2d8c9a188",
+      "search_bytes": 263,
+      "replace_bytes": 268
+    },
+    {
+      "region": 3,
+      "search_matches_in_function": 1,
+      "first_source_line": 6382,
+      "search_sha256": "939d4d3b9b16ff4d1fef228a5a5921e4a6e77f846b2062f64ba639086820c86a",
+      "replace_sha256": "6cda6d41c9553d91d3326560fd9d72cd45b0f7791acc1bc83a8ff716f0dc80cb",
+      "search_bytes": 206,
+      "replace_bytes": 242
+    }
+  ],
+  "complete_schema_exact3": true,
+  "all_search_unique_in_supplied_function": true,
+  "full_original_source_sha256_after": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "provider_patch_applied": false,
+  "tests_executed": false,
+  "native_build_gpu": false,
+  "scope_approval": "PendingROOT/Gemini substantive review; provider rationale not accepted as fact"
+}

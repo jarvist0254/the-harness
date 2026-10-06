@@ -1,0 +1,9 @@
+This isolated focused cycle completed four actual provider jobs: Qwen3.8Max implementation, Gemini3.8FlashMedium review, Grok4.7BuildFast edit attempt, and Gemini review of the separately root-authored correction. Grok timed out after300.95s with no artifact; usage is unknown, not zero. Root correction is not attributed to Grok.
+
+Qwen source6BB4 failed20of40 independent matched mock controls. Separately root-authored source4D8272 passed40of40 mocked-native controls with0forbiddencalls. Final Gemini raw STATIC_REJECTED findings target prior Qwen source/tests, not a new exact root-source defect; the raw response and separate adjudication are preserved. No native process or production qualification is claimed. Manager ran no candidate imports, process fixtures, GPU, or CAD work.
+
+Current usage: Qwen27,303; Gemini307,479; GrokUNKNOWN. Current observed334,782tokens,4jobs,1unknown. Across three previous closed batches plus this cycle: Qwen16jobs326,566; Gemini10jobs1,250,754; Grok15jobs753,494 observed plus1unknown. Total41jobs2,330,814observedtokens. These are provider-reported tokens, not ModelStudioCredits. Root's separate read-only dashboard snapshot shows35.6% remaining, refreshed2026-10-04 09:58:41; exact per-jobCredit attributionNOT_CHECKED.
+
+AllfourownedproviderPIDs terminal/absent. Exactknowncredentialstrings3 checked against61 bounded batch textfiles:0matches,0credential-namedfiles. No keys echoed/saved. Actual nativechildren0; user authorizationmaximum10 each Qwen/DeepSeek parent remains distinct from directjobs.
+
+Evidence: USAGE_ALLFOUR_FINAL_20261004T141456Z.json, BATCH_ALLFOUR_CLOSED_RECEIPT_20261004T141456Z.json, FINAL_REVIEW_ADJUDICATION.json, SECRET_PROCESS_AUDIT_ALLFOUR.json. Earlier three-job close snapshot and reopening receipt remain immutable. Accepted modules/docs/globalFactory untouched. Full four8GB integrated fabrication/execution goal remainsOPEN.

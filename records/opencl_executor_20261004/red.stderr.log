@@ -1,0 +1,108 @@
+EEFEEEE
+======================================================================
+ERROR: test_default_policy_assigns_four_unique_layers_to_each_vendor (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 54, in test_default_policy_assigns_four_unique_layers_to_each_vendor
+    module = executor_module()
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 22, in executor_module
+    return importlib.import_module('opencl_executor')
+  File "C:\Users\thoma\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'opencl_executor'
+
+======================================================================
+ERROR: test_four_device_sixteen_layer_policy_fit_and_accounting_rounds_up (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 82, in test_four_device_sixteen_layer_policy_fit_and_accounting_rounds_up
+    module = executor_module()
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 22, in executor_module
+    return importlib.import_module('opencl_executor')
+  File "C:\Users\thoma\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'opencl_executor'
+
+======================================================================
+ERROR: test_rejects_boolean_and_out_of_range_dimensions_and_policy (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 123, in test_rejects_boolean_and_out_of_range_dimensions_and_policy
+    module = executor_module()
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 22, in executor_module
+    return importlib.import_module('opencl_executor')
+  File "C:\Users\thoma\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'opencl_executor'
+
+======================================================================
+ERROR: test_rejects_unused_device_participants_and_duplicate_identities (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 108, in test_rejects_unused_device_participants_and_duplicate_identities
+    module = executor_module()
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 22, in executor_module
+    return importlib.import_module('opencl_executor')
+  File "C:\Users\thoma\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'opencl_executor'
+
+======================================================================
+ERROR: test_same_sixteen_layer_workload_is_rejected_with_three_devices (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 97, in test_same_sixteen_layer_workload_is_rejected_with_three_devices
+    module = executor_module()
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 22, in executor_module
+    return importlib.import_module('opencl_executor')
+  File "C:\Users\thoma\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'opencl_executor'
+
+======================================================================
+ERROR: test_single_nine_mib_policy_device_cannot_fit_default_eight_layers (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 103, in test_single_nine_mib_policy_device_cannot_fit_default_eight_layers
+    module = executor_module()
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 22, in executor_module
+    return importlib.import_module('opencl_executor')
+  File "C:\Users\thoma\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'opencl_executor'
+
+======================================================================
+FAIL: test_import_is_gpu_free_and_planerror_is_planner_error (j_link.tests.test_opencl_executor_contract.ExecutorPlanContracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_opencl_executor_contract.py", line 50, in test_import_is_gpu_free_and_planerror_is_planner_error
+    self.assertEqual(child.returncode, 0, child.stderr or child.stdout)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+  File "<string>", line 7, in guarded_import
+ModuleNotFoundError: No module named 'opencl_executor'
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.033s
+
+FAILED (failures=1, errors=6)
+

@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-10-04T10:17:41.707373+00:00",
+  "source": "Official KhronosGroup/Vulkan-Headers",
+  "tag": "v1.4.321",
+  "tag_api_url": "https://api.github.com/repos/KhronosGroup/Vulkan-Headers/git/ref/tags/v1.4.321",
+  "tag_object": {
+    "sha": "4c8aa84a61c12cab9780fa44298617666b491d71",
+    "type": "tag",
+    "url": "https://api.github.com/repos/KhronosGroup/Vulkan-Headers/git/tags/4c8aa84a61c12cab9780fa44298617666b491d71"
+  },
+  "requested_archive_url": "https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.4.321.zip",
+  "resolved_download_url": "https://codeload.github.com/KhronosGroup/Vulkan-Headers/zip/refs/tags/v1.4.321",
+  "archive_bytes": 2794742,
+  "archive_sha256": "cace1d5832fc00287c9b10b27577c41033b2c86434e884eef5c8dcea098d5118",
+  "extracted_files": 50,
+  "extracted_bytes": 19337168,
+  "include_root": "E:\\the_harness\\records\\vendor_headers\\vulkan_1.4.321\\include",
+  "selection": "include/** and root LICENSE* only; no downloaded code/scripts executed",
+  "loader_existing": "C:\\Windows\\System32\\vulkan-1.dll",
+  "loader_exists": true
+}

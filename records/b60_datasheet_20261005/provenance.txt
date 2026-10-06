@@ -1,0 +1,3 @@
+url=https://cdrdv2-public.intel.com/855693/Datasheet-Intel Arc Pro B60 Graphics.pdf
+fetch=2026-10-05T11:35Z HTTP 200 bytes=2904836 content-type=application/pdf pages=2 extractor=PyMuPDF
+verdict=B60_24GB_CONFIRMED_FIRST_HAND

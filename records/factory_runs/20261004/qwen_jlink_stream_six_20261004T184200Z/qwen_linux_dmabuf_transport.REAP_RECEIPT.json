@@ -1,0 +1,33 @@
+{
+  "job": "qwen_linux_dmabuf_transport",
+  "candidate_imported_compiled_executed": false,
+  "root_admission": false,
+  "wrapper_pid": 68712,
+  "artifact": "COMPLETE_QUERY_SOURCE_UNTRUSTED_PENDING_ROOT_GATE",
+  "session": 98423,
+  "point_owned_pids_alive": [],
+  "source_pin_after": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc",
+  "wrapper_terminal": {
+    "parse_error_type": null,
+    "usage": null,
+    "lane": "Qwen",
+    "credential_saved": false,
+    "pid": 21300,
+    "requested_model": "qwen3.8-max",
+    "finish_reason": null,
+    "drain_unknown": false,
+    "model_usage": null,
+    "native_children_actual": 0,
+    "log_cap_exceeded": false,
+    "private_url_output_refused": false,
+    "status": "OWNED_CHILD_TERMINAL_CHECK_WORKER_RECEIPT",
+    "provider_patch_applied": false,
+    "outer_killed": false,
+    "exit_code": 0,
+    "elapsed_seconds": 1035.64,
+    "pipe_error": false
+  },
+  "prompt_pin_after": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc",
+  "session_exit_code": 0,
+  "generated_tests_run": false
+}

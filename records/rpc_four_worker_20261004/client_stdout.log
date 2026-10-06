@@ -1,0 +1,1 @@
+{"status":"PASS","qualification":"CPU_ONLY_NOT_GPU_QUALIFICATION","workers":4,"computed_stages":4,"interworker_tensor_transfers":3,"values":[136,312,184,424]}

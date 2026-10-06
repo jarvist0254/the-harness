@@ -1,0 +1,15 @@
+{
+  "http330_outer360_log2097152": true,
+  "thinking_documentation": "https://docs.qwencloud.com/developer-guides/text-generation/thinking",
+  "provider_launch_authorized": true,
+  "reasoning_effort": "xhigh",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\supervisor_snapshot.py",
+  "enable_thinking": true,
+  "prompt_sha256": "4540c8a46c90f34e837befe1b845168a9caafff9894061bbf7d385b2adfb0388",
+  "lane": "Qwen",
+  "job_id": "qwen_compiler_adapter",
+  "authority": "ROOT delegated bounded six-job authorization2026-10-04; agent-authored immutable source/prompt binding, not ROOT-written receipt",
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+  "model": "qwen3.8-max"
+}

@@ -1,0 +1,86 @@
+{
+  "requests_added_for_brief": 0,
+  "native_children_actual": 0,
+  "terminal_count": 1,
+  "round": "qwen_jlink_stream_six_20261004T184200Z",
+  "live_count": 5,
+  "usage_pending_jobs": 5,
+  "jobs": [
+    {
+      "model": "qwen3.8-max",
+      "raw_bytes": 1818239,
+      "state": "LIVE_OWNED_HTTP200_STREAM",
+      "elapsed_seconds": 588.48,
+      "http": 200,
+      "provider_tokens": null,
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_intel_peer_copy\\terminal.json",
+      "job": "qwen_intel_peer_copy",
+      "content_bytes": 0,
+      "reasoning_bytes": 92492
+    },
+    {
+      "model": "qwen3.8-max",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_intel_nvidia_external_query\\terminal.json",
+      "provider_tokens": 16232,
+      "artifact_state": "STRICT_REFUSAL_NO_SOURCE_NOT_ACCEPTED",
+      "state": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+      "job": "qwen_intel_nvidia_external_query",
+      "http": 200
+    },
+    {
+      "model": "qwen3.8-max",
+      "raw_bytes": 1787481,
+      "state": "LIVE_OWNED_HTTP200_STREAM",
+      "elapsed_seconds": 587.97,
+      "http": 200,
+      "provider_tokens": null,
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_intel_backend_contract\\terminal.json",
+      "job": "qwen_intel_backend_contract",
+      "content_bytes": 0,
+      "reasoning_bytes": 94904
+    },
+    {
+      "model": "qwen3.8-max",
+      "raw_bytes": 1809848,
+      "state": "LIVE_OWNED_HTTP200_STREAM",
+      "elapsed_seconds": 588.73,
+      "http": 200,
+      "provider_tokens": null,
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_four_physical_capacity_tests\\terminal.json",
+      "job": "qwen_four_physical_capacity_tests",
+      "content_bytes": 0,
+      "reasoning_bytes": 94778
+    },
+    {
+      "model": "qwen3.8-max",
+      "raw_bytes": 1969631,
+      "state": "LIVE_OWNED_HTTP200_STREAM",
+      "elapsed_seconds": 588.1,
+      "http": 200,
+      "provider_tokens": null,
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\terminal.json",
+      "job": "qwen_vulkan_numeric_state_ledger",
+      "content_bytes": 0,
+      "reasoning_bytes": 102195
+    },
+    {
+      "model": "qwen3.8-max",
+      "raw_bytes": 1867971,
+      "state": "LIVE_OWNED_HTTP200_STREAM",
+      "elapsed_seconds": 587.66,
+      "http": 200,
+      "provider_tokens": null,
+      "terminal_receipt_expected": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\terminal.json",
+      "job": "qwen_linux_dmabuf_transport",
+      "content_bytes": 0,
+      "reasoning_bytes": 98278
+    }
+  ],
+  "observed_provider_tokens": 16232,
+  "generated_source_artifacts": 0,
+  "actual_requests": 6,
+  "known_usage_jobs": 1,
+  "utc": "2026-10-04T18:55:05.4269532Z",
+  "credits": "NOT_CHECKED",
+  "accepted_functionality": 0
+}

@@ -1,0 +1,31 @@
+{
+  "scope": "COMPILE_ONLY_NO_FIXTURE_OR_GPU_EXECUTION",
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/s",
+    "/c",
+    "call \"E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\compile_original.cmd\" \"E:\the_harness\records\build_vulkan_real\build\""
+  ],
+  "pid": 53084,
+  "exit_code": 1,
+  "elapsed_seconds": 0.6100000003352761,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "stream_cap_each": 1048576,
+  "streams": {
+    "stderr": {
+      "observed_bytes": 246,
+      "captured_bytes": 246,
+      "truncated": false
+    },
+    "stdout": {
+      "observed_bytes": 0,
+      "captured_bytes": 0,
+      "truncated": false
+    }
+  },
+  "source_headers_libs_unchanged": true,
+  "child_presence_after_wait": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "outputs": []
+}

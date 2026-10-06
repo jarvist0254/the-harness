@@ -1,0 +1,25 @@
+--- grok_2786_preserved
++++ root_repair
+@@ -72,7 +72,7 @@
+     for prefix in _PREFIXES:
+         if name.startswith(prefix):
+             suffix = name[len(prefix):]
+-            if suffix.isdigit() and str(int(suffix)) == suffix and 0 <= int(suffix) <= 27:
++            if suffix in {str(layer) for layer in range(28)}:
+                 return True
+     return False
+ 
+@@ -140,11 +140,11 @@
+     devices = exp["devices"]
+     if type(devices) is not list or len(devices) not in (1, 2):
+         raise CaptureError("Bad expected devices")
+-    if len(set(devices)) != len(devices):
+-        raise CaptureError("Bad expected devices")
+     for device in devices:
+         if type(device) is not str or device not in ("Vulkan0", "Vulkan1"):
+             raise CaptureError("Bad expected devices")
++    if len(set(devices)) != len(devices):
++        raise CaptureError("Bad expected devices")
+     return exp
+ 
+ def _validate_origin(origin: Any, role: str, expected: dict) -> dict:

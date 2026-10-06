@@ -1,0 +1,23 @@
+{
+  "pid": 25308,
+  "planned_children": 3,
+  "wall_seconds": 240,
+  "memory": false,
+  "credential_persisted": false,
+  "team_cap": 10,
+  "model": "qwen3.8-flash",
+  "tools": [
+    "agent",
+    "team_create",
+    "team_delete",
+    "list_agents",
+    "send_message",
+    "request_shutdown",
+    "task_create",
+    "task_update",
+    "task_list",
+    "task_get",
+    "task_stop"
+  ],
+  "outer_seconds": 270
+}

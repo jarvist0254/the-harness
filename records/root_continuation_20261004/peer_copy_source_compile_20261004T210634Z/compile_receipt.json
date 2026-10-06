@@ -1,0 +1,233 @@
+{
+  "phase": "compile_only",
+  "candidate_execution": "NOT_RUN",
+  "linking": "NOT_RUN",
+  "gpu_api_calls": "NOT_RUN",
+  "started_utc": "2026-10-04T21:07:31.356740+00:00",
+  "controller_sha256_before": "b549dbd8f6429b25cf3ab591ae83819fa3f98e6b41deeb88fedf0640e5ca01e3",
+  "pins_before": [
+    {
+      "name": "source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+      "sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+      "expected_sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+      "match": true
+    },
+    {
+      "name": "cuda.h",
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cuda.h",
+      "sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072",
+      "expected_sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072",
+      "match": true
+    },
+    {
+      "name": "cudaTypedefs.h",
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cudaTypedefs.h",
+      "sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c",
+      "expected_sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c",
+      "match": true
+    },
+    {
+      "name": "ze_api.h",
+      "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+      "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+      "expected_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+      "match": true
+    },
+    {
+      "name": "tests",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\tests_source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+      "sha256": "cc09cb3f891be064c6bd0c10f6e1dceda532cc3c4b4aa3934f199cc53bb4ffc9",
+      "expected_sha256": "cc09cb3f891be064c6bd0c10f6e1dceda532cc3c4b4aa3934f199cc53bb4ffc9",
+      "match": true
+    },
+    {
+      "name": "supervisor",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor_revision2.py",
+      "sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+      "expected_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+      "match": true
+    },
+    {
+      "name": "wsl.exe",
+      "path": "C:\\Windows\\System32\\wsl.exe",
+      "sha256": "7e9f5cee6d641481e5a942f0e08563bae9c17ee55f0aad888f9aa0be9a5d4757",
+      "expected_sha256": "7e9f5cee6d641481e5a942f0e08563bae9c17ee55f0aad888f9aa0be9a5d4757",
+      "match": true
+    }
+  ],
+  "runs": [
+    {
+      "label": "compiler_version",
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "/usr/bin/c++",
+        "--version"
+      ],
+      "pid": 83876,
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.234,
+      "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compiler_version.stdout.txt",
+      "stdout_bytes": 246,
+      "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compiler_version.stderr.txt",
+      "stderr_bytes": 0,
+      "pid_absent_after_wait": true
+    },
+    {
+      "label": "compiler_path_hash",
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "/usr/bin/sha256sum",
+        "/usr/bin/c++"
+      ],
+      "pid": 75092,
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.157,
+      "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compiler_path_hash.stdout.txt",
+      "stdout_bytes": 79,
+      "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compiler_path_hash.stderr.txt",
+      "stderr_bytes": 0,
+      "pid_absent_after_wait": true
+    },
+    {
+      "label": "compile_only",
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "/usr/bin/timeout",
+        "--signal=TERM",
+        "--kill-after=5s",
+        "85s",
+        "/usr/bin/c++",
+        "-std=c++17",
+        "-c",
+        "-x",
+        "c++",
+        "-I/mnt/e/the_harness/records/toolchains/cuda_driver_headers_20261004/include",
+        "-I/mnt/e/the_harness/records/toolchains/level_zero_20261004/sdk/include",
+        "/mnt/e/the_harness/records/factory_runs/20261004/qwen_transfer_four_prep_20261004T202539Z/qwen_l0_peer_repair/source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+        "-o",
+        "/mnt/e/the_harness/records/root_continuation_20261004/peer_copy_source_compile_20261004T210634Z/candidate.o"
+      ],
+      "pid": 80744,
+      "exit_code": 1,
+      "timed_out": false,
+      "elapsed_seconds": 1.031,
+      "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compile.stdout.txt",
+      "stdout_bytes": 0,
+      "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compile.stderr.txt",
+      "stderr_bytes": 4836,
+      "pid_absent_after_wait": true
+    },
+    {
+      "label": "compiler_path_hash_after",
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "/usr/bin/sha256sum",
+        "/usr/bin/c++"
+      ],
+      "pid": 96536,
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.156,
+      "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compiler_path_hash_after.stdout.txt",
+      "stdout_bytes": 79,
+      "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\peer_copy_source_compile_20261004T210634Z\\compiler_path_hash_after.stderr.txt",
+      "stderr_bytes": 0,
+      "pid_absent_after_wait": true
+    }
+  ],
+  "compiler_sha256_expected": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "compiler_version_observed": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "compiler_sha256_observed": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "compile_argv": [
+    "C:\\Windows\\System32\\wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--exec",
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "85s",
+    "/usr/bin/c++",
+    "-std=c++17",
+    "-c",
+    "-x",
+    "c++",
+    "-I/mnt/e/the_harness/records/toolchains/cuda_driver_headers_20261004/include",
+    "-I/mnt/e/the_harness/records/toolchains/level_zero_20261004/sdk/include",
+    "/mnt/e/the_harness/records/factory_runs/20261004/qwen_transfer_four_prep_20261004T202539Z/qwen_l0_peer_repair/source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+    "-o",
+    "/mnt/e/the_harness/records/root_continuation_20261004/peer_copy_source_compile_20261004T210634Z/candidate.o"
+  ],
+  "compiler_sha256_after": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "pins_after": [
+    {
+      "name": "source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+      "sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+      "expected_sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+      "match": true
+    },
+    {
+      "name": "cuda.h",
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cuda.h",
+      "sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072",
+      "expected_sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072",
+      "match": true
+    },
+    {
+      "name": "cudaTypedefs.h",
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cudaTypedefs.h",
+      "sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c",
+      "expected_sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c",
+      "match": true
+    },
+    {
+      "name": "ze_api.h",
+      "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+      "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+      "expected_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+      "match": true
+    },
+    {
+      "name": "tests",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\tests_source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+      "sha256": "cc09cb3f891be064c6bd0c10f6e1dceda532cc3c4b4aa3934f199cc53bb4ffc9",
+      "expected_sha256": "cc09cb3f891be064c6bd0c10f6e1dceda532cc3c4b4aa3934f199cc53bb4ffc9",
+      "match": true
+    },
+    {
+      "name": "supervisor",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor_revision2.py",
+      "sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+      "expected_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+      "match": true
+    },
+    {
+      "name": "wsl.exe",
+      "path": "C:\\Windows\\System32\\wsl.exe",
+      "sha256": "7e9f5cee6d641481e5a942f0e08563bae9c17ee55f0aad888f9aa0be9a5d4757",
+      "expected_sha256": "7e9f5cee6d641481e5a942f0e08563bae9c17ee55f0aad888f9aa0be9a5d4757",
+      "match": true
+    }
+  ],
+  "controller_sha256_after": "b549dbd8f6429b25cf3ab591ae83819fa3f98e6b41deeb88fedf0640e5ca01e3",
+  "finished_utc": "2026-10-04T21:07:37.631096+00:00",
+  "object_exists": false,
+  "object_sha256": null,
+  "verdict": "COMPILE_FAILED"
+}

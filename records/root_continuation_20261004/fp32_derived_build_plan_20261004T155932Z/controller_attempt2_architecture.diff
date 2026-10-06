@@ -1,0 +1,38 @@
+--- 0CE
++++ AMD64_attempt2
+@@ -78,7 +78,7 @@
+    if digest(evidence/name)!=pin:raise ValueError('evidence changed '+name)
+   qualified_receipts(a)
+   for stage in ('configure','build'):
+-   if digest(root/('build_owned_'+stage+'.cmd'))!=a[stage+'_cmd_sha256']:raise ValueError('stage command changed '+stage)
++   if digest(root/('build_owned_'+stage+'_attempt2.cmd'))!=a[stage+'_cmd_sha256']:raise ValueError('stage command changed '+stage)
+   for item in derived:
+    f=root/'source'/item['path']
+    if f.stat().st_size!=item['bytes'] or digest(f)!=item['sha256']:raise ValueError('derived source changed')
+@@ -90,7 +90,7 @@
+  verify_all()
+  if digest(a['variant_path'])!=a['variant_sha256'] or digest(a['cmd_exe'])!=a['cmd_exe_sha256']:raise ValueError('runner executable pins')
+  for stage in ('configure','build'):
+-  if digest(root/('build_owned_'+stage+'.cmd'))!=a[stage+'_cmd_sha256']:raise ValueError('stage command pins')
++  if digest(root/('build_owned_'+stage+'_attempt2.cmd'))!=a[stage+'_cmd_sha256']:raise ValueError('stage command pins')
+  # The exact ROOT-admitted variant has side-effect-free imports; native calls only in run_workers.
+  spec=importlib.util.spec_from_file_location('root_admitted_build_only_variant',a['variant_path']);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+  run_evidence.mkdir()
+@@ -103,7 +103,7 @@
+      try:atomic_json(progress,{'stage':stage,'status':'RUNNING','elapsed_seconds':time.monotonic()-start,'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'deadline_seconds':deadline,'scope':'Compiler/shader only; root can read supervisor journal for owned PID'})
+      except Exception as e:heartbeat_errors.append(str(e));cancel.set();return
+      stop.wait(15)
+-   manifest={'version':1,'run_id':'fp32_'+stage,'deadline_seconds':deadline,'startup_seconds':10,'log_limit_bytes':131072,'containment_policy':'kill_on_close','workers':[{'worker_id':stage,'argv':[a['cmd_exe'],'/d','/c',str(root/('build_owned_'+stage+'.cmd'))],'executable_sha256':a['cmd_exe_sha256'],'cwd':str(root)}]}
++   manifest={'version':1,'run_id':'fp32_'+stage,'deadline_seconds':deadline,'startup_seconds':10,'log_limit_bytes':131072,'containment_policy':'kill_on_close','workers':[{'worker_id':stage,'argv':[a['cmd_exe'],'/d','/c',str(root/('build_owned_'+stage+'_attempt2.cmd'))],'executable_sha256':a['cmd_exe_sha256'],'cwd':str(root)}]}
+    atomic_json(run_evidence/(stage+'_manifest.json'),manifest)
+    beat=None
+    try:
+@@ -127,7 +127,7 @@
+    atomic_json(progress,{'stage':stage,'status':'COMPLETED','elapsed_seconds':time.monotonic()-start,'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'owned_worker_receipt':str(out)})
+   outputs=[]
+   for name in cfg['runtime_dlls']:
+-   f=root/'build/bin'/name
++   f=root/'build_attempt2/bin'/name
+    if not f.is_file():raise RuntimeError('missing fresh DLL '+name)
+    outputs.append({'path':str(f),'bytes':f.stat().st_size,'sha256':digest(f)})
+   atomic_json(run_evidence/'fresh_dll_manifest.json',outputs)

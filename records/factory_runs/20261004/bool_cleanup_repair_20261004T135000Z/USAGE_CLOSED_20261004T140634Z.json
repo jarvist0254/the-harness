@@ -1,0 +1,205 @@
+{
+  "utc": "2026-10-04T14:07:25.152042+00:00",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z",
+  "calls": [
+    {
+      "job_id": "qwen_bool_cleanup",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\terminal.json",
+      "requested_model": "qwen3.8-max",
+      "role": "Qwen_ModelStudio_Workhorse",
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "owned_pid": 68744,
+      "elapsed_seconds": 171.18,
+      "exit_code": null,
+      "http": 200,
+      "outer_killed": false,
+      "usage": {
+        "prompt_tokens": 16125,
+        "total_tokens": 27303,
+        "completion_tokens": 11178,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 16125
+        }
+      },
+      "reported_total_tokens": 27303,
+      "reported_prompt_tokens": 16125,
+      "reported_completion_tokens": 11178,
+      "native_children_actual": 0,
+      "transport": "DIRECT_HTTP",
+      "reported_internal_model_calls": null,
+      "artifact_acceptance": "QWEN_STATIC_REJECTED_18_OF36_MOCK_RED"
+    },
+    {
+      "job_id": "gemini_bool_review",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\gemini_bool_review\\terminal.json",
+      "requested_model": "gemini-3.8-flash-medium",
+      "role": "Gemini_Reviewer",
+      "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+      "owned_pid": 36508,
+      "elapsed_seconds": 127.49,
+      "exit_code": 0,
+      "http": null,
+      "outer_killed": false,
+      "usage": {
+        "input_tokens": 117997,
+        "output_tokens": 31223,
+        "thinking_tokens": 29831,
+        "cache_read_tokens": 89845,
+        "total_tokens": 149220
+      },
+      "reported_total_tokens": 149220,
+      "reported_prompt_tokens": 117997,
+      "reported_completion_tokens": 31223,
+      "native_children_actual": 0,
+      "transport": "CLI",
+      "reported_internal_model_calls": null,
+      "artifact_acceptance": "GEMINI_REVIEW_STATIC_REJECTED"
+    },
+    {
+      "job_id": "grok_bool_cleanup",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\grok_bool_cleanup\\terminal.json",
+      "requested_model": "grok-4.7-build-fast",
+      "role": "Grok_Editor",
+      "status": "NOT_ACCEPTED",
+      "owned_pid": 88900,
+      "elapsed_seconds": 300.95,
+      "exit_code": -1,
+      "http": null,
+      "outer_killed": true,
+      "usage": null,
+      "reported_total_tokens": null,
+      "reported_prompt_tokens": null,
+      "reported_completion_tokens": null,
+      "native_children_actual": 0,
+      "transport": "CLI",
+      "reported_internal_model_calls": null,
+      "artifact_acceptance": "NO_ARTIFACT_TIMEOUT_USAGE_UNKNOWN"
+    }
+  ],
+  "provider_job_count": 3,
+  "cli_job_count": 2,
+  "direct_http_requests": 1,
+  "provider_subtotals": {
+    "Qwen_ModelStudio_Workhorse": {
+      "jobs": 1,
+      "observed_reported_tokens": 27303,
+      "usage_unknown_jobs": 0
+    },
+    "Gemini_Reviewer": {
+      "jobs": 1,
+      "observed_reported_tokens": 149220,
+      "usage_unknown_jobs": 0
+    },
+    "Grok_Editor": {
+      "jobs": 1,
+      "observed_reported_tokens": 0,
+      "usage_unknown_jobs": 1
+    }
+  },
+  "observed_reported_tokens": 176523,
+  "unknown_usage_jobs": 1,
+  "native_children_actual": 0,
+  "native_maximum_authorized_each_qwen_deepseek_parent": 10,
+  "internal_model_calls": "Qwen1HTTP; Gemini NOT_REPORTED (num_turns is not modelCalls); Grok UNKNOWN due empty timeout output",
+  "job4": "NOT_LAUNCHED_NO_GROK_ARTIFACT_TO_REVIEW",
+  "credits": "ROOT_READONLY_BROWSER_OBSERVED35.6percent; NO_SDK_GETTER; tokens_are_not_Credits",
+  "quota_snapshot": {
+    "source": "root existing authenticated Chrome readonly dashboard refresh",
+    "url": "https://home.qwencloud.com/analytics/token-plan/individual",
+    "last_updated": "2026-10-04 09:58:41",
+    "monthly_remaining_percent_visible": 35.6,
+    "accessibility_progress_percent": 35.596370697021484,
+    "plan": "Pro180000Credits/month",
+    "reset_displayed": "2026-10-06 12:00:00",
+    "per_job_credit_attribution": "NOT_CHECKED"
+  },
+  "previous_ledgers_immutable": [
+    {
+      "ledger_path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\usage_snapshot_20261004T120359076Z.json",
+      "sha256": "7da91c47d0eab0c9dafc441464adb2dfde0a3d70fd421dd002431549bb0641bf",
+      "provider_subtotals": {
+        "Qwen_ModelStudio_Workhorse": {
+          "jobs": 6,
+          "observed_reported_tokens": 115793,
+          "usage_unknown_jobs": 0
+        },
+        "Gemini_Reviewer": {
+          "jobs": 2,
+          "observed_reported_tokens": 171734,
+          "usage_unknown_jobs": 0
+        },
+        "Grok_Editor": {
+          "jobs": 2,
+          "observed_reported_tokens": 130730,
+          "usage_unknown_jobs": 0
+        }
+      },
+      "jobs": 10
+    },
+    {
+      "ledger_path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\usage_snapshot_20261004T125512786Z.json",
+      "sha256": "6f75e68c1a43402cac33664527ccdbf8f2414d022ec2de9e8f9255c347586175",
+      "provider_subtotals": {
+        "Qwen_ModelStudio_Workhorse": {
+          "jobs": 6,
+          "observed_reported_tokens": 96458,
+          "usage_unknown_jobs": 0
+        },
+        "Gemini_Reviewer": {
+          "jobs": 2,
+          "observed_reported_tokens": 264469,
+          "usage_unknown_jobs": 0
+        },
+        "Grok_Editor": {
+          "jobs": 5,
+          "observed_reported_tokens": 290504,
+          "usage_unknown_jobs": 0
+        }
+      },
+      "jobs": 13
+    },
+    {
+      "ledger_path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\USAGE_FINAL_20261004T133716Z.json",
+      "sha256": "d782820ad9cf6155d6df6d37c503b0a86b41a33870b3c52e8974b97063b3bc5d",
+      "provider_subtotals": {
+        "Grok_Editor": {
+          "jobs": 7,
+          "observed_reported_tokens": 332260,
+          "usage_unknown_jobs": 0
+        },
+        "Qwen_ModelStudio_Workhorse": {
+          "jobs": 3,
+          "observed_reported_tokens": 87012,
+          "usage_unknown_jobs": 0
+        },
+        "Gemini_Reviewer": {
+          "jobs": 4,
+          "observed_reported_tokens": 507072,
+          "usage_unknown_jobs": 0
+        }
+      },
+      "jobs": 14
+    }
+  ],
+  "prior3_plus_current_provider_subtotals": {
+    "Qwen_ModelStudio_Workhorse": {
+      "jobs": 16,
+      "observed_reported_tokens": 326566,
+      "usage_unknown_jobs": 0
+    },
+    "Gemini_Reviewer": {
+      "jobs": 9,
+      "observed_reported_tokens": 1092495,
+      "usage_unknown_jobs": 0
+    },
+    "Grok_Editor": {
+      "jobs": 15,
+      "observed_reported_tokens": 753494,
+      "usage_unknown_jobs": 1
+    }
+  },
+  "prior3_plus_current_jobs": 40,
+  "prior3_plus_current_observed_tokens": 2172555,
+  "counting_rule": "Deduplicate actual provider jobs, not copied raw/answer/review artifacts. Unknown usage is not zero. Reported total_tokens retained without adding cache/thinking again. No billing or credit consumption inference."
+}

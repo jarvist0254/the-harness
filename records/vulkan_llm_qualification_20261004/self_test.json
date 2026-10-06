@@ -1,0 +1,9 @@
+{
+  "pid": 15504,
+  "exit_code": "0",
+  "command": "llama_logits_qual.exe --self-test",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\self_test.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\self_test.stderr.log",
+  "working_directory": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin",
+  "process_present_after": false
+}

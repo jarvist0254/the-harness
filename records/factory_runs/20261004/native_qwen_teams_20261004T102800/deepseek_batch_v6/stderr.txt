@@ -1,0 +1,5 @@
+⚠ Safe mode: --core-tools flag is ignored (settings-sourced core tools are also disabled).
+⚠ SAFE MODE — all customizations disabled (hooks, extensions, skills, MCP servers, QWEN.md). Restart without --safe-mode to resume normal operation.
+Warning: model.generationConfig.timeout, model.generationConfig.maxRetries, model.generationConfig.extra_body are ignored for provider model "deepseek-v4-flash-0731" from modelProviders.openai. Move these fields to modelProviders.openai[].generationConfig for that model if you want them to apply.
+Run aborted: wall-clock budget of 240s exceeded (--max-wall-time).
+

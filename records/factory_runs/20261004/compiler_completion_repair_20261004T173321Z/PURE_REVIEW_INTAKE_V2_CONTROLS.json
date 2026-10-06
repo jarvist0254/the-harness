@@ -1,0 +1,69 @@
+{
+  "native_fixture_or_gpu_run": false,
+  "utc": "2026-10-04T17:44:29.3031579Z",
+  "failed": 0,
+  "cli_provider_calls": 0,
+  "credentials_read": false,
+  "passed": 7,
+  "tests": [
+    {
+      "expected_accept": true,
+      "selected_source": "structured_output",
+      "name": "valid_actual_structured_output_over_nonjson_response",
+      "passed": true,
+      "error_type": null,
+      "actual_accept": true
+    },
+    {
+      "expected_accept": true,
+      "selected_source": "response_strict_json",
+      "name": "strict_json_response_fallback",
+      "passed": true,
+      "error_type": null,
+      "actual_accept": true
+    },
+    {
+      "expected_accept": false,
+      "selected_source": null,
+      "name": "duplicate_outer_keys_refused_before_selection",
+      "passed": true,
+      "error_type": "RuntimeException",
+      "actual_accept": false
+    },
+    {
+      "expected_accept": false,
+      "selected_source": null,
+      "name": "malformed_outer_json_refused",
+      "passed": true,
+      "error_type": "MethodInvocationException",
+      "actual_accept": false
+    },
+    {
+      "expected_accept": false,
+      "selected_source": null,
+      "name": "structured_extra_authority_refused_no_fallback",
+      "passed": true,
+      "error_type": "RuntimeException",
+      "actual_accept": false
+    },
+    {
+      "expected_accept": false,
+      "selected_source": null,
+      "name": "markdown_response_without_structured_output_refused",
+      "passed": true,
+      "error_type": "MethodInvocationException",
+      "actual_accept": false
+    },
+    {
+      "expected_accept": false,
+      "selected_source": null,
+      "name": "incomplete_finding_refused",
+      "passed": true,
+      "error_type": "RuntimeException",
+      "actual_accept": false
+    }
+  ],
+  "scope": "PURE_REVIEW_INTAKE_ONLY",
+  "native_children": 0,
+  "verdict_is_runtime_approval": false
+}

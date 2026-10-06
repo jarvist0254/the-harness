@@ -1,0 +1,570 @@
+{
+  "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+  "PE_imports_inspected_before_execution": [
+    "KERNEL32.dll",
+    "VCRUNTIME140.dll",
+    "api-ms-win-crt-string-l1-1-0.dll",
+    "api-ms-win-crt-stdio-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-math-l1-1-0.dll",
+    "api-ms-win-crt-locale-l1-1-0.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll"
+  ],
+  "pins_before": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "C:\\Windows\\System32\\cmd.exe": "8dd1ebb0b969370c70a5ee7f7ee347949aa7046aa5e1a33fcd7b1e9415b21fc3",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\link.exe": "3e173cdf4a8ea9493d26ce007da3dba0e053f4002fa981fb47699db0f1da91a3",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe": "c5cecf8e663f105217ff5805bb1d748f7de2fe3767312974b677b3c818883d2c",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe": "65db0d7b4f10ba0f55973fd9356543a556da9ec1c777a0c05f05a0329c8a100a",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.26100.0\\um\\x64\\Cfgmgr32.Lib": "c09d8bbd1512d9b03d0648a82f335b983cd301277fe3551afcedb047f0a0f9ba",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_runs\\suite_1791138717588329600\\suite_receipt.json": "6fd02f03f84a9ef3884210e50c720b70b7873a744b19372155994f784b8c2cdb",
+    "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_driver.py": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\stub.exe": "f9c7bfd399adb3bba2c5541553a817fa1ec99b6fa6fa0fbf0a0f65e9cb036ba5",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\actual_header_stub_local_revision2.cpp": "78250c8d9e780295e3385cf5d5dc88a6c4028064e7383658aaaa00f6f5c7f91d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\pe_imports.raw.txt": "34cd11a69606a957db062bcda3eb3fa9e619bb88cfeaf9523a97598c5e058d14",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\compile_receipt.json": "de33d3dffc03ccbf25650adfb8f9bec2da07dfdd2f35c03d239a14db9da22aeb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\run_stub_cases.py": "6e6c015e27daef511496d5652f5032d64ad1d473fb5bd2106d602c5da024a2ab"
+  },
+  "pins_after": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "C:\\Windows\\System32\\cmd.exe": "8dd1ebb0b969370c70a5ee7f7ee347949aa7046aa5e1a33fcd7b1e9415b21fc3",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\link.exe": "3e173cdf4a8ea9493d26ce007da3dba0e053f4002fa981fb47699db0f1da91a3",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe": "c5cecf8e663f105217ff5805bb1d748f7de2fe3767312974b677b3c818883d2c",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\rc.exe": "65db0d7b4f10ba0f55973fd9356543a556da9ec1c777a0c05f05a0329c8a100a",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.26100.0\\um\\x64\\Cfgmgr32.Lib": "c09d8bbd1512d9b03d0648a82f335b983cd301277fe3551afcedb047f0a0f9ba",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_runs\\suite_1791138717588329600\\suite_receipt.json": "6fd02f03f84a9ef3884210e50c720b70b7873a744b19372155994f784b8c2cdb",
+    "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_driver.py": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\stub.exe": "f9c7bfd399adb3bba2c5541553a817fa1ec99b6fa6fa0fbf0a0f65e9cb036ba5",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\actual_header_stub_local_revision2.cpp": "78250c8d9e780295e3385cf5d5dc88a6c4028064e7383658aaaa00f6f5c7f91d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\pe_imports.raw.txt": "34cd11a69606a957db062bcda3eb3fa9e619bb88cfeaf9523a97598c5e058d14",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\compile_receipt.json": "de33d3dffc03ccbf25650adfb8f9bec2da07dfdd2f35c03d239a14db9da22aeb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\run_stub_cases.py": "6e6c015e27daef511496d5652f5032d64ad1d473fb5bd2106d602c5da024a2ab"
+  },
+  "hashes_unchanged": true,
+  "all_cases_cleanup_verified": true,
+  "cases": [
+    {
+      "case": "normal",
+      "result": {
+        "version": 1,
+        "run_id": "l0_cpu_stub_normal",
+        "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+        "failure_reason": "compiler_root_exited_zero",
+        "containment_policy": "kill_on_close",
+        "workers": [
+          {
+            "worker_id": "stub",
+            "pid": 85004,
+            "exit_code": 0,
+            "assigned": true,
+            "resumed": true
+          }
+        ],
+        "job_active_count": 0,
+        "drain_proof": "CLEANUP",
+        "whole_tree_certificate": false,
+        "logs": {
+          "stub": {
+            "stdout": "{\"status\":\"PASS\",\"collector\":\"levelzero_query_only\",\"init_flag\":\"ZE_INIT_FLAG_GPU_ONLY\",\"drivers\":1,\"physical_root_devices\":2,\"subdevice_nodes\":0,\"node_total\":2,\"inventory_truncated\":false,\"inventory_truncated_int\":0,\"devices\":[{\"node_index\":0,\"driver_index\":0,\"root_node\":0,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"000102030405060708090a0b0c0d0e0f\",\"vendor\":32902,\"device\":4660,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root0\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false},{\"node_index\":1,\"driver_index\":0,\"root_node\":1,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"101112131415161718191a1b1c1d1e1f\",\"vendor\":32902,\"device\":4661,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root1\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false}],\"p2p\":{\"truncated\":false,\"node_count\":2,\"can_matrix\":[-1,1,0,-1],\"pairs\":[{\"src\":0,\"dst\":0,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null},{\"src\":0,\"dst\":1,\"same_root\":false,\"self\":false,\"can_access\":true,\"can_result_code\":0,\"props_flags\":1,\"props_result_code\":0},{\"src\":1,\"dst\":0,\"same_root\":false,\"self\":false,\"can_access\":false,\"can_result_code\":0,\"props_flags\":null,\"props_result_code\":null},{\"src\":1,\"dst\":1,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null}]},\"direct_transport_qualified\":false,\"cleanup_uncertainty\":\"none_no_l0_objects_created\",\"output_truncated\":false,\"output_truncated_int\":0}\r\n",
+            "stdout_bytes": 1826,
+            "stdout_overflow": false,
+            "stdout_path": "stub.stdout.log",
+            "stderr": "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":2,\"peer_queries\":2,\"property_queries\":2,\"candidate_exit\":0}\r\n",
+            "stderr_bytes": 133,
+            "stderr_overflow": false,
+            "stderr_path": "stub.stderr.log"
+          }
+        },
+        "reattach": false,
+        "replay": false
+      },
+      "restart": {
+        "version": 1,
+        "run_id": "l0_cpu_stub_normal",
+        "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+        "failure_reason": "compiler_root_exited_zero",
+        "containment_policy": "kill_on_close",
+        "workers": [
+          {
+            "worker_id": "stub",
+            "pid": 85004,
+            "exit_code": 0,
+            "assigned": true,
+            "resumed": true
+          }
+        ],
+        "job_active_count": 0,
+        "drain_proof": "CLEANUP",
+        "whole_tree_certificate": false,
+        "logs": {
+          "stub": {
+            "stdout": "{\"status\":\"PASS\",\"collector\":\"levelzero_query_only\",\"init_flag\":\"ZE_INIT_FLAG_GPU_ONLY\",\"drivers\":1,\"physical_root_devices\":2,\"subdevice_nodes\":0,\"node_total\":2,\"inventory_truncated\":false,\"inventory_truncated_int\":0,\"devices\":[{\"node_index\":0,\"driver_index\":0,\"root_node\":0,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"000102030405060708090a0b0c0d0e0f\",\"vendor\":32902,\"device\":4660,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root0\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false},{\"node_index\":1,\"driver_index\":0,\"root_node\":1,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"101112131415161718191a1b1c1d1e1f\",\"vendor\":32902,\"device\":4661,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root1\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false}],\"p2p\":{\"truncated\":false,\"node_count\":2,\"can_matrix\":[-1,1,0,-1],\"pairs\":[{\"src\":0,\"dst\":0,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null},{\"src\":0,\"dst\":1,\"same_root\":false,\"self\":false,\"can_access\":true,\"can_result_code\":0,\"props_flags\":1,\"props_result_code\":0},{\"src\":1,\"dst\":0,\"same_root\":false,\"self\":false,\"can_access\":false,\"can_result_code\":0,\"props_flags\":null,\"props_result_code\":null},{\"src\":1,\"dst\":1,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null}]},\"direct_transport_qualified\":false,\"cleanup_uncertainty\":\"none_no_l0_objects_created\",\"output_truncated\":false,\"output_truncated_int\":0}\r\n",
+            "stdout_bytes": 1826,
+            "stdout_overflow": false,
+            "stdout_path": "stub.stdout.log",
+            "stderr": "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":2,\"peer_queries\":2,\"property_queries\":2,\"candidate_exit\":0}\r\n",
+            "stderr_bytes": 133,
+            "stderr_overflow": false,
+            "stderr_path": "stub.stderr.log"
+          }
+        },
+        "reattach": false,
+        "replay": false
+      },
+      "cleanup_verified": true,
+      "strict_stdout_json": {
+        "valid": true,
+        "value": {
+          "status": "PASS",
+          "collector": "levelzero_query_only",
+          "init_flag": "ZE_INIT_FLAG_GPU_ONLY",
+          "drivers": 1,
+          "physical_root_devices": 2,
+          "subdevice_nodes": 0,
+          "node_total": 2,
+          "inventory_truncated": false,
+          "inventory_truncated_int": 0,
+          "devices": [
+            {
+              "node_index": 0,
+              "driver_index": 0,
+              "root_node": 0,
+              "parent_node": -1,
+              "is_subdevice": false,
+              "subdevice_index": 0,
+              "uuid": "000102030405060708090a0b0c0d0e0f",
+              "vendor": 32902,
+              "device": 4660,
+              "type": "GPU",
+              "type_value": 1,
+              "subdevice_id": 0,
+              "name": "SYNTHETIC Intel root0",
+              "pci_domain": null,
+              "external_memory": {
+                "import_flags": 2,
+                "export_flags": 2
+              },
+              "external_memory_result_code": 0,
+              "queue_groups": [
+                {
+                  "flags": 1,
+                  "numQueues": 1
+                }
+              ],
+              "queue_groups_truncated": false
+            },
+            {
+              "node_index": 1,
+              "driver_index": 0,
+              "root_node": 1,
+              "parent_node": -1,
+              "is_subdevice": false,
+              "subdevice_index": 0,
+              "uuid": "101112131415161718191a1b1c1d1e1f",
+              "vendor": 32902,
+              "device": 4661,
+              "type": "GPU",
+              "type_value": 1,
+              "subdevice_id": 0,
+              "name": "SYNTHETIC Intel root1",
+              "pci_domain": null,
+              "external_memory": {
+                "import_flags": 2,
+                "export_flags": 2
+              },
+              "external_memory_result_code": 0,
+              "queue_groups": [
+                {
+                  "flags": 1,
+                  "numQueues": 1
+                }
+              ],
+              "queue_groups_truncated": false
+            }
+          ],
+          "p2p": {
+            "truncated": false,
+            "node_count": 2,
+            "can_matrix": [
+              -1,
+              1,
+              0,
+              -1
+            ],
+            "pairs": [
+              {
+                "src": 0,
+                "dst": 0,
+                "same_root": true,
+                "self": true,
+                "can_access": null,
+                "can_result_code": null,
+                "props_flags": null,
+                "props_result_code": null
+              },
+              {
+                "src": 0,
+                "dst": 1,
+                "same_root": false,
+                "self": false,
+                "can_access": true,
+                "can_result_code": 0,
+                "props_flags": 1,
+                "props_result_code": 0
+              },
+              {
+                "src": 1,
+                "dst": 0,
+                "same_root": false,
+                "self": false,
+                "can_access": false,
+                "can_result_code": 0,
+                "props_flags": null,
+                "props_result_code": null
+              },
+              {
+                "src": 1,
+                "dst": 1,
+                "same_root": true,
+                "self": true,
+                "can_access": null,
+                "can_result_code": null,
+                "props_flags": null,
+                "props_result_code": null
+              }
+            ]
+          },
+          "direct_transport_qualified": false,
+          "cleanup_uncertainty": "none_no_l0_objects_created",
+          "output_truncated": false,
+          "output_truncated_int": 0
+        }
+      },
+      "independent_stub_counters": {
+        "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+        "external_queries": 2,
+        "peer_queries": 2,
+        "property_queries": 2,
+        "candidate_exit": 0
+      },
+      "raw_stdout_sha256": "f78333f3ec672d4dfb19b3e9c184429ef85e1ac763adc690bac777953b8e5d2f",
+      "raw_stderr_sha256": "7f84cd1361896da510d646c559a5685be81fdd059dabcd696bbb2961f8a62f62"
+    },
+    {
+      "case": "init_error",
+      "result": {
+        "version": 1,
+        "run_id": "l0_cpu_stub_init_error",
+        "status": "FAILED",
+        "failure_reason": "nonzero_exit",
+        "containment_policy": "kill_on_close",
+        "workers": [
+          {
+            "worker_id": "stub",
+            "pid": 42256,
+            "exit_code": 1,
+            "assigned": true,
+            "resumed": true
+          }
+        ],
+        "job_active_count": 0,
+        "drain_proof": "CLEANUP",
+        "whole_tree_certificate": false,
+        "logs": {
+          "stub": {
+            "stdout": "{\"status\":\"FAIL\",\"stage\":\"zeInit\",\"result_code\":1879048193,\"note\":\"init_failed\",\"direct_transport_qualified\":false,\"cleanup_uncertainty\":\"none_no_l0_objects_created\"}\r\n",
+            "stdout_bytes": 168,
+            "stdout_overflow": false,
+            "stdout_path": "stub.stdout.log",
+            "stderr": "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":0,\"peer_queries\":0,\"property_queries\":0,\"candidate_exit\":1}\r\n",
+            "stderr_bytes": 133,
+            "stderr_overflow": false,
+            "stderr_path": "stub.stderr.log"
+          }
+        },
+        "reattach": false,
+        "replay": false
+      },
+      "restart": {
+        "version": 1,
+        "run_id": "l0_cpu_stub_init_error",
+        "status": "FAILED",
+        "failure_reason": "nonzero_exit",
+        "containment_policy": "kill_on_close",
+        "workers": [
+          {
+            "worker_id": "stub",
+            "pid": 42256,
+            "exit_code": 1,
+            "assigned": true,
+            "resumed": true
+          }
+        ],
+        "job_active_count": 0,
+        "drain_proof": "CLEANUP",
+        "whole_tree_certificate": false,
+        "logs": {
+          "stub": {
+            "stdout": "{\"status\":\"FAIL\",\"stage\":\"zeInit\",\"result_code\":1879048193,\"note\":\"init_failed\",\"direct_transport_qualified\":false,\"cleanup_uncertainty\":\"none_no_l0_objects_created\"}\r\n",
+            "stdout_bytes": 168,
+            "stdout_overflow": false,
+            "stdout_path": "stub.stdout.log",
+            "stderr": "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":0,\"peer_queries\":0,\"property_queries\":0,\"candidate_exit\":1}\r\n",
+            "stderr_bytes": 133,
+            "stderr_overflow": false,
+            "stderr_path": "stub.stderr.log"
+          }
+        },
+        "reattach": false,
+        "replay": false
+      },
+      "cleanup_verified": true,
+      "strict_stdout_json": {
+        "valid": true,
+        "value": {
+          "status": "FAIL",
+          "stage": "zeInit",
+          "result_code": 1879048193,
+          "note": "init_failed",
+          "direct_transport_qualified": false,
+          "cleanup_uncertainty": "none_no_l0_objects_created"
+        }
+      },
+      "independent_stub_counters": {
+        "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+        "external_queries": 0,
+        "peer_queries": 0,
+        "property_queries": 0,
+        "candidate_exit": 1
+      },
+      "raw_stdout_sha256": "686960e1f8db8dfaa6fc4ac00fa2ca3121843cb4cc1098e1b88ad5b6a74496d1",
+      "raw_stderr_sha256": "3e266b08ee6ab47293348533f0723bb6c4caf08500bcb353a12bd4570549ed5a"
+    },
+    {
+      "case": "duplicate_root",
+      "result": {
+        "version": 1,
+        "run_id": "l0_cpu_stub_duplicate_root",
+        "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+        "failure_reason": "compiler_root_exited_zero",
+        "containment_policy": "kill_on_close",
+        "workers": [
+          {
+            "worker_id": "stub",
+            "pid": 40100,
+            "exit_code": 0,
+            "assigned": true,
+            "resumed": true
+          }
+        ],
+        "job_active_count": 0,
+        "drain_proof": "CLEANUP",
+        "whole_tree_certificate": false,
+        "logs": {
+          "stub": {
+            "stdout": "{\"status\":\"PASS\",\"collector\":\"levelzero_query_only\",\"init_flag\":\"ZE_INIT_FLAG_GPU_ONLY\",\"drivers\":1,\"physical_root_devices\":2,\"subdevice_nodes\":0,\"node_total\":2,\"inventory_truncated\":false,\"inventory_truncated_int\":0,\"devices\":[{\"node_index\":0,\"driver_index\":0,\"root_node\":0,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"000102030405060708090a0b0c0d0e0f\",\"vendor\":32902,\"device\":4660,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root0\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false},{\"node_index\":1,\"driver_index\":0,\"root_node\":1,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"101112131415161718191a1b1c1d1e1f\",\"vendor\":32902,\"device\":4661,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root1\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false}],\"p2p\":{\"truncated\":false,\"node_count\":2,\"can_matrix\":[-1,1,0,-1],\"pairs\":[{\"src\":0,\"dst\":0,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null},{\"src\":0,\"dst\":1,\"same_root\":false,\"self\":false,\"can_access\":true,\"can_result_code\":0,\"props_flags\":1,\"props_result_code\":0},{\"src\":1,\"dst\":0,\"same_root\":false,\"self\":false,\"can_access\":false,\"can_result_code\":0,\"props_flags\":null,\"props_result_code\":null},{\"src\":1,\"dst\":1,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null}]},\"direct_transport_qualified\":false,\"cleanup_uncertainty\":\"none_no_l0_objects_created\",\"output_truncated\":false,\"output_truncated_int\":0}\r\n",
+            "stdout_bytes": 1826,
+            "stdout_overflow": false,
+            "stdout_path": "stub.stdout.log",
+            "stderr": "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":2,\"peer_queries\":2,\"property_queries\":2,\"candidate_exit\":0}\r\n",
+            "stderr_bytes": 133,
+            "stderr_overflow": false,
+            "stderr_path": "stub.stderr.log"
+          }
+        },
+        "reattach": false,
+        "replay": false
+      },
+      "restart": {
+        "version": 1,
+        "run_id": "l0_cpu_stub_duplicate_root",
+        "status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+        "failure_reason": "compiler_root_exited_zero",
+        "containment_policy": "kill_on_close",
+        "workers": [
+          {
+            "worker_id": "stub",
+            "pid": 40100,
+            "exit_code": 0,
+            "assigned": true,
+            "resumed": true
+          }
+        ],
+        "job_active_count": 0,
+        "drain_proof": "CLEANUP",
+        "whole_tree_certificate": false,
+        "logs": {
+          "stub": {
+            "stdout": "{\"status\":\"PASS\",\"collector\":\"levelzero_query_only\",\"init_flag\":\"ZE_INIT_FLAG_GPU_ONLY\",\"drivers\":1,\"physical_root_devices\":2,\"subdevice_nodes\":0,\"node_total\":2,\"inventory_truncated\":false,\"inventory_truncated_int\":0,\"devices\":[{\"node_index\":0,\"driver_index\":0,\"root_node\":0,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"000102030405060708090a0b0c0d0e0f\",\"vendor\":32902,\"device\":4660,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root0\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false},{\"node_index\":1,\"driver_index\":0,\"root_node\":1,\"parent_node\":-1,\"is_subdevice\":false,\"subdevice_index\":0,\"uuid\":\"101112131415161718191a1b1c1d1e1f\",\"vendor\":32902,\"device\":4661,\"type\":\"GPU\",\"type_value\":1,\"subdevice_id\":0,\"name\":\"SYNTHETIC Intel root1\",\"pci_domain\":null,\"external_memory\":{\"import_flags\":2,\"export_flags\":2},\"external_memory_result_code\":0,\"queue_groups\":[{\"flags\":1,\"numQueues\":1}],\"queue_groups_truncated\":false}],\"p2p\":{\"truncated\":false,\"node_count\":2,\"can_matrix\":[-1,1,0,-1],\"pairs\":[{\"src\":0,\"dst\":0,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null},{\"src\":0,\"dst\":1,\"same_root\":false,\"self\":false,\"can_access\":true,\"can_result_code\":0,\"props_flags\":1,\"props_result_code\":0},{\"src\":1,\"dst\":0,\"same_root\":false,\"self\":false,\"can_access\":false,\"can_result_code\":0,\"props_flags\":null,\"props_result_code\":null},{\"src\":1,\"dst\":1,\"same_root\":true,\"self\":true,\"can_access\":null,\"can_result_code\":null,\"props_flags\":null,\"props_result_code\":null}]},\"direct_transport_qualified\":false,\"cleanup_uncertainty\":\"none_no_l0_objects_created\",\"output_truncated\":false,\"output_truncated_int\":0}\r\n",
+            "stdout_bytes": 1826,
+            "stdout_overflow": false,
+            "stdout_path": "stub.stdout.log",
+            "stderr": "{\"scope\":\"ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE\",\"external_queries\":2,\"peer_queries\":2,\"property_queries\":2,\"candidate_exit\":0}\r\n",
+            "stderr_bytes": 133,
+            "stderr_overflow": false,
+            "stderr_path": "stub.stderr.log"
+          }
+        },
+        "reattach": false,
+        "replay": false
+      },
+      "cleanup_verified": true,
+      "strict_stdout_json": {
+        "valid": true,
+        "value": {
+          "status": "PASS",
+          "collector": "levelzero_query_only",
+          "init_flag": "ZE_INIT_FLAG_GPU_ONLY",
+          "drivers": 1,
+          "physical_root_devices": 2,
+          "subdevice_nodes": 0,
+          "node_total": 2,
+          "inventory_truncated": false,
+          "inventory_truncated_int": 0,
+          "devices": [
+            {
+              "node_index": 0,
+              "driver_index": 0,
+              "root_node": 0,
+              "parent_node": -1,
+              "is_subdevice": false,
+              "subdevice_index": 0,
+              "uuid": "000102030405060708090a0b0c0d0e0f",
+              "vendor": 32902,
+              "device": 4660,
+              "type": "GPU",
+              "type_value": 1,
+              "subdevice_id": 0,
+              "name": "SYNTHETIC Intel root0",
+              "pci_domain": null,
+              "external_memory": {
+                "import_flags": 2,
+                "export_flags": 2
+              },
+              "external_memory_result_code": 0,
+              "queue_groups": [
+                {
+                  "flags": 1,
+                  "numQueues": 1
+                }
+              ],
+              "queue_groups_truncated": false
+            },
+            {
+              "node_index": 1,
+              "driver_index": 0,
+              "root_node": 1,
+              "parent_node": -1,
+              "is_subdevice": false,
+              "subdevice_index": 0,
+              "uuid": "101112131415161718191a1b1c1d1e1f",
+              "vendor": 32902,
+              "device": 4661,
+              "type": "GPU",
+              "type_value": 1,
+              "subdevice_id": 0,
+              "name": "SYNTHETIC Intel root1",
+              "pci_domain": null,
+              "external_memory": {
+                "import_flags": 2,
+                "export_flags": 2
+              },
+              "external_memory_result_code": 0,
+              "queue_groups": [
+                {
+                  "flags": 1,
+                  "numQueues": 1
+                }
+              ],
+              "queue_groups_truncated": false
+            }
+          ],
+          "p2p": {
+            "truncated": false,
+            "node_count": 2,
+            "can_matrix": [
+              -1,
+              1,
+              0,
+              -1
+            ],
+            "pairs": [
+              {
+                "src": 0,
+                "dst": 0,
+                "same_root": true,
+                "self": true,
+                "can_access": null,
+                "can_result_code": null,
+                "props_flags": null,
+                "props_result_code": null
+              },
+              {
+                "src": 0,
+                "dst": 1,
+                "same_root": false,
+                "self": false,
+                "can_access": true,
+                "can_result_code": 0,
+                "props_flags": 1,
+                "props_result_code": 0
+              },
+              {
+                "src": 1,
+                "dst": 0,
+                "same_root": false,
+                "self": false,
+                "can_access": false,
+                "can_result_code": 0,
+                "props_flags": null,
+                "props_result_code": null
+              },
+              {
+                "src": 1,
+                "dst": 1,
+                "same_root": true,
+                "self": true,
+                "can_access": null,
+                "can_result_code": null,
+                "props_flags": null,
+                "props_result_code": null
+              }
+            ]
+          },
+          "direct_transport_qualified": false,
+          "cleanup_uncertainty": "none_no_l0_objects_created",
+          "output_truncated": false,
+          "output_truncated_int": 0
+        }
+      },
+      "independent_stub_counters": {
+        "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+        "external_queries": 2,
+        "peer_queries": 2,
+        "property_queries": 2,
+        "candidate_exit": 0
+      },
+      "raw_stdout_sha256": "f78333f3ec672d4dfb19b3e9c184429ef85e1ac763adc690bac777953b8e5d2f",
+      "raw_stderr_sha256": "7f84cd1361896da510d646c559a5685be81fdd059dabcd696bbb2961f8a62f62"
+    }
+  ],
+  "provider_tests_executed": false,
+  "real_LevelZero_or_GPU_driver_calls": false,
+  "source_edited": false
+}

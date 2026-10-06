@@ -1,0 +1,13 @@
+# Independent F32 staging operator fixture draft
+
+Source and contract only: **NOT_COMPILED / NOT_EXECUTED**. No native process was launched, and no tests passed claim is made.
+
+Seven direct Vulkan graph cases use M=N32, K64, batch2. Real transposed and padded-row-strided views force noncontiguous dim01 handling. The last axis remains1. Independent double reference uses exactly the uploaded float values, deterministic negative k-dependent signs and near1.0001 magnitudes; it never computes a CPU backend graph. Fixed tight atol2e-5/rtol2e-6 is provisional for this operator fixture and must not be widened after observing results.
+
+`CONTRACT.json` fixes dimensions, byte bounds, identity, ownership, all-output finite/parity checks, corruption discrimination and external process/stream bounds. Device shared memory is explicitly labeled IGPU when applicable; Vulkan buffer-type ownership is not physical VRAM residency proof. The correction under test is matrix-path F32 staging, not LLM accuracy/capacity/P2P.
+
+Build only after root reviews source against the admitted fresh derived library tree. Exact draft command: `compile_DRAFT.cmd "E:\the_harness\records\<new-derived-build>\build"`. The parameter must point to the fresh isolated CMake output; it must not reuse the baseline build. Public headers are the unchanged pinned API. The static registry may reference linked CPU/RPC libraries, but the fixture never initializes those backends or schedules work on them. Record every linked library hash and final executable hash; validate any dynamic runtime dependency identity separately. No global PATH changes.
+
+For admitted execution, run one exact device at a time with all four child-local disable flags set1 and outer30-second supervision, capped1MiB per stream. Baseline first on Vulkan0 thenVulkan1. Require complete JSON,7cases,2048finite outputs each, fail_count0 and truthful API ownership checks. Preserve failure as failure. Corruption runs only after baseline passes; actual last output value changes by8 and must fail while the reference is untouched. Parent captures crashes, partial JSON, unsupported cases and absent/reaped PID without interpreting timing as success. This fixture has no internal native fence timeout exposed through public ggml APIs; the parent owns the deadline.
+
+Source-based matrix-path selection is checked statically, not by a runtime execution trace. Pipeline trace in the separately derived Vulkan build would be needed to establish exact copy/matmul types and scratch allocations. Vulkan pipeline/driver global memory is outside application tensor-byte hard bounds and remains unmeasured until admitted execution.

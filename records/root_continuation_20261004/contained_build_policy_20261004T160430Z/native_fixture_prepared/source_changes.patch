@@ -1,0 +1,15 @@
+--- fixture_driver.py (revision2 immutable original)
++++ fixture_driver.py (prepared build-only candidate copy)
+@@
+-EXPECTED_SOURCE_SHA256 = "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c"
++EXPECTED_SOURCE_SHA256 = "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3"
+
+--- fixture_controller.py (revision2 immutable original)
++++ fixture_controller.py (prepared build-only candidate copy)
+@@
+-SOURCE = Path(r"E:\the_harness\records\root_continuation_20261004\supervisor_cleanup_root_repair\contained_supervisor_revision2.py")
+-SOURCE_SHA256 = "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c"
++SOURCE = Path(r"E:\the_harness\records\root_continuation_20261004\contained_build_policy_20261004T160430Z\contained_build_supervisor.py")
++SOURCE_SHA256 = "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3"
+
+fixture_contract.json and fixture_admission.json are newly generated scoped manifests. They pin the copied driver/controller/worker and candidate source/runtime; set `native_cases_started: false` and `PREPARED_FOR_ROOT_REVIEW_NO_NATIVE_AUTHORIZATION`; and retain the fixed five-case, 5-second per-worker envelope. `worker.py` is byte-identical to the admitted revision-2 fixture.

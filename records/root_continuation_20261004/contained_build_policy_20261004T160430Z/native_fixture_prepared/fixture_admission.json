@@ -1,0 +1,55 @@
+{
+  "admission": "PREPARED_FOR_ROOT_REVIEW_NO_NATIVE_AUTHORIZATION",
+  "native_cases_started": false,
+  "run_command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\native_fixture_prepared\\fixture_driver.py",
+    "--run"
+  ],
+  "source": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py",
+    "sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3"
+  },
+  "runtime": {
+    "path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "version": "3.10.11",
+    "sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "fixture_hashes_sha256": {
+    "fixture_contract.json": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc",
+    "fixture_driver.py": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+    "fixture_controller.py": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+    "worker.py": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "case_order": [
+    "natural",
+    "nonzero",
+    "timeout",
+    "cancel",
+    "overflow"
+  ],
+  "case_limits": {
+    "workers_max": 4,
+    "worker_startup_seconds": 5,
+    "worker_deadline_seconds_max": 5,
+    "controller_seconds": 30,
+    "log_limit_bytes_per_stream": 1024
+  },
+  "build_policy": {
+    "candidate_deadline_ceiling_seconds": 600,
+    "fixture_worker_deadline_seconds_max": 5,
+    "extended_deadline_case_included": false
+  },
+  "stop_on": [
+    "baseline not exactly accepted",
+    "native API or cleanup uncertainty",
+    "owned worker PID present",
+    "controller timeout",
+    "any hash changes"
+  ],
+  "network": false,
+  "provider": false,
+  "gpu": false,
+  "global_factory_or_role_queues": false,
+  "production_admission": false
+}

@@ -1,0 +1,15 @@
+# Task-scoped Gemini review → Grok edit
+
+This isolated harness run performed meaningful provider work on the frozen OpenCL executor SHA256 `765B2BE5E976DFB6709F3D0E7754F71696E2B9287CC87120A767E8820F69DF94`. The live global factory, disabled router, authentication configuration and old queues were not modified. This is experimental apparatus, not a qualified PyRe product or four-card LLM executor.
+
+Gemini `gemini-3.8-flash-high` completed substantive review through the authenticated AGY CLI: PID 46804, exit 0, 154.06 seconds, 91,397 reported tokens. Its vendor-boundary finding was valid. Its claim that installed PyOpenCL lacks the NVIDIA PCI domain property was disproven by the root's live device query; no domain is invented. See `gemini_review.json` and `GEMINI_ADJUDICATION.json`.
+
+The first `grok-4.7` edit call produced no answer before owned-process cleanup at 245.61 seconds. Usage is unknown, not zero. The smaller `grok-4.7-build-fast` retry completed: PID 41304, exit 0, 57.12 seconds, `end_turn`, one reported model call and 19,985 reported total tokens. The total includes 1,152 cache-read input tokens in addition to 9,239 input and 9,594 output. Reasoning is a breakdown, not another addition. Vendor-reported cost is 0.05210024 USD; this does not establish monthly quota consumption or billed settlement.
+
+The native response stores its answer in `.text`. The original launcher incorrectly expected another field and wrote `NOT_ACCEPTED`; that receipt remains immutable. `grok_fast_acceptance_20261004T112000.json` separately records complete extraction, four exact source-span matches and root approval subject to the independent implementer gate. `grok_fast_patch_extracted.json` and `grok_fast_patch_tests.py` contain the actual provider-authored code and six GPU-free tests. Changes refuse unknown/insufficient maximum single-buffer limits in both admission paths and select the first actual vendor boundary, refusing homogeneous-vendor corruption controls. No PCI identity weakening is included.
+
+The source owner applies and tests the patch. Root-authored vendor-population reporting and extra mocked child admission tests must be attributed separately. This receipt does not claim the patched runtime passed hardware tests; acceptance belongs to the root/implementer's later exact source hash and test receipts. Direct provider calls launched no native child agents.
+
+Parallel Qwen research is separate advisory work: `qwen3.8-flash` four-card failure tests (9,872 reported tokens) and `qwen3.8-max` integrated 3-upright + 1-rolled mechanical gates (12,320). Four physical discrete cards and complete mechanical interfaces are not available/qualified. Flash's proposed assertions and schema/targeting assumptions require corrections documented in its adjudication. Max returns `CONCEPT_ONLY_UNQUALIFIED`; it does not establish CAD fit or authorize an STL.
+
+The immutable ledger `../provider_usage_ledger_FINAL_20261004T112000.json` counts each provider request once, not its copied answer/review files. Observed totals are token evidence, not dashboard quota units. Missing usage remains unknown. Prior ledgers remain unchanged.

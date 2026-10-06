@@ -1,0 +1,9 @@
+{
+  "pid": 95860,
+  "job": "supervisor_v2",
+  "log_overflow": false,
+  "exit_code": 0,
+  "seconds": 102.15,
+  "identity": "retained process object",
+  "outer_killed": false
+}

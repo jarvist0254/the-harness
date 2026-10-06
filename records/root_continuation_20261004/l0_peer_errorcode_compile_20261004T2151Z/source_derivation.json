@@ -1,0 +1,12 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+  "source_sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f",
+  "source_bytes": 23386,
+  "candidate": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\peer_copy_compile.cpp",
+  "candidate_sha256": "6185dcf242e4c847544c07455468119d67fae35d5aaf341ebaa8d14a0b920aa6",
+  "candidate_bytes": 23386,
+  "replacement_count": 5,
+  "remaining_failure": 0,
+  "unknown_before": 0,
+  "unknown_after": 5
+}

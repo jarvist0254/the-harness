@@ -1,0 +1,4 @@
+  File "E:\the_harness\records\root_continuation_20261004\capacity_qwen_root_audit_20261004T1945Z\capacity_independent_audit.py", line 76
+    else 'OBSERVED')),'note':note}
+                                 ^
+SyntaxError: closing parenthesis '}' does not match opening parenthesis '(' on line 73

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "E:\\the_harness\\records\\cad_draft_20261004\\revision4_pure_gate.py"
+  ],
+  "pid": 78024,
+  "exit": 0,
+  "timed_out": false,
+  "seconds": 0.0939999995753169
+}

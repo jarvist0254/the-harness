@@ -1,0 +1,174 @@
+{
+  "native_children_actual": 0,
+  "root_admission": "PENDING_STATIC_REVIEW_NOT_HARDWARE_QUALIFICATION",
+  "reasoning_in_completion": true,
+  "provider_jobs": 2,
+  "secret_process_audit": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\SECRET_PROCESS_AUDIT_EGL_TWO.json",
+  "observed_total_tokens": 149003,
+  "internal_model_calls": "NOT_REPORTED",
+  "intake_complete": 2,
+  "usage_unknown": 0,
+  "credits": "NOT_DERIVED",
+  "source_execution": false,
+  "all_sessions_reaped": [
+    22992,
+    54271
+  ],
+  "utc": "2026-10-04T21:24:27.5523257Z",
+  "usage_known": 2,
+  "scope": "EXACT_TWO_EGL_QWEN_MAX_XHIGH_JOBS_ONLY",
+  "jobs": [
+    {
+      "prompt_before": "910bd52699de98fbfca8216f36bb00184a4aa350e3853fcb0c0c81f01b0182fb",
+      "artifact": {
+        "source_sha256": "816d95e717de6b5164485fa8a540ebb96f00ad9320fae313a6be62db8de08631",
+        "tests_chars": 2426,
+        "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\source.qwen_untrusted.cpp",
+        "source_execution": false,
+        "provider_status": "PROPOSED",
+        "job": "qwen_intel_egl_consumer",
+        "root_acceptance": "PENDING_STATIC_REVIEW",
+        "elapsed_seconds": 718.4,
+        "source_chars": 14885,
+        "owned_pids_point_absent": false,
+        "usage": {
+          "prompt_tokens": 34443,
+          "total_tokens": 72485,
+          "completion_tokens": 38042,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 34443
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 32338,
+            "text_tokens": 38042
+          }
+        },
+        "utc": "2026-10-04T21:22:15.4506077Z",
+        "owned_pids": [
+          94832,
+          47820
+        ],
+        "tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\tests_source.qwen_untrusted.txt",
+        "tests_sha256": "da8eb59c94f549207851ca8a2833f5cbe2ec05772f18c64378b6c8be0440c4e8"
+      },
+      "source_spec_after": "26d9198d2eb8ac74dfc6e27cf343b97dddc8a283da4e1783679099b99662f711",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\terminal.json",
+      "prompt_after": "910bd52699de98fbfca8216f36bb00184a4aa350e3853fcb0c0c81f01b0182fb",
+      "source_spec_before": "26d9198d2eb8ac74dfc6e27cf343b97dddc8a283da4e1783679099b99662f711",
+      "terminal": {
+        "observed_model": "qwen3.8-max",
+        "frames": 10556,
+        "raw_bytes": 2877196,
+        "parse_error_type": null,
+        "requested_model": "qwen3.8-max",
+        "reasoning_bytes": 129736,
+        "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+        "pid": 47820,
+        "finish_reason": "stop",
+        "done": true,
+        "timeout": false,
+        "http": 200,
+        "normalized_cap_exceeded": false,
+        "usage_known": true,
+        "response_cap_exceeded": false,
+        "provider_patch_applied": false,
+        "content_bytes": 21275,
+        "native_children_actual": 0,
+        "credential_saved": false,
+        "elapsed_seconds": 718.4,
+        "known_secret_match_refused": false,
+        "usage": {
+          "prompt_tokens": 34443,
+          "total_tokens": 72485,
+          "completion_tokens": 38042,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 34443
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 32338,
+            "text_tokens": 38042
+          }
+        }
+      },
+      "job": "qwen_intel_egl_consumer"
+    },
+    {
+      "prompt_before": "de1777194fb6dc5d03f08be4c749b111afb1dc3013d1e579357af5ae80b14958",
+      "artifact": {
+        "source_sha256": "9da36c9700d1ecedde8f63913d4d72a953bfaf572e87df6753fc8388ca9742b0",
+        "tests_chars": 5592,
+        "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_exporter_sync_contract\\source.qwen_untrusted.py",
+        "source_execution": false,
+        "provider_status": "ANALYSIS",
+        "job": "qwen_intel_exporter_sync_contract",
+        "root_acceptance": "PENDING_STATIC_REVIEW",
+        "elapsed_seconds": 751.32,
+        "source_chars": 19125,
+        "owned_pids_point_absent": true,
+        "usage": {
+          "prompt_tokens": 34298,
+          "total_tokens": 76518,
+          "completion_tokens": 42220,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 34298
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 31783,
+            "text_tokens": 42220
+          }
+        },
+        "utc": "2026-10-04T21:22:15.5004104Z",
+        "owned_pids": [
+          60612,
+          95744
+        ],
+        "tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_exporter_sync_contract\\tests_source.qwen_untrusted.txt",
+        "tests_sha256": "ad8d75201b9f52bb59b3722d0bdc8fec743eae9fe32e78c72bf77e4ee72f8fc6"
+      },
+      "source_spec_after": "447225ecd6b3043f1e1ec4bb9810416363be3f2c56e388a1f216e1fb3ab937de",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_exporter_sync_contract\\terminal.json",
+      "prompt_after": "de1777194fb6dc5d03f08be4c749b111afb1dc3013d1e579357af5ae80b14958",
+      "source_spec_before": "447225ecd6b3043f1e1ec4bb9810416363be3f2c56e388a1f216e1fb3ab937de",
+      "terminal": {
+        "raw_bytes": 3126204,
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 34298,
+          "total_tokens": 76518,
+          "completion_tokens": 42220,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 34298
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 31783,
+            "text_tokens": 42220
+          }
+        },
+        "frames": 11480,
+        "done": true,
+        "credential_saved": false,
+        "observed_model": "qwen3.8-max",
+        "content_bytes": 35616,
+        "http": 200,
+        "normalized_cap_exceeded": false,
+        "pid": 95744,
+        "native_children_actual": 0,
+        "usage_known": true,
+        "parse_error_type": null,
+        "known_secret_match_refused": false,
+        "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+        "provider_patch_applied": false,
+        "timeout": false,
+        "reasoning_bytes": 126541,
+        "elapsed_seconds": 751.32,
+        "requested_model": "qwen3.8-max",
+        "response_cap_exceeded": false
+      },
+      "job": "qwen_intel_exporter_sync_contract"
+    }
+  ]
+}

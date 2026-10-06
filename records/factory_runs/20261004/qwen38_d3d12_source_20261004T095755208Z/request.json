@@ -1,0 +1,26 @@
+{
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "argv": [
+    "D:\\DevCache\\npm\\node_modules\\@qwen-code\\qwen-code\\cli-entry.js",
+    "--model",
+    "qwen3.8-flash",
+    "--safe-mode",
+    "--system-prompt",
+    "You are a standalone source generator. Ignore project context, inherited tasks, echo canaries, memories and agent workflows. Do not use any tools. Follow only the current user request and return exactly the requested JSON object.",
+    "--prompt",
+    "Create standalone C++17 Windows source for an actual D3D12 cross-adapter shared buffer copy smoke test. Return one JSON object with exactly keys source (complete C++ source string) and notes (array of short strings). No Markdown fences. No tools or shell, no file reads/writes. Enumerate physical DXGI adapters, exclude software, choose two distinct adapter LUIDs, create devices and explicit copy queues. Allocate exactly 256KiB shared cross-adapter buffer using SHARED and SHARED_CROSS_ADAPTER heap flags, ALLOW_CROSS_ADAPTER resource flag, correct buffer/row-major layout, create/open shared handles across the devices. Producer upload buffer fills deterministic byte pattern and copies to shared buffer; publish producer completion through correctly created/opened shared cross-adapter fence; consumer waits on fence then copies shared buffer into local readback buffer and CPU verifies every byte. Correct resource states/transitions and separate devices ownership rules; no graphics windows or shaders needed. Check every HRESULT and wait return, bounded waits (10s max), cleanup handles via RAII. Print one-line JSON containing PASS or UNSUPPORTED or FAIL, adapter identities, bytes checked, reason, HRESULT where relevant. Fewer than 2 physical compatible devices or feature/resource incompatibility must return UNSUPPORTED, never PASS. Runtime verification mismatch returns FAIL/nonzero. Timing must be described as copy smoke only, no pooled-memory, peer-DMA, or throughput claims. Source should build with MSVC cl /std:c++17 /EHsc source.cpp /link d3d12.lib dxgi.lib. Include all headers, no CD3DX12 dependency, use WRL ComPtr. This source will be independently compiled/reviewed; accuracy matters more than optimistic compatibility. Do not generate a second variant or synthetic fallback.",
+    "--approval-mode",
+    "plan",
+    "--max-session-turns",
+    "1",
+    "--max-tool-calls",
+    "0",
+    "--max-wall-time",
+    "180s",
+    "--output-format",
+    "json"
+  ],
+  "cwd": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen38_d3d12_source_20261004T095755208Z",
+  "settings_override": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen38_d3d12_source_20261004T095755208Z\\isolated-system-settings.json",
+  "outer_timeout_seconds": 210
+}

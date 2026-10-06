@@ -1,0 +1,152 @@
+[
+  {
+    "name": "WindowsJobError",
+    "start_line": 34,
+    "end_line": 38
+  },
+  {
+    "name": "_windows",
+    "start_line": 41,
+    "end_line": 42
+  },
+  {
+    "name": "_monotonic",
+    "start_line": 45,
+    "end_line": 46
+  },
+  {
+    "name": "_sleep",
+    "start_line": 49,
+    "end_line": 50
+  },
+  {
+    "name": "_imports",
+    "start_line": 53,
+    "end_line": 59
+  },
+  {
+    "name": "_kernel",
+    "start_line": 62,
+    "end_line": 79
+  },
+  {
+    "name": "_limit_structs",
+    "start_line": 82,
+    "end_line": 119
+  },
+  {
+    "name": "job_limit_structs",
+    "start_line": 122,
+    "end_line": 125
+  },
+  {
+    "name": "_sha256_file",
+    "start_line": 128,
+    "end_line": 133
+  },
+  {
+    "name": "_int",
+    "start_line": 136,
+    "end_line": 139
+  },
+  {
+    "name": "_abs_text",
+    "start_line": 142,
+    "end_line": 148
+  },
+  {
+    "name": "_child_env",
+    "start_line": 151,
+    "end_line": 157
+  },
+  {
+    "name": "_validate",
+    "start_line": 160,
+    "end_line": 208
+  },
+  {
+    "name": "_write_all",
+    "start_line": 211,
+    "end_line": 217
+  },
+  {
+    "name": "_atomic_write",
+    "start_line": 220,
+    "end_line": 236
+  },
+  {
+    "name": "_journal",
+    "start_line": 239,
+    "end_line": 249
+  },
+  {
+    "name": "_read_pipe",
+    "start_line": 252,
+    "end_line": 288
+  },
+  {
+    "name": "_close_quiet",
+    "start_line": 291,
+    "end_line": 297
+  },
+  {
+    "name": "_accounting",
+    "start_line": 300,
+    "end_line": 316
+  },
+  {
+    "name": "_open_job",
+    "start_line": 319,
+    "end_line": 330
+  },
+  {
+    "name": "_enable_kill_on_close",
+    "start_line": 333,
+    "end_line": 345
+  },
+  {
+    "name": "_spawn",
+    "start_line": 348,
+    "end_line": 403
+  },
+  {
+    "name": "_join",
+    "start_line": 406,
+    "end_line": 409
+  },
+  {
+    "name": "_wait_run",
+    "start_line": 412,
+    "end_line": 453
+  },
+  {
+    "name": "_launch_and_wait",
+    "start_line": 456,
+    "end_line": 470
+  },
+  {
+    "name": "_shutdown",
+    "start_line": 473,
+    "end_line": 503
+  },
+  {
+    "name": "_close_owned",
+    "start_line": 506,
+    "end_line": 519
+  },
+  {
+    "name": "_emit",
+    "start_line": 522,
+    "end_line": 558
+  },
+  {
+    "name": "run_workers",
+    "start_line": 561,
+    "end_line": 603
+  },
+  {
+    "name": "restart_receipt",
+    "start_line": 606,
+    "end_line": 623
+  }
+]

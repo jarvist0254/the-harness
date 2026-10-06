@@ -1,0 +1,102 @@
+[
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "TEAM_AGENT_READ_ONLY_PROPERTY",
+    "excerpt": "approval before executing. Only valid with a named teammate in an active team. Cannot be combined with read_only.\"};var TEAM_AGENT_READ_ONLY_PROPERTY={type:\"boolean\",description:\"When true, the named teammate can only inspect the checkout and use team coordination tools. Shell, file writes, memory, schedules, and nested agents are blocked by an execution allowlist. Only valid with a named teammate in an ac"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "TEAM_AGENT_READ_ONLY_PROPERTY",
+    "excerpt": "fig3.isAgentTeamEnabled()?{name:TEAM_AGENT_NAME_PROPERTY,plan_mode_required:TEAM_AGENT_PLAN_REQUIRED_PROPERTY,read_only:TEAM_AGENT_READ_ONLY_PROPERTY}:{},isolation:{type:\"string\",enum:[\"worktree\"],description:\"Isolation mode. 'worktree' creates a temporary git worktree under <projectRoot>/.qwen/worktrees/agent-<7hex> so the agent works on an isolated copy of the repo. The worktree is auto-removed if the ag"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "readOnly",
+    "excerpt": "t def2=schema._zod.def;process2(def2.innerType,ctx,params);const seen=ctx.seen.get(schema);seen.ref=def2.innerType;json.readOnly=true},\"readonlyProcessor\");var optionalProcessor=__name((schema,ctx,_json,params)=>{const def2=schema._zod.def;process2(def2.innerType,ctx,params);const seen=ctx.seen.get(schema);seen.ref=def2.innerType},\"optionalProcessor\");var lazyProcessor=__name((schema,c"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "readOnly",
+    "excerpt": "t_changed\"),params:NotificationsParamsSchema.optional()});var ToolAnnotationsSchema=object4({title:string3().optional(),readOnlyHint:boolean3().optional(),destructiveHint:boolean3().optional(),idempotentHint:boolean3().optional(),openWorldHint:boolean3().optional()});var ToolExecutionSchema=object4({taskSupport:_enum2([\"required\",\"optional\",\"forbidden\"]).optional()});var ToolSchema=obj"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "safeMode",
+    "excerpt": "rides(override,flags){if(!flags)return;const ov=override;if(flags.bare!==void 0){ov.getBareMode=()=>flags.bare}if(flags.safeMode!==void 0){ov.isSafeMode=()=>flags.safeMode}if(hasOwn(flags,\"sandbox\")){const sandbox=flags.sandbox??void 0;ov.getSandbox=()=>sandbox}if(flags.screenReader!==void 0){ov.getScreenReader=()=>flags.screenReader}if(flags.model!==void 0){ov.getModel=()=>flags.model"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "safeMode",
+    "excerpt": "t ov=override;if(flags.bare!==void 0){ov.getBareMode=()=>flags.bare}if(flags.safeMode!==void 0){ov.isSafeMode=()=>flags.safeMode}if(hasOwn(flags,\"sandbox\")){const sandbox=flags.sandbox??void 0;ov.getSandbox=()=>sandbox}if(flags.screenReader!==void 0){ov.getScreenReader=()=>flags.screenReader}if(flags.model!==void 0){ov.getModel=()=>flags.model}if(flags.maxSessionTurns!==void 0){const m"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "excludeTools",
+    "excerpt": "ls=`\n\nThis error was probably caused by cyclic schema references in one of the following tools, try disabling them with excludeTools:\n\n - `+cyclicSchemaTools.join(`\n - `)+`\n`;error3.message+=extraDetails}}}async*processStreamResponse(model,streamResponse,routeKey,goalContext,transportContinuationPrefix,acceptQuietToolResultCompletion=false,abortSignal,retryClassificationContext){const allM"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "excludeTools",
+    "excerpt": "d a function declaration without a name from MCP server '${mcpServerName}'. Skipping.`);return false}const{includeTools,excludeTools}=mcpServerConfig;if(excludeTools&&excludeTools.includes(funcDecl.name)){return false}return!includeTools||includeTools.some(tool=>tool===funcDecl.name||tool.startsWith(`${funcDecl.name}(`))}__name(isEnabled,\"isEnabled\");init_esbuild_shims();init_esbuild_shims"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "getCoreTools",
+    "excerpt": "s.config.getPermissionsAsk()??[]),deny:parseRules(this.config.getPermissionsDeny()??[])};const rawCoreTools=this.config.getCoreTools?.();if(rawCoreTools&&rawCoreTools.length>0){this.coreToolsAllowList=new Set(rawCoreTools.map(t=>parseRule(t).toolName))}if(this.config.getApprovalMode?.()===\"auto\"){this.stripDangerousRulesForAutoMode()}const rawEagerTools=this.config.getEagerTools?.();if(Arr"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "getCoreTools",
+    "excerpt": "his.liveAppendSystemPrompt=prompt}getOutputStyle(){return this.outputStyle}setOutputStyle(style){this.outputStyle=style}getCoreTools(){if(this.shellExecutionSandbox)return[ToolNames.SHELL,ToolNames.TASK_STOP,ToolNames.READ_FILE,ToolNames.WRITE_FILE,ToolNames.EDIT,ToolNames.MONITOR,ToolNames.AGENT,ToolNames.EXEC,ToolNames.GLOB,ToolNames.LS,ToolNames.ASK_USER_QUESTION,ToolNames.STRUCTURED_OU"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "isToolExecutionAllowed",
+    "excerpt": "edEditor;config;onEditorClose;chatRecordingService;onToolResultFullTurnModel;shouldObserveProducer;hasSkillToolOverride;isToolExecutionAllowed;isFinalizingToolCalls=false;postToolBatchEnabledForBatch=false;postToolBatchSpanCallId;postToolBatchConfigWarned=false;isScheduling=false;validationRetryCounts=new Map;autoModeFallbackCallIds=new Set;toolSpans=new Map;blockedSpans=new Map;callIdToBatch=new Ma"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "isToolExecutionAllowed",
+    "excerpt": "s.shouldObserveProducer=options2.shouldObserveProducer??(()=>true);this.hasSkillToolOverride=options2.hasSkillTool;this.isToolExecutionAllowed=options2.isToolExecutionAllowed}getOrCreateNestedToolScheduler(){if(this.nestedToolScheduler)return this.nestedToolScheduler;this.nestedToolScheduler=new _CoreToolScheduler({...this.schedulerOptions,onAllToolCallsComplete:__name(async calls=>{for(const call o"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "spawnTeammate",
+    "excerpt": "before \"${name}\" was registered.`,returnDisplay:`Teammate spawn aborted.`,error:{message:\"Aborted.\"}}}await teamManager.spawnTeammate({name,prompt:this.params.prompt,agentType:this.params.subagent_type,cwd,planModeRequired:this.params.plan_mode_required===true,readOnly:this.params.read_only===true});const msg=`Teammate \"${name}\" is now running concurrently. Task: ${this.params.description}`"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "spawnTeammate",
+    "excerpt": "hot).then(()=>{this.teamFileWritesCommitted=writeSeq})});this.teamFileWriteQueue=write.catch(()=>{});return write}async spawnTeammate(config3){if(this.teamFile.members.length>=this.maxTeammates){throw new Error(`Maximum number of teammates (${this.maxTeammates}) reached.`)}const effectiveModel=config3.model||void 0;const name=generateUniqueTeammateName(config3.name,this.teamFile.members);co"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "plan_mode_required",
+    "excerpt": "ents are blocked by an execution allowlist. Only valid with a named teammate in an active team. Cannot be combined with plan_mode_required.\"};var RUN_IN_BACKGROUND_DESCRIPTION=\"Defaults to true for top-level regular subagents. Set to false to run a regular agent in the foreground and return its result inline. Set to true for an interactive fork to receive its completion notification; headless fo"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "plan_mode_required",
+    "excerpt": "unInBackgroundDescription(config3.isAgentTeamEnabled())},...config3.isAgentTeamEnabled()?{name:TEAM_AGENT_NAME_PROPERTY,plan_mode_required:TEAM_AGENT_PLAN_REQUIRED_PROPERTY,read_only:TEAM_AGENT_READ_ONLY_PROPERTY}:{},isolation:{type:\"string\",enum:[\"worktree\"],description:\"Isolation mode. 'worktree' creates a temporary git worktree under <projectRoot>/.qwen/worktrees/agent-<7hex> so the agent wor"
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "safeMode",
+    "excerpt": "executionSandbox does not yet support ACP, worktree management, LSP, MCP, extensions or provisional workspaces.\")}const safeMode=argv.safeMode!==void 0?argv.safeMode:isSafeModeEnv();if(argv.insecure){process.env[\"QWEN_TLS_INSECURE\"]=\"1\"}if(isTlsVerificationDisabled()&&process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"]!==\"0\"){process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"]=\"0\";const tlsWarning=\"TL"
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "safeMode",
+    "excerpt": "ox does not yet support ACP, worktree management, LSP, MCP, extensions or provisional workspaces.\")}const safeMode=argv.safeMode!==void 0?argv.safeMode:isSafeModeEnv();if(argv.insecure){process.env[\"QWEN_TLS_INSECURE\"]=\"1\"}if(isTlsVerificationDisabled()&&process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"]!==\"0\"){process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"]=\"0\";const tlsWarning=\"TLS certificate "
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "excludeTools",
+    "excerpt": "??[]];for(const t2 of argv.allowedTools??[]){if(t2&&!mergedAllow.includes(t2))mergedAllow.push(t2)}for(const t2 of argv.excludeTools??[]){if(t2&&!mergedDeny.includes(t2))mergedDeny.push(t2)}const disabledSlashCommands=[];const seenDisabled=new Set;const addDisabled=__name(value=>{if(!value)return;const trimmed=value.trim();if(!trimmed)return;const key=trimmed.toLowerCase();if(!seenDisabled"
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "excludeTools",
+    "excerpt": "re||void 0,allowedTools:bareMode||safeMode?argv.allowedTools||void 0:argv.allowedTools||settings.tools?.allowed||void 0,excludeTools:mergedDeny,disabledSlashCommands:disabledSlashCommands.length>0?disabledSlashCommands:void 0,disabledSkillNamesProvider:bareMode||safeMode?void 0:disabledSkillNamesProvider,enabledSkillNamesProvider:bareMode||safeMode?void 0:enabledSkillNamesProvider,skillSet"
+  }
+]

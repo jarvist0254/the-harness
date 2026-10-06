@@ -1,0 +1,8 @@
+[1/6] Performing build step for 'vulkan-shaders-gen'
+ninja: no work to do.
+[2/6] Performing install step for 'vulkan-shaders-gen'
+-- Up-to-date: E:/the_harness/records/build_vulkan_real/build/Release/./vulkan-shaders-gen.exe
+[3/6] Completed 'vulkan-shaders-gen'
+[4/6] Building CXX object tools\quantize\CMakeFiles\llama-quantize-impl.dir\quantize.cpp.obj
+[5/6] Linking CXX shared library bin\llama-quantize-impl.dll
+[6/6] Linking CXX executable bin\llama-quantize.exe

@@ -1,0 +1,126 @@
+{
+  "timestamp_utc": "2026-10-04T13:41:51.312312+00:00",
+  "command": [
+    "E:\\tooling\\FreeCAD\\app\\FreeCAD_1.1.4-Windows-x86_64-py311\\bin\\freecadcmd.exe",
+    "E:\\the_harness\\records\\cad_draft_20261004\\export_preview_geometry_revision4.py"
+  ],
+  "pid": 31256,
+  "exit": 0,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "seconds": 0.9530000006780028,
+  "fresh_data_present": true,
+  "marker_present": true,
+  "exception_absent": true,
+  "verified": true,
+  "old_exporter_preserved_sha256": "400990510b9e32ac906198dfba198b7196d36fe002457ae209bf70bd59c18896",
+  "new_exporter_sha256": "70c374bb21a6886f0a5107e10a18f2638ca7cef7970291dcf3e73a7d74c55b51",
+  "new_data_sha256": "b6494b51a0348c0d4a9f4a69cc532717af4e6c4c295e70c5fdabf0dca9bd6678",
+  "new_data_bytes": 25336,
+  "profiles": {
+    "compact": {
+      "shape_count": 7,
+      "actual_printed_bbox_mm": [
+        188.0,
+        200.0,
+        150.0
+      ],
+      "actual_core_mesh_bbox_mm": [
+        188.0,
+        200.0,
+        150.0
+      ],
+      "nonempty_meshes": [
+        {
+          "name": "IntegratedPrintedCore_DRAFT",
+          "vertices": 144,
+          "triangles": 296
+        },
+        {
+          "name": "MetalDLoadRailConcept_0",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "MetalDLoadRailConcept_1",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_A_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_B_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_C_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_D_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        }
+      ],
+      "collision_meshes": 0
+    },
+    "universal": {
+      "shape_count": 7,
+      "actual_printed_bbox_mm": [
+        188.0,
+        200.0,
+        199.0
+      ],
+      "actual_core_mesh_bbox_mm": [
+        188.0,
+        200.0,
+        199.0
+      ],
+      "nonempty_meshes": [
+        {
+          "name": "IntegratedPrintedCore_DRAFT",
+          "vertices": 136,
+          "triangles": 280
+        },
+        {
+          "name": "MetalDLoadRailConcept_0",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "MetalDLoadRailConcept_1",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_A_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_B_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_C_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "GPU_D_Envelope",
+          "vertices": 8,
+          "triangles": 12
+        }
+      ],
+      "collision_meshes": 0
+    }
+  },
+  "tasklist_after": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "scope": "Read saved revision4 FCStd geometry, no source/doc edit or STL. Rendering and visual inspection left to root."
+}

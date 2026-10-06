@@ -1,0 +1,17 @@
+{
+  "adjudicator":"ROOT",
+  "authority":"Existing authorized Qwen implementation → Gemini review → Grok edit pipeline",
+  "provider_launch_authorized":true,
+  "batch_path":"E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "job_id":"gemini_fp32_review",
+  "lane":"Gemini",
+  "model":"gemini-3.8-flash-medium",
+  "source_path":"E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch\\patch.pending_root_qa.json",
+  "source_sha256":"6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "prompt_sha256":"b593ebcab840e6f4177a81e7c7784d5c3b1a9a256056165eee232910cdbed674",
+  "root_review":"Read completed actual Qwen artifact, exact original matrix function and helper/prompt. All three searches match; code staging types and X/Y byte sizes change together. Provider explanations about quantize_y and runtime behavior need source-specific review. No forced code defect or execution claim.",
+  "provider_timeout_seconds":210,
+  "outer_timeout_seconds":240,
+  "native_children_actual":0,
+  "result":"Static review only; root adjudication remains separate. No compiler, GPU, tools, source edits, other queues or global configuration changes."
+}

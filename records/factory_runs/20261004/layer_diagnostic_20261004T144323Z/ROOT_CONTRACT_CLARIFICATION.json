@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-04T14:48:03.339408+00:00",
+  "root_authority": "parent root adjudication, separate record frozen initialcontract preserved",
+  "tokens": "EXACT list(range16), type(x)isint no bool",
+  "tolerances": "THIS diagnostic API only atol==0.01 andrtol==0.01 finiteint/float excludingbool; refusebothwideningandnarrowing. Reportfullmax/RMSE/exactmismatchcount allnodes; firstbyte/noise divergence distinctfirstthresholdviolation",
+  "common_workload": "SHA256canonicalsharedexperimentmanifest includes intendedorderedGPU[Vulkan0,Vulkan1], commoncapturefixtureSHA notoldbaseSHA, executable/model/KV/tokens/ctx/batch/declarationchildflags. CPUorigin.devices=[] outsidecommonhash, GPUoriginexactorderedexpected",
+  "scope": "Declarative inputpin match is notnativeexecutionproof; mandatoryintrusive diagnostic-only. NO broad schemaadapterauthorization."
+}

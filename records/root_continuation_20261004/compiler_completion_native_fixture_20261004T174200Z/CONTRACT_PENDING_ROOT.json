@@ -1,0 +1,78 @@
+{
+  "status": "SOURCE_ONLY_PENDING_ACTUAL_ADAPTER_API_AND_ROOT_ADMISSION",
+  "supervisor_path": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py",
+  "supervisor_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "adapter_path": null,
+  "adapter_sha256": null,
+  "adapter_install_symbol": null,
+  "cases": [
+    {
+      "id": "success",
+      "mode": "success",
+      "deadline_seconds": 5,
+      "expected_status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+      "root_exit": 0,
+      "child_required": false
+    },
+    {
+      "id": "resident_success",
+      "mode": "resident_success",
+      "deadline_seconds": 5,
+      "expected_status": "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED",
+      "root_exit": 0,
+      "child_required": true,
+      "critical_discriminator": "The real child stays alive for60 seconds and holds both inherited root pipes. Only owned Job cleanup makes bounded drain possible."
+    },
+    {
+      "id": "resident_failure",
+      "mode": "resident_failure",
+      "deadline_seconds": 5,
+      "expected_status": "FAILED",
+      "expected_reason": "nonzero_exit",
+      "root_exit": 3,
+      "child_required": true
+    },
+    {
+      "id": "timeout",
+      "mode": "timeout",
+      "deadline_seconds": 1,
+      "expected_status": "TIMEOUT",
+      "expected_reason": "deadline",
+      "root_running_before_terminal": true
+    },
+    {
+      "id": "cancel",
+      "mode": "cancel",
+      "deadline_seconds": 5,
+      "expected_status": "CANCELLED",
+      "expected_reason": "cancelled",
+      "cancellation": "Observe own root_ready.json within startup1 second, then set supplied cancel_event after0.1 seconds. Do not start0.1 timer before launch."
+    }
+  ],
+  "manifest": {
+    "version": 1,
+    "workers": 1,
+    "startup_seconds": 1,
+    "log_limit_bytes": 4096,
+    "containment_policy": "kill_on_close",
+    "deadline_seconds_max": 5
+  },
+  "suite_outer_seconds": 60,
+  "case_outer_seconds_max": 15,
+  "existing_shutdown_seconds": 8,
+  "worker_user_payload_bytes_max": 65536,
+  "child_natural_hold_seconds": 60,
+  "scope": "CPU fixture only; no GPU/external application/asynchronous compiler claims/600-second or controller-loss certification",
+  "runtime_acceptance": [
+    "Actual adapter API installed only in private exact FA907 imported module",
+    "Every case actual source/interpreter/self/worker/adapter/admission hashes before import and after run match",
+    "Every root assigned and resumed, owned retained root exit matches expectation",
+    "Final actual job_active_count0 and drain_proof CLEANUP; otherwise refused regardless of compiler-root label",
+    "Complete no-overflow/no-bad-read bounded logs and durable matching restart receipt; whole_tree_certificate false/no replay/no reattach",
+    "Resident cases require actual child readiness and stdout/stderr markers matching child own PID and root-owned spawn PID, not fabricated labels",
+    "Custom compiler-root status accepted only for successful root0 after cleanup evidence; never relabeled PROCESS_COMPLETED",
+    "Owned root and observed child PIDs absent at bounded read-only point-in-time checks after retained wait/Job cleanup; no PID control",
+    "Timeout/cancel roots show running READY marker; appropriate returned terminal states/retained root termination verified",
+    "Five actual cases must pass; stop on uncertain cleanup/pins/native error/global60-second deadline; no retry"
+  ]
+}

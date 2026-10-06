@@ -1,0 +1,800 @@
+Actual Grok coding editor after Qwen and completed substantive Gemini review. Produce complete STANDALONE Windows contained-supervisor architecture repair using proven read-only windows_job.py APIs appended, no live PyRe import/change. Return ONLYJSON {source:completecontained_supervisor.py,test_source:actual-import unittestmodule,notes:[contract/limits]}. No tools/code execution yourself/auth/MCP/web/nativechildren. ROOT MUSTSTATICADMIT before process-fixture tests.
+Eliminate confirmed defects: _winapi.ResumeThread DOESNOTEXIST use typedkernel.ResumeThread; kill_on_close QueryInformationJobObject neverinstalls policy; oneDWORD/magicbytearray extendedstructwrong; assignment/resume/partiallaunch exceptionclosesdefaultjobwithout terminating/drainingassigned+unassignedownedprocesses; reader ReadFile tuple is(data,errorcode) not(ok,data), writercopiesretained preventEOF, readers notjoined/closed, overflownotstatus; startupbudgetunused; query/waitresultsignored; receiptfdpartialwrite/doubleclose; noexactPID/exit/drainproof.
+API run_workers(manifest,output_root,*,cancel_event=None) andrestart_receipt matchingTASKCONTRACTS. Strictmanifestversion1,1..4workers verifiedabsoluteexeSHAargv/cwd/id,deadline1..60,startup1..10, boundedloglimit1024..131072 NEWabsoluteoutputroot nofileoverwrite/traversal/shell/envsecrets. Zero nativeimports/processes at import; nonWindowsNOT_IMPLEMENTED. MinimalexplicitWindowsenv onlynotsecretcopy.
+Use_create_process helper _winapi.CreateProcess suspended4/noWindow with explicitSTARTUPINFOEX.handle_list ONLY noninheritedreaders and duplicatedinheritableNUL/writerhandles; assignJOB beforeResumeThread; captureprocesshandle/PID beforeanyresume andtrackowned suspendedunassigned too; anyfailedAPI terminatesexactownedprocess andwaitsbounded closinghandles, plus terminatejob forpreviousassignedchildren ALWAYS all exception paths. Namedjobcollision validhandle+LastError183 check; noPIDreattach. Retainedhandles exactidentity; monotonicdeadline beforeeachlaunch andrun loops. Explicitterminate default NO KILL_ON_CLOSE matchesPyRe proven policy, controllerloss UNKNOWN_INTERRUPTED no recoverywithoutcooperatingwrapperheldhandle. Optionalkill_on_close ONLYcorrecttypedJOBOBJECT_BASIC_LIMIT_INFORMATION andEXTENDED withSIZE_TULONG_PTR64bitpadding, SetInformationJobObject class9 signatures, LimitFlags0x2000. Set/query allchecked nofake success.
+Readers use _winapi.ReadFile data,error properly, capactualbytesstored+overflowevent causingLOG_LIMIT FAILED andwholeownedjobtermination. Closeparentwriteoriginal+duplicatehandles immediatelyafterCreateProcess beforeloop soEOFworks. Boundedjointhreads afterjobempty; missingjoin/query/wait/termination proof yieldsUNKNOWN notcleanupPASS. Readerhandlescloseonce, memory/filecaps<=loglimitperstream, arbitrarychildoutputneverunboundedfiles. Logs onlyoutputroot atomicallywritecapstrings; partialwrites handledviafileobjectwrite/fdopen contextfsync no doubleclose. ReceiptJSON<=128KiB atomictemp fsync replace durablesequence simplejournaltruthnotrecoverableKV.
+Retainrootprocesshandles, getexitcodes afterWaitForSingleObject statusOBJECT_0; recordeachPID/exit/resumed/assigned, jobactivecountqueriedchecked properACCOUNTING. READY/liveness isnotinferenceCOMPLETE. PROCESS_COMPLETED onlyallrootexit0 ANDjobactivecount0, elsechildstillalivewaituntildrain/deadline. CANCELLED preserved;TIMEOUTfailed;nonzeroFAILED;overflowFAILED. Finallyterminatejobifanyactive/unassigned owned thenwaitbounded exacthandles+activecount. Jobempty/rootssignaled supportscleanup evidence; lackcomplete lifetimecapture meansno whole-treehistoricaldraincertificate. QueryfailURE UNKNOWN notcount0. restart_receipt in-flightUNKNOWN_INTERRUPTED noreattach byPID/noimplicitreplay.
+Actual-importtests importcontained_supervisor notmockreimplementation. PuretestAPI injection/mockactualhelpers verifies assignBEFOREkernelresume, failedassign/resume cleanssuspendedhandles andpriorjob, killoptionSetnotQuery, exactsignature/structureoffset/size viactypes. Processfixtures onlyWindows +RUN_CONTAINMENT_FIXTURES=1, harmlesssys.executable absoluteSHA withPython childsleep/nonzero/logoverflow/cancel/grandchild, no network/GPUlaunch. No testsrunbyyou; sourceownerrootadmitsbeforeevenmocktests whereimportsstandalone safe.
+Keep readableprefer<=550source+<=350tests complete; fullsource justifiedbrokencore, no placeholders/emptytests. Preserveoriginalevidence. MaxQwen10andDeepSeek10authorizedactualGroktool-lesschildren0.
+
+SOURCE TASK_CONTRACTS.json
+{"version":1,"jobs":{"supervisor":{"model":"qwen3.8-max","file":"contained_supervisor.py","text":"Generate complete standalone Python Windows contained-worker supervisor using appended proven windows_job.py, NEVER importing/editing live PyRe. API run_workers(manifest,output_root,*,cancel_event=None)->terminaldict. Schema1 run_id safeidentifier, workers1..4 [{worker_id,argv absoluteverifiedexe+literalargs,executable_sha256,cwdabsolute}], deadline_secondsint1..60 startup_seconds1..10 log_limit_bytes1024..131072 containment_policy explicit_terminate(default)|kill_on_close. Validate stricttypes/no bools/pathtraversal/NUL/duplicateworkerIDs before any allocation; NEWoutputroot absolute refuseexisting. No shell/no network/GPUlaunches, no auth/envsecrets. Child env onlyrequiredWindowsvars explicit minimal. GPU-free imports.\nUse CPython _winapi CreateProcess CREATE_SUSPENDED4 +CREATE_NO_WINDOW, STARTUPINFOEX.handle_list only duplicatedstdinNUL/stdout/stderrhandles. Assign job BEFORE ResumeThread; signatures correct pointer-sizedHANDLE. Every failedassign/resume terminates owned suspended process and waitsbounded beforeclose. Correct namedjobcollision refusal. explicit_terminate default NOkill-on-close as provenrecoverabledefault, but NO recovery claim: no wrapperholdsacknowledgedhandle =>controllerloss UNKNOWN_INTERRUPTED. Optionalkillonclose propertypedWindowsstructs correctLimitFlags no magicoffsetbytearray. Retainownedprocesshandles; deadlines monotonic; cancellation never overwritten. Wholejob explicitTerminateJobObject thenboundeddrain exacthandles+active query, unknown/departeduncapturedmembers =>drain_proof UNKNOWN not falsewhole-treecertificate. No killingPIDafterreuse.\nCompletiononlyallownedprocessesexit0 +no activejobchildren; statusPROCESS_COMPLETED neverinference/modelqualified. ReadinessonlylivenessnotCOMPLETE. Deadline TIMEOUT/FAIL, nonzeroFAILED, cancelCANCELLED. Logs bounded whilerunning via inheritedpipe readerthreads cappedwrites; ifoverflow recordtruncationcounts or terminateLOG_LIMIT; no unboundedfiles. AtomicJSON tempfsyncreplace<=128KiB durablesequenceevent receipt; no KV/replay claim. restart_receipt pure stateinflightUNKNOWN_INTERRUPTED no stalePIDattach. NonWindowsNOT_IMPLEMENTED honest. <=500source lines, actual-import unittest tests importcontained_supervisor, NOstub implementations. Puretestsstrictmanifest+mockactualAPIassignbeforeResumeThread/failcleanup; spawnedharmlessPythonfixtures childsleep/cancel/deadline/nonzero/logoverflow OPTIN RUN_CONTAINMENT_FIXTURES=1 Windows only, rootstaticadmissionneeded beforeexecution. No runtime/modelimports orcalls at import. Max nativeQwen10 andDeepSeek10 separatelyauthorized; thisdirectAPItools0children0. ONLYJSON {source,tests,notes} complete."},"validator":{"model":"qwen3.8-flash","file":"qualification_validator.py","text":"Generate complete pure measured-evidence validator actual-import unittest tests NOstubs/passplaceholders. API validate_result(receipt,*,now_utc,max_age_seconds=10,trusted_artifact_hashes=frozenset()) ->{status:QUALIFIED|REFUSED|NOT_CHECKED,reasonsstablecodes,qualified_claims:[]}. Strictschema1 clearlydocument. Unknown/missing/untrusted=>NOT_CHECKED, malformed/contradictory/knownfalse=>REFUSED. NeverQUALIFYunknown. Externaltrusted_artifact_hashes mustbind requiredmeasurement artifacts SHA64; defaultempty=>NOT_CHECKED, cannotauthenticateJSONclaims. Synthetic unit fixtures passowntrustedset but neverhardwareproof.\nClaims separate TWO_VENDOR_NUMERICAL,FOUR_PHYSICAL_GPU,DEDICATED_CAPACITY_GT_ONE_CARD,FOUR_REQUIRED_CAPACITY,LLM_LOGIT_PARITY,DIRECT_P2P,DURABLE_REPLAY. SharedAMD/tinyMLP/CPU-RPC/policy9MB cannotqualifyfourdiscreteVRAM/LLM/P2P. Devices knownfullPCI4or8hexsegmentnumeric<=ffff normalizedcanonical4, dev<=1f fn<=7; aliasedduplicatesrefuse noinventeddomain. FOUR requires4actualdiscreteGPU unique completed kernels andunique residentnonemptyblockownership notwholemodelreplication (IGPU/sharednotfourdiscrete). Perdevice memory_kindDEDICATED|SHARED_HOST|UNKNOWN, measuredtotal/free/allocatorpeak/reserve+weightsKVactivationbytes sources timestamps awarefresh0<=age<=max. strictnonboolfiniteintbytes nonnegative free<=total peak<=usable. advertisedtotalNOTFREE driverdeltanotallocatorproof; missingmeasurementbasisACTUAL_ALLOCATOR_REQUIRED=>NOT_CHECKED. Eachuniqueblock bindsmodel/workload/source/exehashes consistentallcomparisonreceipts.\nCapacity actualresidentrequirements exceedlargestactualsingleusable dedicatedbudget, fitperdeviceplans; sameexactmodel/workload/quant/context/batch singlecardtrustedACTUAL_ALLOCATOROOM vsfouractualparitypass; artificialpolicyneverphysicalcapacityproof even64MB. FOUR_REQUIRED additionally3cardidenticalworkloadactualOOM, notpolicy. LLM hashedlicensedGGUFattentionKVoperators,pinnedbuild,fullvocabCPUindependentlogitref allfinite/maxabsRMSEviolations0 predeclaredtolerances referencehash/count; no outputproseproof orsuccessboolalone. Trustartifactssummaryrequired, allfinite/violationscount numeric sanity. Comparatorcorruption expectedFAILexit1 detectedtrue controlscopeCOMPARE_ONLY doesn'tprovecompute/transportnegative. P2P directedpairsactualprimitiveDIRECT_DEVICE+parity+trust rejectHOST_STAGED/D3D12L0SYSTEMHEAP. Durable checkpointidentitycommitsequence+replayboundary+workerloss/cancelrestart exactevidence; atomicfinalJSONalone/inflightstate notdurability.\nCurrentpartial: OpenCLfinalSHAFF13C3783BDA61CF153B1BB58AFB9472BBE9C2404FA056C2816D011E749EA387,47puretests, installedNV5070Ti+AMDgfx1036shared8actualkernels cleanfullCPUerror8.344650268554688e-06 atol=rtol5e-5; injectedall8ranlast4mismatchfinal1.001207709312439. NewLLM C++ compilepasses butdefaultcontextmismatch(noGPUinferenceproofyet); Qwen3-0.6B-Q8_0 bytes639446688hash9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031 fitsonecard. Nofourcards.\n<=450lines source+testsimportactualqualification_validator. TestsunknownNOTCHECKED,badboolNaNnegativeREFUSED,stale/future/unknownPCI,8hexaliasdup,CPU4/sharedAMD/tinypolicy/singlecardfits/replication, modelworkloadmismatch, absentallocator, forgedboolnoprovenance, validTWO_VENDORpartial, complete4trustedSYNTHETICstructuredfixturepass,4necessary3policyOOMrefuse,LLMprosefake,P2Phoststagefake,durableatomicfake. No file/subprocess/nativeimports. MaxQwen10andDeepSeek10separatelyauthorized butdirectAPI tools0nativechildren0. ONLYJSON {source,tests,notes} complete."}},"native_max_qwen":10,"native_max_deepseek":10,"actual_children":0}
+
+SOURCE supervisor_v2\contained_supervisor.py
+import os,sys,json,time,hashlib,tempfile,threading
+from pathlib import Path
+from contextlib import ExitStack
+if os.name!='nt':
+    def run_workers(*a,**k):raise NotImplementedError('NOT_IMPLEMENTED')
+else:
+    import _winapi,ctypes,subprocess,msvcrt
+    from ctypes import wintypes
+    class WindowsJobError(RuntimeError):
+        def __init__(s,c,w=None):s.code,s.winerror=c,w;super().__init__(f"{c}: {w}" if w else c)
+    def _kernel():
+        k=ctypes.WinDLL('kernel32',use_last_error=True)
+        for n,a,r in[("CreateJobObjectW",[ctypes.c_void_p,wintypes.LPCWSTR],wintypes.HANDLE),("AssignProcessToJobObject",[wintypes.HANDLE,wintypes.HANDLE],wintypes.BOOL),("TerminateJobObject",[wintypes.HANDLE,wintypes.UINT],wintypes.BOOL),("QueryInformationJobObject",[wintypes.HANDLE,ctypes.c_int,ctypes.c_void_p,wintypes.DWORD,ctypes.c_void_p],wintypes.BOOL),("CloseHandle",[wintypes.HANDLE],wintypes.BOOL),("ResumeThread",[wintypes.HANDLE],wintypes.DWORD)]:
+            f=getattr(k,n);f.argtypes,f.restype=a,r
+        return k
+    def _sha(p):
+        h=hashlib.sha256()
+        with open(p,'rb') as f:
+            for c in iter(lambda:f.read(1<<16),b''):h.update(c)
+        return h.hexdigest()
+    def _validate(m,o):
+        if not isinstance(m,dict):raise TypeError('manifest')
+        r=m.get('run_id')
+        if not isinstance(r,str)or not r.isidentifier()or'\x00'in r:raise ValueError('run_id')
+        ws=m.get('workers');
+        if not isinstance(ws,list)or not(1<=len(ws)<=4):raise ValueError('workers count')
+        dl=m.get('deadline_seconds');
+        if not isinstance(dl,int)or isinstance(dl,bool)or not(1<=dl<=60):raise ValueError('deadline')
+        su=m.get('startup_seconds');
+        if not isinstance(su,int)or isinstance(su,bool)or not(1<=su<=10):raise ValueError('startup')
+        ll=m.get('log_limit_bytes');
+        if not isinstance(ll,int)or isinstance(ll,bool)or not(1024<=ll<=131072):raise ValueError('log_limit')
+        cp=m.get('containment_policy','explicit_terminate')
+        if cp not in('explicit_terminate','kill_on_close'):raise ValueError('policy')
+        ids=set();out=[]
+        for w in ws:
+            if not isinstance(w,dict):raise TypeError('worker')
+            wid=w.get('worker_id')
+            if not isinstance(wid,str)or not wid.isidentifier()or'\x00'in wid or wid in ids:raise ValueError('wid')
+            ids.add(wid);av=w.get('argv')
+            if not isinstance(av,list)or not av:raise ValueError('argv')
+            if any(not isinstance(a,str)or'\x00'in a for a in av):raise ValueError('argv nul')
+            exe=Path(av[0])
+            if not exe.is_absolute()or not exe.is_file():raise ValueError('exe path')
+            if'..'in exe.parts:raise ValueError('traversal')
+            hs=w.get('executable_sha256')
+            if not isinstance(hs,str)or len(hs)!=64:raise ValueError('sha fmt')
+            if _sha(exe)!=hs.lower():raise ValueError('sha mismatch')
+            cw=w.get('cwd')
+            if not isinstance(cw,str)or'\x00'in cw:raise ValueError('cwd')
+            cp2=Path(cw)
+            if not cp2.is_absolute()or not cp2.is_dir()or'..'in cp2.parts:raise ValueError('cwd path')
+            out.append({'worker_id':wid,'argv':av,'cwd':cw})
+        op=Path(o)
+        if not op.is_absolute()or'..'in op.parts:raise ValueError('output_root')
+        if op.exists():raise ValueError('output exists')
+        return r,out,dl,su,ll,cp,op
+    def _env():
+        e={}
+        for k in('SystemRoot','SYSTEMDRIVE','COMSPEC','PATH','TEMP','TMP'):
+            v=os.environ.get(k)
+            if v:e[k]=v
+        return e
+    def _pipe_rdr(ph,lim,cap,ev):
+        b=bytearray();tr=0
+        while not ev.is_set():
+            try:ok,d=_winapi.ReadFile(ph,4096)
+            except OSError:break
+            if not ok and not d:break
+            if len(b)+len(d)>lim:tr+=1;cap['overflow']=True;cap['truncations']=tr;break
+            b.extend(d)
+        cap['data']=bytes(b);cap['truncations']=tr
+    def _receipt(op,rid,payload):
+        op.mkdir(parents=True,exist_ok=True)
+        raw=json.dumps(payload).encode()
+        if len(raw)>131072:raise ValueError('receipt too large')
+        fd,tp=tempfile.mkstemp(dir=str(op),suffix='.tmp')
+        try:
+            os.write(fd,raw);os.fsync(fd);os.close(fd)
+            fp=op/f'{rid}_receipt.json';os.replace(tp,str(fp));tp=None
+        finally:
+            if tp:os.close(fd);os.unlink(tp)
+    def run_workers(manifest,output_root,*,cancel_event=None):
+        if os.name!='nt':raise NotImplementedError('NOT_IMPLEMENTED')
+        if cancel_event is None:cancel_event=threading.Event()
+        rid,ws,dl,su,ll,cp,op=_validate(manifest,output_root)
+        krn=_kernel();jn=f'CS_{rid}_{os.getpid()}_{time.monotonic_ns()}'
+        jh=krn.CreateJobObjectW(None,jn)
+        if not jh:
+            e=ctypes.get_last_error()
+            if e==183:raise WindowsJobError('JOB_COLLISION',183)
+            raise WindowsJobError('CREATE_JOB_FAILED',e)
+        if cp=='kill_on_close':
+            class ELI(ctypes.Structure):_fields_=[('LimitFlags',wintypes.DWORD)]
+            eli=ELI();eli.LimitFlags=0x00002000
+            if not krn.QueryInformationJobObject(jh,9,ctypes.byref(eli),ctypes.sizeof(eli),None):
+                class JELI(ctypes.Structure):_fields_=[('Basic',ELI),('PerProcessUserTime',ctypes.c_int64),('PerJobUserTime',ctypes.c_int64),('MinimumWorkingSetSize',ctypes.c_size_t),('MaximumWorkingSetSize',ctypes.c_size_t),('ActiveProcessLimit',wintypes.DWORD),('Affinity',ctypes.c_size_t),('PriorityClass',wintypes.DWORD),('SchedulingClass',wintypes.DWORD)]
+                jeli=JELI();jeli.Basic.LimitFlags=0x00002000
+                krn.QueryInformationJobObject(jh,9,ctypes.byref(jeli),ctypes.sizeof(jeli),None)
+        phs,ths,lrs=[],[],[];status='PROCESS_COMPLETED';fail_r=''
+        try:
+            with ExitStack() as stk:
+                env=_env()
+                for w in ws:
+                    si=subprocess.STARTUPINFO();si.dwFlags|=subprocess.STARTF_USESTDHANDLES
+                    cur=_winapi.GetCurrentProcess()
+                    nh=stk.enter_context(open(os.devnull,'rb'))
+                    sh=_winapi.DuplicateHandle(cur,msvcrt.get_osfhandle(nh.fileno()),cur,0,True,2)
+                    stk.callback(_winapi.CloseHandle,sh)
+                    prd,pwr=_winapi.CreatePipe(None,0);stk.callback(_winapi.CloseHandle,pwr)
+                    erd,ewr=_winapi.CreatePipe(None,0);stk.callback(_winapi.CloseHandle,ewr)
+                    oh=_winapi.DuplicateHandle(cur,pwr,cur,0,True,2);stk.callback(_winapi.CloseHandle,oh)
+                    eh=_winapi.DuplicateHandle(cur,ewr,cur,0,True,2);stk.callback(_winapi.CloseHandle,eh)
+                    si.hStdInput,si.hStdOutput,si.hStdError=sh,oh,eh
+                    si.lpAttributeList={'handle_list':[sh,oh,eh]}
+                    cl=subprocess.list2cmdline(w['argv'])
+                    ph,th,pid,_=_winapi.CreateProcess(w['argv'][0],cl,None,None,True,0x00000004|0x08000000,env,w['cwd'],si)
+                    phs.append(ph);ths.append(th)
+                    if not krn.AssignProcessToJobObject(jh,ph):
+                        ae=ctypes.get_last_error();_winapi.TerminateProcess(ph,1);_winapi.WaitForSingleObject(ph,5000)
+                        raise WindowsJobError('ASSIGN_FAILED',ae)
+                    sc={};ev=threading.Event();lrs.append((sc,ev))
+                    t=threading.Thread(target=_pipe_rdr,args=(prd,ll,sc,ev),daemon=True);t.start()
+                    ec={};ev2=threading.Event();lrs.append((ec,ev2))
+                    t2=threading.Thread(target=_pipe_rdr,args=(erd,ll,ec,ev2),daemon=True);t2.start()
+                dead=time.monotonic()+dl;started=time.monotonic()
+                for th in ths:
+                    if _winapi.ResumeThread(th)==0xFFFFFFFF:raise WindowsJobError('RESUME_FAILED')
+                while time.monotonic()<dead and not cancel_event.is_set():
+                    done=True
+                    for ph in phs:
+                        if _winapi.WaitForSingleObject(ph,0)==258:done=False;break
+                    if done:break
+                    time.sleep(0.02)
+                if cancel_event.is_set():status,fail_r='CANCELLED','cancelled'
+                elif time.monotonic()>=dead:status,fail_r='TIMEOUT','deadline'
+                else:
+                    class AI(ctypes.Structure):_fields_=[('t',ctypes.c_longlong*4),('pf',wintypes.DWORD),('tot',wintypes.DWORD),('act',wintypes.DWORD),('term',wintypes.DWORD)]
+                    ai=AI();krn.QueryInformationJobObject(jh,1,ctypes.byref(ai),ctypes.sizeof(ai),None)
+                    if ai.act>0:status,fail_r='FAIL','active_children'
+                    else:
+                        for ph in phs:
+                            if _winapi.GetExitCodeProcess(ph)!=0:status,fail_r='FAILED','nonzero_exit';break
+                for sc,ev in lrs:ev.set()
+                if status!='PROCESS_COMPLETED':krn.TerminateJobObject(jh,1)
+                for ph in phs:_winapi.WaitForSingleObject(ph,5000)
+        finally:
+            for th in ths:_winapi.CloseHandle(th)
+            for ph in phs:_winapi.CloseHandle(ph)
+            krn.CloseHandle(jh)
+        logs={}
+        for i,w in enumerate(ws):
+            sc=lrs[i*2][0];ec=lrs[i*2+1][0]
+            logs[w['worker_id']]={'stdout':sc.get('data',b'').decode(errors='replace'),'stderr':ec.get('data',b'').decode(errors='replace'),'truncated_stdout':sc.get('truncations',0),'truncated_stderr':ec.get('truncations',0)}
+        res={'run_id':rid,'status':status,'failure_reason':fail_r,'logs':logs}
+        _receipt(op,rid,res);return res
+
+
+SOURCE supervisor_v2\tests.candidate.py
+import unittest,os,sys,json,hashlib,threading
+try:
+    import contained_supervisor as cs
+except ImportError:
+    sys.path.insert(0,os.path.dirname(__file__))
+    import contained_supervisor as cs
+RUN_FX=os.environ.get('RUN_CONTAINMENT_FIXTURES')=='1'
+def _sha(p):
+    h=hashlib.sha256()
+    with open(p,'rb') as f:
+        for c in iter(lambda:f.read(1<<16),b''):h.update(c)
+    return h.hexdigest()
+def _py_exe():return sys.executable
+def _base_m(tmp):
+    exe=_py_exe();d=tmp/'cwd';d.mkdir(exist_ok=True)
+    return{'run_id':'test_run','workers':[{'worker_id':'w1','argv':[exe,'-c','import time;time.sleep(0.1)'],'executable_sha256':_sha(exe),'cwd':str(d)}],'deadline_seconds':10,'startup_seconds':5,'log_limit_bytes':4096,'containment_policy':'explicit_terminate'}
+class TestValidation(unittest.TestCase):
+    def test_non_windows(self):
+        if os.name=='nt':self.skipTest('windows only')
+        with self.assertRaises(NotImplementedError):cs.run_workers({},'/tmp/x')
+    def test_bad_run_id(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False})()})())
+        m['run_id']='bad id!'
+        with self.assertRaises(ValueError):cs._validate(m,'/no/exist')
+    def test_bool_deadline(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False})()})())
+        m['deadline_seconds']=True
+        with self.assertRaises(ValueError):cs._validate(m,'/no/exist')
+    def test_dup_worker_ids(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False})()})())
+        m['workers'].append(dict(m['workers'][0]))
+        with self.assertRaises(ValueError):cs._validate(m,'/no/exist')
+    def test_existing_output(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False})()})())
+            with self.assertRaises(ValueError):cs._validate(m,td)
+    def test_path_traversal(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False})()})())
+        m['workers'][0]['cwd']='C:/../evil'
+        with self.assertRaises(ValueError):cs._validate(m,'/no/exist')
+@unittest.skipUnless(RUN_FX and os.name=='nt','OPT-IN fixtures')
+class TestFixtures(unittest.TestCase):
+    def setUp(self):
+        import tempfile;self.tmp=tempfile.TemporaryDirectory();self.tp=self.tmp.name
+    def tearDown(self):self.tmp.cleanup()
+    def test_child_sleep_cancel(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False,'__truediv__':lambda s2,y:type('R',(object,),{'mkdir':lambda **k:None})()})()})())
+        m['workers'][0]['argv']=[_py_exe(),'-c','import time;time.sleep(60)']
+        m['workers'][0]['executable_sha256']=_sha(_py_exe())
+        ce=threading.Event();out=os.path.join(self.tp,'out')
+        threading.Timer(0.5,ce.set).start()
+        r=cs.run_workers(m,out,cancel_event=ce)
+        self.assertEqual(r['status'],'CANCELLED')
+    def test_deadline(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False,'__truediv__':lambda s2,y:type('R',(object,),{'mkdir':lambda **k:None})()})()})())
+        m['workers'][0]['argv']=[_py_exe(),'-c','import time;time.sleep(60)']
+        m['workers'][0]['executable_sha256']=_sha(_py_exe());m['deadline_seconds']=1
+        out=os.path.join(self.tp,'out2')
+        r=cs.run_workers(m,out)
+        self.assertEqual(r['status'],'TIMEOUT')
+    def test_nonzero(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False,'__truediv__':lambda s2,y:type('R',(object,),{'mkdir':lambda **k:None})()})()})())
+        m['workers'][0]['argv']=[_py_exe(),'-c','import sys;sys.exit(1)']
+        m['workers'][0]['executable_sha256']=_sha(_py_exe())
+        out=os.path.join(self.tp,'out3')
+        r=cs.run_workers(m,out)
+        self.assertEqual(r['status'],'FAILED')
+    def test_log_overflow(self):
+        m=_base_m(type('P',(object,),{'__truediv__':lambda s,x:type('Q',(object,),{'mkdir':lambda **k:None,'exists':lambda:False,'__truediv__':lambda s2,y:type('R',(object,),{'mkdir':lambda **k:None})()})()})())
+        m['workers'][0]['argv']=[_py_exe(),'-c','import sys;sys.stdout.write("A"*2048);sys.stdout.flush()']
+        m['workers'][0]['executable_sha256']=_sha(_py_exe());m['log_limit_bytes']=1024
+        out=os.path.join(self.tp,'out4')
+        r=cs.run_workers(m,out)
+        self.assertTrue(r['logs']['w1']['truncated_stdout']>0 or r['status']=='PROCESS_COMPLETED')
+if __name__=='__main__':unittest.main()
+
+
+SOURCE gemini_candidate_review\review.json
+{
+  "findings": [
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, _winapi\nclass TestWinapiResumeThread(unittest.TestCase):\n    def test_winapi_lacks_resumethread(self):\n        self.assertFalse(hasattr(_winapi, 'ResumeThread'), '_winapi does not have ResumeThread in CPython; must use kernel32.ResumeThread')\n",
+      "exact_source": "if _winapi.ResumeThread(th)==0xFFFFFFFF:raise WindowsJobError('RESUME_FAILED')",
+      "line": 128,
+      "minimal_fix": "if krn.ResumeThread(th)==0xFFFFFFFF:raise WindowsJobError('RESUME_FAILED')",
+      "reason": "_winapi in CPython does not export ResumeThread. Calling _winapi.ResumeThread raises AttributeError at runtime. ResumeThread was correctly declared on kernel32 via _kernel(), but the author invoked _winapi.ResumeThread instead of krn.ResumeThread.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, ctypes, contained_supervisor as cs\nclass TestKillOnClose(unittest.TestCase):\n    def test_set_information_job_object_declared(self):\n        krn = cs._kernel()\n        self.assertTrue(hasattr(krn, 'SetInformationJobObject'), 'SetInformationJobObject must be declared on kernel32 to set kill_on_close')\n",
+      "exact_source": "if not krn.QueryInformationJobObject(jh,9,ctypes.byref(eli),ctypes.sizeof(eli),None):",
+      "line": 96,
+      "minimal_fix": "Add SetInformationJobObject to _kernel() signatures and call krn.SetInformationJobObject(jh, 9, ctypes.byref(jeli), ctypes.sizeof(jeli)) with JOBOBJECT_EXTENDED_LIMIT_INFORMATION setting LimitFlags = 0x2000 (JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE).",
+      "reason": "To set JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE (0x2000), Windows API requires SetInformationJobObject. The candidate calls QueryInformationJobObject with class 9, which only queries limits into uninitialized memory and never configures kill-on-close. Furthermore, SetInformationJobObject is missing from _kernel() prototypes.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, ctypes, contained_supervisor as cs\nclass TestJobCollision(unittest.TestCase):\n    def test_collision_detection_on_nonzero_handle(self):\n        # CreateJobObjectW returns non-zero handle and GetLastError() == 183 on collision\n        krn = cs._kernel()\n        jh1 = krn.CreateJobObjectW(None, 'TEST_COLLISION_JOB')\n        try:\n            with self.assertRaises(cs.WindowsJobError) as ctx:\n                cs.run_workers({'run_id': 'TEST_COLLISION_JOB', 'workers': [{'worker_id': 'w1', 'argv': ['C:\\\\Windows\\\\System32\\\\cmd.exe', '/c', 'exit 0'], 'executable_sha256': '0'*64, 'cwd': 'C:\\\\'}], 'deadline_seconds': 5, 'startup_seconds': 2, 'log_limit_bytes': 1024}, 'C:\\\\test_out_nonexistent')\n            self.assertEqual(ctx.exception.code, 'JOB_COLLISION')\n        finally:\n            krn.CloseHandle(jh1)\n",
+      "exact_source": "if not jh:\n    e=ctypes.get_last_error()\n    if e==183:raise WindowsJobError('JOB_COLLISION',183)\n    raise WindowsJobError('CREATE_JOB_FAILED',e)",
+      "line": 89,
+      "minimal_fix": "if not jh:\n    raise WindowsJobError('CREATE_JOB_FAILED', ctypes.get_last_error())\nif ctypes.get_last_error() == 183:\n    krn.CloseHandle(jh)\n    raise WindowsJobError('JOB_COLLISION', 183)",
+      "reason": "CreateJobObjectW returns a valid open HANDLE (not NULL/0) when a named job already exists, with GetLastError() returning 183 (ERROR_ALREADY_EXISTS). By checking `if not jh:`, the candidate fails to detect named job collision, leaks the duplicate handle, and runs inside an uncontained/colliding job.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, contained_supervisor as cs\nclass TestFailureCleanup(unittest.TestCase):\n    def test_assign_failure_terminates_job(self):\n        # When an error occurs during worker creation, TerminateJobObject must be invoked even on unhandled exceptions\n        pass\n",
+      "exact_source": "if not krn.AssignProcessToJobObject(jh,ph):\n    ae=ctypes.get_last_error();_winapi.TerminateProcess(ph,1);_winapi.WaitForSingleObject(ph,5000)\n    raise WindowsJobError('ASSIGN_FAILED',ae)",
+      "line": 120,
+      "minimal_fix": "Wrap worker setup and execution so that any exception invokes krn.TerminateJobObject(jh, 1) and boundedly waits for all created processes in phs before closing handles.",
+      "reason": "If AssignProcessToJobObject or ResumeThread fails, the exception bypasses line 145 (TerminateJobObject) and enters finally:, where only CloseHandle is called on phs and jh. Under explicit_terminate mode where kill-on-close is disabled, surviving child processes are not terminated when the job handle closes, leaking detached processes.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "supervisor_v2/contained_supervisor.py",
+      "discriminating_test": "import unittest, contained_supervisor as cs\nclass TestPipeHandles(unittest.TestCase):\n    def test_pipe_read_handles_closed(self):\n        # prd and erd handles must be closed upon supervisor completion\n        pass\n",
+      "exact_source": "prd,pwr=_winapi.CreatePipe(None,0);stk.callback(_winapi.CloseHandle,pwr)\nerd,ewr=_winapi.CreatePipe(None,0);stk.callback(_winapi.CloseHandle,ewr)",
+      "line": 110,
+      "minimal_fix": "Register prd and erd with stk.callback(_winapi.CloseHandle, ...) or close them in reader threads/finally, and close pwr/ewr/oh/eh immediately after CreateProcess so write ends do not remain open in the parent process during execution.",
+      "reason": "Pipe read handles prd and erd are never closed, leaking kernel handles. Furthermore, writer handles pwr, ewr, oh, eh remain open in the parent ExitStack until execution finishes, preventing ReadFile in reader threads from detecting EOF when children terminate.",
+      "severity": "MEDIUM"
+    },
+    {
+      "artifact": "supervisor_v2/tests.candidate.py",
+      "discriminating_test": "import unittest, supervisor_v2.tests_candidate as tc\nclass TestMockTestsExist(unittest.TestCase):\n    def test_has_pure_mock_tests(self):\n        # Contract requires pure unit tests with mocked API checking assign-before-resume without opt-in fixtures\n        self.assertTrue(hasattr(tc, 'TestMockContainment'), 'Pure mock unit tests for run_workers assign-before-resume are missing')\n",
+      "exact_source": "class TestValidation(unittest.TestCase):",
+      "line": 17,
+      "minimal_fix": "Implement pure mock unit tests for run_workers that mock _winapi and _kernel to assert AssignProcessToJobObject precedes ResumeThread and verify failure-path cleanup without requiring RUN_CONTAINMENT_FIXTURES=1.",
+      "reason": "supervisor_v2/tests.candidate.py completely lacks pure unit tests for run_workers execution. All tests of run_workers are confined to TestFixtures, which is skipped unless RUN_CONTAINMENT_FIXTURES=1 is set. The contract strictly requires pure mock tests verifying assignment before ResumeThread and fail cleanup.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestPciParsing(unittest.TestCase):\n    def test_standard_pci_not_malformed(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        dev = {'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': [dev], 'claims': []}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertNotIn('MALFORMED_PCI:0000:01:00.0', res['reasons'])\n",
+      "exact_source": "parts = pci_raw.split(':')\nif len(parts) != 4:\n    reasons.append(f'MALFORMED_PCI:{pci_raw}')\n    continue",
+      "line": 46,
+      "minimal_fix": "Parse PCI ID by splitting domain/bus/device/function properly (e.g. splitting domain:bus:device.function where device and function are separated by a dot), normalizing to 4 hex segments and verifying dev <= 0x1f and fn <= 0x7.",
+      "reason": "Standard PCI IDs format device and function as 'device.function' (e.g. 0000:01:00.0). Splitting only on ':' results in 3 parts (['0000', '01', '00.0']), causing line 47 to reject all standard PCI identifiers as MALFORMED_PCI and failing every device receipt in the test suite.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestEmptyArtifactsTrustGate(unittest.TestCase):\n    def test_empty_artifacts_rejected(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [], 'devices': [], 'claims': [{'id': 'TWO_VENDOR_NUMERICAL'}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset())\n        self.assertEqual(res['status'], 'NOT_CHECKED')\n",
+      "exact_source": "for art in artifacts:\n    h = art.get('sha256')\n    if not h or h not in trusted_artifact_hashes:\n        reasons.append(f'UNTRUSTED_ARTIFACT:{h}')\n        return {'status': 'NOT_CHECKED', 'reasons': reasons, 'qualified_claims': []}",
+      "line": 23,
+      "minimal_fix": "Verify receipt contains non-empty required artifacts and that every required measurement artifact hash is present in non-empty trusted_artifact_hashes; if trusted_artifact_hashes is empty or artifacts are missing, immediately return {'status': 'NOT_CHECKED', 'reasons': ['UNTRUSTED_OR_MISSING_ARTIFACTS'], 'qualified_claims': []}.",
+      "reason": "External trust gate bypass: If receipt['artifacts'] is empty or omitted, the loop is completely skipped, allowing receipts to be evaluated and qualified with empty trusted_artifact_hashes. Pure validator cannot authenticate JSON claims without external trust gate binding required measurement artifacts.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestBoolMemoryRejected(unittest.TestCase):\n    def test_bool_memory_rejected(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        dev = {'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': True, 'free_bytes': False, 'allocator_peak_bytes': False, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': [dev]*4, 'claims': [{'id': 'FOUR_PHYSICAL_GPU'}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertIn('INVALID_MEM_TYPES', res['reasons'])\n",
+      "exact_source": "if not all(isinstance(x, int) and x >= 0 for x in [total, free, peak]):\n    return False, 'INVALID_MEM_TYPES'",
+      "line": 80,
+      "minimal_fix": "if not all(isinstance(x, int) and not isinstance(x, bool) and x >= 0 for x in [total, free, peak]):\n    return False, 'INVALID_MEM_TYPES'",
+      "reason": "In Python, bool is a subclass of int, so isinstance(True, int) evaluates to True. As a result, boolean values pass check_mem, violating the contract requirement: strict nonbool finite int bytes.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestCapacityOOMRequired(unittest.TestCase):\n    def test_capacity_claims_require_oom_proof(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        devs = [{'pci_id': f'0000:0{i+1}:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': f'b{i}'} for i in range(4)]\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': devs, 'claims': [{'id': 'FOUR_PHYSICAL_GPU'}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertNotIn('DEDICATED_CAPACITY_GT_ONE_CARD', res['qualified_claims'])\n        self.assertNotIn('FOUR_REQUIRED_CAPACITY', res['qualified_claims'])\n",
+      "exact_source": "qualified_claims.append('FOUR_PHYSICAL_GPU')\nqualified_claims.append('DEDICATED_CAPACITY_GT_ONE_CARD')\nqualified_claims.append('FOUR_REQUIRED_CAPACITY')",
+      "line": 128,
+      "minimal_fix": "Implement separate claim validation for DEDICATED_CAPACITY_GT_ONE_CARD and FOUR_REQUIRED_CAPACITY requiring proof that 1-card and 3-card workloads encounter actual allocator OOM on identical model/workload hashes while 4-card passes without policy caps.",
+      "reason": "qualification_validator.py automatically stamps DEDICATED_CAPACITY_GT_ONE_CARD and FOUR_REQUIRED_CAPACITY as qualified whenever FOUR_PHYSICAL_GPU is claimed, without verifying any single-card or 3-card actual allocator OOM evidence or memory budget exceedance.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "validator_v2/qualification_validator.py",
+      "discriminating_test": "import unittest, datetime, validator_v2.qualification_validator as qv\nclass TestTwoVendorNumerical(unittest.TestCase):\n    def test_two_vendor_requires_numerical_evidence(self):\n        now = datetime.datetime.now(datetime.timezone.utc)\n        devs = [{'pci_id': '0000:01:00.0', 'vendor': 'NVIDIA', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b1'}, {'pci_id': '0000:02:00.0', 'vendor': 'AMD', 'memory': {'total_bytes': 1000, 'free_bytes': 500, 'allocator_peak_bytes': 100, 'kind': 'DEDICATED'}, 'kernels_completed': True, 'resident_block_hash': 'b2'}]\n        receipt = {'timestamp': now.isoformat(), 'artifacts': [{'sha256': 'a'*64}], 'devices': devs, 'claims': [{'id': 'TWO_VENDOR_NUMERICAL', 'evidence': {}}]}\n        res = qv.validate_result(receipt, now_utc=now, trusted_artifact_hashes=frozenset(['a'*64]))\n        self.assertNotIn('TWO_VENDOR_NUMERICAL', res['qualified_claims'])\n",
+      "exact_source": "if 'TWO_VENDOR_NUMERICAL' in claim_map:\n    # Requires at least 2 distinct vendors in devices\n    vendors = set(d.get('vendor') for d in valid_devices)\n    if len(vendors) < 2:\n        reasons.append('SINGLE_VENDOR_EVIDENCE')\n        return {'status': 'REFUSED', 'reasons': reasons, 'qualified_claims': []}\n    qualified_claims.append('TWO_VENDOR_NUMERICAL')",
+      "line": 188,
+      "minimal_fix": "Verify evidence contains numerical kernel execution proof, clean CPU reference tolerances (atol, rtol), and bound artifact hashes, rather than qualifying on vendor string counts alone.",
+      "reason": "TWO_VENDOR_NUMERICAL qualifies simply if two distinct vendor strings exist in the device map, completely ignoring numerical kernel execution, tolerance bounds, and CPU reference verification.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "validator_v2/tests.candidate.py",
+      "discriminating_test": "import unittest, validator_v2.tests_candidate as tc\nclass TestFixtureExecution(unittest.TestCase):\n    def test_run_candidate_tests(self):\n        suite = unittest.defaultTestLoader.loadTestsFromModule(tc)\n        runner = unittest.TextTestRunner()\n        result = runner.run(suite)\n        self.assertTrue(result.wasSuccessful(), 'Candidate tests fail when run against candidate validator due to PCI parsing bug')\n",
+      "exact_source": "def test_complete_4_trusted_synthetic_structured_fixture_pass(self):",
+      "line": 162,
+      "minimal_fix": "Fix the candidate validator PCI normalization to accept canonical colon/dot PCI formats and run the test suite to verify tests actually pass.",
+      "reason": "validator_v2/tests.candidate.py contains tests that were never run against qualification_validator.py. Because of the PCI parsing defect in qualification_validator.py line 46, test_complete_4_trusted_synthetic_structured_fixture_pass and test_valid_two_vendor_partial fail with AssertionError ('REFUSED' != 'QUALIFIED').",
+      "severity": "HIGH"
+    }
+  ],
+  "qualification_limits": [
+    "Contained supervisor candidate contained_supervisor.py fails Windows process execution proof due to calling non-existent _winapi.ResumeThread and failing to configure kill_on_close via SetInformationJobObject.",
+    "Supervisor unit tests omit required pure-mock assign-before-resume tests, running only schema validation unless fixtures are manually enabled via RUN_CONTAINMENT_FIXTURES=1.",
+    "Qualification validator qualification_validator.py fails PCI normalization for all standard PCI addresses (splitting on ':' instead of recognizing '.' for device.function), refusing all valid multi-device receipts.",
+    "Validator external trust gate is unauthenticated when receipt artifacts list is empty, and capacity claims (DEDICATED_CAPACITY_GT_ONE_CARD, FOUR_REQUIRED_CAPACITY) are fabricated without single-card or 3-card actual allocator OOM proof.",
+    "No physical 4-GPU hardware execution proof exists; LLM inference context mismatch and single-card Qwen3-0.6B model bounds remain unproven for 4-discrete-GPU qualification."
+  ],
+  "toolAction": "Finalizing candidate review",
+  "toolSummary": "Finalize candidate review",
+  "verdict": "REJECTED"
+}
+
+SOURCE windows_job.snapshot.py
+"""Recoverable Windows process containment; closing a handle does not cancel work.
+
+Launch uses CPython's CreateProcessW binding with CREATE_SUSPENDED. Assignment
+precedes ResumeThread, including on failure paths. Jobs use default limits:
+neither breakaway nor kill-on-last-handle-close is enabled.
+
+Recovery requires a cooperating wrapper to open and retain its own job handle
+and acknowledge readiness before the controller closes its handle. Although
+members survive last-handle closure, Windows removes the name at that point.
+The wrapper must retain its handle until its descendants have drained.
+"""
+
+from __future__ import annotations
+
+import ctypes
+import os
+import subprocess
+import time
+from contextlib import ExitStack
+from ctypes import wintypes
+from pathlib import Path
+
+
+class WindowsJobError(RuntimeError):
+    def __init__(self, code: str, winerror: int | None = None):
+        self.code = code
+        self.winerror = winerror
+        super().__init__(code if winerror is None else f"{code}: winerror={winerror}")
+
+
+def _api():
+    if os.name != "nt":
+        raise WindowsJobError("WINDOWS_JOB_UNSUPPORTED")
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    signatures = {
+        "CreateJobObjectW": ([ctypes.c_void_p, wintypes.LPCWSTR], wintypes.HANDLE),
+        "OpenJobObjectW": (
+            [wintypes.DWORD, wintypes.BOOL, wintypes.LPCWSTR],
+            wintypes.HANDLE,
+        ),
+        "AssignProcessToJobObject": ([wintypes.HANDLE, wintypes.HANDLE], wintypes.BOOL),
+        "QueryInformationJobObject": (
+            [
+                wintypes.HANDLE,
+                ctypes.c_int,
+                ctypes.c_void_p,
+                wintypes.DWORD,
+                ctypes.c_void_p,
+            ],
+            wintypes.BOOL,
+        ),
+        "TerminateJobObject": ([wintypes.HANDLE, wintypes.UINT], wintypes.BOOL),
+        "CloseHandle": ([wintypes.HANDLE], wintypes.BOOL),
+        "ResumeThread": ([wintypes.HANDLE], wintypes.DWORD),
+        "OpenProcess": (
+            [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD],
+            wintypes.HANDLE,
+        ),
+        "IsProcessInJob": (
+            [wintypes.HANDLE, wintypes.HANDLE, ctypes.POINTER(wintypes.BOOL)],
+            wintypes.BOOL,
+        ),
+        "WaitForSingleObject": ([wintypes.HANDLE, wintypes.DWORD], wintypes.DWORD),
+    }
+    for name, (args, result) in signatures.items():
+        function = getattr(kernel, name)
+        function.argtypes = args
+        function.restype = result
+    return kernel
+
+
+def _error(code):
+    error = ctypes.get_last_error()
+    return WindowsJobError("WINDOWS_JOB_ACCESS_DENIED" if error == 5 else code, error)
+
+
+class JobProcess:
+    """Owned, non-inheritable process handle. Closing it does not terminate work."""
+
+    def __init__(self, handle, pid):
+        self._handle = handle
+        self.pid = pid
+
+    def poll(self):
+        import _winapi
+
+        if self._handle is None:
+            raise WindowsJobError("WINDOWS_PROCESS_CLOSED")
+        if _winapi.WaitForSingleObject(self._handle, 0) == 258:
+            return None
+        return _winapi.GetExitCodeProcess(self._handle)
+
+    def wait(self, timeout=10):
+        deadline = time.monotonic() + timeout
+        while (result := self.poll()) is None:
+            if time.monotonic() >= deadline:
+                raise WindowsJobError("WINDOWS_PROCESS_WAIT_TIMEOUT")
+            time.sleep(0.02)
+        return result
+
+    def close(self):
+        if self._handle is not None:
+            import _winapi
+
+            _winapi.CloseHandle(self._handle)
+            self._handle = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_):
+        self.close()
+
+
+class WindowsJob:
+    def __init__(self, name, handle, kernel):
+        self.name = name
+        self._handle = handle
+        self._kernel = kernel
+        self._drain_handles = []
+        self._drain_started = False
+        self._drain_unknown = False
+        self._drain_total = None
+        self._drain_complete = False
+        self._drain_count = 0
+        self.termination_initiated = False
+        self.assignment_sealed = False
+
+    @classmethod
+    def create(cls, name):
+        kernel = _api()
+        if not isinstance(name, str) or not name or "\0" in name:
+            raise WindowsJobError("WINDOWS_JOB_INVALID_NAME")
+        ctypes.set_last_error(0)
+        handle = kernel.CreateJobObjectW(None, name)
+        if not handle:
+            raise _error("WINDOWS_JOB_CREATE_FAILED")
+        if ctypes.get_last_error() == 183:
+            kernel.CloseHandle(handle)
+            raise WindowsJobError("WINDOWS_JOB_ALREADY_EXISTS", 183)
+        return cls(name, handle, kernel)
+
+    @classmethod
+    def open(cls, name):
+        kernel = _api()
+        if not isinstance(name, str) or not name or "\0" in name:
+            raise WindowsJobError("WINDOWS_JOB_INVALID_NAME")
+        handle = kernel.OpenJobObjectW(1 | 4 | 8, False, name)
+        if not handle:
+            if ctypes.get_last_error() == 2:
+                raise WindowsJobError("WINDOWS_JOB_NOT_FOUND", 2)
+            raise _error("WINDOWS_JOB_OPEN_FAILED")
+        return cls(name, handle, kernel)
+
+    @property
+    def closed(self):
+        return self._handle is None
+
+    def _checked_handle(self):
+        if self.closed:
+            raise WindowsJobError("WINDOWS_JOB_CLOSED")
+        return self._handle
+
+    def _assign(self, process_handle):
+        if self.assignment_sealed:
+            raise WindowsJobError("WINDOWS_JOB_ASSIGNMENT_SEALED")
+        if not self._kernel.AssignProcessToJobObject(
+            self._checked_handle(), process_handle
+        ):
+            raise _error("WINDOWS_JOB_ASSIGN_FAILED")
+
+    def launch(
+        self,
+        command,
+        *,
+        cwd=None,
+        environment=None,
+        stdout_path=None,
+        stderr_path=None,
+        detached=False,
+        lifetime=None,
+    ):
+        """Launch an explicit executable; environment replaces the inherited map.
+
+        Only three duplicated standard handles are inherited when log files are
+        requested. Otherwise handle inheritance is disabled. Standard input is
+        always NUL for logged launches. Output files append binary data.
+        """
+        self._checked_handle()
+        import _winapi
+        import msvcrt
+
+        if isinstance(command, (str, bytes)) or not command:
+            raise WindowsJobError("WINDOWS_JOB_INVALID_COMMAND")
+        command = [os.fspath(part) for part in command]
+        if not Path(command[0]).is_absolute() or any("\0" in part for part in command):
+            raise WindowsJobError("WINDOWS_JOB_INVALID_COMMAND")
+        startup = subprocess.STARTUPINFO()
+        process_handle = thread_handle = None
+        with ExitStack() as stack:
+            inherit = stdout_path is not None or stderr_path is not None
+            if inherit:
+                handles = []
+                for path, mode in [
+                    (os.devnull, "rb"),
+                    (stdout_path or os.devnull, "ab"),
+                    (stderr_path or os.devnull, "ab"),
+                ]:
+                    stream = stack.enter_context(open(path, mode))
+                    current = _winapi.GetCurrentProcess()
+                    handle = _winapi.DuplicateHandle(
+                        current,
+                        msvcrt.get_osfhandle(stream.fileno()),
+                        current,
+                        0,
+                        True,
+                        2,
+                    )
+                    stack.callback(_winapi.CloseHandle, handle)
+                    handles.append(handle)
+                startup.dwFlags |= subprocess.STARTF_USESTDHANDLES
+                startup.hStdInput, startup.hStdOutput, startup.hStdError = handles
+                startup.lpAttributeList = {"handle_list": handles}
+            try:
+                process_handle, thread_handle, pid, _ = _winapi.CreateProcess(
+                    command[0],
+                    subprocess.list2cmdline(command),
+                    None,
+                    None,
+                    inherit,
+                    0x00000004
+                    | (0x00000008 if detached else 0x08000000)
+                    | (0x00000001 if lifetime is not None else 0),
+                    environment,
+                    os.fspath(cwd) if cwd is not None else None,
+                    startup,
+                )
+                self._assign(process_handle)
+                if lifetime is not None:
+                    lifetime.capture(pid, process_handle, root=True)
+                if self._kernel.ResumeThread(thread_handle) == 0xFFFFFFFF:
+                    raise _error("WINDOWS_JOB_RESUME_FAILED")
+                result = JobProcess(process_handle, pid)
+                process_handle = None
+                return result
+            except OSError as exc:
+                raise WindowsJobError(
+                    "WINDOWS_JOB_LAUNCH_FAILED", exc.winerror
+                ) from exc
+            finally:
+                if thread_handle is not None:
+                    _winapi.CloseHandle(thread_handle)
+                if process_handle is not None:
+                    try:
+                        _winapi.TerminateProcess(process_handle, 1)
+                        if lifetime is not None:
+                            # Creation and pumping must share a thread. Never wait
+                            # behind a pending debug exit, including failed launch.
+                            deadline = time.monotonic() + 10
+                            while (
+                                _winapi.WaitForSingleObject(process_handle, 0) == 258
+                                and time.monotonic() < deadline
+                            ):
+                                lifetime.pump(10)
+                        if _winapi.WaitForSingleObject(process_handle, 10000) != 0:
+                            raise WindowsJobError("WINDOWS_JOB_CLEANUP_TIMEOUT")
+                    finally:
+                        _winapi.CloseHandle(process_handle)
+
+    def active_process_ids(self):
+        capacity = 16
+        while capacity <= 1048576:
+
+            class ProcessList(ctypes.Structure):
+                _fields_ = [
+                    ("assigned", wintypes.DWORD),
+                    ("count", wintypes.DWORD),
+                    ("pids", ctypes.c_size_t * capacity),
+                ]
+
+            data = ProcessList()
+            if self._kernel.QueryInformationJobObject(
+                self._checked_handle(), 3, ctypes.byref(data), ctypes.sizeof(data), None
+            ):
+                return list(data.pids[: data.count])
+            if ctypes.get_last_error() != 234:
+                raise _error("WINDOWS_JOB_QUERY_FAILED")
+            capacity = max(capacity * 2, data.assigned)
+        raise WindowsJobError("WINDOWS_JOB_QUERY_LIMIT")
+
+    def total_processes(self):
+        """Cumulative assignments detect members missed across capture/termination."""
+
+        class Accounting(ctypes.Structure):
+            _fields_ = [
+                ("times", ctypes.c_longlong * 4),
+                ("page_faults", wintypes.DWORD),
+                ("total", wintypes.DWORD),
+                ("active", wintypes.DWORD),
+                ("terminated", wintypes.DWORD),
+            ]
+
+        data = Accounting()
+        if not self._kernel.QueryInformationJobObject(
+            self._checked_handle(),
+            1,
+            ctypes.byref(data),
+            ctypes.sizeof(data),
+            None,
+        ):
+            raise _error("WINDOWS_JOB_QUERY_FAILED")
+        return data.total
+
+    def _capture_drain(self):
+        self._drain_started = True
+        self._drain_total = self.total_processes()
+        pids = self.active_process_ids()
+        if len(pids) > 4096:
+            raise WindowsJobError("WINDOWS_JOB_DRAIN_CAPTURE_LIMIT")
+        for pid in pids:
+            handle = self._kernel.OpenProcess(0x100000 | 0x0400, False, pid)
+            if not handle:
+                raise _error("WINDOWS_JOB_MEMBER_OPEN_FAILED")
+            try:
+                contained = wintypes.BOOL()
+                if (
+                    not self._kernel.IsProcessInJob(
+                        handle,
+                        self._checked_handle(),
+                        ctypes.byref(contained),
+                    )
+                    or not contained.value
+                ):
+                    raise WindowsJobError("WINDOWS_JOB_MEMBER_IDENTITY_UNKNOWN")
+                # The handle keeps this exact process object alive despite PID reuse.
+                self._drain_handles.append(handle)
+                self._drain_count += 1
+                handle = None
+            finally:
+                if handle is not None:
+                    self._kernel.CloseHandle(handle)
+        if self.total_processes() != self._drain_total:
+            raise WindowsJobError("WINDOWS_JOB_DRAIN_UNKNOWN")
+
+    def terminate(self, exit_code=1):
+        """Initiate whole-job termination even if positive-drain capture fails.
+
+        No waiting here: wrappers may terminate the job containing themselves.
+        The external caller must separately wait_empty before certifying a drain.
+        """
+        self._checked_handle()
+        self.prepare_drain()
+        if not self._kernel.TerminateJobObject(self._checked_handle(), exit_code):
+            raise _error("WINDOWS_JOB_TERMINATE_FAILED")
+        self.termination_initiated = True
+
+    def prepare_drain(self):
+        """Capture immediately before forced termination can remove members."""
+        if not self._drain_started:
+            try:
+                self._capture_drain()
+            except Exception:
+                self._drain_started = True
+                self._drain_unknown = True
+
+    def drain_proof(self):
+        # Stable totals prove no additions, not that departed objects signaled.
+        # Without lifetime monitoring, only complete lifetime capture authorizes
+        # a whole-tree certificate. wait_empty remains usable for ordinary cleanup.
+        if (
+            not self.termination_initiated
+            or not self._drain_complete
+            or self._drain_unknown
+            or self._drain_count != self._drain_total
+        ):
+            raise WindowsJobError("WINDOWS_JOB_DRAIN_UNKNOWN")
+        return {
+            "exact_handles_signaled": True,
+            "total_processes": self._drain_total,
+            "captured_members": self._drain_count,
+        }
+
+    def _close_drain_handles(self):
+        for handle in self._drain_handles:
+            self._kernel.CloseHandle(handle)
+        self._drain_handles.clear()
+
+    def wait_empty(self, timeout=10):
+        deadline = time.monotonic() + timeout
+        if self._drain_started:
+            if self._drain_unknown or self.total_processes() != self._drain_total:
+                self._drain_unknown = True
+                raise WindowsJobError("WINDOWS_JOB_DRAIN_UNKNOWN")
+            for handle in self._drain_handles:
+                remaining_ms = max(0, int((deadline - time.monotonic()) * 1000))
+                status = self._kernel.WaitForSingleObject(handle, remaining_ms)
+                if status == 258:
+                    raise WindowsJobError("WINDOWS_JOB_WAIT_TIMEOUT")
+                if status != 0:
+                    self._drain_unknown = True
+                    raise WindowsJobError("WINDOWS_JOB_DRAIN_UNKNOWN")
+        while self.active_process_ids():
+            if time.monotonic() >= deadline:
+                raise WindowsJobError("WINDOWS_JOB_WAIT_TIMEOUT")
+            time.sleep(0.02)
+        if self._drain_started:
+            if self.total_processes() != self._drain_total:
+                self._drain_unknown = True
+                raise WindowsJobError("WINDOWS_JOB_DRAIN_UNKNOWN")
+            self._drain_complete = True
+            self._close_drain_handles()
+
+    def close(self):
+        self._close_drain_handles()
+        if not self.closed:
+            if not self._kernel.CloseHandle(self._handle):
+                raise _error("WINDOWS_JOB_CLOSE_FAILED")
+            self._handle = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_):
+        self.close()
+

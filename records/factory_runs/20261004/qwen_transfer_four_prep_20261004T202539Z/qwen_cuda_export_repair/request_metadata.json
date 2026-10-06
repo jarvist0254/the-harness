@@ -1,0 +1,20 @@
+{
+  "dedicated_token_plan_key_kind_confirmed": true,
+  "http_deadline_seconds": 2400,
+  "response_cap_bytes": 16777216,
+  "enable_thinking": true,
+  "model": "qwen3.8-max",
+  "max_reply_tokens": 16384,
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "prompt_sha256": "cf37121754066e02f3b54dd5e7d7cf7bc830e5d5f77874241a9ccd0926d8c62b",
+  "normalized_reasoning_cap_bytes": 2097152,
+  "stream": true,
+  "reasoning_effort": "xhigh",
+  "pid": 52796,
+  "credential_saved": false,
+  "thinking_budget_set": false,
+  "include_usage": true,
+  "normalized_content_cap_bytes": 2097152,
+  "native_children_actual": 0,
+  "source_sha256": "677d867f88e7d2d607530a0a9cdad1619af1efb05ecd8999e6444a9477c63413"
+}

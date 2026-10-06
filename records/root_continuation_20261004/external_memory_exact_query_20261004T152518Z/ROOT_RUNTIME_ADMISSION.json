@@ -1,0 +1,25 @@
+{
+  "authority": "Existing user-authorized bounded J-Link capability investigation",
+  "adjudicator": "ROOT",
+  "source": "external_memory_query.cpp",
+  "source_sha256": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+  "executable": "attempt_004/external_memory_query.exe",
+  "executable_sha256": "67c69e60c12780415bfd62858536078e09d2749cc539ee3928079657bbc718b5",
+  "controller_python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "command_arguments": [],
+  "timeout_seconds": 10,
+  "capture_limit_bytes_per_stream": 262144,
+  "source_review": "Only creates a Vulkan instance, enumerates physical-device extensions/properties/UUIDs, queries exact external buffer properties for two handle types and two usages, then destroys the instance. No VkDevice, buffer/memory/import, command submission, semaphore or kernel.",
+  "guards": [
+    "Verify exact source, executable and controller pins before and after.",
+    "Own a retained hidden process; no shell; monotonic deadline and concurrent bounded stream readers.",
+    "On timeout/overflow/error, kill only the retained owned process, reap and stop without retry.",
+    "Validate complete JSON on exit zero; raw output and process state remain independent of capability adjudication.",
+    "Do not modify parent environment or driver/device/global Factory settings."
+  ],
+  "qualification_limits": [
+    "Capability bits do not prove successful import, payload transfer, physical residency or direct VRAM P2P.",
+    "Intel absence means absence in this enumerated Vulkan instance, not an exhaustive OS/hardware proof.",
+    "No Intel/NVIDIA link claim is authorized by extension or feature advertisements."
+  ]
+}

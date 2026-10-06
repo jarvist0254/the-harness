@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "protocol_argument",
+    "changes",
+    "prerequisites",
+    "evidence_limits",
+    "smoke_plan"
+  ],
+  "properties": {
+    "evidence_limits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 8192
+      },
+      "maxItems": 32,
+      "minItems": 1
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 8192
+      },
+      "maxItems": 32,
+      "minItems": 1
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "search",
+          "replace",
+          "rationale"
+        ],
+        "properties": {
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32768
+          },
+          "replace": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32768
+          },
+          "search": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32768
+          }
+        }
+      },
+      "maxItems": 8
+    },
+    "protocol_argument": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32768
+    },
+    "smoke_plan": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 8192
+      },
+      "maxItems": 32,
+      "minItems": 1
+    },
+    "status": {
+      "enum": [
+        "PROPOSED",
+        "REFUSED"
+      ],
+      "type": "string"
+    }
+  }
+}

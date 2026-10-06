@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verdict",
+    "findings",
+    "safety_checks"
+  ],
+  "properties": {
+    "verdict": {
+      "type": "string"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "region",
+          "exact_source",
+          "reason",
+          "minimal_fix"
+        ],
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "exact_source": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "minimal_fix": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "safety_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

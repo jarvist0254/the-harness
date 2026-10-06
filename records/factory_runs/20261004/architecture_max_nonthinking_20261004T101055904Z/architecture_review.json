@@ -1,0 +1,50 @@
+{
+  "unsupported_claims": [
+    "Four 8GB GPUs do not equal one 32GB unified heap because vendor APIs enforce separate virtual address spaces per physical device; no cross-device pointer dereferencing exists without explicit host-staged or P2P transport, which is absent here.",
+    "hardware.py lines 396-409 enforces single-backend visibility and raises MIXED_ACCELERATOR_BACKENDS_UNSUPPORTED when len(backends)!=1, making mixed NVIDIA+Intel job partitioning impossible in current code.",
+    "controller/adapter.py lines 117-140 constructs exactly ONE device per job, directly contradicting any claim of multi-device-per-job scheduling for four 8GB units.",
+    "allocation.py lines 163-169 defaults to first discrete device only; pooled VRAM across four devices is not implemented.",
+    "No direct P2P transport exists between heterogeneous vendors (CUDA/ROCm/XPU); OpenCL apparatus is strictly host-staged SMOKE transfer compute parity, not direct P2P.",
+    "D3D12 planned shared cross-adapter buffer resides in L0 system memory, not summed VRAM; claiming aggregated 32GB GPU memory via D3D12 is false.",
+    "Vulkan planned fill-A/readback-CPU/write-B/readback is explicitly HOST_STAGED; no direct P2P claims are valid.",
+    "Warm context excludes XPU; assuming Intel GPU participation in warm-start workflows is unsupported.",
+    "The four workflow tasks are experimental apparatus only and must never be represented as live PyRe or Factory features.",
+    "Factory is off; no Store or app changes are in scope.",
+    "Mechanical: assuming a 48mm single row for Tetris-packed 4-core integrated print is unsupported; concept of 3 uprights plus rolled top requires dimension, clearance, and support checking, not assumed proven strength; no tack-on D is permitted."
+  ],
+  "exact_fixes": [
+    "Enforce protocol constraint: one backend + one device key per job; reject any scheduling request that attempts to span multiple backends simultaneously per hardware.py:396-409.",
+    "Update controller/adapter.py:117-140 to explicitly document and enforce the single-device-per-job invariant rather than allowing ambiguous multi-device construction.",
+    "Clarify allocation.py:171-182 explicit multiple support as referring to multiple sequential allocations on the SAME device, not cross-device pooling.",
+    "Document that target/bootstrap.py:52-93 ceilings apply per-visible-device independently; total capacity is not summable across devices.",
+    "Add explicit telemetry validation in controller.py:420-465 to verify free VRAM and temperature per controller/resources.py:135-155 before reservation, rejecting busy physical devices unconditionally.",
+    "Remove or gate all CUDA/ROCm/XPU framework probe and launch branches behind experimental flags, ensuring they cannot trigger mixed-vendor execution.",
+    "Formally classify OpenCL, D3D12, and Vulkan cross-adapter paths as HOST_STAGED SMOKE parity tests with zero production throughput guarantees.",
+    "Mechanical: replace 48mm single-row assumption with parametric bounding-box checks for 3-upright+rolled-top geometry including overhang clearance and support structure validation."
+  ],
+  "future_qualification": [
+    "Per-device identity: each of four 8GB devices must have unique stable enumeration across reboots and driver updates before multi-device workflows can be qualified.",
+    "VRAM reservation: controller.py:420-465 reservation logic must be extended to hold atomic reservations across N devices simultaneously without partial-allocation deadlocks.",
+    "Launch requirements: framework probe branches (CUDA/ROCm/XPU) need deterministic fallback ordering when primary backend fails on one of four devices.",
+    "Progress tracking: cross-device jobs require synchronized progress reporting; current single-device adapter lacks multi-device heartbeat aggregation.",
+    "Checkpoint/resume: state serialization must capture per-device memory layouts separately since address spaces are disjoint; unified checkpoint is impossible without host-staging all device states.",
+    "Parity verification: OpenCL SMOKE transfers must achieve numerical parity within defined epsilon across all four devices before promotion beyond experimental.",
+    "Mismatch handling: define explicit behavior when one of four devices reports different compute capability, driver version, or thermal throttle state mid-job.",
+    "Failure recovery: single-device failure in a four-device job must trigger clean teardown of remaining three without resource leaks per controller/resources.py:135-155.",
+    "Cost accounting: four 8GB devices consume more power and PCIe bandwidth than one larger device; cost models must reflect non-linear scaling.",
+    "Thermal management: controller/resources.py temperature rejection must account for adjacent-device thermal coupling in dense 4-GPU configurations.",
+    "Fairness scheduling: prevent starvation when four independent jobs compete for four devices vs. one job requesting all four under the one-device-per-job constraint.",
+    "Cross-vendor qualification: mixed NVIDIA+Intel operation requires resolving hardware.py MIXED_ACCELERATOR_BACKENDS_UNSUPPORTED, currently untested and blocked."
+  ],
+  "safe_reuse": [
+    "Single-backend, single-device job execution path remains fully safe and validated by existing hardware.py and controller/adapter.py constraints.",
+    "allocation.py:163-169 first-discrete default is safe for single-device workloads and should remain the production default.",
+    "target/bootstrap.py:52-93 per-visible-device ceiling logic is safe to reuse for individual device capacity planning.",
+    "controller/resources.py:135-155 busy-device rejection and free VRAM/temperature gating is safe and required for all scheduling.",
+    "controller.py:420-465 reservation and fresh telemetry patterns are safe for single-device jobs; reuse for multi-device only after future qualification.",
+    "OpenCL host-staged SMOKE transfer compute parity apparatus is safe to reuse as an isolated experimental test, not as production transport.",
+    "D3D12 L0 system memory cross-adapter buffer concept is safe to reuse for CPU-mediated data exchange experiments, explicitly not for VRAM pooling.",
+    "Vulkan HOST_STAGED fill/readback pattern is safe to reuse for experimental verification, maintaining strict no-direct-P2P documentation.",
+    "Mechanical Tetris-packing logic for 4 cores with overhangs allowed is safe to reuse for layout optimization provided 48mm single-row assumption is removed and 3-upright+rolled-top concept undergoes dimensional/clearance/support validation prior to print."
+  ]
+}

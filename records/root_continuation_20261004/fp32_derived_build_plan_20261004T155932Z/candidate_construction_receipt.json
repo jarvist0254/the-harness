@@ -1,0 +1,63 @@
+{
+  "authorization": "PENDING_ROOT",
+  "source_original_sha256_before": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "source_original_sha256_after": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "provider_patch": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\grok_fp32_patch\\patch.pending_root_qa.json",
+  "provider_patch_sha256": "4d90acfb1f9f004e3a0dced9b2d02eb7fb8f731bdfa64e1b840f9d0db09cb203",
+  "candidate_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "three_search_replacement_receipts": [
+    {
+      "edit": 1,
+      "original_first_line": 6314,
+      "original_line_count": 6,
+      "old_sha256": "53d8e848c4aaa2f0ebaf2b05d686ad51c82f33cd6ba2c7b776ec829c2fad2304",
+      "new_sha256": "2943ddac09e8f6f9b9893c5cbc7a6df16a7692a6839701498ebe43d330c11644",
+      "search_occurrences_inside_function": 1,
+      "applied_only_to_function": true
+    },
+    {
+      "edit": 2,
+      "original_first_line": 6379,
+      "original_line_count": 3,
+      "old_sha256": "ac33af6a8289b2a4d0112449d6280e6276f12bd239e39bf9df61085d3edfaa07",
+      "new_sha256": "9e0f08ece354c94cc62af2ccd7f452abe79c1b7f1aaab13d0ea71b8de8cea60b",
+      "search_occurrences_inside_function": 1,
+      "applied_only_to_function": true
+    },
+    {
+      "edit": 3,
+      "original_first_line": 6382,
+      "original_line_count": 1,
+      "old_sha256": "939d4d3b9b16ff4d1fef228a5a5921e4a6e77f846b2062f64ba639086820c86a",
+      "new_sha256": "221a83079260d038bea391986e470fb8deb28a965819ee949cc934e25f98ce48",
+      "search_occurrences_inside_function": 1,
+      "applied_only_to_function": true
+    }
+  ],
+  "sequence_matcher_diff_regions": [
+    {
+      "tag": "replace",
+      "old_first_line": 6319,
+      "old_end_exclusive_line": 6320,
+      "new_first_line": 6319,
+      "new_end_exclusive_line": 6321,
+      "old_bytes_sha256": "c7f28b45ba458c6e42331d54113b1e782675e9b3b665a4688d7f0acbe80fcbcc",
+      "new_bytes_sha256": "607fb06153234b477f610ba07c633c4f6a30f824ea16814b616389db8c0d4033"
+    },
+    {
+      "tag": "replace",
+      "old_first_line": 6381,
+      "old_end_exclusive_line": 6383,
+      "new_first_line": 6382,
+      "new_end_exclusive_line": 6384,
+      "old_bytes_sha256": "fca77c5c0209b709ce5ef6bd476e305a4b9d84600a855b4d6cfdc797ad8de20b",
+      "new_bytes_sha256": "fcdafacb6529da3478fb67faf49e50ef43d189760aa79a753c3651c73236a50f"
+    }
+  ],
+  "number_search_edits": 3,
+  "number_merged_diff_regions": 2,
+  "CRLF_count_candidate": 16571,
+  "LF_count_candidate": 16571,
+  "prefix_suffix_byte_identical": true,
+  "staging_copy_build_execution": "NOT_RUN"
+}

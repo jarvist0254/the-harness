@@ -1,0 +1,19 @@
+{
+  "requested_model": "qwen3.8-flash",
+  "usage": {
+    "prompt_tokens": 396,
+    "total_tokens": 5512,
+    "completion_tokens": 5116,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 396
+    }
+  },
+  "elapsed_seconds": 68.25,
+  "http": 200,
+  "finish_reason": "stop",
+  "observed_model": "qwen3.8-flash",
+  "pid": 88440,
+  "status": "COMPLETE_UNVERIFIED",
+  "job": "vulkan_codegen"
+}

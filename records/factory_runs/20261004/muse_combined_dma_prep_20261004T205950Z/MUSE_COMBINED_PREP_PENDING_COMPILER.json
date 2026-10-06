@@ -1,0 +1,33 @@
+{
+  "state": "PREPARED_PENDING_ACTUAL_COMPILER_DIAGNOSTICS_AND_ROOT_READ",
+  "capture_cap_aggregate_bytes": 2097152,
+  "compiler_diagnostics": "PENDING_ROOT_LUNA_MEASURED_REPORT",
+  "wrapper_sha256": "04be013e9cbb6ce631d374062701b5f21c5fb9f92b31e5ef7b97d491c915ea0b",
+  "utc": "2026-10-04T20:59:50.1630335Z",
+  "tests_sha256": "8d468ec191f45ae44de3b136de8420846517717ed8accb1a282145c23f6f0ccb",
+  "prompt_sha256": "51939d2f86c2e63419236f95cea59ad875489ecf860fc54b1954e7b3f9753fc7",
+  "inputs": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+      "sha256": "E8916BC07EE2A058F5AF9371B073B2F47810071C6949480FE0C0A4B2D3064411"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\tests.snapshot.txt",
+      "sha256": "8D468EC191F45AE44DE3B136DE8420846517717ED8ACCB1A282145C23F6F0CCB"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\spec.snapshot.txt",
+      "sha256": "6FB3E449272CFD176AD0961FDC11077EAA84A8FD84155CF89025EDF6141F4493"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\root_review.snapshot.json",
+      "sha256": "273D953E4F8D0133A1822CDFBCB325D0FC6FD507933FE25B9CAF3B93AADAD3FC"
+    }
+  ],
+  "source_execution": false,
+  "deadline_seconds": 300,
+  "schema_sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+  "wrapper_changes": "Only batch path, prompt filename, inputPINS dictionary, promptSHA; all owned suspended Job/log/time/toolguard logic unchanged",
+  "provider_launch_authorized": false
+}

@@ -1,0 +1,10 @@
+{
+  "vendor": "nvidia",
+  "tool": "nvidia-smi",
+  "tool_version": "NOT_CHECKED",
+  "sampled_at_utc": "2026-10-04T12:01:39.849682+00:00",
+  "exit_code": 0,
+  "format": "csv",
+  "memory_kind": "DEDICATED",
+  "stdout": "pci.bus_id, name, memory.total [MiB], memory.free [MiB], memory.used [MiB], uuid\n00000000:01:00.0, NVIDIA GeForce RTX 5070 Ti, 16303, 14667, 1329, GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c\n"
+}

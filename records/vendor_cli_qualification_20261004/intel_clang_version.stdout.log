@@ -1,0 +1,6 @@
+DPC++ compiler 7.2.0 (pre-release) (Nightly 2026-10-04) build based on:
+clang version 24.0.0git (https://github.com/intel/llvm b98b3a76c11345f1ff6f295e416755ce8c11b60c)
+Target: x86_64-pc-windows-msvc
+Thread model: posix
+InstalledDir: E:\the_harness\records\toolchains\intel_sycl\nightly_20261004\bin
+Build config: +assertions

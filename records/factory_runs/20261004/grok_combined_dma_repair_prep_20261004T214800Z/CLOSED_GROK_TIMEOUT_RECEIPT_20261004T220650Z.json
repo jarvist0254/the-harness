@@ -1,0 +1,18 @@
+{
+  "job": "grok_combined_high",
+  "terminal": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\grok_combined_high.owned_terminal.json",
+  "source_changes_applied": false,
+  "session_reaped": true,
+  "owned_pids_still_alive": [],
+  "reasoning_effort": "high",
+  "session": 83309,
+  "retry_launched": false,
+  "status": "OWNED_600_SECOND_DEADLINE_TERMINATION_NO_COMPLETE_ARTIFACT",
+  "utc": "2026-10-04T22:07:04.3183647Z",
+  "source_execution": false,
+  "input_pins_changed": [],
+  "requested_model": "grok-4.7-build-fast",
+  "internal_model_calls": "UNKNOWN",
+  "usage": "UNKNOWN_NOT_ZERO",
+  "paid_provider_requests": 1
+}

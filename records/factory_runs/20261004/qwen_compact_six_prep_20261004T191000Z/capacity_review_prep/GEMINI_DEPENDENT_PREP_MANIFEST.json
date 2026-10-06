@@ -1,0 +1,60 @@
+{
+  "grok_dependent_editor_not_built_until_gem_actual": true,
+  "prompt_utf16_chars": 23806,
+  "argv_estimate_utf16_chars": 25826,
+  "model": "gemini-3.8-flash-medium",
+  "parser_changes": "prefer structured_output else response strictONE JSON; exact reviewkeys/enums/boundedfindings",
+  "files": [
+    {
+      "name": "gemini_capacity.prompt.txt",
+      "sha256": "178a0bbbb167d0dbd5c4ab47ea593d053a0cb53b5378a4029fd9d472f009852d",
+      "bytes": 23806
+    },
+    {
+      "name": "REVIEW_SCHEMA.json",
+      "sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+      "bytes": 1388
+    },
+    {
+      "name": "provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072
+    },
+    {
+      "name": "research_artifact.ps1",
+      "sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+      "bytes": 722
+    },
+    {
+      "name": "invoke_owned_capacity_review.pending_admission.ps1",
+      "sha256": "3691e11e5545ad05316a5b710e44aed3ea52f8fc503e5106aa0615c1339f62fd",
+      "bytes": 8813
+    }
+  ],
+  "raw_muse_original_parser_failure_preserved": true,
+  "actual_measured_root_evidence_pins": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\run_output\\muse_review.extracted.json",
+      "sha256": "de2b5a98c4ad598c69db85e9a9c376d4e1840c892c9b1f4e3b67127f0e8a9fb0"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\capacity_independent_audit_v3.py",
+      "sha256": "440245bf69e5fde1f2d68c94797f971c068d2d3a87ffe6da5e0afd2de394329e"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\stdout.attempt3.raw.json",
+      "sha256": "86cc4fc6fb7062e758b27802944fad2c40c67d9703d2f5df8e18cdfad5eb3d71"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\run_receipt_attempt3.json",
+      "sha256": "8ea1ee71a9692199a399d4b1ec7d1abd280fc373f047f06c6ae1764149f54c91"
+    }
+  ],
+  "outer_deadline_seconds": 240,
+  "state": "GEMINI_ACTUAL_DEPENDENT_PROMPT_PENDING_ROOT_LAUNCH_ADMISSION",
+  "source_import_execution": false,
+  "provider_launch_authorized": false,
+  "provider_deadline_seconds": 210,
+  "utc": "2026-10-04T20:00:50.9676418Z",
+  "capture_each_bytes": 2097152
+}

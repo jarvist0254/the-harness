@@ -1,0 +1,176 @@
+"""ROOT-admitted fixed-fixture runner. SOURCE ONLY until separately admitted.
+
+No numerical adjudication, discovery, model conversion, source edits or retry.
+The admission is a local ROOT trust boundary, not cryptographic authentication.
+"""
+import argparse
+import ctypes
+from ctypes import wintypes
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import threading
+import time
+
+ROOT = Path('E:/the_harness')
+PHASE = ROOT / 'records/root_continuation_20261004'
+DLL_NAMES = {'ggml-base.dll', 'ggml-cpu.dll', 'ggml-rpc.dll', 'ggml-vulkan.dll', 'ggml.dll'}
+FLAGS = {name: '1' for name in ('GGML_VK_DISABLE_F16', 'GGML_VK_DISABLE_FUSION',
+                              'GGML_VK_DISABLE_COOPMAT', 'GGML_VK_DISABLE_COOPMAT2')}
+PINS = {
+    'operator': ('ad449a153447080836e25a5ca264ebd4b3afa5b14dbb239b11a5bad5be117b5b',
+                 'f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59', 30),
+    'model': ('d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4',
+              '2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371', 60),
+}
+MODEL_PIN = ('bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80', 2390150816)
+LIMIT = 2 * 1024 * 1024
+
+
+def unique_object(pairs):
+    result = {}
+    for k, v in pairs:
+        if k in result:
+            raise ValueError('duplicate JSON key')
+        result[k] = v
+    return result
+
+
+def load_json(text):
+    return json.loads(text, object_pairs_hook=unique_object,
+                      parse_constant=lambda _: (_ for _ in ()).throw(ValueError('nonfinite JSON')))
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with path.open('rb') as f:
+        for block in iter(lambda: f.read(1024 * 1024), b''):
+            h.update(block)
+    return h.hexdigest()
+
+
+def confined(value, base=ROOT, exists=True):
+    if not isinstance(value, str) or not value or '\x00' in value:
+        raise ValueError('invalid path')
+    p = Path(value)
+    if not p.is_absolute():
+        raise ValueError('absolute path required')
+    p = p.resolve(strict=exists)
+    p.relative_to(base.resolve())
+    return p
+
+
+def check_pin(pin, system_loader=False):
+    if not isinstance(pin, dict) or set(pin) != {'path', 'sha256', 'bytes'}:
+        raise ValueError('invalid file pin')
+    if type(pin['bytes']) is not int or pin['bytes'] <= 0:
+        raise ValueError('invalid file size')
+    if not isinstance(pin['sha256'], str) or not re.fullmatch('[0-9a-f]{64}', pin['sha256']):
+        raise ValueError('invalid SHA256')
+    if system_loader:
+        p = Path(pin['path']).resolve(strict=True)
+        if str(p).casefold() != 'c:\\windows\\system32\\vulkan-1.dll':
+            raise ValueError('system loader path mismatch')
+    else:
+        p = confined(pin['path'])
+    if not p.is_file() or p.stat().st_size != pin['bytes'] or digest(p) != pin['sha256']:
+        raise ValueError('file pin mismatch: ' + p.name)
+    return p
+
+
+def relevant_environment():
+    names = {'VULKAN_SDK', 'VK_DRIVER_FILES', 'VK_ICD_FILENAMES', 'VK_LAYER_PATH',
+             'VK_INSTANCE_LAYERS', 'VK_ADD_DRIVER_FILES', 'GGML_BACKEND_PATH', 'GGML_BACKEND_DL_PATH'}
+    names.update(k for k in os.environ if k.startswith('GGML_VK_'))
+    names.update(FLAGS)
+    return {k: os.environ.get(k) for k in sorted(names)}
+
+
+def atomic_json(path, value):
+    data = (json.dumps(value, indent=2, allow_nan=False) + '\n').encode('utf-8')
+    if len(data) > 512 * 1024:
+        raise ValueError('receipt exceeds bounded budget')
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    with temporary.open('xb') as f:
+        f.write(data)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(temporary, path)
+
+
+class Capture:
+    def __init__(self, pipe):
+        self.pipe = pipe
+        self.data = bytearray()
+        self.observed = 0
+        self.overflow = False
+        self.error = None
+        self.started = False
+        self.thread = threading.Thread(target=self.read, daemon=True)
+
+    def read(self):
+        try:
+            while True:
+                block = self.pipe.read(4096)
+                if not block:
+                    break
+                self.observed += len(block)
+                room = LIMIT - len(self.data)
+                self.data.extend(block[:max(0, room)])
+                if len(block) > room:
+                    self.overflow = True
+        except Exception as exc:
+            self.error = type(exc).__name__
+        finally:
+            try:
+                self.pipe.close()
+            except Exception as exc:
+                self.error = self.error or type(exc).__name__
+
+
+class Modules:
+    def __init__(self):
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        self.enum = kernel.K32EnumProcessModules
+        self.enum.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.HMODULE),
+                              wintypes.DWORD, ctypes.POINTER(wintypes.DWORD)]
+        self.enum.restype = wintypes.BOOL
+        self.name = kernel.K32GetModuleFileNameExW
+        self.name.argtypes = [wintypes.HANDLE, wintypes.HMODULE, wintypes.LPWSTR, wintypes.DWORD]
+        self.name.restype = wintypes.DWORD
+
+    def paths(self, owned_process):
+        entries = (wintypes.HMODULE * 2048)()
+        needed = wintypes.DWORD()
+        handle = wintypes.HANDLE(int(owned_process._handle))
+        if not self.enum(handle, entries, ctypes.sizeof(entries), ctypes.byref(needed)):
+            raise ctypes.WinError(ctypes.get_last_error())
+        if needed.value > ctypes.sizeof(entries):
+            raise ValueError('module array overflow')
+        result = []
+        for entry in entries[:needed.value // ctypes.sizeof(wintypes.HMODULE)]:
+            buf = ctypes.create_unicode_buffer(32768)
+            n = self.name(handle, entry, buf, len(buf))
+            if n == 0:
+                raise ctypes.WinError(ctypes.get_last_error())
+            if n >= len(buf):
+                raise ValueError('module filename unavailable/truncated')
+            result.append(Path(buf.value).resolve(strict=True))
+        return result
+
+
+def run(admission_path, admission_sha256):
+    admission_path = confined(str(admission_path), PHASE)
+    if not isinstance(admission_sha256, str) or not re.fullmatch('[0-9a-f]{64}', admission_sha256):
+        raise ValueError('external ROOT admission SHA256 required')
+    if digest(admission_path) != admission_sha256:
+        raise ValueError('external admission pin mismatch before JSON read')
+    if admission_path.stat().st_size > 128 * 1024:
+        raise ValueError('admission too large')
+    a = load_json(admission_path.read_text(encoding='utf-8-sig'))
+    required = {'schema', 'adjudicator', 'launch', 'fixture', 'helper', 'python', 'source',

@@ -1,0 +1,19 @@
+{
+  "review_sha256": "4ad7f5d9c2fd92d489dba5f3836e164e74b1783a0f3461207b685ce8fe064e16",
+  "owned_shell_pid": 46804,
+  "manual_strict_single_terminal_review": true,
+  "provider_scope": "ADVISORY_STATIC_REVIEW_NOT_ROOT_ADMISSION",
+  "review_chars": 9693,
+  "owned_session_reaped": 96269,
+  "exit_code": 0,
+  "Muse_pid": 82948,
+  "utc": "2026-10-04T21:12:48.1586708Z",
+  "original_parser": "UNKNOWN_RESULT_SHAPE_PRESERVED",
+  "findings": 16,
+  "owned_pids_point_absent": true,
+  "usage": "UNKNOWN",
+  "source_execution": false,
+  "subagents": "UNKNOWN_NOT_INFERRED_FROM_TASK_EVENTS",
+  "verdict": "REQUEST_CHANGES",
+  "elapsed_seconds": 41.172
+}

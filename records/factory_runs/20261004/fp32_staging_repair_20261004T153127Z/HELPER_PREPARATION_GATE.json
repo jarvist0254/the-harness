@@ -1,0 +1,62 @@
+{
+  "utc": "2026-10-04T15:40:06.407247+00:00",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "state": "READY_FOR_ROOT_HELPER_REVIEW_NO_LAUNCH",
+  "files": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\provider_common.ps1",
+      "sha256": "24ca09ca269491adca571ab495ff8a382a9ae2c74c79a3d9b4dbbff92ba3cae1",
+      "bytes": 4120
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_http_patch.ps1",
+      "sha256": "5b04db9e56202aae55d32543355eacf8bba934d10013720a768acaac943a5fe0",
+      "bytes": 5370
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\invoke_owned_provider.ps1",
+      "sha256": "a2d0adfa589bfc533f4b6ced4f1406f03f045fc92c31d2a3c04e93752697254d",
+      "bytes": 7806
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\PATCH_SCHEMA.json",
+      "sha256": "4295b731c7cd36b77468226241be303254317491b32d1cd48b29df6cc3bcea67",
+      "bytes": 961
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\REVIEW_SCHEMA.json",
+      "sha256": "3449a633613cafee7dd19f670c5d715dd8926db566c27dc3a84a7f2cfe5c0c97",
+      "bytes": 906
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\ROOT_LAUNCH_RECEIPT_SCHEMA.json",
+      "sha256": "427d6444c28c472d5ec52738a36b36f1c79566fd0230edf231c427f412acab4a",
+      "bytes": 882
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch.prompt.txt",
+      "sha256": "b8c65a481a8097a74bba8f9e1c61b98494a4edab3217405457dc5b5e7a592865",
+      "bytes": 34578
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\ggml_vk_mul_mat_q_f16.excerpt.cpp.txt",
+      "sha256": "c84be41420009d9b0de50570e6a1b8ac2dc23cad62027afa39101ffee2d8a871",
+      "bytes": 14089
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\ABI_SUPPORT_EXCERPTS.txt",
+      "sha256": "124471deb0d4f4a3eccb536a64ee09743249c3defddba7a543c27fdeabdac326",
+      "bytes": 8375
+    }
+  ],
+  "script_ast_only": "All3PowerShellscriptsPASS_NOT_EXECUTED",
+  "base_source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "source_patch_scope": "Exactly3regions insideggml_vk_mul_mat_q_f16:predicate/type,Xbytes,Ybytes",
+  "provider_launches": 0,
+  "credentials_reads": 0,
+  "network_native_gpu_calls": 0,
+  "provider_patch_applied": false,
+  "root_contract_received": true,
+  "launch_admission": "Awaitindependentroothelperinspectionandexplicitlaunchinstruction; rootreceiptNOTcreatedbyhelper",
+  "provider_outputs_staged_only": true
+}

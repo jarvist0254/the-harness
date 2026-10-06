@@ -1,0 +1,144 @@
+import re
+SCHEMA='p2p.transfer.receipt/v1'
+TSCHEMA='p2p.trusted/v1'
+MAX=2**63-1
+ZERO='0'*64
+HX=re.compile(r'^[0-9a-f]{64}$')
+UID=re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+PCI=re.compile(r'^[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}[.][0-7]$')
+DIRS={'nv_device_dmabuf_export_to_intel_imported_view':('nvidia','intel'),'intel_write_to_nv_device_allocation_cuda_read':('intel','nvidia')}
+ART=('source_executable','target_executable','build','payload','controller','baseline')
+class Missing(Exception): pass
+def _miss(k): raise Missing(k)
+def _need(d,k):
+ if type(d) is not dict: raise ValueError('obj')
+ if k not in d: _miss(k)
+ return d[k]
+def _int(v,n,lo=0):
+ if type(v) is not int or isinstance(v,bool): raise ValueError(n)
+ if v<lo or v>MAX: raise ValueError(n)
+ return v
+def _str(v,n,ml=256):
+ if type(v) is not str or not v or len(v)>ml: raise ValueError(n)
+ return v
+def _hash(v,n):
+ v=_str(v,n,64)
+ if not HX.match(v) or v==ZERO: raise ValueError(n)
+ return v
+def _bool(v,n):
+ if type(v) is not bool: raise ValueError(n)
+ return v
+def _dev(d,n):
+ if type(d) is not dict: raise ValueError(n)
+ v=_str(_need(d,'vendor'),n,16); u=_str(_need(d,'uuid'),n,36); p=_str(_need(d,'pci'),n,16); a=_hash(_need(d,'allocation_id'),n); api=_str(_need(d,'api'),n,128); pa=_str(_need(d,'path'),n,256); k=_str(_need(d,'kind'),n,16)
+ if v not in ('nvidia','intel') or not UID.match(u) or not PCI.match(p) or k not in ('device','host','shared'): raise ValueError(n)
+ return {'vendor':v,'uuid':u,'pci':p,'allocation_id':a,'api':api,'path':pa,'kind':k}
+def _pins(t):
+ if type(t) is not dict or t.get('schema')!=TSCHEMA: return None
+ au=t.get('authorities')
+ if type(au) is not list or not au: return None
+ ids=set(); ns=set()
+ for a in au:
+  if type(a) is not dict: return None
+  i=a.get('id'); nm=a.get('name')
+  if type(i) is not str or not HX.match(i) or i==ZERO: return None
+  if type(nm) is not str or not nm or nm in ns or i in ids: return None
+  ids.add(i); ns.add(nm)
+ ar=t.get('artifacts')
+ if type(ar) is not dict: return None
+ oa={}
+ for k in ART:
+  v=ar.get(k)
+  if type(v) is not str or not HX.match(v) or v==ZERO: return None
+  oa[k]=v
+ ds=t.get('devices')
+ if type(ds) is not list or not ds: return None
+ dm={}
+ for d in ds:
+  if type(d) is not dict: return None
+  v=d.get('vendor'); u=d.get('uuid'); p=d.get('pci'); a=d.get('allocation_id'); k=d.get('kind')
+  if v not in ('nvidia','intel') or type(u) is not str or not UID.match(u) or type(p) is not str or not PCI.match(p): return None
+  if type(a) is not str or not HX.match(a) or a==ZERO or k not in ('device','host','shared'): return None
+  api=d.get('api'); pa=d.get('path')
+  if type(api) is not str or not api or type(pa) is not str or not pa: return None
+  key=(v,u,p,a)
+  if key in dm: return None
+  dm[key]={'kind':k,'api':api,'path':pa}
+ ev=t.get('evaluation_unix')
+ if type(ev) is not int or isinstance(ev,bool) or ev<0 or ev>MAX: return None
+ ms=t.get('max_staleness_seconds',300)
+ if type(ms) is not int or isinstance(ms,bool) or ms<0 or ms>MAX: return None
+ return {'artifacts':oa,'devices':dm,'evaluation_unix':ev,'max_staleness':ms}
+def _r(s,c,g,f): return {'status':s,'classification':c,'transport_accepted':False,'scope':'evidence_consistency_only','gaps':g,'failures':f}
+def validate(receipt,*,trusted):
+ pins=_pins(trusted)
+ if pins is None: return _r('NOT_CHECKED','NOT_CHECKED',['trusted_authoritative_pins_absent'],[])
+ if type(receipt) is not dict: raise ValueError('receipt')
+ if receipt.get('schema')!=SCHEMA: raise ValueError('schema')
+ direction=_str(receipt.get('direction'),'direction',128)
+ if direction not in DIRS: raise ValueError('direction')
+ try:
+  src=_dev(_need(receipt,'source'),'source'); tgt=_dev(_need(receipt,'target'),'target')
+  arts=_need(receipt,'artifacts')
+  if type(arts) is not dict: raise ValueError('artifacts')
+  for k in ART:
+   if _hash(_need(arts,k),k)!=pins['artifacts'][k]: return _r('FAIL','NOT_CHECKED',[],['artifact_pin_mismatch:'+k])
+  sy=_need(receipt,'sync')
+  if type(sy) is not dict: raise ValueError('sync')
+  _hash(_need(sy,'producer_event_hash'),'sync.producer'); _hash(_need(sy,'consumer_event_hash'),'sync.consumer')
+  ct=_need(receipt,'controls')
+  if type(ct) is not dict: raise ValueError('controls')
+  cpu=_bool(_need(ct,'cpu_staging'),'cpu'); hp=_bool(_need(ct,'host_pointer_equality_only'),'hostptr')
+  clean=_hash(_need(ct,'clean_baseline_hash'),'clean'); corr=_hash(_need(ct,'producer_corruption_before_copy_hash'),'corr')
+  pay=_need(receipt,'payload')
+  if type(pay) is not dict: raise ValueError('payload')
+  pb=_int(_need(pay,'bytes'),'payload.bytes',1); base=_hash(_need(pay,'baseline_hash'),'baseline'); cons=_hash(_need(pay,'consumer_result_hash'),'consumer'); par=_hash(_need(pay,'parity_hash'),'parity')
+  res=receipt.get('residency'); fails=[]; gaps=[]
+  hb=cpu or hp or src['kind']!='device' or tgt['kind']!='device'
+  sk=(src['vendor'],src['uuid'],src['pci'],src['allocation_id']); tk=(tgt['vendor'],tgt['uuid'],tgt['pci'],tgt['allocation_id'])
+  if sk not in pins['devices'] or tk not in pins['devices']: return _r('NOT_CHECKED','HOST_BACKED' if hb else 'NOT_CHECKED',['device_pin_absent'],[])
+  sd=pins['devices'][sk]; td=pins['devices'][tk]
+  if sd['kind']!='device' or td['kind']!='device': hb=True
+  if sd['api']!=src['api'] or sd['path']!=src['path'] or td['api']!=tgt['api'] or td['path']!=tgt['path']: fails.append('device_api_path_mismatch')
+  sv,tv=DIRS[direction]
+  if src['vendor']!=sv or tgt['vendor']!=tv: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',[],['direction_source_target_order'])
+  if direction=='nv_device_dmabuf_export_to_intel_imported_view':
+   ex=_need(receipt,'export'); im=_need(receipt,'import')
+   if type(ex) is not dict or type(im) is not dict: raise ValueError('export/import')
+   fd=_hash(_need(ex,'fd_hash'),'fd'); back=_hash(_need(ex,'backing_allocation_id'),'back'); eb=_int(_need(ex,'bytes'),'export.bytes',1)
+   if back!=src['allocation_id']: fails.append('export_backing_allocation_mismatch')
+   if _str(_need(im,'external_type'),'external_type',64)!='ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF': fails.append('import_external_type')
+   if _hash(_need(im,'imported_fd_hash'),'imported_fd')!=fd: fails.append('fd_binding')
+   if _hash(_need(im,'allocation_id'),'import_allocation')!=tgt['allocation_id']: fails.append('import_allocation_mismatch')
+   if _int(_need(im,'bytes'),'import.bytes',1)!=eb: fails.append('bytes_mismatch')
+   exp=eb
+   if 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+  else:
+   wr=_need(receipt,'write'); rd=_need(receipt,'read')
+   if type(wr) is not dict or type(rd) is not dict: raise ValueError('write/read')
+   wa=_hash(_need(wr,'allocation_id'),'write.allocation'); pat=_hash(_need(wr,'pattern_hash'),'pattern'); wb=_int(_need(wr,'bytes'),'write.bytes',1)
+   ra=_hash(_need(rd,'allocation_id'),'read.allocation'); rr=_hash(_need(rd,'cuda_read_hash'),'cuda_read'); rb=_int(_need(rd,'bytes'),'read.bytes',1)
+   if wa!=tgt['allocation_id'] or ra!=tgt['allocation_id']: fails.append('nv_allocation_binding')
+   if rr!=pat: fails.append('write_read_pattern_mismatch')
+   if pat!=corr: fails.append('write_control_mismatch')
+   if wb!=rb: fails.append('bytes_mismatch')
+   exp=wb
+   if 'export' in receipt or 'import' in receipt or 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+  if pb!=exp: fails.append('payload_bytes_mismatch')
+  if base!=clean: fails.append('baseline_mismatch')
+  if corr==clean: fails.append('corruption_control_not_distinct')
+  if cons!=corr: fails.append('consumer_control_mismatch')
+  if par!=cons: fails.append('parity_mismatch')
+  if type(res) is not dict: gaps.append('residency_missing')
+  else:
+   if _bool(_need(res,'source_device_resident'),'source_resident') is not True: gaps.append('source_not_resident')
+   if _bool(_need(res,'target_device_resident'),'target_resident') is not True: gaps.append('target_not_resident')
+   _hash(_need(res,'measurement_hash'),'measurement')
+   ts=_int(_need(res,'timestamp_unix'),'timestamp',0)
+   if ts>pins['evaluation_unix']+pins['max_staleness'] or ts<pins['evaluation_unix']-pins['max_staleness']: gaps.append('residency_stale')
+ except Missing as m:
+  return _r('NOT_CHECKED','NOT_CHECKED',['missing:'+str(m)],[])
+ if fails: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',gaps,fails)
+ if hb: return _r('EVIDENCE_CONSISTENT','HOST_BACKED',gaps+['host_backed_not_device_p2p'],[])
+ if gaps: return _r('NOT_CHECKED','NOT_CHECKED',gaps,[])
+ return _r('EVIDENCE_CONSISTENT','DEVICE_P2P',[],[])

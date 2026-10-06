@@ -1,0 +1,30 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\TASK_CONTRACTS.json",
+    "sha256": "5E15D765AD5A2134CD577999800915FED302C026A248AC601A25375F56EA72BC"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\contained_supervisor.syntax_normalized.py",
+    "sha256": "7641ED7E865E1A601AEB72BE6942F39FB040C8BDD4CEC57A34D25FB76E1F4B84"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\tests.candidate.py",
+    "sha256": "F471DBEC8D224799CA1D65A346419470670EF469A010BD82D77E8500D1B78BB5"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\qualification_validator.corrected.py",
+    "sha256": "F024298CA0D597C8CFA04F00334924F957BB268B0734FB8FF6CE1CA5FA9378F0"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\tests.candidate.py",
+    "sha256": "A1C4EE00F2A8047A944527CBB5CC5787A2C094C18D60D3976F67238446020D83"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\windows_job.snapshot.py",
+    "sha256": "7C2AA34CE589856F912ED08D7B3389477298E3185596D6790A378D7D6EAA7036"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\CHECKLIST.md",
+    "sha256": "92C131D03AB55CB0D21C742E0EBBC3C61877D3E4F6A03CD5E42B17174C245182"
+  }
+]

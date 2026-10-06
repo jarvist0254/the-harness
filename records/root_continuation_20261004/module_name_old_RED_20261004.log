@@ -1,0 +1,17 @@
+test_truncated_path_remains_refused (__main__.ModuleNameTests) ... ok
+test_zero_api_result_is_oserror (__main__.ModuleNameTests) ... ERROR
+
+======================================================================
+ERROR: test_zero_api_result_is_oserror (__main__.ModuleNameTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\test_module_name_error_20261004.py", line 25, in test_zero_api_result_is_oserror
+    self.probe(0).paths(types.SimpleNamespace(_handle=123))
+  File "E:\the_harness\records\root_continuation_20261004\fixture_runtime.py", line 160, in paths
+    raise ValueError('module filename unavailable/truncated')
+ValueError: module filename unavailable/truncated
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (errors=1)

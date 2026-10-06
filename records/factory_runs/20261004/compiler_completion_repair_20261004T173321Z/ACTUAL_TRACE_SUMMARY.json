@@ -1,0 +1,78 @@
+{
+  "stderr_bytes": 316,
+  "root_spec": "390080fa8e3d17af2acf983e94f713c6479bd118178ca3491a51ecf1e3e5fad2",
+  "trace_sha256": "a7966f095792168ab54b90f74f936bb23f5c92ab147119820880e218cd7e7d18",
+  "configure_receipt_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_result_copy.json",
+  "whole_tree_certificate": false,
+  "trace_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\job_members.jsonl",
+  "interpretation": "Original TIMEOUT natural-drain policy was correct; proposed compiler-root policy is distinct. Process names are observations only, never control targets.",
+  "failure_reason": "deadline",
+  "complete_samples": 23,
+  "supervisor_source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "stdout_bytes": 2776,
+  "job_active_count": 0,
+  "first_observation": {
+    "monotonic": 4611036.281,
+    "original_counts": [
+      2,
+      221
+    ],
+    "observation": {
+      "status": "LIST_OBSERVED",
+      "assigned": 2,
+      "returned": 2,
+      "members": [
+        {
+          "pid": 52068,
+          "status": "IMAGE_OBSERVED",
+          "image": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\vctip.exe"
+        },
+        {
+          "pid": 23820,
+          "status": "IMAGE_OBSERVED",
+          "image": "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\mspdbsrv.exe"
+        }
+      ],
+      "scope": "Read-only sampled membership and names; races may invalidate identity"
+    }
+  },
+  "original_status": "TIMEOUT",
+  "last_observation": {
+    "monotonic": 4611146.406,
+    "original_counts": [
+      2,
+      221
+    ],
+    "observation": {
+      "status": "LIST_OBSERVED",
+      "assigned": 2,
+      "returned": 2,
+      "members": [
+        {
+          "pid": 52068,
+          "status": "IMAGE_OBSERVED",
+          "image": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\vctip.exe"
+        },
+        {
+          "pid": 23820,
+          "status": "IMAGE_OBSERVED",
+          "image": "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\mspdbsrv.exe"
+        }
+      ],
+      "scope": "Read-only sampled membership and names; races may invalidate identity"
+    }
+  },
+  "worker": [
+    {
+      "worker_id": "configure",
+      "pid": 46568,
+      "exit_code": 0,
+      "assigned": true,
+      "resumed": true
+    }
+  ],
+  "stderr_overflow": false,
+  "drain_proof": "CLEANUP",
+  "stdout_overflow": false,
+  "configure_receipt_sha256": "311cd29e3bf15017a99e49e78c9f84ad3f60e0ed62562bec70a18d72ea56502d"
+}

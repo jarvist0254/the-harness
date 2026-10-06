@@ -1,0 +1,9 @@
+{
+  "log_overflow": false,
+  "outer_killed": false,
+  "exit_code": 0,
+  "pid": 82652,
+  "identity": "retained process object",
+  "job": "qwen_capture_tests",
+  "seconds": 157.96
+}

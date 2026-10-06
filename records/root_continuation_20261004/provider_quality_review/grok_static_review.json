@@ -1,0 +1,289 @@
+{
+  "timestamp_utc": "2026-10-04T12:45:20.657701+00:00",
+  "review_mode": "Full static source and test review only; no candidate imported, executed or mutated. AST parse only.",
+  "sha256": {
+    "grok_supervisor_repair/contained_supervisor.syntax_normalized.py": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+    "grok_validator_repair/qualification_validator.corrected.py": "f024298ca0d597c8cfa04f00334924f957bb268b0734fb8ff6ce1ca5fa9378f0",
+    "grok_supervisor_repair/tests.candidate.py": "f471dbec8d224799ca1d65a346419470670ef469a010bd82d77e8500d1b78bb5",
+    "grok_validator_repair/tests.candidate.py": "a1c4ee00f2a8047a944527cbb5cc5787a2c094c18d60d3976f67238446020d83"
+  },
+  "source_verdict": {
+    "supervisor": "REFUSED_FOR_NATIVE_PROCESS_FIXTURES",
+    "validator": "REFUSED_FOR_QUALIFICATION_USE"
+  },
+  "test_admission_recommendation": "Root may admit bounded isolated pure/mock adversarial tests with RUN_CONTAINMENT_FIXTURES absent, after fixing harness defects and preserving provider originals. Do not admit any actual child fixtures until S1-S4 cleanup defects are repaired. No tests executed by this reviewer.",
+  "provider_admission_flag": "ROOT_STATIC_ADMISSION=True is provider-authored and has no authority.",
+  "improvements_confirmed": [
+    "Native HANDLE signatures, correct Basic/Io/Extended layouts and Set/query kill-on-close implementation",
+    "Typed kernel ResumeThread and assign-before-resume ordering",
+    "Nonempty external trust gate, canonical PCI domain aliases, bool/finite scalar guards, separate requested claims",
+    "Atomic complete receipt write and aggregate inline log externalization",
+    "Honest whole_tree_certificate=False and restart no stale PID attach"
+  ],
+  "findings": [
+    {
+      "id": "S1",
+      "priority": "P1",
+      "file": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+      "lines": [
+        359,
+        365
+      ],
+      "title": "Register resource ownership immediately after each allocation",
+      "finding": "Second CreatePipe failure leaks the first pipe pair; second output-handle duplication failure leaks the first duplicated writer. Append each successful handle before the next fallible API."
+    },
+    {
+      "id": "S2",
+      "priority": "P1",
+      "file": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+      "lines": [
+        482,
+        503,
+        587,
+        602
+      ],
+      "title": "Do not skip cleanup on termination or wait errors",
+      "finding": "TerminateJobObject failure returns before exact-root waits; any exception from WaitForSingleObject/GetExitCodeProcess/accounting inside _shutdown skips _close_owned and reader joins, because its enclosing finally only closes the job. Default explicit policy may leave unproven live processes and leaks handles."
+    },
+    {
+      "id": "S3",
+      "priority": "P1",
+      "file": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+      "lines": [
+        384,
+        393
+      ],
+      "title": "Reader transfer ownership is not exception safe",
+      "finding": "If first reader starts and second thread creation/start fails, reads still contains both handles and _spawn finally closes them while first reader owns and later closes the same handle. Explicit transferred ownership per reader is needed."
+    },
+    {
+      "id": "S4",
+      "priority": "P1",
+      "file": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+      "lines": [
+        259,
+        288,
+        439,
+        453
+      ],
+      "title": "Reader failures and cancellation can falsely complete",
+      "finding": "Read OSError is swallowed without a failure indicator, bad_read is never checked, and close failures mark closed=True. Cancellation/deadline arriving during sequential reader joins is not rechecked before PROCESS_COMPLETED. Check all reader errors and recheck cancellation/deadline after joins."
+    },
+    {
+      "id": "S5",
+      "priority": "P2",
+      "file": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+      "lines": [
+        456,
+        470
+      ],
+      "title": "Last launch can exceed startup budget or resume after cancellation",
+      "finding": "Budgets/cancel checked only before _spawn, not inside it before ResumeThread or after the final spawn. A single slow spawn exceeding startup_seconds is admitted if under whole deadline."
+    },
+    {
+      "id": "S6",
+      "priority": "P2",
+      "file": "grok_supervisor_repair/contained_supervisor.syntax_normalized.py",
+      "lines": [
+        522,
+        557
+      ],
+      "title": "Aggregate log cap repair is present but identifiers remain unbounded",
+      "finding": "Logs are safely externalized if inline JSON exceeds 128 KiB, but run/worker identifiers have no length limit and can make filenames invalid or receipt still oversized. An emit exception occurs after handle closure and returns no terminal receipt."
+    },
+    {
+      "id": "V1",
+      "priority": "P1",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        191,
+        263
+      ],
+      "title": "Capacity is planned rather than demonstrated",
+      "finding": "assigned_bytes is never tied to highwater or actual resident weight/KV/activation bytes; no multi/four-card parity-success receipt, completed kernels or resident ownership are required by _capacity. highwater=0 and all kernel/block evidence removed can still qualify standalone capacity."
+    },
+    {
+      "id": "V2",
+      "priority": "P1",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        210,
+        238
+      ],
+      "title": "Four-required capacity can qualify with only three devices",
+      "finding": "_capacity requires only two dedicated devices; need_three merely checks a three-device OOM label. Three devices with fitting aggregate plans and a three-device OOM can qualify FOUR_REQUIRED_CAPACITY without any fourth device or four-device success."
+    },
+    {
+      "id": "V3",
+      "priority": "P1",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        150,
+        152,
+        376,
+        390
+      ],
+      "title": "Control artifact is not bound to the compared computation",
+      "finding": "_good_control checks kind/scope/exit/detected/hash only. It ignores model/workload/build/executable, physical IDs, tensor dimensions, timestamps and numerical differences. A trusted control from a different workload is accepted."
+    },
+    {
+      "id": "V4",
+      "priority": "P1",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        153,
+        162,
+        266,
+        284
+      ],
+      "title": "Numerical claims can omit actual GPU execution",
+      "finding": "_two accepts CPU or OTHER device_class if vendors differ and kernel.completed is True. _llm never checks participating physical IDs or GPU kernels at all; it can qualify with devices=[] and numeric/prose operator labels. Kernel tensor/weight artifacts are not bound to claimed model/workload execution."
+    },
+    {
+      "id": "V5",
+      "priority": "P1",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        350,
+        373
+      ],
+      "title": "Predeclared tolerances and metric consistency are optional",
+      "finding": "Predeclared tolerances are checked only when supplied. Removing them allows arbitrary loose atol/rtol. rmse>max_abs_error is not rejected. max_abs_error<=atol also ignores legitimate relative tolerance, so rejection semantics do not implement documented atol+rtol parity."
+    },
+    {
+      "id": "V6",
+      "priority": "P1",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        287,
+        347
+      ],
+      "title": "P2P and durable evidence are not fully bound",
+      "finding": "P2P lacks matching model/workload/build/executable, full count/reference digests/tolerance and GPU-only participants. Durable events are hash labels only: no event checkpoint/sequence/workload binding, order, freshness or replay-boundary relation. Unrelated trusted event sets can qualify."
+    },
+    {
+      "id": "V7",
+      "priority": "P2",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        441,
+        459
+      ],
+      "title": "Usable budget need not follow measured free",
+      "finding": "Memory allows free_bytes=0 with usable_bytes>0 as long as usable+reserve<=total. Source label ACTUAL_ALLOCATOR has no per-measurement artifact binding; current memory freshness alone does not establish actual residency."
+    },
+    {
+      "id": "V8",
+      "priority": "P2",
+      "file": "grok_validator_repair/qualification_validator.corrected.py",
+      "lines": [
+        55,
+        56,
+        254,
+        400,
+        402,
+        480,
+        502
+      ],
+      "title": "Strict schema and unknown handling incomplete",
+      "finding": "schema=True passes ==1; PCI match with $ admits a trailing newline; missing PCI returns REFUSED instead of NOT_CHECKED. Unhashable physical_ids in _oom raise TypeError and non-string dict keys can raise in _collect_shas instead of structured refusal."
+    },
+    {
+      "id": "T1",
+      "priority": "P1",
+      "file": "grok_supervisor_repair/tests.candidate.py",
+      "lines": [
+        147,
+        154,
+        299,
+        322
+      ],
+      "title": "Pure supervisor tests contain independent failures",
+      "finding": "Import-safety textual test sees WinDLL in docstring. Constant (b\"abc\",0) read fills beyond cap and cannot satisfy expected single abc/no overflow. Two-value monotonic iterator exhausts during _shutdown, skipping cleanup. FakeAPI pipe handle pairs can overlap, so ownership tests are not reliable."
+    },
+    {
+      "id": "T2",
+      "priority": "P2",
+      "file": "grok_validator_repair/tests.candidate.py",
+      "lines": [
+        94,
+        109,
+        126,
+        140,
+        222,
+        232
+      ],
+      "title": "Validator negative tests can be masked and positive fixture omits required proof",
+      "finding": "Several tests omit device weight/tensor hashes from trusted/listed artifacts and therefore hit trust rejection before memory/PCI/numerical guards. Claimed valid capacity fixture has only 1024-byte highwater for 2 GB assignments and no four-device numerical pass; passing it would encode the false-positive architecture."
+    }
+  ],
+  "discriminating_cases": [
+    {
+      "name": "second_pipe_failure",
+      "mode": "MOCK_ONLY_UNEXECUTED",
+      "setup": "First CreatePipe returns distinct owned handles; second raises OSError.",
+      "assertion": "Both first-pair handles closed exactly once; no process launched; no handle left ownerless."
+    },
+    {
+      "name": "second_duplicate_failure",
+      "mode": "MOCK_ONLY_UNEXECUTED",
+      "setup": "stdout DuplicateHandle succeeds; stderr DuplicateHandle raises.",
+      "assertion": "All originals and successful duplicate closed once."
+    },
+    {
+      "name": "terminate_job_failure_and_wait_exception",
+      "mode": "MOCK_ONLY_UNEXECUTED",
+      "setup": "Two owned roots, first assigned and second unassigned suspended. TerminateJobObject returns false; alternatively one exact-root wait raises.",
+      "assertion": "Every root is still independently waited/terminated within common bound; all handles closed in exception-safe finally; drain UNKNOWN if any proof missing."
+    },
+    {
+      "name": "second_reader_start_failure",
+      "mode": "MOCK_ONLY_UNEXECUTED",
+      "setup": "First fake reader takes ownership; second start raises.",
+      "assertion": "First read handle never closed by two owners; worker/job terminated and reader cancellation/join bounded."
+    },
+    {
+      "name": "cancel_during_join",
+      "mode": "MOCK_ONLY_UNEXECUTED",
+      "setup": "Roots signaled and job empty; cancel event changes to set during reader join.",
+      "assertion": "CANCELLED, never PROCESS_COMPLETED."
+    },
+    {
+      "name": "no_actual_residency_capacity",
+      "mode": "PURE_UNEXECUTED",
+      "setup": "Start with fully trusted schema-valid capacity fixture; highwater=0, remove every kernel/block, keep fitting assigned_bytes and labeled single/three OOM.",
+      "assertion": "NOT_CHECKED or REFUSED with no capacity qualified claims."
+    },
+    {
+      "name": "three_devices_cannot_prove_four",
+      "mode": "PURE_UNEXECUTED",
+      "setup": "Only p1,p2,p3, each usable6GB; requirement8GB; assigned3GB/3GB/2GB; bound single OOM and three OOM; no fourth success.",
+      "assertion": "FOUR_REQUIRED_CAPACITY never QUALIFIED."
+    },
+    {
+      "name": "mismatched_control",
+      "mode": "PURE_UNEXECUTED",
+      "setup": "Otherwise valid two-vendor numerical fixture; control model/workload hashes differ, both old and new artifacts externally trusted.",
+      "assertion": "REFUSED BINDING_MISMATCH rather than QUALIFIED."
+    },
+    {
+      "name": "cpu_only_two_vendor_and_llm",
+      "mode": "PURE_UNEXECUTED",
+      "setup": "Two CPU participants with differing vendors and completed kernel labels; separately valid llm scalar summary with devices=[] and unrelated comparator control.",
+      "assertion": "No actual GPU numerical claim qualified."
+    },
+    {
+      "name": "missing_predeclared_and_inconsistent_metrics",
+      "mode": "PURE_UNEXECUTED",
+      "setup": "Remove predeclared tolerances, set atol1e6; separately rmse1e-5,max_abs_error0 with zero violations.",
+      "assertion": "Unknown tolerance declaration or contradictory metric refused/not checked."
+    },
+    {
+      "name": "unrelated_durability_events",
+      "mode": "PURE_UNEXECUTED",
+      "setup": "Trusted WORKER_LOSS/CANCEL/RESTART artifacts belonging to distinct model/checkpoint sequences, while aggregate summary says COMPLETE.",
+      "assertion": "Cannot qualify replay by event kind set."
+    }
+  ],
+  "evidence_trust_limit": "External trusted hashes can bind caller-admitted artifacts; membership cannot authenticate arbitrary JSON claims or associate unrelated events. No synthetic fixture is physical hardware evidence."
+}

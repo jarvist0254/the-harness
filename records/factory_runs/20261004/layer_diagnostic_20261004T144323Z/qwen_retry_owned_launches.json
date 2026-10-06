@@ -1,0 +1,9 @@
+{
+  "model": "qwen3.8-flash",
+  "job": "qwen_layer_capture_retry",
+  "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+  "observed_process_start_utc": "2026-10-04T14:51:38.9627855Z",
+  "outer_deadline_seconds": 270,
+  "clock": "Stopwatch monotonic",
+  "pid": 88488
+}

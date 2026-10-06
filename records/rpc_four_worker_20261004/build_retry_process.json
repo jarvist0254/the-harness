@@ -1,0 +1,7 @@
+{
+  "supervisor_pid": 91116,
+  "build_pid": 13712,
+  "timeout_seconds": 600,
+  "max_jobs": 4,
+  "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && cmake -S repos/llama.cpp -B records/build_cpu_rpc -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe\" -DGGML_RPC=ON -DGGML_CUDA=OFF -DGGML_VULKAN=OFF -DLLAMA_BUILD_TESTS=ON -DLLAMA_CURL=OFF -DLLAMA_OPENSSL=OFF -DFETCHCONTENT_FULLY_DISCONNECTED=ON -DCMAKE_SUPPRESS_REGENERATION=ON && cmake --build records/build_cpu_rpc --target ggml-rpc-server --parallel 4\""
+}

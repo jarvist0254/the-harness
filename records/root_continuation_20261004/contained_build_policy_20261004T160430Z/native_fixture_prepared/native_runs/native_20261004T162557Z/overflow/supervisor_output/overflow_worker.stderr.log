@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\contained_build_policy_20261004T160430Z\native_fixture_prepared\worker.py", line 21, in <module>
+    sys.stdout.write("X" * 16384)
+BrokenPipeError: [Errno 32] Broken pipe

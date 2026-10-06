@@ -1,0 +1,8 @@
+{
+  "model": "gemini-3.8-flash-medium",
+  "wrapper_pid": 29272,
+  "job": "gemini_fp32_review_v2",
+  "admission": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_GEMINI_V2_LAUNCH_ADMISSION_20261004T155800Z.json",
+  "process_identity": "Unified-exec shell executes owned wrapper directly; retained tool session",
+  "utc": "2026-10-04T15:55:50.6481406Z"
+}

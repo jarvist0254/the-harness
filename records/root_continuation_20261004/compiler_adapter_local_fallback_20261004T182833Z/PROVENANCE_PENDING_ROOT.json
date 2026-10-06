@@ -1,0 +1,9 @@
+{
+  "author": "Independent local Codex fallback, not provider-generated",
+  "authorization": "PENDING_ROOT_NO_NATIVE_EXECUTION",
+  "source_sha256": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+  "install_symbol": "install",
+  "success_reason": "compiler_root_exited_zero",
+  "generic_supervisor_unchanged": true,
+  "scope": "Only private wait-hook installation; no cleanup, accounting, launch, native imports, process or file calls at import/install"
+}

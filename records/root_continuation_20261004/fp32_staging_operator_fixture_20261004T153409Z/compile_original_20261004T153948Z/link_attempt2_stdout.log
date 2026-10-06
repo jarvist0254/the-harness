@@ -1,0 +1,8 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.6.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\bin\Hostx64\x64\cl.exe
+fp32_staging_operator.cpp
+LINK : fatal error LNK1104: cannot open file 'he_harnessecordsuild_vulkan_realuild\ggml\src.obj'

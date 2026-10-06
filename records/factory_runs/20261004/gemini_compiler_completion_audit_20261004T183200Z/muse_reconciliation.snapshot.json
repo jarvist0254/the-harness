@@ -1,0 +1,19 @@
+{
+  "extraction": "single run.terminal.completed payload.text JSON object",
+  "event_sequence": 1027,
+  "event_id": "018f0000-0000-7000-8000-00000000cb52",
+  "raw_jsonl_sha256": "D05BB2792C685DC83CA57B5200E8035E70FBF12C59DA1BED122733512A3FADF7",
+  "terminal_text_sha256": "C5F9B471848DBED5794D63CBD60EEB6D2329460D9D0B689D08CC97BF8D1A133C",
+  "terminal_text_bytes": 17742,
+  "result_keys": [
+    "findings",
+    "safety_checks",
+    "verdict"
+  ],
+  "original_runner_status": "PROCESS_COMPLETED",
+  "original_runner_exit_code": 2,
+  "original_parser_status": "UNKNOWN_RESULT_SHAPE",
+  "model_verdict": "REQUEST_CHANGES",
+  "findings_count": 14,
+  "safety_checks_count": 12
+}

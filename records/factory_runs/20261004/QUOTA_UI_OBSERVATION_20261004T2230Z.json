@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "observed_utc": "2026-10-04T22:31:15.780098+00:00",
+  "scope": "Read-only existing signed-in QwenCloud Individual Token Plan UI",
+  "page": "https://home.qwencloud.com/analytics/token-plan/individual",
+  "method": "Existing quotaTab.reload; close supported-models panel; rendered AX quota text",
+  "plan": "Individual Plan Pro",
+  "plan_status": "Active",
+  "page_last_updated_label": "2026-10-04 18:28:53",
+  "page_time_zone": "NOT_REPORTED",
+  "remaining_display_percent": 34.4,
+  "monthly_plan_quota": 180000,
+  "remaining_credits_derived_approx": 61920,
+  "derivation": "180000 * 34.4 / 100, rounded UI percentage not exact Credits",
+  "reset_time_label": "2026-10-06 12:00:00",
+  "quota_goal_achieved": false,
+  "factory_attribution": "NOT_PROVEN; other user/account work may contribute",
+  "tokens_are_not_credits": true,
+  "credentials_or_url_queries_saved": false,
+  "billing_or_auto_renew_mutations": false,
+  "prior_remaining_display_percent": 34.7,
+  "delta_percentage_points": -0.3
+}

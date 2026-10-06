@@ -1,0 +1,115 @@
+[0] Arguments: E:\the_harness\records\build_vulkan_real\toolchain\installer\vulkansdk-windows-X64-1.4.363.0.exe, --root, E:\the_harness\records\build_vulkan_real\toolchain\sdk, --accept-licenses, --default-answer, --confirm-command, install, copy_only=1
+[3] Operations sanity check succeeded.
+[10] Using metadata cache from "C:/Users/thoma/AppData/Local/cache\\qt-installer-framework\\7d98f84a-e733-3980-9ce8-68a0c2878080"
+[11] Found 0 cached items.
+[14] Loaded control script ":/metadata/installer-config/installscript_qs"
+[15] Fetching latest update information...
+[16] Downloading 1 items to cache.
+[17] Retrieving information from remote repositories...
+[712] Retrieving meta information from remote repository...
+[1092] Extracting meta information...
+[1097] Updating local cache with 1 new items...
+[1121] Loading component scripts...
+[1123] License "MIT 2.0 or Apache" accepted by user.
+[1123] Loading component scripts...
+[1124] Warning: QFont::setPixelSize: Pixel size <= 0 (-1)
+[1124] Selected components without dependencies:
+com.lunarg.vulkan 
+com.lunarg.vulkan.core
+[1134] Installation space required: "1.74 GB"
+[1144] Temporary space required: "0.00 bytes"
+[1170] Cache is on a different volume than the installation directory. Cache volume mount point: "C:\\" Free space available: "116.06 GB" Install volume mount point: "E:\\" Free space available: "787.05 GB"
+[1171] Installation will use 1.74 GB of disk space.
+[1171] backup  operation: Mkdir
+[1171] 	- arguments: E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1171] Done
+[1172] perform  operation: Mkdir
+[1172] 	- arguments: E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1172] Done
+[1172] Preparing the installation...
+[1173] Install size: 2 components
+[1205] Preparing to unpack components...
+[1210] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1210] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Bin.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1211] Started
+[1211] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1211] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0cmake.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1211] Started
+[1211] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1211] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Config.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1211] Started
+[1211] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1212] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0content.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1212] Started
+[1216] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1216] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Source.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1216] Started
+[1217] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1217] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Helpers.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1217] Started
+[1217] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1217] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Templates.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1217] Started
+[1217] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1218] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Include.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1218] Started
+[1218] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1218] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0share.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1218] Started
+[1218] backup com.lunarg.vulkan.core concurrent operation: Extract
+[1218] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Lib.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1218] Started
+[1225] Unpacking components...
+[1226] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1226] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Bin.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1226] Started
+[1226] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1226] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Lib.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1227] Started
+[1227] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1227] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Helpers.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1227] Started
+[1227] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1227] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Include.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1227] Started
+[1227] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1227] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0share.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1228] Started
+[1228] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1228] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Config.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1228] Started
+[1228] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1228] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Source.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1228] Started
+[1230] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1230] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0Templates.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1230] Started
+[1230] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1230] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0content.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1231] Started
+[1231] perform com.lunarg.vulkan.core concurrent operation: Extract
+[1231] 	- arguments: installer://com.lunarg.vulkan.core/1.4.363.0cmake.7z, E:/the_harness/records/build_vulkan_real/toolchain/sdk
+[1231] Started
+[9628] Installing component The Vulkan SDK
+[9629] backup com.lunarg.vulkan operation: License
+[9629] 	- arguments:
+[9629] Done
+[9629] perform com.lunarg.vulkan operation: License
+[9630] 	- arguments:
+[9630] Done
+[9631] Installing component The Vulkan SDK Core (Always Installed)
+[9632] backup com.lunarg.vulkan.core operation: License
+[9632] 	- arguments:
+[9632] Done
+[9633] perform com.lunarg.vulkan.core operation: License
+[9633] 	- arguments:
+[9634] Done
+[9639] Writing maintenance tool: "E:/the_harness/records/build_vulkan_real/toolchain/sdk/maintenancetool.exe.new"
+[9639] Writing maintenance tool.
+[9693] Wrote permissions for maintenance tool.
+[9728] Maintenance tool hard restart: false.
+[9729] Installation finished!
+[9758] perform  operation: Delete
+[9758] 	- arguments: E:/the_harness/records/build_vulkan_real/toolchain/sdk/Helpers/VC_redist.x64.exe
+[9760] Done
+[9761] Components installed successfully.

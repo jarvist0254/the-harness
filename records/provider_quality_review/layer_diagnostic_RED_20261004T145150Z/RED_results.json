@@ -1,0 +1,1003 @@
+{
+  "scope": "SYNTHETIC_COMPARATOR_ONLY_NOT_GPU_OR_MODEL_QUALIFICATION",
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+  "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+  "tests_run": 62,
+  "failures": 21,
+  "errors": 0,
+  "not_checked": 0,
+  "forbidden_calls": [],
+  "outcomes": [
+    {
+      "case": "__main__.Cases.test_actual_hash_mismatch",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_aggregate_actual_file_budget",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_authority_extra",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 88, in test_authority_extra\n    def test_authority_extra(self):self.gm['origin']['qualification']='GPU_PASS';self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_canonical_alias",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 76, in test_canonical_alias\n    def test_canonical_alias(self):self.cm['captures'][0]['name']='attn_norm-00';self.gm['captures'][0]['name']='attn_norm-00';self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_duplicate_name",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_equal_baseline",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_extra_nodes",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 70, in test_extra_nodes\n    node=copy.deepcopy(self.gm['captures'][-1]);node.update(name='result_norm',ordinal=3);self.gm['captures'].append(node);self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'reason': 'node_count_mismatch'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_global_scale_false_match",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_budget",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_extra",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 89, in test_manifest_extra\n    def test_manifest_extra(self):self.gm['production_pass']=True;self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_op_mismatch",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 67, in test_metadata_op_mismatch\n    def test_metadata_op_mismatch(self):self.gm['captures'][0]['op']='OTHER_OP';self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': 0, 'reason': 'metadata_mismatch'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_shape_mismatch",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 66, in test_metadata_shape_mismatch\n    self.gm['captures'][0]['dims']=[4,2,1,1];self.gm['captures'][0]['strides']=[4,16,32,32];self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': 0, 'reason': 'metadata_mismatch'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_missing_expected_authority",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 85, in test_missing_expected_authority\n    def test_missing_expected_authority(self):self.expected={};self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_missing_nodes",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 68, in test_missing_nodes\n    def test_missing_nodes(self):self.gm['captures'].pop();self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'reason': 'node_count_mismatch'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_diagnostic_intrusive",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_qualification",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_schema",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_status",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dims",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dtype",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_../escape.bin",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_C:\\outside.bin",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_node.bin:ads",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_nbytes",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 117, in test\n    self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: (None, {'type': 'error', 'message': 'bad char in struct format'})\n"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_0.0",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 117, in test\n    self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_False",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_strides",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 117, in test\n    self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan0',_'Vulka",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan1',_'Vulka",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_executable_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_flash_attention",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_bytes",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 117, in test\n    self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_n_ctx_actual",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 117, in test\n    self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_pinned_commit",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_role",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_source_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_vulkan_disable_f16",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_workload_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nested_duplicate_json_key",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_node_extra",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 90, in test_node_extra\n    def test_node_extra(self):self.gm['captures'][0]['reference_scale']=1000000;self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_minus_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_nan",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_minus_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_nan",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_order_difference",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 74, in test_order_difference\n    self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': 0, 'reason': 'metadata_mismatch'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_small_noise_reported_for_every_capture",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 64, in test_small_noise_reported_for_every_capture\n    self.replace_bytes(self.gpu,self.gm,0,[.001,1000000.,-2.,3.,4.,5.,6.,7.]);self.save();r,e=self.call();self.assertIsNone(e);self.assertEqual(r['result'],'DIAGNOSTIC_MATCH');self.assertTrue(any(isinstance(v,list) and len(v)==3 for v in r.values()),'Every observed capture needs statistics even when within tolerance')\nAssertionError: False is not true : Every observed capture needs statistics even when within tolerance\n"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_file_inside_owned_folder",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_root_inside_owned_folder",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 107, in test_symlink_root_inside_owned_folder\n    self.gpu=link;self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_both_short",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 86, in test_tokens_both_short\n    def test_tokens_both_short(self):self.cm['origin']['tokens']=[0,1];self.gm['origin']['tokens']=[0,1];self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_different_passes",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 87, in test_tokens_different_passes\n    def test_tokens_different_passes(self):self.gm['origin']['tokens']=list(reversed(range(16)));self.save();self.refuse()\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_bool",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_nan",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_narrowed",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 128, in test\n    def test(self):self.refuse(atol=value,rtol=value)\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_negative",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_widened",
+      "outcome": "FAIL",
+      "trace": "Traceback (most recent call last):\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 128, in test\n    def test(self):self.refuse(atol=value,rtol=value)\n  File \"E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py\", line 56, in refuse\n    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))\nAssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)\n"
+    },
+    {
+      "case": "__main__.Cases.test_trailing_with_true_hash",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_truncated_with_true_hash",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_updated_hash_real_corruption_first_observed",
+      "outcome": "PASS"
+    }
+  ],
+  "observations": [
+    {
+      "case": "__main__.Cases.test_actual_hash_mismatch",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "SHA256 mismatch"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_aggregate_actual_file_budget",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Pass too large"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_authority_extra",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_canonical_alias",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_duplicate_name",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Duplicate name attn_norm-0"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_equal_baseline",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_extra_nodes",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "reason": "node_count_mismatch"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_global_scale_false_match",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "comparator": "COMPARATOR_ONLY",
+        "first_divergent_ordinal": 0,
+        "stats": {
+          "max_abs": 0.019999999552965164,
+          "rmse": 0.007071067653814793,
+          "failed_count": 1,
+          "samples": [
+            {
+              "index": 0,
+              "cpu": 0.0,
+              "gpu": 0.019999999552965164,
+              "diff": 0.019999999552965164
+            }
+          ]
+        }
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_budget",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Manifest too large"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_extra",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_op_mismatch",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "first_divergent_ordinal": 0,
+        "reason": "metadata_mismatch"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_shape_mismatch",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "first_divergent_ordinal": 0,
+        "reason": "metadata_mismatch"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_missing_expected_authority",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_missing_nodes",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "reason": "node_count_mismatch"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_diagnostic_intrusive",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Not intrusive"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_qualification",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad qualification"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_schema",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad schema"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_status",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad status"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dims",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad dim value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dtype",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad dtype"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_../escape.bin",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad file path"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_C:\\outside.bin",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad file path"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_node.bin:ads",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad file path"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_nbytes",
+      "result": null,
+      "error": {
+        "type": "error",
+        "message": "bad char in struct format"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_0.0",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_False",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad ordinal 0"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_strides",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan0',_'Vulka",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "GPU devices not unique"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan1',_'Vulka",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Mismatch devices"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_executable_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Mismatch executable_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_flash_attention",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad flash_attention"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_bytes",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad model_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_n_ctx_actual",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_pinned_commit",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad pinned_commit"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_role",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad GPU role"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_source_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Mismatch source_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_vulkan_disable_f16",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "GPU vulkan_disable_f16"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_workload_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Mismatch workload_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nested_duplicate_json_key",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Duplicate JSON key: source_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_node_extra",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_minus_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_nan",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_minus_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_nan",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_order_difference",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "first_divergent_ordinal": 0,
+        "reason": "metadata_mismatch"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_small_noise_reported_for_every_capture",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_file_inside_owned_folder",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Path escapes root"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_root_inside_owned_folder",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_both_short",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_different_passes",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_bool",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance cannot be bool"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be finite non-negative"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_nan",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be finite non-negative"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_narrowed",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_negative",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be finite non-negative"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_widened",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY"
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_trailing_with_true_hash",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Size mismatch"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_truncated_with_true_hash",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Size mismatch"
+      },
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_updated_hash_real_corruption_first_observed",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "comparator": "COMPARATOR_ONLY",
+        "first_divergent_ordinal": 1,
+        "stats": {
+          "max_abs": 1.0,
+          "rmse": 0.3535533905932738,
+          "failed_count": 1,
+          "samples": [
+            {
+              "index": 0,
+              "cpu": 0.0,
+              "gpu": 1.0,
+              "diff": 1.0
+            }
+          ]
+        }
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    }
+  ],
+  "adapter": "Actual Qwen result key result, first_divergent_ordinal, stats; malformed artifacts must CaptureError or resultNOT_CHECKED, not numeric divergence. Output root/file writes remain external caller responsibility.",
+  "limits": [
+    "Metadata pin matching does not authenticate execution or original model.",
+    "144-node cap cannot get otherwise-valid145names under142canonical-name whitelist.",
+    "Synthetic fixture storage maximumabout16MiB, no candidate16MiBfullfloatcomparison.",
+    "No provider-generated tests executed."
+  ]
+}

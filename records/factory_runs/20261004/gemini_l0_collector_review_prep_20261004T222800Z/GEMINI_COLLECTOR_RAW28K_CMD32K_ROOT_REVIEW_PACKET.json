@@ -1,0 +1,91 @@
+{
+  "job": "gemini_l0_collector_high",
+  "muse_all11_findings_fields_embedded": true,
+  "actual_measurement": {
+    "native_calls": 0,
+    "process_started": false,
+    "method": "Actual installed .NET Process.BuildCommandLine via managed Reflection.Emit; no Process.Start/native call",
+    "including_terminating_nul_utf16_code_units": 28276,
+    "dotnet_runtime": ".NET 10.0.12",
+    "utf16_code_units": 28275
+  },
+  "source_full_embedded": true,
+  "model": "gemini-3.8-flash-high",
+  "raw_prompt_utf16_chars": 27617,
+  "scoped_qa_reference": {
+    "bytes": 1644,
+    "sha256": "5f0aadf18c8c5d09615d11f6155a92b50db2092566581c2358dc2fcbe6221d35",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\ADJUDICATION.md"
+  },
+  "measurement": {
+    "bytes": 298,
+    "sha256": "dba95314111de5911ac09c9b8dfa591d6d472030517cd4dd7fda2a54b962bc94",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\ACTUAL_DOTNET_COMMANDLINE_MEASUREMENT.json"
+  },
+  "utc": "2026-10-04T22:28:27.6995916Z",
+  "native_command_cap_including_nul": 32000,
+  "muse_complete_semantic_compact": {
+    "bytes": 10361,
+    "sha256": "1ea31902054148807a2611b48e16fcfb13567e31b5cf7f4448ade6ccb7e39cca",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\muse_review.semantic_compact.json"
+  },
+  "raw_prompt_cap": 28000,
+  "status": "PREPARATION_ONLY_PENDING_ROOT_READ_ADMISSION",
+  "helpers": [
+    {
+      "bytes": 9317,
+      "sha256": "d20411662bbcf557745db3a1e8f98b256adf0eb288db082a7665fe340ef0497f",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\invoke_owned_collector_review.high.raw28k.cmd32k.ps1"
+    },
+    {
+      "bytes": 1875,
+      "sha256": "6283aff321b3b8a53928cd3e644e269627ec656e57362ee985e36e2cdf7383a2",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\measure_actual_native_commandline.ps1"
+    },
+    {
+      "bytes": 4070,
+      "sha256": "2a6b79b3151aefdb7e704192506aa9f3e03c6107c79b22f9350cd247c3035975",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\provider_common.high.v2.ps1"
+    },
+    {
+      "bytes": 722,
+      "sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\research_artifact.ps1"
+    },
+    {
+      "bytes": 1388,
+      "sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\REVIEW_SCHEMA.json"
+    }
+  ],
+  "full_stub_and_test_files_embedded": false,
+  "native_children_actual": 0,
+  "prompt": {
+    "bytes": 27617,
+    "sha256": "e6afd35dbc970c95ce04030f7a97c43fab92af19cbcc80e6306d88570c8ffe6c",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high.prompt.txt"
+  },
+  "launch_authorized": false,
+  "diffs": [
+    "New exact model/source/prompt/outputbindings, copy frozencommon/schema/companion unchanged.",
+    "Wrapper adds dot-source of puremanaged commandline measurer.",
+    "Explicit raw28000guard afterprompt read; actualquoted32000includingNULguard beforeProcess.Start plusmeasurementreceipt.",
+    "Provider210/outer240sec,2MiBeach streams, CLI flags, auth, parse, ownedcleanup unchanged."
+  ],
+  "scope_gaps": {
+    "bytes": 1165,
+    "sha256": "2e143883a4890886afda93fd7158c5cafa8b29bcd32ea1bd7a7ec3acce42cdb4",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\ROOT_ADDITIONAL_COLLECTOR_SCOPE_GAPS_20261004T220600Z.json"
+  },
+  "source_pin": {
+    "bytes": 15764,
+    "sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp"
+  },
+  "muse_original": {
+    "bytes": 10956,
+    "sha256": "f88cdad706e88a7af8fa4aad0c6d214d16ead6706a2e9ee1468e5a6092bbf5a1",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_output\\parsed_review.json"
+  },
+  "source_execution": false
+}

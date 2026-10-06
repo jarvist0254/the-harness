@@ -1,0 +1,9 @@
+
+Platforms: 0
+default_selector()      : No device of requested type available.
+accelerator_selector()  : No device of requested type available.
+cpu_selector()          : No device of requested type available.
+gpu_selector()          : No device of requested type available.
+custom_selector(gpu)    : No device of requested type available.
+custom_selector(cpu)    : No device of requested type available.
+custom_selector(acc)    : No device of requested type available.

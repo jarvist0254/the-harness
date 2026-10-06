@@ -1,0 +1,11 @@
+{
+  "pid": 95288,
+  "usage": null,
+  "native_children": 0,
+  "status": "ERROR_MethodInvocationException",
+  "observed_model": null,
+  "requested_model": "qwen3.8-max",
+  "finish_reason": null,
+  "elapsed_seconds": 240.75,
+  "http": null
+}

@@ -1,0 +1,78 @@
+-- The C compiler identification is MSVC 19.51.36246.0
+-- The CXX compiler identification is MSVC 19.51.36246.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Build options:
+--    Flags for selecting targets to be built:
+--       BUILD_L0=OFF 
+--       BUILD_OCL=ON 
+--       BUILD_VK=OFF 
+--       BUILD_UR=OFF 
+--       BUILD_OL=OFF 
+--       BUILD_SYCL=OFF 
+--       BUILD_SYCL_WITH_CUDA=OFF 
+--       BUILD_OMP=OFF 
+--       BUILD_MPI=OFF 
+--       NULL_L0=OFF 
+--       USE_SYSTEM_LEVEL_ZERO=ON 
+--       USE_SYSTEM_VULKAN=ON 
+--       BUILD_SINGLE_API_BINARIES=ON 
+--       BUILD_ALL_API_BINARIES=OFF (Disabled due to not all APIs being enabled)
+--    Flags for configuring publishable builds and versions:
+--       BUILD_FOR_PUBLISHING=OFF 
+--       INCLUDE_VERSION=OFF 
+--       VERSION_INDEX=01 
+--    Miscellaneous flags:
+--       OUTPUT_DIR=E:/the_harness/records/compute_benchmarks_opencl_20261004/build/bin 
+--       BUILD_HELLO_WORLD=OFF 
+--       GENERATE_DOCS=OFF 
+--       BUILD_TOOLS=ON 
+--       LOG_BENCHMARK_TARGETS=OFF 
+--       ALLOW_WARNINGS=ON 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Looking for SYS_pidfd_getfd
+-- Looking for SYS_pidfd_getfd - not found
+-- Looking for SYS_pidfd_open
+-- Looking for SYS_pidfd_open - not found
+-- OpenCL installation not found. Using E:/the_harness/records/compute_benchmarks_opencl_20261004/source/third_party/opencl-sdk
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to api_overhead_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/api_overhead_benchmark/implementations/ocl to api_overhead_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to atomic_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/atomic_benchmark/implementations/ocl to atomic_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to compute_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/compute_benchmark/implementations/ocl to compute_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to emu_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/emu_benchmark/implementations/ocl to emu_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to eu_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/eu_benchmark/implementations/ocl to eu_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to graph_api_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/graph_api_benchmark/implementations/ocl to graph_api_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to memory_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/memory_benchmark/implementations/ocl to memory_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to miscellaneous_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/miscellaneous_benchmark/implementations/ocl to miscellaneous_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to multithread_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/multithread_benchmark/implementations/ocl to multithread_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to multitile_memory_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/multitile_memory_benchmark/implementations/ocl to multitile_memory_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to page_fault_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/page_fault_benchmark/implementations/ocl to page_fault_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/common/ocl to ulls_benchmark_ocl
+-- Adding sources from E:/the_harness/records/compute_benchmarks_opencl_20261004/source/source/benchmarks/ulls_benchmark/implementations/ocl to ulls_benchmark_ocl
+-- Configuring done (8.6s)
+-- Generating done (0.2s)
+-- Build files have been written to: E:/the_harness/records/compute_benchmarks_opencl_20261004/build

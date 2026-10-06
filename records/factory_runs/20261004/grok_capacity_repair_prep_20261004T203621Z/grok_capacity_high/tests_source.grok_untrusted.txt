@@ -1,0 +1,136 @@
+import hashlib,importlib.util,math,os,unittest
+P=os.environ.get('CANDIDATE_PATH') or os.environ.get('CANDIDATE_SOURCE_PATH') or 'candidate.py'
+if not os.path.isfile(P):
+    raise RuntimeError('set CANDIDATE_PATH to the actual candidate source path')
+spec=importlib.util.spec_from_file_location('candidate_under_test',P)
+mod=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+RAW=b'root-model-bytes'
+def hx(b):
+    return hashlib.sha256(b).hexdigest()
+MODEL,WORK,SRC,EXE,CTX,CPU=hx(RAW),hx(b'workload'),hx(b'source'),hx(b'exe'),hx(b'context'),hx(b'cpu-ref')
+QUANT='q8_0'
+VALS={'model_hash':MODEL,'workload_hash':WORK,'source_hash':SRC,'exe_hash':EXE,'context_hash':CTX,'quant':QUANT}
+def reg():
+    return {'model_hash':RAW,'workload_hash':bytearray(b'workload'),'source_hash':SRC,'exe_hash':EXE,'context_hash':CTX,'cpu_reference_hash':CPU,'artifact_source':'root-store','quant':QUANT}
+def dev(i):
+    return {'canonical_id':'pci:0000:%02x.0'%i,'physical_alias':'phys:%d'%i,'aliases':['root:%d'%i,'sub:%d:0'%i],'discrete':True,'form_factor':'discrete_gpu'}
+def wt(dev,h,n):
+    return {'device':dev,'shard_hash':h,'resident_bytes':n,'backing':'device_vram'}
+PAIRS=((0.0,0.0),(1.0,1.0625),(2.0,2.0))
+def metrics(pairs):
+    es=[abs(o-c) for c,o in pairs]
+    return math.sqrt(sum(x*x for x in es)/len(es)),max(es)
+def att(role,n,ts=1000):
+    a={'role':role,'timestamp_ns':ts,'controller':{'args_valid':True,'timeout':False,'policy_cap':False,'native_error':None},'devices':[dev(i) for i in range(n)],'allocator':{'class':'dedicated_vram','fresh':True,'source':'allocd','timestamp_ns':ts}}
+    a.update(VALS)
+    if role!='four':
+        a['execution']={'status':'allocator_oom','requested_bytes':4000}
+    else:
+        rm,mx=metrics(PAIRS)
+        a['execution']={'status':'success','rmse':rm,'max_abs_error':mx,'logits':[{'cpu':c,'observed':o,'tol_abs':0.1} for c,o in PAIRS]}
+        a['weights']=[wt('pci:0000:%02x.0'%i,'h%d'%i,1000) for i in range(4)]
+        a['allocator']['peak_bytes_by_device']={'pci:0000:%02x.0'%i:1000 for i in range(4)}
+    return a
+def ev():
+    e={'artifact_source':'root-store','cpu_reference_hash':CPU,'observed_at_ns':1000,'model_bytes':4000,'logit_tol_abs':0.1,'attempts':[att('single',1),att('three',3),att('four',4)]}
+    e.update(VALS)
+    return e
+class T(unittest.TestCase):
+    def runv(self,e,trusted=None):
+        return mod.validate_capacity(e,trusted=reg() if trusted is None else trusted)
+    def test_pass(self):
+        r=self.runv(ev()); self.assertEqual((r['status'],r['exit_code']),('PASS',0))
+    def test_untrusted_bool(self):
+        self.assertEqual(mod.validate_capacity(ev(),trusted=True)['errors'],['untrusted'])
+    def test_nonhex(self):
+        e=ev(); e['model_hash']='not-a-hex'
+        for a in e['attempts']: a['model_hash']=e['model_hash']
+        self.assertEqual(self.runv(e)['errors'],['hash:model_hash'])
+    def test_registry_mismatch(self):
+        e=ev(); e['workload_hash']=hx(b'other')
+        for a in e['attempts']: a['workload_hash']=e['workload_hash']
+        self.assertEqual(self.runv(e)['errors'],['registry_mismatch:workload_hash'])
+    def test_missing_registry(self):
+        t=reg(); del t['exe_hash']
+        self.assertEqual(self.runv(ev(),t)['errors'],['registry:exe_hash'])
+    def test_uppercase_hash(self):
+        e=ev(); e['context_hash']=CTX.upper()
+        for a in e['attempts']: a['context_hash']=e['context_hash']
+        t=reg(); t['context_hash']=CTX.upper()
+        self.assertEqual(self.runv(e,t)['errors'],['hash:context_hash'])
+    def test_three_cards(self):
+        e=ev(); e['attempts'][2]['devices']=e['attempts'][2]['devices'][:3]
+        self.assertEqual(self.runv(e)['errors'],['four_phys'])
+    def test_five_rejected(self):
+        e=ev(); e['attempts'][2]['devices'].append(dev(4))
+        self.assertEqual(self.runv(e)['errors'],['four_phys'])
+    def test_alias_dedup(self):
+        e=ev(); e['attempts'][2]['devices'][1]['aliases'].append('root:0')
+        self.assertEqual(self.runv(e)['errors'],['dedup:four'])
+    def test_repeat_enumeration(self):
+        e=ev(); e['attempts'][2]['devices'].append(dev(0))
+        self.assertEqual(self.runv(e)['status'],'PASS')
+    def test_replicated_weights(self):
+        e=ev(); w=e['attempts'][2]['weights']; w[1]['shard_hash']=w[0]['shard_hash']
+        self.assertEqual(self.runv(e)['errors'],['replicated_shard'])
+    def test_shards_only_device0(self):
+        e=ev(); four=e['attempts'][2]; d0=four['devices'][0]['canonical_id']
+        for w in four['weights']: w['device']=d0
+        four['allocator']['peak_bytes_by_device'][d0]=4000
+        self.assertEqual(self.runv(e)['errors'],['shard_coverage'])
+    def test_cumulative_peak(self):
+        e=ev(); e['attempts'][2]['weights'][:]=[wt('pci:0000:00.0','a',600),wt('pci:0000:00.0','b',600),wt('pci:0000:01.0','c',1000),wt('pci:0000:02.0','d',1000),wt('pci:0000:03.0','e',800)]
+        self.assertEqual(self.runv(e)['errors'],['peak_cover'])
+    def test_multi_shard_ok(self):
+        e=ev(); e['attempts'][2]['weights'][:]=[wt('pci:0000:00.0','a',500),wt('pci:0000:00.0','b',500),wt('pci:0000:01.0','c',1000),wt('pci:0000:02.0','d',1000),wt('pci:0000:03.0','e',1000)]
+        self.assertEqual(self.runv(e)['status'],'PASS')
+    def test_policy_oom_substitute(self):
+        e=ev(); e['attempts'][0]['controller']['policy_cap']=True
+        self.assertEqual(self.runv(e)['errors'],['policy:single'])
+    def test_missing_peak(self):
+        e=ev(); del e['attempts'][2]['allocator']['peak_bytes_by_device']['pci:0000:01.0']
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_missing_residence(self):
+        e=ev(); del e['attempts'][2]['weights'][0]['resident_bytes']
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_stale(self):
+        e=ev(); e['attempts'][2]['timestamp_ns']=999999999999
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_metrics_contradict(self):
+        e=ev(); ex=e['attempts'][2]['execution']; ex['rmse']=0.0; ex['max_abs_error']=0.0
+        self.assertEqual(self.runv(e)['errors'],['metric_recompute'])
+    def test_full_payload(self):
+        e=ev(); ex=e['attempts'][2]['execution']; rm,mx=metrics(PAIRS[:2]); ex['rmse']=rm; ex['max_abs_error']=mx
+        self.assertEqual(self.runv(e)['errors'],['metric_recompute'])
+    def test_no_1e6_loophole(self):
+        e=ev(); ex=e['attempts'][2]['execution']; ex['rmse']=ex['rmse']+1e-6
+        self.assertEqual(self.runv(e)['errors'],['metric_recompute'])
+    def test_logit_tol_fail(self):
+        e=ev(); e['attempts'][2]['execution']['logits'][1]['observed']=1.5
+        self.assertEqual(self.runv(e)['errors'],['logit_tol_fail'])
+    def test_mismatched_model(self):
+        e=ev(); e['attempts'][2]['model_hash']='x'
+        self.assertEqual(self.runv(e)['errors'],['bind:four'])
+    def test_bool_logit(self):
+        e=ev(); e['attempts'][2]['execution']['logits'][0]['observed']=True
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_huge_logit(self):
+        e=ev(); p=e['attempts'][2]['execution']['logits'][0]; p['cpu']=(1<<53)+1; p['observed']=0
+        self.assertEqual(self.runv(e)['errors'],['logit_range'])
+    def test_igpu(self):
+        e=ev(); e['attempts'][2]['devices'][3]['discrete']=False
+        self.assertEqual(self.runv(e)['errors'],['discrete:four'])
+    def test_host_backing(self):
+        e=ev(); e['attempts'][2]['weights'][0]['backing']='host_staged'
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_shared_allocator(self):
+        e=ev(); e['attempts'][2]['allocator']['class']='shared'
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_reconcile(self):
+        e=ev(); e['model_bytes']=4001
+        for a in e['attempts']:
+            if a['role']!='four': a['execution']['requested_bytes']=4001
+        self.assertEqual(self.runv(e)['errors'],['reconcile'])
+if __name__=='__main__':
+    unittest.main()

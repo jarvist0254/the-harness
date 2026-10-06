@@ -1,0 +1,61 @@
+test_body_gaps_and_independent_integrated_supports (test_integrated_layout.IntegratedLayoutTests) ... ERROR
+test_fourth_card_rolls_same_fixture_dimensions (test_integrated_layout.IntegratedLayoutTests) ... ERROR
+test_invalid_dimensions_and_fixed_print_limit_are_refused (test_integrated_layout.IntegratedLayoutTests) ... ERROR
+test_universal_boxes_are_not_silently_certified (test_integrated_layout.IntegratedLayoutTests) ... ERROR
+
+======================================================================
+ERROR: test_body_gaps_and_independent_integrated_supports (test_integrated_layout.IntegratedLayoutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 25, in test_body_gaps_and_independent_integrated_supports
+    layout = module().plan_layout(module().default_config())
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 10, in module
+    spec.loader.exec_module(loaded)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1016, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\the_harness\\cad\\integrated_core.py'
+
+======================================================================
+ERROR: test_fourth_card_rolls_same_fixture_dimensions (test_integrated_layout.IntegratedLayoutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 16, in test_fourth_card_rolls_same_fixture_dimensions
+    layout = module().plan_layout(module().default_config())
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 10, in module
+    spec.loader.exec_module(loaded)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1016, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\the_harness\\cad\\integrated_core.py'
+
+======================================================================
+ERROR: test_invalid_dimensions_and_fixed_print_limit_are_refused (test_integrated_layout.IntegratedLayoutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 36, in test_invalid_dimensions_and_fixed_print_limit_are_refused
+    core = module()
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 10, in module
+    spec.loader.exec_module(loaded)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1016, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\the_harness\\cad\\integrated_core.py'
+
+======================================================================
+ERROR: test_universal_boxes_are_not_silently_certified (test_integrated_layout.IntegratedLayoutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 48, in test_universal_boxes_are_not_silently_certified
+    core = module()
+  File "E:\the_harness\cad\tests\test_integrated_layout.py", line 10, in module
+    spec.loader.exec_module(loaded)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1016, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\the_harness\\cad\\integrated_core.py'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (errors=4)

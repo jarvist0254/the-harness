@@ -1,0 +1,7 @@
+{
+  "pid": 51800,
+  "job": "freecad",
+  "started_utc": "2026-10-04T11:46:57.6977482Z",
+  "model": "qwen3.8-max",
+  "outer_deadline_seconds": 270
+}

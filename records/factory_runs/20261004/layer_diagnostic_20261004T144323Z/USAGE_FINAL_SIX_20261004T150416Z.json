@@ -1,0 +1,239 @@
+{
+  "utc": "2026-10-04T15:04:56.546920+00:00",
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z",
+  "definition": "FIFTH isolated batch; previousFOURclosedbatches immutable baseline",
+  "calls": [
+    {
+      "job_id": "qwen_layer_capture",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_layer_capture\\terminal.json",
+      "requested_model": "qwen3.8-max",
+      "observed_model": null,
+      "role": "Qwen_ModelStudio_Workhorse",
+      "status": "ERROR_MethodInvocationException",
+      "owned_pid": 95288,
+      "elapsed_seconds": 240.75,
+      "exit_code": null,
+      "http": null,
+      "outer_killed": false,
+      "finish_reason": null,
+      "usage": null,
+      "reported_total_tokens": null,
+      "reported_prompt_tokens": null,
+      "reported_completion_tokens": null,
+      "native_children_actual": 0,
+      "transport": "DIRECT_HTTP",
+      "reported_internal_model_calls": null,
+      "vendor_reported_cost_usd": null,
+      "artifact_acceptance": "NOT_AUTOMATICALLY_ACCEPTED; CPP_TIMEOUT_OR_TRUNCATION_HAS_NO_COMPLETE_SOURCE"
+    },
+    {
+      "job_id": "qwen_capture_comparator",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\terminal.json",
+      "requested_model": "qwen3.8-max",
+      "observed_model": "qwen3.8-max",
+      "role": "Qwen_ModelStudio_Workhorse",
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "owned_pid": 91568,
+      "elapsed_seconds": 100.36,
+      "exit_code": null,
+      "http": 200,
+      "outer_killed": false,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1624,
+        "total_tokens": 7419,
+        "completion_tokens": 5795,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024,
+          "text_tokens": 1624
+        }
+      },
+      "reported_total_tokens": 7419,
+      "reported_prompt_tokens": 1624,
+      "reported_completion_tokens": 5795,
+      "native_children_actual": 0,
+      "transport": "DIRECT_HTTP",
+      "reported_internal_model_calls": null,
+      "vendor_reported_cost_usd": null,
+      "artifact_acceptance": "PENDING_ROOT_INDEPENDENT_ADMISSION"
+    },
+    {
+      "job_id": "qwen_capture_tests",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_tests\\terminal.json",
+      "requested_model": "qwen3.8-max",
+      "observed_model": "qwen3.8-max",
+      "role": "Qwen_ModelStudio_Workhorse",
+      "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+      "owned_pid": 82652,
+      "elapsed_seconds": 157.43,
+      "exit_code": null,
+      "http": 200,
+      "outer_killed": false,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1647,
+        "total_tokens": 11270,
+        "completion_tokens": 9623,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 1647
+        }
+      },
+      "reported_total_tokens": 11270,
+      "reported_prompt_tokens": 1647,
+      "reported_completion_tokens": 9623,
+      "native_children_actual": 0,
+      "transport": "DIRECT_HTTP",
+      "reported_internal_model_calls": null,
+      "vendor_reported_cost_usd": null,
+      "artifact_acceptance": "PENDING_ROOT_INDEPENDENT_ADMISSION"
+    },
+    {
+      "job_id": "qwen_layer_capture_retry",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_layer_capture_retry\\terminal.json",
+      "requested_model": "qwen3.8-flash",
+      "observed_model": "qwen3.8-flash",
+      "role": "Qwen_ModelStudio_Workhorse",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "owned_pid": 88488,
+      "elapsed_seconds": 134.48,
+      "exit_code": null,
+      "http": 200,
+      "outer_killed": false,
+      "finish_reason": "length",
+      "usage": {
+        "prompt_tokens": 20988,
+        "total_tokens": 36988,
+        "completion_tokens": 16000,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 20988
+        }
+      },
+      "reported_total_tokens": 36988,
+      "reported_prompt_tokens": 20988,
+      "reported_completion_tokens": 16000,
+      "native_children_actual": 0,
+      "transport": "DIRECT_HTTP",
+      "reported_internal_model_calls": null,
+      "vendor_reported_cost_usd": null,
+      "artifact_acceptance": "NOT_AUTOMATICALLY_ACCEPTED; CPP_TIMEOUT_OR_TRUNCATION_HAS_NO_COMPLETE_SOURCE"
+    },
+    {
+      "job_id": "gemini_layer_review",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\gemini_layer_review\\terminal.json",
+      "requested_model": "gemini-3.8-flash-medium",
+      "observed_model": null,
+      "role": "Gemini_Reviewer",
+      "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+      "owned_pid": 61016,
+      "elapsed_seconds": 93.91,
+      "exit_code": 0,
+      "http": null,
+      "outer_killed": false,
+      "finish_reason": null,
+      "usage": {
+        "input_tokens": 48831,
+        "output_tokens": 23737,
+        "thinking_tokens": 18751,
+        "cache_read_tokens": 93802,
+        "total_tokens": 72568
+      },
+      "reported_total_tokens": 72568,
+      "reported_prompt_tokens": 48831,
+      "reported_completion_tokens": 23737,
+      "native_children_actual": 0,
+      "transport": "CLI",
+      "reported_internal_model_calls": null,
+      "vendor_reported_cost_usd": null,
+      "artifact_acceptance": "PENDING_ROOT_INDEPENDENT_ADMISSION"
+    },
+    {
+      "job_id": "grok_capture_edit",
+      "terminal_receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\grok_capture_edit\\terminal.json",
+      "requested_model": "grok-4.7-build-fast",
+      "observed_model": null,
+      "role": "Grok_Editor",
+      "status": "COMPLETE_PATCH_UNTRUSTED",
+      "owned_pid": 3928,
+      "elapsed_seconds": 219.33,
+      "exit_code": 0,
+      "http": null,
+      "outer_killed": false,
+      "finish_reason": "end_turn",
+      "usage": {
+        "input_tokens": 20538,
+        "cache_read_input_tokens": 1152,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 34451,
+        "reasoning_tokens": 20395,
+        "total_tokens": 56141
+      },
+      "reported_total_tokens": 56141,
+      "reported_prompt_tokens": 20538,
+      "reported_completion_tokens": 34451,
+      "native_children_actual": 0,
+      "transport": "CLI",
+      "reported_internal_model_calls": 1,
+      "vendor_reported_cost_usd": 0.16888344,
+      "artifact_acceptance": "PENDING_ROOT_INDEPENDENT_ADMISSION"
+    }
+  ],
+  "provider_job_count": 6,
+  "direct_http_request_attempts": 4,
+  "cli_jobs": 2,
+  "grok_cli_jobs": 1,
+  "reported_grok_internal_model_calls": 1,
+  "gemini_cli_jobs": 1,
+  "gemini_internal_model_calls": "NOT_REPORTED (num_turns not modelCalls)",
+  "native_children_actual": 0,
+  "native_maximum_authorized_each_qwen_deepseek_parent": 10,
+  "provider_subtotals": {
+    "Qwen_ModelStudio_Workhorse": {
+      "jobs": 4,
+      "observed_reported_tokens": 55677,
+      "usage_unknown_jobs": 1
+    },
+    "Gemini_Reviewer": {
+      "jobs": 1,
+      "observed_reported_tokens": 72568,
+      "usage_unknown_jobs": 0
+    },
+    "Grok_Editor": {
+      "jobs": 1,
+      "observed_reported_tokens": 56141,
+      "usage_unknown_jobs": 0
+    }
+  },
+  "observed_reported_token_total": 184386,
+  "unknown_usage_jobs": 1,
+  "previous_four_ledger": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\USAGE_ALLFOUR_FINAL_20261004T141456Z.json",
+    "sha256": "15f3ab25a8c65792d27c6875587a7783a6047cd8cc11df61aa5cc808c2660add",
+    "jobs": 41,
+    "observed_tokens": 2330814,
+    "usage_unknown_jobs": 1
+  },
+  "previous_four_plus_fifth_provider_subtotals": {
+    "Qwen_ModelStudio_Workhorse": {
+      "jobs": 20,
+      "observed_reported_tokens": 382243,
+      "usage_unknown_jobs": 1
+    },
+    "Gemini_Reviewer": {
+      "jobs": 11,
+      "observed_reported_tokens": 1323322,
+      "usage_unknown_jobs": 0
+    },
+    "Grok_Editor": {
+      "jobs": 16,
+      "observed_reported_tokens": 809635,
+      "usage_unknown_jobs": 1
+    }
+  },
+  "previous_four_plus_fifth_jobs": 47,
+  "previous_four_plus_fifth_observed_tokens": 2515200,
+  "previous_four_plus_fifth_unknown_usage_jobs": 2,
+  "credits": "Tokens are NOTCredits; no new quota getter or browser access by manager. Prior root readonly dashboard35.6percent snapshot is historical, not current fifthbatchremainingCredit value or perjobattribution.",
+  "counting_rule": "Deduplicate actual provider request/CLI jobs, not copied rawanswer/parserreceipt artifacts. Failed timeout usageUNKNOWN notzero; HTTP200truncatedresponse reportedusagecounted but codeunaccepted. Provider reportedtotal retained withoutdoubleaddingcache/thinking; no billing/creditinference."
+}

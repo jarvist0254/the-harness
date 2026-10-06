@@ -1,0 +1,10 @@
+OpenCL Platform: NVIDIA CUDA
+	Device: NVIDIA GeForce RTX 5070 Ti
+		driverVersion: 591.86
+		computeUnits:  70
+		clockFreq:     2452
+
+TestCase                                                                    Mean         Median         StdDev            Min            Max   Type   Label [unit]
+ReadBufferMisaligned(api=ocl size=1MB misalignment=1 useEvents=0)          9.203          9.203         38.78%          5.634         12.772  [CPU]         [GB/s]
+individual results: [ 5.63448 12.7719 ]
+

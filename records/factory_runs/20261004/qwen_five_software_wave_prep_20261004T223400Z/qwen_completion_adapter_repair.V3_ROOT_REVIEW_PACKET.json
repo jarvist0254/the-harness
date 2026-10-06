@@ -1,0 +1,139 @@
+{
+  "enable_thinking": true,
+  "thinking_budget_absent": true,
+  "spec": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.spec.txt",
+    "sha256": "4e9589deca4516679f18ad40c29b0e7ee8693b284bb087cd6ea87f1805c4ebbe",
+    "bytes": 3959
+  },
+  "outer_seconds": 2430,
+  "status": "PREPARATION_ONLY_PENDING_ROOT_ADMISSION",
+  "raw_stream_cap_bytes": 16777216,
+  "normalized_each_cap": 2097152,
+  "utc": "2026-10-04T23:06:24.0184503Z",
+  "job": "qwen_completion_adapter_repair",
+  "model": "qwen3.8-max",
+  "source_execution": false,
+  "native_children_actual": 0,
+  "source_binding": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\source.qwen_untrusted.py",
+    "sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+    "bytes": 14662
+  },
+  "root_independent_controls_status": "V3_ACTUAL_PURE_QA_10METHODS_9FAILURE_EVENTS_1CANDIDATEERROR_1METHODPASS_NO_NATIVE",
+  "full_embedded_inputs": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\source.qwen_untrusted.py",
+      "sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+      "bytes": 14662
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\tests_source.qwen_untrusted.txt",
+      "sha256": "0e4372f0c706c2e7f9b5ba8354b4e46b7c70649b2f585e8824ab1c8598014491",
+      "bytes": 8580
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\test_adapter_independent_contract_v2.py",
+      "sha256": "eaecf21e7bdd43763b84b74d4d688bab720490e55fae9207b5358ccfb8ff79f2",
+      "bytes": 9205
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\pure_qa_controller_v2.py",
+      "sha256": "00200b8f71a3677bd79e6b6750b532df7bb420c158324f2d772b96142ecc8002",
+      "bytes": 8004
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\STATIC_REVIEW_V2.md",
+      "sha256": "52b2d63993bf26d94db193b81ceb2af014be1c46c5249fd2c664babb1c372ae6",
+      "bytes": 1630
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\ROOT_REVIEW_PACKET_V2.json",
+      "sha256": "f4f21d5de9f18f08fc55aec64b99206a70e9f8865062c54064908e4c2835ade3",
+      "bytes": 1948
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\dma_buf_sync_bridge_primary_20261004T2144Z\\host_relay_correction_addendum.md",
+      "sha256": "3559242ddf2a8ab72632cd4f4c4cb5310a470e14e131a0956ec91dd021e022bd",
+      "bytes": 4165
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\bridge_contract_findings.md",
+      "sha256": "4e02a99eaf54e92d13ccf5d7a1deb15981f31c050a63f08865eb4862f392dbc8",
+      "bytes": 6314
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\source_excerpts.txt",
+      "sha256": "4170f42fad8e03dd12ad347b39c3fbca29493d1d3ab95f1f17ff7d60f931486e",
+      "bytes": 23295
+    },
+    {
+      "bytes": 10328,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\test_adapter_independent_contract_v3.py",
+      "sha256": "c449ab05a605a21003c42c45233422416249c87c3251ac4a57a7e743cd947204"
+    },
+    {
+      "bytes": 8200,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\pure_qa_controller_v3.py",
+      "sha256": "3482b54c4b155d5231338481640aa7105774e9a67377dca73b9167612224e4cc"
+    },
+    {
+      "bytes": 1062,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\ROOT_PURE_QA_ADMISSION_V3.json",
+      "sha256": "08e73ea92225cffde87365f92b4f21570f74cabe014095db78deafa5e65b1cfa"
+    },
+    {
+      "bytes": 5003,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\stdout.bin",
+      "sha256": "c4cdc09ad5a1d028468e87ac910293883d423c96c9684fba201dcac1808450b4"
+    },
+    {
+      "bytes": 9138,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\stderr.bin",
+      "sha256": "9cfb83f4c2885db8d0b5bc933ac2968d3cf37be99076144c8f03244ecf71839f"
+    },
+    {
+      "bytes": 3590,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v3_20261004T2254Z\\runs\\pure_qa_20261004T225945Z\\receipt.json",
+      "sha256": "92faffe57bd149289b66323cdb67889b335b429c41855b71bcc94101e6439085"
+    }
+  ],
+  "prompt": {
+    "bytes": 122369,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.v3.prompt.txt",
+    "sha256": "ba1cc0bc5401b00f225606dbf906b1c0bcea7470335def06f68bb0ec4082bc8a"
+  },
+  "launch_authorized": false,
+  "helper_diffs": "NONE exactfrozen32k/16k copies",
+  "http_seconds": 2400,
+  "tests_chars_limit": 16000,
+  "helpers": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\invoke_owned_stream_research.v3.ps1",
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "bytes": 8048
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PURE_LIMIT_CONTROLS.json",
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e",
+      "bytes": 582
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_http_stream_research.v3.ps1",
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "bytes": 8011
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\research_artifact.v3.ps1",
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36",
+      "bytes": 774
+    }
+  ],
+  "reasoning_effort": "xhigh",
+  "source_chars_limit": 32000
+}

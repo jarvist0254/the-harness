@@ -1,0 +1,206 @@
+1: import hashlib
+2: import json
+3: import math
+4: import unittest
+5: import state_ledger as sl
+6: 
+7: def make_payload(cpu, gpu):
+8:     data = sl.canonical_payload_bytes(cpu, gpu)
+9:     sha = hashlib.sha256(data).hexdigest()
+10:     max_err = 0.0
+11:     sum_sq = 0.0
+12:     for a, b in zip(cpu, gpu):
+13:         err = abs(float(a) - float(b))
+14:         if err > max_err:
+15:             max_err = err
+16:         sum_sq += err * err
+17:     rmse = math.sqrt(sum_sq / float(sl.VOCAB_COUNT))
+18:     return sha, max_err, rmse
+19: 
+20: def model_meta():
+21:     entry = sl.MODEL_WHITELIST['original_q8']
+22:     return {
+23:         'model_key': 'original_q8',
+24:         'sha256': entry['sha256'],
+25:         'size': entry['size'],
+26:         'quant': entry['quant'],
+27:         'source_commit': sl.SOURCE_COMMIT,
+28:     }
+29: 
+30: def runtime_meta():
+31:     return {
+32:         'requested_ctx': sl.REQUESTED_CTX,
+33:         'actual_ctx': sl.ACTUAL_CTX,
+34:         'pinned_ggml_pad': sl.PINNED_GGML_PAD,
+35:         'n_batch': sl.N_BATCH,
+36:         'n_ubatch': sl.N_UBATCH,
+37:         'tokens': list(sl.EXACT_TOKENS),
+38:         'dll_hashes': ['0' * 64] * sl.DLL_COUNT,
+39:         'device_order': ['cpu', 'gpu0'],
+40:         'cpu_vs_gpu_origins': {'cpu': 'host', 'gpu': 'device'},
+41:         'build_id': 'build0',
+42:         'exe_sha256': '0' * 64,
+43:         'requested_kv': 256,
+44:         'actual_kv': 256,
+45:         'child_f16_disabled': True,
+46:         'fusion_disabled': True,
+47:         'coopmat_disabled': True,
+48:         'coopmat2_disabled': True,
+49:     }
+50: 
+51: def capture_meta():
+52:     return {
+53:         'native_capture_claimed': False,
+54:         'callback_intrusiveness_declared': True,
+55:         'unsupported_dtype_fail_closed': True,
+56:         'name_op_dim_canonical': True,
+57:         'node_order_declared': True,
+58:         'common_intended_device_workload_separate_cpu_origin': True,
+59:     }
+60: 
+61: def make_record(cpu, gpu, sha, max_err, rmse, control_kind='baseline_clean'):
+62:     return {
+63:         'experiment_id': 'exp',
+64:         'model_metadata': model_meta(),
+65:         'runtime_metadata': runtime_meta(),
+66:         'capture_metadata': capture_meta(),
+67:         'cpu_logits': cpu,
+68:         'gpu_logits': gpu,
+69:         'payload_sha256': sha,
+70:         'max_abs_err': max_err,
+71:         'rmse': rmse,
+72:         'count': sl.VOCAB_COUNT,
+73:         'control_kind': control_kind,
+74:     }
+75: 
+76: ZERO_CPU = [0.0] * sl.VOCAB_COUNT
+77: ZERO_GPU = [0.0] * sl.VOCAB_COUNT
+78: ZERO_SHA, ZERO_MAX, ZERO_RMSE = make_payload(ZERO_CPU, ZERO_GPU)
+79: 
+80: class StaticConstraints(unittest.TestCase):
+81:     def test_model_whitelist(self):
+82:         good = model_meta()
+83:         self.assertTrue(sl.validate_model_metadata(good))
+84:         bad = dict(good)
+85:         bad['sha256'] = '0' * 64
+86:         self.assertFalse(sl.validate_model_metadata(bad))
+87: 
+88:     def test_tokens_exact(self):
+89:         self.assertTrue(sl.validate_tokens(list(range(16))))
+90:         bad = list(range(16))
+91:         bad[3] = 4
+92:         self.assertFalse(sl.validate_tokens(bad))
+93: 
+94:     def test_runtime_missing_dll(self):
+95:         meta = runtime_meta()
+96:         meta['dll_hashes'] = meta['dll_hashes'][:4]
+97:         self.assertFalse(sl.validate_runtime_metadata(meta))
+98: 
+99:     def test_runtime_missing_exe_hash(self):
+100:         meta = runtime_meta()
+101:         meta['exe_sha256'] = 'zzz'
+102:         self.assertFalse(sl.validate_runtime_metadata(meta))
+103: 
+104:     def test_device_order_malformed(self):
+105:         meta = runtime_meta()
+106:         meta['device_order'] = []
+107:         self.assertFalse(sl.validate_runtime_metadata(meta))
+108: 
+109:     def test_capture_native_claim_rejected(self):
+110:         cap = capture_meta()
+111:         cap['native_capture_claimed'] = True
+112:         self.assertFalse(sl.validate_capture_metadata(cap))
+113: 
+114:     def test_metadata_rounding(self):
+115:         self.assertTrue(sl._close_metadata_number(0.01, 0.0100000000000001))
+116:         self.assertFalse(sl._close_metadata_number(0.01, 0.0100000001))
+117: 
+118: class NumericDiagnostic(unittest.TestCase):
+119:     def test_clean_baseline_is_diagnostic_not_pass(self):
+120:         rec = make_record(ZERO_CPU, ZERO_GPU, ZERO_SHA, ZERO_MAX, ZERO_RMSE)
+121:         out = sl.evaluate_experiment(rec)
+122:         self.assertEqual(out['state'], 'DIAGNOSTIC_ONLY')
+123:         self.assertEqual(out['fail_count'], 0)
+124:         self.assertFalse(out['model_pass'])
+125: 
+126:     def test_three_failures_remain_failed_numeric(self):
+127:         cpu = list(ZERO_CPU)
+128:         cpu[10] = 1.0
+129:         cpu[20] = 1.0
+130:         cpu[30] = 1.0
+131:         sha, max_err, rmse = make_payload(cpu, ZERO_GPU)
+132:         rec = make_record(cpu, ZERO_GPU, sha, max_err, rmse)
+133:         out = sl.evaluate_experiment(rec)
+134:         self.assertEqual(out['state'], 'FAILED_NUMERIC')
+135:         self.assertEqual(out['fail_count'], 3)
+136:         self.assertEqual(out['count'], sl.VOCAB_COUNT)
+137: 
+138:     def test_nan_is_runtime_not_divergence(self):
+139:         cpu = list(ZERO_CPU)
+140:         cpu[5] = float('nan')
+141:         rec = make_record(cpu, ZERO_GPU, '0' * 64, 0.0, 0.0)
+142:         out = sl.evaluate_experiment(rec)
+143:         self.assertEqual(out['state'], 'FAILED_RUNTIME')
+144: 
+145:     def test_count_mismatch_is_not_checked(self):
+146:         rec = make_record(ZERO_CPU, ZERO_GPU, ZERO_SHA, ZERO_MAX, ZERO_RMSE)
+147:         rec['count'] = 1
+148:         out = sl.evaluate_experiment(rec)
+149:         self.assertEqual(out['state'], 'NOT_CHECKED')
+150: 
+151:     def test_payload_sha_mismatch_is_not_checked(self):
+152:         rec = make_record(ZERO_CPU, ZERO_GPU, '0' * 64, ZERO_MAX, ZERO_RMSE)
+153:         out = sl.evaluate_experiment(rec)
+154:         self.assertEqual(out['state'], 'NOT_CHECKED')
+155: 
+156:     def test_perturbed_negative_is_comparison_only(self):
+157:         cpu = list(ZERO_CPU)
+158:         cpu[7] = 1.0
+159:         sha, max_err, rmse = make_payload(cpu, ZERO_GPU)
+160:         rec = make_record(cpu, ZERO_GPU, sha, max_err, rmse, control_kind='perturbed_negative')
+161:         out = sl.evaluate_experiment(rec)
+162:         self.assertEqual(out['state'], 'DIAGNOSTIC_ONLY')
+163:         self.assertEqual(out['fail_count'], 1)
+164:         self.assertFalse(out['transport_corruption_proof'])
+165: 
+166: class LedgerTests(unittest.TestCase):
+167:     def test_append_is_immutable_and_rejects_pass_or_supersede(self):
+168:         base = sl.StateLedger()
+169:         rec = {'state': 'PENDING', 'experiment_id': 'x'}
+170:         next_ledger = base.append(rec)
+171:         self.assertEqual(len(base.records()), 0)
+172:         self.assertEqual(len(next_ledger.records()), 1)
+173:         with self.assertRaises(ValueError):
+174:             next_ledger.append({'state': 'READY', 'experiment_id': 'x'})
+175:         with self.assertRaises(ValueError):
+176:             next_ledger.append({'state': 'PENDING', 'experiment_id': 'x', 'supersede': True})
+177: 
+178:     def test_transition_rules(self):
+179:         ledger = sl.StateLedger()
+180:         ledger = ledger.append({'state': 'PENDING', 'experiment_id': 'x'})
+181:         ledger = ledger.append({'state': 'RUNNING', 'experiment_id': 'x', 'prior_state': 'PENDING'})
+182:         with self.assertRaises(ValueError):
+183:             ledger.append({'state': 'RUNNING', 'experiment_id': 'x', 'prior_state': 'FAILED_NUMERIC'})
+184: 
+185:     def test_candidate_plan_is_bounded_and_no_pass(self):
+186:         ledger = sl.StateLedger(plan_bound=2)
+187:         for i in range(3):
+188:             ledger = ledger.append({'state': 'PENDING', 'experiment_id': 'e' + str(i)})
+189:         plan = json.loads(ledger.candidate_plan())
+190:         self.assertEqual(plan['included_count'], 2)
+191:         self.assertTrue(plan['bounded'])
+192:         self.assertTrue(plan['no_pass'])
+193: 
+194:     def test_durable_commit_representation_has_no_writes(self):
+195:         ledger = sl.StateLedger()
+196:         ledger = ledger.append({'state': 'PENDING', 'experiment_id': 'x'})
+197:         rep = ledger.durable_commit_representation()
+198:         self.assertFalse(rep['writes_performed'])
+199:         self.assertEqual(len(rep['sha256']), 64)
+200: 
+201:     def test_refusal_record(self):
+202:         rec = sl.refusal_record('not_admitted')
+203:         self.assertEqual(rec['state'], 'NOT_CHECKED')
+204: 
+205: if __name__ == '__main__':
+206:     unittest.main()

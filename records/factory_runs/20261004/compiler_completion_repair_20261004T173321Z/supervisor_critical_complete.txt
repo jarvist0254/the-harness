@@ -1,0 +1,465 @@
+=== CONSTANTS / CLOCK / DEPENDENCIES LINES1-83 ===
+
+"""Standalone Windows contained-worker supervisor; root cleanup-repair candidate.
+
+Import is side-effect free: no _winapi, ctypes, WinDLL, or processes at import.
+Process fixtures still require Windows and RUN_CONTAINMENT_FIXTURES=1. This module does not import PyRe.
+Explicit terminate is the default. No kill-on-close is installed unless requested.
+Closing the controller job handle is not a drain certificate. Without a cooperating
+wrapper holding its own job handle, controller loss is UNKNOWN_INTERRUPTED.
+No PID reattach and no replay.
+Derived from Qwen 6bb4e7ed; root edits address independently reproduced cleanup
+and terminal-commit failures. Not admitted for native or production execution.
+Revision 2 avoids terminating a process whose retained handle is already signaled;
+the original nonzero-exit failure and native Winerror-5 trace remain preserved.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import tempfile
+import threading
+import time
+from pathlib import Path
+
+_RECEIPT_MAX = 131072
+_CREATE_SUSPENDED = 0x00000004
+_CREATE_NO_WINDOW = 0x08000000
+_JOB_LIMIT_KILL_ON_CLOSE = 0x2000
+_JOB_EXTENDED_LIMIT = 9
+_JOB_ACCOUNTING = 1
+_WAIT_OBJECT_0 = 0
+_WAIT_TIMEOUT = 258
+_ENV_KEYS = ("SystemRoot", "SYSTEMDRIVE", "WINDIR", "COMSPEC", "PATH", "PATHEXT", "TEMP", "TMP")
+
+
+class WindowsJobError(RuntimeError):
+    def __init__(self, code, winerror=None):
+        self.code = code
+        self.winerror = winerror
+        super().__init__(code if winerror is None else f"{code}: winerror={winerror}")
+
+
+def _windows():
+    return os.name == "nt"
+
+
+def _monotonic():
+    return time.monotonic()
+
+
+def _sleep(seconds):
+    time.sleep(seconds)
+
+
+def _imports():
+    import _winapi
+    import ctypes
+    import msvcrt
+    import subprocess
+    from ctypes import wintypes
+    return {"_winapi": _winapi, "ctypes": ctypes, "wintypes": wintypes, "msvcrt": msvcrt, "subprocess": subprocess}
+
+
+def _kernel(deps):
+    ctypes = deps["ctypes"]
+    wt = deps["wintypes"]
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    specs = {
+        "CreateJobObjectW": ([ctypes.c_void_p, wt.LPCWSTR], wt.HANDLE),
+        "AssignProcessToJobObject": ([wt.HANDLE, wt.HANDLE], wt.BOOL),
+        "TerminateJobObject": ([wt.HANDLE, wt.UINT], wt.BOOL),
+        "SetInformationJobObject": ([wt.HANDLE, ctypes.c_int, ctypes.c_void_p, wt.DWORD], wt.BOOL),
+        "QueryInformationJobObject": ([wt.HANDLE, ctypes.c_int, ctypes.c_void_p, wt.DWORD, ctypes.c_void_p], wt.BOOL),
+        "CloseHandle": ([wt.HANDLE], wt.BOOL),
+        "ResumeThread": ([wt.HANDLE], wt.DWORD),
+    }
+    for name, (args, result) in specs.items():
+        fn = getattr(kernel, name)
+        fn.argtypes = args
+        fn.restype = result
+    return kernel
+
+
+
+=== MANIFEST VALIDATION LINES162-212 ===
+
+def _validate(manifest, output_root):
+    if not isinstance(manifest, dict):
+        raise TypeError("manifest")
+    allowed = {"version", "run_id", "workers", "deadline_seconds", "startup_seconds", "log_limit_bytes", "containment_policy"}
+    if set(manifest) - allowed:
+        raise ValueError("unknown_field")
+    if _int(manifest.get("version"), 1, 1, "version") != 1:
+        raise ValueError("version")
+    run_id = manifest.get("run_id")
+    if not isinstance(run_id, str) or not run_id.isidentifier() or "\x00" in run_id or len(run_id) > 64:
+        raise ValueError("run_id")
+    workers = manifest.get("workers")
+    if not isinstance(workers, list) or not (1 <= len(workers) <= 4):
+        raise ValueError("workers")
+    deadline = _int(manifest.get("deadline_seconds"), 1, 600, "deadline")
+    startup = _int(manifest.get("startup_seconds"), 1, 10, "startup")
+    log_limit = _int(manifest.get("log_limit_bytes"), 1024, 131072, "log_limit")
+    policy = manifest.get("containment_policy", "explicit_terminate")
+    if policy not in ("explicit_terminate", "kill_on_close"):
+        raise ValueError("policy")
+    seen = set()
+    clean = []
+    wfields = {"worker_id", "argv", "executable_sha256", "cwd"}
+    for worker in workers:
+        if not isinstance(worker, dict) or set(worker) - wfields:
+            raise ValueError("worker")
+        worker_id = worker.get("worker_id")
+        if not isinstance(worker_id, str) or not worker_id.isidentifier() or worker_id in seen or len(worker_id) > 64:
+            raise ValueError("worker_id")
+        seen.add(worker_id)
+        argv = worker.get("argv")
+        if not isinstance(argv, list) or not argv or any(not isinstance(a, str) or "\x00" in a for a in argv):
+            raise ValueError("argv")
+        exe = _abs_text(argv[0], "exe")
+        if not exe.is_file():
+            raise ValueError("exe")
+        sha = worker.get("executable_sha256")
+        if not isinstance(sha, str) or len(sha) != 64 or any(c not in "0123456789abcdefABCDEF" for c in sha):
+            raise ValueError("sha")
+        if _sha256_file(exe) != sha.lower():
+            raise ValueError("sha_mismatch")
+        cwd = _abs_text(worker.get("cwd"), "cwd")
+        if not cwd.is_dir():
+            raise ValueError("cwd")
+        clean.append({"worker_id": worker_id, "argv": list(argv), "cwd": str(cwd)})
+    output = _abs_text(os.fspath(output_root), "output_root")
+    if output.exists():
+        raise ValueError("output_exists")
+    return {"run_id": run_id, "workers": clean, "deadline": deadline, "startup": startup, "log_limit": log_limit, "policy": policy, "output": output, "env": _child_env(), "seq": 1}
+
+
+
+=== COMPLETE WAIT / LAUNCH / SHUTDOWN / CLOSE / EMIT / RUN_WORKERS LINES463-786 ===
+
+def _wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by):
+    wapi = deps["_winapi"]
+    while True:
+        if cancel_event.is_set():
+            return "CANCELLED", "cancelled"
+        if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+            return "FAILED", "LOG_LIMIT"
+        if _monotonic() >= dead_by:
+            return "TIMEOUT", "deadline"
+        running = False
+        for rec in owned:
+            try:
+                waited = wapi.WaitForSingleObject(rec["ph"], 0)
+            except Exception:
+                return "UNKNOWN", "wait_failed"
+            rec["wait"] = waited
+            if waited == _WAIT_TIMEOUT:
+                running = True
+            elif waited != _WAIT_OBJECT_0:
+                return "UNKNOWN", "wait_failed"
+        if running:
+            _sleep(0.02)
+            continue
+        try:
+            counts = _accounting(deps, kernel, job)
+        except Exception:
+            return "UNKNOWN", "query_failed"
+        if counts is None:
+            return "UNKNOWN", "query_failed"
+        spec["active"] = counts[0]
+        if counts[0] > 0:
+            _sleep(0.02)
+            continue
+        if _join(threads, 2, dead_by) is not True:
+            return "UNKNOWN", "reader_join"
+        if any(thread.is_alive() for thread in threads):
+            return "UNKNOWN", "reader_join"
+        if cancel_event.is_set():
+            return "CANCELLED", "cancelled"
+        if _monotonic() >= dead_by:
+            return "TIMEOUT", "deadline"
+        if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+            return "FAILED", "LOG_LIMIT"
+        if any(slot.get("bad_read") for slot in slots):
+            return "UNKNOWN", "bad_read"
+        failed = False
+        for rec in owned:
+            if rec["wait"] != _WAIT_OBJECT_0:
+                return "UNKNOWN", "wait_failed"
+            try:
+                rec["exit_code"] = wapi.GetExitCodeProcess(rec["ph"])
+            except Exception:
+                return "UNKNOWN", "exit_query_failed"
+            if rec["exit_code"] != 0:
+                failed = True
+        if failed:
+            return "FAILED", "nonzero_exit"
+        return "PROCESS_COMPLETED", ""
+
+
+def _launch_and_wait(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event):
+    origin = _monotonic()
+    start_by = origin + spec["startup"]
+    dead_by = origin + spec["deadline"]
+    for worker in spec["workers"]:
+        now = _monotonic()
+        if cancel_event.is_set():
+            return "CANCELLED", "cancelled"
+        if now >= start_by:
+            return "TIMEOUT", "startup_budget"
+        if now >= dead_by:
+            return "TIMEOUT", "deadline"
+        _spawn(deps, kernel, job, spec, worker, owned, threads, slots, overflow_event)
+        _journal(spec, {"event": "resumed", "worker_id": worker["worker_id"], "pid": owned[-1]["pid"]})
+        if cancel_event.is_set():
+            return "CANCELLED", "cancelled"
+        if _monotonic() >= dead_by:
+            return "TIMEOUT", "deadline"
+    return _wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by)
+
+
+def _shutdown(deps, kernel, job, owned, terminate, deadline):
+    wapi = deps["_winapi"]
+    terminate_ok = True
+    if terminate:
+        for rec in owned:
+            if rec["ph"] is not None:
+                try:
+                    before_termination = wapi.WaitForSingleObject(rec["ph"], 0)
+                except Exception:
+                    before_termination = None
+                    terminate_ok = False
+                if before_termination == _WAIT_OBJECT_0:
+                    # A signaled process handle remains signaled after exit.
+                    # TerminateProcess on that exited object returns access
+                    # denied; skip that redundant call, retain the exit status,
+                    # and still terminate/query the Job to cover descendants.
+                    continue
+                if before_termination != _WAIT_TIMEOUT:
+                    terminate_ok = False
+                try:
+                    terminated = wapi.TerminateProcess(rec["ph"], 1)
+                except Exception:
+                    terminate_ok = False
+                else:
+                    if terminated is False or terminated == 0:
+                        terminate_ok = False
+        try:
+            job_terminated = kernel.TerminateJobObject(job, 1)
+        except Exception:
+            terminate_ok = False
+        else:
+            if not job_terminated:
+                terminate_ok = False
+    waits_ok = True
+    for rec in owned:
+        if rec["ph"] is None:
+            waits_ok = False
+            continue
+        left = int(max(0.0, deadline - _monotonic()) * 1000)
+        try:
+            waited = wapi.WaitForSingleObject(rec["ph"], left)
+        except Exception:
+            waits_ok = False
+            rec["wait"] = None
+            continue
+        rec["wait"] = waited
+        if waited != _WAIT_OBJECT_0:
+            waits_ok = False
+            continue
+        try:
+            rec["exit_code"] = wapi.GetExitCodeProcess(rec["ph"])
+        except Exception:
+            waits_ok = False
+    counts = None
+    try:
+        counts = _accounting(deps, kernel, job)
+    except Exception:
+        counts = None
+    if counts is None or not waits_ok or not terminate_ok:
+        return (None if counts is None else counts[0]), "UNKNOWN_DRAIN"
+    active = counts[0]
+    if active != 0:
+        return active, "UNKNOWN_DRAIN"
+    return active, "CLEANUP"
+
+
+def _close_owned(wapi, owned):
+    uncertain = False
+    for rec in owned:
+        if rec.get("th") is not None:
+            try:
+                closed = wapi.CloseHandle(rec["th"])
+            except Exception:
+                uncertain = True
+                rec["close_uncertain"] = True
+            else:
+                if closed is False or closed == 0:
+                    uncertain = True
+                    rec["close_uncertain"] = True
+                else:
+                    rec["th"] = None
+        if rec.get("ph") is not None:
+            try:
+                closed = wapi.CloseHandle(rec["ph"])
+            except Exception:
+                uncertain = True
+                rec["close_uncertain"] = True
+            else:
+                if closed is False or closed == 0:
+                    uncertain = True
+                    rec["close_uncertain"] = True
+                else:
+                    rec["ph"] = None
+    return not uncertain
+
+
+def _emit(spec, status, reason, owned, slots, active, drain):
+    logs = {}
+    for slot in slots:
+        raw = bytes(slot.get("data", b""))[: spec["log_limit"]]
+        path = spec["output"] / f"{slot['worker_id']}.{slot['stream']}.log"
+        _atomic_write(path, raw)
+        entry = logs.setdefault(slot["worker_id"], {})
+        entry[slot["stream"]] = raw.decode("utf-8", "replace")
+        entry[slot["stream"] + "_bytes"] = len(raw)
+        entry[slot["stream"] + "_overflow"] = bool(slot.get("overflow"))
+        entry[slot["stream"] + "_path"] = path.name
+    payload = {
+        "version": 1,
+        "run_id": spec["run_id"],
+        "status": status,
+        "failure_reason": reason,
+        "containment_policy": spec["policy"],
+        "workers": [{"worker_id": r["worker_id"], "pid": r["pid"], "exit_code": r["exit_code"], "assigned": r["assigned"], "resumed": r["resumed"]} for r in owned],
+        "job_active_count": active,
+        "drain_proof": drain,
+        "whole_tree_certificate": False,
+        "logs": logs,
+        "reattach": False,
+        "replay": False,
+    }
+    encoded = json.dumps(payload).encode()
+    if len(encoded) > _RECEIPT_MAX:
+        for entry in logs.values():
+            entry["stdout"] = ""
+            entry["stderr"] = ""
+        payload["logs_externalized"] = True
+        encoded = json.dumps(payload).encode()
+    if len(encoded) > _RECEIPT_MAX:
+        raise WindowsJobError("RECEIPT_TOO_LARGE")
+    # A receipt is the commit marker. A terminal journal row alone is never
+    # accepted by restart_receipt as a completed run.
+    _journal(spec, {"event": "terminal", "status": status, "failure_reason": reason})
+    _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", encoded)
+    return payload
+
+
+def run_workers(manifest, output_root, *, cancel_event=None):
+    if not _windows():
+        raise NotImplementedError("NOT_IMPLEMENTED")
+    if cancel_event is None:
+        cancel_event = threading.Event()
+    spec = _validate(manifest, output_root)
+    deps = _imports()
+    kernel = _kernel(deps)
+    job = _open_job(deps, kernel, spec["run_id"])
+    owned, threads, slots = [], [], []
+    overflow_event = threading.Event()
+    status, reason, active, drain = "UNKNOWN", "init", None, "UNKNOWN_DRAIN"
+    result = None
+    try:
+        spec["output"].mkdir()
+        try:
+            _journal(spec, {"event": "start", "policy": spec["policy"]})
+        except Exception:
+            status, reason = "FAILED", "UNKNOWN_DURABILITY"
+            raise
+        if spec["policy"] == "kill_on_close":
+            _enable_kill_on_close(deps, kernel, job)
+        status, reason = _launch_and_wait(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event)
+        active = spec.get("active")
+    except WindowsJobError as exc:
+        if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+            status, reason = "FAILED", exc.code
+    except Exception:
+        if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+            status, reason = "FAILED", "EXCEPTION"
+    finally:
+        cleanup_deadline = _monotonic() + 8.0
+        try:
+            try:
+                active2, drain = _shutdown(deps, kernel, job, owned, status != "PROCESS_COMPLETED", cleanup_deadline)
+                if active2 is not None:
+                    active = active2
+            except Exception:
+                drain = "UNKNOWN_DRAIN"
+            join_certain = False
+            try:
+                join_certain = _join(threads, 2, cleanup_deadline)
+            except Exception:
+                join_certain = False
+            readers_unresolved = join_certain is not True
+            for thread in threads:
+                try:
+                    if thread.is_alive():
+                        readers_unresolved = True
+                except Exception:
+                    readers_unresolved = True
+            if readers_unresolved or drain not in ("CLEANUP", "UNKNOWN_DRAIN"):
+                drain = "UNKNOWN_DRAIN"
+            if drain != "CLEANUP" and status == "PROCESS_COMPLETED":
+                status, reason = "UNKNOWN", "proof_incomplete"
+            if any(
+                slot.get("bad_read") or slot.get("close_uncertain") or slot.get("closed") is not True
+                for slot in slots
+            ):
+                if status == "PROCESS_COMPLETED":
+                    status, reason = "UNKNOWN", "bad_read" if any(slot.get("bad_read") for slot in slots) else "close_uncertain"
+                drain = "UNKNOWN_DRAIN"
+            owned_closed = False
+            try:
+                owned_closed = _close_owned(deps["_winapi"], owned)
+            except Exception:
+                owned_closed = False
+            if owned_closed is not True or spec.get("parent_close_uncertain") or any(rec.get("close_uncertain") for rec in owned):
+                drain = "UNKNOWN_DRAIN"
+                if status == "PROCESS_COMPLETED":
+                    status, reason = "UNKNOWN", "close_uncertain"
+            job_close_ok = True
+            try:
+                jres = kernel.CloseHandle(job)
+                if not jres:
+                    job_close_ok = False
+            except Exception:
+                job_close_ok = False
+            if not job_close_ok:
+                if status == "PROCESS_COMPLETED":
+                    status, reason = "UNKNOWN", "job_close_failed"
+                drain = "UNKNOWN_DRAIN"
+            try:
+                if spec["output"].is_dir():
+                    result = _emit(spec, status, reason, owned, slots, active, drain)
+                else:
+                    result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": "UNKNOWN_DRAIN", "whole_tree_certificate": False, "reattach": False, "replay": False}
+            except Exception:
+                if status not in ("CANCELLED", "TIMEOUT"):
+                    status, reason = "FAILED", "UNKNOWN_DURABILITY"
+                result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "durability": "UNKNOWN_DURABILITY", "whole_tree_certificate": False, "reattach": False, "replay": False}
+                # Never leave a prior successful receipt after a failed terminal
+                # journal commit. This best-effort refusal is not a durability
+                # certificate; a failed write remains UNKNOWN_DURABILITY.
+                try:
+                    if spec["output"].is_dir():
+                        _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", json.dumps(result).encode())
+                except Exception:
+                    pass
+        except Exception:
+            pass
+    if result is None:
+        result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "whole_tree_certificate": False, "reattach": False, "replay": False}
+    return result
+

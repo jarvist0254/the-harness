@@ -1,0 +1,22 @@
+{
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+  "model": "gemini-3.8-flash-high",
+  "all_dependencies": {
+    "provider_common.high.v2.ps1": "2a6b79b3151aefdb7e704192506aa9f3e03c6107c79b22f9350cd247c3035975",
+    "invoke_owned_combined_review.high.pending_admission.ps1": "13427d2f951c556a79dd982ad3d3e8b0bc0a19389e00b03d897dd8d7e9f54454",
+    "research_artifact.ps1": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+    "REVIEW_SCHEMA.json": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+    "gemini_combined_high.v3.prompt.txt": "f1246cddb8e08f3ff1a2cec27d7fa2d7e2bb858a3e8df82f81ffa70e30311847"
+  },
+  "job_id": "gemini_combined_high_v3_with_companion",
+  "native_children_actual": 0,
+  "authority": "ROOT distinct Gemini startup after fullread exact missingcompanion correction",
+  "prior_local_setup_failure": "LOCAL_SETUP_FAILURE_NO_CHILD.json remains unpaid",
+  "provider_launch_authorized": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_combined_dma_prep_20261004T211555Z",
+  "prompt_sha256": "f1246cddb8e08f3ff1a2cec27d7fa2d7e2bb858a3e8df82f81ffa70e30311847",
+  "source_execution": false,
+  "lane": "Gemini",
+  "utc": "2026-10-04T21:40:28.0332963Z"
+}

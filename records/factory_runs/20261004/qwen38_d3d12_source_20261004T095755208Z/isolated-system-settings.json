@@ -1,0 +1,16 @@
+{
+  "memory": {
+    "enableTeamMemorySync": false,
+    "enableManagedAutoMemory": false,
+    "enableTeamMemory": false,
+    "enableManagedAutoDream": false,
+    "enableAutoSkill": false
+  },
+  "hooks": {
+    "enabled": false
+  },
+  "skills": {
+    "enabled": false
+  },
+  "$version": 4
+}

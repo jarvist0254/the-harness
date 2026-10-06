@@ -1,0 +1,12 @@
+{
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_cad_bboxfix\\integrated_core.grok_corrected.py",
+  "sha256": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+  "spans": [
+    {
+      "index": 0,
+      "count": 1
+    }
+  ],
+  "gate": "AST_ONLY_PASS_NO_IMPORT",
+  "runtime_admitted": false
+}

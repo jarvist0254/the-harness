@@ -1,0 +1,21 @@
+{
+  "provider_launched": false,
+  "scripts": [
+    {
+      "name": "invoke_owned_capacity_editor.ps1",
+      "parse_errors": [],
+      "sha256": "4c31e32ca8baf6d8b231c38a0a8e3845c667341b6e85f87e5449b08d2b974005"
+    },
+    {
+      "name": "provider_common.ps1",
+      "parse_errors": [],
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    {
+      "name": "research_artifact.ps1",
+      "parse_errors": [],
+      "sha256": "458c5e8b30dc91cb490e324c6572ad4b7b642f7ce068ad2d9b43905d93b931b6"
+    }
+  ],
+  "scope": "AST_ONLY_SOURCE_PREPARATION"
+}

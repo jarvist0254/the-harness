@@ -1,0 +1,334 @@
+PREPARATION ONLY: no launch until ROOT reviews/adopts this exact packet. Source-only Grok4.7-build-fast HIGH correction. Return ONE strict JSON with exactly status,source,tests_source,analysis,prerequisites,evidence_limits,references; statusPROPOSED|REFUSED|ANALYSIS. Complete replacement Python module <=32768 characters; actual-file tests <=16384 characters. Nonempty explanation arrays. No tools, source execution, files, provider/native/GPU calls, subagents or product promotion. Tests load supplied CANDIDATE_PATH, never embed an implementation. No hardware/P2P/capacity proof from synthetic data.
+
+Make only these THREE measured binding corrections to exact source4a278926 below. Its existing47 independent controls measured44PASS/3RED and the original4 contradictions are fixed. Preserve those44passing assertions, exact4 distinct discrete policy, legal repeated-root/same-canonical-subdevice aliases, multiple resident shards/card, unique nonreplicated shards on all owners, cumulative peak coverage, matching OOM artifact/workload pins, input immutability, finite strict numerical values, fixed per-logit tolerance and original1e-12 rounding consistency. No tolerance widening, extra framework or unrelated redesign. Actual current machine has no4-card capacity evidence.
+
+1 ACTUAL_CPU_PAYLOAD_BINDING. Existing trusted named cpu_reference_hash slot may be actualbytes/bytearray or lowercase64SHA digest. ROOT APPROVED NEW experimental schema: full ordered UTF8 JSON nonempty flat finite-number array, max16777216 bytes and1048576 values. Hash complete rawbytes before parsing; reject malformed JSON, objects/null/bool/strings/NaN/Infinity/unsafe huge numbers; bound byte/value counts. When slot is digest-only, require trusted['cpu_reference_bytes'] and bind actualbytes to that digest and evidence hash. Missing payload is NOT_CHECKED, not authority-by-hash. Compare full reference count and every supplied logits[*].cpu value EXACTLY after safe numerical conversion (no execution tolerance); ordered data must match. CPU registry bytes b'[1.0]' is the existing legal fixture. Bytearray inputs remain unchanged. Metadata labels/digests are not evidence of native execution. New serialization contract is explicit, not claimed historical artifact format.
+
+2 SINGLE_PHYSICAL_OWNER_SUBSET and3 THREE_PHYSICAL_OWNER_SUBSET. OOM attempts must resolve respectively1 and3 distinct physical participants from the SAME qualified four-card physical population. Use explicit unambiguous canonical root/aliases; do not use vendor/index/name-only fallback. Resolve overlap across roles into four owners and require subsets. Unknown or multiple owner mappings refuse. Repeated enumeration of the same canonical physical root remains legal; subdevice rows do not count as extra physical cards. Retain exact4 (5 refuses), discrete/shared/backing checks and current residency/peak/statistics protections.
+
+MEASURED MUTATIONS, all other bindings unchanged:
+- CPU registered bytes b'[1.0]' and full digest remain fixed. Supplied pair CPU1/GPU1.05 -> CPU2/GPU2.05 with corresponding recomputed errors: actualoldPASS, mustREFUSE.
+- Four physical IDs0,1,2,3 remain fixed. SINGLE OOM devices [7]: actualoldPASS, mustREFUSE.
+- Same four remain fixed. THREE OOM devices [5,6,7]: actualoldPASS, mustREFUSE.
+The raw measured findings are copied in compact JSON below; no whole47outcome text, previous provider tests or audit essays are included. Prior600.43-second timeout/empty streams/noartifact remains preserved, not a successful repair. This request cannot grant its own runtime admission. Provide concise real fixes and useful positive/negative tests, no essay. ROOT will read actual source and retarget the independent47 controls plus schema cases afterward.
+
+===== EXACT ACTUAL SOURCE SHA256 4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211 =====
+import hashlib,math
+ART=('model_hash','workload_hash','source_hash','exe_hash','context_hash','quant')
+HASH=('model_hash','workload_hash','source_hash','exe_hash','context_hash','cpu_reference_hash')
+_FIX=1e-12  # retained tolerance contract; |claimed-actual| <= _FIX*max(1,|claimed|,|actual|)
+class _E(Exception):
+    def __init__(s,st,m):
+        super().__init__(m); s.st=st; s.m=m
+def _i(x):
+    return isinstance(x,int) and not isinstance(x,bool)
+def _n(x):
+    return (not isinstance(x,bool)) and (isinstance(x,int) or (isinstance(x,float) and math.isfinite(x)))
+def _s(x):
+    return isinstance(x,str) and x.strip()!=''
+def _l(x):
+    return x.strip().lower()
+def _hex64(x):
+    return isinstance(x,str) and len(x)==64 and all(c in '0123456789abcdef' for c in x)
+def _ret(st,m):
+    c=0 if st=='PASS' else (1 if st=='FAIL' else 2)
+    return {'status':st,'exit_code':c,'errors':[] if st=='PASS' else [m],'scope':'four discrete GPU VRAM capacity receipt; GPU-free strict validator'}
+def _bind(evidence,trusted):
+    if not isinstance(trusted,dict):
+        raise _E('NOT_CHECKED','untrusted')
+    for k in HASH:
+        ev=evidence.get(k)
+        if not _hex64(ev):
+            raise _E('NOT_CHECKED','hash:'+k)
+        pin=trusted.get(k,None)
+        if isinstance(pin,(bytes,bytearray)):
+            digest=hashlib.sha256(bytes(pin)).hexdigest()
+        elif _hex64(pin):
+            digest=pin
+        elif pin is None:
+            raise _E('NOT_CHECKED','registry:'+k)
+        else:
+            raise _E('NOT_CHECKED','registry_type:'+k)
+        if digest!=ev:
+            raise _E('FAIL','registry_mismatch:'+k)
+    for k in ('artifact_source','quant'):
+        ev=evidence.get(k); pin=trusted.get(k,None)
+        if not _s(ev) or not _s(pin):
+            raise _E('NOT_CHECKED','registry:'+k)
+        if pin!=ev:
+            raise _E('FAIL','registry_mismatch:'+k)
+def _consistent(claimed,actual):
+    if not _n(claimed) or not _n(actual):
+        return False
+    try:
+        fc=float(claimed); fa=float(actual)
+        diff=abs(fc-fa); scale=max(1.0,abs(fc),abs(fa))
+    except (OverflowError,ValueError):
+        return False
+    return math.isfinite(diff) and math.isfinite(scale) and diff<=_FIX*scale
+def _as_float(x):
+    if isinstance(x,float):
+        if not math.isfinite(x):
+            raise _E('NOT_CHECKED','logit_range')
+        return x
+    if not _i(x):
+        raise _E('NOT_CHECKED','logit_tol')
+    try:
+        f=float(x)
+        ok=math.isfinite(f) and int(f)==x
+    except (OverflowError,ValueError):
+        ok=False
+    if not ok:
+        raise _E('NOT_CHECKED','logit_range')
+    return f
+def _pair_err(ob,cp):
+    if not _n(ob) or not _n(cp):
+        raise _E('NOT_CHECKED','logit_tol')
+    d=abs(_as_float(ob)-_as_float(cp))
+    if (not math.isfinite(d)) or d>1e150:
+        raise _E('NOT_CHECKED','logit_range')
+    return d
+def validate_capacity(evidence,*,trusted):
+    try:
+        if not isinstance(evidence,dict):
+            raise _E('NOT_CHECKED','evidence')
+        _bind(evidence,trusted)
+        if not _i(evidence.get('observed_at_ns')):
+            raise _E('NOT_CHECKED','observed_at_ns')
+        mb=evidence.get('model_bytes')
+        if not _i(mb) or mb<=0:
+            raise _E('NOT_CHECKED','model_bytes')
+        tol=evidence.get('logit_tol_abs')
+        if not _n(tol) or tol<=0:
+            raise _E('NOT_CHECKED','tol')
+        ms=evidence.get('max_staleness_ns',10000000000)
+        if not _i(ms) or ms<0:
+            raise _E('NOT_CHECKED','staleness')
+        att=evidence.get('attempts')
+        if not isinstance(att,list):
+            raise _E('NOT_CHECKED','attempts')
+        by={}
+        for a in att:
+            if isinstance(a,dict) and _s(a.get('role')):
+                by.setdefault(a['role'],[]).append(a)
+        bind=tuple(evidence[k] for k in ART)
+        P={}
+        for r in ('single','three','four'):
+            L=by.get(r,[])
+            if len(L)!=1:
+                raise _E('NOT_CHECKED','role:'+r)
+            a=L[0]
+            if tuple(a.get(k) for k in ART)!=bind:
+                raise _E('FAIL','bind:'+r)
+            if not _i(a.get('timestamp_ns')):
+                raise _E('NOT_CHECKED','ts:'+r)
+            if abs(a['timestamp_ns']-evidence['observed_at_ns'])>ms:
+                raise _E('NOT_CHECKED','stale:'+r)
+            c=a.get('controller')
+            if not isinstance(c,dict):
+                raise _E('NOT_CHECKED','ctrl:'+r)
+            for k in ('args_valid','timeout','policy_cap'):
+                if k not in c:
+                    raise _E('NOT_CHECKED','ctrl.'+k)
+            if c['args_valid'] is not True:
+                raise _E('FAIL','args:'+r)
+            if c['timeout'] is not False:
+                raise _E('FAIL','timeout:'+r)
+            if c['policy_cap'] is not False:
+                raise _E('FAIL','policy:'+r)
+            if c.get('native_error') not in (None,'',False):
+                raise _E('FAIL','native:'+r)
+            ds=a.get('devices')
+            if not isinstance(ds,list) or not ds:
+                raise _E('NOT_CHECKED','devs:'+r)
+            seen=set(); canon=set(); phys=0
+            for d in ds:
+                if not isinstance(d,dict):
+                    raise _E('NOT_CHECKED','dev:'+r)
+                cid=d.get('canonical_id'); pal=d.get('physical_alias')
+                if not _s(cid) or not _s(pal):
+                    raise _E('NOT_CHECKED','alias:'+r)
+                al=d.get('aliases')
+                if not isinstance(al,list) or not al:
+                    raise _E('NOT_CHECKED','aliases:'+r)
+                nm={_l(cid),_l(pal)}
+                for x in al:
+                    if not _s(x):
+                        raise _E('NOT_CHECKED','alias2:'+r)
+                    nm.add(_l(x))
+                if 'discrete' not in d or 'form_factor' not in d:
+                    raise _E('NOT_CHECKED','form:'+r)
+                if d['discrete'] is not True or d['form_factor']!='discrete_gpu':
+                    raise _E('FAIL','discrete:'+r)
+                if not (nm & seen):
+                    phys+=1
+                seen|=nm; canon.add(_l(cid))
+            if len(canon)!=phys:
+                raise _E('FAIL','dedup:'+r)
+            al=a.get('allocator')
+            if not isinstance(al,dict):
+                raise _E('NOT_CHECKED','alloc:'+r)
+            if al.get('class')!='dedicated_vram':
+                raise _E('NOT_CHECKED','alloc_class:'+r)
+            if al.get('fresh') is not True:
+                raise _E('NOT_CHECKED','fresh:'+r)
+            if not _s(al.get('source')):
+                raise _E('NOT_CHECKED','alloc_src:'+r)
+            if not _i(al.get('timestamp_ns')):
+                raise _E('NOT_CHECKED','alloc_ts:'+r)
+            if abs(al['timestamp_ns']-a['timestamp_ns'])>ms:
+                raise _E('NOT_CHECKED','alloc_stale:'+r)
+            P[r]={'a':a,'phys':phys,'canon':canon}
+        if P['single']['phys']!=1:
+            raise _E('FAIL','single_phys')
+        if P['three']['phys']!=3:
+            raise _E('FAIL','three_phys')
+        if P['four']['phys']!=4:
+            raise _E('FAIL','four_phys')
+        for r in ('single','three'):
+            ex=P[r]['a'].get('execution')
+            if not isinstance(ex,dict):
+                raise _E('NOT_CHECKED','exec:'+r)
+            if ex.get('status')!='allocator_oom':
+                raise _E('FAIL','oom:'+r)
+            rb=ex.get('requested_bytes')
+            if not _i(rb) or rb<=0:
+                raise _E('NOT_CHECKED','req:'+r)
+            if rb!=mb:
+                raise _E('FAIL','req_mb:'+r)
+        a=P['four']['a']; ex=a.get('execution')
+        if not isinstance(ex,dict):
+            raise _E('NOT_CHECKED','exec4')
+        if ex.get('status')!='success':
+            raise _E('FAIL','success4')
+        rm=ex.get('rmse'); mx=ex.get('max_abs_error')
+        if not _n(rm) or not _n(mx) or rm<0 or mx<0:
+            raise _E('NOT_CHECKED','errs4')
+        lg=ex.get('logits')
+        if not isinstance(lg,list) or not lg:
+            raise _E('NOT_CHECKED','logits')
+        errs=[]
+        for p in lg:
+            if not isinstance(p,dict):
+                raise _E('NOT_CHECKED','logit')
+            cp=p.get('cpu'); ob=p.get('observed'); lt=p.get('tol_abs')
+            if not _n(lt) or lt<=0:
+                raise _E('NOT_CHECKED','logit_tol')
+            if abs(lt-tol)>_FIX:
+                raise _E('FAIL','fixed_tol')
+            e=_pair_err(ob,cp)
+            if e>lt:
+                raise _E('FAIL','logit_tol_fail')
+            errs.append(e)
+        act_max=errs[0]; ss=0.0
+        for e in errs:
+            if e>act_max:
+                act_max=e
+            ss+=e*e
+            if not math.isfinite(ss):
+                raise _E('NOT_CHECKED','logit_range')
+        act_rmse=math.sqrt(ss/len(errs))
+        if not math.isfinite(act_rmse):
+            raise _E('NOT_CHECKED','logit_range')
+        if not _consistent(mx,act_max) or not _consistent(rm,act_rmse):
+            raise _E('FAIL','metric_recompute')
+        if rm>mx:
+            raise _E('FAIL','rmse>maxabs')
+        pk=a.get('allocator',{}).get('peak_bytes_by_device')
+        if not isinstance(pk,dict):
+            raise _E('NOT_CHECKED','peaks')
+        npk={}
+        for k,v in pk.items():
+            if not _s(k):
+                raise _E('NOT_CHECKED','peak_key')
+            if not _i(v) or v<=0:
+                raise _E('NOT_CHECKED','peak_int')
+            lk=_l(k)
+            if lk in npk and npk[lk]!=v:
+                raise _E('FAIL','peak_dup')
+            npk[lk]=v
+        if set(npk)!=P['four']['canon']:
+            raise _E('NOT_CHECKED','peak_set')
+        ws=a.get('weights')
+        if not isinstance(ws,list) or not ws:
+            raise _E('NOT_CHECKED','weights')
+        sh=set(); tot=0
+        owned={c:0 for c in P['four']['canon']}
+        summed={c:0 for c in P['four']['canon']}
+        for w in ws:
+            if not isinstance(w,dict):
+                raise _E('NOT_CHECKED','weight')
+            dv=w.get('device'); h=w.get('shard_hash'); rb=w.get('resident_bytes'); bk=w.get('backing')
+            if not _s(dv) or not _s(h):
+                raise _E('NOT_CHECKED','weight_id')
+            if not _i(rb) or rb<=0:
+                raise _E('NOT_CHECKED','resident')
+            if bk!='device_vram':
+                raise _E('NOT_CHECKED','backing')
+            nd=_l(dv)
+            if nd not in owned:
+                raise _E('FAIL','weight_dev')
+            if h in sh:
+                raise _E('FAIL','replicated_shard')
+            sh.add(h); owned[nd]+=1; summed[nd]+=rb; tot+=rb
+        for c in owned:
+            if owned[c]<1:
+                raise _E('FAIL','shard_coverage')
+            if summed[c]>npk[c]:
+                raise _E('FAIL','peak_cover')
+        if tot!=mb:
+            raise _E('FAIL','reconcile')
+        return _ret('PASS','')
+    except _E as e:
+        return _ret(e.st,e.m)
+    except Exception as e:
+        return _ret('NOT_CHECKED','unexpected:'+repr(e))
+
+===== ACTUAL THREE RED OBSERVATIONS =====
+[
+  {
+    "case": "CPU_payload_disagrees_with_registered_reference_bytes",
+    "expected": "REFUSE",
+    "passed": false,
+    "candidate_result": {
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": [],
+      "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+    },
+    "uncaught_exception": null,
+    "inputs_unchanged": true,
+    "original_measured_red": false,
+    "note": "Trusted CPU reference is canonical JSON bytes [1.0], whose digest stays pinned; supplied CPU changes to2.0. No particular serialization is parsed by candidate: this measures missing payload-binding contract."
+  },
+  {
+    "case": "single_attempt_foreign_physical_population",
+    "expected": "REFUSE",
+    "passed": false,
+    "candidate_result": {
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": [],
+      "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+    },
+    "uncaught_exception": null,
+    "inputs_unchanged": true,
+    "original_measured_red": false,
+    "note": "Same-workload OOM comparison must use a subset of the qualified four physical participants, not unrelated hardware."
+  },
+  {
+    "case": "three_attempt_foreign_physical_population",
+    "expected": "REFUSE",
+    "passed": false,
+    "candidate_result": {
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": [],
+      "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+    },
+    "uncaught_exception": null,
+    "inputs_unchanged": true,
+    "original_measured_red": false,
+    "note": ""
+  }
+]

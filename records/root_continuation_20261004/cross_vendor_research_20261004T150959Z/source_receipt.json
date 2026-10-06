@@ -1,0 +1,41 @@
+{
+  "scope": "PRIMARY_RESEARCH_ONLY_NO_NATIVE_EXECUTION",
+  "created_utc": "2026-10-04T15:09:59.249387+00:00",
+  "sources": [
+    "https://arxiv.org/html/2602.18007v1",
+    "https://arxiv.org/html/2603.10030v2",
+    "https://github.com/marcoeg/dmaplane",
+    "https://raw.githubusercontent.com/marcoeg/dmaplane/main/driver/Makefile",
+    "https://raw.githubusercontent.com/marcoeg/dmaplane/main/driver/gpu_p2p.c",
+    "https://rocm.docs.amd.com/projects/rocm-xio/en/beta-0.1.0/reference/performance.html",
+    "https://raw.githubusercontent.com/ROCm/rocm-xio/main/INSTALL.md",
+    "https://raw.githubusercontent.com/ROCm/rocm-xio/main/src/common/ibv-wrapper.cpp",
+    "https://github.com/GPUOpen-LibrariesAndSDKs/DirectGMA_P2P",
+    "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/DirectGMA_P2P/master/GPUtoGPU_OpenCL/GPUtoGPU_OpenCL/CLTransferBuffer.cpp",
+    "https://docs.nvidia.com/cuda/gpudirect-rdma/index.html",
+    "https://instinct.docs.amd.com/projects/cluster-documentation/latest/how-to/gpu-enabled-mpi.html",
+    "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/graphics-interop.html",
+    "https://docs.vulkan.org/refpages/latest/refpages/source/VkPhysicalDeviceIDProperties.html",
+    "https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_external_memory_host.html",
+    "https://docs.nvidia.com/cuda/cuda-runtime-api/cuda_runtime_api/group__CUDART__PEER.html",
+    "https://rocm.docs.amd.com/projects/HIP/en/latest/doxygen/html/group___peer_to_peer.html"
+  ],
+  "search_calls": 3,
+  "search_queries": [
+    "\"Joint Training on AMD and NVIDIA GPUs\" github Zettabyte",
+    "\"Joint Training on AMD and NVIDIA GPUs\" site:github.com",
+    "\"Zettabyte\" \"GPUDirect\" site:github.com",
+    "dmaplane author code primary lookup",
+    "DirectGMA official sample lookup",
+    "ROCm XIO official consumer RDMA lookup"
+  ],
+  "search_bound": "Three calls, eight queries across prior tool history; query list is representative where exact prior invocation is not retained in compacted context. No fourth call.",
+  "read_scope": "Full joint-training HTML; full dmaplane paper including appendices; author README and selected critical source/build files; official API and prerequisite sections. No whole-repository audit.",
+  "public_code_joint_training": "PUBLIC_CODE_NOT_FOUND_WITHIN_BOUNDS",
+  "public_code_dmaplane": "AUTHOR_LINK_VERIFIED",
+  "source_checkout_hashes": "NOT_CHECKED: web-read unpinned source branches, not downloaded or executed",
+  "windows_target": "UNCHECKED; Linux prerequisites documented for dmaplane/XIO",
+  "current_capability_receipt": "../external_memory_capability_20261004T144953Z/capability_result_report.md",
+  "hardware_qualification": "NOT_CHECKED",
+  "access_failures": "Some GitHub directory/API and initially guessed source URLs failed; actual file paths resolved via published Makefiles; no absence claim from these errors."
+}

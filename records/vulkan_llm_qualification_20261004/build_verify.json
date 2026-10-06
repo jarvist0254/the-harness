@@ -1,0 +1,7 @@
+{
+  "pid": 77356,
+  "exit_code": 0,
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\build_verify.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\build_verify.stderr.log",
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\build_targets.cmd"
+}

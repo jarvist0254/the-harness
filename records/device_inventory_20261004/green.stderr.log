@@ -1,0 +1,36 @@
+test_8hex_nv_and_4hex_amd_same_identity_no_resurrection (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_8hex_nvidia_canonical_4hex_and_dedup (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_admission_rechecks_stale_at_later_now (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_future_timestamp_not_admitted (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_kind_and_total_contradiction_tombstone (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_missing_physical_id_refused (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_naive_timestamp_and_naive_now_refused (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_nonintegral_floats_rejected (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_quoted_csv_name_and_declared_header (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_same_name_does_not_dedup (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_segment_above_ffff_and_device_32_rejected (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_unknown_classification_fail_closed (test_device_inventory.TestAdmissionIdentityDefects) ... ok
+test_eligible_and_refused (test_device_inventory.TestAdmissionSnapshot) ... ok
+test_shared_refused_for_dedicated (test_device_inventory.TestAdmissionSnapshot) ... ok
+test_unknown_free_not_allocatable (test_device_inventory.TestAdmissionSnapshot) ... ok
+test_amd_json_dedicated (test_device_inventory.TestNormalizeInventory) ... ok
+test_amd_shared_not_vram (test_device_inventory.TestNormalizeInventory) ... ok
+test_amd_unsupported_schema_rejected (test_device_inventory.TestNormalizeInventory) ... ok
+test_intel_json_valid (test_device_inventory.TestNormalizeInventory) ... ok
+test_invalid_bool_memory (test_device_inventory.TestNormalizeInventory) ... ok
+test_missing_pci_unqualified (test_device_inventory.TestNormalizeInventory) ... ok
+test_nonzero_exit_refusal (test_device_inventory.TestNormalizeInventory) ... ok
+test_nvidia_csv_valid (test_device_inventory.TestNormalizeInventory) ... ok
+test_nvidia_na_memory (test_device_inventory.TestNormalizeInventory) ... ok
+test_stale_sample (test_device_inventory.TestNormalizeInventory) ... ok
+test_vendor_contradiction_conflict (test_device_inventory.TestNormalizeInventory) ... ok
+test_actual_captured_unit_headers_and_identity (test_real_headers.CapturedNvidiaTests) ... ok
+test_arbitrary_total_unit_is_not_stripped (test_real_headers.CapturedNvidiaTests) ... ok
+test_duplicate_canonical_header_refused (test_real_headers.CapturedNvidiaTests) ... ok
+test_free_unknown_unit_is_not_stripped (test_real_headers.CapturedNvidiaTests) ... ok
+test_live_fixture_age_is_rechecked (test_real_headers.CapturedNvidiaTests) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.002s
+
+OK

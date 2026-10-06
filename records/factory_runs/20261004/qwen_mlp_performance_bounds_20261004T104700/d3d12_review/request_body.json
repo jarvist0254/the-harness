@@ -1,0 +1,13 @@
+{
+  "messages": [
+    {
+      "content": "Independently derive theoretical capacity/communication/performance bounds for an EXPERIMENTAL mixed NVIDIA5070Ti +AMDintegrated OpenCL residualMLP, not a benchmark. NO TOOLS; directAPI doesnotcreatechildren, userup10authorizationnotexecutedworkers. Return ONLY JSON {\"computed_quantities\":[{\"name\":\"...\",\"value\":1,\"unit\":\"...\",\"derivation\":\"...\"}],\"latency_equations\":[\"...\"],\"assumptions\":[\"...\"],\"measurement_requirements\":[\"...\"],\"forbidden_claims\":[\"...\"]}. FP32 layers8,width512,batch8,uniquelayerW(width,width)+biaswidth, relu(x+x@W+b),8kernels,4residentlayersperdevice. Planner ceilweight+biasMiB PER LAYER, devicepolicy9MiBminusworkspace1MiB=>8MiBmodeledbudget, actualtwoactivationbuffersperdevice2*B*width*4bytes. Weightsresidentuploadedoncebeforeinference, nofullmodelreplication. Oneinterdevicestageboundaryactualactivationhoststaged, GPUA->host->GPUB. ALL8layeroutputsreadbackonlyforparity; boundarycanreusealreadyexistingreadback insteadextra. Kernels withinstagepingpongresidentactivations. Separatelycoldweightupload, perinferenceinitialinputupload, parityinstrumentationreadbacks, trueboundaryminimalcopybytesandhostcopy count assumptions. Expecteddefaultactivationpayload16KiB; explainonepayloadAread+oneBupload doesnotmean32KiBneuralactivation. Deriveactualtotalweightbytes,ceilmodeledmemory,perdeviceresidentweightbytes,FP32GEMMarithmeticops andtinyresidual/relu overhead; distinguishmultiply+add versusFMAcounts. Providelatencyequation usingunknownmeasuredperstagekernel times, eventqueueoverhead, readback/H2Dbandwidth+fixedlatency, CPUreference and parityinstrumentation SEPARATE fromun-instrumentedexecutor. No empiricalbandwidth/freeVRAM/performancebenefit assumed. Defaultmodel8MiBfitsonehostGPU; policycaps intentionallyforcepartition, notphysicalcapacityproof. AMDintegrated hostsharedmemorydoesnotmakeexternaldedicated8GBcard. Fourdevicehypotheticallargerworkloadand32GBpooledbufferremainNOTPROVEN. Nonuniformdevices+seriallayerdependencies cannotpromiseuniform4xspeed. Includefuturequalificationgates:warmcoldcomparisons,equalprecision,bothorders,twoGPUvsoneGPUbaseline,instrumentationoffwhenbenchmarkingonlyaftercorrectnessaccepted; actualOpenCLbufferallocationnotfreshVRAM lease. NoapproximatehardwarethroughputnumbersorLLMclaims.",
+      "role": "user"
+    }
+  ],
+  "stream": false,
+  "max_tokens": 4096,
+  "model": "qwen3.8-max",
+  "enable_thinking": false,
+  "temperature": 0.1
+}

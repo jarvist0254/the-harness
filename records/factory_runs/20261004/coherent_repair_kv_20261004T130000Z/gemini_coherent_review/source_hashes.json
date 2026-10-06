@@ -1,0 +1,26 @@
+[
+  {
+    "sha256": "A9E6CF0EA1390F1A2254F7BB2FA61FED22CE6817D9D48612C040669AAB1BB21E",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\contained_supervisor.py"
+  },
+  {
+    "sha256": "CAC243F7A942566980664F1F11BC3ADFD116D3DAB0F972BB6B8F4C66F4673E89",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\tests.candidate.py"
+  },
+  {
+    "sha256": "DB4A4702EBCF7F5B2E712736D7D12E6F71752004373494B3445CB911B4B27BDA",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\qualification_validator.py"
+  },
+  {
+    "sha256": "3798B49057115A50EBF7F068A09D5B2F2DD2BD89A2EDC9B8AF052E8FFA445129",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\tests.candidate.py"
+  },
+  {
+    "sha256": "92C131D03AB55CB0D21C742E0EBBC3C61877D3E4F6A03CD5E42B17174C245182",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\CHECKLIST.md"
+  },
+  {
+    "sha256": "E5BC15F1FCFE822115AE46C09C16FD7C765D8A624FB254CE4B99A03359D05872",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py"
+  }
+]

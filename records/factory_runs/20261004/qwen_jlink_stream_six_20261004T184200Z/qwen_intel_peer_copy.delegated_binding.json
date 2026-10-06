@@ -1,0 +1,16 @@
+{
+  "lane": "Qwen",
+  "authority": "ROOT explicit sixpurposefulstreamingroles HTTP1200/outer1230/raw16MiB/normalized2MiBeach",
+  "native_children_actual": 0,
+  "job_id": "qwen_intel_peer_copy",
+  "prompt_sha256": "150cb209673db9697119c7cfeb3eeb7b2c14964eb6ecf50723bce46a2e6456f9",
+  "enable_thinking": true,
+  "reasoning_effort": "xhigh",
+  "source_sha256": "150cb209673db9697119c7cfeb3eeb7b2c14964eb6ecf50723bce46a2e6456f9",
+  "model": "qwen3.8-max",
+  "include_usage": true,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_intel_peer_copy.spec.txt",
+  "provider_launch_authorized": true,
+  "stream": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z"
+}

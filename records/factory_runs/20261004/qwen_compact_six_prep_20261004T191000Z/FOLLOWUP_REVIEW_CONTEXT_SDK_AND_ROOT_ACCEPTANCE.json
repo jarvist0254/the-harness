@@ -1,0 +1,29 @@
+{
+  "current_intel_hardware": "NOT_CHECKED_NO_INTEL_ENUMERATED",
+  "sent_after_provider_launch": true,
+  "level_zero_runtime_dll": "NOT_VERIFIED",
+  "primary_reference": "https://oneapi-src.github.io/level-zero-spec/level-zero/latest/core/api/apis/device.html",
+  "utc": "2026-10-04T19:33:29.5135212Z",
+  "capability_not_transport": true,
+  "api_direction": "hDevice performing access, hPeerDevice allocation owner",
+  "followup_source_review_only": true,
+  "subdevice_alias_limit": "same parent may report access true; never count same root subdevices as four cards",
+  "prompts_unchanged": true,
+  "pins": [
+    {
+      "bytes": 1240682,
+      "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+      "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h"
+    },
+    {
+      "bytes": 256346,
+      "sha256": "be1ff9cb298a54463fa4c04117ffe0ed6ddf54a7d2419745ebfc4381d28c6d30",
+      "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\lib\\ze_loader.lib"
+    },
+    {
+      "bytes": 10265,
+      "sha256": "b1da0dd4719ee343b39f63e8ca0597d80c0c94c7083fe80d283d5b2f81204cde",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "packet_sha256": "ee9f1fdd80fcf8d003fa8b0768844b0e7b4f866c234d35f4b8ef0a146707393f",
+  "generated_source_execution_authorized": false,
+  "enable_thinking": true,
+  "lane": "Qwen",
+  "reasoning_effort": "xhigh",
+  "source_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\source.original_untrusted.cpp",
+  "utc": "2026-10-04T21:56:12.5303182Z",
+  "model": "qwen3.8-max",
+  "native_children_actual": 0,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z",
+  "job_id": "qwen_l0_query_measured_repair",
+  "provider_launch_authorized": true,
+  "thinking_budget_absent": true,
+  "prompt_sha256": "0a0f67faefd51924442e7ca836eb5d50748162658308af9a51bd1da8e17af8b9",
+  "authority": "ROOT explicit exact three admissions after full reads and rehash",
+  "source_sha256": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694"
+}

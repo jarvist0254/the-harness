@@ -1,0 +1,12 @@
+test_exact_poses_shoes_post_clearances_and_height (__main__.IndependentCases) ... ok
+test_old_invalid_dimension_gates_retained (__main__.IndependentCases) ... ok
+test_unclipped_oversize_rejected (__main__.IndependentCases) ... ok
+test_unknown_interfaces_and_draft_labels_retained (__main__.IndependentCases) ... ok
+test_exact_printed_bbox_and_rotation (revision4_provider_tests.PrintedHeightTests) ... ok
+test_oversize_post_and_gap_gates (revision4_provider_tests.PrintedHeightTests) ... ok
+test_universal_d_support_and_body_remain_overhang (revision4_provider_tests.PrintedHeightTests) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.003s
+
+OK

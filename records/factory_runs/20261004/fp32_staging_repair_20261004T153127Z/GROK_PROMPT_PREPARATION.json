@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-04T16:00:09.817486+00:00",
+  "state": "GROK_PREPARED_NOT_LAUNCHED",
+  "job": "grok_fp32_patch",
+  "model": "grok-4.7-build-fast",
+  "transport": "CLI--prompt-file (prompt body not onWindowscommandline)",
+  "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\grok_fp32_patch.prompt.txt",
+  "prompt_sha256": "0abfef51beffcbab83b95aa62cd21afb99139c4db52b79e2d1096a0d6b21ca36",
+  "prompt_bytes": 31986,
+  "commandline_utf16_estimate": 735,
+  "root_binding_source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch\\patch.pending_root_qa.json",
+  "root_binding_source_sha256": "6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "gemini_review_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\gemini_fp32_review_v2\\review.pending_root_qa.json",
+  "gemini_review_sha256": "aff99c3703e70b339da7e8d8dfee6cb8dd614dc6c331d7bae0e0add9a35290f1",
+  "original_cpp_source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "root_adjudication": "PENDING",
+  "proposed_edit": "Keep Qwenregions1and2, simplify mathematicallyequivalentY nonquantformula andcorrectquantizeY/runtimebehaviorprose",
+  "actual_provider_review": "GeminiPASSfindings0_STATIC_ONLY",
+  "launches": 0,
+  "provider_patch_applied": false
+}

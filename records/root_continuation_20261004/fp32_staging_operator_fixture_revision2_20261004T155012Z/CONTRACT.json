@@ -1,0 +1,102 @@
+{
+  "status": "REVISION2_SOURCE_PREPARED_COMPILE_PENDING_NOT_EXECUTED",
+  "source_sha256": "f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59",
+  "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "shape": {
+    "M": 32,
+    "N": 32,
+    "K": 64,
+    "batch": 2,
+    "destination": [
+      32,
+      32,
+      2,
+      1
+    ]
+  },
+  "layouts": [
+    "contiguous",
+    "X_stride",
+    "Y_stride",
+    "X_stride_Y_stride",
+    "Y_transpose",
+    "X_stride_Y_transpose"
+  ],
+  "input_layouts": {
+    "transpose": "physical [32,64,2,1], logical [64,32,2,1], nb0=128,nb1=4,nb2=8192 bytes",
+    "stride": "physical [68,32,2,1], logical [64,32,2,1], nb0=4,nb1=272,nb2=8704 bytes",
+    "contiguous": "[64,32,2,1], nb0=4,nb1=256,nb2=8192 bytes"
+  },
+  "bytes_per_case": {
+    "contiguous_input": 16384,
+    "strided_input": 17408,
+    "transposed_input": 16384,
+    "output": 8192,
+    "metadata_arena": 2097152,
+    "output_values": 2048
+  },
+  "caps": {
+    "each_tensor_bytes": 1048576,
+    "combined_allocated_graph_buffer_bytes": 1048576,
+    "declared_fixture_bytes": 16777216,
+    "outer_owned_process_seconds": 30,
+    "each_stream_bytes": 1048576
+  },
+  "cap_limits": "Application tensor and context allocations bounded; Vulkan driver/pipeline global allocations cannot be hard-limited by public API and are not claimed measured. Small dimensions keep expected scratch allocations small; static/runtime size trace needed in admitted build.",
+  "backend": "Only explicit Vulkan0 or Vulkan1 registry device; allow GPU/IGPU type, never CPU/ACCEL/META; no scheduler, backend_init_best or CPU graph.",
+  "reference": "Independent double accumulation of actual float input values via deterministic formula; never a CPU ggml graph.",
+  "atol": 2e-05,
+  "rtol": 2e-06,
+  "numeric_gate": "Every finite output satisfies abs(actual-double_ref)<=atol+rtol*abs(double_ref); fixed before experiment, do not widen after failure. GPU accumulation order remains different from double reference.",
+  "corruption": "--inject-corruption adds8 to last readback value in final case, leaving reference unchanged; must exit1 with last-case fail_count>=1. Control mutates host readback not execution, does not claim fault injection inside GPU.",
+  "exit_contract": {
+    "0": "All seven operator parity cases passed",
+    "1": "Numerical/nonfinite/API execution failure",
+    "2": "Unavailable/unsupported/wrong identity/ownership/cap/arguments flags refusal; NOT_CHECKED"
+  },
+  "fatal_behavior": "Native abort/crash may bypass exceptions; wrapper must classify nonzero/partial JSON as failure or uncertainty, never PASS.",
+  "receipt_requirements": [
+    "Full JSON must parse exactly once with duplicate keys rejected; exit0 agrees OPERATOR_PARITY_PASS and6cases",
+    "2048 outputs per case, finite_count2048, fail_count0, ownership and shape true",
+    "Selected exact registry/device and logs identify hardware; no4card/P2P/LLM qualification",
+    "Record command/environment/fresh compiled artifact hashes/exits/stdout/stderr/PID absence; do not count draft as tested",
+    "Backend supports_op and buffer identity are API checks, not independent residency or instruction tracing"
+  ],
+  "child_environment": {
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1",
+    "GGML_VK_DISABLE_COOPMAT": "1",
+    "GGML_VK_DISABLE_COOPMAT2": "1"
+  },
+  "commands": [
+    "fp32_staging_operator.exe --device Vulkan0",
+    "fp32_staging_operator.exe --device Vulkan1",
+    "fp32_staging_operator.exe --device Vulkan0 --inject-corruption",
+    "fp32_staging_operator.exe --device Vulkan1 --inject-corruption"
+  ],
+  "execution_admission": "Root review/build admission required; no commands executed by author",
+  "matrix_path_reason": "Pinned ggml_vk_mul_mat routes ordinary F32 MUL_MAT with destination ne[1]=32 (>8) and batch2 to matrix helper, outside vector branches; dimensions far below hugeA split thresholds. Runtime trace still required to prove actual helper/pipeline used. A transposed view is explicitly refused before graph construction, consistent with pinned ggml.c3355.",
+  "public_api_pins": [
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml.h",
+      "sha256": "62e4d28730f96924bfc3ec46771b38c30a8d4397584769fd636d6327354d5430"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-backend.h",
+      "sha256": "d65b0d09a6f5a53bb62b33a0c9e67095f07209d144c556ea87bc555d43b79735"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-alloc.h",
+      "sha256": "4c2dc83a6bc3e8df4c8a613c56ec0a9a96a09a5b96de85cf9e1fbe2873c86608"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-vulkan.h",
+      "sha256": "0b6f625021b047907d24b60b3ca441e8a97d44235f0d32abeb2665112c35418e"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+      "sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef"
+    }
+  ],
+  "cases_required": 6
+}

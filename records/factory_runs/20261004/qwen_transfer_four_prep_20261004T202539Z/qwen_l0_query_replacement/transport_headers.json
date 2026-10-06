@@ -1,0 +1,7 @@
+{
+  "auth_headers_saved": false,
+  "http": 200,
+  "content_type": "text/event-stream; charset=utf-8",
+  "requested_model": "qwen3.8-max",
+  "seconds": 1.86
+}

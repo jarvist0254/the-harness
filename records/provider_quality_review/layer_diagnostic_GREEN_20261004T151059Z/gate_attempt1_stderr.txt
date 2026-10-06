@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_GREEN_20261004T151059Z\evaluate_comparator.py", line 35, in <module>
+    if n.value.func.id=='getattr':assert ast.unparse(n.value)=='getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 1024)'
+AssertionError

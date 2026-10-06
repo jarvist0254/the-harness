@@ -1,0 +1,21 @@
+{
+  "packet_sha256": "696c23ebeaef300cf440ca031616662d6dbd18271984beb0d29d7c38d55b1443",
+  "authority": "ROOT explicit exact-pin Grok capacity HIGH one-call admission",
+  "source_execution": false,
+  "job_id": "grok_capacity_high",
+  "model": "grok-4.7-build-fast",
+  "lane": "Grok",
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "prompt_sha256": "cfd8f05f04dce70b0654ad8f023e5f63837b479f3a14388e08e950079293795c",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\source.qwen_untrusted.py",
+  "utc": "2026-10-04T20:38:47.1881234Z",
+  "provider_launch_authorized": true,
+  "helper_pins": {
+    "grok_capacity_high.prompt.txt": "cfd8f05f04dce70b0654ad8f023e5f63837b479f3a14388e08e950079293795c",
+    "provider_common.ps1": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+    "invoke_owned_capacity_editor.ps1": "4c31e32ca8baf6d8b231c38a0a8e3845c667341b6e85f87e5449b08d2b974005",
+    "research_artifact.ps1": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459"
+  },
+  "native_children_actual": 0,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z"
+}

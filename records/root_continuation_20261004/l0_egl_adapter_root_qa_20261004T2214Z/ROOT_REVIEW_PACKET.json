@@ -1,0 +1,23 @@
+{
+  "status": "PENDING_ROOT_REVIEW_AND_ADMISSION",
+  "scope": "PURE_CALLBACK_STATE_MACHINE_TESTS_ONLY",
+  "candidate_path": "E:/the_harness/records/factory_runs/20261004/l0_egl_sync_bridge_two_prep_20261004T212837Z/qwen_l0_egl_fence_adapter/source.qwen_untrusted.py",
+  "candidate_sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+  "provider_test_path": "E:/the_harness/records/factory_runs/20261004/l0_egl_sync_bridge_two_prep_20261004T212837Z/qwen_l0_egl_fence_adapter/tests_source.qwen_untrusted.txt",
+  "provider_test_sha256": "0e4372f0c706c2e7f9b5ba8354b4e46b7c70649b2f585e8824ab1c8598014491",
+  "independent_test_path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_20261004T2214Z/test_adapter_independent_contract.py",
+  "independent_test_sha256": "8abcadd3fc52aeb98ac6421f0ef4055862e84a45c2755cb29a31036995386304",
+  "controller_path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_20261004T2214Z/pure_qa_controller.py",
+  "controller_sha256": "a63853d4ab61f3d4b54908759829cae9e28e77c80c36dacc099369c82382ef24",
+  "python_path": "C:/Users/thoma/AppData/Local/Programs/Python/Python310/python.exe",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "static_review_path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_20261004T2214Z/STATIC_REVIEW.md",
+  "static_review_sha256": "a7f010cd6627ebd8132079f8d5ec5badd15421b72ff9f68ac6f71c45a5cef8dd",
+  "static_parse": "AST_PARSE_ONLY_PASS; no import or execution",
+  "execution_status": "NOT_RUN",
+  "candidate_imported": false,
+  "provider_tests_executed": false,
+  "native_gpu_driver_calls": false,
+  "root_admission_required": true,
+  "requested_action": "Review the static findings, independent tests, and exact pins; issue a separate admission only if this pure test scope is accepted."
+}

@@ -1,0 +1,26 @@
+{
+  "source_chars": 18540,
+  "tests_chars": 12803,
+  "utc": "2026-10-04T22:23:10.2896242Z",
+  "status": "COMPLETE_SOURCE_STAGED_UNTRUSTED_NO_IMPORT_OR_COMPILE_ADMISSION",
+  "session_reaped": true,
+  "session": 46149,
+  "source_execution": false,
+  "pins": [
+    {
+      "sha256": "27d560b3f73dd830b68de9aac3316d7b8510c0218d54704156e273929ce23fe2",
+      "bytes": 18540,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\source.qwen_untrusted.cpp"
+    },
+    {
+      "sha256": "df49c5aa406c27a9d1cee14ded78804ef95551a0eac703635c9268bb13f06ac8",
+      "bytes": 12803,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\tests_source.qwen_untrusted.txt"
+    },
+    {
+      "sha256": "edeb69444e3b7b41ce6b777344ec193fe086b5a1eede8781ef67d964e6882d75",
+      "bytes": 35919,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\qwen_l0_query_measured_repair\\research.pending_root_qa.json"
+    }
+  ]
+}

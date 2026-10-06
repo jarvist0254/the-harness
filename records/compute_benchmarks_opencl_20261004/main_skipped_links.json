@@ -1,0 +1,34 @@
+[
+  {
+    "name": "third_party/level-zero-sdk/lib/x64/libze_loader.so",
+    "target": "libze_loader.so.1"
+  },
+  {
+    "name": "third_party/level-zero-sdk/lib/x64/libze_loader.so.1",
+    "target": "libze_loader.so.1.28.2"
+  },
+  {
+    "name": "third_party/level-zero-sdk/lib/x64/libze_tracing_layer.so",
+    "target": "libze_tracing_layer.so.1"
+  },
+  {
+    "name": "third_party/level-zero-sdk/lib/x64/libze_tracing_layer.so.1",
+    "target": "libze_tracing_layer.so.1.28.2"
+  },
+  {
+    "name": "third_party/level-zero-sdk/lib/x64/libze_validation_layer.so",
+    "target": "libze_validation_layer.so.1"
+  },
+  {
+    "name": "third_party/level-zero-sdk/lib/x64/libze_validation_layer.so.1",
+    "target": "libze_validation_layer.so.1.28.2"
+  },
+  {
+    "name": "third_party/vulkan-sdk/lib/x64/libvulkan.so",
+    "target": "libvulkan.so.1"
+  },
+  {
+    "name": "third_party/vulkan-sdk/lib/x64/libvulkan.so.1",
+    "target": "libvulkan.so.1.3.290"
+  }
+]

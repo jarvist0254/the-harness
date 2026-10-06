@@ -1,0 +1,95 @@
+{
+  "pid": 82168,
+  "exit_code": 1,
+  "seconds": 132.34300000034273,
+  "outer_timeout": false,
+  "reaped": true,
+  "pid_absent_after_wait": true,
+  "pid_absence_stdout": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "pid_absence_stderr": "",
+  "capture": {
+    "bytes": 604,
+    "overflow": false,
+    "reader_errors": []
+  },
+  "source_pins_before": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt4_job_probe.py": "5c06efd624620b005c433eafd00e0bfa6672facbd0ddac6c3e8ace02a580566a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\job_member_trace.py": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_ATTEMPT4_ADMISSION.json": "ee0da539c2ab1bd5cad23adb68f59acf92dc26b673192349730afe2b7fc144fa",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt4.cmd": "b51d0012531295771e0643145047c1fd795ef76cf7f9e8236ed5f77088df95e8",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt4.cmd": "51477a225417baee8de532e6ebe1ca191cbfa188c074bfdcffe389d0524c9175"
+  },
+  "source_pins_after": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt4_job_probe.py": "5c06efd624620b005c433eafd00e0bfa6672facbd0ddac6c3e8ace02a580566a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\job_member_trace.py": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_ATTEMPT4_ADMISSION.json": "ee0da539c2ab1bd5cad23adb68f59acf92dc26b673192349730afe2b7fc144fa",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt4.cmd": "b51d0012531295771e0643145047c1fd795ef76cf7f9e8236ed5f77088df95e8",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt4.cmd": "51477a225417baee8de532e6ebe1ca191cbfa188c074bfdcffe389d0524c9175"
+  },
+  "source_pins_unchanged": true,
+  "copied_runtime_evidence": [
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_manifest.json",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_manifest.json",
+      "sha256": "53151bf6471ab98ccc0514807081ec495a3e606b4fe67cdaaa2062429aa071cb",
+      "bytes": 643
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_progress.json",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_progress.json",
+      "sha256": "3e4a5431128a0dd6f97fea84f08cb0c10e6a327520b2ed173cc5840faa41683b",
+      "bytes": 252
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_result_copy.json",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_result_copy.json",
+      "sha256": "311cd29e3bf15017a99e49e78c9f84ad3f60e0ed62562bec70a18d72ea56502d",
+      "bytes": 3918
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\controller_result.json",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\controller_result.json",
+      "sha256": "f27676905abea6526a62387696edaa474dbdde41f85008fe205c357d32652ebc",
+      "bytes": 4953
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\job_members.jsonl",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\job_members.jsonl",
+      "sha256": "a7966f095792168ab54b90f74f936bb23f5c92ab147119820880e218cd7e7d18",
+      "bytes": 12134
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_contained\\configure.stderr.log",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_contained\\configure.stderr.log",
+      "sha256": "2a7b2e04ee316f49b1661eb890b3b0bd54dceaa23e102b5bee091afbf85f4529",
+      "bytes": 316
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_contained\\configure.stdout.log",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_contained\\configure.stdout.log",
+      "sha256": "87658f017e91819cdd6e4a907c61cc005863be5c69a989173b68c83765314f14",
+      "bytes": 2776
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_contained\\fp32_configure.journal",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_contained\\fp32_configure.journal",
+      "sha256": "c2e12f15c288027a67ed00b771abe5a4b131d7c89c87c8d48fc25b79f79a334c",
+      "bytes": 191
+    },
+    {
+      "source": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt4_job_probe\\configure_contained\\fp32_configure_receipt.json",
+      "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\configure_contained\\fp32_configure_receipt.json",
+      "sha256": "18bd1fe26381c4c0dc9ecb2e4c0901b9113d1e4d0ab5070165b57f975e24cf06",
+      "bytes": 3754
+    }
+  ],
+  "scope": "Bounded owned CPU compile diagnostic; no GPU, no whole-tree certificate"
+}

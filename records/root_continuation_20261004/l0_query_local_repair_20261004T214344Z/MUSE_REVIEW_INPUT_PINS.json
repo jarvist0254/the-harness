@@ -1,0 +1,77 @@
+{
+  "scope": "READ_ONLY_MUSE_PREPARATION_NOT_PROVIDER_LAUNCH_OR_PROMOTION",
+  "inputs": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\final_source_and_stub_pins.json",
+      "sha256": "045c0d8b8deb8b54ec5fcaed2e7b396d41c8e1a5083248eeb9e09cac8aac94c5"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp",
+      "sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\actual_header_stub_local_revision2.cpp",
+      "sha256": "78250c8d9e780295e3385cf5d5dc88a6c4028064e7383658aaaa00f6f5c7f91d"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\test_measured_requirements.py",
+      "sha256": "6009ac0454f59858a3d49b6156f39c82d1f18145e87fd1f59121f2275f16824b"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\requirements_GREEN.stderr.log",
+      "sha256": "88efc050564d9fda5f15a3b6d636db0c043633ae2b874e90e9557fbdd98742ac"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\requirements_RED.stderr.log",
+      "sha256": "29b55cc7f465825852b887195216c646e596e3858f81e926469f41f795e3227d"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\ADJUDICATION.json",
+      "sha256": "4ebf0c3e3011aab4c9fac17183205ac68ecc3410b93aeb8d83a7a43e18a5171f"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\ADJUDICATION.md",
+      "sha256": "5f0aadf18c8c5d09615d11f6155a92b50db2092566581c2358dc2fcbe6221d35"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\compile_controller.py",
+      "sha256": "563b08de94e3f1c1ca2bb6f41c693c6575087a72bb52fe088aa0f9c6f2daef60"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\run_stub_cases.py",
+      "sha256": "6e6c015e27daef511496d5652f5032d64ad1d473fb5bd2106d602c5da024a2ab"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\compile_receipt.json",
+      "sha256": "de33d3dffc03ccbf25650adfb8f9bec2da07dfdd2f35c03d239a14db9da22aeb"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\runtime_receipt.json",
+      "sha256": "15c423ee01e3c82143b0b9f58e227ca6f5d0ce6f1e63acc406a47ef975567838"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\runtime_outer_receipt.json",
+      "sha256": "c2dcb32ebc0266a5d1f4ec786b95721b17c995ba444563f1f041890e1c56bad8"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\pe_imports.raw.txt",
+      "sha256": "34cd11a69606a957db062bcda3eb3fa9e619bb88cfeaf9523a97598c5e058d14"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\build_20261004T214702Z\\stub.exe",
+      "sha256": "f9c7bfd399adb3bba2c5541553a817fa1ec99b6fa6fa0fbf0a0f65e9cb036ba5"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\STUB_CONTRACT.pending.md",
+      "sha256": "a9aa41603538b6c86d06e4afc9e84605b5938bb276f4a42e53cd2edbaf878ecd"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_replacement_audit_20261004T211418Z\\STUB_ADJUDICATION_EXECUTED.md",
+      "sha256": "d8793be2cf08dc337f50f84b6d3605e8da95fa0878785b0e14bd0d60be50b59f"
+    },
+    {
+      "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+      "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de"
+    }
+  ]
+}

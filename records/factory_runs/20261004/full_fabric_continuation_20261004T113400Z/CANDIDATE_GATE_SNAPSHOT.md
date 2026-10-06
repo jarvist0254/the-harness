@@ -1,0 +1,13 @@
+# Full-fabric continuation: candidate gates
+
+The full goal remains four discrete 8GB cards in one integrated support core, useful real-model execution with unique device ownership and honest physical capacity, bounded workers and durable replay boundaries. Installed NVIDIA5070Ti plus shared-memory AMD and the small MLP are partial experimental evidence. Neither pure policy budgets nor four CPU RPC workers establish that full goal.
+
+Six independent Qwen jobs completed through the configured authenticated ModelStudio route, with zero tools or native child agents. Inventory, RPC supervisor, hardware validator, pinned llama operator/model specification, FreeCAD draft builder and full-model numerical fixture are frozen under their own task directories. Their HTTP and inference finish states are not product acceptance.
+
+Two actual Gemini reviews read the candidates and rejected concrete defects. `GEMINI_ADJUDICATION.md` records confirmed findings and rejected suggestions. The supervisor, validator and CAD originals are rejected before execution. The llama operator spec is advisory, with missing bounds/full-model semantics. The Qwen C++ original is rejected by static source analysis before execution.
+
+Grok's inventory editor returned twelve exact unique replacements. A staging-only reconstruction passes syntax and runs twenty-six actual-import tests: twenty-five pass, one correctly refuses fractional data but its expected refusal reason differs. `grok_inventory_edit/test_receipt.json` preserves the failure. The original source and tests remain unchanged. Root may adjudicate the narrow expectation and independently gate the reconstructed adapter. AMD/Intel schema adapters are declared fixtures, not verified current live vendor CLI output.
+
+The Grok C++ edit uses the authoritative clean pinned headers confirmed by Luna and the root, not modified build headers. It is still pending at this snapshot. All generated source is untrusted until independent compile and hardware gates. The postprocessed-logit corruption option is a numerical comparator negative control, not a compute/transport corruption control. Model offload configuration and load logs alone do not prove every compute command's backend or measured per-layer physical residency; qualification labels must state this limitation.
+
+No live Factory/PyRe source, old queue, driver, Store, global auth or deployed product was modified. Candidate artifacts and evidence are the only writes performed by this agent. Every provider call has its own raw response/usage and terminal receipt; cache/thinking fields must not be counted twice or translated into monthly quota dashboard units.

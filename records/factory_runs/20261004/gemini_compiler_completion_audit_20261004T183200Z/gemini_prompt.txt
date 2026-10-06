@@ -1,0 +1,976 @@
+You are Gemini doing an independent, source-only correctness review for a bounded compiler-completion adapter. Review the actual candidate below against the exact specification and actual caller gates. Do not execute code, use tools, read other files, modify files, launch jobs, or make provider calls. All relevant source and evidence are embedded here.
+
+Candidate SHA256: 0E5292D39A9D9AFB0D8787904F51D3815C3723694E44F4AB964D8E6BD6E0F564
+ROOT task spec SHA256: 390080FA8E3D17AF2ACF983E94F713C6479BD118178CA3491A51ECF1E3E5FAD2
+Pinned supervisor SHA256: FA907E8637870521B573922F6E939E56E388439FA61DC1A76FBEB53F7AD45EF3
+Actual caller native_driver SHA256: E4327908E0DA6F668BA7AE51CF92FB641BB7C4E02DDE019722A863B8217C3C1D
+Actual attempt-5 build controller SHA256: 23EEBE110753C4BF5D929D6B3D38EB4209ED755FBB11974ED2064AAF8B669137
+
+Review tasks:
+1. Independently audit the candidate hook and its limits against the spec, especially wait/exit semantics, boundary checks, event/deadline races, unsupported worker/policy configurations, exceptions, and import/install side effects.
+2. Independently trace the actual caller acceptance path. Determine whether a custom hook status can be accepted if `_shutdown` or log/handle cleanup is uncertain. Distinguish a status-label concern from an actual false-accept path. Cite exact lines from the embedded supervisor excerpts and native driver/controller.
+3. Assess the actual Muse findings below, which came from a different earlier Qwen candidate, against this local fallback and the caller gates. For each finding either confirm as a real candidate defect, mark not applicable/already handled, or explain what additional discriminating evidence is needed. Do not repeat a concern as a bug without tracing it into an acceptance decision.
+4. Check the supplied independent pure-test sources and 22-test green log only as supporting evidence. Identify missed concrete cases. Do not infer native behavior from pure tests.
+5. Return only confirmed, actionable findings in the required schema. If no confirmed defect exists, return an empty findings array and state what remains unverified in safety_checks. Do not prescribe broad rewrite, relax deadlines, or claim GPU/build success.
+
+EXACT ROOT TASK SPEC:
+# Compiler-only completion adapter specification
+
+ROOT design decision: a synchronous, pinned CMake configure/build root returning zero establishes compiler-root completion. Resident compiler telemetry/PDB auxiliaries may then be terminated through that root's owned Job. This is a distinct completion policy, not natural whole-tree completion. Original supervisor files, failed receipts, source and system installation stay unchanged.
+
+Actual diagnostic evidence: attempt4 configure root returned zero after successful generation, but owned Job membership retained vctip.exe and mspdbsrv.exe. The existing supervisor correctly returned TIMEOUT under its natural-drain policy. Twenty-three complete typed samples observed both members; final cleanup killed the owned Job, recorded active zero and CLEANUP. No names-based process control occurred.
+
+Implement a small side-effect-free Python adapter installed only into a private imported copy of the pinned build supervisor. Never change the generic original file. Replace that private module's _wait_run with a compiler-only hook; leave creation, suspended assignment, launch, shutdown, log readers, typed APIs, durability and close handling unchanged. No native API/filesystem/process actions at import or install.
+
+Only one root and kill_on_close are supported by this adapter. Reject inconsistent records rather than generalizing it to ordinary workers, asynchronous launchers, production processes or multiple workers. The admitted caller still pins the exact CMake batch command, compiler tools, source, adapter, supervisor and admission. It checks compiler-root outcome and cleanup independently before admitting DLLs.
+
+The hook signature matches the pinned _wait_run. Use its supplied dependencies and already-owned root process handle. Check cancellation, stream overflow or bad_read, and monotonic deadline before waits and again before returning success. WaitForSingleObject must be zero for the owned root, not merely an absent PID. WAIT_TIMEOUT keeps waiting with a bounded small sleep; other statuses or exceptions produce UNKNOWN. Query GetExitCodeProcess through that same handle; nonzero is FAILED, exceptions UNKNOWN. Do not inspect or terminate processes by PID/name, reopen process control handles, kill anything inside this wait hook, suppress an exception, or weaken a deadline/log bound.
+
+After a verified zero root exit, return COMPILER_ROOT_EXITED_CLEANUP_REQUIRED with an explicit reason. Do not return PROCESS_COMPLETED. Existing run_workers therefore takes its existing TerminateJobObject/shutdown path. This hook never claims auxiliaries exited naturally, cleanup succeeded, log drain succeeded, DLLs exist, numerical results passed or an arbitrary tree is certified.
+
+A caller may accept a compiler stage only after receiving the explicit compiler-root status, root exit zero with assigned/resumed true, final job_active_count zero, drain_proof CLEANUP, complete bounded log capture with no overflow, no ambiguous handle/read/close state, unchanged input/admission/source/tool pins and verified owned-root reaping. A failed cleanup remains refused. The caller records the different completion semantics and keeps whole_tree_certificate false. No GPU execution is authorized by the adapter.
+
+Supply independent pure tests using injected fake wait/exit/clock/event behavior. Required discriminating controls: root success with auxiliaries still present requests cleanup (not natural completion); nonzero root; root timeout; cancellation before/after exit; log overflow or bad reader before/after exit; unexpected wait/exit query exceptions; wrong worker count or policy. Check exact returned state, cleanup-not-performed-in-hook and no import-time native/process calls. Do not execute the native Windows APIs in these pure tests.
+
+A separately ROOT-admitted native CPU-only fixture must then test one successful root, a successful root with a resident child holding inherited pipes, a failed root, a live root timeout, and cancellation. It must use owned Job/retained-handle cleanup, finite deadlines, tiny bounded memory and logs, exact markers/PID observations, cleanup failure refusal, and source/pin preservation. Plan that fixture; do not launch it from a provider response.
+
+Deliver strict JSON with exactly adapter_source, pure_tests_source, rationale, safety_checks, native_fixture_plan. The first two are bounded complete Python source strings. The other fields are nonempty arrays of strings. No markdown fences, auth/driver/environment/global Factory modifications, live product edits, candidate execution or provider tools. The root will parse, inspect, stage and test separately. No tolerance or workload change is permitted.
+
+
+ACTUAL CANDIDATE SOURCE:
+"""Independent local compiler-only fallback. No import/install native actions.
+ROOT must separately admit this exact source before any native use.
+"""
+def install(private_module):
+    monotonic = private_module._monotonic
+    sleep = private_module._sleep
+    def wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by):
+        if spec.get('policy') != 'kill_on_close' or len(spec.get('workers', [])) != 1 or len(owned) != 1:
+            return 'UNKNOWN', 'compiler_policy_mismatch'
+        rec = owned[0]
+        if rec.get('assigned') is not True or rec.get('resumed') is not True or rec.get('ph') is None:
+            return 'UNKNOWN', 'compiler_root_ownership'
+        handle = rec['ph']
+        def guards():
+            if rec.get('assigned') is not True or rec.get('resumed') is not True or rec.get('ph') != handle:
+                return 'UNKNOWN', 'compiler_root_ownership'
+            if cancel_event.is_set():
+                return 'CANCELLED', 'cancelled'
+            if overflow_event.is_set() or any(slot.get('overflow') for slot in slots):
+                return 'FAILED', 'LOG_LIMIT'
+            if any(slot.get('bad_read') for slot in slots):
+                return 'UNKNOWN', 'bad_read'
+            if monotonic() >= dead_by:
+                return 'TIMEOUT', 'deadline'
+            return None
+        wapi = deps['_winapi']
+        while True:
+            guarded = guards()
+            if guarded is not None:
+                return guarded
+            try:
+                waited = wapi.WaitForSingleObject(handle, 0)
+            except Exception:
+                return 'UNKNOWN', 'wait_failed'
+            if type(waited) is not int:
+                return 'UNKNOWN', 'wait_failed'
+            rec['wait'] = waited
+            guarded = guards()
+            if guarded is not None:
+                return guarded
+            if waited == 258:
+                sleep(0.02)
+                continue
+            if waited != 0:
+                return 'UNKNOWN', 'wait_failed'
+            try:
+                exit_code = wapi.GetExitCodeProcess(handle)
+            except Exception:
+                return 'UNKNOWN', 'exit_query_failed'
+            if type(exit_code) is not int:
+                return 'UNKNOWN', 'exit_query_failed'
+            rec['exit_code'] = exit_code
+            # Actual terminal guards run after the successful exit query too.
+            guarded = guards()
+            if guarded is not None:
+                return guarded
+            if exit_code != 0:
+                return 'FAILED', 'nonzero_exit'
+            return 'COMPILER_ROOT_EXITED_CLEANUP_REQUIRED', 'compiler_root_exited_zero'
+    private_module._wait_run = wait_run
+
+
+PINNED SUPERVISOR `_shutdown` AND `run_workers` SOURCE EXCERPTS:
+PINNED SUPERVISOR _shutdown and run_workers EXCERPTS WITH FILE LINE NUMBERS
+
+544: def _shutdown(deps, kernel, job, owned, terminate, deadline):
+545:     wapi = deps["_winapi"]
+546:     terminate_ok = True
+547:     if terminate:
+548:         for rec in owned:
+549:             if rec["ph"] is not None:
+550:                 try:
+551:                     before_termination = wapi.WaitForSingleObject(rec["ph"], 0)
+552:                 except Exception:
+553:                     before_termination = None
+554:                     terminate_ok = False
+555:                 if before_termination == _WAIT_OBJECT_0:
+556:                     # A signaled process handle remains signaled after exit.
+557:                     # TerminateProcess on that exited object returns access
+558:                     # denied; skip that redundant call, retain the exit status,
+559:                     # and still terminate/query the Job to cover descendants.
+560:                     continue
+561:                 if before_termination != _WAIT_TIMEOUT:
+562:                     terminate_ok = False
+563:                 try:
+564:                     terminated = wapi.TerminateProcess(rec["ph"], 1)
+565:                 except Exception:
+566:                     terminate_ok = False
+567:                 else:
+568:                     if terminated is False or terminated == 0:
+569:                         terminate_ok = False
+570:         try:
+571:             job_terminated = kernel.TerminateJobObject(job, 1)
+572:         except Exception:
+573:             terminate_ok = False
+574:         else:
+575:             if not job_terminated:
+576:                 terminate_ok = False
+577:     waits_ok = True
+578:     for rec in owned:
+579:         if rec["ph"] is None:
+580:             waits_ok = False
+581:             continue
+582:         left = int(max(0.0, deadline - _monotonic()) * 1000)
+583:         try:
+584:             waited = wapi.WaitForSingleObject(rec["ph"], left)
+585:         except Exception:
+586:             waits_ok = False
+587:             rec["wait"] = None
+588:             continue
+589:         rec["wait"] = waited
+590:         if waited != _WAIT_OBJECT_0:
+591:             waits_ok = False
+592:             continue
+593:         try:
+594:             rec["exit_code"] = wapi.GetExitCodeProcess(rec["ph"])
+595:         except Exception:
+596:             waits_ok = False
+597:     counts = None
+598:     try:
+599:         counts = _accounting(deps, kernel, job)
+600:     except Exception:
+601:         counts = None
+602:     if counts is None or not waits_ok or not terminate_ok:
+603:         return (None if counts is None else counts[0]), "UNKNOWN_DRAIN"
+604:     active = counts[0]
+605:     if active != 0:
+606:         return active, "UNKNOWN_DRAIN"
+607:     return active, "CLEANUP"
+608: 
+609: 
+
+681: def run_workers(manifest, output_root, *, cancel_event=None):
+682:     if not _windows():
+683:         raise NotImplementedError("NOT_IMPLEMENTED")
+684:     if cancel_event is None:
+685:         cancel_event = threading.Event()
+686:     spec = _validate(manifest, output_root)
+687:     deps = _imports()
+688:     kernel = _kernel(deps)
+689:     job = _open_job(deps, kernel, spec["run_id"])
+690:     owned, threads, slots = [], [], []
+691:     overflow_event = threading.Event()
+692:     status, reason, active, drain = "UNKNOWN", "init", None, "UNKNOWN_DRAIN"
+693:     result = None
+694:     try:
+695:         spec["output"].mkdir()
+696:         try:
+697:             _journal(spec, {"event": "start", "policy": spec["policy"]})
+698:         except Exception:
+699:             status, reason = "FAILED", "UNKNOWN_DURABILITY"
+700:             raise
+701:         if spec["policy"] == "kill_on_close":
+702:             _enable_kill_on_close(deps, kernel, job)
+703:         status, reason = _launch_and_wait(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event)
+704:         active = spec.get("active")
+705:     except WindowsJobError as exc:
+706:         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+707:             status, reason = "FAILED", exc.code
+708:     except Exception:
+709:         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+710:             status, reason = "FAILED", "EXCEPTION"
+711:     finally:
+712:         cleanup_deadline = _monotonic() + 8.0
+713:         try:
+714:             try:
+715:                 active2, drain = _shutdown(deps, kernel, job, owned, status != "PROCESS_COMPLETED", cleanup_deadline)
+716:                 if active2 is not None:
+717:                     active = active2
+718:             except Exception:
+719:                 drain = "UNKNOWN_DRAIN"
+720:             join_certain = False
+721:             try:
+722:                 join_certain = _join(threads, 2, cleanup_deadline)
+723:             except Exception:
+724:                 join_certain = False
+725:             readers_unresolved = join_certain is not True
+726:             for thread in threads:
+727:                 try:
+728:                     if thread.is_alive():
+729:                         readers_unresolved = True
+730:                 except Exception:
+731:                     readers_unresolved = True
+732:             if readers_unresolved or drain not in ("CLEANUP", "UNKNOWN_DRAIN"):
+733:                 drain = "UNKNOWN_DRAIN"
+734:             if drain != "CLEANUP" and status == "PROCESS_COMPLETED":
+735:                 status, reason = "UNKNOWN", "proof_incomplete"
+736:             if any(
+737:                 slot.get("bad_read") or slot.get("close_uncertain") or slot.get("closed") is not True
+738:                 for slot in slots
+739:             ):
+740:                 if status == "PROCESS_COMPLETED":
+741:                     status, reason = "UNKNOWN", "bad_read" if any(slot.get("bad_read") for slot in slots) else "close_uncertain"
+742:                 drain = "UNKNOWN_DRAIN"
+743:             owned_closed = False
+744:             try:
+745:                 owned_closed = _close_owned(deps["_winapi"], owned)
+746:             except Exception:
+747:                 owned_closed = False
+748:             if owned_closed is not True or spec.get("parent_close_uncertain") or any(rec.get("close_uncertain") for rec in owned):
+749:                 drain = "UNKNOWN_DRAIN"
+750:                 if status == "PROCESS_COMPLETED":
+751:                     status, reason = "UNKNOWN", "close_uncertain"
+752:             job_close_ok = True
+753:             try:
+754:                 jres = kernel.CloseHandle(job)
+755:                 if not jres:
+756:                     job_close_ok = False
+757:             except Exception:
+758:                 job_close_ok = False
+759:             if not job_close_ok:
+760:                 if status == "PROCESS_COMPLETED":
+761:                     status, reason = "UNKNOWN", "job_close_failed"
+762:                 drain = "UNKNOWN_DRAIN"
+763:             try:
+764:                 if spec["output"].is_dir():
+765:                     result = _emit(spec, status, reason, owned, slots, active, drain)
+766:                 else:
+767:                     result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": "UNKNOWN_DRAIN", "whole_tree_certificate": False, "reattach": False, "replay": False}
+768:             except Exception:
+769:                 if status not in ("CANCELLED", "TIMEOUT"):
+770:                     status, reason = "FAILED", "UNKNOWN_DURABILITY"
+771:                 result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "durability": "UNKNOWN_DURABILITY", "whole_tree_certificate": False, "reattach": False, "replay": False}
+772:                 # Never leave a prior successful receipt after a failed terminal
+773:                 # journal commit. This best-effort refusal is not a durability
+774:                 # certificate; a failed write remains UNKNOWN_DURABILITY.
+775:                 try:
+776:                     if spec["output"].is_dir():
+777:                         _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", json.dumps(result).encode())
+778:                 except Exception:
+779:                     pass
+780:         except Exception:
+781:             pass
+782:     if result is None:
+783:         result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "whole_tree_certificate": False, "reattach": False, "replay": False}
+784:     return result
+785: 
+786: 
+
+ACTUAL ACCEPTANCE CALLER SOURCES:
+--- native_driver.py ---
+"""Prepared native CPU driver. Execution requires separately pinned ROOT admission."""
+import argparse, hashlib, importlib.util, json, os, pathlib, subprocess, sys, threading, time
+HERE=pathlib.Path(__file__).resolve().parent
+BASE=pathlib.Path(r'E:\the_harness\records\root_continuation_20261004\contained_build_policy_20261004T160430Z\contained_build_supervisor.py')
+BASE_SHA='fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3'
+PY_SHA='3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260'
+CUSTOM='COMPILER_ROOT_EXITED_CLEANUP_REQUIRED'
+CASES=('success','resident_success','resident_failure','timeout','cancel')
+def sha(p):return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+def pairs(xs):
+ d={}
+ for k,v in xs:
+  if k in d:raise ValueError('duplicate JSON key')
+  d[k]=v
+ return d
+def read(p):return json.loads(pathlib.Path(p).read_text(),object_pairs_hook=pairs)
+def write(p,data):
+ p=pathlib.Path(p);tmp=p.with_suffix('.part')
+ with tmp.open('w',encoding='utf-8') as f:json.dump(data,f,indent=2);f.flush();os.fsync(f.fileno())
+ os.replace(tmp,p)
+def validate_result(case,r,restart,success_reason):
+ if case not in CASES:raise ValueError('unknown fixture case')
+ status=CUSTOM if case in ('success','resident_success') else {'resident_failure':'FAILED','timeout':'TIMEOUT','cancel':'CANCELLED'}[case]
+ if r.get('status')!=status:raise ValueError('exact terminal status')
+ if case in ('success','resident_success') and (not isinstance(success_reason,str) or not success_reason or r.get('failure_reason')!=success_reason):raise ValueError('exact compiler-root reason')
+ if case in ('resident_failure','timeout','cancel') and r.get('failure_reason')!={'resident_failure':'nonzero_exit','timeout':'deadline','cancel':'cancelled'}[case]:raise ValueError('terminal reason')
+ if type(r.get('job_active_count')) is not int or r['job_active_count']!=0 or r.get('drain_proof')!='CLEANUP' or r.get('whole_tree_certificate') is not False or r.get('durability')=='UNKNOWN_DURABILITY':raise ValueError('cleanup/durability refusal')
+ if r.get('containment_policy')!='kill_on_close' or r.get('reattach') is not False or r.get('replay') is not False:raise ValueError('policy refusal')
+ workers=r.get('workers',[])
+ if len(workers)!=1:raise ValueError('one owned root required')
+ w=workers[0]
+ if w.get('assigned') is not True or w.get('resumed') is not True or type(w.get('pid')) is not int or w['pid']<=0 or type(w.get('exit_code')) is not int:raise ValueError('owned root state')
+ if case in ('success','resident_success') and w['exit_code']!=0:raise ValueError('root zero required')
+ if case=='resident_failure' and w['exit_code']!=3:raise ValueError('root3 required')
+ if case in ('timeout','cancel') and w['exit_code']!=1:raise ValueError('running root termination not established')
+ if any(restart.get(k)!=r.get(k) for k in ('run_id','status','failure_reason','workers','logs','job_active_count','drain_proof','containment_policy')) or restart.get('replay') is not False or restart.get('reattach') is not False or restart.get('whole_tree_certificate') is not False:raise ValueError('restart refusal')
+ logs=r.get('logs',{})
+ if set(logs)!={w['worker_id']}:raise ValueError('root logs')
+ log=logs[w['worker_id']];markers={}
+ for stream in ('stdout','stderr'):
+  if log.get(stream+'_overflow') is not False or type(log.get(stream+'_bytes')) is not int or not 0<=log[stream+'_bytes']<=4096:raise ValueError('bounded stream refusal')
+  if not isinstance(log.get(stream),str):raise ValueError('missing captured stream')
+  rows=[json.loads(line,object_pairs_hook=pairs) for line in log[stream].splitlines()]
+  expected=['child','root'] if case in ('resident_success','resident_failure') else ['root']
+  if [x.get('role') for x in rows]!=expected:raise ValueError('complete marker sequence')
+  for row in rows:
+   if row.get('fixture')!='COMPILER_COMPLETION_CPU_V1' or row.get('stream')!=stream or type(row.get('pid')) is not int or row['pid']<=0:raise ValueError('marker origin')
+  root=rows[-1]
+  if root['pid']!=w['pid'] or root.get('mode')!=case:raise ValueError('actual root marker')
+  if len(rows)==2 and (rows[0].get('mode')!='resident_child' or rows[0].get('hold_seconds')!=60 or rows[0]['pid']!=root.get('owned_child_pid') or rows[0]['pid']==w['pid']):raise ValueError('actual resident-child marker')
+  markers[stream]=rows
+ if [{k:v for k,v in x.items() if k!='stream'} for x in markers['stdout']]!=[{k:v for k,v in x.items() if k!='stream'} for x in markers['stderr']]:raise ValueError('stream markers mismatch')
+ return {'root_pid':w['pid'],'child_pid':markers['stdout'][0]['pid'] if case in ('resident_success','resident_failure') else None}
+def load(path,name):
+ spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+def gate(args):
+ if sha(args.admission)!=args.admission_sha256:raise ValueError('external ROOT admission pin')
+ a=read(args.admission)
+ if a.get('authorization')!='ROOT_COMPILER_CPU_FIXTURE_ADMITTED':raise ValueError('not natively admitted')
+ if str(pathlib.Path(args.adapter).resolve())!=a.get('adapter_path') or args.adapter_sha256!=a.get('adapter_sha256') or args.install_symbol!=a.get('install_symbol'):raise ValueError('actual adapter binding')
+ files={'driver':pathlib.Path(__file__),'worker':HERE/'worker.py','supervisor':BASE,'adapter':pathlib.Path(args.adapter),'interpreter':pathlib.Path(sys.executable)}
+ pins={k:sha(v) for k,v in files.items()}
+ if pins['supervisor']!=BASE_SHA or pins['interpreter']!=PY_SHA or any(pins[k]!=a.get(k+'_sha256') for k in files):raise ValueError('exact runtime source pins')
+ return a,files,pins
+def presence(pid):
+ c=subprocess.run([r'C:\Windows\System32\tasklist.exe','/FI','PID eq '+str(pid)],capture_output=True,timeout=3,creationflags=subprocess.CREATE_NO_WINDOW)
+ text=c.stdout.decode(errors='replace');return {'pid':pid,'absent':c.returncode==0 and 'No tasks are running' in text,'exit':c.returncode,'stdout':text,'scope':'Point-in-time read-only lookup, no PID control'}
+def run_case_child(args):
+ a,files,pins=gate(args);folder=pathlib.Path(args.case_dir).resolve(strict=True)
+ if (HERE/'native_runs').resolve() not in folder.parents:raise ValueError('owned case confinement')
+ module=load(BASE,'private_pinned_compiler_supervisor');adapter=load(args.adapter,'actual_root_admitted_adapter')
+ install=getattr(adapter,args.install_symbol);old_wait=module._wait_run;install(module)
+ if module._wait_run is old_wait:raise ValueError('adapter did not install private hook')
+ cancel=threading.Event();stop=threading.Event();cancel_error=[];thread=None
+ if args.case=='cancel':
+  def cancel_after_ready():
+   end=time.monotonic()+1
+   while not stop.is_set():
+    if (folder/'root_ready.json').exists():
+     if stop.wait(.1):return
+     cancel.set();return
+    if time.monotonic()>=end:cancel_error.append('root readiness timeout');cancel.set();return
+    stop.wait(.005)
+  thread=threading.Thread(target=cancel_after_ready,daemon=True);thread.start()
+ manifest={'version':1,'run_id':'compiler_'+args.case,'workers':[{'worker_id':args.case,'argv':[sys.executable,'-B',str(files['worker']),'--mode',args.case,'--case-dir',str(folder)],'executable_sha256':pins['interpreter'],'cwd':str(HERE)}],'deadline_seconds':1 if args.case=='timeout' else 5,'startup_seconds':1,'log_limit_bytes':4096,'containment_policy':'kill_on_close'}
+ try:r=module.run_workers(manifest,str(folder/'supervisor'),cancel_event=cancel)
+ finally:
+  stop.set()
+  if thread is not None:thread.join(timeout=1)
+ restart=module.restart_receipt(str(folder/'supervisor'),manifest['run_id']);ids=validate_result(args.case,r,restart,a['success_reason'])
+ if cancel_error or (thread is not None and thread.is_alive()):raise ValueError('cancellation readiness refusal')
+ for role,pid in (('root',ids['root_pid']),('child',ids['child_pid'])):
+  if pid is None:continue
+  ready=read(folder/(role+'_ready.json'))
+  if ready!={'role':role,'mode':'resident_child' if role=='child' else args.case,'pid':pid}:raise ValueError('actual READY binding')
+ for log in r['logs'].values():
+  for stream in ('stdout','stderr'):
+   path=(folder/'supervisor'/log[stream+'_path']).resolve(strict=True)
+   if (folder/'supervisor').resolve() not in path.parents or path.read_bytes().decode('utf-8',errors='replace')!=log[stream] or path.stat().st_size!=log[stream+'_bytes']:raise ValueError('actual stream files')
+ checks=[presence(pid) for pid in ids.values() if pid is not None]
+ after={k:sha(v) for k,v in files.items()}
+ if after!=pins or sha(args.admission)!=args.admission_sha256 or not all(x['absent'] for x in checks):raise ValueError('pins/PID refusal')
+ write(folder/'case_result.json',{'case':args.case,'accepted':True,'result':r,'restart':restart,'pins_before':pins,'pins_after':after,'pid_checks':checks,'scope':'Actual bounded CPU fixture only; not GPU or arbitrary controller-loss certification'})
+ return 0
+def bounded_child(command,folder,timeout):
+ proc=subprocess.Popen(command,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,creationflags=subprocess.CREATE_NO_WINDOW)
+ state={'total':0,'overflow':False,'errors':[]};lock=threading.Lock();threads=[]
+ def capture(pipe,name):
+  try:
+   with (folder/name).open('wb') as f:
+    while True:
+     block=pipe.read(4096)
+     if not block:break
+     with lock:
+      keep=max(0,min(len(block),131072-state['total']));state['total']+=keep;state['overflow']|=keep<len(block)
+     f.write(block[:keep])
+  except Exception as exc:state['errors'].append(type(exc).__name__)
+  finally:pipe.close()
+ for pipe,name in ((proc.stdout,'controller.stdout.log'),(proc.stderr,'controller.stderr.log')):
+  t=threading.Thread(target=capture,args=(pipe,name),daemon=True);t.start();threads.append(t)
+ end=time.monotonic()+timeout;timed=False
+ while proc.poll() is None:
+  if state['overflow'] or time.monotonic()>=end:timed=True;proc.kill();break
+  time.sleep(.01)
+ proc.wait(timeout=3)
+ for t in threads:t.join(timeout=1)
+ check=presence(proc.pid)
+ return {'controller_pid':proc.pid,'controller_exit':proc.returncode,'outer_timeout':timed,'capture':state,'reader_joined':not any(t.is_alive() for t in threads),'controller_pid_check':check}
+def main():
+ parser=argparse.ArgumentParser();parser.add_argument('--adapter',required=True);parser.add_argument('--adapter-sha256',required=True);parser.add_argument('--install-symbol',required=True);parser.add_argument('--admission',required=True);parser.add_argument('--admission-sha256',required=True);parser.add_argument('--run',action='store_true');parser.add_argument('--case',choices=CASES);parser.add_argument('--case-dir');args=parser.parse_args()
+ if not args.run:print(json.dumps({'status':'NOT_CHECKED','reason':'explicit separate ROOT native admission and --run required'}));return 2
+ if os.name!='nt':raise ValueError('Windows fixture only')
+ a,files,pins=gate(args)
+ if args.case:return run_case_child(args)
+ runs=HERE/'native_runs';runs.mkdir(exist_ok=True);folder=runs/('suite_'+str(time.time_ns()));folder.mkdir();end=time.monotonic()+50;cases=[];ok=False
+ try:
+  for case in CASES:
+   cf=folder/case;cf.mkdir();remaining=end-time.monotonic()
+   if remaining<=0:raise TimeoutError('50-second work budget, 60-second outer admission required')
+   cmd=[sys.executable,'-B',str(pathlib.Path(__file__).resolve()),'--run','--case',case,'--case-dir',str(cf),'--adapter',args.adapter,'--adapter-sha256',args.adapter_sha256,'--install-symbol',args.install_symbol,'--admission',args.admission,'--admission-sha256',args.admission_sha256]
+   outer=bounded_child(cmd,cf,min(15,remaining));outer['case']=case;cases.append(outer)
+   if outer['controller_exit']!=0 or outer['outer_timeout'] or outer['capture']['overflow'] or outer['capture']['errors'] or not outer['reader_joined'] or not outer['controller_pid_check']['absent']:raise ValueError('actual case controller refusal '+case)
+   actual=read(cf/'case_result.json');validate_result(case,actual['result'],actual['restart'],a['success_reason'])
+   if actual['pins_before']!=pins or actual['pins_after']!=pins or not all(x.get('absent') is True for x in actual['pid_checks']):raise ValueError('actual case evidence refusal')
+   outer['actual']=actual
+  ok=True
+ finally:
+  integrity_error=None;after=None
+  try:
+   after={k:sha(v) for k,v in files.items()}
+   ok=ok and after==pins and sha(args.admission)==args.admission_sha256
+  except Exception as exc:
+   integrity_error=type(exc).__name__+': '+str(exc);ok=False
+  write(folder/'suite_receipt.json',{'status':'FIVE_CPU_FIXTURES_PASS' if ok else 'REFUSED','cases':cases,'pins_before':pins,'pins_after':after,'integrity_error':integrity_error,'scope':'Fixed compiler-root policy CPU fixtures only; no GPU/model/controller-loss certificate'})
+ print(json.dumps({'status':'FIVE_CPU_FIXTURES_PASS' if ok else 'REFUSED','suite_receipt':str(folder/'suite_receipt.json')}));return 0 if ok else 1
+if __name__=='__main__':raise SystemExit(main())
+
+--- controller_compiler_completion_attempt5.py ---
+"""DRAFT root-admitted BUILD_ONLY variant controller; no execution at import.
+Must not execute before actual variant hash/pure+native gates are admitted by root.
+"""
+import argparse,hashlib,importlib.util,json,os,pathlib,threading,time,datetime,subprocess,sys
+HERE=pathlib.Path(__file__).resolve().parent
+def digest(p):
+ h=hashlib.sha256()
+ with pathlib.Path(p).open('rb') as f:
+  for data in iter(lambda:f.read(1048576),b''):h.update(data)
+ return h.hexdigest()
+def read_json(p):
+ def pairs(xs):
+  d={}
+  for k,v in xs:
+   if k in d:raise ValueError('duplicate keys')
+   d[k]=v
+  return d
+ return json.loads(pathlib.Path(p).read_text(),object_pairs_hook=pairs)
+def atomic_json(path,obj):
+ path=pathlib.Path(path);tmp=path.with_suffix('.part')
+ with tmp.open('w',encoding='utf-8') as f:json.dump(obj,f,indent=2);f.flush();os.fsync(f.fileno())
+ os.replace(tmp,path)
+def qualified_receipts(a):
+ variant=a['variant_sha256']
+ keys=('pure44_receipt','boundary_receipt','native_suite_receipt')
+ for key in keys:
+  if digest(a[key+'_path'])!=a[key+'_sha256']:raise ValueError('qualification receipt pin '+key)
+ pure=read_json(a['pure44_receipt_path'])
+ if pure.get('source_sha256')!=variant or pure.get('tests_run')!=44 or pure.get('failures')!=0 or pure.get('errors')!=0 or pure.get('actual_native_process_calls')!=[] or pure.get('ast_import_gate')!='PASS':raise ValueError('pure44 actual result')
+ if len(pure.get('outcomes',[]))!=44 or any(x.get('outcome')!='PASS' for x in pure['outcomes']):raise ValueError('pure44 outcomes')
+ boundary=read_json(a['boundary_receipt_path'])
+ if boundary.get('case')!='boundary' or boundary.get('status')!='PURE_TESTS_PASS' or boundary.get('exit_code')!=0 or boundary.get('hashes_unchanged') is not True or boundary.get('hashes_before',{}).get('candidate')!=variant or boundary.get('hashes_after',{}).get('candidate')!=variant or boundary.get('pid_absent_after_wait') is not True:raise ValueError('boundary actual result')
+ if digest(a['boundary_stderr_path'])!=a['boundary_stderr_sha256'] or b'Ran 5 tests' not in pathlib.Path(a['boundary_stderr_path']).read_bytes() or b'\nOK' not in pathlib.Path(a['boundary_stderr_path']).read_bytes():raise ValueError('boundary actual five tests')
+ native=read_json(a['native_suite_receipt_path'])
+ expected={'natural':('PROCESS_COMPLETED',None),'nonzero':('FAILED','nonzero_exit'),'timeout':('TIMEOUT','deadline'),'cancel':('CANCELLED','cancelled'),'overflow':('FAILED','LOG_LIMIT')}
+ if native.get('source_sha256')!=variant or native.get('overall')!='FIXTURE_EXPECTATIONS_MET' or native.get('containment_policy')!='kill_on_close' or [x.get('case_id') for x in native.get('cases',[])]!=list(expected):raise ValueError('native actual five cases')
+ for case in native['cases']:
+  result=case.get('supervisor',{});name=case['case_id'];status,reason=expected[name]
+  if case.get('outer_failure') or case.get('controller_timeout') is not False or case.get('controller_exit_code')!=0 or case.get('controller_pid_absent_after_wait') is not True or case.get('worker_pids_absent_after_cleanup') is not True or case.get('source_and_runtime_hashes_unchanged') is not True or case.get('controller_source_hash_after')!=variant or case.get('restart_commit_verified') is not True or case.get('restart_matches') is not True or case.get('capture_limit_ok') is not True:raise ValueError('native case refusal '+name)
+  if result.get('status')!=status or (reason is not None and result.get('failure_reason')!=reason) or result.get('drain_proof')!='CLEANUP' or result.get('job_active_count')!=0 or result.get('whole_tree_certificate') is not False:raise ValueError('native semantic gates '+name)
+  before=case.get('source_and_runtime_hashes_before',{});after=case.get('source_and_runtime_hashes_after',{})
+  if before!=after or before.get('source')!=variant or before.get('worker')!=native.get('worker_sha256') or case.get('controller_worker_hash_after')!=native.get('worker_sha256'):raise ValueError('native raw source/runtime pins '+name)
+  restart=case.get('restart_receipt',{})
+  if any(restart.get(k)!=result.get(k) for k in ('run_id','status','failure_reason','drain_proof','workers','logs')) or restart.get('reattach') is not False or restart.get('replay') is not False or restart.get('job_active_count')!=0 or restart.get('whole_tree_certificate') is not False:raise ValueError('native durable restart '+name)
+  workers=result.get('workers',[])
+  if len(workers)!=(4 if name=='natural' else 1) or any(x.get('assigned') is not True or x.get('resumed') is not True for x in workers):raise ValueError('native ownership '+name)
+  if name=='natural':
+   if any(x.get('exit_code')!=0 for x in workers) or len(result.get('logs',{}))!=4:raise ValueError('natural exits/log count')
+   for worker in workers:
+    log=result['logs'].get(worker['worker_id'],{})
+    if log.get('stdout','').strip()!=worker['worker_id']+':stdout' or log.get('stderr','').strip()!=worker['worker_id']+':stderr' or log.get('stdout_overflow') is not False or log.get('stderr_overflow') is not False:raise ValueError('natural actual outputs')
+  if name=='nonzero' and workers[0].get('exit_code')!=3:raise ValueError('nonzero discriminator')
+  if name=='overflow':
+   log=result.get('logs',{}).get(workers[0]['worker_id'],{})
+   if log.get('stdout_overflow') is not True or log.get('stdout_bytes')!=1024:raise ValueError('overflow discriminator')
+ return {'pure44':44,'boundary':5,'native_fixed_cases':5,'source_sha256':variant,'scope':'Fixed fixtures only; not a 600-second workload or arbitrary controller loss certification'}
+def main():
+ parser=argparse.ArgumentParser();parser.add_argument('--runtime-admission',required=True);parser.add_argument('--runtime-admission-sha256',required=True);args=parser.parse_args()
+ if digest(args.runtime_admission)!=args.runtime_admission_sha256:raise ValueError('trusted caller admission pin')
+ a=read_json(args.runtime_admission);required={'authorization','plan_sha256','controller_sha256','variant_path','variant_sha256','pure_controls_pass','native_admitted','derived_root','derived_manifest_sha256','configure_cmd_sha256','build_cmd_sha256','cmd_exe','cmd_exe_sha256','copied_clean_manifest_sha256','toolchain_original_pins_sha256','evidence_admission_snapshot_sha256','pure44_receipt_path','pure44_receipt_sha256','boundary_receipt_path','boundary_receipt_sha256','boundary_stderr_path','boundary_stderr_sha256','native_suite_receipt_path','native_suite_receipt_sha256','adapter_path','adapter_sha256','adapter_install_symbol','compiler_success_reason','compiler_native_suite_path','compiler_native_suite_sha256'}
+ if set(a)!=required or a['authorization']!='ROOT_BUILD_ONLY_NATIVE_ADMITTED' or a['pure_controls_pass'] is not True or a['native_admitted'] is not True:raise ValueError('strict admission')
+ if digest(HERE/'CONTRACT.json')!=a['plan_sha256'] or digest(__file__)!=a['controller_sha256']:raise ValueError('plan/controller binding')
+ cfg=read_json(HERE/'CONTRACT.json')
+ if a['variant_sha256']!='fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3' or cfg['containment']['base_sha256']!='3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c':raise ValueError('explicit ROOT-admitted FA907 variant and original3CB lineage binding')
+ qualification=qualified_receipts(a)
+ root=pathlib.Path(a['derived_root']).resolve()
+ if str(root).casefold()!=cfg['proposed_new_root'].casefold():raise ValueError('root confinement')
+ evidence=root/'evidence'
+ run_evidence=evidence/'attempt5_compiler_root_cleanup'
+ if run_evidence.exists():raise ValueError('fresh compiler completion attempt output directory required')
+ evidence_pins={'derived_manifest.json':a['derived_manifest_sha256'],'copied_clean_manifest.json':a['copied_clean_manifest_sha256'],'toolchain_original_pins.json':a['toolchain_original_pins_sha256'],'admission_snapshot.json':a['evidence_admission_snapshot_sha256']}
+ for name,pin in evidence_pins.items():
+  if digest(evidence/name)!=pin:raise ValueError('evidence pin '+name)
+ derived=read_json(evidence/'derived_manifest.json');original=read_json(evidence/'copied_clean_manifest.json');pins=read_json(evidence/'toolchain_original_pins.json')
+ def verify_all():
+  if digest(__file__)!=a['controller_sha256'] or digest(args.runtime_admission)!=args.runtime_admission_sha256 or digest(HERE/'CONTRACT.json')!=a['plan_sha256']:raise ValueError('controller/admission/plan changed')
+  for name,pin in evidence_pins.items():
+   if digest(evidence/name)!=pin:raise ValueError('evidence changed '+name)
+  qualified_receipts(a)
+  if digest(a['adapter_path'])!=a['adapter_sha256'] or digest(a['compiler_native_suite_path'])!=a['compiler_native_suite_sha256']:raise ValueError('compiler adapter/evidence pins changed')
+  if digest(HERE/'job_member_trace.py')!='8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd':raise ValueError('diagnostic helper changed')
+  for stage in ('configure','build'):
+   if digest(root/('build_owned_'+stage+'_attempt5.cmd'))!=a[stage+'_cmd_sha256']:raise ValueError('stage command changed '+stage)
+  for item in derived:
+   f=root/'source'/item['path']
+   if f.stat().st_size!=item['bytes'] or digest(f)!=item['sha256']:raise ValueError('derived source changed')
+  for item in original:
+   f=pathlib.Path(cfg['baseline_source'])/item['path']
+   if f.stat().st_size!=item['bytes'] or digest(f)!=item['sha256']:raise ValueError('original source changed')
+  for item in pins:
+   if digest(item['path'])!=item['sha256']:raise ValueError('original toolchain/DLL changed')
+ verify_all()
+ if digest(a['variant_path'])!=a['variant_sha256'] or digest(a['cmd_exe'])!=a['cmd_exe_sha256']:raise ValueError('runner executable pins')
+ for stage in ('configure','build'):
+  if digest(root/('build_owned_'+stage+'_attempt5.cmd'))!=a[stage+'_cmd_sha256']:raise ValueError('stage command pins')
+ # The exact ROOT-admitted variant has side-effect-free imports; native calls only in run_workers.
+ spec=importlib.util.spec_from_file_location('root_admitted_build_only_variant',a['variant_path']);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ if digest(HERE/'job_member_trace.py')!='8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd':raise ValueError('diagnostic helper pin')
+ run_evidence.mkdir()
+ probe_spec=importlib.util.spec_from_file_location('root_admitted_job_member_trace',HERE/'job_member_trace.py');probe_module=importlib.util.module_from_spec(probe_spec);probe_spec.loader.exec_module(probe_module)
+ tracer=probe_module.install(module,run_evidence)
+ if digest(a['adapter_path'])!=a['adapter_sha256'] or digest(a['compiler_native_suite_path'])!=a['compiler_native_suite_sha256'] or digest(HERE/'native_driver.py')!='e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d':raise ValueError('compiler policy pins')
+ check_spec=importlib.util.spec_from_file_location('pure_fixture_evidence_validator',HERE/'native_driver.py');check_module=importlib.util.module_from_spec(check_spec);check_spec.loader.exec_module(check_module)
+ suite=read_json(a['compiler_native_suite_path'])
+ if suite.get('status')!='FIVE_CPU_FIXTURES_PASS' or [x.get('case') for x in suite.get('cases',[])]!=list(check_module.CASES) or suite.get('pins_before')!=suite.get('pins_after') or suite['pins_before'].get('supervisor')!=a['variant_sha256'] or suite['pins_before'].get('adapter')!=a['adapter_sha256'] or suite['pins_before'].get('driver')!='e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d':raise ValueError('actual compiler CPU fixtures binding')
+ for case in suite['cases']:
+  actual=case.get('actual',{})
+  check_module.validate_result(case['case'],actual['result'],actual['restart'],a['compiler_success_reason'])
+  if case.get('controller_exit')!=0 or case.get('outer_timeout') is not False or case.get('reader_joined') is not True or case.get('capture',{}).get('overflow') is not False or case['capture'].get('errors')!=[] or case.get('controller_pid_check',{}).get('absent') is not True or actual.get('pins_before')!=suite['pins_before'] or actual.get('pins_after')!=suite['pins_before'] or not actual.get('pid_checks') or not all(x.get('absent') is True for x in actual['pid_checks']):raise ValueError('actual compiler case refusal')
+ adapter_spec=importlib.util.spec_from_file_location('root_admitted_compiler_completion_adapter',a['adapter_path']);adapter_module=importlib.util.module_from_spec(adapter_spec);adapter_spec.loader.exec_module(adapter_module)
+ getattr(adapter_module,a['adapter_install_symbol'])(module)
+ results=[];all_completed=False;failure=None;integrity_failure=None
+ try:
+  for stage,deadline in [('configure',120),('build',600)]:
+   out=run_evidence/(stage+'_contained');progress=run_evidence/(stage+'_progress.json');cancel=threading.Event();stop=threading.Event();start=time.monotonic();heartbeat_errors=[]
+   def heartbeat():
+    while not stop.is_set():
+     try:atomic_json(progress,{'stage':stage,'status':'RUNNING','elapsed_seconds':time.monotonic()-start,'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'deadline_seconds':deadline,'scope':'Compiler/shader only; root can read supervisor journal for owned PID'})
+     except Exception as e:heartbeat_errors.append(str(e));cancel.set();return
+     stop.wait(15)
+   manifest={'version':1,'run_id':'fp32_'+stage,'deadline_seconds':deadline,'startup_seconds':10,'log_limit_bytes':131072,'containment_policy':'kill_on_close','workers':[{'worker_id':stage,'argv':[a['cmd_exe'],'/d','/c',str(root/('build_owned_'+stage+'_attempt5.cmd'))],'executable_sha256':a['cmd_exe_sha256'],'cwd':str(root)}]}
+   atomic_json(run_evidence/(stage+'_manifest.json'),manifest)
+   beat=None
+   try:
+    beat=threading.Thread(target=heartbeat,daemon=True);beat.start()
+    result=module.run_workers(manifest,str(out),cancel_event=cancel)
+   finally:
+    stop.set()
+    if beat is not None and beat.ident is not None:beat.join(timeout=2)
+   if beat.is_alive() or heartbeat_errors:raise RuntimeError('uncertain heartbeat durability')
+   results.append(result);atomic_json(run_evidence/(stage+'_result_copy.json'),result)
+   verify_all()
+   if result.get('status')!='COMPILER_ROOT_EXITED_CLEANUP_REQUIRED' or result.get('failure_reason')!=a['compiler_success_reason'] or result.get('drain_proof')!='CLEANUP' or result.get('job_active_count')!=0 or result.get('whole_tree_certificate') is not False or result.get('durability')=='UNKNOWN_DURABILITY':raise RuntimeError('refused stage result/cleanup')
+   workers=result.get('workers',[])
+   if len(workers)!=1 or workers[0].get('exit_code')!=0 or workers[0].get('assigned') is not True or workers[0].get('resumed') is not True:raise RuntimeError('worker state')
+   for stream in ('stdout','stderr'):
+    if result.get('logs',{}).get(stage,{}).get(stream+'_overflow') is not False:raise RuntimeError('stream overflow/unknown')
+   check=subprocess.run([str(pathlib.Path(a['cmd_exe']).parent/'tasklist.exe'),'/FI','PID eq '+str(workers[0]['pid'])],capture_output=True,timeout=5,creationflags=subprocess.CREATE_NO_WINDOW)
+   presence=check.stdout.decode(errors='replace')
+   atomic_json(run_evidence/(stage+'_pid_absence.json'),{'pid':workers[0]['pid'],'tasklist_exit':check.returncode,'stdout':presence,'stderr':check.stderr.decode(errors='replace')})
+   if check.returncode!=0 or 'No tasks are running' not in presence:raise RuntimeError('PID absence not verified')
+   atomic_json(progress,{'stage':stage,'status':'COMPLETED','elapsed_seconds':time.monotonic()-start,'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'owned_worker_receipt':str(out)})
+  outputs=[]
+  for name in cfg['runtime_dlls']:
+   f=root/'build_attempt5/bin'/name
+   if not f.is_file():raise RuntimeError('missing fresh DLL '+name)
+   outputs.append({'path':str(f),'bytes':f.stat().st_size,'sha256':digest(f)})
+  atomic_json(run_evidence/'fresh_dll_manifest.json',outputs)
+  all_completed=True
+ except BaseException as exc:
+  failure=type(exc).__name__+': '+str(exc)
+  raise
+ finally:
+  try:
+   verify_all()
+   if digest(a['variant_path'])!=a['variant_sha256'] or digest(a['cmd_exe'])!=a['cmd_exe_sha256']:raise RuntimeError('runner/executable changed after build')
+  except BaseException as exc:
+   integrity_failure=type(exc).__name__+': '+str(exc);all_completed=False
+  result_write_failure=None
+  try:
+   atomic_json(run_evidence/'controller_result.json',{'diagnostic_trace':tracer.metadata,'stages':results,'all_completed':all_completed,'failure':failure,'integrity_failure':integrity_failure,'qualification':qualification,'controller_sha256':a['controller_sha256'],'root_admission_sha256':args.runtime_admission_sha256,'scope':'Fixed contained compiler tree only; no GPU run or reproducible-build claim'})
+  except BaseException as exc:
+   result_write_failure=type(exc).__name__+': '+str(exc)
+   print('controller result write failed: '+result_write_failure,file=sys.stderr)
+  if failure is None and (integrity_failure or result_write_failure):raise RuntimeError(integrity_failure or result_write_failure)
+if __name__=='__main__':main()
+
+--- test_driver_acceptance_pure.py ---
+import unittest, importlib.util, pathlib, json, copy, ctypes, subprocess, os
+TRAPS=[]
+def deny(*args,**kwargs):TRAPS.append('native/process');raise AssertionError('native/process forbidden')
+ctypes.WinDLL=deny;subprocess.Popen=deny;os.system=deny
+spec=importlib.util.spec_from_file_location('actual_prepared_driver',pathlib.Path(__file__).parent/'native_driver.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+def sample(case='resident_success'):
+ root={'fixture':'COMPILER_COMPLETION_CPU_V1','role':'root','mode':case,'pid':100,'requested_exit':3 if case=='resident_failure' else 0 if case in ('success','resident_success') else None}
+ if case in ('resident_success','resident_failure'):root['owned_child_pid']=101
+ rows=[{'fixture':'COMPILER_COMPLETION_CPU_V1','role':'child','mode':'resident_child','pid':101,'hold_seconds':60},root] if 'resident' in case else [root]
+ log={}
+ for stream in ('stdout','stderr'):
+  value=''.join(json.dumps(dict(x,stream=stream))+'\n' for x in rows)
+  log.update({stream:value,stream+'_bytes':len(value.encode()),stream+'_overflow':False})
+ status=m.CUSTOM if case in ('success','resident_success') else {'resident_failure':'FAILED','timeout':'TIMEOUT','cancel':'CANCELLED'}[case]
+ reason='mock_root_zero' if status==m.CUSTOM else {'resident_failure':'nonzero_exit','timeout':'deadline','cancel':'cancelled'}[case]
+ r={'run_id':'mock','status':status,'failure_reason':reason,'job_active_count':0,'drain_proof':'CLEANUP','whole_tree_certificate':False,'containment_policy':'kill_on_close','reattach':False,'replay':False,'workers':[{'worker_id':case,'pid':100,'assigned':True,'resumed':True,'exit_code':3 if case=='resident_failure' else 1 if case in ('timeout','cancel') else 0}],'logs':{case:log}}
+ return r,copy.deepcopy(r)
+class Tests(unittest.TestCase):
+ def test_all_five_synthetic_shapes(self):
+  for case in m.CASES:
+   r,restart=sample(case);self.assertEqual(m.validate_result(case,r,restart,'mock_root_zero')['root_pid'],100)
+ def refused(self,mutator):
+  r,restart=sample();mutator(r)
+  with self.assertRaises((ValueError,KeyError)):m.validate_result('resident_success',r,restart,'mock_root_zero')
+ def test_generic_status_refused(self):self.refused(lambda r:r.update(status='PROCESS_COMPLETED'))
+ def test_wrong_custom_reason_refused(self):self.refused(lambda r:r.update(failure_reason='other'))
+ def test_job_still_active_refused(self):self.refused(lambda r:r.update(job_active_count=1))
+ def test_bad_drain_refused(self):self.refused(lambda r:r.update(drain_proof='UNKNOWN_DRAIN'))
+ def test_bad_durability_refused(self):self.refused(lambda r:r.update(durability='UNKNOWN_DURABILITY'))
+ def test_wrong_exit_refused(self):self.refused(lambda r:r['workers'][0].update(exit_code=3))
+ def test_assignment_bool_refused(self):self.refused(lambda r:r['workers'][0].update(assigned=1))
+ def test_overflow_refused(self):self.refused(lambda r:r['logs']['resident_success'].update(stdout_overflow=True))
+ def test_missing_actual_child_refused(self):self.refused(lambda r:r['logs']['resident_success'].update(stdout=r['logs']['resident_success']['stdout'].splitlines()[-1]+'\n'))
+ def test_mismatched_stream_pid_refused(self):self.refused(lambda r:r['logs']['resident_success'].update(stderr=r['logs']['resident_success']['stderr'].replace('101','102')))
+ def test_restart_mismatch_refused(self):
+  r,restart=sample();restart['replay']=True
+  with self.assertRaises(ValueError):m.validate_result('resident_success',r,restart,'mock_root_zero')
+ def test_duplicate_keys_refused(self):self.refused(lambda r:r['logs']['resident_success'].update(stdout=r['logs']['resident_success']['stdout'].replace('"pid": 101','"pid": 101, "pid": 102')))
+ def test_no_native_traps_invoked(self):self.assertEqual(TRAPS,[])
+if __name__=='__main__':unittest.main(verbosity=2)
+
+
+INDEPENDENT POST-QUERY CONTRACT TESTS:
+--- test_post_query_guards.py ---
+"""Independent controls loading the delivered adapter, with no native APIs."""
+import builtins
+import importlib.util
+import os
+import sys
+import types
+import unittest
+
+ADAPTER = os.environ.get("JLINK_ADAPTER_TEST_PATH")
+SUCCESS = "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED"
+
+
+class Event:
+    def __init__(self):
+        self.value = False
+
+    def is_set(self):
+        return self.value
+
+
+class AdapterTests(unittest.TestCase):
+    def setUp(self):
+        self.now = 0.0
+        self.cancel = Event()
+        self.overflow = Event()
+        self.slots = [{"overflow": False, "bad_read": False}]
+        self.wait_result = 0
+        self.exit_result = 0
+        self.on_wait = lambda: None
+        self.on_exit = lambda: None
+        self.calls = []
+        self.rec = {"ph": object(), "assigned": True, "resumed": True}
+        self.spec = {"policy": "kill_on_close", "workers": [{}]}
+        self.base = types.SimpleNamespace(
+            _monotonic=lambda: self.now,
+            _sleep=self.sleep,
+            _wait_run=object(),
+        )
+        def deny_import(name, *args, **kwargs):
+            if name.split(".")[0] in {"_winapi", "ctypes", "subprocess", "multiprocessing"}:
+                raise AssertionError("native/process import at adapter import/install")
+            return original_import(name, *args, **kwargs)
+        original_import = builtins.__import__
+        builtins.__import__ = deny_import
+        try:
+            spec = importlib.util.spec_from_file_location("adapter_under_test", ADAPTER)
+            self.adapter = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(self.adapter)
+            before = dict(vars(self.base))
+            self.adapter.install(self.base)
+            self.assertEqual(set(vars(self.base)), set(before))
+            for key in before:
+                if key != "_wait_run":
+                    self.assertIs(getattr(self.base, key), before[key])
+        finally:
+            builtins.__import__ = original_import
+
+    def sleep(self, seconds):
+        self.now += seconds
+
+    def wait(self, handle, timeout):
+        self.assertIs(handle, self.rec["ph"])
+        self.assertEqual(timeout, 0)
+        self.calls.append("wait")
+        self.on_wait()
+        return self.wait_result
+
+    def query(self, handle):
+        self.assertIs(handle, self.rec["ph"])
+        self.calls.append("query")
+        self.on_exit()
+        return self.exit_result
+
+    def run_hook(self):
+        native = types.SimpleNamespace(WaitForSingleObject=self.wait, GetExitCodeProcess=self.query)
+        deps = {"_winapi": native, "monotonic": lambda: self.now, "sleep": self.sleep}
+        return self.base._wait_run(deps, object(), object(), self.spec, [self.rec], [], self.slots,
+                                   self.overflow, self.cancel, 1.0)
+
+    def test_success_requests_cleanup(self):
+        self.assertEqual(self.run_hook()[0], SUCCESS)
+        self.assertEqual(self.calls, ["wait", "query"])
+
+    def test_nonzero_exit_refused(self):
+        self.exit_result = 3
+        self.assertEqual(self.run_hook()[0], "FAILED")
+
+    def test_cancel_from_exit_query(self):
+        self.on_exit = lambda: setattr(self.cancel, "value", True)
+        self.assertEqual(self.run_hook()[0], "CANCELLED")
+
+    def test_overflow_from_exit_query(self):
+        self.on_exit = lambda: setattr(self.overflow, "value", True)
+        self.assertEqual(self.run_hook()[0], "FAILED")
+
+    def test_bad_read_from_exit_query(self):
+        self.on_exit = lambda: self.slots[0].update(bad_read=True)
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_deadline_from_exit_query(self):
+        self.on_exit = lambda: setattr(self, "now", 1.0)
+        self.assertEqual(self.run_hook()[0], "TIMEOUT")
+
+    def test_cancel_from_wait_signal(self):
+        self.on_wait = lambda: setattr(self.cancel, "value", True)
+        self.assertEqual(self.run_hook()[0], "CANCELLED")
+
+    def test_bad_read_from_wait_signal(self):
+        self.on_wait = lambda: self.slots[0].update(bad_read=True)
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_timeout(self):
+        self.wait_result = 258
+        self.assertEqual(self.run_hook()[0], "TIMEOUT")
+
+    def test_bool_wait_refused(self):
+        self.wait_result = False
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_bool_exit_refused(self):
+        self.exit_result = False
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_wrong_policy_refused(self):
+        self.spec["policy"] = "explicit_terminate"
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+        self.assertEqual(self.calls, [])
+
+
+if __name__ == "__main__":
+    if not ADAPTER:
+        raise SystemExit("JLINK_ADAPTER_TEST_PATH is required")
+    unittest.main(verbosity=2)
+
+--- test_more_contract.py ---
+import importlib.util
+from pathlib import Path
+import types
+import unittest
+
+spec = importlib.util.spec_from_file_location("root_base_controls", Path(__file__).with_name("test_post_query_guards.py"))
+base = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(base)
+
+
+class ContractTests(base.AdapterTests):
+    def test_wait_exception(self):
+        def fail():
+            raise OSError("injected wait error")
+        self.on_wait = fail
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_exit_exception(self):
+        def fail():
+            raise OSError("injected query error")
+        self.on_exit = fail
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_unexpected_wait(self):
+        self.wait_result = 0xffffffff
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+
+    def test_multiple_workers(self):
+        self.spec["workers"] = [{}, {}]
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+        self.assertEqual(self.calls, [])
+
+    def test_assigned_integer_not_boolean(self):
+        self.rec["assigned"] = 1
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+        self.assertEqual(self.calls, [])
+
+    def test_resumed_integer_not_boolean(self):
+        self.rec["resumed"] = 1
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+        self.assertEqual(self.calls, [])
+
+    def test_guard_bad_read_before_wait(self):
+        self.slots[0]["bad_read"] = True
+        self.assertEqual(self.run_hook()[0], "UNKNOWN")
+        self.assertEqual(self.calls, [])
+
+    def test_guard_overflow_before_wait(self):
+        self.overflow.value = True
+        self.assertEqual(self.run_hook()[0], "FAILED")
+        self.assertEqual(self.calls, [])
+
+    def test_guard_deadline_before_wait(self):
+        self.now = 1.0
+        self.assertEqual(self.run_hook()[0], "TIMEOUT")
+        self.assertEqual(self.calls, [])
+
+    def test_uses_private_supervisor_clock(self):
+        def forbidden(*args):
+            raise AssertionError("ad hoc dependency clock used")
+        native = types.SimpleNamespace(WaitForSingleObject=self.wait, GetExitCodeProcess=self.query)
+        deps = {"_winapi": native, "monotonic": forbidden, "sleep": forbidden}
+        result = self.base._wait_run(deps, object(), object(), self.spec, [self.rec], [], self.slots,
+                                    self.overflow, self.cancel, 1.0)
+        self.assertEqual(result[0], base.SUCCESS)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+
+--- fallback_22_GREEN.log ---
+test_assigned_integer_not_boolean (__main__.ContractTests) ... ok
+test_bad_read_from_exit_query (__main__.ContractTests) ... ok
+test_bad_read_from_wait_signal (__main__.ContractTests) ... ok
+test_bool_exit_refused (__main__.ContractTests) ... ok
+test_bool_wait_refused (__main__.ContractTests) ... ok
+test_cancel_from_exit_query (__main__.ContractTests) ... ok
+test_cancel_from_wait_signal (__main__.ContractTests) ... ok
+test_deadline_from_exit_query (__main__.ContractTests) ... ok
+test_exit_exception (__main__.ContractTests) ... ok
+test_guard_bad_read_before_wait (__main__.ContractTests) ... ok
+test_guard_deadline_before_wait (__main__.ContractTests) ... ok
+test_guard_overflow_before_wait (__main__.ContractTests) ... ok
+test_multiple_workers (__main__.ContractTests) ... ok
+test_nonzero_exit_refused (__main__.ContractTests) ... ok
+test_overflow_from_exit_query (__main__.ContractTests) ... ok
+test_resumed_integer_not_boolean (__main__.ContractTests) ... ok
+test_success_requests_cleanup (__main__.ContractTests) ... ok
+test_timeout (__main__.ContractTests) ... ok
+test_unexpected_wait (__main__.ContractTests) ... ok
+test_uses_private_supervisor_clock (__main__.ContractTests) ... ok
+test_wait_exception (__main__.ContractTests) ... ok
+test_wrong_policy_refused (__main__.ContractTests) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.011s
+
+OK
+
+
+ACTUAL MUSE REVIEW OF THE PREVIOUS QWEN CANDIDATE (NOT THIS FALLBACK):
+Original Muse JSONL parser did not recognize Muse's native event envelope; one terminal object was separately extracted and accepted by the existing strict review intake. Muse provider run exited zero; use/tool/subagent usage was UNKNOWN. The candidate in that older review differs from the fallback under review here. Treat each item as a hypothesis to re-evaluate against current source/caller, not as established fact:
+[
+  {
+    "exact_source": "supervisor lines 734-735, 736-742, 743-751, 759-762: `if drain != \"CLEANUP\" and status == \"PROCESS_COMPLETED\": status, reason = \"UNKNOWN\", \"proof_incomplete\"` and three further `if status == \"PROCESS_COMPLETED\":` demotions for bad_read/close_uncertain/job_close_failed. Candidate returns `COMPILER_ROOT_EXITED_CLEANUP_REQUIRED`.",
+    "minimal_fix": "Extend all four PROCESS_COMPLETED-only demotion guards to also cover the new compiler status, so any drain UNKNOWN_DRAIN, reader-join failure, bad_read, close_uncertain, closed-is-not-True, parent_close_uncertain, or job_close failure forces UNKNOWN. Add an independent fake-shutdown test that returns COMPILER status with each failure and asserts demotion.",
+    "reason": "Walk: hook returns COMPILER_ROOT_EXITED_CLEANUP_REQUIRED -> run_workers line 715 calls _shutdown with terminate True (status != PROCESS_COMPLETED) -> _shutdown may return active None or nonzero or UNKNOWN_DRAIN, readers may stay alive, slots may have bad_read, closes may fail -> finally lines 732-762 set drain UNKNOWN_DRAIN but leave status COMPILER because all demotions require PROCESS_COMPLETED. Executable counterexample: fake Wait returns 0, exit 0, then fake TerminateJobObject returns False or active count 1, or fake thread.is_alive True, or slot bad_read True; current code emits receipt status COMPILER_ROOT_EXITED_CLEANUP_REQUIRED with drain UNKNOWN_DRAIN. Expected: UNKNOWN proof_incomplete or bad_read or close_uncertain or job_close_failed, and caller must refuse. Without fix the new status is materially weaker than PROCESS_COMPLETED.",
+    "region": "supervisor run_workers finally proof gates vs new status"
+  },
+  {
+    "exact_source": "supervisor lines 597-607: `counts = _accounting(...); if counts is None or not waits_ok or not terminate_ok: return ..., \"UNKNOWN_DRAIN\"; active = counts[0]; if active != 0: return active, \"UNKNOWN_DRAIN\"; return active, \"CLEANUP\"` plus run_workers lines 715-717, 720-733 reader join handling.",
+    "minimal_fix": "Keep whole_tree_certificate false for the compiler path and require the caller to independently gate on final job_active_count zero, drain_proof CLEANUP, bounded complete logs, and pin preservation. Add a receipt-level assertion test that CLEANUP plus COMPILER status never sets whole_tree_certificate true.",
+    "reason": "CLEANUP establishes only: owned-root handle reaped via WaitForSingleObject, TerminateJobObject reported success and no redundant TerminateProcess was needed on an exited handle, and _accounting reported zero. It does not establish auxiliaries exited naturally, log readers drained, DLLs exist, numerical results passed, or arbitrary tree certified. Counterexample: attempt-4 trace with 23 samples of vctip.exe plus mspdbsrv.exe, root PID 46568 exit 0, TIMEOUT deadline, then active zero CLEANUP still required caller rejection with all_completed false. A caller that treats CLEANUP as natural completion would misclassify resident auxiliaries as naturally drained.",
+    "region": "_shutdown CLEANUP semantics and whole-tree claim"
+  },
+  {
+    "exact_source": "candidate: `if waited == _WAIT_OBJECT_0: break` then `if cancel...; if overflow...; if bad_read...; now = mono_fn(); if now >= dead_by: TIMEOUT` then `exit_code = wapi.GetExitCodeProcess(root_ph); rec[\"exit_code\"] = exit_code; if exit_code != 0: FAILED; return COMPILER...`. No check after GetExitCodeProcess.",
+    "minimal_fix": "Add a second cancel plus overflow plus bad_read plus deadline recheck after the exit-code query and before returning the compiler status, without adding any kill or handle work. Add independent tests where a fake exit-query side effect flips each condition and asserts CANCELLED or FAILED LOG_LIMIT or UNKNOWN bad_read or TIMEOUT instead of compiler success.",
+    "reason": "Executable race: FakeWapi Wait sequence [0], FakeClock [0.0, 1.0], exit_code 0, but GetExitCodeProcess side effect sets cancel_event or overflow_event or slot bad_read True, or clock advances past dead_by after the pre-query check. Current hook returns COMPILER_ROOT_EXITED_CLEANUP_REQUIRED. Expected per spec intent again before returning success: CANCELLED cancelled, FAILED LOG_LIMIT, UNKNOWN bad_read, TIMEOUT deadline. The window between exit query and return is untested and unguarded.",
+    "region": "candidate post-exit TOCTOU after GetExitCodeProcess"
+  },
+  {
+    "exact_source": "candidate: `mono_fn = deps.get(\"monotonic\"); sleep_fn = deps.get(\"sleep\"); if mono_fn is None: import time; mono_fn = time.monotonic; if sleep_fn is None: import time; sleep_fn = time.sleep` and `sleep_fn(_SLEEP_SECONDS)` with _SLEEP_SECONDS 0.02. Pinned supervisor uses global `_monotonic()` and `_sleep(0.02)` and deps only for _winapi.",
+    "minimal_fix": "Bind the hook to the same monotonic and sleep source as the pinned supervisor and assert the sleep bound is small and finite. Add a test that fails if the fallback clock diverges from the supervisor clock or if sleep is unbounded or zero-spin.",
+    "reason": "Counterexample: pure test injects deps monotonic values [0.0, 1.0] with dead_by 100.0 and asserts success, but production _monotonic may already exceed dead_by, so the same wait sequence would be TIMEOUT in production. Conversely fallback to time.monotonic when deps lacks monotonic weakens the deadline bound the supervisor enforces. Sleep injection with lambda None also hides whether the loop is bounded. Expected: deadline behavior must be proven against the supervisor clock, not an injected substitute.",
+    "region": "candidate clock and sleep source divergence"
+  },
+  {
+    "exact_source": "pinned: `\"wait_failed\"`, `\"exit_query_failed\"`, `\"query_failed\"`, `\"reader_join\"`. Candidate: `\"wait_exception\"`, `\"exit_query_exception\"`, `\"unexpected_wait_status\"`, `\"policy_mismatch\"`, `\"worker_count_mismatch\"`, `\"not_assigned_resumed\"`, `\"no_root_handle\"`.",
+    "minimal_fix": "Align reason taxonomy with the pinned supervisor or publish an explicit mapping that existing accounting and durability monitors understand. Add a test asserting each candidate UNKNOWN or FAILED reason maps to the pinned equivalent class.",
+    "reason": "Counterexample: FakeWapi wait_exc True produces UNKNOWN wait_exception in candidate versus UNKNOWN wait_failed in pinned _wait_run lines 476-477 and 481-482. A caller or log monitor counting wait_failed, exit_query_failed, or query_failed would miss the new strings and mis-triage. The candidate tests only assert the candidate's own strings, so they confirm assumption rather than transition compatibility.",
+    "region": "candidate reason-code taxonomy change"
+  },
+  {
+    "exact_source": "candidate: `workers = spec.get(\"workers\", []); if len(workers) != 1 or len(owned) != 1: return \"UNKNOWN\", \"worker_count_mismatch\"` with no worker-identity check. Test helper builds `spec workers [{worker_id:w}]` and `owned [{worker_id:w0}]` yet `test_root_zero_requests_cleanup` expects COMPILER success.",
+    "minimal_fix": "Reject unless owned length one, workers length one, and owned root worker identity matches the single admitted worker, with no duplicate or extra records. Add tests for zero workers, two workers with one owned, one worker with two owned, mismatched worker_id, and duplicate ids, all expecting UNKNOWN.",
+    "reason": "Executable counterexample: spec workers [w-a], owned [ph 1234 assigned resumed worker_id w-b]; current hook returns COMPILER_ROOT_EXITED_CLEANUP_REQUIRED. Expected UNKNOWN worker mismatch because the reaped handle is not proven to be the admitted root. The shipped test pair w versus w0 proves the gap because it passes despite mismatch.",
+    "region": "candidate worker-identity linkage"
+  },
+  {
+    "exact_source": "candidate `test_root_zero_requests_cleanup` asserts `exit_code 0`, `wait 0`, `exit_calls 1` but installs no fake kernel terminate, accounting, close, or handle-open trap. Candidate source contains no Terminate or accounting call, but nothing enforces it.",
+    "minimal_fix": "Add a hook-purity test with a fake kernel and wapi where any TerminateProcess, TerminateJobObject, accounting query, handle open by PID or name, or filesystem call fails the test. Assert only WaitForSingleObject on the supplied root handle and one GetExitCodeProcess occur.",
+    "reason": "Counterexample: a mutated hook that calls kernel.TerminateJobObject or reopens a handle by PID inside _compiler_wait_run would still pass all current tests because they never trap those calls. Expected: cleanup-not-performed-in-hook must be proven by a failing trap, not by reading source. Spec forbids killing inside the wait hook and forbids PID or name control.",
+    "region": "candidate no-cleanup-in-hook unproven"
+  },
+  {
+    "exact_source": "candidate test: `def test_no_side_effects_on_import: mod = ModuleType(...); exec(ADAPTER_SRC, ...); assert hasattr install and _compiler_wait_run`. No native-call observation.",
+    "minimal_fix": "Perform import with instrumented winapi, time, filesystem, and process stubs that record any call, then assert zero native or process actions occurred during import and install. Separately assert install does not touch the generic original file.",
+    "reason": "Counterexample: an adapter that called WaitForSingleObject or time.sleep at module top level would still pass hasattr checks if the imported names exist. Expected: proof requires an import under failing native stubs with zero recorded calls. The current test merely confirms its own exec succeeded.",
+    "region": "candidate import-time purity test gap"
+  },
+  {
+    "exact_source": "candidate tests `test_overflow_after_wait` and `test_bad_read_after_wait`: both set `overflow.set()` or `slots [{bad_read:True}]` before calling `_compiler_wait_run` with `FakeWapi([0])`. `test_cancel_after_wait` flips cancel via sleep after a TIMEOUT, not after a signaled root.",
+    "minimal_fix": "Add true post-signal tests where FakeWapi returns WAIT_OBJECT_0 first and its GetExitCodeProcess or wait side effect flips cancel, overflow, bad_read, or clock past deadline only after the signal. Assert the post-signal outcome takes precedence over compiler success.",
+    "reason": "Because the condition is preset, these tests exercise the pre-wait branch, not the required again-before-returning-success branch. Executable gap: a hook that omitted all post-break checks would still pass test_overflow_after_wait and test_bad_read_after_wait. Expected post-signal behavior remains unproven for cancellation after exit, log overflow after exit, and bad reader after exit.",
+    "region": "candidate post-signal race tests preset not flipped"
+  },
+  {
+    "exact_source": "candidate: `exit_code = wapi.GetExitCodeProcess(root_ph); rec[\"exit_code\"] = exit_code; if exit_code != 0: return \"FAILED\", \"nonzero_exit\"`. Pinned lines 513-517 identical. Windows STILL_ACTIVE is 259.",
+    "minimal_fix": "Treat exit value 259 after WAIT_OBJECT_0 as UNKNOWN exit-query ambiguity rather than FAILED nonzero_exit, or record it as unresolved pending native semantics. Add a test with wait 0 plus exit 259 asserting UNKNOWN.",
+    "reason": "Executable counterexample: FakeWapi wait [0], exit 259 returns FAILED nonzero_exit under current code. A signaled handle reporting STILL_ACTIVE indicates handle reuse, stale query, or query race, not a proven nonzero root failure. Expected: UNKNOWN, with caller refusal distinct from proven nonzero failure. Current tests cover exit 1 but not 259, so the ambiguity is hidden.",
+    "region": "candidate STILL_ACTIVE 259 misclassified"
+  },
+  {
+    "exact_source": "candidate test `test_timeout_loop`: `FakeWapi([258,258,0])`, `FakeClock([0.0,1.0,2.0,3.0])`, asserts COMPILER success and 3 wait calls. No always-TIMEOUT until deadline case.",
+    "minimal_fix": "Add a live-root test with Wait always 258 and monotonic advancing past dead_by on successive calls, asserting TIMEOUT deadline with bounded wait calls. Add a second test where FakeClock sticks at the last value to expose infinite-loop risk explicitly.",
+    "reason": "Counterexample: FakeWapi wait always 258 with FakeClock [0.0, 1.0] and dead_by 100.0 never reaches deadline because the clock sticks at 1.0, so the loop would spin unbounded. Current tests do not prove a live root times out or that TIMEOUT keeps waiting with bounded small sleep. Expected: TIMEOUT deadline once monotonic reaches dead_by.",
+    "region": "candidate live-root timeout coverage"
+  },
+  {
+    "exact_source": "candidate: `def install(private_module): private_module._wait_run = _compiler_wait_run` with no target verification. Test `test_install_replaces_wait_run` uses a blank ModuleType with only `_wait_run`.",
+    "minimal_fix": "Require install to verify the target is the private imported copy, preserve all non-wait attributes including creation, launch, shutdown, log readers, typed APIs, durability, and close handling, and refuse the generic original. Add a test asserting all other attributes are unchanged and original-file identity is untouched.",
+    "reason": "Counterexample: calling install on the generic supervisor module would silently retarget production _wait_run yet the current test would still pass because it only checks identity replacement on a dummy object. Expected: install must be proven scoped to a private copy with everything else unchanged. Spec explicitly forbids changing the generic original file.",
+    "region": "candidate install scope guard"
+  },
+  {
+    "exact_source": "pinned lines 681-784 run_workers plus attempt-4 facts: 23 JSONL samples with original_counts [2,221], LIST_OBSERVED, assigned 2 returned 2, members vctip.exe and mspdbsrv.exe; controller PID 46568 exit 0 assigned resumed true, TIMEOUT deadline, active zero CLEANUP, all_completed false. Candidate has no accounting, join, slot close, or job-close observation.",
+    "minimal_fix": "Keep caller gates outside the hook: require assigned resumed true, root exit zero, final active zero, CLEANUP, complete bounded logs with no overflow, no bad_read or close_uncertain or closed-is-not-True, unchanged pins, and verified owned-root reaping. Plan a native CPU-only fixture with tiny bounded logs that observes exact markers and PIDs and refuses on cleanup failure.",
+    "reason": "Hook alone cannot distinguish root exit success from stage acceptance: it never queries job membership, never joins readers, never checks closes. Counterexample: hook returns COMPILER with auxiliaries still present and readers still draining, which is correct per spec, but a caller that accepts on hook status alone would admit DLLs before active zero, CLEANUP, and log completeness. Attempt-4 proves the needed separation: root zero, natural-drain TIMEOUT, later owned-Job cleanup, overall rejection. A failed cleanup must remain refused with whole_tree_certificate false.",
+    "region": "caller acceptance versus hook success"
+  },
+  {
+    "exact_source": "candidate while loop only calls `wapi.WaitForSingleObject(root_ph, 0)`; never calls `_accounting`, `_join`, or inspects `threads` or `slots` beyond overflow and bad_read flags, and never checks `close_uncertain` or `closed`.",
+    "minimal_fix": "Document job-isolation and reader-drain as explicit caller-side gates and cover them in the native fixture with a resident child holding inherited pipes, plus pure tests for duplicate or wrong worker and policy records. Do not add PID or name based control to the hook.",
+    "reason": "Executable gaps: Job containing unrelated work still yields COMPILER success because the hook never accounts; stream readers still draining at root signal still yield COMPILER because the hook never joins; deadline crossing exactly between last check and return still yields COMPILER; unknown wait value beyond 0 or 258 is handled but WAIT_ABANDONED versus WAIT_FAILED distinction is collapsed to one string. Expected: each must be either blocked by single-root kill_on_close admission or refused by caller on active nonzero, incomplete logs, or ambiguous close state. Current pure tests do not cover unrelated-job content or inherited-pipe drain delay.",
+    "region": "candidate race and scope residuals"
+  }
+]
+
+OUTPUT CONTRACT: return exactly one JSON object with keys verdict, findings, safety_checks. verdict is a short string. findings is an array of objects, each having exactly region, exact_source, reason, minimal_fix (all nonempty strings; include exact line references where available). safety_checks is an array of nonempty strings. No markdown fences or text outside JSON. Do not claim this review authorizes native builds, GPU runs, or acceptance.

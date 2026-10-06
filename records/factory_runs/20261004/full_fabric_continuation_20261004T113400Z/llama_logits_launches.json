@@ -1,0 +1,7 @@
+{
+  "outer_deadline_seconds": 270,
+  "started_utc": "2026-10-04T11:52:28.4535269Z",
+  "pid": 36532,
+  "model": "qwen3.8-max",
+  "job": "llama_logits"
+}

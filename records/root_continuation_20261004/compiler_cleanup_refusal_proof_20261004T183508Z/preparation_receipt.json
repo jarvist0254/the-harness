@@ -1,0 +1,14 @@
+{
+  "authorization": "PENDING_ROOT_NO_NATIVE_BUILD_EXECUTION",
+  "proof_tests": 4,
+  "proof_exit": 0,
+  "proof_pid": 90632,
+  "proof_reaped": true,
+  "build_admission": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_cleanup_refusal_proof_20261004T183508Z\\BUILD_ADMISSION_FALLBACK_FIVE_CPU_PENDING_ROOT.json",
+  "build_admission_sha256": "ef3e41835f340d8ceba2fe7fc72eac445c988ef9f7de8232a9dcc9eb14801d45",
+  "native_suite_sha256": "6fd02f03f84a9ef3884210e50c720b70b7873a744b19372155994f784b8c2cdb",
+  "controller_sha256": "23eebe110753c4bf5d929d6b3d38eb4209ed755fbb11974ed2064aaf8b669137",
+  "adapter_sha256": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+  "generic_source_unchanged": true,
+  "native_compile_gpu_execution": false
+}

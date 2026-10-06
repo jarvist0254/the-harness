@@ -1,0 +1,11 @@
+{
+  "scope": "SYNTHETIC_ACCEPTANCE_ONLY_NOT_NATIVE_OR_ADAPTER_QUALIFICATION",
+  "exit_code": 0,
+  "pid": 60188,
+  "reaped": true,
+  "seconds": 0.07799999974668026,
+  "tests": 14,
+  "driver_sha256": "e4327908e0da6f668ba7ae51cf92fb641bb7c4e02dde019722a863b8217c3c1d",
+  "test_sha256": "3210071efaeaabb9b305222bf92b40a01a69c6a459a9c61aaca1642be91acdd0",
+  "native_process_traps_invoked": false
+}

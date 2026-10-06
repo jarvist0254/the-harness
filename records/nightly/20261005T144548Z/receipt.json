@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "target": "T7",
+  "target_definition": "unattended nightly job that builds every component, runs every test, verifies the artifact manifest, and publishes a dated receipt",
+  "stamp": "20261005T144548Z",
+  "generated_utc": "2026-10-05T14:45:49Z",
+  "generated_iso": "2026-10-05T14:45:49.470060+00:00",
+  "duration_ms": 688,
+  "host_pins": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "system": "Windows",
+    "release": "10",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "os_build": {
+      "status": "OK",
+      "major": 10,
+      "minor": 0,
+      "build": 26200,
+      "platform": 2,
+      "service_pack": "",
+      "version_string": "10.0.26200"
+    },
+    "python": {
+      "version": "3.10.11",
+      "version_full": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "implementation": "CPython",
+      "executable": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "compiler": "MSC v.1929 64 bit (AMD64)",
+      "bytecode_writing_disabled": true
+    },
+    "packages": {
+      "numpy": "2.2.6",
+      "pyopencl": "2025.2.6",
+      "pytest": "7.4.4"
+    },
+    "gpu_inventory": {
+      "tool": "nvidia-smi",
+      "status": "OK",
+      "executable": "C:\\windows\\system32\\nvidia-smi.EXE",
+      "device_count": 1,
+      "devices": [
+        {
+          "name": "NVIDIA GeForce RTX 5070 Ti",
+          "driver_version": "591.86",
+          "memory.total [MiB]": "16303 MiB"
+        }
+      ],
+      "raw_stdout_tail": [
+        "name, driver_version, memory.total [MiB]",
+        "NVIDIA GeForce RTX 5070 Ti, 591.86, 16303 MiB"
+      ]
+    },
+    "tool_probes": {
+      "nvidia-smi": {
+        "status": "OK",
+        "path": "C:\\windows\\system32\\nvidia-smi.EXE"
+      },
+      "rocminfo": {
+        "status": "UNAVAILABLE",
+        "path": "UNAVAILABLE"
+      },
+      "clinfo": {
+        "status": "OK",
+        "path": "C:\\windows\\system32\\clinfo.EXE"
+      },
+      "nvcc": {
+        "status": "OK",
+        "path": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.3\\bin\\nvcc.EXE",
+        "version_tail": [
+          "Copyright (c) 2005-2023 NVIDIA Corporation",
+          "Built on Fri_Sep__8_19:56:38_Pacific_Daylight_Time_2023",
+          "Cuda compilation tools, release 12.3, V12.3.52",
+          "Build cuda_12.3.r12.3/compiler.33281558_0"
+        ],
+        "version_status": "OK"
+      },
+      "ze_loader": {
+        "status": "UNAVAILABLE",
+        "path": "UNAVAILABLE",
+        "dll_path": "C:\\windows\\System32\\ze_loader.dll",
+        "dll_present": false
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "j_link_unittest_suite",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "E:\\the_harness\\j_link\\tests"
+      ],
+      "command_string": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -B -m unittest discover -s E:\\the_harness\\j_link\\tests",
+      "cwd": "E:\\the_harness",
+      "parser": "unittest",
+      "returncode": 0,
+      "duration_ms": 313,
+      "status": "PASS",
+      "passed": true,
+      "parsed": {
+        "tests_ran": 115,
+        "verdict": "OK",
+        "expected_verdict": "OK",
+        "min_tests": 1,
+        "criteria_met": true
+      },
+      "error": null,
+      "stdout_tail": [],
+      "stderr_tail": [
+        "...................................................................................................................",
+        "----------------------------------------------------------------------",
+        "Ran 115 tests in 0.214s",
+        "",
+        "OK"
+      ],
+      "stdout_bytes": 0,
+      "stderr_bytes": 215
+    },
+    {
+      "name": "cad_unittest_suite",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "E:\\the_harness\\cad\\tests"
+      ],
+      "command_string": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -B -m unittest discover -s E:\\the_harness\\cad\\tests",
+      "cwd": "E:\\the_harness",
+      "parser": "unittest",
+      "returncode": 0,
+      "duration_ms": 77,
+      "status": "PASS",
+      "passed": true,
+      "parsed": {
+        "tests_ran": 15,
+        "verdict": "OK",
+        "expected_verdict": "OK",
+        "min_tests": 1,
+        "criteria_met": true
+      },
+      "error": null,
+      "stdout_tail": [],
+      "stderr_tail": [
+        "...............",
+        "----------------------------------------------------------------------",
+        "Ran 15 tests in 0.028s",
+        "",
+        "OK"
+      ],
+      "stdout_bytes": 0,
+      "stderr_bytes": 114
+    },
+    {
+      "name": "j_link_planner_mixed",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "E:\\the_harness\\j_link\\planner.py",
+        "E:\\the_harness\\j_link\\examples\\mixed.json"
+      ],
+      "command_string": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -B E:\\the_harness\\j_link\\planner.py E:\\the_harness\\j_link\\examples\\mixed.json",
+      "cwd": "E:\\the_harness",
+      "parser": "json_status",
+      "returncode": 0,
+      "duration_ms": 47,
+      "status": "PASS",
+      "passed": true,
+      "parsed": {
+        "status": "PLANNED_NOT_ALLOCATED",
+        "expected_statuses": [
+          "PLANNED_NOT_ALLOCATED"
+        ],
+        "hypothetical": true,
+        "device_count": 4,
+        "criteria_met": true
+      },
+      "error": null,
+      "stdout_tail": [
+        "        \"synthetic_block_41\",",
+        "        \"synthetic_block_42\",",
+        "        \"synthetic_block_43\",",
+        "        \"synthetic_block_44\",",
+        "        \"synthetic_block_45\",",
+        "        \"synthetic_block_46\",",
+        "        \"synthetic_block_47\"",
+        "      ],",
+        "      \"block_memory_mib\": 6144,",
+        "      \"remaining_budget_mib\": 512",
+        "    }",
+        "  ],",
+        "  \"limitations\": [",
+        "    \"No discovery, driver probe, allocator, leases or execution\",",
+        "    \"memory_mib must include block weights and block-local KV/activation requirements\",",
+        "    \"Extra embeddings/output/workspace must be represented explicitly\",",
+        "    \"Free samples precede modeled reserves; do not double-subtract resident leases\",",
+        "    \"Topology ordering is caller supplied; no transfer-time optimization\"",
+        "  ]",
+        "}"
+      ],
+      "stderr_tail": [],
+      "stdout_bytes": 3322,
+      "stderr_bytes": 0
+    },
+    {
+      "name": "artifact_manifest_integrity",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "E:\\the_harness\\scripts\\verify_adaptation.py",
+        "E:\\the_harness\\records\\ADAPTATION_SHA256_20261005_110323Z.json"
+      ],
+      "command_string": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -B E:\\the_harness\\scripts\\verify_adaptation.py E:\\the_harness\\records\\ADAPTATION_SHA256_20261005_110323Z.json",
+      "cwd": "E:\\the_harness",
+      "parser": "manifest_json",
+      "returncode": 0,
+      "duration_ms": 125,
+      "status": "PASS",
+      "passed": true,
+      "parsed": {
+        "checked": 219,
+        "failure_count": 0,
+        "failures": [],
+        "manifest": "E:\\the_harness\\records\\ADAPTATION_SHA256_20261005_110323Z.json",
+        "min_checked": 1,
+        "criteria_met": true
+      },
+      "error": null,
+      "stdout_tail": [
+        "{",
+        "  \"manifest\": \"E:\\\\the_harness\\\\records\\\\ADAPTATION_SHA256_20261005_110323Z.json\",",
+        "  \"checked\": 219,",
+        "  \"failures\": [],",
+        "  \"scope\": \"Dated current hashes of prior curated paths plus explicitly listed numerical and pure-QA artifacts. Integrity only: no new hardware/P2P/capacity, provider-source acceptance or product promotion is certified. Original package and earlier adaptation manifests remain immutable. Does not enumerate every later record. RE-PIN REASON 2026-10-05: nine curated documents were deliberately corrected this session (96 audit corrections plus a retracted PCIe-switch claim, propagated from docs/10 section 1.10 first-hand Intel verification). The prior 2148Z manifest reported those nine as drift; this manifest re-pins the same path set at current hashes. Path count is unchanged. NOTE: docs/10, docs/11 and the new scripts are NOT yet pinned and should be added at the next re-pin.\"",
+        "}"
+      ],
+      "stderr_tail": [],
+      "stdout_bytes": 909,
+      "stderr_bytes": 0,
+      "manifest_resolution": {
+        "mode": "newest_by_filename_sort",
+        "search": "E:\\the_harness\\records\\ADAPTATION_SHA256_*.json",
+        "candidate_count": 3,
+        "candidates": [
+          "ADAPTATION_SHA256_20261004.json",
+          "ADAPTATION_SHA256_20261004_2148Z.json",
+          "ADAPTATION_SHA256_20261005_110323Z.json"
+        ],
+        "status": "OK",
+        "resolved": "E:\\the_harness\\records\\ADAPTATION_SHA256_20261005_110323Z.json",
+        "resolved_name": "ADAPTATION_SHA256_20261005_110323Z.json"
+      }
+    }
+  ],
+  "counts": {
+    "total": 4,
+    "pass": 4,
+    "fail": 0,
+    "timeout": 0,
+    "unavailable": 0,
+    "error": 0
+  },
+  "overall_verdict": "PASS",
+  "exit_code": 0,
+  "exit_code_policy": {
+    "0": "every check PASSed",
+    "1": "one or more checks FAILED or TIMED OUT (loud failure)",
+    "2": "job could not fully run: UNAVAILABLE command, parser ERROR, or receipt write failure",
+    "precedence": "FAIL outranks UNAVAILABLE; a regression is the more actionable signal"
+  },
+  "source": {
+    "script": "E:\\the_harness\\scripts\\nightly_verify.py",
+    "repo_root": "E:\\the_harness"
+  },
+  "notes": [
+    "manifest resolution: mode=newest_by_filename_sort status=OK resolved=E:\\the_harness\\records\\ADAPTATION_SHA256_20261005_110323Z.json",
+    "manifest candidates by filename sort (3): ADAPTATION_SHA256_20261004.json, ADAPTATION_SHA256_20261004_2148Z.json, ADAPTATION_SHA256_20261005_110323Z.json"
+  ]
+}

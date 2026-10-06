@@ -1,0 +1,22 @@
+{
+  "spawn_transaction": {
+    "model": "qwen3.8-max",
+    "scope": "Own ONLY _spawn and needed ownership helper. Register every newly allocated HANDLE immediately before any subsequent API; each pipe and duplicate independent. Thread read HANDLE transfer only after successful corresponding thread.start; started reader solely owns it; failure of next thread must not close previous reader handle. Retain exact created process in owned record before assignment, Assign before typed ResumeThread, single cleanup owner, no Gemini delayed transfer double-close. Exception still caller cleanup; add mocked failures for secondCreatePipe, secondDuplicateHandle, CreateProcess, assign, resume, first/secondThread.start and exact closecounts/order. Ignore unrelated shutdown edits.",
+    "native_children": 0
+  },
+  "cleanup_transaction": {
+    "model": "qwen3.8-max",
+    "scope": "Own _shutdown, run_workers, _wait_run/_read_pipe error propagation and fake ROOT_STATIC_ADMISSION removal ONLY. Always attempt EACH owned wait/termination/close even TerminateJobObject/query/wait/GetExitCode raises; never earlyreturn before waits; preservecancel/timeout; UNKNOWNdrain on any uncertaincall. Handleclose in nested finally independent of receipt failure and shutdown exception. bad_read must not becomePROCESS_COMPLETED. Remove fake source/tests admissionconstant; externalrunnercontrols actualfixtureadmission. No real children. Tests injectednativeAPI faults fullcleanup and waitproof. Do not rewrite _spawn (separatejob).",
+    "native_children": 0
+  },
+  "capacity_participation": {
+    "model": "qwen3.8-max",
+    "scope": "Own _capacity/_oom/_four/_two participation and memory allocation guards ONLY. FOUR_REQUIRED >=4unique actual discreteGPU participants and successplan exactlymatchesparticipants. Positive eachassigned weight bytes, freshactualallocatorhighwater/residentbytes >=assignedbytes with explicit measuredsource notdriverdelta/policy. Require SAMEbound numerical CLEAN successful multi/four execution, fullfinite CPUreference/parity, matches physicalset and model/workload/build/exec/context/quant. Actualsingle/3allocator OOM comparisons samenumericalworkload, no policy substitutes. Reject CPU/OTHER participating TWO_VENDOR. No capacity from4countalone. Tests3deviceFOUR_REQUIRED, zeroassignment, absentmultisuccess, insufficienthighwater, stale/alias, wrongquant/context, CPUvendorlabels. No trustgate/controls wholesale rewrite (separatejob).",
+    "native_children": 0
+  },
+  "proof_bindings": {
+    "model": "qwen3.8-max",
+    "scope": "Own _good_control/_p2p/_durable/_require_binds/_numbers and helpers ONLY. Require actual model/workload/build/executable/deviceSET/context/quant evidence binding to authenticated external artifact payload, not just unrelated trusted digest membership; document exact caller verification contract and refuse unverifiable summaries. Match control to CLEAN samebaseline and comparison; comparatoronlynottransport. DIRECTP2P actual APIprimitive instrumentedartifact plus fullcountsfinitebytes/parity/tolerances/devicepair/workload, HOST_STAGED/systemmemory refuse, no labelonly. DURABLE checkpoint/commit/replayloss/cancel/restart sequence/identity bindings. Numerical finite/violations0 usingpredeclaredatol/rtol; do NOT rejectmaxabs>atol automatically when relative tolerance valid, use actualfullverified metrics/elements. Actual-importdiscriminators each isolatedwrongbinding/untrustedpayload/falseprimitive/transportcontrol/no cleanbaseline/durabilitysequence. No capacity orspawn edits.",
+    "native_children": 0
+  }
+}

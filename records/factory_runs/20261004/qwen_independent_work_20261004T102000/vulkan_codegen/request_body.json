@@ -1,0 +1,13 @@
+{
+  "messages": [
+    {
+      "content": "Generate a COMPACT standalone Windows C++17 Vulkan TWO-SEPARATE-DEVICE transfer smoke source. NO TOOLS. Return ONLY valid JSON {\"source\":\"...\",\"notes\":[\"...\"]}. Source MUST fit under 220 lines and 22000 chars: use <vulkan/vulkan.h> and Vulkan loader imports; SDK/header not found locally yet so compile is NOT_CHECKED. No shaders. Enumerate physical devices, require2 or print SKIP exit77. Report names/vendor/device IDs and local heap sizes, query/list physical-device groups for diagnostic ONLY. Create one logical device per selected physical device, each with transfer queue. A device-local256KiB buffer filled deterministic pattern via vkCmdFillBuffer(A), copy to A host-visible readback; bounded fence10s, invalidate noncoherent mapping when needed; memcpy HOST staging into B host-visible upload, flush noncoherent when needed, transfer to B device-local then B host-visible readback with bounded fence10s. Proper usage flags, barriers/stages queue ownership singlequeueperdevice, memorytype selection, checked VkResult, initial commandbuffer lifecycle. Full parity all65536 words, --inject-corruption mutates final mappedbyte then exit1; report actual bytes_checked/mismatches, transport HOST_STAGING_NOT_P2P, no pooled VRAM claims. Error exit2; timeout exit3; PASS0. RAII or explicit resource cleanup. Compact helper functions avoid huge inline boilerplate. Never call vkCreateDeviceGroup; never imply directP2P. Pattern constant0x4a17c0de sufficient deterministic. Windows console build comment cl /std:c++17 /EHsc source.cpp /I SDKinclude /link vulkan-1.lib; build prerequisites explicitly unverified.",
+      "role": "user"
+    }
+  ],
+  "enable_thinking": false,
+  "model": "qwen3.8-flash",
+  "temperature": 0.1,
+  "max_tokens": 8192,
+  "stream": false
+}

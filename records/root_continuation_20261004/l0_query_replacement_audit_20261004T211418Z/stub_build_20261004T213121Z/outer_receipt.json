@@ -1,0 +1,19 @@
+{
+  "owned_controller_pid": 34616,
+  "exit_code": 0,
+  "reaped": true,
+  "timeout": false,
+  "capture": {
+    "bytes": {
+      "controller.stderr.log": 0,
+      "controller.stdout.log": 229
+    },
+    "overflow": [],
+    "errors": []
+  },
+  "readers_joined": true,
+  "seconds": 2.046999999321997,
+  "controller_source_sha_before": "14bf789cae3f7ee9144d322ce587ef8d4eaaf4fa46096a1b5f683126461791d7",
+  "controller_source_sha_after": "14bf789cae3f7ee9144d322ce587ef8d4eaaf4fa46096a1b5f683126461791d7",
+  "scope": "Only exact admitted /c compiler command under pinned owned Job; no candidate linking/execution"
+}

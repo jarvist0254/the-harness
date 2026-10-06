@@ -1,0 +1,14 @@
+{
+  "grok_binary_sha256": "6BB22B8B19BB1E92771710F50C45E1A5F5FF8B3B2A48FAC9157A1524539CD8F5",
+  "deadline_seconds": 300,
+  "reasoning_effort": "high",
+  "session_id": "b369ff39-9f69-4846-8e03-66c1716716c4",
+  "model": "grok-4.7-build-fast",
+  "source_execution": false,
+  "start_utc": "2026-10-04T18:48:29.5082225Z",
+  "prompt_sha256": "20C46ABB2ECD817BDF5195F960079D670864F0D0778092FD030830955E84747D",
+  "per_stream_cap_bytes": 2097152,
+  "candidate_sha256": "0E5292D39A9D9AFB0D8787904F51D3815C3723694E44F4AB964D8E6BD6E0F564",
+  "pid": 61984,
+  "provider_edit": false
+}

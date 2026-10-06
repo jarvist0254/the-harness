@@ -1,0 +1,46 @@
+{
+  "provider_tests_run": 14,
+  "provider_failures": 0,
+  "provider_errors": 0,
+  "provider_log": "test_eligible_and_refused (provider_inventory_tests.TestAdmissionSnapshot) ... ok\ntest_shared_refused_for_dedicated (provider_inventory_tests.TestAdmissionSnapshot) ... ok\ntest_unknown_free_not_allocatable (provider_inventory_tests.TestAdmissionSnapshot) ... ok\ntest_amd_json_dedicated (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_amd_shared_not_vram (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_amd_unsupported_schema_rejected (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_intel_json_valid (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_invalid_bool_memory (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_missing_pci_unqualified (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_nonzero_exit_refusal (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_nvidia_csv_valid (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_nvidia_na_memory (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_stale_sample (provider_inventory_tests.TestNormalizeInventory) ... ok\ntest_vendor_contradiction_conflict (provider_inventory_tests.TestNormalizeInventory) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.001s\n\nOK\n",
+  "independent_discriminators": [
+    {
+      "case": "future",
+      "physical_ids": [
+        "0000:01:00.0"
+      ],
+      "eligible_count": 1,
+      "expected_eligible_count": 0,
+      "gate_pass": false
+    },
+    {
+      "case": "missing_physical_id",
+      "physical_ids": [
+        null
+      ],
+      "eligible_count": 1,
+      "expected_eligible_count": 0,
+      "gate_pass": false
+    },
+    {
+      "case": "admission_recheck_stale",
+      "physical_ids": [
+        "0000:01:00.0"
+      ],
+      "eligible_count": 1,
+      "expected_eligible_count": 0,
+      "gate_pass": false
+    },
+    {
+      "case": "nvidia_8hex_domain",
+      "physical_ids": [
+        null
+      ],
+      "eligible_count": 1,
+      "expected_eligible_count": 1,
+      "gate_pass": false
+    }
+  ],
+  "runtime_execution": false,
+  "hardware_qualification": false
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+    "sha256": "6BB4E7EDB317044E34D426D44B0035C2EA57FB762AADE601F81E3BE599CA59F9"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+    "sha256": "20D57E2270221AD313DFC16D5C15245E52B3106AE1FF41113FA38886DC0851C7"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\contained_supervisor.base.snapshot.py",
+    "sha256": "60391680917CBBE84FE432596C399DCCC064C1FC5658A1CC6401C5BECF8B0F21"
+  },
+  {
+    "path": "E:\\the_harness\\records\\provider_quality_review\\expanded_eval_20261004T130649Z\\expanded_evaluator.py",
+    "sha256": "043DFE3444A8EF7D2F9B5524E0C6C44512E4BDD4C020C2558E56DF7A7ECB5FB5"
+  }
+]

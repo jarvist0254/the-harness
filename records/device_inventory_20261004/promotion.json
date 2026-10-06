@@ -1,0 +1,38 @@
+{
+  "immutable_source_sha256": "f8750235d89201ad56205fad3691ace06af5ecac106e4425b7291f4dd17cb56c",
+  "accepted_source_sha256": "4d3d5f10a46a92672ce10f16fcc2be2ca1c09a96f605cd87e25b200539280ade",
+  "red": {
+    "command": [
+      "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_device_inventory",
+      "test_real_headers"
+    ],
+    "exit_code": 1
+  },
+  "green": {
+    "command": [
+      "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_device_inventory",
+      "test_real_headers"
+    ],
+    "exit_code": 0
+  },
+  "amendments": [
+    "Whitelist three exact memory.* [MiB] headers only",
+    "Reject duplicate canonical CSV fields rather than silently overwrite",
+    "Clarify synthetic AMD/Intel schema limitations",
+    "Correct fractional-total refusal expectation: invalid_total precedes unknown_free"
+  ],
+  "public_api": [
+    "normalize_inventory(samples, *, now_utc, max_age_seconds=5)",
+    "get_admission_snapshot(inventory_result, *, now_utc, max_age_seconds=5)"
+  ]
+}

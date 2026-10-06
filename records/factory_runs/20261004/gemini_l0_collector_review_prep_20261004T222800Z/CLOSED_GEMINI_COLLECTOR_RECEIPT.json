@@ -1,0 +1,39 @@
+{
+  "review_path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high\\review.pending_root_qa.json",
+  "session_reaped": 1205,
+  "native_execution": false,
+  "job": "gemini_l0_collector_high",
+  "review_sha256": "0b405573f32bb91e0d4b9de8d299c30698225c9b6c4e38fc5b48826b8d1d1529",
+  "model_observed": "NOT_EXTRACTED_PENDING_RAW_CHECK",
+  "token_note": "total59125=input32248+output26877;thinking23707 included notadded;tokensNOTCredits",
+  "pins_mismatch_after": [],
+  "acceptance": "ADVISORY_REQUEST_CHANGES11_PENDING_ROOT",
+  "model_requested": "gemini-3.8-flash-high",
+  "utc": "2026-10-04T23:02:09.0916422Z",
+  "terminal": {
+    "outer_killed": false,
+    "exit_code": 0,
+    "drain_unknown": false,
+    "usage": {
+      "input_tokens": 32248,
+      "output_tokens": 26877,
+      "thinking_tokens": 23707,
+      "cache_read_tokens": 0,
+      "total_tokens": 59125
+    },
+    "private_url_output_refused": false,
+    "pipe_error": false,
+    "log_cap_exceeded": false,
+    "pid": 6488,
+    "finish_reason": "NOT_REPORTED",
+    "requested_model": "gemini-3.8-flash-high",
+    "status": "COMPLETE_REVIEW_STAGED",
+    "provider_patch_applied": false,
+    "credential_saved": false,
+    "model_usage": null,
+    "elapsed_seconds": 104.42,
+    "native_children_actual": 0,
+    "parse_error_type": null,
+    "lane": "Gemini"
+  }
+}

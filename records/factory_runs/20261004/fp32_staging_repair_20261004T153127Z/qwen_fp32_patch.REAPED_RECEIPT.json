@@ -1,0 +1,11 @@
+{
+  "wrapper_tool_session_exit": 0,
+  "utc": "2026-10-04T15:45:55.1870053Z",
+  "child_owned_terminal_exit": 0,
+  "identity": "Session and retained Process exit records primary; PID absence informational",
+  "provider_patch_applied": false,
+  "wrapper_pid": 55480,
+  "owned_pids_still_alive": [],
+  "worker_pid": 87556,
+  "wrapper_tool_session": 30640
+}

@@ -1,0 +1,22 @@
+{
+  "run": "corruption",
+  "pid": 77100,
+  "exit_code": 1,
+  "timeout_seconds": 60,
+  "wall_seconds": 0.32799999974668026,
+  "command": [
+    "E:\\the_harness\\records\\vulkan_smoke_20261004\\revision_3\\vulkan_smoke.exe",
+    "--inject-corruption"
+  ],
+  "compile": "PASS",
+  "api_execution": "PASS",
+  "actual_two_hardware_devices_reported": true,
+  "transport": "EXPLICIT_HOST_STAGED",
+  "transfer": "PASS",
+  "verification": "EXPECTED_CORRUPTION_DETECTED",
+  "gpu_compute_shader_operator": "NOT_CHECKED",
+  "memory_flags": "ADVERTISED_ONLY_NOT_VRAM_POOL",
+  "stdout": "Device 0: NVIDIA GeForce RTX 5070 Ti ID:11269 Vendor:4318\nAllocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:1 (advertised only)\nAllocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)\nAllocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)\nAllocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:1 (advertised only)\nDevice 1: AMD Radeon(TM) Graphics ID:5710 Vendor:4098\nAllocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:3 (advertised only)\nAllocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)\nAllocation bytes:262144 requested_flags:6 selected_flags:6 heap_flags:0 (advertised only)\nAllocation bytes:262144 requested_flags:1 selected_flags:1 heap_flags:3 (advertised only)\nA_FULL_PARITY words:65536 bytes:262144 mismatches:0\nB_FULL_PARITY words:65536 bytes:262144 mismatches:1 transport:EXPLICIT_HOST_STAGED\nFAIL: Mismatches in B_host: 1\n",
+  "stderr": "",
+  "process_closed": true
+}

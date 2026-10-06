@@ -1,0 +1,35 @@
+{
+  "source_sha256": "326133a489430f5167bec29a87c28af8ea652e2fe40701d64c153399b85f372c",
+  "source_stable": true,
+  "tests": "8 methods PASS; exact stdout/stderr and process receipt retained",
+  "compact_one_valid_solid": true,
+  "compact_dimensions_mm": [
+    188,
+    200,
+    200
+  ],
+  "compact_body_clear": true,
+  "universal_one_valid_solid": true,
+  "universal_dimensions_mm": [
+    188,
+    200,
+    254
+  ],
+  "universal_body_clear": false,
+  "universal_collision_mm3": {
+    "A": 33000.000000000015,
+    "C": 33000.0
+  },
+  "revision2_preview_geometry_equivalent": true,
+  "equivalence_method": "Each of 7 saved shape objects in each profile checked old-minus-new/new-minus-old BRep volumes and six bounding coordinates within 1e-6; all differences zero. Native FreeCAD computation, not planned dimensions only.",
+  "existing_preview_preserved_sha256": "8b7552d0cd35fd4879c2b9664b6eef35a41acff5c34fe51490cb2ac60a504962",
+  "revision2_state_files_preserved": true,
+  "revision3_native_receipt": "E:\\the_harness\\records\\cad_draft_20261004\\native_build_revision3_runs.json",
+  "processes_absent": [
+    8660,
+    19684,
+    70316
+  ],
+  "qualification": "DRAFT ONLY. Nominal front/rear body overlap does not certify safe contact, D structural load path, actual mounts, PSU, airflow, cable or production fit.",
+  "remaining_concrete_defect": "No new blocker found for the two current fixtures; universal remains explicitly refused for body interference."
+}

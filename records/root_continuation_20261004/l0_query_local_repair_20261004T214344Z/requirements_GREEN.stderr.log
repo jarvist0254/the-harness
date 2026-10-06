@@ -1,0 +1,12 @@
+test_all_owned_cleanup_proofs_are_complete (__main__.MeasuredRequirements) ... ok
+test_device_lost_is_attempted_failure (__main__.MeasuredRequirements) ... ok
+test_directed_relation_preserved (__main__.MeasuredRequirements) ... ok
+test_duplicate_root_queries_two_physical_owners_only (__main__.MeasuredRequirements) ... ok
+test_no_transport_qualification_from_queries (__main__.MeasuredRequirements) ... ok
+test_normal_full_artifact_is_strict_JSON (__main__.MeasuredRequirements) ... ok
+test_normal_queries_actual_external_properties (__main__.MeasuredRequirements) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK

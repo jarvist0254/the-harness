@@ -1,0 +1,6 @@
+[mcp_servers.google_search_console]
+enabled=false
+[mcp_servers.windows-mcp]
+enabled=false
+[mcp_servers.pycharm]
+enabled=false

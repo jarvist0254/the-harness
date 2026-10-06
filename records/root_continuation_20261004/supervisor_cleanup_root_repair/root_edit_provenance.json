@@ -1,0 +1,8 @@
+{
+  "source": "records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+  "source_sha256": "6bb4e7edb317044e34d426d44b0035c2ea57fb762aade601f81e3be599ca59f9",
+  "candidate": "records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+  "candidate_sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "author": "root",
+  "scope": "separately attributed experimental repair; not native or production admission"
+}

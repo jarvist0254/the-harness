@@ -1,0 +1,116 @@
+Microsoft (R) COFF/PE Dumper Version 14.51.36246.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\build_20261004T214702Z\stub.exe
+
+File Type: EXECUTABLE IMAGE
+
+  Section contains the following imports:
+
+    KERNEL32.dll
+             140005000 Import Address Table
+             140006168 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                         481 QueryPerformanceCounter
+                         242 GetCurrentProcessId
+                         246 GetCurrentThreadId
+                         31A GetSystemTimeAsFileTime
+                         39A InitializeSListHead
+                         5B8 SetUnhandledExceptionFilter
+                         2A5 GetModuleHandleW
+
+    VCRUNTIME140.dll
+             140005040 Import Address Table
+             1400061A8 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          3B memcmp
+                          3C memcpy
+                          3E memset
+                           8 __C_specific_handler
+                          1B __current_exception
+                          1C __current_exception_context
+
+    api-ms-win-crt-string-l1-1-0.dll
+             140005178 Import Address Table
+             1400062E0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          86 strcmp
+                          88 strcpy
+                          8B strlen
+
+    api-ms-win-crt-stdio-l1-1-0.dll
+             140005140 Import Address Table
+             1400062A8 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          54 _set_fmode
+                          7F fputc
+                           1 __p__commode
+                           3 __stdio_common_vfprintf
+                          8A fwrite
+                           0 __acrt_iob_func
+
+    api-ms-win-crt-runtime-l1-1-0.dll
+             1400050A8 Import Address Table
+             140006210 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          40 _seh_filter_exe
+                          42 _set_app_type
+                          67 terminate
+                          18 _configure_narrow_argv
+                          1E _crt_atexit
+                          28 _get_initial_narrow_environment
+                          36 _initterm
+                          37 _initterm_e
+                          55 exit
+                          23 _exit
+                           4 __p___argc
+                           5 __p___argv
+                          33 _initialize_narrow_environment
+                          15 _c_exit
+                          3D _register_thread_local_exe_atexit_callback
+                          16 _cexit
+                          3C _register_onexit_function
+                          34 _initialize_onexit_table
+
+    api-ms-win-crt-math-l1-1-0.dll
+             140005098 Import Address Table
+             140006200 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           9 __setusermatherr
+
+    api-ms-win-crt-locale-l1-1-0.dll
+             140005088 Import Address Table
+             1400061F0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           8 _configthreadlocale
+
+    api-ms-win-crt-heap-l1-1-0.dll
+             140005078 Import Address Table
+             1400061E0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          16 _set_new_mode
+
+  Summary
+
+       2E000 .data
+        1000 .pdata
+        2000 .rdata
+        1000 .reloc
+        4000 .text

@@ -1,0 +1,16 @@
+{
+  "pid": 36356,
+  "usage": {
+    "input_tokens": 133843,
+    "output_tokens": 24416,
+    "thinking_tokens": 22027,
+    "cache_read_tokens": 98054,
+    "total_tokens": 158259
+  },
+  "native_children": 0,
+  "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+  "exit_code": 0,
+  "outer_killed": false,
+  "requested_model": "gemini-3.8-flash-medium",
+  "elapsed_seconds": 110.55
+}

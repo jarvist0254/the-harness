@@ -1,0 +1,7 @@
+{
+  "pid": 6360,
+  "query": "tasklist /FI \"PID eq 6360\"",
+  "result": "No tasks are running which match the specified criteria.",
+  "observed_utc": "2026-10-04T16:38:00.9440060Z",
+  "scope": "Independent point-in-time worker-PID absence check"
+}

@@ -1,0 +1,41 @@
+{
+  "utc": "2026-10-04T22:18:59.849009+00:00",
+  "authority": "ROOT admission within explicit user Muse/Qwen/Gemini/Grok work authorization",
+  "admitted": true,
+  "scope": "Single bounded Muse source-only collector adversarial review; no GPU/source execution/promotion",
+  "wrapper": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_muse_collector.root_revision2.py",
+    "bytes": 26949,
+    "sha256": "fd4be5277c9f6557a3f76d0d0312eae3ca5777b3a9c12aab4e098847653de4e1"
+  },
+  "prompt": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\muse_collector.prompt.txt",
+    "bytes": 79168,
+    "sha256": "856f540a5eeaa2b8b97043469c4aa0f269341e88b2632ad271ce1a15122327fb"
+  },
+  "schema": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\output_schema.json",
+    "bytes": 1388,
+    "sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f"
+  },
+  "checked_pins": 25,
+  "pin_mismatches": [],
+  "full_embedded_input_presence_verified": 10,
+  "modified_function_only": [
+    "parse_jsonl"
+  ],
+  "parser_tests": {
+    "original_tests": 18,
+    "original_failures": 4,
+    "derivative_tests": 18,
+    "derivative_failures": 0,
+    "red_sha256": "af2f5817453dfd88f37fe74a94270cfb888309e16dd5ee0f913cdbc0114c42a6",
+    "green_sha256": "56c120a3c369d18814002382f56acad20c6823f3de34edc0a3e368177eb01724",
+    "test_sha256": "38aa53e2ddb7f2948aea0ed9f870b2263a77c1adea93c4cb1b8e90ca744d872a"
+  },
+  "deadline_seconds": 300,
+  "capture_aggregate_bytes": 2097152,
+  "native_tools": "disabled by unchanged CLI flags",
+  "usage": "UNKNOWN unless actual terminal reports it",
+  "original_failed_shape_artifacts": "preserved unchanged; no retroactive acceptance"
+}

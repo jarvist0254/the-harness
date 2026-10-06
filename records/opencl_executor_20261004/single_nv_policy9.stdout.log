@@ -1,0 +1,14 @@
+{
+  "status": "REFUSED",
+  "reason": "Total block memory exceeds usable aggregate budget",
+  "labels": [
+    "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+    "EXPLICIT_HOST_STAGED",
+    "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+  ],
+  "experimental": true,
+  "child_pid": 38572,
+  "child_exit_code": 2,
+  "elapsed_seconds": 0.375,
+  "timestamp_utc": "2026-10-04T11:08:21.940908+00:00"
+}

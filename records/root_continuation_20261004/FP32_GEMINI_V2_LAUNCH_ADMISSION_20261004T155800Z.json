@@ -1,0 +1,17 @@
+{
+  "adjudicator":"ROOT",
+  "authority":"Existing authorized Qwen → Gemini → Grok pipeline",
+  "provider_launch_authorized":true,
+  "batch_path":"E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "job_id":"gemini_fp32_review_v2",
+  "lane":"Gemini",
+  "model":"gemini-3.8-flash-medium",
+  "source_path":"E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch\\patch.pending_root_qa.json",
+  "source_sha256":"6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "prompt_sha256":"71d1f2e704a18a793dad4007f93f330fd827e0e8f94232d42156cff6f1920874",
+  "root_review":"Compact actual-artifact review retains complete matrix function, three Qwen changes and essential F32 pipeline/copy support. Prompt 21050 UTF-16 units; conservative full command bound 21678. Original 39223-unit prompt failed locally before provider launch and is not counted as paid usage. Helpers and original receipts are unchanged.",
+  "provider_timeout_seconds":210,
+  "outer_timeout_seconds":240,
+  "native_children_actual":0,
+  "result":"Static review only; no code application, compiler, GPU/native, other queues, authentication or global changes. No unchanged retry."
+}

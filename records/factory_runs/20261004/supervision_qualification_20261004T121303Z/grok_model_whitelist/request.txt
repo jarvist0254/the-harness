@@ -1,0 +1,2290 @@
+You are the requested Grok editor of the real clean-pinned llama.cpp numerical fixture. Author ONLY exact unique span replacements plus integrated actual-helper selftests, JSON {replacements:[{old,new}],test_source,notes}. Original Q8_0 CPU-vs-mixed-Vulkan failure remains authoritative, tolerances .01/.01 remain unchanged. Manager will append TWO verified model tuples: original official Q8_0 and distinct derived F32. No source guessing, model conversion, tools, runtime, installs, credentials, or unverified model names. Preserve all current one-device and two-device selections, hash/tokens/context/operator/device/parity controls. Allowed model is chosen by exact absolute path whitelist and verified selected-model byte size plus checked BCrypt SHA256 of actual file bytes; reject any other path/hash/size. Workload identity must include actual selected model SHA, selected dtype/quant identity, requested128+actual256 context, fixed16tokens, batch32/ubatch32/threads4, exact selected GPU devices/order, fixed atol/rtol. Keep model dimension/layers/vocabulary validation tied actual GGUF metadata, not label. F32 diagnostics are a different model representation/workload and do not retroactively validate Q8_0. Current pinned clean headers and source will be appended. Return minimal replacements, not whole unrelated rewrite. Tests must invoke actual selector/hash metadata helper from candidate, cover each allowed tuple, unknownpath, cross-hash/size mismatches, and distinct actual workload IDs. Both Qwen and DeepSeek terminal native maximum10 separately authorized but this direct tool-less Grok job creates0 native children.
+VERIFIED MODEL TUPLES
+Original Q8_0: E:\the_harness\records\models\qwen3_06b\Qwen3-0.6B-Q8_0.gguf ; SHA256 9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031 ; bytes639446688.
+Derived F32: E:\the_harness\records\models\qwen3_06b_f32_derived\Qwen3-0.6B-Q8_0-dequant-F32.gguf ; SHA256 bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80 ; bytes2390150816. All310tensorsF32,28layers,vocab151936. Derived via clean pinned official llama-quantize --allow-requantize --pure --max-buffer-size256 input output F32 4. F32 is dequantization of already quantized Q8_0 weights, not original full precision recovery. Preserve Q8 failure and do not loosen tolerance. Require exact28layers/vocab151936 metadata plus actual selected representation. No fake root admission or measured capacity claim.
+
+EXACT CURRENT SOURCE
+#include "llama.h"
+#include "ggml-backend.h"
+#include <algorithm>
+#include <chrono>
+#include <cmath>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <limits>
+#include <string>
+#include <vector>
+#ifndef _WIN32
+#ifndef LLAMA_LOGITS_QUAL_NO_MAIN
+int main(){fputs("{\"status\":\"ERROR\",\"exit_code\":2,\"error\":\"NOT_CHECKED\"}\n",stdout);return 2;}
+#endif
+#else
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <windows.h>
+#include <bcrypt.h>
+#pragma comment(lib,"bcrypt.lib")
+static const char* kPath="E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf";
+static const char* kSha="9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031";
+static const uint64_t kSize=639446688ULL;
+static const int kN=16;
+static std::chrono::steady_clock::time_point g_deadline;
+static bool abort_cb(void*){return std::chrono::steady_clock::now()>=g_deadline;}
+static std::string esc(const std::string& s){std::string r;r.reserve(s.size()+8);for(unsigned char c:s){if(c=='"')r+="\\\"";else if(c=='\\')r+="\\\\";else if(c=='\n')r+="\\n";else if(c=='\r')r+="\\r";else if(c=='\t')r+="\\t";else if(c<0x20){char b[8];std::snprintf(b,sizeof(b),"\\u%04x",c);r+=b;}else r.push_back((char)c);}return r;}
+static std::string hex32(const uint8_t h[32]){static const char* d="0123456789abcdef";std::string s(64,'0');for(int i=0;i<32;i++){s[i*2]=d[h[i]>>4];s[i*2+1]=d[h[i]&15];}return s;}
+static std::string num_or_null(bool ok,double v){if(!ok||!std::isfinite(v))return "null";char b[64];std::snprintf(b,sizeof(b),"%.17g",v);return b;}
+struct Alg{BCRYPT_ALG_HANDLE h=nullptr;~Alg(){if(h)BCryptCloseAlgorithmProvider(h,0);}};
+struct Hs{BCRYPT_HASH_HANDLE h=nullptr;~Hs(){if(h)BCryptDestroyHash(h);}};
+struct File{HANDLE h=INVALID_HANDLE_VALUE;~File(){if(h!=INVALID_HANDLE_VALUE)CloseHandle(h);}};
+static bool sha256_bytes(const uint8_t* data,size_t n,uint8_t out[32]){Alg alg;NTSTATUS st=BCryptOpenAlgorithmProvider(&alg.h,BCRYPT_SHA256_ALGORITHM,nullptr,0);if(!BCRYPT_SUCCESS(st))return false;DWORD obj_len=0,cb=0,hash_len=0;st=BCryptGetProperty(alg.h,BCRYPT_OBJECT_LENGTH,(PUCHAR)&obj_len,sizeof(obj_len),&cb,0);if(!BCRYPT_SUCCESS(st)||obj_len==0)return false;st=BCryptGetProperty(alg.h,BCRYPT_HASH_LENGTH,(PUCHAR)&hash_len,sizeof(hash_len),&cb,0);if(!BCRYPT_SUCCESS(st)||hash_len!=32)return false;std::vector<UCHAR> obj(obj_len);Hs hs;st=BCryptCreateHash(alg.h,&hs.h,obj.data(),obj_len,nullptr,0,0);if(!BCRYPT_SUCCESS(st))return false;size_t off=0;while(off<n){size_t chunk=n-off;if(chunk>1048576u)chunk=1048576u;st=BCryptHashData(hs.h,(PUCHAR)data+off,(ULONG)chunk,0);if(!BCRYPT_SUCCESS(st))return false;off+=chunk;}st=BCryptFinishHash(hs.h,out,32,0);return BCRYPT_SUCCESS(st);}
+static bool sha256_file(const wchar_t* path,uint64_t& sz,uint8_t out[32],const char*& err){err="cannot_open";File f;f.h=CreateFileW(path,GENERIC_READ,FILE_SHARE_READ,nullptr,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL|FILE_FLAG_SEQUENTIAL_SCAN,nullptr);if(f.h==INVALID_HANDLE_VALUE)return false;LARGE_INTEGER li{};if(!GetFileSizeEx(f.h,&li)){err="size_query_failed";return false;}if(li.QuadPart<0){err="size_query_failed";return false;}sz=(uint64_t)li.QuadPart;if(sz!=kSize){err="size_mismatch";return false;}Alg alg;NTSTATUS st=BCryptOpenAlgorithmProvider(&alg.h,BCRYPT_SHA256_ALGORITHM,nullptr,0);if(!BCRYPT_SUCCESS(st)){err="bcrypt_open_failed";return false;}DWORD obj_len=0,cb=0,hash_len=0;st=BCryptGetProperty(alg.h,BCRYPT_OBJECT_LENGTH,(PUCHAR)&obj_len,sizeof(obj_len),&cb,0);if(!BCRYPT_SUCCESS(st)||obj_len==0){err="bcrypt_object_length_failed";return false;}st=BCryptGetProperty(alg.h,BCRYPT_HASH_LENGTH,(PUCHAR)&hash_len,sizeof(hash_len),&cb,0);if(!BCRYPT_SUCCESS(st)||hash_len!=32){err="bcrypt_hash_length_failed";return false;}std::vector<UCHAR> obj(obj_len);Hs hs;st=BCryptCreateHash(alg.h,&hs.h,obj.data(),obj_len,nullptr,0,0);if(!BCRYPT_SUCCESS(st)){err="bcrypt_create_failed";return false;}uint64_t got=0;uint8_t buf[1<<16];while(got<sz){uint64_t remain=sz-got;DWORD want=remain>sizeof(buf)?(DWORD)sizeof(buf):(DWORD)remain;DWORD rd=0;if(!ReadFile(f.h,buf,want,&rd,nullptr)||rd==0){err="short_read";return false;}st=BCryptHashData(hs.h,buf,rd,0);if(!BCRYPT_SUCCESS(st)){err="bcrypt_hash_data_failed";return false;}got+=rd;}if(got!=sz){err="short_read";return false;}st=BCryptFinishHash(hs.h,out,32,0);if(!BCRYPT_SUCCESS(st)){err="bcrypt_finish_failed";return false;}err="";return true;}
+struct Cmp{bool length_ok=false,all_finite_ref=false,all_finite_tgt=false,metrics_ok=false;double max_abs=0,rmse=0;int fail_count=0;};
+static Cmp compare_logits(const float* r,size_t nr,const float* t,size_t nt,float atol,float rtol){Cmp c;c.length_ok=r&&t&&nr==nt&&nr>0;c.all_finite_ref=true;c.all_finite_tgt=true;if(!c.length_ok){c.fail_count=1;return c;}double sum=0,mx=0;int fc=0;for(size_t i=0;i<nr;i++){bool fr=std::isfinite(r[i]),ft=std::isfinite(t[i]);if(!fr)c.all_finite_ref=false;if(!ft)c.all_finite_tgt=false;if(!fr||!ft)continue;double d=std::fabs((double)r[i]-(double)t[i]);double tol=(double)atol+(double)rtol*std::fabs((double)r[i]);if(d>tol)fc++;if(d>mx)mx=d;sum+=d*d;}c.fail_count=fc;c.metrics_ok=c.all_finite_ref&&c.all_finite_tgt;if(c.metrics_ok){c.max_abs=mx;c.rmse=std::sqrt(sum/(double)nr);}return c;}
+static void corrupt_gpu_only(std::vector<float>& gpu,const std::vector<float>& cpu){double ref=cpu.empty()?0.0:(double)cpu[0];double tol=0.01+0.01*std::fabs(ref);double nv=ref+tol+1.0;if(!std::isfinite(ref)||!std::isfinite(nv)||std::fabs(nv-ref)<=tol)nv=std::isfinite(ref)?ref+(ref>=0?1000.0:-1000.0):1000.0;if(!gpu.empty())gpu[0]=(float)nv;}
+struct Batch{llama_batch b{};bool on=false;~Batch(){if(on){llama_batch_free(b);on=false;}}};
+static bool fill_batch(llama_batch& b,const std::vector<llama_token>& toks){if(!b.token||!b.pos||!b.n_seq_id||!b.seq_id||!b.logits)return false;b.n_tokens=(int32_t)toks.size();b.embd=nullptr;for(int i=0;i<b.n_tokens;i++){b.token[i]=toks[(size_t)i];b.pos[i]=i;b.n_seq_id[i]=1;if(!b.seq_id[i])return false;b.seq_id[i][0]=0;b.logits[i]=(int8_t)(i+1==b.n_tokens);}return true;}
+static bool decode_copy(llama_context* ctx,const std::vector<llama_token>& toks,int n_vocab,std::vector<float>& out,const char*& err){Batch batch;batch.b=llama_batch_init((int32_t)toks.size(),0,1);batch.on=true;if(!fill_batch(batch.b,toks)){err="batch_fill_failed";return false;}int rc=llama_decode(ctx,batch.b);if(rc!=0){err=rc==2?"decode_aborted":"decode_failed";return false;}llama_synchronize(ctx);float* p=llama_get_logits_ith(ctx,-1);if(!p){err="logits_null";return false;}out.resize((size_t)n_vocab);std::memcpy(out.data(),p,(size_t)n_vocab*sizeof(float));err="";return true;}
+static std::string lower_copy(const char* s){std::string r=s?s:"";for(char& c:r)if(c>='A'&&c<='Z')c=(char)(c-'A'+'a');return r;}
+static int vend(const char* desc){std::string s=lower_copy(desc);auto has=[&](const char* x){return s.find(x)!=std::string::npos;};int nv=has("nvidia")||has("geforce")||has("rtx");int amd=has("amd")||has("radeon")||has("gfx");if(nv&&amd)return -1;if(nv)return 1;if(amd)return 2;return 0;}
+struct DevSel{bool ok=false;int n=0;std::string a,b;const char* err="devices_syntax";};
+static bool vk_name(const std::string& s){return s=="Vulkan0"||s=="Vulkan1";}
+static DevSel parse_devices(const std::string& devices){DevSel s;if(devices.empty())return s;std::vector<std::string> p;size_t i=0;while(i<=devices.size()){size_t c=devices.find(',',i);if(c==std::string::npos){p.push_back(devices.substr(i));break;}p.push_back(devices.substr(i,c-i));i=c+1;if(i==devices.size()){p.push_back("");break;}}for(const auto& x:p)if(x.empty())return s;if(p.size()>2){s.err="devices_excess";return s;}if(p.empty())return s;for(const auto& x:p)if(!vk_name(x)){s.err="devices_unknown";return s;}if(p.size()==2&&p[0]==p[1]){s.err="devices_duplicate";return s;}s.ok=true;s.n=(int)p.size();s.a=p[0];if(p.size()==2)s.b=p[1];s.err="";return s;}
+static std::string join_device_names(const std::string& a,const std::string& b,int n){if(n<=1)return n==1?a:std::string();return a+","+b;}
+static std::string devices_json_array(const std::string& a,const std::string& b,int n){std::string o="[";if(n>=1){o+="\"";o+=esc(a);o+="\"";}if(n>=2){o+=",\"";o+=esc(b);o+="\"";}o+="]";return o;}
+static std::string tensor_split_json(size_t md,int n){std::string o="[";for(size_t i=0;i<md;i++){if(i)o+=",";o+=(i==0||(n>=2&&i==1))?"1":"0";}o+="]";return o;}
+static const char* split_mode_for_count(int n){return n==1?"NONE":n==2?"LAYER":"";}
+static std::string vendor_population_label(int n,int va,int vb){if(n==1&&va>0)return "SINGLE_VENDOR";if(n==2&&va>0&&vb>0&&va!=vb)return "MIXED_VENDOR";return "INVALID";}
+struct Hold{llama_model* m=nullptr;llama_context* c=nullptr;~Hold(){if(c)llama_free(c);if(m)llama_model_free(m);}void reset(){if(c)llama_free(c);c=nullptr;if(m)llama_model_free(m);m=nullptr;}};
+struct Backend{bool on=false;Backend(){llama_backend_init();ggml_backend_load_all();on=true;}~Backend(){if(on)llama_backend_free();}};
+struct Rep{std::string status="ERROR";int code=2;std::string error="unspecified";std::string model,sha,d0,d1,dj0,dj1,workload,desc,quant,tokens;bool has_sz=false,has_cmp=false,metrics=false,fcpu=false,fgpu=false,inject=false;uint64_t sz=0;int n_layer=-1,n_vocab=-1,nctx=-1,nbatch=-1,nubatch=-1,fc=0;double mx=0,rmse=0;int nsel=0,reg_count=-1;std::string vendor_pop,split_mode,split_json;
+std::string json() const{std::string o="{\"status\":\"";o+=status;o+="\",\"exit_code\":";o+=std::to_string(code);o+=",\"error\":";o+=error.empty()?"null":"\""+esc(error)+"\"";o+=",\"model\":\"";o+=esc(model);o+="\",\"file_size\":";o+=has_sz?std::to_string(sz):"null";o+=",\"sha256\":";o+=sha.empty()?"null":"\""+esc(sha)+"\"";o+=",\"devices\":";o+=devices_json_array(d0,d1,nsel);o+=",\"device_details\":[";if(nsel>=1&&!dj0.empty())o+=dj0;if(nsel>=2&&!dj1.empty()){if(!dj0.empty())o+=",";o+=dj1;}o+="],\"device_population\":";o+=std::to_string(nsel);o+=",\"device_registry_count\":";o+=reg_count<0?"null":std::to_string(reg_count);o+=",\"vendor_population\":";o+=vendor_pop.empty()?"null":std::string("\"")+vendor_pop+"\"";o+=",\"workload_sha256\":";o+=workload.empty()?"null":"\""+esc(workload)+"\"";o+=",\"tokens\":[";o+=tokens;o+="],\"n_layer\":";o+=n_layer<0?"null":std::to_string(n_layer);o+=",\"n_vocab\":";o+=n_vocab<0?"null":std::to_string(n_vocab);o+=",\"n_ctx_actual\":";o+=nctx<0?"null":std::to_string(nctx);o+=",\"n_batch_actual\":";o+=nbatch<0?"null":std::to_string(nbatch);o+=",\"n_ubatch_actual\":";o+=nubatch<0?"null":std::to_string(nubatch);o+=",\"description\":";o+=desc.empty()?"null":"\""+esc(desc)+"\"";o+=",\"quant\":";o+=quant.empty()?"null":"\""+esc(quant)+"\"";o+=",\"max_abs\":";o+=num_or_null(has_cmp&&metrics,mx);o+=",\"rmse\":";o+=num_or_null(has_cmp&&metrics,rmse);o+=",\"fail_count\":";o+=has_cmp?std::to_string(fc):"null";o+=",\"all_finite_cpu\":";o+=has_cmp?(fcpu?"true":"false"):"null";o+=",\"all_finite_gpu\":";o+=has_cmp?(fgpu?"true":"false"):"null";o+=",\"inject_corruption\":";o+=inject?"true":"false";o+=",\"requested\":{\"n_ctx\":128,\"n_batch\":32,\"n_ubatch\":32,\"n_threads\":4,\"cpu_n_gpu_layers\":0,\"gpu_n_gpu_layers\":2147483647,\"split_mode\":";o+=split_mode.empty()?"null":std::string("\"")+split_mode+"\"";o+=",\"tensor_split\":";o+=split_json.empty()?"null":split_json;o+=",\"flash_attn\":\"disabled\",\"cpu_devices\":\"ggml_backend_dev_by_type(CPU),null\",\"offload_kqv_cpu\":false,\"op_offload_cpu\":false,\"offload_kqv_gpu\":true,\"op_offload_gpu\":true},\"qualification_limits\":[\"public_API_cannot_prove_per_layer_ownership_stderr_llama_logs_required\",\"NOT_VRAM_pool_NOT_4cards_NOT_P2P_NOT_gt_one_card_capacity\",\"AMD_shared_memory_total_NOT_dedicated_capacity\",\"device_id_UNKNOWN_when_props.device_id_null_no_fake_pci\",\"abort_callback_installed_header_says_CPU_execution_only\",\"model_load_not_aborted_by_abort_callback_parent_owns_60s\",\"atol_0.01_rtol_0.01_provisional\",\"flash_attn_disabled_on_both_contexts\",\"capacity_qualified_false\"],\"pinned_commit\":\"0faee5004297c3bcfa40b7bf11750127b8c1fd7d\"}\n";return o;}};
+static int emit(const Rep& r){std::string j=r.json();if(j.size()>128*1024){fputs("{\"status\":\"ERROR\",\"exit_code\":2,\"error\":\"json_too_large\"}\n",stdout);return 2;}fputs(j.c_str(),stdout);fflush(stdout);return r.code;}
+static std::string dev_json(ggml_backend_dev_t d){ggml_backend_dev_props p{};ggml_backend_dev_get_props(d,&p);const char* id=(p.device_id&&p.device_id[0])?p.device_id:"UNKNOWN";auto t=ggml_backend_dev_type(d);const char* ty=t==GGML_BACKEND_DEVICE_TYPE_GPU?"GPU":t==GGML_BACKEND_DEVICE_TYPE_IGPU?"IGPU":"OTHER";auto reg=ggml_backend_dev_backend_reg(d);const char* rn=reg?ggml_backend_reg_name(reg):"";std::string o="{\"name\":\"";o+=esc(p.name?p.name:"");o+="\",\"description\":\"";o+=esc(p.description?p.description:"");o+="\",\"type\":\"";o+=ty;o+="\",\"backend\":\"";o+=esc(rn?rn:"");o+="\",\"device_id\":\"";o+=esc(id);o+="\",\"memory_total\":";o+=std::to_string((unsigned long long)p.memory_total);o+=",\"memory_free\":";o+=std::to_string((unsigned long long)p.memory_free);o+=",\"capacity_qualified\":false}";return o;}
+static int expected_padded_context(int requested){if(requested!=128)return -1;return 256;}
+static bool context_dims_ok(int actual_ctx,int nbatch,int nubatch,int nthreads,const char*& err){if(actual_ctx!=expected_padded_context(128)||nbatch!=32||nubatch!=32||nthreads!=4){err="context_params_mismatch";return false;}return true;}
+static bool ctx_ok(llama_context* c,Rep& r,const char*& err){r.nctx=(int)llama_n_ctx(c);r.nbatch=(int)llama_n_batch(c);r.nubatch=(int)llama_n_ubatch(c);llama_set_n_threads(c,4,4);if(!context_dims_ok(r.nctx,r.nbatch,r.nubatch,(int)llama_n_threads(c),err))return false;return true;}
+static llama_context_params ctx_params(bool gpu){llama_context_params cp=llama_context_default_params();cp.n_ctx=128;cp.n_batch=32;cp.n_ubatch=32;cp.n_threads=4;cp.n_threads_batch=4;cp.flash_attn_type=LLAMA_FLASH_ATTN_TYPE_DISABLED;cp.offload_kqv=gpu;cp.op_offload=gpu;cp.abort_callback=abort_cb;cp.abort_callback_data=nullptr;return cp;}
+int qual_self_test(){int fails=0;std::string names;auto exp=[&](bool cond,const char* n){if(!cond){fails++;if(!names.empty())names+=",";names+="\"";names+=n;names+="\"";}};float a[]={1.f,2.f,3.f,4.f};float b[]={1.005f,2.005f,3.005f,4.005f};Cmp c=compare_logits(a,4,b,4,0.01f,0.01f);exp(c.metrics_ok&&c.fail_count==0,"within_tol");float nan=std::numeric_limits<float>::quiet_NaN();float inf=std::numeric_limits<float>::infinity();float rn[]={1.f,nan,3.f};float tn[]={1.f,2.f,3.f};c=compare_logits(rn,3,tn,3,0.01f,0.01f);exp(!c.all_finite_ref&&!c.metrics_ok,"nan_ref");float ri[]={1.f,2.f,3.f};float ti[]={1.f,inf,3.f};c=compare_logits(ri,3,ti,3,0.01f,0.01f);exp(!c.all_finite_tgt&&!c.metrics_ok,"inf_tgt");float rp[]={1.f,2.f};float tp[]={1.05f,2.f};c=compare_logits(rp,2,tp,2,0.01f,0.01f);exp(c.metrics_ok&&c.fail_count==1,"perturb");c=compare_logits(a,4,b,3,0.01f,0.01f);exp(!c.length_ok&&!c.metrics_ok,"length");c=compare_logits(a,0,b,0,0.01f,0.01f);exp(!c.length_ok,"empty");float big0[]={100.f};float big1[]={101.f};float big2[]={101.02f};exp(compare_logits(big0,1,big1,1,0.01f,0.01f).fail_count==0,"rtol_pass");exp(compare_logits(big0,1,big2,1,0.01f,0.01f).fail_count==1,"rtol_fail");std::vector<float> cpu{1.f,2.f},gpu{1.f,2.f},cpu0=cpu;corrupt_gpu_only(gpu,cpu);exp(cpu==cpu0,"cpu_unmodified");exp(compare_logits(cpu.data(),cpu.size(),gpu.data(),gpu.size(),0.01f,0.01f).fail_count>0,"inject_fails");std::string in;in.push_back('a');in.push_back('"');in.push_back('\\');in.push_back('\n');in.push_back(1);std::string e=esc(in);exp(e.find("\\\"")!=std::string::npos&&e.find("\\n")!=std::string::npos&&e.find("\\u0001")!=std::string::npos,"esc");exp(num_or_null(false,1.0)=="null"&&num_or_null(true,nan)=="null"&&num_or_null(true,1.5).find("nan")==std::string::npos,"num_null");uint8_t h[32]{};const uint8_t abc[]={'a','b','c'};exp(sha256_bytes(abc,3,h)&&hex32(h)=="ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad","sha256_abc");exp(expected_padded_context(128)==256&&expected_padded_context(64)==-1&&expected_padded_context(256)==-1&&expected_padded_context(512)==-1,"pad_128_to_256");const char* ce="";exp(context_dims_ok(256,32,32,4,ce),"actual_256_accepted");exp(!context_dims_ok(128,32,32,4,ce)&&ce&&std::strcmp(ce,"context_params_mismatch")==0,"actual_128_refused");exp(!context_dims_ok(512,32,32,4,ce),"actual_512_refused");{int saved_ctx=256;int gpu_ctx=256;exp(gpu_ctx==saved_ctx&&saved_ctx==expected_padded_context(128),"cpu_gpu_actual_256");gpu_ctx=128;exp(gpu_ctx!=saved_ctx,"cpu_gpu_mismatch_refused");}std::string wtag="REQUESTED_N_CTX=128\nACTUAL_N_CTX=";wtag+=std::to_string(expected_padded_context(128));wtag+="\nN_BATCH=32\nN_UBATCH=32";exp(wtag=="REQUESTED_N_CTX=128\nACTUAL_N_CTX=256\nN_BATCH=32\nN_UBATCH=32"&&wtag.find("\nN_CTX=")==std::string::npos,"workload_context_tags");DevSel s=parse_devices("Vulkan0");exp(s.ok&&s.n==1&&s.a=="Vulkan0"&&s.b.empty(),"parse_v0");s=parse_devices("Vulkan1");exp(s.ok&&s.n==1&&s.a=="Vulkan1"&&s.b.empty(),"parse_v1");s=parse_devices("Vulkan0,Vulkan1");exp(s.ok&&s.n==2&&s.a=="Vulkan0"&&s.b=="Vulkan1","parse_01");s=parse_devices("Vulkan1,Vulkan0");exp(s.ok&&s.n==2&&s.a=="Vulkan1"&&s.b=="Vulkan0","parse_10");s=parse_devices("Vulkan0,Vulkan0");exp(!s.ok&&s.err&&std::strcmp(s.err,"devices_duplicate")==0&&s.n==0,"parse_dup");s=parse_devices("");exp(!s.ok&&std::strcmp(s.err,"devices_syntax")==0,"parse_empty");s=parse_devices("Vulkan0,");exp(!s.ok&&std::strcmp(s.err,"devices_syntax")==0,"parse_trail");s=parse_devices(",Vulkan0");exp(!s.ok&&std::strcmp(s.err,"devices_syntax")==0,"parse_lead");s=parse_devices("Vulkan0,,Vulkan1");exp(!s.ok,"parse_hole");s=parse_devices("Vulkan2");exp(!s.ok&&std::strcmp(s.err,"devices_unknown")==0&&s.a.empty()&&s.n==0,"parse_unk_nofallback");s=parse_devices("Vulkan0,Vulkan2");exp(!s.ok&&std::strcmp(s.err,"devices_unknown")==0,"parse_unk_pair");s=parse_devices("CPU");exp(!s.ok&&std::strcmp(s.err,"devices_unknown")==0,"parse_cpu_rejected");s=parse_devices("Vulkan0,Vulkan1,Vulkan0");exp(!s.ok&&std::strcmp(s.err,"devices_excess")==0,"parse_excess");s=parse_devices("Vulkan0,Vulkan1,");exp(!s.ok,"parse_excess_trail");exp(devices_json_array("Vulkan0","",1)=="[\"Vulkan0\"]","json_single");exp(devices_json_array("Vulkan1","",1)=="[\"Vulkan1\"]","json_single_amd");exp(devices_json_array("Vulkan0","Vulkan1",2)=="[\"Vulkan0\",\"Vulkan1\"]","json_pair");exp(devices_json_array("Vulkan1","Vulkan0",2)=="[\"Vulkan1\",\"Vulkan0\"]","json_rev");exp(devices_json_array("","",0)=="[]","json_none");exp(tensor_split_json(4,1)=="[1,0,0,0]","split_single");exp(tensor_split_json(4,2)=="[1,1,0,0]","split_pair");exp(tensor_split_json(1,1)=="[1]","split_md1");exp(std::string(split_mode_for_count(1))=="NONE"&&std::string(split_mode_for_count(2))=="LAYER","split_mode_names");exp(vendor_population_label(1,1,0)=="SINGLE_VENDOR","vend_single_nv");exp(vendor_population_label(1,2,1)=="SINGLE_VENDOR"&&vendor_population_label(1,2,1)!="MIXED_VENDOR","vend_single_amd_not_mixed");exp(vendor_population_label(2,1,2)=="MIXED_VENDOR","vend_mixed");exp(vendor_population_label(2,2,1)=="MIXED_VENDOR","vend_mixed_rev");exp(vendor_population_label(2,1,1)=="INVALID","vend_same_invalid");exp(vendor_population_label(1,0,0)=="INVALID","vend_unknown_invalid");std::string j1=join_device_names("Vulkan0","",1);std::string j2=join_device_names("Vulkan0","Vulkan1",2);std::string j3=join_device_names("Vulkan1","Vulkan0",2);exp(j1=="Vulkan0"&&j1.find(',')==std::string::npos,"join_single_no_comma");exp(j2=="Vulkan0,Vulkan1"&&j3=="Vulkan1,Vulkan0","join_orders");exp(join_device_names("Vulkan0","Vulkan1",1)=="Vulkan0","join_single_ignores_unselected");std::string o="{\"self_test\":true,\"status\":\"";o+=fails?"SELF_TEST_FAIL":"SELF_TEST_OK";o+="\",\"hardware_pass\":false,\"failures\":[";o+=names;o+="]}\n";fputs(o.c_str(),stdout);fflush(stdout);return fails?1:0;}
+static int run_parity(std::string model,std::string expect,std::string devices,bool inject){g_deadline=std::chrono::steady_clock::now()+std::chrono::seconds(60);Rep r;r.inject=inject;r.model=model;if(model!=kPath){r.error="path_mismatch";r.code=2;return emit(r);}if(expect!=kSha){r.error="expected_sha256_mismatch";r.code=2;return emit(r);}int wn=MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,model.c_str(),-1,nullptr,0);if(wn<=0){r.error="path_utf8";r.code=2;return emit(r);}std::vector<wchar_t> w((size_t)wn);if(MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,model.c_str(),-1,w.data(),wn)!=wn){r.error="path_utf8";r.code=2;return emit(r);}uint8_t raw[32]{};const char* herr="";if(!sha256_file(w.data(),r.sz,raw,herr)){r.has_sz=true;r.error=herr;r.code=herr&&std::strcmp(herr,"size_mismatch")==0?1:1;return emit(r);}r.has_sz=true;r.sha=hex32(raw);if(r.sha!=expect){r.error="sha256_mismatch";r.code=1;return emit(r);}DevSel sel=parse_devices(devices);if(!sel.ok){r.error=sel.err?sel.err:"devices_syntax";r.code=2;return emit(r);}r.d0=sel.a;r.d1=sel.b;r.nsel=sel.n;r.split_mode=split_mode_for_count(r.nsel);Backend backend;r.reg_count=(int)ggml_backend_dev_count();if(abort_cb(nullptr)){r.error="deadline";r.code=2;return emit(r);}ggml_backend_dev_t d0=ggml_backend_dev_by_name(r.d0.c_str());if(!d0){r.error="device_not_found";r.code=2;return emit(r);}ggml_backend_dev_t d1=nullptr;if(r.nsel==2){d1=ggml_backend_dev_by_name(r.d1.c_str());if(!d1){r.error="device_not_found";r.code=2;return emit(r);}if(d0==d1){r.error="duplicate_device_pointer";r.code=2;return emit(r);}}const char* n0=ggml_backend_dev_name(d0);if(!n0||r.d0!=n0){r.error="device_name_mismatch";r.code=2;return emit(r);}if(r.nsel==2){const char* n1=ggml_backend_dev_name(d1);if(!n1||r.d1!=n1){r.error="device_name_mismatch";r.code=2;return emit(r);}}auto reg0=ggml_backend_dev_backend_reg(d0);const char* rn0=reg0?ggml_backend_reg_name(reg0):nullptr;if(!rn0||std::strcmp(rn0,"Vulkan")!=0){r.error="backend_not_vulkan";r.code=2;return emit(r);}if(r.nsel==2){auto reg1=ggml_backend_dev_backend_reg(d1);const char* rn1=reg1?ggml_backend_reg_name(reg1):nullptr;if(!rn1||std::strcmp(rn1,"Vulkan")!=0){r.error="backend_not_vulkan";r.code=2;return emit(r);}}auto t0=ggml_backend_dev_type(d0);if(t0!=GGML_BACKEND_DEVICE_TYPE_GPU&&t0!=GGML_BACKEND_DEVICE_TYPE_IGPU){r.error="device_type";r.code=2;return emit(r);}if(r.nsel==2){auto t1=ggml_backend_dev_type(d1);if(t1!=GGML_BACKEND_DEVICE_TYPE_GPU&&t1!=GGML_BACKEND_DEVICE_TYPE_IGPU){r.error="device_type";r.code=2;return emit(r);}}ggml_backend_dev_props p0{};ggml_backend_dev_get_props(d0,&p0);int va=vend(p0.description);int vb=0;ggml_backend_dev_props p1{};if(r.nsel==2){ggml_backend_dev_get_props(d1,&p1);vb=vend(p1.description);}if(vendor_population_label(r.nsel,va,vb)=="INVALID"){r.error="vendor_description_mismatch";r.code=2;return emit(r);}r.vendor_pop=vendor_population_label(r.nsel,va,vb);std::string id0=(p0.device_id&&p0.device_id[0])?p0.device_id:"UNKNOWN";if(r.nsel==2){std::string id1=(p1.device_id&&p1.device_id[0])?p1.device_id:"UNKNOWN";if(id0!="UNKNOWN"&&id0==id1){r.error="duplicate_physical_device";r.code=2;return emit(r);}}r.dj0=dev_json(d0);if(r.nsel==2)r.dj1=dev_json(d1);ggml_backend_dev_t cdevs[2]={ggml_backend_dev_by_type(GGML_BACKEND_DEVICE_TYPE_CPU),nullptr};if(!cdevs[0]||ggml_backend_dev_type(cdevs[0])!=GGML_BACKEND_DEVICE_TYPE_CPU){r.error="cpu_device_missing";r.code=2;return emit(r);}std::vector<llama_token> toks;std::vector<float> cpu_logits,gpu_logits;int cpu_ft=-1,gpu_ft=-1;{
+Hold cpu;llama_model_params mp=llama_model_default_params();mp.n_gpu_layers=0;mp.devices=cdevs;mp.split_mode=LLAMA_SPLIT_MODE_NONE;cpu.m=llama_model_load_from_file(model.c_str(),mp);if(!cpu.m){r.error="cpu_model_load_failed";r.code=1;return emit(r);}r.n_layer=llama_model_n_layer(cpu.m);const llama_vocab* vocab=llama_model_get_vocab(cpu.m);r.n_vocab=vocab?llama_vocab_n_tokens(vocab):0;if(r.n_vocab<kN){r.error="vocab";r.code=1;return emit(r);}for(int i=0;i<kN;i++)toks.push_back((llama_token)i);for(int i=0;i<kN;i++){if(i)r.tokens+=",";r.tokens+=std::to_string((int)toks[(size_t)i]);}char db[1024];db[0]=0;if(llama_model_desc(cpu.m,db,sizeof(db))<0){r.error="model_desc";r.code=1;return emit(r);}r.desc=db;cpu_ft=(int)llama_model_ftype(cpu.m);const char* qn=llama_ftype_name((llama_ftype)cpu_ft);r.quant=qn?qn:"UNKNOWN";if(abort_cb(nullptr)){r.error="deadline";r.code=2;return emit(r);}llama_context_params cp=ctx_params(false);cpu.c=llama_init_from_model(cpu.m,cp);if(!cpu.c){r.error="cpu_context_failed";r.code=1;return emit(r);}llama_set_abort_callback(cpu.c,abort_cb,nullptr);const char* e="";if(!ctx_ok(cpu.c,r,e)){r.error=e;r.code=1;return emit(r);}if(!decode_copy(cpu.c,toks,r.n_vocab,cpu_logits,e)){r.error=e;r.code=std::strcmp(e,"decode_aborted")==0?2:1;return emit(r);}cpu.reset();
+}
+if(abort_cb(nullptr)){r.error="deadline_before_gpu";r.code=2;return emit(r);}size_t md=llama_max_devices();if(md<(size_t)r.nsel){r.error="llama_max_devices";r.code=2;return emit(r);}r.split_json=tensor_split_json(md,r.nsel);std::vector<float> split(md,0.f);split[0]=1.f;if(r.nsel==2)split[1]=1.f;std::vector<ggml_backend_dev_t> gdevs;gdevs.push_back(d0);if(r.nsel==2)gdevs.push_back(d1);gdevs.push_back(nullptr);{
+Hold gpu;llama_model_params mp=llama_model_default_params();mp.n_gpu_layers=INT_MAX;mp.split_mode=r.nsel==2?LLAMA_SPLIT_MODE_LAYER:LLAMA_SPLIT_MODE_NONE;mp.devices=gdevs.data();mp.tensor_split=split.data();gpu.m=llama_model_load_from_file(model.c_str(),mp);if(!gpu.m){r.error="gpu_model_load_failed";r.code=1;return emit(r);}if(llama_model_n_layer(gpu.m)!=r.n_layer){r.error="layer_mismatch";r.code=1;return emit(r);}const llama_vocab* gv=llama_model_get_vocab(gpu.m);int gv_n=gv?llama_vocab_n_tokens(gv):0;if(gv_n!=r.n_vocab){r.error="vocab_mismatch";r.code=1;return emit(r);}gpu_ft=(int)llama_model_ftype(gpu.m);if(gpu_ft!=cpu_ft){r.error="quant_mismatch";r.code=1;return emit(r);}llama_context_params cp=ctx_params(true);gpu.c=llama_init_from_model(gpu.m,cp);if(!gpu.c){r.error="gpu_context_failed";r.code=1;return emit(r);}llama_set_abort_callback(gpu.c,abort_cb,nullptr);const char* e="";int saved_ctx=r.nctx;if(!ctx_ok(gpu.c,r,e)){r.error=e;r.code=1;return emit(r);}if(r.nctx!=saved_ctx){r.error="context_params_mismatch";r.code=1;return emit(r);}if(!decode_copy(gpu.c,toks,r.n_vocab,gpu_logits,e)){r.error=e;r.code=std::strcmp(e,"decode_aborted")==0?2:1;return emit(r);}gpu.reset();
+}
+if(inject)corrupt_gpu_only(gpu_logits,cpu_logits);Cmp cmp=compare_logits(cpu_logits.data(),cpu_logits.size(),gpu_logits.data(),gpu_logits.size(),0.01f,0.01f);r.has_cmp=true;r.metrics=cmp.metrics_ok;r.mx=cmp.max_abs;r.rmse=cmp.rmse;r.fc=cmp.fail_count;r.fcpu=cmp.all_finite_ref;r.fgpu=cmp.all_finite_tgt;std::string canon="MODEL_HASH=";canon+=r.sha;canon+="\nDEVICES=";canon+=join_device_names(r.d0,r.d1,r.nsel);canon+="\nTOKENS=";canon+=r.tokens;canon+="\nREQUESTED_N_CTX=128\nACTUAL_N_CTX=";canon+=std::to_string(r.nctx);canon+="\nN_BATCH=32\nN_UBATCH=32\nQUANT=";canon+=r.quant;uint8_t wh[32]{};if(!sha256_bytes((const uint8_t*)canon.data(),canon.size(),wh)){r.error="workload_hash_failed";r.code=1;return emit(r);}r.workload=hex32(wh);if(!cmp.length_ok||!cmp.metrics_ok||cmp.fail_count!=0){r.status="NUMERIC_PARITY_FAIL";r.code=1;r.error=!cmp.metrics_ok?"nonfinite_or_length":inject?"inject_corruption":"tolerance";return emit(r);}r.status="NUMERIC_PARITY_PASS";r.code=0;r.error.clear();return emit(r);}
+#ifndef LLAMA_LOGITS_QUAL_NO_MAIN
+int main(int argc,char** argv){bool self=false,inject=false;std::string model,sha,devices;for(int i=1;i<argc;i++){if(!std::strcmp(argv[i],"--self-test"))self=true;else if(!std::strcmp(argv[i],"--inject-logit-corruption"))inject=true;else if(!std::strcmp(argv[i],"--model")&&i+1<argc)model=argv[++i];else if(!std::strcmp(argv[i],"--expected-sha256")&&i+1<argc)sha=argv[++i];else if(!std::strcmp(argv[i],"--devices")&&i+1<argc)devices=argv[++i];else{Rep r;r.error="bad_arg";r.code=2;return emit(r);}}if(self)return qual_self_test();if(model.empty()||sha.empty()||devices.empty()){Rep r;r.error="usage";r.code=2;return emit(r);}return run_parity(model,sha,devices,inject);}
+#endif
+#endif
+
+
+SOURCE E:\the_harness\records\vulkan_llm_qualification_20261004\f32_derived_model_provenance.md
+# Derived F32 GGUF provenance
+
+This file records a separate diagnostic input derived from the pinned Q8_0 model. It does not change or supersede any Q8_0 parity failure.
+
+The input was `records/models/qwen3_06b/Qwen3-0.6B-Q8_0.gguf`, SHA256 `9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031`, 639,446,688 bytes. The clean llama.cpp export is commit `0faee5004297c3bcfa40b7bf11750127b8c1fd7d`, archive SHA256 `7B1C763340C17226B4DF928DC34A62150F8D27DECC22AF0CE808EB16BF027872`. The built `llama-quantize.exe` SHA256 is `28d19fcf648406bb7e77dc5afcd4a43867f0ad92550c50409d0c63e8e061f332`.
+
+The command was:
+
+```text
+llama-quantize.exe --allow-requantize --pure --max-buffer-size 256 E:\the_harness\records\models\qwen3_06b\Qwen3-0.6B-Q8_0.gguf E:\the_harness\records\models\qwen3_06b_f32_derived\Qwen3-0.6B-Q8_0-dequant-F32.gguf F32 4
+```
+
+It completed in 3.909 seconds under the 180-second bound with exit 0. The quantizer dry-run predicted 2,273.75 MiB. The output is 2,390,150,816 bytes, below the enforced 3 GiB ceiling, with SHA256 `bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80`. The original Q8_0 file remained unchanged. E: had approximately 832.5 GB free before the conversion.
+
+A second no-write quantizer dry-run loaded the derived GGUF and reported 310 tensors, `general.file_type=0`, `qwen3.block_count=28`, and `tokenizer.ggml.tokens` length 151,936. All 310 tensor records were `f32`; the requested dry-run output did not exist afterward. No inference was performed with this derived file. The linked Vulkan backend printed device enumeration during quantizer startup; the pinned quantization path dequantizes tensor rows and calls CPU `ggml_quantize_chunk`, with no Vulkan graph execution in the conversion loop.
+
+Exact build, help, dry-run, conversion, and verification logs and process receipts are in `records/vulkan_llm_qualification_20261004/quantizer_build/`. The tool documentation warns that requantizing already quantized tensors can reduce quality compared with converting from F16/F32, so this artifact is a numerical diagnostic fixture only.
+
+SOURCE E:\the_harness\records\vulkan_llm_qualification_20261004\contextfix_default.stdout.json
+{"status":"NUMERIC_PARITY_FAIL","exit_code":1,"error":"tolerance","model":"E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf","file_size":639446688,"sha256":"9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031","devices":["Vulkan0","Vulkan1"],"device_details":[{"name":"Vulkan0","description":"NVIDIA GeForce RTX 5070 Ti","type":"GPU","backend":"Vulkan","device_id":"0000:01:00.0","memory_total":16771973120,"memory_free":15966666752,"capacity_qualified":false},{"name":"Vulkan1","description":"AMD Radeon(TM) Graphics","type":"IGPU","backend":"Vulkan","device_id":"UNKNOWN","memory_total":50729451520,"memory_free":48192978944,"capacity_qualified":false}],"device_population":3,"workload_sha256":"e1d585014035ad4a9433ff709f1ecdeaac5f7f85d87dfad0d02767dc8636eedf","tokens":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"n_layer":28,"n_vocab":151936,"n_ctx_actual":256,"n_batch_actual":32,"n_ubatch_actual":32,"description":"qwen3 0.6B Q8_0","quant":"Q8_0","max_abs":0.34243869781494141,"rmse":0.06446059050249317,"fail_count":99853,"all_finite_cpu":true,"all_finite_gpu":true,"inject_corruption":false,"requested":{"n_ctx":128,"n_batch":32,"n_ubatch":32,"n_threads":4,"cpu_n_gpu_layers":0,"gpu_n_gpu_layers":2147483647,"split_mode":"LAYER","tensor_split":[1,1],"flash_attn":"disabled","cpu_devices":"ggml_backend_dev_by_type(CPU),null","offload_kqv_cpu":false,"op_offload_cpu":false,"offload_kqv_gpu":true,"op_offload_gpu":true},"qualification_limits":["public_API_cannot_prove_per_layer_ownership_stderr_llama_logs_required","NOT_VRAM_pool_NOT_4cards_NOT_P2P_NOT_gt_one_card_capacity","AMD_shared_memory_total_NOT_dedicated_capacity","device_id_UNKNOWN_when_props.device_id_null_no_fake_pci","abort_callback_installed_header_says_CPU_execution_only","model_load_not_aborted_by_abort_callback_parent_owns_60s","atol_0.01_rtol_0.01_provisional","flash_attn_disabled_on_both_contexts","capacity_qualified_false"],"pinned_commit":"0faee5004297c3bcfa40b7bf11750127b8c1fd7d"}
+
+SOURCE E:\the_harness\records\vulkan_llm_qualification_20261004\contextfix_reverse.stdout.json
+{"status":"NUMERIC_PARITY_FAIL","exit_code":1,"error":"tolerance","model":"E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf","file_size":639446688,"sha256":"9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031","devices":["Vulkan1","Vulkan0"],"device_details":[{"name":"Vulkan1","description":"AMD Radeon(TM) Graphics","type":"IGPU","backend":"Vulkan","device_id":"UNKNOWN","memory_total":50729451520,"memory_free":48192978944,"capacity_qualified":false},{"name":"Vulkan0","description":"NVIDIA GeForce RTX 5070 Ti","type":"GPU","backend":"Vulkan","device_id":"0000:01:00.0","memory_total":16771973120,"memory_free":15966666752,"capacity_qualified":false}],"device_population":3,"workload_sha256":"615369abe3c783a9cec55b9c244c72b702e17f5baaf14adc8f62ffd3ba993f20","tokens":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"n_layer":28,"n_vocab":151936,"n_ctx_actual":256,"n_batch_actual":32,"n_ubatch_actual":32,"description":"qwen3 0.6B Q8_0","quant":"Q8_0","max_abs":0.30610275268554688,"rmse":0.063112973778274253,"fail_count":99891,"all_finite_cpu":true,"all_finite_gpu":true,"inject_corruption":false,"requested":{"n_ctx":128,"n_batch":32,"n_ubatch":32,"n_threads":4,"cpu_n_gpu_layers":0,"gpu_n_gpu_layers":2147483647,"split_mode":"LAYER","tensor_split":[1,1],"flash_attn":"disabled","cpu_devices":"ggml_backend_dev_by_type(CPU),null","offload_kqv_cpu":false,"op_offload_cpu":false,"offload_kqv_gpu":true,"op_offload_gpu":true},"qualification_limits":["public_API_cannot_prove_per_layer_ownership_stderr_llama_logs_required","NOT_VRAM_pool_NOT_4cards_NOT_P2P_NOT_gt_one_card_capacity","AMD_shared_memory_total_NOT_dedicated_capacity","device_id_UNKNOWN_when_props.device_id_null_no_fake_pci","abort_callback_installed_header_says_CPU_execution_only","model_load_not_aborted_by_abort_callback_parent_owns_60s","atol_0.01_rtol_0.01_provisional","flash_attn_disabled_on_both_contexts","capacity_qualified_false"],"pinned_commit":"0faee5004297c3bcfa40b7bf11750127b8c1fd7d"}
+
+SOURCE E:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\include\llama.h
+#ifndef LLAMA_H
+#define LLAMA_H
+
+#include "ggml.h"
+#include "ggml-cpu.h"
+#include "ggml-backend.h"
+#include "ggml-opt.h"
+#include "gguf.h"
+
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdbool.h>
+
+#ifdef LLAMA_SHARED
+#    if defined(_WIN32) && !defined(__MINGW32__)
+#        ifdef LLAMA_BUILD
+#            define LLAMA_API __declspec(dllexport)
+#        else
+#            define LLAMA_API __declspec(dllimport)
+#        endif
+#    else
+#        define LLAMA_API __attribute__ ((visibility ("default")))
+#    endif
+#else
+#    define LLAMA_API
+#endif
+
+#ifdef __GNUC__
+#    define DEPRECATED(func, hint) func __attribute__((deprecated(hint)))
+#elif defined(_MSC_VER)
+#    define DEPRECATED(func, hint) __declspec(deprecated(hint)) func
+#else
+#    define DEPRECATED(func, hint) func
+#endif
+
+#define LLAMA_DEFAULT_SEED 0xFFFFFFFF
+
+#define LLAMA_TOKEN_NULL -1
+
+#define LLAMA_FILE_MAGIC_GGLA 0x67676c61u // 'ggla'
+#define LLAMA_FILE_MAGIC_GGSN 0x6767736eu // 'ggsn'
+#define LLAMA_FILE_MAGIC_GGSQ 0x67677371u // 'ggsq'
+
+#define LLAMA_SESSION_MAGIC   LLAMA_FILE_MAGIC_GGSN
+#define LLAMA_SESSION_VERSION 10
+
+#define LLAMA_STATE_SEQ_MAGIC   LLAMA_FILE_MAGIC_GGSQ
+#define LLAMA_STATE_SEQ_VERSION 3
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    //
+    // C interface
+    //
+    // TODO: show sample usage
+    //
+
+    struct llama_vocab;
+    struct llama_model;
+    struct llama_context;
+    struct llama_sampler;
+
+    typedef struct llama_memory_i * llama_memory_t;
+
+    typedef int32_t llama_pos;
+    typedef int32_t llama_token;
+    typedef int32_t llama_seq_id;
+
+    enum llama_vocab_type {
+        LLAMA_VOCAB_TYPE_NONE   = 0, // For models without vocab
+        LLAMA_VOCAB_TYPE_SPM    = 1, // LLaMA tokenizer based on byte-level BPE with byte fallback
+        LLAMA_VOCAB_TYPE_BPE    = 2, // GPT-2 tokenizer based on byte-level BPE
+        LLAMA_VOCAB_TYPE_WPM    = 3, // BERT tokenizer based on WordPiece
+        LLAMA_VOCAB_TYPE_UGM    = 4, // T5 tokenizer based on Unigram
+        LLAMA_VOCAB_TYPE_RWKV   = 5, // RWKV tokenizer based on greedy tokenization
+        LLAMA_VOCAB_TYPE_PLAMO2 = 6, // PLaMo-2 tokenizer based on Aho-Corasick with dynamic programming
+        LLAMA_VOCAB_TYPE_TEST   = 7, // Dummy tokenizer for testing: rolling hash of fixed-size chunks -> tokens, tokens -> hex
+    };
+
+    enum llama_rope_type {
+        LLAMA_ROPE_TYPE_NONE   = -1,
+        LLAMA_ROPE_TYPE_NORM   = 0,
+        LLAMA_ROPE_TYPE_NEOX   = GGML_ROPE_TYPE_NEOX,
+        LLAMA_ROPE_TYPE_MROPE  = GGML_ROPE_TYPE_MROPE,
+        LLAMA_ROPE_TYPE_IMROPE = GGML_ROPE_TYPE_IMROPE,
+        LLAMA_ROPE_TYPE_VISION = GGML_ROPE_TYPE_VISION,
+    };
+
+    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+        LLAMA_TOKEN_TYPE_UNDEFINED    = 0,
+        LLAMA_TOKEN_TYPE_NORMAL       = 1,
+        LLAMA_TOKEN_TYPE_UNKNOWN      = 2,
+        LLAMA_TOKEN_TYPE_CONTROL      = 3,
+        LLAMA_TOKEN_TYPE_USER_DEFINED = 4,
+        LLAMA_TOKEN_TYPE_UNUSED       = 5,
+        LLAMA_TOKEN_TYPE_BYTE         = 6,
+    };
+
+    enum llama_token_attr {
+        LLAMA_TOKEN_ATTR_UNDEFINED    = 0,
+        LLAMA_TOKEN_ATTR_UNKNOWN      = 1 << 0,
+        LLAMA_TOKEN_ATTR_UNUSED       = 1 << 1,
+        LLAMA_TOKEN_ATTR_NORMAL       = 1 << 2,
+        LLAMA_TOKEN_ATTR_CONTROL      = 1 << 3,  // SPECIAL?
+        LLAMA_TOKEN_ATTR_USER_DEFINED = 1 << 4,
+        LLAMA_TOKEN_ATTR_BYTE         = 1 << 5,
+        LLAMA_TOKEN_ATTR_NORMALIZED   = 1 << 6,
+        LLAMA_TOKEN_ATTR_LSTRIP       = 1 << 7,
+        LLAMA_TOKEN_ATTR_RSTRIP       = 1 << 8,
+        LLAMA_TOKEN_ATTR_SINGLE_WORD  = 1 << 9,
+    };
+
+    // model file types
+    enum llama_ftype {
+        LLAMA_FTYPE_ALL_F32              = 0,
+        LLAMA_FTYPE_MOSTLY_F16           = 1,  // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q4_0          = 2,  // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q4_1          = 3,  // except 1d tensors
+        // LLAMA_FTYPE_MOSTLY_Q4_1_SOME_F16 = 4,  // tok_embeddings.weight and output.weight are F16
+        // LLAMA_FTYPE_MOSTLY_Q4_2       = 5,  // support has been removed
+        // LLAMA_FTYPE_MOSTLY_Q4_3       = 6,  // support has been removed
+        LLAMA_FTYPE_MOSTLY_Q8_0          = 7,  // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q5_0          = 8,  // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q5_1          = 9,  // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q2_K          = 10, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q3_K_S        = 11, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q3_K_M        = 12, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q3_K_L        = 13, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q4_K_S        = 14, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q4_K_M        = 15, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q5_K_S        = 16, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q5_K_M        = 17, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q6_K          = 18, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ2_XXS       = 19, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ2_XS        = 20, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q2_K_S        = 21, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ3_XS        = 22, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ3_XXS       = 23, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ1_S         = 24, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ4_NL        = 25, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ3_S         = 26, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ3_M         = 27, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ2_S         = 28, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ2_M         = 29, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ4_XS        = 30, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_IQ1_M         = 31, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_BF16          = 32, // except 1d tensors
+        //LLAMA_FTYPE_MOSTLY_Q4_0_4_4      = 33, // removed from gguf files, use Q4_0 and runtime repack
+        //LLAMA_FTYPE_MOSTLY_Q4_0_4_8      = 34, // removed from gguf files, use Q4_0 and runtime repack
+        //LLAMA_FTYPE_MOSTLY_Q4_0_8_8      = 35, // removed from gguf files, use Q4_0 and runtime repack
+        LLAMA_FTYPE_MOSTLY_TQ1_0         = 36, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_TQ2_0         = 37, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_MXFP4_MOE     = 38, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_NVFP4         = 39, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q1_0          = 40, // except 1d tensors
+        LLAMA_FTYPE_MOSTLY_Q2_0          = 41, // except 1d tensors
+
+        LLAMA_FTYPE_GUESSED = 1024, // not specified in the model file
+    };
+
+    // Get the model file type (quantization) as a string, e.g. "Q8_0" or "Q4_K - Medium"
+    LLAMA_API const char * llama_ftype_name(enum llama_ftype ftype);
+
+    enum llama_rope_scaling_type {
+        LLAMA_ROPE_SCALING_TYPE_UNSPECIFIED = -1,
+        LLAMA_ROPE_SCALING_TYPE_NONE        = 0,
+        LLAMA_ROPE_SCALING_TYPE_LINEAR      = 1,
+        LLAMA_ROPE_SCALING_TYPE_YARN        = 2,
+        LLAMA_ROPE_SCALING_TYPE_LONGROPE    = 3,
+        LLAMA_ROPE_SCALING_TYPE_MAX_VALUE   = LLAMA_ROPE_SCALING_TYPE_LONGROPE,
+    };
+
+    enum llama_pooling_type {
+        LLAMA_POOLING_TYPE_UNSPECIFIED = -1,
+        LLAMA_POOLING_TYPE_NONE = 0,
+        LLAMA_POOLING_TYPE_MEAN = 1,
+        LLAMA_POOLING_TYPE_CLS  = 2,
+        LLAMA_POOLING_TYPE_LAST = 3,
+        LLAMA_POOLING_TYPE_RANK = 4, // used by reranking models to attach the classification head to the graph
+    };
+
+    enum llama_attention_type {
+        LLAMA_ATTENTION_TYPE_UNSPECIFIED = -1,
+        LLAMA_ATTENTION_TYPE_CAUSAL      = 0,
+        LLAMA_ATTENTION_TYPE_NON_CAUSAL  = 1,
+    };
+
+    enum llama_flash_attn_type {
+        LLAMA_FLASH_ATTN_TYPE_AUTO     = -1,
+        LLAMA_FLASH_ATTN_TYPE_DISABLED = 0,
+        LLAMA_FLASH_ATTN_TYPE_ENABLED  = 1,
+    };
+
+    LLAMA_API const char * llama_flash_attn_type_name(enum llama_flash_attn_type flash_attn_type);
+
+    enum llama_split_mode {
+        LLAMA_SPLIT_MODE_NONE   = 0, // single GPU
+        LLAMA_SPLIT_MODE_LAYER  = 1, // split layers and KV across GPUs
+        LLAMA_SPLIT_MODE_ROW    = 2, // split layers and KV across GPUs, use tensor parallelism if supported
+        LLAMA_SPLIT_MODE_TENSOR = 3,
+    };
+
+    enum llama_load_mode {
+        LLAMA_LOAD_MODE_AUTO       = -1, // auto-detect based on device capabilities
+        LLAMA_LOAD_MODE_NONE       =  0, // no special loading mode
+        LLAMA_LOAD_MODE_MMAP       =  1, // memory map the model
+        LLAMA_LOAD_MODE_MLOCK      =  2, // force system to keep model in RAM rather than swapping or compressing
+        LLAMA_LOAD_MODE_MMAP_MLOCK =  3, // mmap + force system to keep model in RAM rather than swapping or compressing
+        LLAMA_LOAD_MODE_DIRECT_IO  =  4, // use direct I/O if available
+    };
+
+    LLAMA_API const char * llama_load_mode_name(enum llama_load_mode load_mode);
+    LLAMA_API enum llama_load_mode llama_load_mode_from_str(const char * str);
+
+    enum llama_lazy_mode {
+        LLAMA_LAZY_MODE_OFF  = 0, // always read the whole tensor up front
+        LLAMA_LAZY_MODE_AUTO = 1, // lazy only for marked tensors larger than 4 GiB (requires mmap)
+        LLAMA_LAZY_MODE_ON   = 2, // read the rows of tensors marked by the arch on demand (requires mmap)
+    };
+
+    enum llama_context_type {
+        LLAMA_CONTEXT_TYPE_DEFAULT = 0,
+        LLAMA_CONTEXT_TYPE_MTP     = 1,
+    };
+
+    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+    typedef struct llama_token_data {
+        llama_token id; // token id
+        float logit;    // log-odds of the token
+        float p;        // probability of the token
+    } llama_token_data;
+
+    typedef struct llama_token_data_array {
+        // TODO: consider SoA
+        // NOTE: this pointer can be modified by the samplers
+        llama_token_data * data;
+        size_t size;
+        int64_t selected; // this is the index in the data array (i.e. not the token id)
+        bool sorted;      // note: do not assume the data is sorted - always check this flag
+    } llama_token_data_array;
+
+    typedef bool (*llama_progress_callback)(float progress, void * user_data);
+
+    // Input data for llama_encode/llama_decode
+    // A llama_batch object can contain input about one or many sequences
+    // The provided arrays (i.e. token, embd, pos, etc.) must have size of n_tokens
+    //
+    // - token  : the token ids of the input (used when embd is NULL)
+    // - embd   : token embeddings (i.e. float vector of size n_embd) (used when token is NULL)
+    // - pos    : the positions of the respective token in the sequence
+    //            (if set to NULL, the token position will be tracked automatically by llama_encode/llama_decode)
+    // - seq_id : the sequence to which the respective token belongs
+    //            (if set to NULL, the sequence ID will be assumed to be 0)
+    // - logits : if zero, the logits (and/or the embeddings) for the respective token will not be output
+    //            (if set to NULL:
+    //               - if embeddings: all tokens are output
+    //               - if not:        only the last token is output
+    //            )
+    //
+    typedef struct llama_batch {
+        int32_t n_tokens;
+
+        llama_token  *  token;
+        float        *  embd;
+        llama_pos    *  pos;
+        int32_t      *  n_seq_id;
+        llama_seq_id ** seq_id;
+        int8_t       *  logits;   // TODO: rename this to "output"
+    } llama_batch;
+
+    enum llama_model_kv_override_type {
+        LLAMA_KV_OVERRIDE_TYPE_INT,
+        LLAMA_KV_OVERRIDE_TYPE_FLOAT,
+        LLAMA_KV_OVERRIDE_TYPE_BOOL,
+        LLAMA_KV_OVERRIDE_TYPE_STR,
+    };
+
+    enum llama_model_meta_key {
+        LLAMA_MODEL_META_KEY_SAMPLING_SEQUENCE,
+        LLAMA_MODEL_META_KEY_SAMPLING_TOP_K,
+        LLAMA_MODEL_META_KEY_SAMPLING_TOP_P,
+        LLAMA_MODEL_META_KEY_SAMPLING_MIN_P,
+        LLAMA_MODEL_META_KEY_SAMPLING_XTC_PROBABILITY,
+        LLAMA_MODEL_META_KEY_SAMPLING_XTC_THRESHOLD,
+        LLAMA_MODEL_META_KEY_SAMPLING_TEMP,
+        LLAMA_MODEL_META_KEY_SAMPLING_PENALTY_LAST_N,
+        LLAMA_MODEL_META_KEY_SAMPLING_PENALTY_REPEAT,
+        LLAMA_MODEL_META_KEY_SAMPLING_MIROSTAT,
+        LLAMA_MODEL_META_KEY_SAMPLING_MIROSTAT_TAU,
+        LLAMA_MODEL_META_KEY_SAMPLING_MIROSTAT_ETA,
+    };
+
+    enum llama_process_type {
+        LLAMA_PROCESS_TYPE_ENCODE,
+        LLAMA_PROCESS_TYPE_DECODE,
+    };
+
+    struct llama_model_kv_override {
+        enum llama_model_kv_override_type tag;
+
+        char key[128];
+
+        union {
+            int64_t val_i64;
+            double  val_f64;
+            bool    val_bool;
+            char    val_str[128];
+        };
+    };
+
+    struct llama_model_tensor_buft_override {
+        const char * pattern;
+        ggml_backend_buffer_type_t buft;
+    };
+
+    struct llama_model_params {
+        // NULL-terminated list of devices to use for offloading (if NULL, all available devices are used)
+        ggml_backend_dev_t * devices;
+
+        // NULL-terminated list of buffer types to use for tensors that match a pattern
+        const struct llama_model_tensor_buft_override * tensor_buft_overrides;
+
+        int32_t n_gpu_layers; // number of layers to store in VRAM, a negative value means all layers
+        enum llama_split_mode split_mode; // how to split the model across multiple GPUs
+        enum llama_load_mode  load_mode;  // how to load the model
+
+        enum llama_lazy_mode lazy_mode; // on-demand reading of tensors marked by the arch
+
+        // the GPU that is used for the entire model when split_mode is LLAMA_SPLIT_MODE_NONE
+        int32_t main_gpu;
+
+        // proportion of the model (layers or rows) to offload to each GPU, size: llama_max_devices()
+        const float * tensor_split;
+
+        // Called with a progress value between 0.0 and 1.0. Pass NULL to disable.
+        // If the provided progress_callback returns true, model loading continues.
+        // If it returns false, model loading is immediately aborted.
+        llama_progress_callback progress_callback;
+
+        // context pointer passed to the progress callback
+        void * progress_callback_user_data;
+
+        // override key-value pairs of the model meta data
+        const struct llama_model_kv_override * kv_overrides;
+
+        // Keep the booleans together to avoid misalignment during copy-by-value.
+        bool vocab_only;      // only load the vocabulary, no weights
+        bool check_tensors;   // validate model tensor data
+        bool use_extra_bufts; // use extra buffer types (used for weight repacking)
+        bool no_host;         // bypass host buffer allowing extra buffers to be used
+        bool no_alloc;        // only load metadata and simulate memory allocations
+        bool load_mtp;        // whether to load MTP layers
+    };
+
+    struct llama_sampler_seq_config {
+        llama_seq_id           seq_id;
+        struct llama_sampler * sampler;
+    };
+
+    // NOTE: changing the default values of parameters marked as [EXPERIMENTAL] may cause crashes or incorrect results in certain configurations
+    //       https://github.com/ggml-org/llama.cpp/pull/7544
+    struct llama_context_params {
+        uint32_t n_ctx;                 // text context, 0 = from model
+        uint32_t n_batch;               // logical maximum batch size that can be submitted to llama_decode
+        uint32_t n_ubatch;              // physical maximum batch size
+        uint32_t n_seq_max;             // max number of sequences (i.e. distinct states for recurrent models)
+        uint32_t n_rs_seq;              // number of recurrent-state snapshots per seq for rollback (0 = no rollback) [EXPERIMENTAL]
+        uint32_t n_outputs_max;         // max outputs in a ubatch (0 = n_batch)
+        uint32_t n_outputs_max_per_seq; // max outputs per sequence (0 = n_outputs_max)
+        int32_t  n_threads;             // number of threads to use for generation
+        int32_t  n_threads_batch;       // number of threads to use for batch processing
+
+        enum llama_context_type      ctx_type;          // set the context type (e.g. MTP)
+        enum llama_rope_scaling_type rope_scaling_type; // RoPE scaling type, from `enum llama_rope_scaling_type`
+        enum llama_pooling_type      pooling_type;      // whether to pool (sum) embedding results by sequence id
+        enum llama_attention_type    attention_type;    // attention type to use for embeddings
+        enum llama_flash_attn_type   flash_attn_type;   // when to enable Flash Attention
+
+        // ref: https://github.com/ggml-org/llama.cpp/pull/2054
+        float    rope_freq_base;   // RoPE base frequency, 0 = from model
+        float    rope_freq_scale;  // RoPE frequency scaling factor, 0 = from model
+        float    yarn_ext_factor;  // YaRN extrapolation mix factor, negative = from model
+        float    yarn_attn_factor; // YaRN magnitude scaling factor
+        float    yarn_beta_fast;   // YaRN low correction dim
+        float    yarn_beta_slow;   // YaRN high correction dim
+        uint32_t yarn_orig_ctx;    // YaRN original context size
+        float    defrag_thold;     // [DEPRECATED] defragment the KV cache if holes/size > thold, <= 0 disabled (default)
+
+        ggml_backend_sched_eval_callback cb_eval;
+        void * cb_eval_user_data;
+
+        enum ggml_type type_k; // data type for K cache [EXPERIMENTAL]
+        enum ggml_type type_v; // data type for V cache [EXPERIMENTAL]
+
+        // Abort callback
+        // if it returns true, execution of llama_decode() will be aborted
+        // currently works only with CPU execution
+        ggml_abort_callback abort_callback;
+        void *              abort_callback_data;
+
+        // Keep the booleans together and at the end of the struct to avoid misalignment during copy-by-value.
+        bool embeddings;  // if true, extract embeddings (together with logits)
+        bool offload_kqv; // offload the KQV ops (including the KV cache) to GPU
+        bool no_perf;     // measure performance timings
+        bool op_offload;  // offload host tensor operations to device
+        bool swa_full;    // use full-size SWA cache (https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+                          // NOTE: setting to false when n_seq_max > 1 can cause bad performance in some cases
+                          //       ref: https://github.com/ggml-org/llama.cpp/pull/13845#issuecomment-2924800573
+        bool kv_unified;  // use a unified buffer across the input sequences when computing the attention
+                          // try to disable when n_seq_max > 1 for improved performance when the sequences do not share a large prefix
+                          // ref: https://github.com/ggml-org/llama.cpp/pull/14363
+
+        // [EXPERIMENTAL]
+        // backend sampler chain configuration (make sure the caller keeps the sampler chains alive)
+        // note: the samplers must be sampler chains (i.e. use llama_sampler_chain_init)
+        struct llama_sampler_seq_config * samplers;
+        size_t                            n_samplers;
+
+        // a source/target/parent context
+        // can be utilized in various ways, for example by sharing results or llama_memory between 2 contexts
+        struct llama_context * ctx_other;
+    };
+
+    struct llama_model_tensor_override {
+        const char * pattern;
+        enum ggml_type type;
+    };
+
+    struct llama_model_imatrix_data {
+        const char * name;
+        const float * data;
+        size_t size;
+    };
+
+    // model quantization parameters
+    typedef struct llama_model_quantize_params {
+        int32_t nthread;                                            // number of threads to use for quantizing, if <=0 will use std::thread::hardware_concurrency()
+        enum llama_ftype ftype;                                     // quantize to this llama_ftype
+        enum ggml_type output_tensor_type;                          // output tensor type
+        enum ggml_type token_embedding_type;                        // token embeddings tensor type
+        bool allow_requantize;                                      // allow quantizing non-f32/f16 tensors
+        bool quantize_output_tensor;                                // quantize output.weight
+        bool only_copy;                                             // only copy tensors - ftype, allow_requantize and quantize_output_tensor are ignored
+        bool pure;                                                  // quantize all tensors to the default type
+        bool keep_split;                                            // quantize to the same number of shards
+        bool dry_run;                                               // calculate and show the final quantization size without performing quantization
+        const struct llama_model_imatrix_data * imatrix;            // pointer to importance matrix data
+        const struct llama_model_kv_override * kv_overrides;        // pointer to kv overrides
+        const struct llama_model_tensor_override * tt_overrides;    // pointer to tensor overrides
+        const int32_t * prune_layers;                               // pointer to layer indices to prune
+        size_t max_buf_size;                                        // max bytes of tensor rows kept in memory at once, 0 = default (8 GiB)
+    } llama_model_quantize_params;
+
+    typedef struct llama_logit_bias {
+        llama_token token;
+        float bias;
+    } llama_logit_bias;
+
+    typedef struct llama_sampler_chain_params {
+        bool no_perf; // whether to measure performance timings
+    } llama_sampler_chain_params;
+
+    // used in chat template
+    typedef struct llama_chat_message {
+        const char * role;
+        const char * content;
+    } llama_chat_message;
+
+    // lora adapter
+    struct llama_adapter_lora;
+
+    LLAMA_API const char * llama_version(void);
+
+    // Helpers for getting default parameters
+    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+    LLAMA_API struct llama_model_params          llama_model_default_params(void);
+    LLAMA_API struct llama_context_params        llama_context_default_params(void);
+    LLAMA_API struct llama_sampler_chain_params  llama_sampler_chain_default_params(void);
+    LLAMA_API struct llama_model_quantize_params llama_model_quantize_default_params(void);
+
+    // Initialize the llama + ggml backend
+    // Call once at the start of the program
+    LLAMA_API void llama_backend_init(void);
+
+    // Call once at the end of the program - currently only used for MPI
+    LLAMA_API void llama_backend_free(void);
+
+    // Optional: enable numa optimizations
+    // TODO: deprecate and make part of llama_backend_init()
+    LLAMA_API void llama_numa_init(enum ggml_numa_strategy numa);
+
+    // Optional: an auto threadpool gets created in ggml if not passed explicitly
+    LLAMA_API void llama_attach_threadpool(
+            struct llama_context * ctx,
+               ggml_threadpool_t   threadpool,
+               ggml_threadpool_t   threadpool_batch);
+
+    LLAMA_API void llama_detach_threadpool(struct llama_context * ctx);
+
+    typedef void (*llama_model_set_tensor_data_t)(struct ggml_tensor * tensor, void * userdata);
+
+    // Create a new model from GGUF metadata as well as a function to set the tensor data
+    //   - tensors are created as GGML_TYPE_F32 by default,
+    //     override by adding a tensor with the same name but a different name to the context
+    LLAMA_API struct llama_model * llama_model_init_from_user(
+                    struct gguf_context * metadata,
+          llama_model_set_tensor_data_t   set_tensor_data,    // function to initialize tensor data with
+                                   void * set_tensor_data_ud, // userdata for function
+              struct llama_model_params   params);
+
+    DEPRECATED(LLAMA_API struct llama_model * llama_load_model_from_file(
+                             const char * path_model,
+              struct llama_model_params   params),
+            "use llama_model_load_from_file instead");
+
+    // Load a model from a file
+    // If the file is split into multiple parts, the file name must follow this pattern: <name>-%05d-of-%05d.gguf
+    // If the split file name does not follow this pattern, use llama_model_load_from_splits
+    LLAMA_API struct llama_model * llama_model_load_from_file(
+                             const char * path_model,
+              struct llama_model_params   params);
+
+    // Load a model from an open FILE pointer
+    // The GGUF is read from the current position, so it can be embedded in a larger file
+    // mmap needs the GGUF data section at a file offset to be aligned to the CPU tensor alignment (32 bytes)
+    LLAMA_API struct llama_model * llama_model_load_from_file_ptr(
+                                   FILE * file,
+              struct llama_model_params   params);
+
+    // Load a model from multiple splits (support custom naming scheme)
+    // The paths must be in the correct order
+    LLAMA_API struct llama_model * llama_model_load_from_splits(
+                             const char ** paths,
+                                 size_t    n_paths,
+              struct llama_model_params    params);
+
+    LLAMA_API void llama_model_save_to_file(
+            const struct llama_model * model,
+                        const char * path_model);
+
+    DEPRECATED(LLAMA_API void llama_free_model(struct llama_model * model),
+            "use llama_model_free instead");
+
+    LLAMA_API void llama_model_free(struct llama_model * model);
+
+    LLAMA_API struct llama_context * llama_init_from_model(
+                     struct llama_model * model,
+            struct llama_context_params   params);
+
+    DEPRECATED(LLAMA_API struct llama_context * llama_new_context_with_model(
+                     struct llama_model * model,
+            struct llama_context_params   params),
+            "use llama_init_from_model instead");
+
+    // Frees all allocated memory
+    LLAMA_API void llama_free(struct llama_context * ctx);
+
+    LLAMA_API int64_t llama_time_us(void);
+
+    LLAMA_API size_t llama_max_devices(void);
+    LLAMA_API size_t llama_max_parallel_sequences(void);
+    LLAMA_API size_t llama_max_tensor_buft_overrides(void);
+
+    LLAMA_API bool llama_supports_mmap       (void);
+    LLAMA_API bool llama_supports_mlock      (void);
+    LLAMA_API bool llama_supports_gpu_offload(void);
+    LLAMA_API bool llama_supports_rpc        (void);
+
+    // NOTE: After creating a llama_context, it is recommended to query the actual values using these functions
+    //       In some cases the requested values via llama_context_params may differ from the actual values used by the context
+    //       ref: https://github.com/ggml-org/llama.cpp/pull/17046#discussion_r2503085732
+    LLAMA_API uint32_t llama_n_ctx      (const struct llama_context * ctx);
+    LLAMA_API uint32_t llama_n_ctx_seq  (const struct llama_context * ctx);
+    LLAMA_API uint32_t llama_n_batch    (const struct llama_context * ctx);
+    LLAMA_API uint32_t llama_n_ubatch   (const struct llama_context * ctx);
+    LLAMA_API uint32_t llama_n_seq_max  (const struct llama_context * ctx);
+    LLAMA_API uint32_t llama_n_rs_seq   (const struct llama_context * ctx);
+
+    DEPRECATED(LLAMA_API int32_t llama_n_ctx_train(const struct llama_model * model), "use llama_model_n_ctx_train instead");
+    DEPRECATED(LLAMA_API int32_t llama_n_embd     (const struct llama_model * model), "use llama_model_n_embd instead");
+    DEPRECATED(LLAMA_API int32_t llama_n_layer    (const struct llama_model * model), "use llama_model_n_layer instead");
+    DEPRECATED(LLAMA_API int32_t llama_n_head     (const struct llama_model * model), "use llama_model_n_head instead");
+
+    DEPRECATED(LLAMA_API int32_t llama_n_vocab    (const struct llama_vocab * vocab), "use llama_vocab_n_tokens instead");
+
+    LLAMA_API const struct llama_model * llama_get_model   (const struct llama_context * ctx);
+    LLAMA_API           llama_memory_t   llama_get_memory  (const struct llama_context * ctx);
+    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+
+    LLAMA_API const struct llama_vocab * llama_model_get_vocab(const struct llama_model * model);
+    LLAMA_API enum llama_rope_type       llama_model_rope_type(const struct llama_model * model);
+
+    LLAMA_API int32_t llama_model_n_ctx_train  (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_embd       (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_embd_inp   (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_embd_out   (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_layer      (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_layer_nextn(const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_head       (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_head_kv    (const struct llama_model * model);
+    LLAMA_API int32_t llama_model_n_swa        (const struct llama_model * model);
+
+    // Get the model's RoPE frequency scaling factor
+    LLAMA_API float llama_model_rope_freq_scale_train(const struct llama_model * model);
+
+    // Returns the number of classifier outputs (only valid for classifier models)
+    // Undefined behavior for non-classifier models
+    LLAMA_API uint32_t llama_model_n_cls_out(const struct llama_model * model);
+
+    // Returns label of classifier output by index (<n_cls_out). Returns nullptr if no label provided
+    LLAMA_API const char * llama_model_cls_label(const struct llama_model * model, uint32_t i);
+
+    LLAMA_API enum llama_vocab_type llama_vocab_type(const struct llama_vocab * vocab);
+
+    LLAMA_API int32_t llama_vocab_n_tokens(const struct llama_vocab * vocab);
+
+    // Functions to access the model's GGUF metadata scalar values
+    // - The functions return the length of the string on success, or -1 on failure
+    // - The output string is always null-terminated and cleared on failure
+    // - When retrieving a string, an extra byte must be allocated to account for the null terminator
+    // - GGUF array values are not supported by these functions
+
+    // Get metadata value as a string by key name
+    LLAMA_API int32_t llama_model_meta_val_str(const struct llama_model * model, const char * key, char * buf, size_t buf_size);
+
+    // Get the number of metadata key/value pairs
+    LLAMA_API int32_t llama_model_meta_count(const struct llama_model * model);
+
+    // Get sampling metadata key name. Returns nullptr if the key is invalid
+    LLAMA_API const char * llama_model_meta_key_str(enum llama_model_meta_key key);
+
+    // Get metadata key name by index
+    LLAMA_API int32_t llama_model_meta_key_by_index(const struct llama_model * model, int32_t i, char * buf, size_t buf_size);
+
+    // Get metadata value as a string by index
+    LLAMA_API int32_t llama_model_meta_val_str_by_index(const struct llama_model * model, int32_t i, char * buf, size_t buf_size);
+
+    // Get a string describing the model type
+    LLAMA_API int32_t llama_model_desc(const struct llama_model * model, char * buf, size_t buf_size);
+
+    // Get the model file type (quantization), e.g. LLAMA_FTYPE_MOSTLY_Q8_0
+    LLAMA_API enum llama_ftype llama_model_ftype(const struct llama_model * model);
+
+    // Returns the total size of all the tensors in the model in bytes
+    LLAMA_API uint64_t llama_model_size(const struct llama_model * model);
+
+    // Get the default chat template. Returns nullptr if not available
+    // If name is NULL, returns the default chat template
+    LLAMA_API const char * llama_model_chat_template(const struct llama_model * model, const char * name);
+
+    // Returns the total number of parameters in the model
+    LLAMA_API uint64_t llama_model_n_params(const struct llama_model * model);
+
+    // Returns true if the model contains an encoder that requires llama_encode() call
+    LLAMA_API bool llama_model_has_encoder(const struct llama_model * model);
+
+    // Returns true if the model contains a decoder that requires llama_decode() call
+    LLAMA_API bool llama_model_has_decoder(const struct llama_model * model);
+
+    // For encoder-decoder models, this function returns id of the token that must be provided
+    // to the decoder to start generating output sequence. For other models, it returns -1.
+    LLAMA_API llama_token llama_model_decoder_start_token(const struct llama_model * model);
+
+    // Returns true if the model is recurrent (like Mamba, RWKV, etc.)
+    LLAMA_API bool llama_model_is_recurrent(const struct llama_model * model);
+
+    // Returns true if the model is hybrid (like Jamba, Granite, etc.)
+    LLAMA_API bool llama_model_is_hybrid(const struct llama_model * model);
+
+    // Returns true if the model is diffusion-based (like LLaDA, Dream, etc.)
+    LLAMA_API bool llama_model_is_diffusion(const struct llama_model * model);
+
+    // Returns 0 on success
+    LLAMA_API uint32_t llama_model_quantize(
+            const char * fname_inp,
+            const char * fname_out,
+            const llama_model_quantize_params * params);
+
+    //
+    // Adapters
+    //
+
+    // Load a LoRA adapter from file
+    // The adapter is valid as long as the associated model is not freed
+    LLAMA_API struct llama_adapter_lora * llama_adapter_lora_init(
+            struct llama_model * model,
+            const char * path_lora);
+
+    // Load a LoRA adapter from an open FILE pointer, reading from its current position
+    LLAMA_API struct llama_adapter_lora * llama_adapter_lora_init_from_file_ptr(
+            struct llama_model * model,
+            FILE * file);
+
+    // Functions to access the adapter's GGUF metadata scalar values
+    // - The functions return the length of the string on success, or -1 on failure
+    // - The output string is always null-terminated and cleared on failure
+    // - When retrieving a string, an extra byte must be allocated to account for the null terminator
+    // - GGUF array values are not supported by these functions
+
+    // Get metadata value as a string by key name
+    LLAMA_API int32_t llama_adapter_meta_val_str(const struct llama_adapter_lora * adapter, const char * key, char * buf, size_t buf_size);
+
+    // Get the number of metadata key/value pairs
+    LLAMA_API int32_t llama_adapter_meta_count(const struct llama_adapter_lora * adapter);
+
+    // Get metadata key name by index
+    LLAMA_API int32_t llama_adapter_meta_key_by_index(const struct llama_adapter_lora * adapter, int32_t i, char * buf, size_t buf_size);
+
+    // Get metadata value as a string by index
+    LLAMA_API int32_t llama_adapter_meta_val_str_by_index(const struct llama_adapter_lora * adapter, int32_t i, char * buf, size_t buf_size);
+
+    // Manually free a LoRA adapter
+    // NOTE: loaded adapters that are not manually freed will be freed when the associated model is deleted
+    LLAMA_API void llama_adapter_lora_free(struct llama_adapter_lora * adapter);
+
+    // Get the invocation tokens if the current lora is an alora
+    LLAMA_API uint64_t            llama_adapter_get_alora_n_invocation_tokens(const struct llama_adapter_lora * adapter);
+    LLAMA_API const llama_token * llama_adapter_get_alora_invocation_tokens  (const struct llama_adapter_lora * adapter);
+
+    // The following functions operate on a llama_context, hence the naming: llama_verb_...
+
+    // Set LoRa adapters on the context. Will only modify if the adapters currently in context are different.
+    LLAMA_API int32_t llama_set_adapters_lora(
+            struct llama_context * ctx,
+            struct llama_adapter_lora ** adapters,
+            size_t n_adapters,
+            float * scales);
+
+    // Apply a loaded control vector to a llama_context, or if data is NULL, clear
+    // the currently loaded vector.
+    // n_embd should be the size of a single layer's control, and data should point
+    // to an n_embd x n_layers buffer starting from layer 1.
+    // il_start and il_end are the layer range the vector should apply to (both inclusive)
+    // See llama_control_vector_load in common to load a control vector.
+    LLAMA_API int32_t llama_set_adapter_cvec(
+            struct llama_context * ctx,
+                     const float * data,
+                          size_t   len,
+                         int32_t   n_embd,
+                         int32_t   il_start,
+                         int32_t   il_end);
+
+    //
+    // Memory
+    //
+
+    // Clear the memory contents
+    // If data == true, the data buffers will also be cleared together with the metadata
+    LLAMA_API void llama_memory_clear(
+            llama_memory_t mem,
+                      bool data);
+
+    // Removes all tokens that belong to the specified sequence and have positions in [p0, p1)
+    // Returns false if a partial sequence cannot be removed. Removing a whole sequence never fails
+    // seq_id < 0 : match any sequence [TAG_LLAMA_SEQ_ID_NEG]
+    // p0 < 0     : [0,  p1]
+    // p1 < 0     : [p0, inf)
+    LLAMA_API bool llama_memory_seq_rm(
+            llama_memory_t mem,
+              llama_seq_id seq_id,
+                 llama_pos p0,
+                 llama_pos p1);
+
+    // Copy all tokens that belong to the specified sequence to another sequence
+    // p0 < 0 : [0,  p1]
+    // p1 < 0 : [p0, inf)
+    LLAMA_API void llama_memory_seq_cp(
+            llama_memory_t mem,
+              llama_seq_id seq_id_src,
+              llama_seq_id seq_id_dst,
+                 llama_pos p0,
+                 llama_pos p1);
+
+    // Removes all tokens that do not belong to the specified sequence
+    LLAMA_API void llama_memory_seq_keep(
+            llama_memory_t mem,
+              llama_seq_id seq_id);
+
+    // Adds relative position "delta" to all tokens that belong to the specified sequence and have positions in [p0, p1)
+    // p0 < 0 : [0,  p1]
+    // p1 < 0 : [p0, inf)
+    LLAMA_API void llama_memory_seq_add(
+            llama_memory_t mem,
+              llama_seq_id seq_id,
+                 llama_pos p0,
+                 llama_pos p1,
+                 llama_pos delta);
+
+    // Integer division of the positions by factor of `d > 1`
+    // p0 < 0 : [0,  p1]
+    // p1 < 0 : [p0, inf)
+    LLAMA_API void llama_memory_seq_div(
+            llama_memory_t mem,
+              llama_seq_id seq_id,
+                 llama_pos p0,
+                 llama_pos p1,
+                       int d);
+
+    // Returns the smallest position present in the memory for the specified sequence
+    // This is typically non-zero only for SWA caches
+    // Note that all positions in the range [pos_min, pos_max] are guaranteed to be present in the memory
+    // Return -1 if the sequence is empty
+    LLAMA_API llama_pos llama_memory_seq_pos_min(
+            llama_memory_t mem,
+              llama_seq_id seq_id);
+
+    // Returns the largest position present in the memory for the specified sequence
+    // Note that all positions in the range [pos_min, pos_max] are guaranteed to be present in the memory
+    // Return -1 if the sequence is empty
+    LLAMA_API llama_pos llama_memory_seq_pos_max(
+            llama_memory_t mem,
+              llama_seq_id seq_id);
+
+    // Check if the memory supports shifting
+    LLAMA_API bool llama_memory_can_shift(llama_memory_t mem);
+
+    //
+    // State / sessions
+    //
+
+    // Returns the *actual* size in bytes of the state
+    // (logits, embedding and memory)
+    // Only use when saving the state, not when restoring it, otherwise the size may be too small.
+    LLAMA_API size_t llama_state_get_size(struct llama_context * ctx);
+    LLAMA_API DEPRECATED(size_t llama_get_state_size(struct llama_context * ctx),
+        "use llama_state_get_size instead");
+
+    // Copies the state to the specified destination address.
+    // Destination needs to have allocated enough memory.
+    // Returns the number of bytes copied
+    LLAMA_API size_t llama_state_get_data(
+            struct llama_context * ctx,
+                         uint8_t * dst,
+                          size_t   size);
+    LLAMA_API DEPRECATED(size_t llama_copy_state_data(
+            struct llama_context * ctx,
+                         uint8_t * dst),
+        "use llama_state_get_data instead");
+
+    // Set the state reading from the specified address
+    // Returns the number of bytes read
+    LLAMA_API size_t llama_state_set_data(
+            struct llama_context * ctx,
+                   const uint8_t * src,
+                          size_t   size);
+    LLAMA_API DEPRECATED(size_t llama_set_state_data(
+            struct llama_context * ctx,
+                   const uint8_t * src),
+        "use llama_state_set_data instead");
+
+    // Save/load session file
+    LLAMA_API bool llama_state_load_file(
+            struct llama_context * ctx,
+                      const char * path_session,
+                     llama_token * tokens_out,
+                          size_t   n_token_capacity,
+                          size_t * n_token_count_out);
+    LLAMA_API DEPRECATED(bool llama_load_session_file(
+            struct llama_context * ctx,
+                      const char * path_session,
+                     llama_token * tokens_out,
+                          size_t   n_token_capacity,
+                          size_t * n_token_count_out),
+        "use llama_state_load_file instead");
+
+    LLAMA_API bool llama_state_save_file(
+            struct llama_context * ctx,
+                      const char * path_session,
+               const llama_token * tokens,
+                          size_t   n_token_count);
+    LLAMA_API DEPRECATED(bool llama_save_session_file(
+            struct llama_context * ctx,
+                      const char * path_session,
+               const llama_token * tokens,
+                          size_t   n_token_count),
+        "use llama_state_save_file instead");
+
+    // Get the exact size needed to copy the state of a single sequence
+    LLAMA_API size_t llama_state_seq_get_size(
+            struct llama_context * ctx,
+                    llama_seq_id   seq_id);
+
+    // Copy the state of a single sequence into the specified buffer
+    LLAMA_API size_t llama_state_seq_get_data(
+            struct llama_context * ctx,
+                         uint8_t * dst,
+                          size_t   size,
+                    llama_seq_id   seq_id);
+
+    // Copy the sequence data (originally copied with `llama_state_seq_get_data`) into the specified sequence
+    // Returns:
+    //  - Positive: Ok
+    //  - Zero: Failed to load
+    LLAMA_API size_t llama_state_seq_set_data(
+            struct llama_context * ctx,
+                   const uint8_t * src,
+                          size_t   size,
+                    llama_seq_id   dest_seq_id);
+
+    LLAMA_API size_t llama_state_seq_save_file(
+            struct llama_context * ctx,
+                      const char * filepath,
+                    llama_seq_id   seq_id,
+               const llama_token * tokens,
+                          size_t   n_token_count);
+
+    // If tokens_out is NULL, only the token count is reported through n_token_count_out and no state is loaded
+    LLAMA_API size_t llama_state_seq_load_file(
+            struct llama_context * ctx,
+                      const char * filepath,
+                    llama_seq_id   dest_seq_id,
+                     llama_token * tokens_out,
+                          size_t   n_token_capacity,
+                          size_t * n_token_count_out);
+
+#define LLAMA_STATE_SEQ_FLAGS_NONE 0
+
+// for backwards-compat
+#define LLAMA_STATE_SEQ_FLAGS_SWA_ONLY 1
+
+// work only with partial states, such as SWA KV cache or recurrent cache (e.g. Mamba)
+#define LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY 1
+
+// Keeps the tensor data on device buffers (i.e. not accessible in host memory, but faster save/load).
+// Getting the state for a seq_id with this flag invalidates all prior states gotten for that seq_id with this flag.
+#define LLAMA_STATE_SEQ_FLAGS_ON_DEVICE 2
+
+    typedef uint32_t llama_state_seq_flags;
+
+    LLAMA_API size_t llama_state_seq_get_size_ext(
+            struct llama_context * ctx,
+                    llama_seq_id   seq_id,
+           llama_state_seq_flags   flags);
+
+    LLAMA_API size_t llama_state_seq_get_data_ext(
+            struct llama_context * ctx,
+                         uint8_t * dst,
+                          size_t   size,
+                    llama_seq_id   seq_id,
+           llama_state_seq_flags   flags);
+
+    LLAMA_API size_t llama_state_seq_set_data_ext(
+            struct llama_context * ctx,
+                   const uint8_t * src,
+                          size_t   size,
+                    llama_seq_id   dest_seq_id,
+           llama_state_seq_flags   flags);
+
+    //
+    // Decoding
+    //
+
+    // Return batch for single sequence of tokens
+    // The sequence ID will be fixed to 0
+    // The position of the tokens will be tracked automatically by llama_decode
+    //
+    // NOTE: this is a helper function to facilitate transition to the new batch API - avoid using it
+    //
+    LLAMA_API struct llama_batch llama_batch_get_one(
+                  llama_token * tokens,
+                      int32_t   n_tokens);
+
+    // Allocates a batch of tokens on the heap that can hold a maximum of n_tokens
+    // Each token can be assigned up to n_seq_max sequence ids
+    // The batch has to be freed with llama_batch_free()
+    // If embd != 0, llama_batch.embd will be allocated with size of n_tokens * embd * sizeof(float)
+    // Otherwise, llama_batch.token will be allocated to store n_tokens llama_token
+    // The rest of the llama_batch members are allocated with size n_tokens
+    // All members are left uninitialized
+    LLAMA_API struct llama_batch llama_batch_init(
+            int32_t n_tokens,
+            int32_t embd,
+            int32_t n_seq_max);
+
+    // Frees a batch of tokens allocated with llama_batch_init()
+    LLAMA_API void llama_batch_free(struct llama_batch batch);
+
+    // Process a batch of tokens.
+    // In contrast to llama_decode() - this call does not use KV cache.
+    // For encode-decoder contexts, processes the batch using the encoder.
+    // Can store the encoder output internally for later use by the decoder's cross-attention layers.
+    //   0 - success
+    // < 0 - error. the memory state is restored to the state before this call
+    LLAMA_API int32_t llama_encode(
+            struct llama_context * ctx,
+              struct llama_batch   batch);
+
+    // Process a batch of tokens.
+    // Requires the context to have a memory.
+    // For encode-decoder contexts, processes the batch using the decoder.
+    // Positive return values does not mean a fatal error, but rather a warning.
+    // Upon fatal-error or abort, the ubatches that managed to be been processed will remain in the memory state of the context
+    //   To handle this correctly, query the memory state using llama_memory_seq_pos_min() and llama_memory_seq_pos_max()
+    // Upon other return values, the memory state is restored to the state before this call
+    //    0 - success
+    //    1 - could not find a KV slot for the batch (try reducing the size of the batch or increase the context)
+    //    2 - aborted     (processed ubatches will remain in the context's memory)
+    //   -1 - invalid input batch
+    // < -1 - fatal error (processed ubatches will remain in the context's memory)
+    LLAMA_API int32_t llama_decode(
+            struct llama_context * ctx,
+              struct llama_batch   batch);
+
+    //
+    // Extended batch API
+    //
+
+    struct llama_batch_ext;
+
+    struct llama_embd {
+        const float * data;
+        size_t n_rows; // number of embedding rows in data
+        size_t n_embd; // size of one row
+    };
+
+    LLAMA_API struct llama_batch_ext * llama_batch_ext_init (struct llama_context * ctx);
+    LLAMA_API void                     llama_batch_ext_free (struct llama_batch_ext * batch);
+    LLAMA_API void                     llama_batch_ext_clear(struct llama_batch_ext * batch);
+
+    // Add an input token to the batch, with default values:
+    //     id = LLAMA_TOKEN_NULL
+    //     embd = nullptr
+    //     pos = not set, the caller must set it with llama_batch_ext_set_pos()
+    // Returns the batch index (>= 0)
+    // On error:
+    //     -1: batch is full
+    //     -2: token is invalid (id == LLAMA_TOKEN_NULL or invalid embd)
+    //     -3: invalid sequence id
+    LLAMA_API int32_t llama_batch_ext_add      (struct llama_batch_ext * batch, llama_seq_id seq_id);
+
+    // Add an input token to the batch, with a specified token ID or token embedding
+    LLAMA_API int32_t llama_batch_ext_add_token(struct llama_batch_ext * batch, llama_seq_id seq_id, llama_token id);
+    LLAMA_API int32_t llama_batch_ext_add_embd (struct llama_batch_ext * batch, llama_seq_id seq_id, struct llama_embd embd);
+
+    // Add the token at index idx in the batch to another sequence id. The position will stays the same.
+    // Note: this should be called before other _set() functions
+    LLAMA_API bool llama_batch_ext_add_seq(
+                                struct llama_batch_ext * batch,
+                                               int32_t   idx,
+                                          llama_seq_id   seq_id);
+
+    // Set the token embedding for the token at index idx in the batch
+    // use it after llama_batch_ext_add_token() to have an entry with both a token id and an embedding
+    LLAMA_API bool llama_batch_ext_set_embd_token(
+                                struct llama_batch_ext * batch,
+                                               int32_t   idx,
+                                     struct llama_embd   embd);
+
+    // Set the "state" embedding for the token at index idx in the batch
+    // "state" here means extra hidden state carried over from a previous stage, e.g.:
+    //   - MTP: state from N layers of the target model
+    //   - Qwen3 VL (deepstack): state from N layers of the vision encoder
+    LLAMA_API bool llama_batch_ext_set_embd_state(
+                                struct llama_batch_ext * batch,
+                                               int32_t   idx,
+                                     struct llama_embd   embd);
+
+    // Set if output embeddings should be available for the token at index idx in the batch
+    // Note: for now, this is equivalent to setting the output logits
+    LLAMA_API bool llama_batch_ext_set_output_embd(
+                                struct llama_batch_ext * batch,
+                                               int32_t  idx,
+                                                  bool  value);
+
+    // Set output logits for the token at index idx in the batch
+    // Note: for now, this is equivalent to setting the output embd
+    LLAMA_API bool llama_batch_ext_set_output_logits(
+                                struct llama_batch_ext * batch,
+                                               int32_t  idx,
+                                                  bool  value);
+
+    // Set custom position for the token at index idx in the batch
+    // For M-RoPE models:
+    //     - Embedding tokens must have multiple positions per token
+    //     - Text token only requires one single position per token
+    LLAMA_API bool llama_batch_ext_set_pos(
+                                struct llama_batch_ext * batch,
+                                               int32_t   idx,
+                                       const llama_pos * pos);
+
+    // TODO: implement get_embeddings() and get_logits() for llama_batch_ext
+
+    // Return values are the same as llama_decode()
+    LLAMA_API int32_t llama_process(
+                                struct llama_context * ctx,
+                             enum llama_process_type   type,
+                              struct llama_batch_ext * batch);
+
+    // Set the number of threads used for decoding
+    // n_threads is the number of threads used for generation (single token)
+    // n_threads_batch is the number of threads used for prompt and batch processing (multiple tokens)
+    LLAMA_API void llama_set_n_threads(struct llama_context * ctx, int32_t n_threads, int32_t n_threads_batch);
+
+    // Get the number of threads used for generation of a single token.
+    LLAMA_API int32_t llama_n_threads(struct llama_context * ctx);
+
+    // Get the number of threads used for prompt and batch processing (multiple token).
+    LLAMA_API int32_t llama_n_threads_batch(struct llama_context * ctx);
+
+    // Set whether the context outputs embeddings or not
+    // TODO: rename to avoid confusion with llama_get_embeddings()
+    LLAMA_API void llama_set_embeddings(struct llama_context * ctx, bool embeddings);
+
+    // Set whether to use causal attention or not
+    // If set to true, the model will only attend to the past tokens
+    LLAMA_API void llama_set_causal_attn(struct llama_context * ctx, bool causal_attn);
+
+    // Returns whether the context is currently using causal attention
+    LLAMA_API bool llama_get_causal_attn(const struct llama_context * ctx);
+
+    // Set whether the model is in warmup mode or not
+    // If true, all model tensors are activated during llama_decode() to load and cache their weights.
+    //
+    // note: using this can cause extra graph reallocations because it changes the graph topology with MoE models,
+    //       so it is generally not recommended to use in practice. will be removed in the future
+    DEPRECATED(LLAMA_API void llama_set_warmup(struct llama_context * ctx, bool warmup),
+            "user code should do warmup runs manually [TAG_LLAMA_GRAPH_NO_WARMUP]");
+
+    // Set abort callback
+    LLAMA_API void llama_set_abort_callback(struct llama_context * ctx, ggml_abort_callback abort_callback, void * abort_callback_data);
+
+    // Wait until all computations are finished
+    // This is automatically done when using one of the functions below to obtain the computation results
+    // and is not necessary to call it explicitly in most cases
+    LLAMA_API void llama_synchronize(struct llama_context * ctx);
+
+    // Token logits obtained from the last call to llama_decode()
+    // The logits for which llama_batch.logits[i] != 0 are stored contiguously
+    // in the order they have appeared in the batch.
+    // Rows: number of tokens for which llama_batch.logits[i] != 0
+    // Cols: n_vocab
+    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+    LLAMA_API float * llama_get_logits(struct llama_context * ctx);
+
+    // Logits for the ith token. For positive indices, Equivalent to:
+    // llama_get_logits(ctx) + ctx->output_ids[i]*n_vocab
+    // Negative indices can be used to access logits in reverse order, -1 is the last logit.
+    // returns NULL for invalid ids.
+    LLAMA_API float * llama_get_logits_ith(struct llama_context * ctx, int32_t i);
+
+    // Get all output token embeddings.
+    // when pooling_type == LLAMA_POOLING_TYPE_NONE or when using a generative model,
+    // the embeddings for which llama_batch.logits[i] != 0 are stored contiguously
+    // in the order they have appeared in the batch.
+    // shape: [n_outputs*n_embd]
+    // Otherwise, returns NULL.
+    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+    LLAMA_API float * llama_get_embeddings(struct llama_context * ctx);
+
+    // Get the embeddings for the ith token. For positive indices, Equivalent to:
+    // llama_get_embeddings(ctx) + ctx->output_ids[i]*n_embd
+    // Negative indices can be used to access embeddings in reverse order, -1 is the last embedding.
+    // shape: [n_embd] (1-dimensional)
+    // returns NULL for invalid ids.
+    LLAMA_API float * llama_get_embeddings_ith(struct llama_context * ctx, int32_t i);
+
+    // Get the embeddings for a sequence id
+    // Returns NULL if pooling_type is LLAMA_POOLING_TYPE_NONE
+    // when pooling_type == LLAMA_POOLING_TYPE_RANK, returns float[n_cls_out] with the rank(s) of the sequence
+    // otherwise: float[n_embd] (1-dimensional)
+    LLAMA_API float * llama_get_embeddings_seq(struct llama_context * ctx, llama_seq_id seq_id);
+
+    //
+    // backend sampling API [EXPERIMENTAL]
+    // note: use only if the llama_context was created with at least one llama_sampler_seq_config
+    //
+
+    // Get the backend sampled token for the ith token.
+    // With multiple outputs, sampler state advances when the token is accepted,
+    // not when it is read through this function.
+    // When accepting multiple outputs, accept a contiguous prefix in output order.
+    // Returns LLAMA_TOKEN_NULL if no token was sampled.
+    LLAMA_API llama_token llama_get_sampled_token_ith(struct llama_context * ctx, int32_t i);
+
+    // Get the backend sampled probabilities for the ith token
+    // The index matches llama_get_sampled_token_ith().
+    // Returns NULL if no probabilities were generated.
+    LLAMA_API float *  llama_get_sampled_probs_ith      (struct llama_context * ctx, int32_t i);
+    LLAMA_API uint32_t llama_get_sampled_probs_count_ith(struct llama_context * ctx, int32_t i);
+
+    // Get the backend sampled logits for the ith token
+    // Returns NULL if no logits were sampled.
+    LLAMA_API float *  llama_get_sampled_logits_ith      (struct llama_context * ctx, int32_t i);
+    LLAMA_API uint32_t llama_get_sampled_logits_count_ith(struct llama_context * ctx, int32_t i);
+
+    // Get the backend sampled candidates (token ids) for the ith token
+    // These are needed to map probability/logit indices to vocab token ids.
+    // Returns NULL if no candidates were sampled.
+    LLAMA_API llama_token * llama_get_sampled_candidates_ith      (struct llama_context * ctx, int32_t i);
+    LLAMA_API uint32_t      llama_get_sampled_candidates_count_ith(struct llama_context * ctx, int32_t i);
+
+    //
+    // Vocab
+    //
+
+    LLAMA_API const char * llama_vocab_get_text(const struct llama_vocab * vocab, llama_token token);
+
+    LLAMA_API float llama_vocab_get_score(const struct llama_vocab * vocab, llama_token token);
+
+    LLAMA_API enum llama_token_attr llama_vocab_get_attr(const struct llama_vocab * vocab, llama_token token);
+
+    // Check if the token is supposed to end generation (end-of-generation, eg. EOS, EOT, etc.)
+    LLAMA_API bool llama_vocab_is_eog(const struct llama_vocab * vocab, llama_token token);
+
+    // Identify if Token Id is a control token or a render-able token
+    LLAMA_API bool llama_vocab_is_control(const struct llama_vocab * vocab, llama_token token);
+
+    // Special tokens
+    LLAMA_API llama_token llama_vocab_bos(const struct llama_vocab * vocab); // beginning-of-sentence
+    LLAMA_API llama_token llama_vocab_eos(const struct llama_vocab * vocab); // end-of-sentence
+    LLAMA_API llama_token llama_vocab_eot(const struct llama_vocab * vocab); // end-of-turn
+    LLAMA_API llama_token llama_vocab_sep(const struct llama_vocab * vocab); // sentence separator
+    LLAMA_API llama_token llama_vocab_nl (const struct llama_vocab * vocab); // next-line
+    LLAMA_API llama_token llama_vocab_pad(const struct llama_vocab * vocab); // padding
+    LLAMA_API llama_token llama_vocab_mask(const struct llama_vocab * vocab); // mask
+
+    LLAMA_API bool llama_vocab_get_add_bos(const struct llama_vocab * vocab);
+    LLAMA_API bool llama_vocab_get_add_eos(const struct llama_vocab * vocab);
+    LLAMA_API bool llama_vocab_get_add_sep(const struct llama_vocab * vocab);
+
+    // model-specific suppress tokens (gguf key: tokenizer.ggml.suppress_tokens)
+    LLAMA_API const llama_token * llama_vocab_get_suppress_tokens(const struct llama_vocab * vocab, int32_t * n_suppress_tokens);
+
+    LLAMA_API llama_token llama_vocab_fim_pre(const struct llama_vocab * vocab);
+    LLAMA_API llama_token llama_vocab_fim_suf(const struct llama_vocab * vocab);
+    LLAMA_API llama_token llama_vocab_fim_mid(const struct llama_vocab * vocab);
+    LLAMA_API llama_token llama_vocab_fim_pad(const struct llama_vocab * vocab);
+    LLAMA_API llama_token llama_vocab_fim_rep(const struct llama_vocab * vocab);
+    LLAMA_API llama_token llama_vocab_fim_sep(const struct llama_vocab * vocab);
+
+    DEPRECATED(LLAMA_API const char * llama_token_get_text(const struct llama_vocab * vocab, llama_token token), "use llama_vocab_get_text instead");
+    DEPRECATED(LLAMA_API float llama_token_get_score(const struct llama_vocab * vocab, llama_token token), "use llama_vocab_get_score instead");
+    DEPRECATED(LLAMA_API enum llama_token_attr llama_token_get_attr(const struct llama_vocab * vocab, llama_token token), "use llama_vocab_get_attr instead");
+    DEPRECATED(LLAMA_API bool llama_token_is_eog(const struct llama_vocab * vocab, llama_token token), "use llama_vocab_is_eog instead");
+    DEPRECATED(LLAMA_API bool llama_token_is_control(const struct llama_vocab * vocab, llama_token token), "use llama_vocab_is_control instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_bos(const struct llama_vocab * vocab), "use llama_vocab_bos instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_eos(const struct llama_vocab * vocab), "use llama_vocab_eos instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_eot(const struct llama_vocab * vocab), "use llama_vocab_eot instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_cls(const struct llama_vocab * vocab), "use llama_vocab_cls instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_sep(const struct llama_vocab * vocab), "use llama_vocab_sep instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_nl (const struct llama_vocab * vocab), "use llama_vocab_nl instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_pad(const struct llama_vocab * vocab), "use llama_vocab_pad instead");
+    DEPRECATED(LLAMA_API bool llama_add_bos_token(const struct llama_vocab * vocab), "use llama_vocab_get_add_bos instead");
+    DEPRECATED(LLAMA_API bool llama_add_eos_token(const struct llama_vocab * vocab), "use llama_vocab_get_add_eos instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_fim_pre(const struct llama_vocab * vocab), "use llama_vocab_fim_pre instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_fim_suf(const struct llama_vocab * vocab), "use llama_vocab_fim_suf instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_fim_mid(const struct llama_vocab * vocab), "use llama_vocab_fim_mid instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_fim_pad(const struct llama_vocab * vocab), "use llama_vocab_fim_pad instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_fim_rep(const struct llama_vocab * vocab), "use llama_vocab_fim_rep instead");
+    DEPRECATED(LLAMA_API llama_token llama_token_fim_sep(const struct llama_vocab * vocab), "use llama_vocab_fim_sep instead");
+
+    // CLS is equivalent to BOS
+    DEPRECATED(LLAMA_API llama_token llama_vocab_cls(const struct llama_vocab * vocab), // classification
+            "use llama_vocab_bos instead");
+
+    //
+    // Tokenization
+    //
+    // The API is thread-safe.
+    //
+
+    /// @details Convert the provided text into tokens.
+    /// @param tokens The tokens pointer must be large enough to hold the resulting tokens.
+    /// @return Returns the number of tokens on success, no more than n_tokens_max
+    /// @return Returns a negative number on failure - the number of tokens that would have been returned
+    /// @return Returns INT32_MIN on overflow (e.g., tokenization result size exceeds int32_t limit)
+    /// @param add_special Allow to add BOS and EOS tokens if model is configured to do so.
+    /// @param parse_special Allow tokenizing special and/or control tokens which otherwise are not exposed and treated
+    ///                      as plaintext. Does not insert a leading space.
+    LLAMA_API int32_t llama_tokenize(
+        const struct llama_vocab * vocab,
+                      const char * text,
+                         int32_t   text_len,
+                     llama_token * tokens,
+                         int32_t   n_tokens_max,
+                            bool   add_special,
+                            bool   parse_special);
+
+    // Token Id -> Piece.
+    // Uses the vocabulary in the provided context.
+    // Does not write null terminator to the buffer.
+    // User can skip up to 'lstrip' leading spaces before copying (useful when encoding/decoding multiple tokens with 'add_space_prefix')
+    // @param special If true, special tokens are rendered in the output.
+    LLAMA_API int32_t llama_token_to_piece(
+              const struct llama_vocab * vocab,
+                           llama_token   token,
+                                  char * buf,
+                               int32_t   length,
+                               int32_t   lstrip,
+                                  bool   special);
+
+    /// @details Convert the provided tokens into text (inverse of llama_tokenize()).
+    /// @param text The char pointer must be large enough to hold the resulting text.
+    /// @return Returns the number of chars/bytes on success, no more than text_len_max.
+    /// @return Returns a negative number on failure - the number of chars/bytes that would have been returned.
+    /// @param remove_special Allow to remove BOS and EOS tokens if model is configured to do so.
+    /// @param unparse_special If true, special tokens are rendered in the output.
+    LLAMA_API int32_t llama_detokenize(
+        const struct llama_vocab * vocab,
+               const llama_token * tokens,
+                         int32_t   n_tokens,
+                            char * text,
+                         int32_t   text_len_max,
+                            bool   remove_special,
+                            bool   unparse_special);
+
+    //
+    // Chat templates
+    //
+
+    /// Apply chat template. Inspired by hf apply_chat_template() on python.
+    ///
+    /// NOTE: This function does not use a jinja parser. It only support a pre-defined list of template. See more: https://github.com/ggml-org/llama.cpp/wiki/Templates-supported-by-llama_chat_apply_template
+    /// @param tmpl A Jinja template to use for this chat.
+    /// @param chat Pointer to a list of multiple llama_chat_message
+    /// @param n_msg Number of llama_chat_message in this chat
+    /// @param add_ass Whether to end the prompt with the token(s) that indicate the start of an assistant message.
+    /// @param buf A buffer to hold the output formatted prompt. The recommended alloc size is 2 * (total number of characters of all messages)
+    /// @param length The size of the allocated buffer
+    /// @return The total number of bytes of the formatted prompt. If is it larger than the size of buffer, you may need to re-alloc it and then re-apply the template.
+    LLAMA_API int32_t llama_chat_apply_template(
+                            const char * tmpl,
+       const struct llama_chat_message * chat,
+                                size_t   n_msg,
+                                  bool   add_ass,
+                                  char * buf,
+                               int32_t   length);
+
+    // Get list of built-in chat templates
+    LLAMA_API int32_t llama_chat_builtin_templates(const char ** output, size_t len);
+
+    //
+    // Sampling API
+    //
+    // Sample usage:
+    //
+    //    // prepare the sampling chain at the start
+    //    auto sparams = llama_sampler_chain_default_params();
+    //
+    //    llama_sampler * smpl = llama_sampler_chain_init(sparams);
+    //
+    //    llama_sampler_chain_add(smpl, llama_sampler_init_top_k(50));
+    //    llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.9, 1));
+    //    llama_sampler_chain_add(smpl, llama_sampler_init_temp (0.8));
+    //
+    //    // typically, the chain should end with a sampler such as "greedy", "dist" or "mirostat"
+    //    // this sampler will be responsible to select the actual token
+    //    llama_sampler_chain_add(smpl, llama_sampler_init_dist(seed));
+    //
+    //    ...
+    //
+    //    // decoding loop:
+    //    while (...) {
+    //        ...
+    //
+    //        llama_decode(ctx, batch);
+    //
+    //        // sample from the logits of the last token in the batch
+    //        const llama_token id = llama_sampler_sample(smpl, ctx, -1);
+    //
+    //        ...
+    //    }
+    //
+    //    llama_sampler_free(smpl);
+    //
+
+    typedef void * llama_sampler_context_t;
+
+    struct llama_sampler_data {
+        struct ggml_tensor * logits;
+        struct ggml_tensor * probs;
+        struct ggml_tensor * sampled;
+        struct ggml_tensor * candidates;
+    };
+
+    // user code can implement the interface below in order to create custom llama_sampler
+    struct llama_sampler_i {
+        const char *           (*name)  (const struct llama_sampler * smpl);                                 // can be NULL
+        void                   (*accept)(      struct llama_sampler * smpl, llama_token token);              // can be NULL
+        void                   (*apply) (      struct llama_sampler * smpl, llama_token_data_array * cur_p); // required
+        void                   (*reset) (      struct llama_sampler * smpl);                                 // can be NULL
+        struct llama_sampler * (*clone) (const struct llama_sampler * smpl);                                 // can be NULL if ctx is NULL
+        void                   (*free)  (      struct llama_sampler * smpl);                                 // can be NULL if ctx is NULL
+
+        // [EXPERIMENTAL]
+        // backend sampling interface:
+
+        // return true if the backend supports all ops needed by the sampler and can handle up to n_outputs_max_per_seq outputs per sequence
+        // note: call once per sampler
+        bool (*backend_init)(
+                struct llama_sampler       * smpl,
+                ggml_backend_buffer_type_t   buft,
+                uint32_t                     n_outputs_max_per_seq);
+
+        // call after .backend_apply()
+        void (*backend_accept)(
+                struct llama_sampler * smpl,
+                struct ggml_context  * ctx,
+                struct ggml_cgraph   * gf,
+                struct ggml_tensor   * selected_token);
+
+        // call after .backend_init()
+        void (*backend_apply)(
+                struct llama_sampler      * smpl,
+                struct ggml_context       * ctx,
+                struct ggml_cgraph        * gf,
+                struct llama_sampler_data * data);
+
+        // called before graph execution to set inputs for the current ubatch
+        void (*backend_set_input)(struct llama_sampler * smpl);
+
+        // called before rebuilding a sampling graph to clear any internal sampler state
+        void (*backend_reset)(struct llama_sampler * smpl);
+
+        // copy mutable state from src into dst while keeping dst's references to the current sampling graph
+        // src and dst must have the same type and configuration
+        void (*copy_state)(const struct llama_sampler * src, struct llama_sampler * dst);
+    };
+
+    struct llama_sampler {
+        struct llama_sampler_i * iface;
+
+        llama_sampler_context_t ctx;
+    };
+
+    // [EXPERIMENTAL]
+    // attach a sampler to the context
+    // note: prefer initializing the context with llama_context_params.samplers when possible
+    LLAMA_API bool llama_set_sampler(struct llama_context * ctx, llama_seq_id seq_id, struct llama_sampler * smpl);
+
+    // mirror of llama_sampler_i:
+    LLAMA_API struct llama_sampler * llama_sampler_init  (      struct llama_sampler_i * iface, llama_sampler_context_t ctx);
+    LLAMA_API const char *           llama_sampler_name  (const struct llama_sampler * smpl);
+    LLAMA_API void                   llama_sampler_accept(      struct llama_sampler * smpl, llama_token token);
+    LLAMA_API void                   llama_sampler_apply (      struct llama_sampler * smpl, llama_token_data_array * cur_p);
+    LLAMA_API void                   llama_sampler_reset (      struct llama_sampler * smpl);
+    LLAMA_API struct llama_sampler * llama_sampler_clone (const struct llama_sampler * smpl);
+    LLAMA_API void                   llama_sampler_copy  (const struct llama_sampler * src, struct llama_sampler * dst);
+    // important: do not free if the sampler has been added to a llama_sampler_chain (via llama_sampler_chain_add)
+    LLAMA_API void                   llama_sampler_free  (      struct llama_sampler * smpl);
+
+    // llama_sampler_chain
+    // a type of llama_sampler that can chain multiple samplers one after another
+
+    LLAMA_API struct llama_sampler * llama_sampler_chain_init(struct llama_sampler_chain_params params);
+
+    // important: takes ownership of the sampler object and will free it when llama_sampler_free is called
+    LLAMA_API void                   llama_sampler_chain_add(      struct llama_sampler * chain, struct llama_sampler * smpl);
+
+    // return NULL if:
+    //   - the sampler is NULL
+    //   - the sampler is not a llama_sampler_chain
+    //   - the index is out of bounds, unless i == -1
+    //   - if i == -1, returns the chain itself (can be used to check if the sampler is a chain)
+    LLAMA_API struct llama_sampler * llama_sampler_chain_get(      struct llama_sampler * chain, int32_t i);
+
+    // the total number of samplers in the chain
+    LLAMA_API int32_t                llama_sampler_chain_n  (const struct llama_sampler * chain);
+
+    // after removing a sampler, the chain will no longer own it, and it will not be freed when the chain is freed
+    LLAMA_API struct llama_sampler * llama_sampler_chain_remove(   struct llama_sampler * chain, int32_t i);
+
+    // available samplers:
+
+    LLAMA_API struct llama_sampler * llama_sampler_init_greedy(void);
+
+    /// seed == LLAMA_DEFAULT_SEED to use a random seed.
+    LLAMA_API struct llama_sampler * llama_sampler_init_dist(uint32_t seed);
+
+    /// @details Top-K sampling described in academic paper "The Curious Case of Neural Text Degeneration" https://arxiv.org/abs/1904.09751
+    /// Setting k <= 0 makes this a noop
+    LLAMA_API struct llama_sampler * llama_sampler_init_top_k      (int32_t k);
+
+    /// @details Nucleus sampling described in academic paper "The Curious Case of Neural Text Degeneration" https://arxiv.org/abs/1904.09751
+    LLAMA_API struct llama_sampler * llama_sampler_init_top_p      (float   p, size_t min_keep);
+
+    /// @details Minimum P sampling as described in https://github.com/ggml-org/llama.cpp/pull/3841
+    LLAMA_API struct llama_sampler * llama_sampler_init_min_p      (float   p, size_t min_keep);
+
+    /// @details Locally Typical Sampling implementation described in the paper https://arxiv.org/abs/2202.00666.
+    LLAMA_API struct llama_sampler * llama_sampler_init_typical    (float   p, size_t min_keep);
+
+    /// #details Updates the logits l_i` = l_i/t. When t <= 0.0f, the maximum logit is kept at it's original value, the rest are set to -inf
+    LLAMA_API struct llama_sampler * llama_sampler_init_temp       (float   t);
+
+    /// @details Dynamic temperature implementation (a.k.a. entropy) described in the paper https://arxiv.org/abs/2309.02772.
+    LLAMA_API struct llama_sampler * llama_sampler_init_temp_ext   (float   t, float   delta, float exponent);
+
+    /// @details XTC sampler as described in https://github.com/oobabooga/text-generation-webui/pull/6335
+    LLAMA_API struct llama_sampler * llama_sampler_init_xtc        (float   p, float   t,     size_t min_keep, uint32_t seed);
+
+    /// @details Top n sigma sampling as described in academic paper "Top-nσ: Not All Logits Are You Need" https://arxiv.org/pdf/2411.07641
+    LLAMA_API struct llama_sampler * llama_sampler_init_top_n_sigma(float   n);
+
+    /// @details Mirostat 1.0 algorithm described in the paper https://arxiv.org/abs/2007.14966. Uses tokens instead of words.
+    /// @param candidates A vector of `llama_token_data` containing the candidate tokens, their probabilities (p), and log-odds (logit) for the current position in the generated text.
+    /// @param tau  The target cross-entropy (or surprise) value you want to achieve for the generated text. A higher value corresponds to more surprising or less predictable text, while a lower value corresponds to less surprising or more predictable text.
+    /// @param eta The learning rate used to update `mu` based on the error between the target and observed surprisal of the sampled word. A larger learning rate will cause `mu` to be updated more quickly, while a smaller learning rate will result in slower updates.
+    /// @param m The number of tokens considered in the estimation of `s_hat`. This is an arbitrary value that is used to calculate `s_hat`, which in turn helps to calculate the value of `k`. In the paper, they use `m = 100`, but you can experiment with different values to see how it affects the performance of the algorithm.
+    /// @param mu Maximum cross-entropy. This value is initialized to be twice the target cross-entropy (`2 * tau`) and is updated in the algorithm based on the error between the target and observed surprisal.
+    LLAMA_API struct llama_sampler * llama_sampler_init_mirostat(
+                             int32_t   n_vocab,
+                            uint32_t   seed,
+                               float   tau,
+                               float   eta,
+                             int32_t   m);
+
+    /// @details Mirostat 2.0 algorithm described in the paper https://arxiv.org/abs/2007.14966. Uses tokens instead of words.
+    /// @param candidates A vector of `llama_token_data` containing the candidate tokens, their probabilities (p), and log-odds (logit) for the current position in the generated text.
+    /// @param tau  The target cross-entropy (or surprise) value you want to achieve for the generated text. A higher value corresponds to more surprising or less predictable text, while a lower value corresponds to less surprising or more predictable text.
+    /// @param eta The learning rate used to update `mu` based on the error between the target and observed surprisal of the sampled word. A larger learning rate will cause `mu` to be updated more quickly, while a smaller learning rate will result in slower updates.
+    /// @param mu Maximum cross-entropy. This value is initialized to be twice the target cross-entropy (`2 * tau`) and is updated in the algorithm based on the error between the target and observed surprisal.
+    LLAMA_API struct llama_sampler * llama_sampler_init_mirostat_v2(
+                            uint32_t   seed,
+                               float   tau,
+                               float   eta);
+
+    /// @details Initializes a GBNF grammar, see grammars/README.md for details.
+    /// @param vocab The vocabulary that this grammar will be used with.
+    /// @param grammar_str The production rules for the grammar, encoded as a string. Returns an empty grammar if empty. Returns NULL if parsing of grammar_str fails.
+    /// @param grammar_root The name of the start symbol for the grammar.
+    LLAMA_API struct llama_sampler * llama_sampler_init_grammar(
+            const struct llama_vocab * vocab,
+                          const char * grammar_str,
+                          const char * grammar_root);
+
+    DEPRECATED(LLAMA_API struct llama_sampler * llama_sampler_init_grammar_lazy(
+            const struct llama_vocab * vocab,
+                          const char * grammar_str,
+                          const char * grammar_root,
+                         const char ** trigger_words,
+                                size_t num_trigger_words,
+                   const llama_token * trigger_tokens,
+                                size_t num_trigger_tokens),
+        "use llama_sampler_init_grammar_lazy_patterns instead");
+
+
+    /// @details Lazy grammar sampler, introduced in https://github.com/ggml-org/llama.cpp/pull/9639
+    /// @param trigger_patterns A list of patterns that will trigger the grammar sampler. Pattern will be matched from the start of the generation output, and grammar sampler will be fed content starting from its first match group.
+    /// @param trigger_tokens A list of tokens that will trigger the grammar sampler. Grammar sampler will be fed content starting from the trigger token included.
+    LLAMA_API struct llama_sampler * llama_sampler_init_grammar_lazy_patterns(
+        const struct llama_vocab * vocab,
+                      const char * grammar_str,
+                      const char * grammar_root,
+                     const char ** trigger_patterns,
+                            size_t num_trigger_patterns,
+               const llama_token * trigger_tokens,
+                            size_t num_trigger_tokens);
+
+
+    /// NOTE: Avoid using on the full vocabulary as searching for repeated tokens can become slow. For example, apply top-k or top-p sampling first.
+    LLAMA_API struct llama_sampler * llama_sampler_init_penalties(
+                             int32_t   n_vocab,
+                             int32_t   penalty_last_n,   // last n tokens to penalize (0 = disable penalty)
+                               float   penalty_repeat,   // must be > 0.0, 1.0 = disabled
+                               float   penalty_freq,     // must be finite, 0.0 = disabled
+                               float   penalty_present); // must be finite, 0.0 = disabled
+
+    ///  @details DRY sampler, designed by p-e-w, as described in: https://github.com/oobabooga/text-generation-webui/pull/5677, porting Koboldcpp implementation authored by pi6am: https://github.com/LostRuins/koboldcpp/pull/982
+    LLAMA_API struct llama_sampler * llama_sampler_init_dry(
+            const struct llama_vocab *  vocab,
+                               float    dry_multiplier,
+                               float    dry_base,
+                             int32_t    dry_allowed_length,
+                             int32_t    dry_penalty_last_n, // last n tokens to penalize (0 = disable penalty)
+                          const char ** seq_breakers,
+                              size_t    num_breakers);
+
+    /// adaptive-p: select tokens near a configurable target probability over time.
+    ///
+    /// the adaptive-p sampler transforms the token probability distribution to favor tokens
+    /// that fall near a user-configurable probability target.
+    ///
+    /// internally, the sampler maintains an exponential moving average of the *ORIGINAL*
+    /// probabilities of selected tokens at each sampling step. it uses this EMA to compute an
+    /// adapted target probability at each sampling step, thus maintaining the desired target
+    /// probability over time.
+    ///
+    /// adaptive-p selects a token ID rather than just mutating candidates, so it must be last
+    /// in the sampler chain (like mirostat, dist, greedy).
+    ///
+    /// only mild truncation before this sampler is recommended. we suggest applying min-p
+    /// before adaptive-p as the only other active sampler in the chain.
+    ///
+    /// @param target select tokens near this probability (valid range 0.0 to 1.0; negative = disabled)
+    /// @param decay  EMA decay for adaptation; history ≈ 1/(1-decay) tokens (valid range 0.0 - 0.99)
+    /// @param seed   RNG seed
+    ///
+    /// ref: https://github.com/ggml-org/llama.cpp/pull/17927
+    ///
+    LLAMA_API struct llama_sampler * llama_sampler_init_adaptive_p(
+                               float   target,
+                               float   decay,
+                            uint32_t   seed);
+
+    LLAMA_API struct llama_sampler * llama_sampler_init_logit_bias(
+                             int32_t   n_vocab,
+                             int32_t   n_logit_bias,
+              const llama_logit_bias * logit_bias);
+
+    // this sampler is meant to be used for fill-in-the-middle infilling
+    // it's supposed to be used after top_k + top_p sampling
+    //
+    // 1. if the sum of the EOG probs times the number of candidates is higher than the sum of the other probs -> pick EOG
+    // 2. combine probs of tokens that have the same prefix
+    //
+    // example:
+    //
+    // - before:
+    //   "hel":   0.5
+    //   "hell":  0.2
+    //   "hello": 0.1
+    //   "dummy": 0.1
+    //
+    // - after:
+    //   "hel":   0.8
+    //   "dummy": 0.1
+    //
+    // 3. discard non-EOG tokens with low prob
+    // 4. if no tokens are left -> pick EOT
+    //
+    LLAMA_API struct llama_sampler * llama_sampler_init_infill(const struct llama_vocab * vocab);
+
+    // Returns the seed used by the sampler if applicable, LLAMA_DEFAULT_SEED otherwise
+    LLAMA_API uint32_t llama_sampler_get_seed(const struct llama_sampler * smpl);
+
+    /// @details Sample and accept a token from the idx-th output of the last evaluation
+    // For multiple outputs from one sampler, call this function in output order without gaps.
+    //
+    // Shorthand for:
+    //    const auto * logits = llama_get_logits_ith(ctx, idx);
+    //    llama_token_data_array cur_p = { ... init from logits ... };
+    //    llama_sampler_apply(smpl, &cur_p);
+    //    auto token = cur_p.data[cur_p.selected].id;
+    //    llama_sampler_accept(smpl, token);
+    //    return token;
+    // Returns the sampled token
+    LLAMA_API llama_token llama_sampler_sample(struct llama_sampler * smpl, struct llama_context * ctx, int32_t idx);
+
+    // TODO: extend in the future
+    //LLAMA_API void llama_decode_with_sampler(struct llama_context * ctx, struct llama_sampler * smpl, struct llama_batch batch, ...);
+
+    //
+    // Model split
+    //
+
+    /// @details Build a split GGUF final path for this chunk.
+    ///          llama_split_path(split_path, sizeof(split_path), "/models/ggml-model-q4_0", 2, 4) => split_path = "/models/ggml-model-q4_0-00002-of-00004.gguf"
+    //  Returns the split_path length.
+    LLAMA_API int32_t llama_split_path(char * split_path, size_t maxlen, const char * path_prefix, int32_t split_no, int32_t split_count);
+
+    /// @details Extract the path prefix from the split_path if and only if the split_no and split_count match.
+    ///          llama_split_prefix(split_prefix, 64, "/models/ggml-model-q4_0-00002-of-00004.gguf", 2, 4) => split_prefix = "/models/ggml-model-q4_0"
+    //  Returns the split_prefix length.
+    LLAMA_API int32_t llama_split_prefix(char * split_prefix, size_t maxlen, const char * split_path, int32_t split_no, int32_t split_count);
+
+    // Print system information
+    LLAMA_API const char * llama_print_system_info(void);
+
+    // Set callback for all future logging events.
+    // If this is not called, or NULL is supplied, everything is output on stderr.
+    // The logger state is global so these functions are NOT thread safe.
+    LLAMA_API void llama_log_get(ggml_log_callback * log_callback, void ** user_data);
+    LLAMA_API void llama_log_set(ggml_log_callback   log_callback, void *  user_data);
+
+    //
+    // Performance utils
+    //
+    // NOTE: Used by llama.cpp examples/tools, avoid using in third-party apps. Instead, do your own performance measurements.
+    //
+
+    struct llama_perf_context_data {
+        // ms == milliseconds
+        double t_start_ms;  // absolute start time
+        double t_load_ms;   // time needed for loading the model
+        double t_p_eval_ms; // time needed for processing the prompt
+        double t_eval_ms;   // time needed for generating tokens
+
+        int32_t n_p_eval;   // number of prompt tokens
+        int32_t n_eval;     // number of generated tokens
+        int32_t n_reused;   // number of times a ggml compute graph had been reused
+    };
+
+    struct llama_perf_sampler_data {
+        double t_sample_ms; // time needed for sampling in ms
+
+        int32_t n_sample;   // number of sampled tokens
+    };
+
+    LLAMA_API struct llama_perf_context_data llama_perf_context      (const struct llama_context * ctx);
+    LLAMA_API void                           llama_perf_context_print(const struct llama_context * ctx);
+    LLAMA_API void                           llama_perf_context_reset(      struct llama_context * ctx);
+
+    // NOTE: the following work only with samplers constructed via llama_sampler_chain_init
+    LLAMA_API struct llama_perf_sampler_data llama_perf_sampler      (const struct llama_sampler * chain);
+    LLAMA_API void                           llama_perf_sampler_print(const struct llama_sampler * chain);
+    LLAMA_API void                           llama_perf_sampler_reset(      struct llama_sampler * chain);
+
+    //
+    // training
+    //
+
+    // function that returns whether or not a given tensor contains trainable parameters
+    typedef bool (*llama_opt_param_filter)(const struct ggml_tensor * tensor, void * userdata);
+
+    // always returns true
+    LLAMA_API bool llama_opt_param_filter_all(const struct ggml_tensor * tensor, void * userdata);
+
+    struct llama_opt_params {
+        uint32_t n_ctx_train; // assumed context size post training, use context size specified in llama_context if 0
+
+        llama_opt_param_filter param_filter; // callback for determining which tensors contain trainable parameters
+        void * param_filter_ud;              // userdata for determining which tensors contain trainable parameters
+
+        ggml_opt_get_optimizer_params get_opt_pars; // callback for calculating optimizer parameters
+        void * get_opt_pars_ud;                     // userdata for calculating optimizer parameters
+
+        enum ggml_opt_optimizer_type optimizer_type;
+    };
+
+    LLAMA_API void llama_opt_init(struct llama_context * lctx, struct llama_model * model, struct llama_opt_params lopt_params);
+
+    LLAMA_API void llama_opt_epoch(
+            struct llama_context    * lctx,
+            ggml_opt_dataset_t        dataset,
+            ggml_opt_result_t         result_train,
+            ggml_opt_result_t         result_eval,
+            int64_t                   idata_split,
+            ggml_opt_epoch_callback   callback_train,
+            ggml_opt_epoch_callback   callback_eval);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // LLAMA_H
+
+SOURCE E:\the_harness\records\build_vulkan_real\toolchain\llama_clean_source\ggml\include\ggml-backend.h
+#pragma once
+
+#include "ggml.h"
+#include "ggml-alloc.h"
+
+#ifdef GGML_BACKEND_SHARED
+#    if defined(_WIN32) && !defined(__MINGW32__)
+#        ifdef GGML_BACKEND_BUILD
+#            define GGML_BACKEND_API __declspec(dllexport) extern
+#        else
+#            define GGML_BACKEND_API __declspec(dllimport) extern
+#        endif
+#    else
+#        define GGML_BACKEND_API __attribute__ ((visibility ("default"))) extern
+#    endif
+#else
+#    define GGML_BACKEND_API extern
+#endif
+
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
+    typedef struct ggml_backend_buffer_type * ggml_backend_buffer_type_t;
+    typedef struct ggml_backend_buffer * ggml_backend_buffer_t;
+    typedef struct ggml_backend_event * ggml_backend_event_t;
+    typedef struct ggml_backend * ggml_backend_t;
+    typedef void * ggml_backend_graph_plan_t;
+    typedef struct ggml_backend_reg * ggml_backend_reg_t;
+    typedef struct ggml_backend_device * ggml_backend_dev_t;
+
+
+    //
+    // Backend buffer type
+    //
+
+    GGML_API const char *          ggml_backend_buft_name            (ggml_backend_buffer_type_t buft);
+    GGML_API ggml_backend_buffer_t ggml_backend_buft_alloc_buffer    (ggml_backend_buffer_type_t buft, size_t size);
+    GGML_API ggml_backend_buffer_t ggml_backend_buft_alloc_buffer_n  (ggml_backend_buffer_type_t buft, struct ggml_tensor ** tensors, int n_tensors);
+    GGML_API size_t                ggml_backend_buft_get_alignment   (ggml_backend_buffer_type_t buft);
+    GGML_API size_t                ggml_backend_buft_get_max_size    (ggml_backend_buffer_type_t buft);
+    GGML_API size_t                ggml_backend_buft_get_alloc_size  (ggml_backend_buffer_type_t buft, const struct ggml_tensor * tensor);
+    GGML_API size_t                ggml_backend_buft_get_alloc_size_n(ggml_backend_buffer_type_t buft, struct ggml_tensor ** tensors, int n_tensors);
+    GGML_API bool                  ggml_backend_buft_is_host         (ggml_backend_buffer_type_t buft);
+    GGML_API ggml_backend_dev_t    ggml_backend_buft_get_device      (ggml_backend_buffer_type_t buft);
+
+    //
+    // Backend buffer
+    //
+
+    enum ggml_backend_buffer_usage {
+        GGML_BACKEND_BUFFER_USAGE_ANY = 0,
+        GGML_BACKEND_BUFFER_USAGE_WEIGHTS = 1,
+        GGML_BACKEND_BUFFER_USAGE_COMPUTE = 2,
+    };
+
+    GGML_API const char *                   ggml_backend_buffer_name          (ggml_backend_buffer_t buffer);
+    GGML_API void                           ggml_backend_buffer_free          (ggml_backend_buffer_t buffer);
+    GGML_API void *                         ggml_backend_buffer_get_base      (ggml_backend_buffer_t buffer);
+    GGML_API size_t                         ggml_backend_buffer_get_size      (ggml_backend_buffer_t buffer);
+    GGML_API enum ggml_status               ggml_backend_buffer_init_tensor   (ggml_backend_buffer_t buffer, struct ggml_tensor * tensor);
+    GGML_API size_t                         ggml_backend_buffer_get_alignment (ggml_backend_buffer_t buffer);
+    GGML_API size_t                         ggml_backend_buffer_get_max_size  (ggml_backend_buffer_t buffer);
+    GGML_API size_t                         ggml_backend_buffer_get_alloc_size(ggml_backend_buffer_t buffer, const struct ggml_tensor * tensor);
+    GGML_API void                           ggml_backend_buffer_clear         (ggml_backend_buffer_t buffer, uint8_t value);
+    GGML_API bool                           ggml_backend_buffer_is_host       (ggml_backend_buffer_t buffer);
+    GGML_API void                           ggml_backend_buffer_set_usage     (ggml_backend_buffer_t buffer, enum ggml_backend_buffer_usage usage);
+    GGML_API enum ggml_backend_buffer_usage ggml_backend_buffer_get_usage     (ggml_backend_buffer_t buffer);
+    GGML_API ggml_backend_buffer_type_t     ggml_backend_buffer_get_type      (ggml_backend_buffer_t buffer);
+    GGML_API void                           ggml_backend_buffer_reset         (ggml_backend_buffer_t buffer);
+
+    // tensor copy between different backends
+    GGML_API void ggml_backend_tensor_copy(const struct ggml_tensor * src, struct ggml_tensor * dst);
+
+    //
+    // Backend (stream)
+    //
+
+    GGML_API ggml_guid_t  ggml_backend_guid(ggml_backend_t backend);
+    GGML_API const char * ggml_backend_name(ggml_backend_t backend);
+    GGML_API void         ggml_backend_free(ggml_backend_t backend);
+
+    GGML_API ggml_backend_buffer_type_t ggml_backend_get_default_buffer_type(ggml_backend_t backend);
+    GGML_API ggml_backend_buffer_t      ggml_backend_alloc_buffer(ggml_backend_t backend, size_t size);
+    GGML_API size_t                     ggml_backend_get_alignment(ggml_backend_t backend);
+    GGML_API size_t                     ggml_backend_get_max_size(ggml_backend_t backend);
+
+    GGML_API void ggml_backend_tensor_set_async   (ggml_backend_t backend,       struct ggml_tensor * tensor, const void * data, size_t offset, size_t size);
+    GGML_API void ggml_backend_tensor_get_async   (ggml_backend_t backend, const struct ggml_tensor * tensor,       void * data, size_t offset, size_t size);
+    GGML_API void ggml_backend_tensor_set_2d_async(ggml_backend_t backend,       struct ggml_tensor * tensor, const void * data, size_t offset, size_t size, size_t n_copies, size_t stride_tensor, size_t stride_data);
+    GGML_API void ggml_backend_tensor_get_2d_async(ggml_backend_t backend, const struct ggml_tensor * tensor,       void * data, size_t offset, size_t size, size_t n_copies, size_t stride_tensor, size_t stride_data);
+
+    // "offset" refers to the offset in tensor->data for setting/getting data
+    GGML_API void ggml_backend_tensor_set   (      struct ggml_tensor * tensor, const void * data, size_t offset, size_t size);
+    GGML_API void ggml_backend_tensor_get   (const struct ggml_tensor * tensor,       void * data, size_t offset, size_t size);
+    GGML_API void ggml_backend_tensor_set_2d(      struct ggml_tensor * tensor, const void * data, size_t offset, size_t size, size_t n_copies, size_t stride_tensor, size_t stride_data);
+    GGML_API void ggml_backend_tensor_get_2d(const struct ggml_tensor * tensor,       void * data, size_t offset, size_t size, size_t n_copies, size_t stride_tensor, size_t stride_data);
+    GGML_API void ggml_backend_tensor_memset(      struct ggml_tensor * tensor,     uint8_t value, size_t offset, size_t size);
+
+    GGML_API void ggml_backend_synchronize(ggml_backend_t backend);
+
+    GGML_API ggml_backend_graph_plan_t ggml_backend_graph_plan_create(ggml_backend_t backend, struct ggml_cgraph * cgraph);
+    GGML_API void                      ggml_backend_graph_plan_free  (ggml_backend_t backend, ggml_backend_graph_plan_t plan);
+
+    GGML_API enum ggml_status ggml_backend_graph_plan_compute (ggml_backend_t backend, ggml_backend_graph_plan_t plan);
+    GGML_API enum ggml_status ggml_backend_graph_compute      (ggml_backend_t backend, struct ggml_cgraph * cgraph);
+    GGML_API enum ggml_status ggml_backend_graph_compute_async(ggml_backend_t backend, struct ggml_cgraph * cgraph);
+
+    // NOTE: will be removed, use device version instead
+    GGML_API bool ggml_backend_supports_op(ggml_backend_t backend, const struct ggml_tensor * op);
+    GGML_API bool ggml_backend_supports_buft(ggml_backend_t backend, ggml_backend_buffer_type_t buft);
+    GGML_API bool ggml_backend_offload_op(ggml_backend_t backend, const struct ggml_tensor * op);
+
+    // asynchronous copy
+    // the copy is performed after all the currently queued operations in backend_src
+    // backend_dst will wait for the copy to complete before performing other operations
+    // automatic fallback to sync copy if async is not supported
+    GGML_API void ggml_backend_tensor_copy_async(ggml_backend_t backend_src, ggml_backend_t backend_dst, const struct ggml_tensor * src, struct ggml_tensor * dst);
+
+    GGML_API ggml_backend_dev_t ggml_backend_get_device(ggml_backend_t backend);
+
+    //
+    // Events
+    //
+
+    GGML_API ggml_backend_event_t ggml_backend_event_new(ggml_backend_dev_t device);
+    GGML_API void                 ggml_backend_event_free(ggml_backend_event_t event);
+    GGML_API void                 ggml_backend_event_record(ggml_backend_event_t event, ggml_backend_t backend);
+    GGML_API void                 ggml_backend_event_synchronize(ggml_backend_event_t event);
+    GGML_API void                 ggml_backend_event_wait(ggml_backend_t backend, ggml_backend_event_t event);
+
+    //
+    // Backend device
+    //
+
+    enum ggml_backend_dev_type {
+        // CPU device using system memory
+        GGML_BACKEND_DEVICE_TYPE_CPU,
+        // GPU device using dedicated memory
+        GGML_BACKEND_DEVICE_TYPE_GPU,
+        // integrated GPU device using host memory
+        GGML_BACKEND_DEVICE_TYPE_IGPU,
+        // accelerator devices intended to be used together with the CPU backend (e.g. BLAS or AMX)
+        GGML_BACKEND_DEVICE_TYPE_ACCEL,
+        // "meta" device wrapping multiple other devices for tensor parallelism
+        GGML_BACKEND_DEVICE_TYPE_META,
+    };
+
+    // functionality supported by the device
+    struct ggml_backend_dev_caps {
+        // asynchronous operations
+        bool async;
+        // pinned host buffer
+        bool host_buffer;
+        // creating buffers from host ptr
+        bool buffer_from_host_ptr;
+        // event synchronization
+        bool events;
+        // mmap is supported for loading
+        bool mmap_support;
+    };
+
+    // all the device properties
+    struct ggml_backend_dev_props {
+        // device name
+        const char * name;
+        // device description
+        const char * description;
+        // device free memory in bytes
+        size_t memory_free;
+        // device total memory in bytes
+        size_t memory_total;
+        // device type
+        enum ggml_backend_dev_type type;
+        // device id
+        //   for PCI devices, this should be the lower-case PCI bus id formatted as "domain:bus:device.function" (e.g. "0000:c1:00.0")
+        //   if the id is unknown, this should be NULL
+        const char * device_id;
+        // device capabilities
+        struct ggml_backend_dev_caps caps;
+    };
+
+    GGML_API const char *                  ggml_backend_dev_name(ggml_backend_dev_t device);
+    GGML_API const char *                  ggml_backend_dev_description(ggml_backend_dev_t device);
+    GGML_API void                          ggml_backend_dev_memory(ggml_backend_dev_t device, size_t * free, size_t * total);
+    GGML_API enum ggml_backend_dev_type    ggml_backend_dev_type(ggml_backend_dev_t device);
+    GGML_API void                          ggml_backend_dev_get_props(ggml_backend_dev_t device, struct ggml_backend_dev_props * props);
+    GGML_API ggml_backend_reg_t            ggml_backend_dev_backend_reg(ggml_backend_dev_t device);
+    GGML_API ggml_backend_t                ggml_backend_dev_init(ggml_backend_dev_t device, const char * params);
+    GGML_API ggml_backend_buffer_type_t    ggml_backend_dev_buffer_type(ggml_backend_dev_t device);
+    GGML_API ggml_backend_buffer_type_t    ggml_backend_dev_host_buffer_type(ggml_backend_dev_t device);
+    GGML_API ggml_backend_buffer_t         ggml_backend_dev_buffer_from_host_ptr(ggml_backend_dev_t device, void * ptr, size_t size, size_t max_tensor_size);
+
+    GGML_API bool                          ggml_backend_dev_supports_op(ggml_backend_dev_t device, const struct ggml_tensor * op);
+    GGML_API bool                          ggml_backend_dev_supports_buft(ggml_backend_dev_t device, ggml_backend_buffer_type_t buft);
+    GGML_API bool                          ggml_backend_dev_offload_op(ggml_backend_dev_t device, const struct ggml_tensor * op);
+
+    //
+    // Backend (reg)
+    //
+
+    GGML_API const char *       ggml_backend_reg_name(ggml_backend_reg_t reg);
+    GGML_API size_t             ggml_backend_reg_dev_count(ggml_backend_reg_t reg);
+    GGML_API ggml_backend_dev_t ggml_backend_reg_dev_get(ggml_backend_reg_t reg, size_t index);
+    GGML_API void *             ggml_backend_reg_get_proc_address(ggml_backend_reg_t reg, const char * name);
+
+    // Common functions that may be obtained using ggml_backend_reg_get_proc_address
+
+    // Context management and operations for faster communication between backends, used for tensor parallelism (meta backend)
+    typedef void * (*ggml_backend_comm_init_t)(ggml_backend_t * backends, size_t n_backends);
+    typedef void   (*ggml_backend_comm_free_t)(void * comm_ctx);
+    typedef bool   (*ggml_backend_comm_allreduce_tensor_t)(void * comm_ctx, struct ggml_tensor ** tensors);
+
+    // Split buffer type for tensor parallelism (old)
+    typedef ggml_backend_buffer_type_t   (*ggml_backend_split_buffer_type_t)(int main_device, const float * tensor_split);
+    // Set the number of threads for the backend
+    typedef void                         (*ggml_backend_set_n_threads_t)(ggml_backend_t backend, int n_threads);
+    // Get additional buffer types provided by the device (returns a NULL-terminated array)
+    typedef ggml_backend_buffer_type_t * (*ggml_backend_dev_get_extra_bufts_t)(ggml_backend_dev_t device);
+    // Set the abort callback for the backend
+    typedef void                         (*ggml_backend_set_abort_callback_t)(ggml_backend_t backend, ggml_abort_callback abort_callback, void * abort_callback_data);
+    // Get a list of feature flags supported by the backend (returns a NULL-terminated array)
+    struct ggml_backend_feature {
+        const char * name;
+        const char * value;
+    };
+    typedef struct ggml_backend_feature * (*ggml_backend_get_features_t)(ggml_backend_reg_t reg);
+
+    //
+    // Backend registry
+    //
+
+    GGML_API void ggml_backend_register(ggml_backend_reg_t reg);
+
+    GGML_API void ggml_backend_device_register(ggml_backend_dev_t device);
+
+    // Backend (reg) enumeration
+    GGML_API size_t             ggml_backend_reg_count(void);
+    GGML_API ggml_backend_reg_t ggml_backend_reg_get(size_t index);
+    GGML_API ggml_backend_reg_t ggml_backend_reg_by_name(const char * name);
+
+    // Device enumeration
+    GGML_API size_t             ggml_backend_dev_count(void);
+    GGML_API ggml_backend_dev_t ggml_backend_dev_get(size_t index);
+    GGML_API ggml_backend_dev_t ggml_backend_dev_by_name(const char * name);
+    GGML_API ggml_backend_dev_t ggml_backend_dev_by_type(enum ggml_backend_dev_type type);
+
+    // Direct backend (stream) initialization
+    // = ggml_backend_dev_init(ggml_backend_dev_by_name(name), params)
+    GGML_API ggml_backend_t ggml_backend_init_by_name(const char * name, const char * params);
+    // = ggml_backend_dev_init(ggml_backend_dev_by_type(type), params)
+    GGML_API ggml_backend_t ggml_backend_init_by_type(enum ggml_backend_dev_type type, const char * params);
+    // = ggml_backend_dev_init(ggml_backend_dev_by_type(GPU) OR ggml_backend_dev_by_type(CPU), NULL)
+    GGML_API ggml_backend_t ggml_backend_init_best(void);
+
+    // Load a backend from a dynamic library and register it
+    GGML_API ggml_backend_reg_t ggml_backend_load(const char * path);
+    // Unload a backend if loaded dynamically and unregister it
+    GGML_API void               ggml_backend_unload(ggml_backend_reg_t reg);
+    // Load all known backends from dynamic libraries
+    GGML_API void               ggml_backend_load_all(void);
+    GGML_API void               ggml_backend_load_all_from_path(const char * dir_path);
+
+    //
+    // Backend scheduler
+    //
+
+    // The backend scheduler allows for multiple backend devices to be used together
+    // Handles compute buffer allocation, assignment of tensors to backends, and copying of tensors between backends
+    // The backends are selected based on:
+    // - the backend that supports the operation
+    // - the location of the pre-allocated tensors (e.g. the weights)
+    /*
+      Example usage:
+
+        // operations that use tensors allocated in a buffer with USAGE_WEIGHTS will be assigned
+        // preferably to run on the same backend as the buffer
+        ggml_backend_buffer_set_usage(buf_weights, GGML_BACKEND_BUFFER_USAGE_WEIGHTS);
+
+        sched = ggml_backend_sched_new({backend_gpu, backend_gpu2, backend_cpu}, NULL, num_backends, GGML_DEFAULT_GRAPH_SIZE, false, true);
+
+        // initialize buffers from a max size graph (optional)
+        reserve_graph = build_graph(sched, max_batch_size);
+
+        // manually assign nodes to a backend (optional, should not be needed in most cases)
+        struct ggml_tensor * node = ggml_mul_mat(ctx, ...);
+        ggml_backend_sched_set_tensor_backend(sched, node, backend_gpu);
+
+        ggml_backend_sched_reserve(sched, reserve_graph);
+
+        // compute
+        graph = build_graph(sched); // the graph and its tensors are single-use in terms of allocation, multi-use in terms of computation
+        for (int i = 0; i < 10; ++i) {
+            ggml_backend_sched_graph_compute(sched, graph); // on the first iteration the graph is allocated automatically
+        }
+
+        // if there are graph inputs:
+        graph = build_graph(sched); // get a new graph that is not allocated (the metadata for the old graph is freed once ggml_free is called)
+        ggml_backend_sched_reset(sched); // clear the allocation of the previous graph
+        ggml_backend_sched_alloc_graph(sched, graph); // explicitly allocate the new graph but do not execute it
+        ggml_backend_tensor_set(input_tensor, ...); // copy data to the newly allocated graph tensors
+        ggml_backend_sched_graph_compute(sched, graph); // execute the graph
+
+        // as an alternative to the above it is also possible to assign the inputs to a dedicated context and
+        // allocate them statically via ggml_backend_alloc_ctx_tensors
+    }
+    */
+
+    typedef struct ggml_backend_sched * ggml_backend_sched_t;
+
+    // Evaluation callback for each node in the graph (set with ggml_backend_sched_set_eval_callback)
+    // when ask == true, the scheduler wants to know if the user wants to observe this node
+    // this allows the scheduler to batch nodes together in order to evaluate them in a single call
+    //
+    // when ask == false, the scheduler is passing the node tensor to the user for observation
+    // if the user returns false, the scheduler will cancel the graph compute
+    //
+    typedef bool (*ggml_backend_sched_eval_callback)(struct ggml_tensor * t, bool ask, void * user_data);
+
+    // Initialize a backend scheduler, backends with low index are given priority over backends with high index
+    GGML_API ggml_backend_sched_t ggml_backend_sched_new(ggml_backend_t * backends, ggml_backend_buffer_type_t * bufts, int n_backends, size_t graph_size, bool parallel, bool op_offload);
+    GGML_API void                 ggml_backend_sched_free(ggml_backend_sched_t sched);
+
+    // Initialize backend buffers from a measure graph
+    GGML_API void                 ggml_backend_sched_reserve_size(ggml_backend_sched_t sched, struct ggml_cgraph * measure_graph, size_t * sizes);
+    GGML_API bool                 ggml_backend_sched_reserve(ggml_backend_sched_t sched, struct ggml_cgraph * measure_graph); // returns success
+
+    GGML_API int                  ggml_backend_sched_get_n_backends(ggml_backend_sched_t sched);
+    GGML_API ggml_backend_t       ggml_backend_sched_get_backend(ggml_backend_sched_t sched, int i);
+
+    // Get the number of splits of the last graph
+    GGML_API int                  ggml_backend_sched_get_n_splits(ggml_backend_sched_t sched);
+    GGML_API int                  ggml_backend_sched_get_n_copies(ggml_backend_sched_t sched);
+
+    GGML_API ggml_backend_buffer_type_t ggml_backend_sched_get_buffer_type(ggml_backend_sched_t sched, ggml_backend_t backend);
+    GGML_API size_t                     ggml_backend_sched_get_buffer_size(ggml_backend_sched_t sched, ggml_backend_t backend);
+
+    GGML_API void                 ggml_backend_sched_set_tensor_backend(ggml_backend_sched_t sched, struct ggml_tensor * node, ggml_backend_t backend);
+    GGML_API ggml_backend_t       ggml_backend_sched_get_tensor_backend(ggml_backend_sched_t sched, struct ggml_tensor * node);
+
+    // Split graph without allocating it
+    GGML_API void                 ggml_backend_sched_split_graph(ggml_backend_sched_t sched, struct ggml_cgraph * graph);
+
+    // Allocate and compute graph on the backend scheduler
+    GGML_API bool                 ggml_backend_sched_alloc_graph(ggml_backend_sched_t sched, struct ggml_cgraph * graph); // returns success
+    GGML_API enum ggml_status     ggml_backend_sched_graph_compute(ggml_backend_sched_t sched, struct ggml_cgraph * graph);
+    GGML_API enum ggml_status     ggml_backend_sched_graph_compute_async(ggml_backend_sched_t sched, struct ggml_cgraph * graph);
+    GGML_API void                 ggml_backend_sched_synchronize(ggml_backend_sched_t sched);
+
+    // Reset all assignments and allocators - must be called before changing the node backends or allocating a new graph.
+    // This in effect deallocates all tensors that were previously allocated and leaves them with dangling pointers.
+    // The correct way to use this API is to discard the deallocated tensors and create new ones.
+    GGML_API void                 ggml_backend_sched_reset(ggml_backend_sched_t sched);
+
+    // Set a callback to be called for each resulting node during graph compute
+    GGML_API void                 ggml_backend_sched_set_eval_callback(ggml_backend_sched_t sched, ggml_backend_sched_eval_callback callback, void * user_data);
+
+    //
+    // Meta backend
+    //
+
+#define GGML_BACKEND_META_MAX_DEVICES 16
+
+    enum ggml_backend_meta_split_axis {
+        // tensor split by tensor dimensions:
+        GGML_BACKEND_SPLIT_AXIS_0 = 0,
+        GGML_BACKEND_SPLIT_AXIS_1 = 1,
+        GGML_BACKEND_SPLIT_AXIS_2 = 2,
+        GGML_BACKEND_SPLIT_AXIS_3 = 3,
+
+        GGML_BACKEND_SPLIT_AXIS_MIRRORED = 10, // all values on all backends
+        GGML_BACKEND_SPLIT_AXIS_PARTIAL  = 11, // each backend has a partial sum
+
+        // for internal bookkeeping only:
+        GGML_BACKEND_SPLIT_AXIS_NONE    = 98,
+        GGML_BACKEND_SPLIT_AXIS_UNKNOWN = 99,
+    };
+    GGML_API const char * ggml_backend_meta_split_axis_name(enum ggml_backend_meta_split_axis split_axis);
+
+    struct ggml_backend_meta_split_state {
+        enum ggml_backend_meta_split_axis axis;
+
+        // for tensors with axis >= 0 && axis < GGML_MAX_DIMS:
+        //   - each device has a slice of the tensor along the split axis
+        //   - most tensors have n_segments == 1 and a contiguous slice of the tensor data
+        //   - some tensors have an inhomogenenous data layout along the split axis,
+        //     those tensors are divided into segments which are each individually split across devices
+        //     (this usually happens when multiple tensors are fused into a single one)
+        //   - ne has one entry per segment and device and that segment repeats nr times,
+        //     in total when accounting for repetitions the segments add up to ggml_tensor::ne for that axis,
+        //     the outer/inner loops are over segments/devices like [seg0_dev0_r0, seg0_dev1_r0, seg0_dev0_r1, seg0_dev1_r1, seg1_dev0_r0, seg1_dev1_r0],
+        //   - for example, a transformer may have a fused QKV matrix rather than 3 matrices, those would be 3 separate segments
+        //     that each need to be split individually across devices so that each device gets a slice of Q, K, and V,
+        //     the Q matrix can be larger than the K and V matrices so this can either be expressed as 3 segments or as 2 segments
+        //     where the segment for K/V repeats twice
+        int64_t  ne[16*GGML_BACKEND_META_MAX_DEVICES];
+        uint32_t nr[16];
+        uint32_t n_segments;
+    };
+
+    // function to assign split states for statically allocated tensors, compute tensor split states will be assigned to be compatible:
+    typedef struct ggml_backend_meta_split_state(*ggml_backend_meta_get_split_state_t)(const struct ggml_tensor * tensor, void * userdata);
+
+    // create a new meta device from "simple" devices, meta buffer type/buffer/backend is then derived from this:
+    // TODO: this looks a bit strange - a backend API creates a device. I think we should try
+    //       express this as a backend registry functionality instead
+    GGML_API ggml_backend_dev_t ggml_backend_meta_device(
+        ggml_backend_dev_t * devs, size_t n_devs, ggml_backend_meta_get_split_state_t get_split_state, void * get_split_state_ud);
+
+    //
+    // Utils
+    //
+
+    struct ggml_backend_graph_copy {
+        ggml_backend_buffer_t buffer;
+        struct ggml_context * ctx_allocated;
+        struct ggml_context * ctx_unallocated;
+        struct ggml_cgraph * graph;
+    };
+
+    // Copy a graph to a different backend
+    GGML_API struct ggml_backend_graph_copy ggml_backend_graph_copy(ggml_backend_t backend, struct ggml_cgraph * graph);
+    GGML_API void                           ggml_backend_graph_copy_free(struct ggml_backend_graph_copy copy);
+
+    typedef bool (*ggml_backend_eval_callback)(int node_index, struct ggml_tensor * t1, struct ggml_tensor * t2, void * user_data);
+
+    // Compare the output of two backends
+    GGML_API bool ggml_backend_compare_graph_backend(ggml_backend_t backend1, ggml_backend_t backend2, struct ggml_cgraph * graph, ggml_backend_eval_callback callback, void * user_data, struct ggml_tensor const * const * test_nodes, size_t num_test_nodes);
+
+    // Tensor initialization
+    GGML_API enum ggml_status ggml_backend_tensor_alloc(ggml_backend_buffer_t buffer, struct ggml_tensor * tensor, void * addr);
+    GGML_API enum ggml_status ggml_backend_view_init(struct ggml_tensor * tensor);
+
+    // CPU buffer types are always available
+    GGML_API ggml_backend_buffer_t      ggml_backend_cpu_buffer_from_ptr(void * ptr, size_t size);
+    GGML_API ggml_backend_buffer_type_t ggml_backend_cpu_buffer_type(void);
+
+#ifdef  __cplusplus
+}
+#endif
+

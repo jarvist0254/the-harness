@@ -1,0 +1,13 @@
+# Cooperative-matrix-disabled mixed-device diagnostic
+
+The root-admitted mixed-device baseline completed its execution gates but failed the fixed numeric parity test. Because the baseline did not pass, no reverse-order or comparator-corruption follow-up was run.
+
+The exact existing C++ source and binary were reused without edits. The derived F32 model hash was verified before and after. The child-only environment was `GGML_VK_DISABLE_F16=1`, `GGML_VK_DISABLE_FUSION=1`, `GGML_VK_DISABLE_COOPMAT=1`, and `GGML_VK_DISABLE_COOPMAT2=1`; the corresponding parent flags were unset and unchanged. Command selected `Vulkan0,Vulkan1` with `--kv-f32`; fixed workload remained tokens 0–15, requested context 128 / actual 256, batch and ubatch 32, 4 threads, flash attention disabled, and `atol=rtol=0.01`.
+
+Result: `NUMERIC_PARITY_FAIL`, exit 1, 5.562 seconds, PID 80376. The process was reaped and absent after wait; no timeout occurred. All 151,936 CPU and GPU logits were finite. There were 3 mismatches, max absolute error 0.0142855644, and RMSE 0.00284758023. The fixed C++ workload hash was `3257aba03bc8b11a99c84399f8dc7c8e15b99cdeff8bf13dad3113a803fd3187`. The environment-inclusive composite experiment SHA-256 was `8e38b89ad82f772ef9298bc46508eb771cadd7307873c657ecacb64737337b8c`.
+
+Runtime logs identified NVIDIA GeForce RTX 5070 Ti (`Vulkan0`) and AMD Radeon(TM) Graphics (`Vulkan1`) and reported `matrix cores: none` for each. The logs reported 29/29 layers offloaded, 15 layer assignments to `Vulkan0` and 14 to `Vulkan1`, with model buffers of 900.13 MiB and 1,373.62 MiB respectively, plus a 593.50 MiB Vulkan host buffer. F32 KV was reported as 56 MiB total, split into 30 MiB and 26 MiB device buffers; the CPU reference also reported 28 MiB each for K and V.
+
+The measured mismatch count is lower than the earlier mixed F32/KV-F32 run with cooperative matrices enabled (21 mismatches; max absolute error 0.0164736509), while remaining above tolerance. This is a result of the single-factor experiment, not proof that cooperative matrix conversion caused all prior error or that its removal resolves parity. No P2P, physical residency, capacity, or production qualification is established.
+
+The pinned inputs remain: source `2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371`; executable `d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4`; model `bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80` (2,390,150,816 bytes); controller Python `3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260`. Raw stdout, stderr, run receipt, composite identity, static manifest, and admission snapshot are preserved in `baseline/`.

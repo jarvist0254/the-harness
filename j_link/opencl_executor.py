@@ -1,0 +1,839 @@
+#!/usr/bin/env python3
+"""Experimental, policy-bounded mixed-vendor residual MLP executor.
+
+This proves one host-staged OpenCL workload. It is not an LLM runtime,
+allocator, durable worker system, physical-capacity measurement, or P2P test.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+from datetime import datetime, timezone
+
+from planner import PlanError, plan as planner_plan
+
+MIB = 1024 * 1024
+MAX_RESULT_BYTES = 128 * 1024
+MAX_CHILD_SECONDS = 60
+DEFAULT_SEED = 103004
+WORKSPACE_MIB = 1
+RESULT_LABELS = [
+    'RESIDUAL_MLP_EXECUTION_ONLY',
+    'EXPLICIT_HOST_STAGED',
+    'POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF',
+]
+
+
+class RuntimeUnavailable(RuntimeError):
+    """The required OpenCL devices/runtime could not be checked."""
+
+
+class RuntimeRefused(RuntimeError):
+    """A requested topology or policy is invalid before GPU allocation."""
+
+
+def _integer(value, name, low, high):
+    if type(value) is not int or not low <= value <= high:
+        raise PlanError(f'{name} must be an integer from {low} through {high}')
+    return value
+
+
+def prepare_plan(devices, *, width=512, batch=8, layers=8, policy_mib=9):
+    """Build a pure policy plan without importing or querying OpenCL."""
+    width = _integer(width, 'width', 32, 512)
+    batch = _integer(batch, 'batch', 1, 16)
+    layers = _integer(layers, 'layers', 2, 16)
+    policy_mib = _integer(policy_mib, 'policy_mib', 1, 64)
+    if not isinstance(devices, list) or not 1 <= len(devices) <= 4:
+        raise PlanError('Supply one through four qualified devices')
+    if layers < len(devices):
+        raise PlanError('Every selected device must own at least one layer')
+
+    aliases, physical_ids, normalized = set(), set(), []
+    for index, device in enumerate(devices):
+        if not isinstance(device, dict):
+            raise PlanError(f'device[{index}] must be an object')
+        alias, physical_id, vendor = (device.get('id'), device.get('physical_id'),
+                                      device.get('vendor'))
+        if not isinstance(alias, str) or not alias.strip():
+            raise PlanError(f'device[{index}].id must be a nonempty string')
+        if not isinstance(physical_id, str) or not physical_id.strip():
+            raise PlanError(f'{alias}.physical_id must be a nonempty string')
+        if not isinstance(vendor, str) or not vendor.strip():
+            raise PlanError(f'{alias}.vendor must be a nonempty string')
+        if alias in aliases or physical_id in physical_ids:
+            raise PlanError('Duplicate device alias or physical identity')
+        aliases.add(alias)
+        physical_ids.add(physical_id)
+        normalized.append({'id': alias, 'physical_id': physical_id, 'vendor': vendor})
+
+    actual_layer_weight_bytes = (width * width + width) * 4
+    modeled_layer_mib = (actual_layer_weight_bytes + MIB - 1) // MIB
+    workspace_bytes = 2 * batch * width * 4
+    total_actual_weight_bytes = actual_layer_weight_bytes * layers
+    combined_model_buffer_bytes = total_actual_weight_bytes + workspace_bytes * len(normalized)
+    if combined_model_buffer_bytes >= 32 * MIB:
+        raise PlanError('Combined model buffers must remain below 32 MiB')
+
+    layer_ids = [f'layer_{i:02d}' for i in range(layers)]
+    spec = {
+        'devices': [
+            {'id': d['id'], 'physical_id': d['physical_id'], 'vendor': d['vendor'],
+             'free_mib': policy_mib, 'reserve_mib': 0, 'workspace_mib': WORKSPACE_MIB}
+            for d in normalized
+        ],
+        'blocks': [{'id': layer_id, 'memory_mib': modeled_layer_mib} for layer_id in layer_ids],
+        'hypothetical': True,
+    }
+    planner_result = planner_plan(spec)
+    layer_ownership, assigned = [], []
+    for assignment in planner_result['devices']:
+        if not assignment['blocks']:
+            raise PlanError('Selected device would be unused by this layer partition')
+        source = next(d for d in normalized if d['id'] == assignment['id'])
+        names = list(assignment['blocks'])
+        layer_ownership.append({'device_id': assignment['id'],
+                                'physical_id': source['physical_id'], 'layers': names})
+        assigned.extend(names)
+    if assigned != layer_ids or len(set(assigned)) != layers:
+        raise PlanError('Planner did not assign every unique layer exactly once in order')
+    return {
+        'status': 'PLANNED_NOT_ALLOCATED', 'hypothetical': True,
+        'policy_source': 'POLICY_CAP_NOT_OBSERVED_FREE_MEMORY',
+        'policy_mib_per_device': policy_mib, 'workspace_mib_per_device': WORKSPACE_MIB,
+        'width': width, 'batch': batch, 'layers': layers, 'seed': DEFAULT_SEED,
+        'actual_layer_weight_bytes': actual_layer_weight_bytes,
+        'modeled_layer_mib': modeled_layer_mib, 'workspace_bytes': workspace_bytes,
+        'total_actual_weight_bytes': total_actual_weight_bytes,
+        'combined_model_buffer_bytes': combined_model_buffer_bytes,
+        'planner_result': planner_result, 'layer_ownership': layer_ownership,
+    }
+
+
+def _load_opencl():
+    try:
+        import pyopencl as cl
+    except Exception as exc:
+        raise RuntimeUnavailable(f'PyOpenCL runtime unavailable: {exc}') from exc
+    return cl
+
+
+def _vendor_key(vendor):
+    value = str(vendor).lower()
+    if 'nvidia' in value:
+        return 'NVIDIA'
+    if 'advanced micro' in value or 'amd' in value:
+        return 'AMD'
+    if 'intel' in value:
+        return 'Intel'
+    return None
+
+
+def _is_software_device(device, cl):
+    vendor = str(getattr(device, 'vendor', '')).lower()
+    name = str(getattr(device, 'name', '')).lower()
+    markers = ('microsoft', 'software', 'llvmpipe', 'swiftshader', 'warp', 'basic render')
+    if any(marker in vendor or marker in name for marker in markers):
+        return True
+    for attribute in ('parent_device', 'parent'):
+        try:
+            if getattr(device, attribute) is not None:
+                return True
+        except Exception:
+            pass
+    try:
+        parent = device.get_info(cl.device_info.PARENT_DEVICE)
+        return parent is not None
+    except Exception:
+        return False
+
+
+def _is_hardware_gpu_type(device_type, cl):
+    value = int(device_type)
+    return bool(value & int(cl.device_type.GPU)) and not bool(value & int(cl.device_type.CPU))
+
+
+def _pci_identity(device, extensions):
+    if 'cl_khr_pci_bus_info' in extensions:
+        try:
+            info = device.pci_bus_info_khr
+            values = tuple(int(getattr(info, name)) for name in
+                           ('pci_domain', 'pci_bus', 'pci_device', 'pci_function'))
+            return f'pci:{values[0]:04x}:{values[1]:02x}:{values[2]:02x}.{values[3]}', {
+                'domain': values[0], 'bus': values[1],
+                'device': values[2], 'function': values[3]}, 'RUNTIME_REPORTED_PCI_KHR'
+        except Exception:
+            pass
+    if 'cl_nv_device_attribute_query' in extensions:
+        try:
+            domain = int(device.pci_domain_id_nv)
+            bus = int(device.pci_bus_id_nv)
+            slot = int(device.pci_slot_id_nv)
+            return f'pci:{domain:04x}:{bus:02x}:slot{slot:04x}', {
+                'domain': domain, 'bus': bus, 'slot_raw_nv': slot}, 'RUNTIME_REPORTED_PCI_NV'
+        except Exception:
+            pass
+    return None, None, 'EPHEMERAL_RUNTIME_ID'
+
+
+def enumerate_opencl_devices():
+    """Enumerate GPU records without creating contexts or allocating buffers."""
+    cl = _load_opencl()
+    try:
+        platforms = cl.get_platforms()
+    except Exception as exc:
+        raise RuntimeUnavailable(f'OpenCL platform enumeration failed: {exc}') from exc
+    records = []
+    for platform_index, platform in enumerate(platforms):
+        try:
+            platform_devices = platform.get_devices()
+        except Exception:
+            continue
+        for device_index, device in enumerate(platform_devices):
+            runtime_id = f'p{platform_index}:d{device_index}'
+            try:
+                if not _is_hardware_gpu_type(device.type, cl):
+                    continue
+            except Exception:
+                continue
+            if _is_software_device(device, cl):
+                continue
+            vendor = str(getattr(device, 'vendor', 'unknown'))
+            vendor_key = _vendor_key(vendor)
+            if vendor_key not in ('NVIDIA', 'AMD', 'Intel'):
+                continue
+            extensions = set(str(getattr(device, 'extensions', '')).split())
+            pci_id, pci_fields, identity_source = _pci_identity(device, extensions)
+            physical_id = pci_id or f'runtime:{runtime_id}'
+            try:
+                unified = bool(device.host_unified_memory)
+            except Exception:
+                unified = None
+            try:
+                max_alloc = int(device.max_mem_alloc_size)
+            except Exception:
+                max_alloc = 0
+            records.append({
+                'id': runtime_id, 'runtime_id': runtime_id, 'physical_id': physical_id,
+                'identity_confidence': identity_source,
+                'pci_identity': pci_fields, 'vendor': vendor, 'vendor_key': vendor_key,
+                'platform': str(getattr(platform, 'name', '')),
+                'platform_vendor': str(getattr(platform, 'vendor', '')),
+                'platform_version': str(getattr(platform, 'version', '')),
+                'name': str(getattr(device, 'name', '')),
+                'device_version': str(getattr(device, 'version', '')),
+                'driver_version': str(getattr(device, 'driver_version', '')),
+                'global_mem_bytes_reported': int(getattr(device, 'global_mem_size', 0)),
+                'max_mem_alloc_bytes_reported': max_alloc,
+                'host_unified_memory_reported': unified,
+                'memory_classification': (
+                    'SHARED_HOST_MEMORY_NOT_DEDICATED_VRAM' if unified is True else
+                    'DEVICE_LOCAL_MEMORY_REPORTED' if unified is False else 'UNKNOWN'),
+                'device': device,
+            })
+    return records
+
+
+def select_devices(records, explicit_ids=None, *, reverse=False):
+    """Resolve explicit runtime IDs or the required default NVIDIA+AMD pair."""
+    if not isinstance(records, list):
+        raise RuntimeRefused('Device enumeration did not return a list')
+    if explicit_ids is None:
+        by_vendor = {}
+        for record in records:
+            by_vendor.setdefault(record['vendor_key'], record)
+        if 'NVIDIA' not in by_vendor or 'AMD' not in by_vendor:
+            raise RuntimeUnavailable('Required NVIDIA and AMD GPU devices are unavailable')
+        selected = [by_vendor['NVIDIA'], by_vendor['AMD']]
+    else:
+        if not isinstance(explicit_ids, list) or not 1 <= len(explicit_ids) <= 4:
+            raise RuntimeRefused('Explicitly select one through four runtime device IDs')
+        if any(not isinstance(value, str) or not value for value in explicit_ids):
+            raise RuntimeRefused('Runtime device IDs must be nonempty strings')
+        if len(set(explicit_ids)) != len(explicit_ids):
+            raise RuntimeRefused('Duplicate runtime device ID')
+        by_id = {record['runtime_id']: record for record in records}
+        unavailable = [value for value in explicit_ids if value not in by_id]
+        if unavailable:
+            raise RuntimeUnavailable(f'Unavailable OpenCL runtime device ID(s): {unavailable}')
+        selected = [by_id[value] for value in explicit_ids]
+        if any(record['vendor_key'] not in ('NVIDIA', 'AMD', 'Intel') for record in selected):
+            raise RuntimeRefused('Only qualified NVIDIA, AMD, and Intel GPUs may be selected')
+    if len(selected) > 4:
+        raise RuntimeRefused('At most four GPUs may participate')
+    if len({record['runtime_id'] for record in selected}) != len(selected):
+        raise RuntimeRefused('Duplicate runtime device ID')
+    physical_ids = [record['physical_id'] for record in selected]
+    if len(set(physical_ids)) != len(physical_ids):
+        raise RuntimeRefused('Selected runtime IDs alias one reported physical PCI device')
+    for vendor in {record['vendor_key'] for record in selected}:
+        same_vendor = [record for record in selected if record['vendor_key'] == vendor]
+        if len(same_vendor) > 1:
+            sources = {r['identity_confidence'] for r in same_vendor}
+            if len(sources) != 1 or 'EPHEMERAL_RUNTIME_ID' in sources:
+                raise RuntimeRefused(f'Ambiguous physical identity among multiple {vendor} devices')
+    if reverse:
+        selected.reverse()
+    return selected
+
+
+def _public_device(record):
+    return {key: value for key, value in record.items() if key != 'device'}
+
+
+def _base_result(status, reason):
+    return {'status': status, 'reason': reason, 'labels': list(RESULT_LABELS), 'experimental': True}
+
+
+def _execution_identity(vendor_keys):
+    """Describe the vendors that actually participated in this execution."""
+    selected = sorted(set(vendor_keys))
+    population = 'MIXED_VENDOR' if len(selected) > 1 else 'SINGLE_VENDOR'
+    labels = list(RESULT_LABELS)
+    if population == 'MIXED_VENDOR':
+        labels.insert(1, 'MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY')
+    return population, selected, labels
+
+
+def _max_stage_abs_error(stage_errors):
+    """Return a finite maximum, or unknown if any stage has no finite error."""
+    if not stage_errors:
+        return 0.0
+    if any(error is None or not math.isfinite(error) for error in stage_errors):
+        return None
+    return max(stage_errors)
+
+
+def atomic_write_json(path, serialized):
+    """Atomically write one already-bounded JSON string."""
+    target = Path(path)
+    if not target.parent.exists():
+        raise OSError(f'Output directory does not exist: {target.parent}')
+    data = serialized.encode('utf-8')
+    if len(data) > MAX_RESULT_BYTES:
+        raise OSError('Result exceeds 128 KiB output bound')
+    fd, temporary = tempfile.mkstemp(prefix=target.name + '.', suffix='.tmp', dir=str(target.parent))
+    try:
+        with os.fdopen(fd, 'wb') as stream:
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, target)
+    except Exception:
+        try:
+            os.unlink(temporary)
+        except OSError:
+            pass
+        raise
+
+
+def _emit_json(result, code, output_path=None):
+    result.setdefault('timestamp_utc', datetime.now(timezone.utc).isoformat())
+    result.setdefault('experimental', True)
+    result.setdefault('labels', list(RESULT_LABELS))
+    try:
+        serialized = json.dumps(result, indent=2, allow_nan=False) + '\n'
+    except (TypeError, ValueError) as exc:
+        code = 1
+        serialized = json.dumps(_base_result('FAIL', f'Result serialization failed: {exc}')) + '\n'
+    if len(serialized.encode('utf-8')) > MAX_RESULT_BYTES:
+        code = 1
+        serialized = json.dumps(_base_result('FAIL', 'Result exceeds 128 KiB output bound')) + '\n'
+    if output_path:
+        try:
+            atomic_write_json(output_path, serialized)
+        except OSError as exc:
+            code = 1
+            serialized = json.dumps(_base_result('FAIL', f'Atomic result write failed: {exc}')) + '\n'
+    sys.stdout.write(serialized)
+    return code
+
+
+def _child_process(config, timeout_seconds=MAX_CHILD_SECONDS):
+    command = [sys.executable, str(Path(__file__).resolve()), '--child']
+    creationflags = getattr(subprocess, 'CREATE_NO_WINDOW', 0) if os.name == 'nt' else 0
+    started = time.monotonic()
+    proc = None
+    try:
+        proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, text=True, encoding='utf-8',
+                                creationflags=creationflags)
+        stdout, stderr = proc.communicate(json.dumps(config), timeout=timeout_seconds)
+    except subprocess.TimeoutExpired:
+        if proc is not None:
+            try:
+                proc.kill()
+            except OSError:
+                pass
+            stdout, stderr = proc.communicate()
+        else:
+            stdout, stderr = '', ''
+        return _base_result('FAIL', 'GPU child exceeded the 60-second deadline') | {
+            'child_pid': proc.pid if proc else None, 'timeout_seconds': timeout_seconds,
+            'elapsed_seconds': time.monotonic() - started,
+            'child_stdout': (stdout or '')[-4096:], 'child_stderr': (stderr or '')[-4096:]}, 1
+    except OSError as exc:
+        return _base_result('FAIL', f'Could not launch GPU child: {exc}') | {
+            'elapsed_seconds': time.monotonic() - started}, 1
+
+    if len(stdout.encode('utf-8')) > MAX_RESULT_BYTES:
+        return _base_result('FAIL', 'GPU child output exceeds 128 KiB bound') | {
+            'child_pid': proc.pid, 'child_exit_code': proc.returncode,
+            'child_stderr': stderr[-2048:]}, 1
+    try:
+        result = json.loads(stdout)
+        if not isinstance(result, dict):
+            raise ValueError('Child JSON root is not an object')
+    except (json.JSONDecodeError, ValueError) as exc:
+        return _base_result('FAIL', f'GPU child emitted invalid JSON: {exc}') | {
+            'child_pid': proc.pid, 'child_exit_code': proc.returncode,
+            'child_stdout': stdout[-4096:], 'child_stderr': stderr[-4096:]}, 1
+    result['child_pid'] = proc.pid
+    result['child_exit_code'] = proc.returncode
+    result['elapsed_seconds'] = time.monotonic() - started
+    if stderr:
+        result['child_stderr'] = stderr[-8192:]
+    if proc.returncode == 0 and result.get('status') == 'PASS':
+        return result, 0
+    if proc.returncode == 2 and result.get('status') in ('NOT_CHECKED', 'REFUSED'):
+        return result, 2
+    result['status'] = 'FAIL'
+    result.setdefault('reason', f'GPU child exited with code {proc.returncode}')
+    return result, 1
+
+
+def _reported_max_alloc_bytes(maximum, runtime_id, largest):
+    """Refuse an unknown or insufficient reported single-buffer limit before allocation."""
+    if type(maximum) is not int or maximum <= 0:
+        raise RuntimeUnavailable(
+            f'{runtime_id} reported max allocation is unknown before OpenCL buffer allocation')
+    if largest > maximum:
+        raise RuntimeUnavailable(
+            f'A planned OpenCL buffer exceeds {runtime_id} max allocation')
+    return maximum
+
+
+def _first_vendor_boundary(layer_owner, layers, vendor_by_id):
+    """Return the first layer index whose next owner has a different vendor."""
+    for index in range(layers - 1):
+        if vendor_by_id[layer_owner[index]] != vendor_by_id[layer_owner[index + 1]]:
+            return index
+    return None
+
+
+def _require_vendor_boundary(layer_owner, layers, vendor_by_id, inject):
+    boundary = _first_vendor_boundary(layer_owner, layers, vendor_by_id)
+    if inject and boundary is None:
+        raise RuntimeRefused('Corruption requires an actual vendor activation boundary')
+    return boundary
+
+
+def _check_device_memory(selected, prepared):
+    layer_bytes = prepared['actual_layer_weight_bytes']
+    activation_bytes = prepared['workspace_bytes'] // 2
+    by_id = {entry['device_id']: entry['layers'] for entry in prepared['layer_ownership']}
+    per_device = {}
+    for record in selected:
+        resident = layer_bytes * len(by_id[record['runtime_id']])
+        total = resident + prepared['workspace_bytes']
+        cap = prepared['policy_mib_per_device'] * MIB
+        if total > cap:
+            raise RuntimeRefused(f'Actual planned buffers exceed {record["runtime_id"]} policy cap')
+        largest = max(prepared['width'] * prepared['width'] * 4,
+                      prepared['width'] * 4, activation_bytes)
+        maximum = _reported_max_alloc_bytes(
+            record['max_mem_alloc_bytes_reported'], record['runtime_id'], largest)
+        per_device[record['runtime_id']] = {
+            'assigned_layers': list(by_id[record['runtime_id']]),
+            'resident_weight_and_bias_bytes': resident,
+            'activation_ping_pong_bytes': prepared['workspace_bytes'],
+            'planned_allocation_bytes': total,
+            'policy_cap_bytes': cap,
+            'max_single_buffer_bytes_reported': maximum,
+        }
+    return per_device
+
+
+def _execute_gpu(config, selected):
+    """Child-only execution with unique, resident per-context layer weights."""
+    try:
+        import numpy as np
+    except Exception as exc:
+        raise RuntimeUnavailable(f'NumPy reference runtime unavailable: {exc}') from exc
+    cl = _load_opencl()
+
+    selected_meta = config['devices']
+    prepared = config['prepared_plan']
+    width, batch, layers = config['width'], config['batch'], config['layers']
+    seed, inject = config['seed'], config['inject_corruption']
+    rng = np.random.default_rng(seed)
+    weights, biases, weight_hashes = [], [], []
+    for _ in range(layers):
+        weight = np.ascontiguousarray(
+            rng.integers(-2, 3, size=(width, width), dtype=np.int32).astype(np.float32) / np.float32(4096.0))
+        bias = np.ascontiguousarray(
+            rng.integers(-2, 3, size=(width,), dtype=np.int32).astype(np.float32) / np.float32(4096.0))
+        weights.append(weight)
+        biases.append(bias)
+        weight_hashes.append(hashlib.sha256(weight.tobytes() + bias.tobytes()).hexdigest())
+    if len(set(weight_hashes)) != layers:
+        raise RuntimeError('Generated layer weight/bias arrays are not unique')
+    input_original = np.ascontiguousarray(rng.uniform(1.0, 2.0, size=(batch, width)).astype(np.float32))
+
+    ownership = prepared['layer_ownership']
+    assignment = {entry['device_id']: list(entry['layers']) for entry in ownership}
+    layer_owner = {}
+    for owner, layer_names in assignment.items():
+        for layer_name in layer_names:
+            layer_index = int(layer_name.rsplit('_', 1)[1])
+            if layer_index in layer_owner:
+                raise RuntimeError(f'Duplicate layer owner for layer {layer_index}')
+            layer_owner[layer_index] = owner
+    if set(layer_owner) != set(range(layers)):
+        raise RuntimeError('Layer ownership is incomplete before GPU setup')
+    vendor_by_id = {meta['runtime_id']: meta['vendor_key'] for meta in selected_meta}
+    boundary = _require_vendor_boundary(layer_owner, layers, vendor_by_id, inject)
+
+    source = r"""
+    __kernel void residual_layer(__global const float *x,
+                                 __global const float *w,
+                                 __global const float *b,
+                                 __global float *out,
+                                 const int width) {
+        const int row = get_global_id(0);
+        const int col = get_global_id(1);
+        float value = x[row * width + col] + b[col];
+        for (int k = 0; k < width; ++k) {
+            value += x[row * width + k] * w[k * width + col];
+        }
+        out[row * width + col] = fmax(value, 0.0f);
+    }
+    """
+    activation_bytes = batch * width * 4
+    workspace_bytes = 2 * activation_bytes
+    allocation_records = {}
+    for meta in selected_meta:
+        did = meta['runtime_id']
+        names = assignment[did]
+        resident_bytes = sum(weights[int(name[-2:])].nbytes + biases[int(name[-2:])].nbytes
+                             for name in names)
+        biggest = max(width * width * 4, width * 4, activation_bytes)
+        maximum = _reported_max_alloc_bytes(
+            meta.get('max_mem_alloc_bytes_reported'), did, biggest)
+        planned = resident_bytes + workspace_bytes
+        cap = config['policy_mib'] * MIB
+        if planned > cap:
+            raise RuntimeRefused(f'Actual planned buffers exceed {did} policy cap')
+        allocation_records[did] = {
+            'assigned_layers': names,
+            'resident_weight_and_bias_bytes': resident_bytes,
+            'activation_ping_pong_bytes': workspace_bytes,
+            'planned_allocation_bytes': planned,
+            'policy_cap_bytes': cap,
+            'max_single_buffer_bytes_reported': maximum,
+        }
+
+    contexts, resources = {}, []
+    stats = {
+        'planned_layer_count': layers, 'kernels_enqueued': 0, 'kernels_completed': 0,
+        'weight_upload_count': 0, 'weight_upload_bytes': 0,
+        'activation_upload_count': 0, 'activation_readback_count': 0,
+        'activation_upload_bytes': 0, 'activation_readback_bytes': 0,
+        'cross_context_boundaries': 0, 'activation_boundary_staging_bytes': 0,
+        'events_completed': 0, 'cpu_reference_stages': 0,
+        'weights_resident_before_first_kernel': False,
+    }
+    layer_results = []
+    try:
+        # Set up every context and upload each unique assigned weight once before layer 0.
+        for meta in selected_meta:
+            did = meta['runtime_id']
+            actual = next(record for record in selected if record['runtime_id'] == did)
+            context = cl.Context([actual['device']])
+            queue = cl.CommandQueue(context)
+            program = cl.Program(context, source).build()
+            flags = cl.mem_flags
+            resident = {}
+            for layer_name in assignment[did]:
+                layer_index = int(layer_name.rsplit('_', 1)[1])
+                weight_buffer = cl.Buffer(context, flags.READ_ONLY | flags.COPY_HOST_PTR,
+                                          hostbuf=weights[layer_index])
+                bias_buffer = cl.Buffer(context, flags.READ_ONLY | flags.COPY_HOST_PTR,
+                                        hostbuf=biases[layer_index])
+                resources.extend((weight_buffer, bias_buffer))
+                resident[layer_index] = (weight_buffer, bias_buffer)
+                stats['weight_upload_count'] += 1
+                stats['weight_upload_bytes'] += weights[layer_index].nbytes + biases[layer_index].nbytes
+            activation_a = cl.Buffer(context, flags.READ_WRITE, size=activation_bytes)
+            activation_b = cl.Buffer(context, flags.READ_WRITE, size=activation_bytes)
+            resources.extend((activation_a, activation_b))
+            contexts[did] = {'context': context, 'queue': queue, 'program': program,
+                             'weights': resident, 'activation_buffers': (activation_a, activation_b)}
+        if stats['weight_upload_count'] != layers:
+            raise RuntimeError('Not all layer weights were uploaded before inference')
+        stats['weights_resident_before_first_kernel'] = True
+
+        cpu_state = input_original.copy()
+        activation = input_original.copy()
+        tolerance = {'rtol': 5.0e-5, 'atol': 5.0e-5}
+        stage_max_errors = []
+        corruption_applied = False
+        previous_owner = None
+        previous_output_buffer = None
+        for layer_index in range(layers):
+            owner = layer_owner[layer_index]
+            runtime = contexts[owner]
+            queue = runtime['queue']
+            host_output = np.empty((batch, width), dtype=np.float32)
+            if previous_owner == owner:
+                input_buffer = previous_output_buffer
+                output_buffer = next(buffer for buffer in runtime['activation_buffers']
+                                     if buffer is not input_buffer)
+                upload_event = None
+                wait_for = None
+            else:
+                input_buffer, output_buffer = runtime['activation_buffers']
+                upload_event = cl.enqueue_copy(queue, input_buffer, activation, is_blocking=False)
+                wait_for = [upload_event]
+                stats['activation_upload_count'] += 1
+                stats['activation_upload_bytes'] += activation.nbytes
+            kernel_event = runtime['program'].residual_layer(
+                queue, (batch, width), None, input_buffer,
+                runtime['weights'][layer_index][0], runtime['weights'][layer_index][1],
+                output_buffer, np.int32(width), wait_for=wait_for)
+            stats['kernels_enqueued'] += 1
+            readback_event = cl.enqueue_copy(queue, host_output, output_buffer,
+                                             is_blocking=False, wait_for=[kernel_event])
+            readback_event.wait()
+            events = ([upload_event] if upload_event is not None else []) + [kernel_event, readback_event]
+            for event in events:
+                if int(event.command_execution_status) != int(cl.command_execution_status.COMPLETE):
+                    raise RuntimeError(f'OpenCL event incomplete for layer {layer_index}')
+            stats['events_completed'] += len(events)
+            stats['kernels_completed'] += 1
+            stats['activation_readback_count'] += 1
+            stats['activation_readback_bytes'] += host_output.nbytes
+
+            # The reference owns its own original-input state; corruption only changes GPU flow.
+            cpu_state = np.maximum(cpu_state + cpu_state @ weights[layer_index] + biases[layer_index],
+                                   np.float32(0.0)).astype(np.float32, copy=False)
+            finite = bool(np.isfinite(host_output).all() and np.isfinite(cpu_state).all())
+            max_error = float(np.max(np.abs(host_output - cpu_state))) if finite else None
+            stage_pass = finite and bool(np.allclose(host_output, cpu_state, **tolerance))
+            stage_max_errors.append(max_error)
+            layer_results.append({
+                'layer': f'layer_{layer_index:02d}', 'owner_runtime_id': owner,
+                'weight_bias_sha256': weight_hashes[layer_index],
+                'weight_bytes': int(weights[layer_index].nbytes),
+                'bias_bytes': int(biases[layer_index].nbytes),
+                'weight_upload_count': 1, 'kernel_completed': True,
+                'activation_input_bytes': int(activation.nbytes),
+                'activation_readback_bytes': int(host_output.nbytes),
+                'cpu_stage_max_abs_error': max_error, 'cpu_stage_parity': stage_pass,
+                'corruption_applied_after_layer': False,
+            })
+            if inject and layer_index == boundary:
+                host_output[0, 0] += np.float32(1.0)
+                layer_results[-1]['corruption_applied_after_layer'] = True
+                corruption_applied = True
+            if layer_index < layers - 1 and layer_owner[layer_index] != layer_owner[layer_index + 1]:
+                stats['cross_context_boundaries'] += 1
+                stats['activation_boundary_staging_bytes'] += int(host_output.nbytes)
+            activation = host_output
+            previous_owner = owner
+            previous_output_buffer = output_buffer
+            stats['cpu_reference_stages'] += 1
+
+        final_finite = bool(np.isfinite(activation).all() and np.isfinite(cpu_state).all())
+        final_error = float(np.max(np.abs(activation - cpu_state))) if final_finite else None
+        final_parity = final_finite and bool(np.allclose(activation, cpu_state, **tolerance))
+        if inject and not corruption_applied:
+            raise RuntimeError('Corruption did not reach the first vendor boundary')
+        if stats['kernels_completed'] != layers:
+            raise RuntimeError('Not every planned layer kernel completed')
+        if stats['cross_context_boundaries'] != len(selected_meta) - 1:
+            raise RuntimeError('Planned ownership did not forward each context boundary')
+        stage_parity = all(record['cpu_stage_parity'] for record in layer_results)
+        parity_pass = final_parity and stage_parity
+        corruption_detected = bool(inject and not final_parity)
+        passed = parity_pass and not inject
+        reason = 'All GPU stages matched the independent CPU reference'
+        if not parity_pass:
+            reason = 'Measured GPU stage or final output mismatch against independent CPU reference'
+        if inject and parity_pass:
+            reason = 'NEGATIVE_CONTROL_UNDETECTED: corrupted activation retained CPU parity'
+        execution_population, selected_vendor_keys, execution_labels = _execution_identity(
+            [meta['vendor_key'] for meta in selected_meta])
+        return {
+            'status': 'PASS' if passed else 'FAIL',
+            'reason': reason,
+            'timestamp_utc': datetime.now(timezone.utc).isoformat(),
+            'experimental': True, 'labels': execution_labels,
+            'execution_population': execution_population,
+            'selected_vendor_keys': selected_vendor_keys,
+            'model': {'name': 'eight-layer residual MLP', 'width': width, 'batch': batch,
+                      'layers': layers, 'dtype': 'float32', 'seed': seed,
+                      'operation': 'relu(x + x @ W + b)', 'weight_fixture': 'seeded dyadic integers [-2,2]/4096',
+                      'input_fixture': 'seeded uniform [1,2]', 'tolerance': tolerance},
+            'transport': 'EXPLICIT_HOST_STAGED',
+            'memory_claim': 'POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF',
+            'devices': selected_meta, 'policy': {
+                'mib_per_device': config['policy_mib'],
+                'source': 'POLICY_CAP_NOT_OBSERVED_FREE_MEMORY',
+                'allocations_by_device': allocation_records},
+            'plan': prepared, 'layer_ownership': ownership,
+            'layer_results': layer_results, 'stats': stats,
+            'stage_parity_all': stage_parity, 'final_parity': final_parity,
+            'final_max_abs_error': final_error,
+            'max_stage_abs_error': _max_stage_abs_error(stage_max_errors),
+            'corruption': {'requested': inject, 'applied_at_first_vendor_boundary': corruption_applied,
+                           'boundary_after_layer': (f'layer_{boundary:02d}' if inject else None),
+                           'detected_by_final_reference': (corruption_detected if inject else None),
+                           'control_status': ('PASS' if corruption_detected else 'FAIL') if inject else 'NOT_RUN'},
+            'host_activation_buffer_bytes': int(activation_bytes),
+            'combined_model_buffer_bytes': prepared['combined_model_buffer_bytes'],
+        }, (0 if passed else 1)
+    finally:
+        for resource in reversed(resources):
+            try:
+                resource.release()
+            except Exception:
+                pass
+        for item in contexts.values():
+            for obj in (item['queue'], item['program'], item['context']):
+                try:
+                    obj.release()
+                except Exception:
+                    pass
+
+
+def _validated_child_config(config):
+    """Validate only parent-supplied scalars; never trust device metadata."""
+    if not isinstance(config, dict):
+        raise RuntimeRefused('Child payload must be a JSON object')
+    width = _integer(config.get('width'), 'width', 32, 512)
+    batch = _integer(config.get('batch'), 'batch', 1, 16)
+    layers = _integer(config.get('layers'), 'layers', 2, 16)
+    policy_mib = _integer(config.get('policy_mib'), 'policy_mib', 1, 64)
+    seed = _integer(config.get('seed'), 'seed', 0, 2**31 - 1)
+    inject = config.get('inject_corruption')
+    if type(inject) is not bool:
+        raise RuntimeRefused('inject_corruption must be a boolean')
+    device_ids = config.get('device_ids')
+    if device_ids is not None:
+        if not isinstance(device_ids, list) or not 1 <= len(device_ids) <= 4:
+            raise RuntimeRefused('Explicitly select one through four runtime device IDs')
+        if any(not isinstance(value, str) or not value or len(value) > 32 for value in device_ids):
+            raise RuntimeRefused('Runtime device IDs must be nonempty bounded strings')
+        if len(set(device_ids)) != len(device_ids):
+            raise RuntimeRefused('Duplicate explicit runtime device ID')
+    reverse = config.get('reverse')
+    if type(reverse) is not bool:
+        raise RuntimeRefused('reverse must be a boolean')
+    return {'width': width, 'batch': batch, 'layers': layers,
+            'policy_mib': policy_mib, 'seed': seed,
+            'inject_corruption': inject, 'device_ids': device_ids,
+            'reverse': reverse}
+
+
+def _child_main():
+    try:
+        payload = sys.stdin.read(MAX_RESULT_BYTES + 1)
+        if len(payload.encode('utf-8')) > MAX_RESULT_BYTES:
+            raise RuntimeRefused('Child configuration exceeds 128 KiB')
+        config = _validated_child_config(json.loads(payload))
+        records = enumerate_opencl_devices()
+        selected = select_devices(records, config['device_ids'], reverse=config['reverse'])
+        if config['inject_corruption'] and len(selected) < 2:
+            raise RuntimeRefused('Corruption requires a first vendor activation boundary')
+        plan_devices = [{'id': record['runtime_id'], 'physical_id': record['physical_id'],
+                         'vendor': record['vendor_key']} for record in selected]
+        prepared = prepare_plan(plan_devices, width=config['width'], batch=config['batch'],
+                                layers=config['layers'], policy_mib=config['policy_mib'])
+        allocation_records = _check_device_memory(selected, prepared)
+        config['devices'] = [_public_device(record) for record in selected]
+        config['prepared_plan'] = prepared
+        config['planned_allocations'] = allocation_records
+        result, code = _execute_gpu(config, selected)
+    except RuntimeUnavailable as exc:
+        result, code = _base_result('NOT_CHECKED', str(exc)), 2
+    except RuntimeRefused as exc:
+        result, code = _base_result('REFUSED', str(exc)), 2
+    except PlanError as exc:
+        result, code = _base_result('REFUSED', str(exc)), 2
+    except Exception as exc:
+        result, code = _base_result('FAIL', f'{type(exc).__name__}: {exc}'), 1
+    serialized = json.dumps(result, allow_nan=False) + '\n'
+    if len(serialized.encode('utf-8')) > MAX_RESULT_BYTES:
+        result, code = _base_result('FAIL', 'Child result exceeds 128 KiB'), 1
+        serialized = json.dumps(result, allow_nan=False) + '\n'
+    sys.stdout.write(serialized)
+    return code
+
+
+def _validate_cli_dimensions(args):
+    try:
+        return (_integer(args.width, 'width', 32, 512),
+                _integer(args.batch, 'batch', 1, 16),
+                _integer(args.layers, 'layers', 2, 16),
+                _integer(args.policy_mib, 'policy_mib', 1, 64))
+    except PlanError as exc:
+        raise RuntimeRefused(str(exc)) from exc
+
+
+def _main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--width', type=int, default=512)
+    parser.add_argument('--batch', type=int, default=8)
+    parser.add_argument('--layers', type=int, default=8)
+    parser.add_argument('--policy-mib', type=int, default=9)
+    parser.add_argument('--device-ids', nargs='+', default=None,
+                        help='OpenCL runtime IDs pN:dN; default selects one NVIDIA and one AMD GPU')
+    parser.add_argument('--reverse', action='store_true', help='Reverse selected device order')
+    parser.add_argument('--inject-corruption', action='store_true',
+                        help='Corrupt the real activation at the first vendor boundary')
+    parser.add_argument('--output', type=Path, help='Atomically write bounded JSON result')
+    parser.add_argument('--child', action='store_true', help=argparse.SUPPRESS)
+    args = parser.parse_args(argv)
+    if args.child:
+        return _child_main()
+
+    try:
+        width, batch, layers, policy_mib = _validate_cli_dimensions(args)
+        if args.device_ids is not None and len(set(args.device_ids)) != len(args.device_ids):
+            raise RuntimeRefused('Duplicate explicit runtime device ID')
+        if args.device_ids is not None and (not 1 <= len(args.device_ids) <= 4 or
+                any(not value or len(value) > 32 for value in args.device_ids)):
+            raise RuntimeRefused('Explicitly select one through four bounded runtime device IDs')
+        config = {
+            'width': width, 'batch': batch, 'layers': layers,
+            'policy_mib': policy_mib, 'seed': DEFAULT_SEED,
+            'device_ids': args.device_ids, 'reverse': bool(args.reverse),
+            'inject_corruption': bool(args.inject_corruption),
+        }
+        result, code = _child_process(config)
+        return _emit_json(result, code, args.output)
+    except RuntimeUnavailable as exc:
+        return _emit_json(_base_result('NOT_CHECKED', str(exc)), 2, args.output)
+    except RuntimeRefused as exc:
+        return _emit_json(_base_result('REFUSED', str(exc)), 2, args.output)
+    except PlanError as exc:
+        return _emit_json(_base_result('REFUSED', str(exc)), 2, args.output)
+    except Exception as exc:
+        return _emit_json(_base_result('FAIL', f'{type(exc).__name__}: {exc}'), 1, args.output)
+
+
+def main(argv=None):
+    return _main(argv)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

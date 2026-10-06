@@ -1,0 +1,11 @@
+{
+  "tests_chars": 8007,
+  "source_sha256": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "candidate_status": "PENDING_ROOT_STATIC_ADMISSION",
+  "source_chars": 11005,
+  "source_execution": false,
+  "tests_sha256": "1a885582f610a0144479a90be787d049f8afedadd86da8d7810c2b85c428b114",
+  "utc": "2026-10-04T20:48:43.8186679Z",
+  "owned_pids_point_absent": true,
+  "session_reaped": 28465
+}

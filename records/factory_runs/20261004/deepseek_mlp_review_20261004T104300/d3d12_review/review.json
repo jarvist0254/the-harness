@@ -1,0 +1,156 @@
+{
+  "verdict": "reject",
+  "findings": [
+    {
+      "severity": "critical",
+      "line": 1,
+      "exact_source": "cpu_current = x_cpu_ref.copy()",
+      "reason": "The CPU reference state variable is never initialized or updated in the execution loop. The code comment says 'I missed initializing cpu_state in the loop above' but no actual fix is implemented. Without a maintained CPU reference chain, no layer-by-layer parity comparison can occur, making the executor unable to verify numerical correctness.",
+      "minimal_fix": "Initialize cpu_current = x_cpu_ref.copy() before the layer loop, and after each layer compute cpu_current = np.maximum(cpu_current + cpu_current @ weights[l_idx] + biases[l_idx], 0.0) and compare against gpu_output_np with tolerance 5e-5 absolute+relative."
+    },
+    {
+      "severity": "critical",
+      "line": 1,
+      "exact_source": "if inject:\n        status = 'FAIL'",
+      "reason": "The final status is hardcoded to FAIL when corruption is injected, without actually comparing the final GPU output against the CPU reference. This creates false evidence: the executor would report FAIL even if the corruption was not actually propagated through the remaining layers, or if the GPU execution was incorrect in a way that accidentally matched the corrupted reference.",
+      "minimal_fix": "After the layer loop, compute the final CPU reference output and compare all elements against the final GPU output using 5e-5 absolute+relative tolerance. Set status='FAIL' only if the comparison fails, and require that corruption injection causes a mismatch."
+    },
+    {
+      "severity": "critical",
+      "line": 1,
+      "exact_source": "if not args.device_ids:\n        # In a real scenario, we might try to detect, but parent is stdlib-only.\n        # We must refuse if we can't guarantee the hardware exists.\n        # However, the prompt implies we need actual GPUs. Without detection in parent,\n        # we cannot verify existence. We will treat empty list as invalid unless mocked.\n        # For strict compliance: \"Default requires actual NVIDIA GPU plus AMD GPU. Missing... NOT_CHECKED exit2\"\n        # Since we can't check, we exit 2.\n        fail_exit(2, 'NOT_CHECKED: No device IDs provided and parent cannot probe.')",
+      "reason": "The default case with no device IDs always exits with NOT_CHECKED, but the acceptance spec requires default NVIDIA+AMD runs to pass. The parent cannot probe devices due to stdlib-only constraint, but the child could perform device detection. The current design makes the default acceptance test impossible.",
+      "minimal_fix": "Allow the child to perform device detection when no explicit IDs are provided, or implement a stdlib-only detection mechanism (e.g., parsing /sys/bus/pci/devices or using lspci output) to identify NVIDIA and AMD GPUs before spawning the child."
+    },
+    {
+      "severity": "critical",
+      "line": 1,
+      "exact_source": "if not target_device:\n                # Fallback: Just take the next available GPU if exact match fails (for testing)\n                # This is risky but necessary for a generic script without hardcoded IDs\n                all_gpus = []\n                for p in platforms:\n                    all_gpus.extend(p.get_devices(device_type=cl.device_type.GPU))\n                if all_gpus:\n                    target_device = all_gpus.pop(0) # Take first",
+      "reason": "The fallback device selection takes the first available GPU without verifying it matches the requested physical_id or vendor. This can silently assign layers to the wrong device, violating the requirement for unambiguous physical identity and potentially executing on CPU/software devices or the wrong vendor.",
+      "minimal_fix": "Remove the fallback and require exact physical_id matching. If no exact match is found, exit with code 2 and a clear error message identifying the missing device."
+    },
+    {
+      "severity": "critical",
+      "line": 1,
+      "exact_source": "cl.enqueue_copy(queue, buffers_x_in[dev_index], current_input_np.ravel(), is_blocking=False)\n        stats['uploads'] += 1",
+      "reason": "The enqueue_copy for uploading activations is non-blocking and its event is not waited on before kernel execution. This creates a race condition where the kernel may read from a buffer that hasn't been fully written yet, leading to incorrect results.",
+      "minimal_fix": "Capture the event from enqueue_copy and call event.wait() before executing the kernel, or use is_blocking=True."
+    },
+    {
+      "severity": "critical",
+      "line": 1,
+      "exact_source": "cl.enqueue_copy(queue, gpu_output_np.ravel(), buffers_x_out[dev_index], is_blocking=False)\n        # Need to wait for readback completion explicitly if async\n        # enqueue_copy returns event\n        rb_event = cl.enqueue_copy(queue, gpu_output_np.ravel(), buffers_x_out[dev_index])\n        rb_event.wait()",
+      "reason": "The code performs two enqueue_copy operations for readback: the first is non-blocking and its event is discarded, then a second blocking copy is performed. This double-readback wastes resources and the first copy's event is never waited on, potentially causing resource conflicts.",
+      "minimal_fix": "Remove the first non-blocking enqueue_copy and keep only the second one with rb_event.wait(), or use a single blocking copy."
+    },
+    {
+      "severity": "high",
+      "line": 1,
+      "exact_source": "vendor = 'unknown'\n        if 'nvidia' in phys_id.lower() or 'gpu' in phys_id.lower():\n             # Heuristic: often NVIDIA IDs contain specific patterns, but here we just tag based on input assumption\n             # For the sake of the executor, we assume the user provides correct IDs.\n             pass",
+      "reason": "Vendor detection is non-functional: the vendor is always set to 'mixed' regardless of the actual device. This prevents the planner from enforcing the requirement that default runs use actual NVIDIA and AMD GPUs, and prevents rejection of CPU/software devices.",
+      "minimal_fix": "Implement actual vendor detection in the child process using PyOpenCL device properties (device.vendor, device.name) and pass this information back to the planner or validate it before execution."
+    },
+    {
+      "severity": "high",
+      "line": 1,
+      "exact_source": "if phys_id in seen_physical or backend_id in seen_ids:\n            fail_exit(2, 'Duplicate known alias/ambiguous same-vendor REFUSED')",
+      "reason": "The duplicate detection logic is incorrect: it checks if phys_id is in seen_physical OR backend_id is in seen_ids, but these are separate sets. A device with a new physical_id but duplicate backend_id would be caught, but the error message claims 'ambiguous same-vendor' which is misleading. More importantly, the logic doesn't properly detect physical aliases where different physical_ids map to the same physical device.",
+      "minimal_fix": "Maintain a mapping from physical_id to backend_id and check for both duplicate physical_ids and duplicate backend_ids separately with appropriate error messages. For physical alias detection, compare PCI bus addresses or device UUIDs when available."
+    },
+    {
+      "severity": "high",
+      "line": 1,
+      "exact_source": "total_weight_mib = modeled_layer_mib * args.layers",
+      "reason": "The total weight calculation uses modeled_layer_mib (which is rounded up per layer) multiplied by the number of layers. This overestimates the total memory requirement because each layer's rounding is applied individually. The acceptance spec requires checking that combined model buffers are under 32 MiB, which should use the actual byte count, not the sum of rounded-up MiB values.",
+      "minimal_fix": "Calculate total_actual_weight_bytes = (width * width + width) * 4 * layers, and verify this is under 32 MiB (33554432 bytes). Use actual bytes for the 32 MiB check, and use modeled_layer_mib only for planner block sizing."
+    },
+    {
+      "severity": "high",
+      "line": 1,
+      "exact_source": "assigned_count = sum(len(d.get('blocks', [])) for d in plan_result['devices'])\n    if assigned_count != args.layers:\n        fail_exit(2, 'Insufficient policy budget REFUSED')",
+      "reason": "The code assumes plan_result has a 'devices' key with 'blocks' lists, but the acceptance spec requires the planner_result to have 'layer_ownership' as an ordered list of dicts with 'layers' key (not 'blocks'). The code is checking the wrong structure, which will either crash or always report insufficient budget.",
+      "minimal_fix": "Use plan_result['layer_ownership'] and sum the lengths of the 'layers' lists to count assigned layers. Also verify that the planner_result contains the required keys: layer_ownership, actual_layer_weight_bytes, modeled_layer_mib, workspace_bytes, total_actual_weight_bytes."
+    },
+    {
+      "severity": "high",
+      "line": 1,
+      "exact_source": "for d_plan in plan['devices']:\n        did = d_plan['id']\n        block_names = d_plan.get('blocks', [])\n        layer_indices = [int(b[1:]) for b in block_names]",
+      "reason": "The code extracts layer assignments from plan['devices'][i]['blocks'], but the acceptance spec requires the planner to output 'layer_ownership' as an ordered list of dicts with 'layers' key containing integer indices. The code is parsing the wrong structure and will fail to correctly map layers to devices.",
+      "minimal_fix": "Parse plan['layer_ownership'] instead: for each entry, use entry['device_id'] and entry['layers'] (which are already integer indices) to build the device_assignments mapping."
+    },
+    {
+      "severity": "high",
+      "line": 1,
+      "exact_source": "x_in_cl = cl.Buffer(ctx, mf.READ_WRITE | mf.COPY_HOST_PTR, hostbuf=x_gpu_current.ravel())\n            x_out_cl = cl.Buffer(ctx, mf.WRITE_ONLY, size=x_size)",
+      "reason": "The activation buffers are allocated with COPY_HOST_PTR for input and WRITE_ONLY for output, but the spec requires ping-pong buffers where the output of one layer becomes the input of the next. The current design doesn't implement ping-pong: it always writes to x_out_cl and reads back to host, then re-uploads to x_in_cl. This is functionally correct but inefficient and doesn't match the specified architecture of two activation buffers per context with ping-pong.",
+      "minimal_fix": "Implement proper ping-pong: after each layer, swap the input and output buffer references within the same context. Only perform host staging when crossing device boundaries."
+    },
+    {
+      "severity": "medium",
+      "line": 1,
+      "exact_source": "if inject and l_idx == 0:\n            # Modify actual activation[0,0] += 1 AFTER source readback BEFORE destination upload?\n            # Prompt: \"Corruption at FIRST boundary modifies actual activation[0,0]+=1 after source readback BEFORE destination upload\"\n            # This implies modifying the data going INTO the NEXT layer? \n            # Or modifying the output of the CURRENT layer before passing to next?\n            # \"run ALL remaining GPU layers even after intermediate parity failure\"\n            # \"Final parity FAIL exit1\"\n            # If we corrupt at boundary 0 (after layer 0, before layer 1), we modify gpu_output_np.\n            gpu_output_np[0, 0] += 1.0",
+      "reason": "The corruption is injected at layer 0 (l_idx == 0), but the spec says 'corrupt the real activation at the first vendor boundary'. The first vendor boundary occurs after the last layer on the first device, not after layer 0. With 4 layers per device, the first boundary is after layer 3, not layer 0.",
+      "minimal_fix": "Track device boundaries and inject corruption after the last layer assigned to the first device (e.g., after layer 3 when layers 0-3 are on device 0 and layers 4-7 are on device 1)."
+    },
+    {
+      "severity": "medium",
+      "line": 1,
+      "exact_source": "def gen_weights(w):\n        # Uniform discrete approximation\n        vals = rng.integers(-2*4096, 2*4096+1, size=(w,w), dtype=np.int32)\n        return (vals.astype(np.float32) / 4096.0)",
+      "reason": "The weight generation uses rng.integers with range [-8192, 8193], which generates values in [-2, 2] after division by 4096. However, the spec says 'Small dyadic integers [-2, 2]/4096', which implies the integers should be in [-2, 2] and then divided by 4096, giving values in [-2/4096, 2/4096]. The current implementation generates values 4096 times larger than specified.",
+      "minimal_fix": "Change to vals = rng.integers(-2, 3, size=(w,w), dtype=np.int32) and return vals.astype(np.float32) / 4096.0, or clarify the intended range."
+    },
+    {
+      "severity": "medium",
+      "line": 1,
+      "exact_source": "b = rng.integers(-2*4096, 2*4096+1, size=(width,), dtype=np.int32).astype(np.float32) / 4096.0",
+      "reason": "Same issue as weights: the bias generation uses range [-8192, 8193] instead of [-2, 2], producing values 4096 times larger than specified.",
+      "minimal_fix": "Change to b = rng.integers(-2, 3, size=(width,), dtype=np.int32).astype(np.float32) / 4096.0"
+    },
+    {
+      "severity": "medium",
+      "line": 1,
+      "exact_source": "x_cpu_ref = rng.uniform(1.0, 2.0, size=(batch, width)).astype(np.float32)",
+      "reason": "The initial input is generated using rng.uniform, but the spec says 'Initial Input: Positive 1..2'. Using uniform distribution is acceptable, but the spec implies deterministic generation with seed 103004. The current code uses the same rng that was used for weights, so the input depends on the number of layers and width, which may not match the intended deterministic sequence.",
+      "minimal_fix": "Use a separate RNG instance or reset the seed before generating the input to ensure the input is independent of model parameters and matches the specified deterministic sequence."
+    },
+    {
+      "severity": "medium",
+      "line": 1,
+      "exact_source": "for ctx in contexts:\n        ctx.release()",
+      "reason": "Contexts are released but queues, programs, and buffers are not explicitly released. While Python garbage collection may handle this, it's not guaranteed and could lead to resource leaks, especially in a child process that may be killed by timeout.",
+      "minimal_fix": "Explicitly release all queues, programs, and buffers before releasing contexts, or use context managers (with cl.Context(...) as ctx:) to ensure proper cleanup."
+    },
+    {
+      "severity": "low",
+      "line": 1,
+      "exact_source": "result = {\n        'status': status,\n        'stats': stats,\n        'labels': [\n            'MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY',\n            'EXPLICIT_HOST_STAGED',\n            'POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF'\n        ]\n    }",
+      "reason": "The result JSON is missing required fields specified in the acceptance criteria: actual_layer_weight_bytes, modeled_layer_mib, workspace_bytes, total_actual_weight_bytes, layer_ownership, and detailed parity receipts. The result only contains status, stats, and labels.",
+      "minimal_fix": "Add all required fields to the result JSON: actual_layer_weight_bytes, modeled_layer_mib, workspace_bytes, total_actual_weight_bytes, layer_ownership (from planner), and per-layer parity check results."
+    },
+    {
+      "severity": "low",
+      "line": 1,
+      "exact_source": "if result.get('status') == 'PASS':\n        sys.exit(0)\n    else:\n        sys.exit(1)",
+      "reason": "The parent exits with code 1 for any non-PASS status, but the spec requires exit code 2 for planning refusals (oversized budget, duplicate IDs, unavailable devices) and exit code 1 only for execution failures. The current code conflates these exit codes.",
+      "minimal_fix": "Track whether the failure occurred during planning (exit 2) or execution (exit 1), and use the appropriate exit code."
+    }
+  ],
+  "missing_qualification": [
+    "No actual CPU reference chain is maintained for layer-by-layer parity comparison",
+    "No tolerance-based comparison (5e-5 absolute+relative) is implemented",
+    "No verification that all assigned weight and bias buffers are resident before inference",
+    "No verification that weights are uploaded only once",
+    "No actual device vendor detection or validation (NVIDIA/AMD requirement not enforced)",
+    "No rejection of CPU/software/subdevice devices",
+    "No physical alias detection beyond simple string matching",
+    "No verification that combined model buffers are under 32 MiB using actual bytes",
+    "No implementation of ping-pong activation buffers within contexts",
+    "No proper device boundary detection for corruption injection",
+    "No final parity check against CPU reference (status is hardcoded)",
+    "No per-layer parity receipts or stage parity tracking",
+    "No hash computation for weight blocks",
+    "No verification that all planned participating GPUs are non-empty",
+    "No handling of Intel devices as 'future untested'",
+    "No atomic result writing in child process (parent handles it, but child prints directly to stdout)"
+  ]
+}

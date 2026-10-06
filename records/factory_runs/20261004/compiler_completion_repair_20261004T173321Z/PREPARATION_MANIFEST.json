@@ -1,0 +1,170 @@
+{
+  "syntax_only": [
+    {
+      "errors": [],
+      "count": 0,
+      "file": "provider_common.ps1"
+    },
+    {
+      "errors": [],
+      "count": 0,
+      "file": "adapter_artifact.ps1"
+    },
+    {
+      "errors": [],
+      "count": 0,
+      "file": "qwen_http_adapter.ps1"
+    },
+    {
+      "errors": [],
+      "count": 0,
+      "file": "invoke_owned_adapter.ps1"
+    },
+    {
+      "errors": [],
+      "count": 0,
+      "file": "test_adapter_intake.ps1"
+    }
+  ],
+  "pure_controls_passed": 7,
+  "inventory": [
+    {
+      "sha256": "f8bfa89b9828a733929f13555e25e47a615af7c24885d91e80f68ae6f993cc2a",
+      "name": "ACTUAL_TRACE_SUMMARY.json",
+      "bytes": 2993
+    },
+    {
+      "sha256": "6fea50c7fe20b12ade9f8b0d69144e1ca6a52412db6113d2625af71a0937059d",
+      "name": "adapter_artifact.ps1",
+      "bytes": 966
+    },
+    {
+      "sha256": "625f716477ce5ff112459338b33b3a9ca37b37dac3b15cd3395fb81b2b6aec3f",
+      "name": "ADAPTER_HELPER_DIFF.json",
+      "bytes": 4858
+    },
+    {
+      "sha256": "534c8396fede1b5ba17b60ed0f84fda50d0949fa28dcdd26d7c8e66b923cb570",
+      "name": "ADAPTER_SCHEMA.json",
+      "bytes": 1065
+    },
+    {
+      "sha256": "f9c795dc81e9882ce27af6822aae708734934a9c5bdf1dc9936fbb395bbfbf2c",
+      "name": "COMMAND_PENDING_ROOT.md",
+      "bytes": 1659
+    },
+    {
+      "sha256": "da31a8038e08b51ffc571982421116a2fbe918f3eb85ffa61e8bece5701c2c40",
+      "name": "DEPENDENT_ROLES_PENDING.md",
+      "bytes": 1369
+    },
+    {
+      "sha256": "a998042a41d8abf9bed72a0a290a4d707251c03bfd02c13be982c9ad57897036",
+      "name": "invoke_owned_adapter.ps1",
+      "bytes": 8032
+    },
+    {
+      "sha256": "647c516363d3835c88fbd795c5df1d8765d024506bfb6ebd3b94b42605639c4a",
+      "name": "invoke_owned_protocol.ps1",
+      "bytes": 7995
+    },
+    {
+      "sha256": "24ca09ca269491adca571ab495ff8a382a9ae2c74c79a3d9b4dbbff92ba3cae1",
+      "name": "provider_common.ps1",
+      "bytes": 4120
+    },
+    {
+      "sha256": "53ba6fca5563ab123823e089e10159d55fcb6dc2723d78da0a89b44680d9d448",
+      "name": "PURE_ADAPTER_INTAKE_CONTROLS.json",
+      "bytes": 1689
+    },
+    {
+      "sha256": "3253ed7fcad7a77f63a184d5363d01c0634922eaae08646216b95436ed61867d",
+      "name": "qwen_compiler_completion.prompt.txt",
+      "bytes": 30709
+    },
+    {
+      "sha256": "0e9c9d2295df75ce5ac9bd0b8f7f698caf6a8cb199c9378fe2a09808348f0cb9",
+      "name": "qwen_http_adapter.ps1",
+      "bytes": 5428
+    },
+    {
+      "sha256": "ffc33ebfa5afcbc6ddfea6a0062274511a7a419f5bbf491f6b7e62654bf1f309",
+      "name": "qwen_http_protocol.ps1",
+      "bytes": 5432
+    },
+    {
+      "sha256": "3449a633613cafee7dd19f670c5d715dd8926db566c27dc3a84a7f2cfe5c0c97",
+      "name": "REVIEW_SCHEMA.json",
+      "bytes": 906
+    },
+    {
+      "sha256": "427d6444c28c472d5ec52738a36b36f1c79566fd0230edf231c427f412acab4a",
+      "name": "ROOT_LAUNCH_RECEIPT_SCHEMA.json",
+      "bytes": 882
+    },
+    {
+      "sha256": "390080fa8e3d17af2acf983e94f713c6479bd118178ca3491a51ecf1e3e5fad2",
+      "name": "ROOT_TASK_SPEC.md",
+      "bytes": 4716
+    },
+    {
+      "sha256": "c588cc1b6480e32fdd4ede20783b124eca8c3b69ce585550d27a3f978315f636",
+      "name": "supervisor_critical_complete.txt",
+      "bytes": 19139
+    },
+    {
+      "sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+      "name": "supervisor_snapshot.py",
+      "bytes": 31535
+    },
+    {
+      "sha256": "960c7fceb4de68a38fb503fd2c21d2b970dd883ae852b8ed582df1a10a979c1f",
+      "name": "test_adapter_intake.ps1",
+      "bytes": 2113
+    }
+  ],
+  "paid_jobs_started": 0,
+  "python_semantic_eval_import": false,
+  "native_fixture_gpu_compiler_execution": false,
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "credentials_read": false,
+  "original_source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "state": "PREPARATION_ONLY_PENDING_ROOT_READ_AND_ADMISSION",
+  "actual_trace_summary": "ACTUAL_TRACE_SUMMARY.json",
+  "pure_intake_controls": "PURE_ADAPTER_INTAKE_CONTROLS.json",
+  "dependent_roles": {
+    "Grok": "No final prompt until actual audit/review findings",
+    "Gemini": "No final prompt until actual Qwen+Muse artifacts",
+    "Muse": "Headless CLI/model/flags NOT_CHECKED; separate owner inspecting"
+  },
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\supervisor_snapshot.py",
+  "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\qwen_compiler_completion.prompt.txt",
+  "utc": "2026-10-04T17:39:17.5964887Z",
+  "exact_root_spec_sha256": "390080fa8e3d17af2acf983e94f713c6479bd118178ca3491a51ecf1e3e5fad2",
+  "limits": {
+    "grok_outer_seconds": 300,
+    "thinking": false,
+    "qwen_outer_seconds": 270,
+    "response_stream_bytes": 2097152,
+    "max_completion_tokens": 8192,
+    "http_seconds": 240,
+    "gemini_outer_seconds": 240,
+    "gemini_provider_seconds": 210
+  },
+  "native_children_actual": 0,
+  "critical_complete_ranges": [
+    "1-83",
+    "162-212",
+    "463-786"
+  ],
+  "original_source_path": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py",
+  "pure_controls_failed": 0,
+  "prompt_sha256": "3253ed7fcad7a77f63a184d5363d01c0634922eaae08646216b95436ed61867d",
+  "batch": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z",
+  "max_authorized_native_children_each_qwen_deepseek_parent": 10,
+  "expected_cost": "UNKNOWN; tokens not Credits",
+  "first_job": "qwen_compiler_completion",
+  "intake_scope": "Exact source-string schema, no Python parse/import/exec; ROOT independently admits semantic tests",
+  "model": "qwen3.8-max"
+}

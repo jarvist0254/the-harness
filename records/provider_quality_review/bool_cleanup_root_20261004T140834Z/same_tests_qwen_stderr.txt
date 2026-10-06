@@ -1,0 +1,247 @@
+test_alive_exception_remaining_cleanup (__main__.Cases) ... FAIL
+test_baseline (__main__.Cases) ... ok
+test_cleanup_clock_starts_after_work (__main__.Cases) ... FAIL
+test_close_failure_01 (__main__.Cases) ... FAIL
+test_close_failure_02 (__main__.Cases) ... FAIL
+test_close_failure_03 (__main__.Cases) ... FAIL
+test_close_failure_04 (__main__.Cases) ... FAIL
+test_close_failure_05 (__main__.Cases) ... FAIL
+test_close_failure_06 (__main__.Cases) ... FAIL
+test_close_failure_07 (__main__.Cases) ... FAIL
+test_close_failure_08 (__main__.Cases) ... FAIL
+test_close_failure_09 (__main__.Cases) ... FAIL
+test_close_failure_10 (__main__.Cases) ... FAIL
+test_close_failure_11 (__main__.Cases) ... FAIL
+test_close_failure_12 (__main__.Cases) ... FAIL
+test_close_failure_13 (__main__.Cases) ... FAIL
+test_close_failure_14 (__main__.Cases) ... FAIL
+test_close_failure_15 (__main__.Cases) ... ok
+test_close_failure_16 (__main__.Cases) ... ok
+test_close_failure_17 (__main__.Cases) ... ok
+test_close_failure_18 (__main__.Cases) ... ok
+test_close_failure_19 (__main__.Cases) ... ok
+test_first_join_exception_attempts_all_readers (__main__.Cases) ... FAIL
+test_job_close_boolean_false (__main__.Cases) ... ok
+test_job_close_exception (__main__.Cases) ... ok
+test_job_close_failure_persisted_uncertainty (__main__.Cases) ... ok
+test_job_close_integer_zero (__main__.Cases) ... ok
+test_join_exception_unknown (__main__.Cases) ... FAIL
+test_log_write_rejection (__main__.Cases) ... ok
+test_read_failure_01 (__main__.Cases) ... ok
+test_read_failure_02 (__main__.Cases) ... ok
+test_read_failure_03 (__main__.Cases) ... ok
+test_read_failure_04 (__main__.Cases) ... ok
+test_receipt_write_rejection (__main__.Cases) ... ok
+test_shutdown_and_all_joins_share_deadline (__main__.Cases) ... ok
+test_terminal_journal_durable_receipt (__main__.Cases) ... FAIL
+test_terminate_boolean_false (__main__.Cases) ... ok
+test_terminate_integer_zero (__main__.Cases) ... ok
+test_total_monotonic_join_budget (__main__.Cases) ... ok
+test_writer_close_failure_persisted_uncertainty (__main__.Cases) ... FAIL
+
+======================================================================
+FAIL: test_alive_exception_remaining_cleanup (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 244, in test_alive_exception_remaining_cleanup
+    CONFIG['alive_raise']=True;l,a,k,r,e=self.exercise();self.assert_parent_owned_cleanup(l,r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 227, in assert_parent_owned_cleanup
+    self.assertTrue(all(v['close_attempts']>=1 for v in l.handles.values() if v['owner']!='reader'),'All parent-owned handles require close attempts')
+AssertionError: False is not true : All parent-owned handles require close attempts
+
+======================================================================
+FAIL: test_cleanup_clock_starts_after_work (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 242, in test_cleanup_clock_starts_after_work
+    CONFIG['elapsed_launch']=True;l,a,k,r,e=self.exercise();calls=[c for c in a.calls if c[0]=='wait_root' and c[2]>0];self.assertTrue(calls,'Twenty-second successful work must receive a fresh cleanup wait budget')
+AssertionError: [] is not true : Twenty-second successful work must receive a fresh cleanup wait budget
+
+======================================================================
+FAIL: test_close_failure_01 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_02 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_03 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_04 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_05 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_06 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_07 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_08 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_09 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_10 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_11 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_12 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_13 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_close_failure_14 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 258, in test
+    l,a,k,r,e=self.exercise(close_at=index);self.assertTrue(l.all_attempted(),'All handles need close attempts despite earlier failure');self.assert_uncertain(r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 201, in assert_uncertain
+    self.assertIsNotNone(r);self.assertNotEqual(r.get('drain_proof'),'CLEANUP')
+AssertionError: 'CLEANUP' == 'CLEANUP'
+
+======================================================================
+FAIL: test_first_join_exception_attempts_all_readers (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 250, in test_first_join_exception_attempts_all_readers
+    l,a,k,r,e=self.exercise(n=4,mode='BLOCKED',wait='FAILED');readers={h for h,v in l.handles.items() if v['kind']=='read'};attempted={event[1] for event in l.events if event[0]=='reader_join_attempt'};self.assertEqual(readers,attempted,'An earlier join exception must not skip remaining reader join attempts');self.assert_uncertain(r)
+AssertionError: Items in the first set but not the second:
+130
+132
+105
+112
+114
+121
+123 : An earlier join exception must not skip remaining reader join attempts
+
+======================================================================
+FAIL: test_join_exception_unknown (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 232, in test_join_exception_unknown
+    l,a,k,r,e=self.exercise(mode='DEFERRED');self.assert_parent_owned_cleanup(l,r)
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 229, in assert_parent_owned_cleanup
+    self.assertEqual(readers,attempts,'Every reader must get a join attempt');self.assert_uncertain(r);self.assertNotEqual(r['status'],'PROCESS_COMPLETED')
+AssertionError: Items in the first set but not the second:
+112
+105
+114 : Every reader must get a join attempt
+
+======================================================================
+FAIL: test_terminal_journal_durable_receipt (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 215, in test_terminal_journal_durable_receipt
+    if last['restart_receipt'] is not None:self.assertNotEqual(last['restart_receipt']['status'],'PROCESS_COMPLETED','Restart must not return stale successful receipt after failed terminal commit')
+AssertionError: 'PROCESS_COMPLETED' == 'PROCESS_COMPLETED' : Restart must not return stale successful receipt after failed terminal commit
+
+======================================================================
+FAIL: test_writer_close_failure_persisted_uncertainty (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\bool_cleanup_root_20261004T140834Z\evaluate_same_tests_qwen_RED.py", line 254, in test_writer_close_failure_persisted_uncertainty
+    l,a,k,r,e=self.exercise(close_at=1);saved=OBS[-1]['restart_receipt'];self.assertIsNotNone(saved);self.assertNotEqual(saved['status'],'PROCESS_COMPLETED');self.assertNotEqual(saved['drain_proof'],'CLEANUP')
+AssertionError: 'PROCESS_COMPLETED' == 'PROCESS_COMPLETED'
+
+----------------------------------------------------------------------
+Ran 40 tests in 0.493s
+
+FAILED (failures=20)

@@ -1,0 +1,11 @@
+{
+  "pid": 91064,
+  "command": "llama-quantize.exe --help",
+  "timeout_seconds": 30,
+  "timed_out": false,
+  "exit_code": 1,
+  "elapsed_ms": 331,
+  "process_present_after": false,
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\quantizer_build\\help.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\quantizer_build\\help.stderr.log"
+}

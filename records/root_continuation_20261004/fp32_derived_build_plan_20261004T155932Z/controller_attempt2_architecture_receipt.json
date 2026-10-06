@@ -1,0 +1,29 @@
+{
+  "status": "SOURCE_ONLY_NOT_EXECUTED",
+  "controller_sha256": "4f53ec3fe4f17355b8b15fde158e67c1e1a1e24a1e2c95581238ebd571dcdb23",
+  "prior_0CE_preserved_sha256": "0ce3644a997194365d361560545e8834ea414852b1a4b99db3d08916c956f6b2",
+  "ast": "PASS",
+  "commands": [
+    {
+      "stage": "configure",
+      "original": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure.cmd",
+      "original_sha256": "6d2e6acbf1f47d664c5a4525b0a934a58c7604938117573d256183db98265236",
+      "new": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt2.cmd",
+      "sha256": "e9e105fd7f71fce319844a85af3ce30bcbf7770a328b3451bf6267526d5dbd0e"
+    },
+    {
+      "stage": "build",
+      "original": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build.cmd",
+      "original_sha256": "4157954baec539016923745dcda6ed816fca7090891b93c236b5d3f5b8384338",
+      "new": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt2.cmd",
+      "sha256": "a2de7c633182d4eb71fba15c5711734aec4bf24d483e1c53f71b9290fe58d844"
+    }
+  ],
+  "build_directory": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt2",
+  "build_directory_exists": false,
+  "run_evidence_exists": false,
+  "candidate_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "scope": "Child command restores only PROCESSOR_ARCHITECTURE AMD64 before vcvars; no supervisor environment widening; fresh build directory",
+  "static_evidence_inputs": "Unchanged original evidence directory",
+  "configuration_build_gpu_execution": false
+}

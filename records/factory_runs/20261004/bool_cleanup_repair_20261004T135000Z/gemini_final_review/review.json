@@ -1,0 +1,85 @@
+{
+  "findings": [
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+      "discriminating_test": "Verify that CANDIDATE_PATH defaults to the root repair candidate and that importing tests without env overrides resolves the actual root candidate rather than the factory sibling.",
+      "exact_source": "CANDIDATE_PATH = os.environ.get('CANDIDATE_PATH', str(pathlib.Path(__file__).resolve().parent / 'contained_supervisor.py'))",
+      "line": 4,
+      "minimal_fix": "Set default CANDIDATE_PATH to 'E:/the_harness/records/root_continuation_20261004/supervisor_cleanup_root_repair/contained_supervisor.py'.",
+      "reason": "Candidate test defaults to loading stale prior factory focus (qwen_bool_cleanup/contained_supervisor.py) instead of the actual ROOT corrected candidate.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+      "discriminating_test": "Calling _verify_hash() against ROOT candidate sha256 4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663 must pass, whereas EXPECTED_HASH '603916f8b0f21' raises AssertionError.",
+      "exact_source": "EXPECTED_HASH = '603916f8b0f21'",
+      "line": 5,
+      "minimal_fix": "Update EXPECTED_HASH = '4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663' and invoke _verify_hash() during module initialization/setUpClass.",
+      "reason": "Hardcoded EXPECTED_HASH contains a stale truncated hash matching neither ROOT candidate (4d8272aa...) nor Qwen factory candidate (6bb4e7ed...), and _verify_hash() is dead code that is never invoked during test execution.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+      "discriminating_test": "Instrument kernel.CloseHandle and _emit/_atomic_write to record invocation sequence; assert kernel.CloseHandle(job) is invoked strictly prior to receipt write.",
+      "exact_source": "    def test_job_close_zero_no_completed(self):",
+      "line": 128,
+      "minimal_fix": "Assert in test_job_close_zero_no_completed that kernel.CloseHandle(job) is called and evaluated before receipt file creation or durable terminal journal emission.",
+      "reason": "Test checks that final status is not PROCESS_COMPLETED when job close fails, but fails to test or assert the strict ordering requirement that job kernel.CloseHandle must be checked before durable terminal emission.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+      "discriminating_test": "Execute run_workers with a mocked 20s run duration; verify shutdown WaitForSingleObject receives a fresh shared 8s budget rather than 0s timeout.",
+      "exact_source": "    def test_shared_deadline_not_multiplied(self):",
+      "line": 134,
+      "minimal_fix": "Extend clock mock tests to verify that cleanup_deadline starts entering finally AFTER 20s work and is shared across all shutdown waits and reader joins.",
+      "reason": "Tests _join in isolation with a fake clock, omitting coverage for the end-to-end contract where the single shared monotonic cleanup deadline must start on entry to finally after work completes.",
+      "severity": "HIGH"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\tests.candidate.py",
+      "discriminating_test": "Simulate failure in terminal emission write/journal; verify restart_receipt refuses stale success and does not emit false PROCESS_COMPLETED. Also inject exception in thread.is_alive() and verify remaining handle closes are still attempted.",
+      "exact_source": "class TestDefects(unittest.TestCase):",
+      "line": 72,
+      "minimal_fix": "Add test_terminal_journal_durable_receipt and test_alive_exception_remaining_cleanup reproducing the mock RED contracts from evaluate_qwen.py.",
+      "reason": "Test suite completely omits tests for journal-before-receipt durability ordering, refusal of false PROCESS_COMPLETED receipts, and verification that thread inspection errors do not bypass remaining handle closes.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+      "discriminating_test": "Inject failure into initial wapi.CloseHandle on close_after list; assert rec['close_uncertain'] is True and drain_proof is UNKNOWN_DRAIN.",
+      "exact_source": "        _close_quiet(wapi.CloseHandle, close_after)",
+      "line": 405,
+      "minimal_fix": "if not _close_quiet(wapi.CloseHandle, close_after): rec[\"close_uncertain\"] = True",
+      "reason": "Initial writer close failure result is completely discarded, failing to record uncertainty when spawn cleanup fails.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+      "discriminating_test": "Simulate 20s run duration; check that wait_root in shutdown receives a positive wait budget instead of 0 timeout.",
+      "exact_source": "    cleanup_deadline = _monotonic() + 8.0",
+      "line": 662,
+      "minimal_fix": "Move cleanup_deadline = _monotonic() + 8.0 inside the finally block so cleanup budget begins after work.",
+      "reason": "Cleanup deadline starts before work launch, causing successful long runs (>8s) to have zero remaining cleanup budget.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+      "discriminating_test": "Simulate failure in journal write; verify receipt file was not written before journal.",
+      "exact_source": "    _atomic_write(spec[\"output\"] / f\"{spec['run_id']}_receipt.json\", encoded)\n    _journal(spec, {\"event\": \"terminal\", \"status\": status, \"failure_reason\": reason})",
+      "line": 644,
+      "minimal_fix": "Write terminal journal record before writing the atomic receipt file.",
+      "reason": "Atomic receipt is written before terminal journal entry, allowing stale successful receipts if journal emission fails.",
+      "severity": "CRITICAL"
+    }
+  ],
+  "qualification_limits": [
+    "MOCK_ONLY_STATIC_REVIEW: Evaluated via static source analysis without native Windows execution, live subprocess creation, or live kernel handles.",
+    "ROOT_CANDIDATE_STATUS: Actual ROOT candidate (4d8272aa...) addresses the 18 RED mock failures statically, but its accompanying test path (tests.candidate.py) fails admission requirements.",
+    "NON_PREEMPTIBLE_NATIVE_CALLS: Synchronous ReadFile and native WaitForSingleObject operations cannot be preempted asynchronously by Python timers and are bounded only by native OS timeouts.",
+    "ZERO_NATIVE_CHILDREN: Exactly 0 native child processes and 0 child agents were spawned or authorized during review."
+  ],
+  "toolAction": "Submitting review verdict and findings",
+  "toolSummary": "Submit review verdict",
+  "verdict": "STATIC_REJECTED"
+}

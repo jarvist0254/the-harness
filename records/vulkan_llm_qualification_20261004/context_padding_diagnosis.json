@@ -1,0 +1,56 @@
+{
+  "result": "FAIL_BEFORE_GPU_MODEL_LOAD",
+  "trigger": "ctx_ok requires llama_n_ctx == 128",
+  "observed": {
+    "actual_n_ctx": 256,
+    "vocab": 151936,
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "n_ctx_seq": 256,
+    "n_ubatch": 32,
+    "requested_n_ctx": 128,
+    "n_batch": 32,
+    "cpu_model_buffer_mib": 604.15,
+    "file_size": 639446688,
+    "cpu_kv_buffer_mib": 28.0,
+    "model_layers": 28,
+    "cpu_compute_buffer_mib": 18.8
+  },
+  "pinned_source_evidence": [
+    {
+      "meaning": "n_ctx selects requested value unless zero",
+      "line": 133,
+      "file": "records/build_vulkan_real/toolchain/llama_clean_source/src/llama-context.cpp"
+    },
+    {
+      "meaning": "GGML_PAD rounds requested n_ctx up to multiple 256",
+      "line": 290,
+      "file": "records/build_vulkan_real/toolchain/llama_clean_source/src/llama-context.cpp"
+    },
+    {
+      "meaning": "n_ctx_seq derived from total context",
+      "line": 295,
+      "file": "records/build_vulkan_real/toolchain/llama_clean_source/src/llama-context.cpp"
+    },
+    {
+      "meaning": "n_ctx_seq also padded to 256",
+      "line": 296,
+      "file": "records/build_vulkan_real/toolchain/llama_clean_source/src/llama-context.cpp"
+    },
+    {
+      "meaning": "API says actual context values may differ and should be queried",
+      "line": 572,
+      "file": "records/build_vulkan_real/toolchain/llama_clean_source/include/llama.h"
+    }
+  ],
+  "runtime_evidence": {
+    "gpu_model_buffer_allocation_observed": false,
+    "cpu_model_buffer_loaded": true,
+    "stderr": "records/vulkan_llm_qualification_20261004/default.stderr.log",
+    "receipt": "records/vulkan_llm_qualification_20261004/default.json",
+    "gpu_devices_found_in_stderr": 2,
+    "stdout": "records/vulkan_llm_qualification_20261004/default.stdout.json",
+    "cpu_model_destroyed_before_gpu_load": true,
+    "gpu_layer_offload_observed": false
+  },
+  "outcome": "The candidate returned ERROR/context_params_mismatch before GPU model allocation. Preserve as failure. A narrow correction should keep requested context 128 and report/validate actual padded 256 for both CPU and GPU contexts; no parity runs until corrected binary passes compile and API gates."
+}

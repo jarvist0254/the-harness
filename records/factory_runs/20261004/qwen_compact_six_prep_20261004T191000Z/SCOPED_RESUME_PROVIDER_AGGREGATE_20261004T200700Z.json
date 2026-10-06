@@ -1,0 +1,72 @@
+{
+  "prepared_jobs_not_counted_as_calls": true,
+  "pending_prepared_jobs": [
+    "Gemini HIGH capacity review",
+    "Qwen CUDA→L0 combined v3 experiment"
+  ],
+  "tokens_not_credits": true,
+  "source_execution": false,
+  "credits": "NOT_CHECKED",
+  "native_hardware_execution": false,
+  "functional_acceptance": "ROOT owns; none claimed by manager",
+  "utc": "2026-10-04T20:08:17.8904558Z",
+  "known_usage_jobs": 11,
+  "dedup": "actual calls only; raw/extracted/manualadjudication copies notadditionalusage",
+  "observed_reported_token_total": 678966,
+  "providers": {
+    "Grok": {
+      "known_usage_requests": 2,
+      "reported_internal_model_calls_known": 2,
+      "observed_reported_tokens": 235125,
+      "model": "grok-4.7-build-fast",
+      "requests": 3,
+      "unknown_terminal_usage_requests": 1
+    },
+    "Muse": {
+      "known_usage_requests": 0,
+      "internal_model_calls": "UNKNOWN",
+      "observed_model": "muse-spark-1.3",
+      "observed_reported_tokens": null,
+      "requests": 1,
+      "unknown_terminal_usage_requests": 1,
+      "task_lifecycle_pairs": 4
+    },
+    "Qwen": {
+      "known_usage_requests": 9,
+      "model": "qwen3.8-max",
+      "requests": 19,
+      "observed_reported_tokens": 443841,
+      "unknown_terminal_usage_requests": 10
+    }
+  },
+  "unknown_terminal_usage_jobs": 12,
+  "scope": "ONLY this agent owned resumedQwen19 +Grok3 +Musecapacity1; excludes historical53 and other-agentGem/Muse",
+  "receipt_pins": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\RESUME_ROUNDS_AGGREGATE_FINAL.json",
+      "sha256": "5c4899bca49a5ec8e8b5501afee33ad8476846e95856a11d318047f2948b4610"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\USAGE_FINAL_COMPACT_SIX.json",
+      "sha256": "044b8507b39b9a823fefec7dd576e135790fdff985cd49a07abc9bb3bca9aa1c"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\CLOSED_USAGE_SOURCE_RECEIPT.json",
+      "sha256": "0407ea1657f0f4143e282eaa10b1b54263fe620c425eb3c0cb852798973c6cce"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_dmabuf_query_correction_20261004T192708Z\\CLOSED_USAGE_SOURCE_RECEIPT.json",
+      "sha256": "5d324b906ddd5db47c7417b3fb831f57358d2d9c27632874c909d23cda546726"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\CLOSED_USAGE_SOURCE_RECEIPT.json",
+      "sha256": "1b69e4f1b61893e49661d36d7fa99e51a9878ef5e9b7fcd25c53210c1c557358"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\run_output\\receipt.json",
+      "sha256": "a0d3411280537d8efa47322ec6629bad1c7a884349ec28b1b0664abafce1cf6a"
+    }
+  ],
+  "pending_provider_jobs": 0,
+  "provider_jobs": 23
+}

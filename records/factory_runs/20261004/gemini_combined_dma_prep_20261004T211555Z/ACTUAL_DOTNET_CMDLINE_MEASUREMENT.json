@@ -1,0 +1,13 @@
+{
+  "less_than_28000": true,
+  "source_execution": false,
+  "dotnet_runtime": "10.0.12",
+  "utc": "2026-10-04T21:17:31.7382163Z",
+  "method": "Actual installed .NET Process.BuildCommandLine called in managed memory ONLY; no Start/native execution",
+  "actual_quoted_full_command_line_utf16_chars": 24576,
+  "process_started": false,
+  "prompt_sha256": "d87b6746cd58f454a3d4f87cbbef3a4f4d7e36144cea3608358f714575ca907c",
+  "native_calls": 0,
+  "raw_prompt_utf16_chars": 23792,
+  "less_than_32767": true
+}

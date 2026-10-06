@@ -1,0 +1,18 @@
+{
+  "authority": "ROOT explicit Muse combined v2 static review",
+  "utc": "2026-10-04T21:10:37.9002231Z",
+  "aggregate_cap_bytes": 2097152,
+  "interactive_session_interference": false,
+  "provider_launch_authorized": true,
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "packet_sha256": "4fb8e2f94e8660197dbfec7e45c6e75fe0ed07f3647e1899eb324531d3fcc824",
+  "python_path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "deadline": 300,
+  "pins": {
+    "muse_combined.v2.prompt.txt": "ae6a1a7ffb51189d871957c4349a7b475ca09cfa98407397feffbe0541748ffe",
+    "output_schema.json": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+    "run_muse_combined.v2.pending_admission.py": "4d6e7789745e7bfc61e5a5edc97acb66b40d81e0510d16e3e613a23d42a732f5"
+  },
+  "source_execution": false,
+  "tools": "disabled"
+}

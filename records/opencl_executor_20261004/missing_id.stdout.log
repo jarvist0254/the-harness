@@ -1,0 +1,14 @@
+{
+  "status": "NOT_CHECKED",
+  "reason": "Unavailable OpenCL runtime device ID(s): ['p9:d9']",
+  "labels": [
+    "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+    "EXPLICIT_HOST_STAGED",
+    "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+  ],
+  "experimental": true,
+  "child_pid": 73424,
+  "child_exit_code": 2,
+  "elapsed_seconds": 0.4689999995753169,
+  "timestamp_utc": "2026-10-04T11:08:21.451718+00:00"
+}

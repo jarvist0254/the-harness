@@ -1,0 +1,162 @@
+[
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "axToolCalls,\"resolveMaxToolCalls\");function resolveMaxSubagentDepth(argv,settings){const value=argv.maxSubagentDepth;if(value!==void 0&&value!==null){if(!Number.isInteger(value)||value<1||value>MAX_SUBAGENT_DEPTH_LIMIT){throw new Error(`--max-subagent-depth must be an integer between 1 and ${MAX_SUBAGENT_DEPTH_LIMI"
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "eger between 1 and ${MAX_SUBAGENT_DEPTH_LIMIT}; got ${value}.`)}return value}return settings.model?.maxSubagentDepth}__name(resolveMaxSubagentDepth,\"resolveMaxSubagentDepth\");function resolveAdvisorModel(argv,settings){const raw=argv.advisor!==void 0?argv.advisor:settings.advisorModel;const trimmed=typeof raw===\"st"
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "agentTeam",
+    "excerpt": "ngs.tools?.listDirectory?.enabled===true,todoWriteEnabled:settings.tools?.todoWrite?.enabled===true,agentTeamEnabled:settings.experimental?.agentTeam??false,artifactEnabled:settings.experimental?.artifact??true,artifactAutoOpen:settings.artifact?.autoOpen??true,artifactPublisher:settings.artifact?.publisher?"
+  },
+  {
+    "file": "chunk-4PJQ7GPK.js",
+    "term": "agentTeam",
+    "excerpt": ",todoWriteEnabled:settings.tools?.todoWrite?.enabled===true,agentTeamEnabled:settings.experimental?.agentTeam??false,artifactEnabled:settings.experimental?.artifact??true,artifactAutoOpen:settings.artifact?.autoOpen??true,artifactPublisher:settings.artifact?.publisher??\"local\",artifactHost:settings.artifact?"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "denied\"}}if(isSubagentLikeExecutionContext()&&isToolExcludedForCurrentContext(target.name,options2?.maxSubagentDepth)){return{error:bridgeRefusal(getExcludedToolUnavailableMessage(target.name)),errorType:\"execution_denied\"}}if(!registry3.isDeferredAndHidden(target.name)){return{error:bridgeRefusal(`Tool \"${target.n"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "n=await runInRequestGoalContext(request,()=>resolveDeferredToolCall(this.toolRegistry,request.args,{maxSubagentDepth:this.config.getMaxSubagentDepth()}));if(\"error\"in resolution){return{...request,bridgeResolutionError:{error:resolution.error,type:resolution.errorType}}}if(this.isToolExecutionAllowed&&!this.isToolE"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "maxTeammates",
+    "excerpt": "w Map;agentIdentities=new Map;pendingAsyncWork=new Set;pendingPlanApprovals=new Map;subagentManager;maxTeammates;constructor(backend,teamFile,subagentManager,options2){this.backend=backend;this.teamFile=teamFile;this.subagentManager=subagentManager??null;this.maxTeammates=options2?.maxTeammates??MAX_TEAMMATES;t"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "maxTeammates",
+    "excerpt": "tions2){this.backend=backend;this.teamFile=teamFile;this.subagentManager=subagentManager??null;this.maxTeammates=options2?.maxTeammates??MAX_TEAMMATES;this.taskUpdateUnsubscribe=onTasksUpdated(teamName=>{if(teamName===this.teamFile.name){this.fireAndForget(\"scanIdleAgentsForTasks\",this.scanIdleAgentsForTasks())"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "agentTeam",
+    "excerpt": "seEnabled=false;cronEnabled=true;cronRecurringMaxAgeDays;lsToolEnabled=false;todoWriteEnabled=false;agentTeamEnabled=false;artifactEnabled=true;artifactSnapshotsEnabled=false;artifactAutoOpen=true;artifactPublisher=\"local\";artifactHost;artifactOss;omniEnabled=false;omniMaxUploadFileBytes;omniMaxEstimatedToke"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "agentTeam",
+    "excerpt": "lsToolEnabled=params.lsToolEnabled??false;this.todoWriteEnabled=params.todoWriteEnabled??false;this.agentTeamEnabled=params.agentTeamEnabled??false;this.artifactEnabled=params.artifactEnabled??true;this.artifactAutoOpen=params.artifactAutoOpen??true;this.artifactPublisher=params.artifactPublisher??\"local\";th"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "read_only",
+    "excerpt": "roval before executing. Only valid with a named teammate in an active team. Cannot be combined with read_only.\"};var TEAM_AGENT_READ_ONLY_PROPERTY={type:\"boolean\",description:\"When true, the named teammate can only inspect the checkout and use team coordination tools. Shell, file writes, memory, schedules, a"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "read_only",
+    "excerpt": "ntTeamEnabled()?{name:TEAM_AGENT_NAME_PROPERTY,plan_mode_required:TEAM_AGENT_PLAN_REQUIRED_PROPERTY,read_only:TEAM_AGENT_READ_ONLY_PROPERTY}:{},isolation:{type:\"string\",enum:[\"worktree\"],description:\"Isolation mode. 'worktree' creates a temporary git worktree under <projectRoot>/.qwen/worktrees/agent-<7hex> "
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "isReadOnly",
+    "excerpt": "on(this.params.command)){return\"ask\"}const command=stripShellWrapper(this.params.command);try{const isReadOnly=await isShellCommandReadOnlyASTInDirectory(command,this.params.directory||this.config.getTargetDir());if(isReadOnly){return\"allow\"}}catch(e){debugLogger41.warn(\"AST read-only check failed, falling ba"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "isReadOnly",
+    "excerpt": " isShellCommandReadOnlyASTInDirectory(command,this.params.directory||this.config.getTargetDir());if(isReadOnly){return\"allow\"}}catch(e){debugLogger41.warn(\"AST read-only check failed, falling back to ask:\",e)}return\"ask\"}async getConfirmationDetails(_abortSignal){const command=stripShellWrapper(this.params.co"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "PLAN_MODE",
+    "excerpt": "NIED,TOOL_FAILURE_KIND_PERMISSION_DENIED,TOOL_FAILURE_KIND_PERMISSION_HOOK_DENIED,TOOL_FAILURE_KIND_PLAN_MODE_BLOCKED,TOOL_FAILURE_KIND_POST_HOOK_STOPPED,TOOL_FAILURE_KIND_PRE_HOOK_BLOCKED,TOOL_FAILURE_KIND_TIMEOUT,TOOL_FAILURE_KIND_TOOL_ERROR,TOOL_FAILURE_KIND_TOOL_EXCEPTION,endHookSpan,endInteractionSpan,e"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "PLAN_MODE",
+    "excerpt": "er,\"createSessionStartProfiler\");init_esbuild_shims();init_esbuild_shims();init_esbuild_shims();var PLAN_MODE_ENTRY_SIBLING_SKIP_MESSAGE=\"Tool call skipped because enter_plan_mode is an execution boundary. Retry it in the next model turn after observing the resulting approval mode.\";var PLAN_MODE_LIFECYCLE_R"
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "plan mode",
+    "excerpt": "=createDebugLogger(\"EXIT_PLAN_MODE\");var exitPlanModeToolDescription=`Use this tool when you are in plan mode and have finished presenting your plan and are ready to code. This will prompt the user to exit plan mode.\n\n## When to Use This Tool\nIMPORTANT: Only use this tool when the task requires planning the "
+  },
+  {
+    "file": "chunk-AN36BHDM.js",
+    "term": "plan mode",
+    "excerpt": "ode and have finished presenting your plan and are ready to code. This will prompt the user to exit plan mode.\n\n## When to Use This Tool\nIMPORTANT: Only use this tool when the task requires planning the implementation steps of a task that requires writing code. For research tasks where you're gathering infor"
+  },
+  {
+    "file": "chunk-JLVWBZSV.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "(1-based levels). 1 keeps sub-agents available but disables nesting; capped at 100. Overrides model.maxSubagentDepth from settings. Defaults to 5.\"},\"core-tools\":{type:\"array\",description:\"Core tool paths\"},\"exclude-tools\":{type:\"array\",description:\"Tools to exclude\"},\"disabled-slash-commands\":{type:\"array\",descrip"
+  },
+  {
+    "file": "chunk-T54GQIC4.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "aborts). Capped at 1,000,000 to catch typos. Overridable via --max-tool-calls.',showInDialog:false},maxSubagentDepth:{type:\"number\",label:\"Max Sub-agent Nesting Depth\",category:\"Model\",requiresRestart:false,default:DEFAULT_MAX_SUBAGENT_DEPTH,description:\"Maximum sub-agent nesting depth (1-based levels: a top-level "
+  },
+  {
+    "file": "chunk-T54GQIC4.js",
+    "term": "agentTeam",
+    "excerpt": "S environment variable.\",showInDialog:false,jsonSchemaOverride:{type:\"number\",minimum:0,default:7}},agentTeam:{type:\"boolean\",label:\"Enable Agent Team\",category:\"Experimental\",requiresRestart:true,default:false,description:\"Enable agent team collaboration tools (experimental). When enabled, the model can cre"
+  },
+  {
+    "file": "chunk-T54GQIC4.js",
+    "term": "plan mode",
+    "excerpt": "enabled. Mid-turn user input starts a fresh two-attempt stage. Disabled in safe, bare, and Approval plan modes.\",showInDialog:false},sessionWriterLease:{type:\"boolean\",label:\"Enable ACP Session Writer Lease\",category:\"Experimental\",requiresRestart:true,default:false,description:\"Enable cross-process write fe"
+  },
+  {
+    "file": "chunk-TSEC5BVI.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "esAgentToolBlocklist,\"matchesAgentToolBlocklist\");function isToolExcludedForCurrentContext(toolName,maxSubagentDepth){if(toolName===ToolNames.AGENT){if(maxSubagentDepth===void 0){return true}const nestingAllowed=!isTopLevelSession()&&spawnBlockReason(maxSubagentDepth)===null;return!nestingAllowed}return getExcluded"
+  },
+  {
+    "file": "chunk-TSEC5BVI.js",
+    "term": "maxSubagentDepth",
+    "excerpt": "nction isToolExcludedForCurrentContext(toolName,maxSubagentDepth){if(toolName===ToolNames.AGENT){if(maxSubagentDepth===void 0){return true}const nestingAllowed=!isTopLevelSession()&&spawnBlockReason(maxSubagentDepth)===null;return!nestingAllowed}return getExcludedToolsForCurrentContext().has(toolName)}__name(isTool"
+  },
+  {
+    "file": "chunk-TSEC5BVI.js",
+    "term": "PLAN_MODE",
+    "excerpt": "Rule,\"matchesRule\");init_esbuild_shims();var SUBAGENT_PLAN_LIFECYCLE_TOOLS=new Set([ToolNames.ENTER_PLAN_MODE,ToolNames.EXIT_PLAN_MODE]);var EXCLUDED_TOOLS_FOR_SUBAGENTS=new Set([ToolNames.AGENT,ToolNames.CRON_CREATE,ToolNames.CRON_LIST,ToolNames.CRON_DELETE,ToolNames.LIST_AGENTS,ToolNames.TASK_STOP,ToolName"
+  },
+  {
+    "file": "chunk-TSEC5BVI.js",
+    "term": "PLAN_MODE",
+    "excerpt": "esbuild_shims();var SUBAGENT_PLAN_LIFECYCLE_TOOLS=new Set([ToolNames.ENTER_PLAN_MODE,ToolNames.EXIT_PLAN_MODE]);var EXCLUDED_TOOLS_FOR_SUBAGENTS=new Set([ToolNames.AGENT,ToolNames.CRON_CREATE,ToolNames.CRON_LIST,ToolNames.CRON_DELETE,ToolNames.LIST_AGENTS,ToolNames.TASK_STOP,ToolNames.SEND_MESSAGE,ToolNames."
+  },
+  {
+    "file": "chunk-TSEC5BVI.js",
+    "term": "plan mode",
+    "excerpt": ",Skill:\"use skill\",SaveMemory:\"save memory\",TodoList:\"write todos\",Lsp:\"use LSP\",ExitPlanMode:\"exit plan mode\",EnterPlanMode:\"enter plan mode\"};function cleanPathSpecifier(specifier){let cleaned=specifier;cleaned=cleaned.replace(/\\/\\*\\*$/,\"/\").replace(/\\/\\*$/,\"/\");if(cleaned.startsWith(\"//\")){cleaned=cleaned"
+  },
+  {
+    "file": "chunk-TSEC5BVI.js",
+    "term": "plan mode",
+    "excerpt": "ave memory\",TodoList:\"write todos\",Lsp:\"use LSP\",ExitPlanMode:\"exit plan mode\",EnterPlanMode:\"enter plan mode\"};function cleanPathSpecifier(specifier){let cleaned=specifier;cleaned=cleaned.replace(/\\/\\*\\*$/,\"/\").replace(/\\/\\*$/,\"/\");if(cleaned.startsWith(\"//\")){cleaned=cleaned.substring(1)}if(!cleaned.endsWi"
+  },
+  {
+    "file": "team-create-46UB7XBO.js",
+    "term": "maxTeammates",
+    "excerpt": "ait backend.init();const manager=new TeamManager(backend,teamFile,this.config.getSubagentManager(),{maxTeammates:this.config.getAgentsSettings().team?.maxTeammates});this.config.setTeamManager(manager);const ctx={teamName,leadAgentId,teammates:{}};this.config.setTeamContext(ctx);const display={type:\"team_result"
+  },
+  {
+    "file": "team-create-46UB7XBO.js",
+    "term": "maxTeammates",
+    "excerpt": "ckend,teamFile,this.config.getSubagentManager(),{maxTeammates:this.config.getAgentsSettings().team?.maxTeammates});this.config.setTeamManager(manager);const ctx={teamName,leadAgentId,teammates:{}};this.config.setTeamContext(ctx);const display={type:\"team_result\",teamName,action:\"created\"};const llmContent=`Team"
+  },
+  {
+    "file": "team-create-46UB7XBO.js",
+    "term": "read_only",
+    "excerpt": " tools \\u2014 match the agent to the work:\n\n- **Enforced read-only teammates** use the Agent tool's read_only option. This replaces the selected agent's tool surface with inspection and team-coordination tools, so shell and file writes are unavailable. Use them for research, search, review, or planning tasks"
+  },
+  {
+    "file": "team-create-46UB7XBO.js",
+    "term": "read_only",
+    "excerpt": "eam (max ${config.getAgentsSettings().team?.maxTeammates??MAX_TEAMMATES} teammates per team). Set \\`read_only: true\\` for investigation workers; pin a single writer to a leader-owned worktree with \\`working_dir\\` when code changes are required, then shut it down before removing that worktree.\n4. **Assign tas"
+  }
+]

@@ -1,0 +1,165 @@
+/*
+ * Copyright (C) 2025-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#include "shared/source/os_interface/linux/external_semaphore_linux.h"
+
+#include "shared/source/debug_settings/debug_settings_manager.h"
+#include "shared/source/os_interface/external_semaphore.h"
+#include "shared/source/os_interface/linux/drm_neo.h"
+#include "shared/source/os_interface/linux/drm_wrappers.h"
+#include "shared/source/os_interface/linux/ioctl_helper.h"
+#include "shared/source/os_interface/linux/sys_calls.h"
+
+#include <cinttypes>
+#include <limits>
+
+namespace NEO {
+
+std::unique_ptr<ExternalSemaphore> ExternalSemaphore::create(OSInterface *osInterface, ExternalSemaphore::Type type, void *handle, int fd, const char *name, ImportResult &importResult) {
+    if (!osInterface) {
+        importResult = ImportResult::unsupported;
+        return nullptr;
+    }
+
+    auto externalSemaphore = ExternalSemaphoreLinux::create(osInterface);
+
+    importResult = externalSemaphore->importSemaphore(nullptr, fd, 0, nullptr, type, false);
+    if (importResult != ImportResult::success) {
+        return nullptr;
+    }
+
+    return externalSemaphore;
+}
+
+std::unique_ptr<ExternalSemaphoreLinux> ExternalSemaphoreLinux::create(OSInterface *osInterface) {
+    auto externalSemaphoreLinux = std::make_unique<ExternalSemaphoreLinux>();
+    externalSemaphoreLinux->osInterface = osInterface;
+
+    return externalSemaphoreLinux;
+}
+
+ExternalSemaphore::ImportResult ExternalSemaphoreLinux::importSemaphore(void *extHandle, int fd, uint32_t flags, const char *name, Type type, bool isNative) {
+    switch (type) {
+    case ExternalSemaphore::OpaqueFd:
+    case ExternalSemaphore::TimelineSemaphoreFd:
+        break;
+    default:
+        DEBUG_BREAK_IF(true);
+        return ImportResult::unsupported;
+    }
+
+    auto drm = this->osInterface->getDriverModel()->as<Drm>();
+
+    struct SyncObjHandle args = {};
+    args.fd = fd;
+    args.handle = 0;
+
+    auto ioctlHelper = drm->getIoctlHelper();
+
+    int ret = ioctlHelper->ioctl(DrmIoctl::syncObjFdToHandle, &args);
+    if (fd > 0) {
+        SysCalls::close(fd);
+    }
+    if (ret != 0) {
+        return ImportResult::invalidResource;
+    }
+
+    this->syncHandle = args.handle;
+    this->type = type;
+
+    return ImportResult::success;
+}
+
+bool ExternalSemaphoreLinux::enqueueWait(uint64_t *fenceValue) {
+    auto drm = this->osInterface->getDriverModel()->as<Drm>();
+    auto ioctlHelper = drm->getIoctlHelper();
+
+    if (this->type == ExternalSemaphore::TimelineSemaphoreFd) {
+        struct SyncObjTimelineWait args = {};
+        args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+        args.points = reinterpret_cast<uintptr_t>(fenceValue);
+        args.timeoutNs = std::numeric_limits<decltype(args.timeoutNs)>::max();
+        args.countHandles = 1u;
+        args.flags = 0x2; // DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT
+
+        PRINT_STRING(debugManager.flags.PrintExternalSemaphoreTimeline.get() == 1, stdout,
+                     "ExternalSemaphore timeline wait: handle=0x%x, value=%" PRIu64 "\n",
+                     this->syncHandle,
+                     fenceValue ? *fenceValue : 0);
+
+        int ret = ioctlHelper->ioctl(DrmIoctl::syncObjTimelineWait, &args);
+        if (ret != 0) {
+            return false;
+        }
+    } else {
+        struct SyncObjWait args = {};
+        args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+        args.timeoutNs = std::numeric_limits<decltype(args.timeoutNs)>::max();
+        args.countHandles = 1u;
+        args.flags = 0x2; // DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT
+
+        int ret = ioctlHelper->ioctl(DrmIoctl::syncObjWait, &args);
+        if (ret != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool ExternalSemaphoreLinux::enqueueSignal(uint64_t *fenceValue) {
+    auto drm = this->osInterface->getDriverModel()->as<Drm>();
+    auto ioctlHelper = drm->getIoctlHelper();
+
+    if (this->type == ExternalSemaphore::TimelineSemaphoreFd) {
+        struct SyncObjTimelineArray args = {};
+        args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+        args.points = reinterpret_cast<uintptr_t>(fenceValue);
+        args.countHandles = 1u;
+
+        PRINT_STRING(debugManager.flags.PrintExternalSemaphoreTimeline.get() == 1, stdout,
+                     "ExternalSemaphore timeline signal: handle=0x%x, value=%" PRIu64 "\n",
+                     this->syncHandle,
+                     fenceValue ? *fenceValue : 0);
+
+        int ret = ioctlHelper->ioctl(DrmIoctl::syncObjTimelineSignal, &args);
+        if (ret != 0) {
+            return false;
+        }
+    } else {
+        struct SyncObjArray args = {};
+        args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+        args.countHandles = 1u;
+
+        int ret = ioctlHelper->ioctl(DrmIoctl::syncObjSignal, &args);
+        if (ret != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+ExternalSemaphoreLinux::~ExternalSemaphoreLinux() {
+    // Safety check: only destroy if we have a valid handle and osInterface
+    if (syncHandle == 0 || osInterface == nullptr) {
+        return;
+    }
+
+    auto drm = osInterface->getDriverModel()->as<Drm>();
+    auto ioctlHelper = drm->getIoctlHelper();
+
+    SyncObjDestroy args = {};
+    args.handle = syncHandle;
+
+    // Ignore return value - destructor should not throw
+    ioctlHelper->ioctl(DrmIoctl::syncObjDestroy, &args);
+
+    syncHandle = 0;
+}
+
+} // namespace NEO

@@ -1,0 +1,1168 @@
+Qwen3.8-max xhigh enable_thinking true, NO thinking_budget. User authorizes maximum10 native child agents EACH Qwen/DeepSeek parent only if safely supported. Direct HTTP has no tools/native children: actual0. No browsing, source execution/import, compilation, native/GPU calls, installs/auth changes or product edits. Return ONE complete JSON exactkeys status,source,tests_source,analysis,prerequisites,evidence_limits,references. Status PROPOSED|ANALYSIS|REFUSED; source and tests_source STRING (not line arrays) <=32000/16000 chars, explanation arrays1..40 nonemptystrings<=8192. Complete compact source and actual-file behavioral tests; no embedded duplicated implementation or token-grep fake tests. Generated code UNTRUSTED, ROOT independently admits any execution. Primary excerpts supplied are actual pinned snapshots; label unsupported hypotheses and unavailable hardware, do not invent citations or experiments. Strict JSON machine statuses PASS/FAIL/NOT_CHECKED and exits0/1/2; payload-only scope never qualifies direct physical transport, pooling or four-card capacity. All cleanup failures/timeout uncertainty are explicit, never claim PASS before checked cleanup.
+Deliver an actual Linux C++17 reverse route experimental apparatus: selected NVIDIA Vulkan buffer DEVICE allocation DMA_BUF export -> selected Intel Level Zero DEVICE FD import -> Intel device-copy into owned host-readable output -> independent CPU full64KiB reference. This is not the prior CUDA exporter or EGL texture consumer. Hardware-gated proposal only, no Intel exists on current host; do not invent observed import/transport. Query-only mode never allocates. Payload success scope PAYLOAD_EXPERIMENT_ONLY, direct_transport_qualified=false even full byte parity: residency/topology/cache evidence remains separate.
+Exact device selection full128bit UUID + canonical PCI arguments, strict unknown/duplicate/malformed args refusal. Enumerate bounded counts with count mutation/error/INCOMPLETE failclosed, only root GPUs; reject physical aliases/subdevice duplicates. Vulkan1.1 runtime and required extension/entrypoint gates; CUDA is not used. NVIDIA vendor10de selected explicitly; Intel L0vendor8086 root eligibility before allocation. Query external buffer using EXACT creation flags/usage TRANSFER_SRC|TRANSFER_DST and DMA_BUF, examine externalMemoryProperties EXPORTABLE/COMPATIBLE and DEDICATED_ONLY, not nonexistent member. L0 query returned external memory capabilities and DMA_BUF import flag; success value0 unsupported=>NOT_CHECKED2, attempted API failures=>FAIL1/code preserved. No blanket unsupported inference from query errors. Logical DEVICE/local type is not physical VRAM proof.
+64KiB logical payload16384 uint32, original independent CPU deterministic constant pattern remains immutable. GPU vkCmdFillBuffer legal constant write, optional producer GPU one-word vkCmdUpdateBuffer corruption BEFORE final barrier/completion/export; proper transfer-write ordering and queue-family indices. Bound VkMemoryRequirements.size/alignment/heap chosenDEVICE_LOCAL classification and maximum allocation (may exceed64KiB but hard4MiB cap) before allocate; dedicated pNext if required, export allocationpNext and bufferbindingoffset0. Owned source completed by <=10s Vulkan fence before handoff, HOST_CONTROL_PLANE_SERIALIZED completion not inter-driver cache proof. vkGetMemoryFdKHR transfers newFD to application. On the pinned Intel runtime d4fc DEVICE import success consumes FD, failure retains; this branch-specific contract is not a universal installed-driver guarantee or host-USM rule. Preserve exact ownership state, fd0valid, duplicate handle only with justified exact bookkeeping; no silent leak/doubleclose. ze_external_memory_import_fd_t uses flags not type. DEVICE import alloc size must match exported backing extent/alignment protocol and evidence, reject unsupported mapping, preserve APIerror. Query imported allocation ownership actualselecteddevice, distinguish logical type from residency. After actual Intel command-list copy complete bounded10s, host output full16384 words compared with originalreference, full mismatches count/first/max not earlybreak. Payload baseline and GPUproducer corruption control distinct, corruption must exitFAIL1. Do not refill consumer pattern or corrupt expectedCPUreference. Allocation/copy ownership, every API/free/FDclose checked. Busy timedout queue must not be destroyed/freed and called CLEANUP; UNKNOWN_DRAIN receipt plus parent-owned hard process timeout plan. No infinite waits or dummyfences. Strict JSON allpaths finite/counts/status/actualcodes/hashpin inputs and cleanup, no key=value invalid JSON. Explicit external contract/interface assumptions, unsupported cache/visibility not fabricated proof. Pure behavioral tests via actual official Vulkan/L0 headers and injected dispatch functions compile-proposed only, no GPU or driver in tests. API/missingcap/error/FDsuccess/failure/cleanup/fullcorruption and strict CLI/JSON controls.
+IMPORTANT Vulkan-to-Vulkan VkImportMemoryFdInfoKHR same-device constraints do not automatically define legal L0 import. A bounded documented export/import API experiment may discover support; do not require an already-proven crossvendor protocol to attempt it, but mark semantics/physical coherence unresolved. Provide exact primary requirement citations from supplied snapshots only.
+
+
+EXACT USED API/SOURCE EXCERPTS
+VULKAN {"path": "E:\\the_harness\\records\\vendor_headers\\vulkan_1.4.321\\include\\vulkan\\vulkan_core.h", "sha256": "3172a758081a172f4c46771a88046a53d5791ef2bd24329ff4bd7ed8c6f12abd", "bytes": 1204373}
+typedef struct VkPhysicalDeviceExternalBufferInfo {
+    VkStructureType                       sType;
+    const void*                           pNext;
+    VkBufferCreateFlags                   flags;
+    VkBufferUsageFlags                    usage;
+    VkExternalMemoryHandleTypeFlagBits    handleType;
+} VkPhysicalDeviceExternalBufferInfo;
+
+typedef struct VkExternalMemoryProperties {
+    VkExternalMemoryFeatureFlags       externalMemoryFeatures;
+    VkExternalMemoryHandleTypeFlags    exportFromImportedHandleTypes;
+    VkExternalMemoryHandleTypeFlags    compatibleHandleTypes;
+} VkExternalMemoryProperties;
+
+typedef struct VkExternalBufferProperties {
+    VkStructureType               sType;
+    void*                         pNext;
+    VkExternalMemoryProperties    externalMemoryProperties;
+} VkExternalBufferProperties;
+
+typedef struct VkExternalMemoryBufferCreateInfo {
+    VkStructureType                    sType;
+    const void*                        pNext;
+    VkExternalMemoryHandleTypeFlags    handleTypes;
+} VkExternalMemoryBufferCreateInfo;
+
+typedef struct VkExportMemoryAllocateInfo {
+    VkStructureType                    sType;
+    const void*                        pNext;
+    VkExternalMemoryHandleTypeFlags    handleTypes;
+} VkExportMemoryAllocateInfo;
+
+typedef struct VkMemoryGetFdInfoKHR {
+    VkStructureType                       sType;
+    const void*                           pNext;
+    VkDeviceMemory                        memory;
+    VkExternalMemoryHandleTypeFlagBits    handleType;
+} VkMemoryGetFdInfoKHR;
+
+typedef struct VkPhysicalDeviceIDProperties {
+    VkStructureType    sType;
+    void*              pNext;
+    uint8_t            deviceUUID[VK_UUID_SIZE];
+    uint8_t            driverUUID[VK_UUID_SIZE];
+    uint8_t            deviceLUID[VK_LUID_SIZE];
+    uint32_t           deviceNodeMask;
+    VkBool32           deviceLUIDValid;
+} VkPhysicalDeviceIDProperties;
+
+typedef struct VkPhysicalDevicePCIBusInfoPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           pciDomain;
+    uint32_t           pciBus;
+    uint32_t           pciDevice;
+    uint32_t           pciFunction;
+} VkPhysicalDevicePCIBusInfoPropertiesEXT;
+
+typedef struct VkMemoryDedicatedRequirements {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           prefersDedicatedAllocation;
+    VkBool32           requiresDedicatedAllocation;
+} VkMemoryDedicatedRequirements;
+
+typedef struct VkMemoryDedicatedAllocateInfo {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkImage            image;
+    VkBuffer           buffer;
+} VkMemoryDedicatedAllocateInfo;
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryFdKHR(
+    VkDevice                                    device,
+    const VkMemoryGetFdInfoKHR*                 pGetFdInfo,
+    int*                                        pFd);
+
+VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalBufferProperties(
+    VkPhysicalDevice                            physicalDevice,
+    const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
+    VkExternalBufferProperties*                 pExternalBufferProperties);
+
+VKAPI_ATTR void VKAPI_CALL vkGetBufferMemoryRequirements2(
+    VkDevice                                    device,
+    const VkBufferMemoryRequirementsInfo2*      pInfo,
+    VkMemoryRequirements2*                      pMemoryRequirements);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdFillBuffer(
+    VkCommandBuffer                             commandBuffer,
+    VkBuffer                                    dstBuffer,
+    VkDeviceSize                                dstOffset,
+    VkDeviceSize                                size,
+    uint32_t                                    data);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdUpdateBuffer(
+    VkCommandBuffer                             commandBuffer,
+    VkBuffer                                    dstBuffer,
+    VkDeviceSize                                dstOffset,
+    VkDeviceSize                                dataSize,
+    const void*                                 pData);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdPipelineBarrier(
+    VkCommandBuffer                             commandBuffer,
+    VkPipelineStageFlags                        srcStageMask,
+    VkPipelineStageFlags                        dstStageMask,
+    VkDependencyFlags                           dependencyFlags,
+    uint32_t                                    memoryBarrierCount,
+    const VkMemoryBarrier*                      pMemoryBarriers,
+    uint32_t                                    bufferMemoryBarrierCount,
+    const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
+    uint32_t                                    imageMemoryBarrierCount,
+    const VkImageMemoryBarrier*                 pImageMemoryBarriers);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkWaitForFences(
+    VkDevice                                    device,
+    uint32_t                                    fenceCount,
+    const VkFence*                              pFences,
+    VkBool32                                    waitAll,
+    uint64_t                                    timeout);
+LEVEL ZERO {"path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h", "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de", "bytes": 1240682}
+typedef struct _ze_external_memory_import_fd_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_external_memory_type_flags_t flags;                                  ///< [in] flags specifying the memory import type for the file descriptor.
+                                                                            ///< must be 0 (default) or a valid combination of ::ze_external_memory_type_flags_t
+    int fd;                                                                 ///< [in] the file descriptor handle to import
+
+} ze_external_memory_import_fd_t;
+
+typedef enum _ze_external_memory_type_flag_t
+{
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_FD = ZE_BIT(0),                     ///< an opaque POSIX file descriptor handle
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF = ZE_BIT(1),                       ///< a file descriptor handle for a Linux dma_buf
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_WIN32 = ZE_BIT(2),                  ///< an NT handle
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_WIN32_KMT = ZE_BIT(3),              ///< a global share (KMT) handle
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D11_TEXTURE = ZE_BIT(4),                 ///< an NT handle referring to a Direct3D 10 or 11 texture resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D11_TEXTURE_KMT = ZE_BIT(5),             ///< a global share (KMT) handle referring to a Direct3D 10 or 11 texture
+                                                                            ///< resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D12_HEAP = ZE_BIT(6),                    ///< an NT handle referring to a Direct3D 12 heap resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D12_RESOURCE = ZE_BIT(7),                ///< an NT handle referring to a Direct3D 12 committed resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_EXTERNAL_MEMORY_TYPE_FLAG_* ENUMs
+
+} ze_external_memory_type_flag_t;
+
+typedef struct _ze_device_external_memory_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_external_memory_type_flags_t memoryAllocationImportTypes;            ///< [out] Supported external memory import types for memory allocations.
+    ze_external_memory_type_flags_t memoryAllocationExportTypes;            ///< [out] Supported external memory export types for memory allocations.
+    ze_external_memory_type_flags_t imageImportTypes;                       ///< [out] Supported external memory import types for images.
+    ze_external_memory_type_flags_t imageExportTypes;                       ///< [out] Supported external memory export types for images.
+
+} ze_device_external_memory_properties_t;
+
+typedef struct _ze_device_mem_alloc_desc_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_device_mem_alloc_flags_t flags;                                      ///< [in] flags specifying additional allocation controls.
+                                                                            ///< must be 0 (default) or a valid combination of ::ze_device_mem_alloc_flag_t;
+                                                                            ///< default behavior may use implicit driver-based heuristics.
+    uint32_t ordinal;                                                       ///< [in] ordinal of the device's local memory to allocate from.
+                                                                            ///< must be less than the count returned from ::zeDeviceGetMemoryProperties.
+
+} ze_device_mem_alloc_desc_t;
+
+typedef struct _ze_host_mem_alloc_desc_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_host_mem_alloc_flags_t flags;                                        ///< [in] flags specifying additional allocation controls.
+                                                                            ///< must be 0 (default) or a valid combination of ::ze_host_mem_alloc_flag_t;
+                                                                            ///< default behavior may use implicit driver-based heuristics.
+
+} ze_host_mem_alloc_desc_t;
+
+typedef struct _ze_device_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_device_type_t type;                                                  ///< [out] generic device type
+    uint32_t vendorId;                                                      ///< [out] vendor id from PCI configuration
+    uint32_t deviceId;                                                      ///< [out] device id from PCI configuration.
+                                                                            ///< Note, the device id uses little-endian format.
+    ze_device_property_flags_t flags;                                       ///< [out] 0 (none) or a valid combination of ::ze_device_property_flag_t
+    uint32_t subdeviceId;                                                   ///< [out] sub-device id. Only valid if ::ZE_DEVICE_PROPERTY_FLAG_SUBDEVICE
+                                                                            ///< is set.
+    uint32_t coreClockRate;                                                 ///< [out] Clock rate for device core.
+    uint64_t maxMemAllocSize;                                               ///< [out] Maximum memory allocation size.
+    uint32_t maxHardwareContexts;                                           ///< [out] Maximum number of logical hardware contexts.
+    uint32_t maxCommandQueuePriority;                                       ///< [out] Maximum priority for command queues. Higher value is higher
+                                                                            ///< priority.
+    uint32_t numThreadsPerEU;                                               ///< [out] Maximum number of threads per EU.
+    uint32_t physicalEUSimdWidth;                                           ///< [out] The physical EU simd width.
+    uint32_t numEUsPerSubslice;                                             ///< [out] Maximum number of EUs per sub-slice.
+    uint32_t numSubslicesPerSlice;                                          ///< [out] Maximum number of sub-slices per slice.
+    uint32_t numSlices;                                                     ///< [out] Maximum number of slices.
+    uint64_t timerResolution;                                               ///< [out] @deprecated when using ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES
+                                                                            ///< since 1.17: Use ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES_1_2 to obtain
+                                                                            ///< timerResolution in cycles/sec for profiling and timestamps.
+    uint32_t timestampValidBits;                                            ///< [out] Returns the number of valid bits in the timestamp value. (i.e
+                                                                            ///< can be used to calculate the max value of the device timestamp in
+                                                                            ///< hardware or get the mask of valid bits in the timestamp value).
+                                                                            ///< timestampValidBits may or may not be same as the
+                                                                            ///< kernelTimestampValidBits as they may be tracked using different
+                                                                            ///< register sizes which are platform specific.
+    uint32_t kernelTimestampValidBits;                                      ///< [out] Returns the number of valid bits in the kernel timestamp values.
+                                                                            ///< (i.e can beused to calculate the max value of the  kernel timestamp in
+                                                                            ///< hardware or get the mask of valid bits in the kernel timestamp value).
+    ze_device_uuid_t uuid;                                                  ///< [out] universal unique identifier. Note: Subdevices will have their
+                                                                            ///< own uuid.
+    char name[ZE_MAX_DEVICE_NAME];                                          ///< [out] Device name
+
+} ze_device_properties_t;
+
+typedef struct _ze_memory_allocation_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_memory_type_t type;                                                  ///< [out] type of allocated memory
+    uint64_t id;                                                            ///< [out] identifier for this allocation
+    uint64_t pageSize;                                                      ///< [out] page size used for allocation
+
+} ze_memory_allocation_properties_t;
+
+typedef enum _ze_device_mem_alloc_flag_t
+{
+    ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_CACHED = ZE_BIT(0),                       ///< device should cache allocation
+    ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED = ZE_BIT(1),                     ///< device should not cache allocation (UC)
+    ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_INITIAL_PLACEMENT = ZE_BIT(2),            ///< optimize shared allocation for first access on the device
+    ZE_DEVICE_MEM_ALLOC_FLAG_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_DEVICE_MEM_ALLOC_FLAG_* ENUMs
+
+} ze_device_mem_alloc_flag_t;
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeDeviceGetExternalMemoryProperties(
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device
+    ze_device_external_memory_properties_t* pExternalMemoryProperties       ///< [in,out] query result for external memory properties
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemAllocDevice(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    const ze_device_mem_alloc_desc_t* device_desc,                          ///< [in] pointer to device memory allocation descriptor
+    size_t size,                                                            ///< [in] size in bytes to allocate; must be less than or equal to the
+                                                                            ///< `maxMemAllocSize` member of ::ze_device_properties_t
+    size_t alignment,                                                       ///< [in] minimum alignment in bytes for the allocation; must be a power of
+                                                                            ///< two
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device
+    void** pptr                                                             ///< [out] pointer to device allocation
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemGetAllocProperties(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    const void* ptr,                                                        ///< [in] memory pointer to query
+    ze_memory_allocation_properties_t* pMemAllocProperties,                 ///< [in,out] query result for memory allocation properties
+    ze_device_handle_t* phDevice                                            ///< [out][optional] device associated with this allocation
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemAllocHost(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    const ze_host_mem_alloc_desc_t* host_desc,                              ///< [in] pointer to host memory allocation descriptor
+    size_t size,                                                            ///< [in] size in bytes to allocate; must be less than or equal to the
+                                                                            ///< `maxMemAllocSize` member of ::ze_device_properties_t
+    size_t alignment,                                                       ///< [in] minimum alignment in bytes for the allocation; must be a power of
+                                                                            ///< two
+    void** pptr                                                             ///< [out] pointer to host allocation
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeCommandListAppendMemoryCopy(
+    ze_command_list_handle_t hCommandList,                                  ///< [in] handle of command list
+    void* dstptr,                                                           ///< [in] pointer to destination memory to copy to
+    const void* srcptr,                                                     ///< [in] pointer to source memory to copy from
+    size_t size,                                                            ///< [in] size in bytes to copy
+    ze_event_handle_t hSignalEvent,                                         ///< [in][optional] handle of the event to signal on completion
+    uint32_t numWaitEvents,                                                 ///< [in][optional] number of events to wait on before launching; must be 0
+                                                                            ///< if `nullptr == phWaitEvents`
+    ze_event_handle_t* phWaitEvents                                         ///< [in][optional][range(0, numWaitEvents)] handle of the events to wait
+                                                                            ///< on before launching
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeCommandQueueSynchronize(
+    ze_command_queue_handle_t hCommandQueue,                                ///< [in] handle of the command queue
+    uint64_t timeout                                                        ///< [in] if non-zero, then indicates the maximum time (in nanoseconds) to
+                                                                            ///< yield before returning ::ZE_RESULT_SUCCESS or ::ZE_RESULT_NOT_READY;
+                                                                            ///< if zero, then immediately returns the status of the command queue;
+                                                                            ///< if `UINT64_MAX`, then function will not return until complete or
+                                                                            ///< device is lost.
+                                                                            ///< Due to external dependencies, timeout may be rounded to the closest
+                                                                            ///< value allowed by the accuracy of those dependencies.
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeCommandQueueCreate(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device object
+    const ze_command_queue_desc_t* desc,                                    ///< [in] pointer to command queue descriptor
+    ze_command_queue_handle_t* phCommandQueue                               ///< [out] pointer to handle of command queue object created
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemFree(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    void* ptr                                                               ///< [in][release] pointer to memory to free
+    );
+
+FULL PINNED INPUT {"path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\external_memory.adoc", "sha256": "101ee727ee6d90dc863776994274a9461f7f9172ca1e7da9bb820c2a6f77e47d", "bytes": 11740}
+// Copyright 2016-2025 The Khronos Group Inc.
+//
+// SPDX-License-Identifier: CC-BY-4.0
+
+include::{generated}/meta/{refprefix}VK_KHR_external_memory.adoc[]
+
+=== Other Extension Metadata
+
+*Last Modified Date*::
+    2016-10-20
+*IP Status*::
+    No known IP claims.
+*Interactions and External Dependencies*::
+  - Interacts with `apiext:VK_KHR_dedicated_allocation`.
+  - Interacts with `apiext:VK_NV_dedicated_allocation`.
+*Contributors*::
+  - Faith Ekstrand, Intel
+  - Ian Elliott, Google
+  - Jesse Hall, Google
+  - Tobias Hector, Imagination Technologies
+  - James Jones, NVIDIA
+  - Jeff Juliano, NVIDIA
+  - Matthew Netsch, Qualcomm Technologies, Inc.
+  - Daniel Rakos, AMD
+  - Carsten Rohde, NVIDIA
+  - Ray Smith, ARM
+  - Lina Versace, Google
+
+=== Description
+
+An application may wish to reference device memory in multiple Vulkan
+logical devices or instances, in multiple processes, and/or in multiple
+APIs.
+This extension enables an application to export non-Vulkan handles from
+Vulkan memory objects such that the underlying resources can be referenced
+outside the scope of the Vulkan logical device that created them.
+
+=== Promotion to Vulkan 1.1
+
+All functionality in this extension is included in core Vulkan 1.1, with the
+KHR suffix omitted.
+The original type, enum, and command names are still available as aliases of
+the core functionality.
+
+include::{generated}/interfaces/VK_KHR_external_memory.adoc[]
+
+=== Issues
+
+1) How do applications correlate two physical devices across process or
+Vulkan instance boundaries?
+
+*RESOLVED*: New device ID fields have been introduced by
+`apiext:VK_KHR_external_memory_capabilities`.
+These fields, combined with the existing
+slink:VkPhysicalDeviceProperties::pname:driverVersion field can be used to
+identify compatible devices across processes, drivers, and APIs.
+slink:VkPhysicalDeviceProperties::pname:pipelineCacheUUID is not sufficient
+for this purpose because despite its description in the specification, it
+need only identify a unique pipeline cache format in practice.
+Multiple devices may be able to use the same pipeline cache data, and hence
+it would be desirable for all of them to have the same pipeline cache UUID.
+However, only the same concrete physical device can be used when sharing
+memory, so an actual unique device ID was introduced.
+Further, the pipeline cache UUID was specific to Vulkan, but correlation
+with other, non-extensible APIs is required to enable interoperation with
+those APIs.
+
+2) If memory objects are shared between processes and APIs, is this
+considered aliasing according to the rules outlined in the
+<<resources-memory-aliasing,Memory Aliasing>> section?
+
+*RESOLVED*: Yes.
+Applications must take care to obey all restrictions imposed on aliased
+resources when using memory across multiple Vulkan instances or other APIs.
+
+3) Are new image layouts or metadata required to specify image layouts and
+layout transitions compatible with non-Vulkan APIs, or with other instances
+of the same Vulkan driver?
+
+*RESOLVED*: Separate instances of the same Vulkan driver running on the same
+GPU should have identical internal layout semantics, so applications have
+the tools they need to ensure views of images are consistent between the two
+instances.
+Other APIs will fall into two categories: Those that are Vulkan- compatible,
+and those that are Vulkan-incompatible.
+Vulkan-incompatible APIs will require the image to be in the GENERAL layout
+whenever they are accessing them.
+
+Note this does not attempt to address cross-device transitions, nor
+transitions to engines on the same device which are not visible within the
+Vulkan API.
+Both of these are beyond the scope of this extension.
+
+4) Is a new barrier flag or operation of some type needed to prepare
+external memory for handoff to another Vulkan instance or API and/or receive
+it from another instance or API?
+
+*RESOLVED*: Yes.
+Some implementations need to perform additional cache management when
+transitioning memory between address spaces and other APIs, instances, or
+processes which may operate in a separate address space.
+Options for defining this transition include:
+
+  * A new structure that can be added to the pname:pNext list in
+    slink:VkMemoryBarrier, slink:VkBufferMemoryBarrier, and
+    slink:VkImageMemoryBarrier.
+  * A new bit in tlink:VkAccessFlags that can be set to indicate an
+    "`external`" access.
+  * A new bit in tlink:VkDependencyFlags
+  * A new special queue family that represents an "`external`" queue.
+
+A new structure has the advantage that the type of external transition can
+be described in as much detail as necessary.
+However, there is not currently a known need for anything beyond
+differentiating between external and internal accesses, so this is likely an
+over-engineered solution.
+The access flag bit has the advantage that it can be applied at buffer,
+image, or global granularity, and semantically it maps pretty well to the
+operation being described.
+Additionally, the API already includes ename:VK_ACCESS_MEMORY_READ_BIT and
+ename:VK_ACCESS_MEMORY_WRITE_BIT which appear to be intended for this
+purpose.
+However, there is no obvious pipeline stage that would correspond to an
+external access, and therefore no clear way to use
+ename:VK_ACCESS_MEMORY_READ_BIT or ename:VK_ACCESS_MEMORY_WRITE_BIT.
+tlink:VkDependencyFlags and tlink:VkPipelineStageFlags operate at command
+granularity rather than image or buffer granularity, which would make an
+entire pipeline barrier an internal->external or external->internal barrier.
+This may not be a problem in practice, but seems like the wrong scope.
+Another downside of tlink:VkDependencyFlags is that it lacks inherent
+directionality: there are no ptext:src and ptext:dst variants of it in the
+barrier or dependency description semantics, so two bits might need to be
+added to describe both internal->external and external->internal
+transitions.
+Transitioning a resource to a special queue family corresponds well with the
+operation of transitioning to a separate Vulkan instance, in that both
+operations ideally include scheduling a barrier on both sides of the
+transition: Both the releasing and the acquiring queue or process.
+Using a special queue family requires adding an additional reserved queue
+family index.
+Reusing ename:VK_QUEUE_FAMILY_IGNORED would have left it unclear how to
+transition a concurrent usage resource from one process to another, since
+the semantics would have likely been equivalent to the currently-ignored
+transition of
+ename:VK_QUEUE_FAMILY_IGNORED{nbsp}->{nbsp}ename:VK_QUEUE_FAMILY_IGNORED.
+Fortunately, creating a new reserved queue family index is not invasive.
+
+Based on the above analysis, the approach of transitioning to a special
+"`external`" queue family was chosen.
+
+5) Do internal driver memory arrangements and/or other internal driver image
+properties need to be exported and imported when sharing images across
+processes or APIs.
+
+*RESOLVED*: Some vendors claim this is necessary on their implementations,
+but it was determined that the security risks of allowing opaque metadata to
+be passed from applications to the driver were too high.
+Therefore, implementations which require metadata will need to associate it
+with the objects represented by the external handles, and rely on the
+dedicated allocation mechanism to associate the exported and imported memory
+objects with a single image or buffer.
+
+6) Most prior interoperation and cross-process sharing APIs have been based
+on image-level sharing.
+Should Vulkan sharing be based on memory-object sharing or image sharing?
+
+*RESOLVED*: These extensions have assumed memory-level sharing is the
+correct granularity.
+Vulkan is a lower-level API than most prior APIs, and as such attempts to
+closely align with to the underlying primitives of the hardware and
+system-level drivers it abstracts.
+In general, the resource that holds the backing store for both images and
+buffers of various types is memory.
+Images and buffers are merely metadata containing brief descriptions of the
+layout of bits within that memory.
+
+Because memory object-based sharing is aligned with the overall Vulkan API
+design, it enables the full range of Vulkan capabilities with external
+objects.
+External memory can be used as backing for sparse images, for example,
+whereas such usage would be awkward at best with a sharing mechanism based
+on higher-level primitives such as images.
+Further, aligning the mechanism with the API in this way provides some hope
+of trivial compatibility with future API enhancements.
+If new objects backed by memory objects are added to the API, they too can
+be used across processes with minimal additions to the base external memory
+APIs.
+
+Earlier APIs implemented interop at a higher level, and this necessitated
+entirely separate sharing APIs for images and buffers.
+To co-exist and interoperate with those APIs, the Vulkan external sharing
+mechanism must accommodate their model.
+However, if it can be agreed that memory-based sharing is the more desirable
+and forward-looking design, legacy interoperation constraints can be
+considered another reason to favor memory-based sharing: while native and
+legacy driver primitives that may be used to implement sharing may not be as
+low-level as the API here suggests, raw memory is still the least common
+denominator among the types.
+Image-based sharing can be cleanly derived from a set of base memory- object
+sharing APIs with minimal effort, whereas image-based sharing does not
+generalize well to buffer or raw-memory sharing.
+Therefore, following the general Vulkan design principle of minimalism, it
+is better to expose interopability with image-based native and external
+primitives via the memory sharing API, and place sufficient limits on their
+usage to ensure they can be used only as backing for equivalent Vulkan
+images.
+This provides a consistent API for applications regardless of which platform
+or external API they are targeting, which makes development of multi-API and
+multi-platform applications simpler.
+
+7) Should Vulkan define a common external handle type and provide Vulkan
+functions to facilitate cross-process sharing of such handles rather than
+relying on native handles to define the external objects?
+
+*RESOLVED*: No.
+Cross-process sharing of resources is best left to native platforms.
+There are myriad security and extensibility issues with such a mechanism,
+and attempting to re-solve all those issues within Vulkan does not align
+with Vulkan's purpose as a graphics API.
+If desired, such a mechanism could be built as a layer or helper library on
+top of the opaque native handle defined in this family of extensions.
+
+8) Must implementations provide additional guarantees about state implicitly
+included in memory objects for those memory objects that may be exported?
+
+*RESOLVED*: Implementations must ensure that sharing memory objects does not
+transfer any information between the exporting and importing instances and
+APIs other than that required to share the data contained in the memory
+objects explicitly shared.
+As specific examples, data from previously freed memory objects that used
+the same underlying physical memory, and data from memory objects using
+adjacent physical memory must not be visible to applications importing an
+exported memory object.
+
+9) Must implementations validate external handles the application provides
+as inputs to memory import operations?
+
+*RESOLVED*: Implementations must return an error to the application if the
+provided memory handle cannot be used to complete the requested import
+operation.
+However, implementations need not validate handles are of the exact type
+specified by the application.
+
+=== Version History
+
+  * Revision 1, 2016-10-20 (James Jones)
+  ** Initial version
+
+
+FULL PINNED INPUT {"path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\external_memory_fd.adoc", "sha256": "8f402e86c670909c8c6c6b757e4b553ab42a5d0ba8057e226cbda52aa8f66100", "bytes": 1901}
+// Copyright 2016-2025 The Khronos Group Inc.
+//
+// SPDX-License-Identifier: CC-BY-4.0
+
+include::{generated}/meta/{refprefix}VK_KHR_external_memory_fd.adoc[]
+
+=== Other Extension Metadata
+
+*Last Modified Date*::
+    2016-10-21
+*IP Status*::
+    No known IP claims.
+*Contributors*::
+  - James Jones, NVIDIA
+  - Jeff Juliano, NVIDIA
+
+=== Description
+
+An application may wish to reference device memory in multiple Vulkan
+logical devices or instances, in multiple processes, and/or in multiple
+APIs.
+This extension enables an application to export POSIX file descriptor
+handles from Vulkan memory objects and to import Vulkan memory objects from
+POSIX file descriptor handles exported from other Vulkan memory objects or
+from similar resources in other APIs.
+
+include::{generated}/interfaces/VK_KHR_external_memory_fd.adoc[]
+
+=== Issues
+
+1) Does the application need to close the file descriptor returned by
+flink:vkGetMemoryFdKHR?
+
+*RESOLVED*: Yes, unless it is passed back in to a driver instance to import
+the memory.
+A successful get call transfers ownership of the file descriptor to the
+application, and a successful import transfers it back to the driver.
+Destroying the original memory object will not close the file descriptor or
+remove its reference to the underlying memory resource associated with it.
+
+2) Do drivers ever need to expose multiple file descriptors per memory
+object?
+
+*RESOLVED*: No.
+This would indicate there are actually multiple memory objects, rather than
+a single memory object.
+
+3) How should the valid size and memory type for POSIX file descriptor
+memory handles created outside of Vulkan be specified?
+
+*RESOLVED*: The valid memory types are queried directly from the external
+handle.
+The size will be specified by future extensions that introduce such external
+memory handle types.
+
+=== Version History
+
+  * Revision 1, 2016-10-21 (James Jones)
+  ** Initial revision
+
+
+FULL PINNED INPUT {"path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\external_memory_dma_buf.adoc", "sha256": "de12385f23b7bbe24c7f9f0c752b08aaccafd12023ba4d07295787e382a22f54", "bytes": 2261}
+// Copyright 2017-2025 The Khronos Group Inc.
+//
+// SPDX-License-Identifier: CC-BY-4.0
+
+include::{generated}/meta/{refprefix}VK_EXT_external_memory_dma_buf.adoc[]
+
+=== Other Extension Metadata
+
+*Last Modified Date*::
+    2017-10-10
+*IP Status*::
+    No known IP claims.
+*Contributors*::
+  - Lina Versace, Google
+  - James Jones, NVIDIA
+  - Faith Ekstrand, Intel
+
+=== Description
+
+A code:dma_buf is a type of file descriptor, defined by the Linux kernel,
+that allows sharing memory across kernel device drivers and across
+processes.
+This extension enables applications to import a code:dma_buf as
+slink:VkDeviceMemory, to export slink:VkDeviceMemory as a code:dma_buf, and
+to create slink:VkBuffer objects that can: be bound to that memory.
+
+include::{generated}/interfaces/VK_EXT_external_memory_dma_buf.adoc[]
+
+=== Issues
+
+1) How does the application, when creating a slink:VkImage that it intends
+to bind to code:dma_buf slink:VkDeviceMemory containing an externally
+produced image, specify the memory layout (such as row pitch and DRM format
+modifier) of the slink:VkImage? In other words, how does the application
+achieve behavior comparable to that provided by
+https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import.txt[`EGL_EXT_image_dma_buf_import`]
+and
+https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import_modifiers.txt[`EGL_EXT_image_dma_buf_import_modifiers`]
+?
+
+*RESOLVED*: Features comparable to those in
+https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import.txt[`EGL_EXT_image_dma_buf_import`]
+and
+https://registry.khronos.org/EGL/extensions/EXT/EGL_EXT_image_dma_buf_import_modifiers.txt[`EGL_EXT_image_dma_buf_import_modifiers`]
+will be provided by an extension layered atop this one.
+
+2) Without the ability to specify the memory layout of external code:dma_buf
+images, how is this extension useful?
+
+*RESOLVED*: This extension provides exactly one new feature: the ability to
+import/export between code:dma_buf and slink:VkDeviceMemory.
+This feature, together with features provided by
+`apiext:VK_KHR_external_memory_fd`, is sufficient to bind a slink:VkBuffer
+to code:dma_buf.
+
+=== Version History
+
+  * Revision 1, 2017-10-10 (Lina Versace)
+  ** Squashed internal revisions
+
+
+FULL PINNED INPUT {"path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\bridge_contract_findings.md", "sha256": "4e02a99eaf54e92d13ccf5d7a1deb15981f31c050a63f08865eb4862f392dbc8", "bytes": 6314}
+# Pinned Intel L0 DMA-BUF import and semaphore trace
+
+Scope: source-only tracing against the staged official Intel compute-runtime tree at commit `d4fc0756006fa28738766cb66034dc9acadea91e`. No compiler, provider, GPU, context, allocation, or transfer was run. The root staging receipt is `records/root_continuation_20261004/intel_runtime_contract_sources_20261004T2100Z/PINNED_SOURCE_RECEIPT.json`. Additional same-commit files are recorded in `source_manifest.json` in this folder; each was obtained by exact path from that commit and checked against the tree entry's declared Git blob ID and byte size, then locally SHA-256 pinned.
+
+## DEVICE external-FD import and lifetime
+
+For `zeMemAllocDevice` with a shared opaque-FD or DMA-BUF descriptor, `Context::allocDeviceMem` calls `getMemHandlePtr` with `isHostIpcAllocation=false` (`context.cpp:301-315`). A null import returns `ZE_RESULT_ERROR_INVALID_ARGUMENT` before `closeExternalHandle(fd)` (`context.cpp:316-319`). Thus, on this path, the caller's FD is consumed by the L0 context only after successful import; on this import failure the caller retains it. The close implementation invokes `close(2)` only for the DRM driver (`context_drm_or_wddm.cpp:59-67`).
+
+The path is `Context::getMemHandlePtr` -> `DriverHandle::importFdHandle` -> `MemoryManager::importFdHandle` -> `DrmMemoryManager::createGraphicsAllocationFromSharedHandle` (`context_drm_or_wddm.cpp:70-107`, `driver_handle.cpp:692-715`, `memory_manager.cpp:1556-1603`, `drm_memory_manager.cpp:1836-2005`). For this non-host-IPC case, NEO's shared-handle import calls PRIME_FD_TO_HANDLE, tags the imported allocation `MemoryPool::systemCpuInaccessible`, and returns a BO-backed `DrmAllocation` with the original FD stored as its shared handle (`drm_memory_manager.cpp:1836-1877, 1993-2005`). L0 marks the allocation imported and classifies it internally as `deviceUnifiedMemory` (`memory_manager.cpp:1595-1603`). These runtime enum/pool labels describe this implementation's allocation bookkeeping; they do not establish where another driver's allocation physically resides or prove VRAM P2P.
+
+On destruction, `DrmMemoryManager::freeGraphicsMemoryImpl` unrefs the BO and closes the shared handle only for non-imported allocations (`drm_memory_manager.cpp:2058-2107`). Since the imported allocation has `setIsImported()`, the importer-side descriptor is not closed a second time through `closeSharedHandle`; L0 already closed its input FD after successful import. This conclusion is specifically for `zeMemAllocDevice`/direct DMA-BUF import above. Do not apply the separate `createUSMHostAllocationFromSharedHandle(... consumeFd ...)` host-IPC ownership rules to it.
+
+## External semaphore import and operations
+
+`ExternalSemaphoreLinux::importSemaphore` passes the incoming FD to DRM `syncObjFdToHandle`; it then closes the descriptor when `fd > 0` before checking ioctl success (`external_semaphore_linux.cpp:55-74`). This differs from the memory-import failure path. The implementation's `fd > 0` guard means this source does not close FD 0; any wrapper must handle that edge deliberately and must not assume uniform ownership semantics.
+
+Wait and signal are immediate DRM ioctls in `ExternalSemaphoreLinux::enqueueWait` and `enqueueSignal`, not command-list appends: timeline and binary paths invoke `syncObjTimelineWait`/`syncObjWait` or `syncObjTimelineSignal`/`syncObjSignal` (`external_semaphore_linux.cpp:77-145`). The waits use an effectively unbounded `int64` timeout and `WAIT_FOR_SUBMIT`; they are not suitable evidence for a bounded protocol. At the Level Zero wrapper layer, `ExternalSemaphoreImp::semaphoreWait` and `semaphoreSignal` store the boolean result in `[[maybe_unused]]` locals and only print it when debug output is enabled (`external_semaphore_imp.cpp:16-35`). The visible implementation does not propagate those ioctl failures to a ZE result.
+
+The inspected `cmdlist.cpp` and `cmdqueue.cpp` have no external-semaphore references. This is bounded to those two pinned files; it is not a claim about every possible entry point or application-side ordering. The shown semaphore signal method has no queue/fence parameter and immediately issues the DRM signal ioctl. Therefore the traced API alone does not prove that a producer GPU queue has completed before the host issues the signal. A correct bridge must establish producer completion first and must account for errors and finite waits.
+
+## Bridge verdict and missing proof
+
+These sources establish how this Intel runtime imports its own DMA-BUF FD and sync FD and which layer closes them. They do not show a legal Intel-to-NVIDIA producer-completion bridge, a conversion from an Intel DRM syncobj to a sync-file accepted by NVIDIA EGL, or an NVIDIA-side completion/release path. No memory cache-domain visibility/barrier guarantee across drivers is established. There is no cross-vendor allocation/import/transfer evidence here, and no direct P2P or dedicated-VRAM claim follows from `deviceUnifiedMemory`, `systemCpuInaccessible`, or a semaphore handle.
+
+Any future one-way experiment still needs a pinned, compatible semaphore export/import path; verified FD ownership on every success/failure edge; a bounded producer GPU-completion wait before signaling; a bounded consumer completion proof; error propagation; a cache/visibility rule for the shared payload; and safe cleanup for timeout while work may be in flight. If these cannot be justified from the actual APIs and driver pairing, keep transfer/import disabled and report `NOT_CHECKED`/unsupported.
+
+## Source references
+
+- Root pin and original staged sources: `records/root_continuation_20261004/intel_runtime_contract_sources_20261004T2100Z/PINNED_SOURCE_RECEIPT.json`.
+- Additional path/size/SHA-256 pins: `source_manifest.json`.
+- Exact same-commit call-chain files: `records/root_continuation_20261004/intel_l0_import_sync_trace_20261004T210634Z/{context.cpp,context_drm_or_wddm.cpp,driver_handle.cpp,memory_manager.cpp,cmdlist.cpp,cmdqueue.cpp}`.
+- Exact semaphore/DRM files: `records/root_continuation_20261004/intel_runtime_contract_sources_20261004T2100Z/{level_zero__core__source__semaphore__external_semaphore_imp.cpp,shared__source__os_interface__linux__external_semaphore_linux.cpp,shared__source__os_interface__linux__drm_memory_manager.cpp}`.
+
+
+FULL PINNED INPUT {"path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\source_excerpts.txt", "sha256": "4170f42fad8e03dd12ad347b39c3fbca29493d1d3ab95f1f17ff7d60f931486e", "bytes": 23295}
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\shared__source__os_interface__linux__drm_memory_manager.cpp:1836-2006 =====
+1836: GraphicsAllocation *DrmMemoryManager::createGraphicsAllocationFromSharedHandle(const OsHandleData &osHandleData,
+1837:                                                                                const AllocationProperties &properties,
+1838:                                                                                bool requireSpecificBitness,
+1839:                                                                                bool isHostIpcAllocation,
+1840:                                                                                bool reuseSharedAllocation,
+1841:                                                                                void *mapPointer) {
+1842:     if (isHostIpcAllocation) {
+1843:         return createUSMHostAllocationFromSharedHandle(osHandleData.handle, properties, nullptr, reuseSharedAllocation, true);
+1844:     }
+1845: 
+1846:     if (reuseSharedAllocation && osHandleData.physicalOffset != 0) {
+1847:         return nullptr;
+1848:     }
+1849: 
+1850:     std::unique_lock<std::mutex> lock(mtx);
+1851: 
+1852:     PrimeHandle openFd{};
+1853:     uint64_t gpuRange = 0;
+1854:     openFd.fileDescriptor = osHandleData.handle;
+1855: 
+1856:     auto &drm = this->getDrm(properties.rootDeviceIndex);
+1857:     auto ioctlHelper = drm.getIoctlHelper();
+1858: 
+1859:     auto ret = ioctlHelper->ioctl(DrmIoctl::primeFdToHandle, &openFd);
+1860: 
+1861:     if (ret != 0) {
+1862:         [[maybe_unused]] int err = errno;
+1863:         PRINT_STRING(debugManager.flags.PrintDebugMessages.get(), stderr, "ioctl(PRIME_FD_TO_HANDLE) failed with %d. errno=%d(%s)\n", ret, err, strerror(err));
+1864: 
+1865:         return nullptr;
+1866:     }
+1867: 
+1868:     auto boHandle = static_cast<int>(openFd.handle);
+1869:     BufferObject *bo = nullptr;
+1870:     if (reuseSharedAllocation) {
+1871:         bo = findAndReferenceSharedBufferObject(boHandle, properties.rootDeviceIndex);
+1872:     }
+1873: 
+1874:     const auto memoryPool = MemoryPool::systemCpuInaccessible;
+1875: 
+1876:     std::unique_ptr<Gmm> gmm;
+1877:     size_t size = SysCalls::lseek(osHandleData.handle, 0, SEEK_END);
+1878:     const auto cachePolicy = properties.flags.uncacheable ? CachePolicy::uncached : CachePolicy::writeBack;
+1879:     if (properties.imgInfo) {
+1880:         GemGetTiling getTiling{};
+1881:         getTiling.handle = boHandle;
+1882:         ret = ioctlHelper->getGemTiling(&getTiling);
+1883: 
+1884:         if (ret) {
+1885:             if (getTiling.tilingMode == static_cast<uint32_t>(ioctlHelper->getDrmParamValue(DrmParam::tilingNone))) {
+1886:                 properties.imgInfo->linearStorage = true;
+1887:             }
+1888:         }
+1889: 
+1890:         gmm = std::make_unique<Gmm>(executionEnvironment.rootDeviceEnvironments[properties.rootDeviceIndex]->getGmmHelper(), *properties.imgInfo,
+1891:                                     createStorageInfoFromProperties(properties), properties.flags.preferCompressed);
+1892: 
+1893:         gmm->updateImgInfoAndDesc(*properties.imgInfo, 0, NEO::ImagePlane::noPlane);
+1894:         if (bo) {
+1895:             bo->setPatIndex(drm.getPatIndex(gmm.get(), properties.allocationType, CacheRegion::defaultRegion, cachePolicy, false, MemoryPoolHelper::isSystemMemoryPool(memoryPool), false));
+1896:         }
+1897:     } else {
+1898:         auto gmmHelper = executionEnvironment.rootDeviceEnvironments[properties.rootDeviceIndex]->getGmmHelper();
+1899:         GmmRequirements gmmRequirements{};
+1900:         gmmRequirements.preferCompressed = properties.flags.preferCompressed;
+1901:         if (!properties.flags.preferCompressed && !properties.flags.uncacheable) {
+1902:             gmmRequirements.overriderCacheable = {true, true};
+1903:         }
+1904:         gmm = std::make_unique<Gmm>(gmmHelper, nullptr,
+1905:                                     size, 0u, CacheSettingsHelper::getGmmUsageType(properties.allocationType, properties.flags.uncacheable, drm.getRootDeviceEnvironment().getHelper<ProductHelper>(), gmmHelper->getHardwareInfo()), createStorageInfoFromProperties(properties), gmmRequirements);
+1906:     }
+1907: 
+1908:     // Address the consumer accesses and the size it may access from there. For a
+1909:     // plain import these are just the BO base and size; with a physical offset the
+1910:     // accessible window is the remainder of the BO starting at that offset.
+1911:     uint64_t reportedAddress = 0;
+1912:     size_t reportedSize = 0;
+1913: 
+1914:     if (bo == nullptr) {
+1915:         UNRECOVERABLE_IF(size == std::numeric_limits<size_t>::max());
+1916: 
+1917:         const uint64_t physicalOffset = osHandleData.physicalOffset;
+1918:         if (physicalOffset >= size) {
+1919:             return nullptr;
+1920:         }
+1921:         size_t mappedSize = size - static_cast<size_t>(physicalOffset);
+1922: 
+1923:         auto patIndex = drm.getPatIndex(gmm.get(), properties.allocationType, CacheRegion::defaultRegion, cachePolicy, false, MemoryPoolHelper::isSystemMemoryPool(memoryPool), false);
+1924:         auto boHandleWrapper = reuseSharedAllocation ? BufferObjectHandleWrapper{boHandle, properties.rootDeviceIndex} : tryToGetBoHandleWrapperWithSharedOwnership(boHandle, properties.rootDeviceIndex);
+1925: 
+1926:         bo = new (std::nothrow) BufferObject(properties.rootDeviceIndex, &drm, patIndex, std::move(boHandleWrapper), size, maxOsContextCount);
+1927: 
+1928:         if (!bo) {
+1929:             return nullptr;
+1930:         }
+1931: 
+1932:         auto getHeapIndex = [&] {
+1933:             auto gfxPartition = getGfxPartition(properties.rootDeviceIndex);
+1934:             auto prefer57bitAddressing = (gfxPartition->getHeapLimit(HeapIndex::heapExtended) > 0);
+1935:             if (prefer57bitAddressing) {
+1936:                 return HeapIndex::heapExtended;
+1937:             }
+1938: 
+1939:             if (isLocalMemorySupported(properties.rootDeviceIndex)) {
+1940:                 return HeapIndex::heapStandard2MB;
+1941:             }
+1942: 
+1943:             return HeapIndex::heapStandard;
+1944:         };
+1945: 
+1946:         const bool vmBindAvailable = drm.isVmBindAvailable();
+1947: 
+1948:         if (physicalOffset != 0) {
+1949:             // The offset/length are recorded on the BO; VM bind hands them to the
+1950:             // kernel so only the mapped remainder is bound. The legacy execbuffer
+1951:             // path has no per-bind offset, so the whole BO is placed and the offset
+1952:             // is folded into the returned address instead - byte `offset` of the BO
+1953:             // then resolves to the reported pointer. (Mirrors mapPhysicalDeviceMemoryToVirtualMemory.)
+1954:             bo->setPhysicalMemoryOffset(physicalOffset);
+1955:             bo->setVirtualMappingSize(mappedSize);
+1956:             if (vmBindAvailable) {
+1957:                 gpuRange = mapPointer ? reinterpret_cast<uint64_t>(mapPointer) : acquireGpuRange(mappedSize, properties.rootDeviceIndex, getHeapIndex());
+1958:                 bo->setAddress(gpuRange);
+1959:                 bo->setUnmapSize(mappedSize);
+1960:                 reportedAddress = gpuRange;
+1961:             } else {
+1962:                 gpuRange = mapPointer ? reinterpret_cast<uint64_t>(mapPointer) : acquireGpuRange(size, properties.rootDeviceIndex, getHeapIndex());
+1963:                 bo->setAddress(gpuRange);
+1964:                 bo->setUnmapSize(size);
+1965:                 reportedAddress = gpuRange + physicalOffset;
+1966:             }
+1967:             reportedSize = mappedSize;
+1968:         } else {
+1969:             gpuRange = mapPointer ? reinterpret_cast<uint64_t>(mapPointer) : acquireGpuRange(size, properties.rootDeviceIndex, getHeapIndex());
+1970:             bo->setAddress(gpuRange);
+1971:             bo->setUnmapSize(size);
+1972:             reportedAddress = bo->peekAddress();
+1973:             reportedSize = bo->peekSize();
+1974:         }
+1975: 
+1976:         PRINT_STRING(debugManager.flags.PrintBOCreateDestroyResult.get(), stdout,
+1977:                      "Created BO-%d range: %llx - %llx, size: %lld from PRIME_FD_TO_HANDLE\n",
+1978:                      bo->peekHandle(),
+1979:                      bo->peekAddress(),
+1980:                      ptrOffset(bo->peekAddress(), bo->peekSize()),
+1981:                      bo->peekSize());
+1982: 
+1983:         pushSharedBufferObject(bo);
+1984:     } else {
+1985:         reportedAddress = bo->peekAddress();
+1986:         reportedSize = bo->peekSize();
+1987:     }
+1988: 
+1989:     if (reuseSharedAllocation) {
+1990:         lock.unlock();
+1991:     }
+1992: 
+1993:     auto gmmHelper = getGmmHelper(properties.rootDeviceIndex);
+1994:     auto canonizedGpuAddress = gmmHelper->canonize(reportedAddress);
+1995:     auto drmAllocation = new DrmAllocation(properties.rootDeviceIndex, 1u /*num gmms*/, properties.allocationType, bo, reinterpret_cast<void *>(reportedAddress), reportedSize,
+1996:                                            osHandleData.handle, memoryPool, canonizedGpuAddress);
+1997: 
+1998:     drmAllocation->setDefaultGmm(gmm.release());
+1999:     this->makeAllocationResident(drmAllocation);
+2000: 
+2001:     if (!reuseSharedAllocation) {
+2002:         registerSharedBoHandleAllocation(drmAllocation);
+2003:     }
+2004: 
+2005:     return drmAllocation;
+2006: }
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\shared__source__os_interface__linux__drm_memory_manager.cpp:2058-2118 =====
+2058: void DrmMemoryManager::freeGraphicsMemoryImpl(GraphicsAllocation *gfxAllocation, bool isImported) {
+2059:     if (debugManager.flags.DoNotFreeResources.get()) {
+2060:         return;
+2061:     }
+2062:     if (gfxAllocation->isView()) {
+2063:         DEBUG_BREAK_IF(true);
+2064:         return;
+2065:     }
+2066:     DrmAllocation *drmAlloc = static_cast<DrmAllocation *>(gfxAllocation);
+2067:     bool unregister = !isImported && !gfxAllocation->getIsImported() && Sharing::nonSharedResource == gfxAllocation->peekSharedHandle();
+2068:     if (isImported || gfxAllocation->getIsImported()) {
+2069:         std::lock_guard<std::mutex> lock(allocMutex);
+2070:         const auto &allocations = gfxAllocation->isAllocatedInLocalMemoryPool() ? localMemAllocs[gfxAllocation->getRootDeviceIndex()] : sysMemAllocs;
+2071:         unregister = std::find(allocations.begin(), allocations.end(), gfxAllocation) != allocations.end();
+2072:     }
+2073:     if (unregister) {
+2074:         this->unregisterAllocation(gfxAllocation);
+2075:     }
+2076:     auto rootDeviceIndex = gfxAllocation->getRootDeviceIndex();
+2077:     for (auto &engine : getRegisteredEngines(rootDeviceIndex)) {
+2078:         std::unique_lock<CommandStreamReceiver::MutexType> lock;
+2079:         if (engine.osContext->isDirectSubmissionLightActive()) {
+2080:             lock = engine.commandStreamReceiver->obtainUniqueOwnership();
+2081:             engine.commandStreamReceiver->stopDirectSubmission(true, false);
+2082:             handleFenceCompletion(gfxAllocation);
+2083:         }
+2084: 
+2085:         auto memoryOperationsInterface = static_cast<DrmMemoryOperationsHandler *>(executionEnvironment.rootDeviceEnvironments[rootDeviceIndex]->memoryOperationsInterface.get());
+2086:         memoryOperationsInterface->evictWithinOsContext(engine.osContext, *gfxAllocation);
+2087:     }
+2088: 
+2089:     auto ioctlHelper = getDrm(drmAlloc->getRootDeviceIndex()).getIoctlHelper();
+2090:     if (drmAlloc->getMmapPtr()) {
+2091:         ioctlHelper->munmapFunction(*this, drmAlloc->getMmapPtr(), drmAlloc->getMmapSize());
+2092:     }
+2093: 
+2094:     for (auto handleId = 0u; handleId < gfxAllocation->getNumGmms(); handleId++) {
+2095:         delete gfxAllocation->getGmm(handleId);
+2096:     }
+2097: 
+2098:     if (gfxAllocation->fragmentsStorage.fragmentCount) {
+2099:         cleanGraphicsMemoryCreatedFromHostPtr(gfxAllocation);
+2100:     } else {
+2101:         auto &bos = static_cast<DrmAllocation *>(gfxAllocation)->getBOs();
+2102:         for (auto bo : bos) {
+2103:             unreference(bo, bo && bo->peekIsReusableAllocation() ? false : true);
+2104:         }
+2105:         if (isImported == false) {
+2106:             closeSharedHandle(gfxAllocation);
+2107:         }
+2108:     }
+2109: 
+2110:     ioctlHelper->syncUserptrAlloc(*this, *gfxAllocation);
+2111:     ioctlHelper->releaseGpuRange(*this, gfxAllocation->getReservedAddressPtr(), gfxAllocation->getReservedAddressSize(), gfxAllocation->getRootDeviceIndex(), gfxAllocation->getAllocationType());
+2112:     alignedFreeWrapper(gfxAllocation->getDriverAllocatedCpuPtr());
+2113: 
+2114:     drmAlloc->freeRegisteredBOBindExtHandles(&getDrm(drmAlloc->getRootDeviceIndex()));
+2115: 
+2116:     delete gfxAllocation;
+2117: }
+2118: 
+===== E:\the_harness\records\root_continuation_20261004\intel_l0_import_sync_trace_20261004T210634Z\memory_manager.cpp:1556-1617 =====
+1556: void *MemoryManager::importFdHandle(Device *neoDevice,
+1557:                                     SVMAllocsManager *svmAllocsManager,
+1558:                                     uint64_t handle,
+1559:                                     AllocationType allocationType,
+1560:                                     bool isHostIpcAllocation,
+1561:                                     void *basePointer,
+1562:                                     GraphicsAllocation **pAlloc,
+1563:                                     SvmAllocationData &mappedPeerAllocData,
+1564:                                     bool compressedMemory,
+1565:                                     bool uncachedBias,
+1566:                                     uint64_t physicalOffset) {
+1567:     MemoryManager::OsHandleData osHandleData{handle};
+1568:     osHandleData.physicalOffset = physicalOffset;
+1569:     AllocationProperties unifiedMemoryProperties{neoDevice->getRootDeviceIndex(),
+1570:                                                  MemoryConstants::pageSize,
+1571:                                                  allocationType,
+1572:                                                  neoDevice->getDeviceBitfield()};
+1573:     unifiedMemoryProperties.subDevicesBitfield = neoDevice->getDeviceBitfield();
+1574:     unifiedMemoryProperties.flags.preferCompressed = compressedMemory;
+1575:     unifiedMemoryProperties.flags.uncacheable = uncachedBias;
+1576:     GraphicsAllocation *alloc = this->createGraphicsAllocationFromSharedHandle(osHandleData,
+1577:                                                                                unifiedMemoryProperties,
+1578:                                                                                false,
+1579:                                                                                isHostIpcAllocation,
+1580:                                                                                false,
+1581:                                                                                basePointer);
+1582:     if (alloc == nullptr) {
+1583:         return nullptr;
+1584:     }
+1585: 
+1586:     SvmAllocationData allocData(neoDevice->getRootDeviceIndex());
+1587:     SvmAllocationData *allocDataTmp = nullptr;
+1588:     if (basePointer) {
+1589:         allocDataTmp = &mappedPeerAllocData;
+1590:         allocDataTmp->mappedAllocData = true;
+1591:     } else {
+1592:         allocDataTmp = &allocData;
+1593:         allocDataTmp->mappedAllocData = false;
+1594:     }
+1595:     allocDataTmp->gpuAllocations.addAllocation(alloc);
+1596:     allocDataTmp->cpuAllocation = nullptr;
+1597:     allocDataTmp->size = alloc->getUnderlyingBufferSize();
+1598:     allocDataTmp->memoryType =
+1599:         isHostIpcAllocation ? InternalMemoryType::hostUnifiedMemory : InternalMemoryType::deviceUnifiedMemory;
+1600:     allocDataTmp->device = neoDevice;
+1601:     allocDataTmp->isImportedAllocation = true;
+1602:     alloc->setIsImported();
+1603:     allocDataTmp->setAllocId(++svmAllocsManager->allocationsCounter);
+1604:     if (uncachedBias) {
+1605:         allocDataTmp->allocationFlagsProperty.flags.locallyUncachedResource = 1;
+1606:     }
+1607: 
+1608:     if (!basePointer) {
+1609:         svmAllocsManager->insertSVMAlloc(allocData);
+1610:     }
+1611:     if (pAlloc) {
+1612:         *pAlloc = alloc;
+1613:     }
+1614: 
+1615:     return reinterpret_cast<void *>(alloc->getGpuAddress());
+1616: }
+1617: 
+===== E:\the_harness\records\root_continuation_20261004\intel_l0_import_sync_trace_20261004T210634Z\context.cpp:301-320 =====
+301:     if (lookupTable.isSharedHandle) {
+302:         if (lookupTable.sharedHandleType.isOpaqueFDHandle || lookupTable.sharedHandleType.isDMABUFHandle) {
+303:             ze_ipc_memory_flags_t flags = {};
+304:             if (deviceMemDesc->flags & ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+305:                 flags |= ZE_IPC_MEMORY_FLAG_BIAS_UNCACHED;
+306:             }
+307:             *ptr = getMemHandlePtr(hDevice,
+308:                                    lookupTable.sharedHandleType.fd,
+309:                                    NEO::AllocationType::buffer,
+310:                                    false,
+311:                                    0u,
+312:                                    flags,
+313:                                    0u,
+314:                                    nullptr, false, false, 0u)
+315:                        .second;
+316:             if (nullptr == *ptr) {
+317:                 return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+318:             }
+319:             closeExternalHandle(lookupTable.sharedHandleType.fd);
+320:         } else {
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\shared__source__os_interface__linux__external_semaphore_linux.cpp:55-145 =====
+55:     auto drm = this->osInterface->getDriverModel()->as<Drm>();
+56: 
+57:     struct SyncObjHandle args = {};
+58:     args.fd = fd;
+59:     args.handle = 0;
+60: 
+61:     auto ioctlHelper = drm->getIoctlHelper();
+62: 
+63:     int ret = ioctlHelper->ioctl(DrmIoctl::syncObjFdToHandle, &args);
+64:     if (fd > 0) {
+65:         SysCalls::close(fd);
+66:     }
+67:     if (ret != 0) {
+68:         return ImportResult::invalidResource;
+69:     }
+70: 
+71:     this->syncHandle = args.handle;
+72:     this->type = type;
+73: 
+74:     return ImportResult::success;
+75: }
+76: 
+77: bool ExternalSemaphoreLinux::enqueueWait(uint64_t *fenceValue) {
+78:     auto drm = this->osInterface->getDriverModel()->as<Drm>();
+79:     auto ioctlHelper = drm->getIoctlHelper();
+80: 
+81:     if (this->type == ExternalSemaphore::TimelineSemaphoreFd) {
+82:         struct SyncObjTimelineWait args = {};
+83:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+84:         args.points = reinterpret_cast<uintptr_t>(fenceValue);
+85:         args.timeoutNs = std::numeric_limits<decltype(args.timeoutNs)>::max();
+86:         args.countHandles = 1u;
+87:         args.flags = 0x2; // DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT
+88: 
+89:         PRINT_STRING(debugManager.flags.PrintExternalSemaphoreTimeline.get() == 1, stdout,
+90:                      "ExternalSemaphore timeline wait: handle=0x%x, value=%" PRIu64 "\n",
+91:                      this->syncHandle,
+92:                      fenceValue ? *fenceValue : 0);
+93: 
+94:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjTimelineWait, &args);
+95:         if (ret != 0) {
+96:             return false;
+97:         }
+98:     } else {
+99:         struct SyncObjWait args = {};
+100:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+101:         args.timeoutNs = std::numeric_limits<decltype(args.timeoutNs)>::max();
+102:         args.countHandles = 1u;
+103:         args.flags = 0x2; // DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT
+104: 
+105:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjWait, &args);
+106:         if (ret != 0) {
+107:             return false;
+108:         }
+109:     }
+110: 
+111:     return true;
+112: }
+113: 
+114: bool ExternalSemaphoreLinux::enqueueSignal(uint64_t *fenceValue) {
+115:     auto drm = this->osInterface->getDriverModel()->as<Drm>();
+116:     auto ioctlHelper = drm->getIoctlHelper();
+117: 
+118:     if (this->type == ExternalSemaphore::TimelineSemaphoreFd) {
+119:         struct SyncObjTimelineArray args = {};
+120:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+121:         args.points = reinterpret_cast<uintptr_t>(fenceValue);
+122:         args.countHandles = 1u;
+123: 
+124:         PRINT_STRING(debugManager.flags.PrintExternalSemaphoreTimeline.get() == 1, stdout,
+125:                      "ExternalSemaphore timeline signal: handle=0x%x, value=%" PRIu64 "\n",
+126:                      this->syncHandle,
+127:                      fenceValue ? *fenceValue : 0);
+128: 
+129:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjTimelineSignal, &args);
+130:         if (ret != 0) {
+131:             return false;
+132:         }
+133:     } else {
+134:         struct SyncObjArray args = {};
+135:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+136:         args.countHandles = 1u;
+137: 
+138:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjSignal, &args);
+139:         if (ret != 0) {
+140:             return false;
+141:         }
+142:     }
+143: 
+144:     return true;
+145: }
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\level_zero__core__source__semaphore__external_semaphore_imp.cpp:16-35 =====
+16: void ExternalSemaphoreImp::semaphoreWait(const ExternalSemaphoreOperationData &operationData) {
+17:     for (auto [semaphore, value] : operationData.semaphores) {
+18:         [[maybe_unused]] bool result = semaphore->neoExternalSemaphore->enqueueWait(&value);
+19:         PRINT_STRING(NEO::debugManager.flags.PrintExternalSemaphoreOperationResults.get(), stdout,
+20:                      "ExternalSemaphoreImp::semaphoreWait semaphore=%p value=%llu result=%d\n",
+21:                      static_cast<void *>(semaphore),
+22:                      static_cast<unsigned long long>(value),
+23:                      static_cast<int>(result));
+24:     }
+25: };
+26: 
+27: void ExternalSemaphoreImp::semaphoreSignal(const ExternalSemaphoreOperationData &operationData) {
+28:     for (auto [semaphore, value] : operationData.semaphores) {
+29:         [[maybe_unused]] bool result = semaphore->neoExternalSemaphore->enqueueSignal(&value);
+30:         PRINT_STRING(NEO::debugManager.flags.PrintExternalSemaphoreOperationResults.get(), stdout,
+31:                      "ExternalSemaphoreImp::semaphoreSignal semaphore=%p value=%llu result=%d\n",
+32:                      static_cast<void *>(semaphore),
+33:                      static_cast<unsigned long long>(value),
+34:                      static_cast<int>(result));
+35:     }

@@ -1,0 +1,30 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\contained_supervisor.py",
+    "sha256": "a9e6cf0ea1390f1a2254f7bb2fa61fed22ce6817d9d48612c040669aab1bb21e",
+    "lines": 685,
+    "gate": "AST_PASS_NO_IMPORT",
+    "error": null
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\supervisor_coherent\\tests.candidate.py",
+    "sha256": "cac243f7a942566980664f1f11bc3adfd116d3dab0f972bb6b8f4c66f4673e89",
+    "lines": 415,
+    "gate": "AST_PASS_NO_IMPORT",
+    "error": null
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\qualification_validator.py",
+    "sha256": "db4a4702ebcf7f5b2e712736d7d12e6f71752004373494b3445cb911b4b27bda",
+    "lines": 602,
+    "gate": "AST_PASS_NO_IMPORT",
+    "error": null
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\validator_coherent\\tests.candidate.py",
+    "sha256": "3798b49057115a50ebf7f068a09d5b2f2dd2bd89a2edc9b8af052e8ffa445129",
+    "lines": 274,
+    "gate": "AST_PASS_NO_IMPORT",
+    "error": null
+  }
+]

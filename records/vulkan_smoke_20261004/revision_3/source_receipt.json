@@ -1,0 +1,31 @@
+{
+  "static_gate": "PASS",
+  "source_sha256": "01c1d3268ae5e956b57f1c132b1a5ab4f843e24ac44570bc8ef97bf9d1e6f42a",
+  "patch_sha256": "9e85f08383f475bd5e51bd4ff6a88b6777cd2c20e9fb4017bda4a86949bff2b2",
+  "candidate_sha256": "2490ff4e81b7db616f41cfe89e7c997e6705cda12ea437a12f50cb0f8ea66e10",
+  "modifications": [
+    {
+      "provider_replacement": 0,
+      "exact_matches": 1
+    },
+    {
+      "provider_replacement": 1,
+      "exact_matches": 1
+    },
+    {
+      "authorized_local_change": "Explicit integrated/discrete GPU type guard; excludes CPU/virtual devices"
+    },
+    {
+      "authorized_local_change": "Monotonic 10-second fence deadline"
+    },
+    {
+      "authorized_local_change": "Check physical-device enumeration API status"
+    },
+    {
+      "authorized_local_change": "Receipt-only memory flags and full parity counters; no allocation/transfer change"
+    }
+  ],
+  "transport": "EXPLICIT_HOST_STAGED",
+  "buffer_bytes": 262144,
+  "gpu_compute_shader_operator_tested": false
+}

@@ -1,0 +1,58 @@
+{
+  "status": "PURE_QA_EXECUTED_WITH_FAILURES_AND_HARNESS_ERRORS",
+  "root_packet_path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/ROOT_REVIEW_PACKET_V2.json",
+  "root_packet_sha256_restored_original": "f4f21d5de9f18f08fc55aec64b99206a70e9f8865062c54064908e4c2835ade3",
+  "root_static_review_path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/STATIC_REVIEW_V2.md",
+  "root_static_review_sha256_restored_original": "52b2d63993bf26d94db193b81ceb2af014be1c46c5249fd2c664babb1c372ae6",
+  "admission_sha256": "22163230760f602e9a9ba1dc7a397a061f05b92093a47f7bed9c910b02fddd0c",
+  "outer_receipt": {
+    "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/runs/outer_20261004T2240Z/outer_receipt.json",
+    "sha256": "b62752e99a4378a5b6cb704435d85fab5834f64ac80bfc0d68ed2bd91101b39d",
+    "exit_code": 1,
+    "elapsed_seconds": 0.246,
+    "retained_controller_pid": 23544,
+    "owned_process_exited": true,
+    "pid_present_at_check": false,
+    "outer_timeout": false,
+    "stream_overflow": false
+  },
+  "inner_receipt": {
+    "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/runs/pure_qa_20261004T224944Z/receipt.json",
+    "sha256": "eb100537748d315f26dbf514e87502f331ca1171d8e63dca128656d9710365cf",
+    "exit_code": 1,
+    "elapsed_seconds": 0.094,
+    "retained_test_pid": 53756,
+    "owned_process_exited": true,
+    "reader_eof_stdout": true,
+    "reader_eof_stderr": true,
+    "reader_threads_joined": true,
+    "reader_errors": [],
+    "timeout": false,
+    "stream_overflow": false
+  },
+  "raw_test_stderr": {
+    "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/runs/pure_qa_20261004T224944Z/stderr.bin",
+    "sha256": "ef56afeaf906127e03d53d986b28ba4e05dcf10466fb0aefb2a67022ea26bde6",
+    "bytes": 9297
+  },
+  "test_counts": {
+    "test_methods_run": 10,
+    "failure_events": 8,
+    "failure_events_include_deadline_subtests": 2,
+    "errors": 2,
+    "passing_test_methods": 1,
+    "provider_tests_executed": false,
+    "native_gpu_driver_calls": false
+  },
+  "findings": [
+    "Candidate callback RuntimeError escapes ProtocolAdapter.run; this is a candidate defect. The cleanup assertion was unreachable after the exception.",
+    "The report immutability test did not reach the candidate behavior: its test fixture passed unsupported NativeOutcome keyword detail and raised TypeError. This is a harness defect/vacuous control.",
+    "Direct completion observation followed by signal invoked syncobj_host_signal without producer callback evidence.",
+    "The callback-false, admission-false, invalid-export, EGL-retention, and non-finite-deadline cases returned DECLARED_PROTOCOL_READY where the test expected refusal.",
+    "The host-relay order control stopped at its initial unexpected-READY assertion; later wait-before-signal and no-EGL-callback assertions were unreachable in this run.",
+    "The invalid-export test stopped before its seen-empty assertion; whether the EGL callback was blocked was not measured by that assertion.",
+    "The retry-after-timeout test passed: the second report did not retain producer or consumer completion proof from the prior call."
+  ],
+  "post_run_edits_to_candidate_tests_or_controller": false,
+  "raw_run_artifacts_unchanged": true
+}

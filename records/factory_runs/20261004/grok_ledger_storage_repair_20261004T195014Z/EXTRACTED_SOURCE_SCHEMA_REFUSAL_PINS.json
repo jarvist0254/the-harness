@@ -1,0 +1,24 @@
+{
+  "original_provider_status": "corrected_untrusted_pending_root_qa",
+  "raw_status_unchanged": true,
+  "reason": "invalid status enum corrected_untrusted_pending_root_qa",
+  "structured_schema_accepted": false,
+  "original_terminal_state": "PARSE_OR_SCHEMA_ERROR",
+  "exact_strings_extracted_only": true,
+  "root_admission": "PENDING",
+  "files": [
+    {
+      "chars": 25338,
+      "sha256": "e44e86db99225b95cb9c9b63a41987d978e692eb0efc3f431741e2adf28833df",
+      "field": "source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high\\source.grok_untrusted.py"
+    },
+    {
+      "chars": 25199,
+      "sha256": "938739185fe5e6e12d115639160a228a6f917a20a18bd7368bb16231ccdf7869",
+      "field": "tests_source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high\\tests_source.grok_untrusted.py"
+    }
+  ],
+  "source_execution": false
+}

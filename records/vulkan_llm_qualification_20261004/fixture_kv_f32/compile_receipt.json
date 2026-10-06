@@ -1,0 +1,18 @@
+{
+  "admission": "clean compile + GPU-free self-test only",
+  "admission_record": "records/root_continuation_20261004/kv_f32_static_admission_20261004T131000Z.json",
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp",
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "command_file": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\compile_kv_f32.cmd",
+  "compile_command": "cmd.exe /d /s /c call compile_kv_f32.cmd; cl /std:c++17 /EHsc /O2 /MD against pinned clean headers/libs",
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "pid": 62100,
+  "exit_code": 0,
+  "elapsed_seconds": 3.94,
+  "process_present_after": false,
+  "executable": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\llama_logits_kv_f32.exe",
+  "executable_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\compile.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\compile.stderr.log"
+}

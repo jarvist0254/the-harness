@@ -1,0 +1,12 @@
+--- prior_exact17
++++ storage_repair_exact17
+@@ -1,7 +1,7 @@
+ """Independent actual-file RED controls; synthetic only, no hardware qualification."""
+ import pathlib,hashlib,importlib.util,math,unittest,json,builtins,sys
+-SOURCE=pathlib.Path(r'E:\the_harness\records\factory_runs\20261004\grok_numeric_ledger_correction_20261004T191800Z\grok_numeric_ledger_high\source.grok_untrusted.py')
+-PIN='d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a'
++SOURCE=pathlib.Path(r'E:\the_harness\records\factory_runs\20261004\grok_ledger_storage_repair_20261004T195014Z\grok_ledger_storage_high\source.grok_untrusted.py')
++PIN='e44e86db99225b95cb9c9b63a41987d978e692eb0efc3f431741e2adf28833df'
+ assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()==PIN
+ TRAPS=[]
+ original_import=builtins.__import__

@@ -1,0 +1,7 @@
+#include <cstring>
+#include <string>
+#include <cstdio>
+static int expected_padded_context(int requested){if(requested!=128)return -1;return 256;}
+static bool context_dims_ok(int actual_ctx,int nbatch,int nubatch,int nthreads,const char*& err){if(actual_ctx!=expected_padded_context(128)||nbatch!=32||nubatch!=32||nthreads!=4){err="context_params_mismatch";return false;}return true;}
+int main(){int fails=0;auto exp=[&](bool cond){if(!cond)fails++;};exp(expected_padded_context(128)==256&&expected_padded_context(64)==-1&&expected_padded_context(256)==-1&&expected_padded_context(512)==-1);const char* ce="";exp(context_dims_ok(256,32,32,4,ce));exp(!context_dims_ok(128,32,32,4,ce)&&ce&&std::strcmp(ce,"context_params_mismatch")==0);exp(!context_dims_ok(512,32,32,4,ce));int saved_ctx=256,gpu_ctx=256;exp(gpu_ctx==saved_ctx&&saved_ctx==expected_padded_context(128));gpu_ctx=128;exp(gpu_ctx!=saved_ctx);std::string wtag="REQUESTED_N_CTX=128\nACTUAL_N_CTX=";wtag+=std::to_string(expected_padded_context(128));wtag+="\nN_BATCH=32\nN_UBATCH=32";exp(wtag=="REQUESTED_N_CTX=128\nACTUAL_N_CTX=256\nN_BATCH=32\nN_UBATCH=32"&&wtag.find("\nN_CTX=")==std::string::npos);std::string canon="MODEL_HASH=abc\nDEVICES=Vulkan0,Vulkan1\nTOKENS=0,1\n";canon+=wtag;canon+="\nQUANT=Q8_0";exp(canon.find("REQUESTED_N_CTX=128")!=std::string::npos&&canon.find("ACTUAL_N_CTX=256")!=std::string::npos&&canon.find("\nN_CTX=")==std::string::npos&&canon.find("N_BATCH=32")!=std::string::npos&&canon.find("N_UBATCH=32")!=std::string::npos&&canon.find("QUANT=Q8_0")!=std::string::npos);return fails?1:0;}
+

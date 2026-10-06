@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\source.qwen_untrusted.py",
+      "field": "source",
+      "chars": 7296
+    },
+    {
+      "sha256": "aae6be310522f4d7a3152652ffd2816df186db72a317f5ead1372ec9dda95239",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\tests_source.qwen_untrusted.txt",
+      "field": "tests_source",
+      "chars": 3522
+    }
+  ],
+  "provider_tests_executed": false,
+  "provider_status": "PROPOSED",
+  "root_admission": false,
+  "artifact_sha256": "3feca3b5bad91ac994bbbb4a4b0dfb6ddee7572681095e62d4f9c37ee2481c9d",
+  "candidate_parsed_imported_compiled_executed": false,
+  "job": "qwen_four_capacity",
+  "action": "Exact JSON source-string extraction only"
+}

@@ -1,0 +1,19 @@
+{
+  "native_children": 0,
+  "pid": 95860,
+  "elapsed_seconds": 101.33,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 10214,
+    "total_tokens": 14868,
+    "completion_tokens": 4654,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 10214
+    }
+  },
+  "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_ADMISSION",
+  "http": 200,
+  "requested_model": "qwen3.8-max",
+  "observed_model": "qwen3.8-max"
+}

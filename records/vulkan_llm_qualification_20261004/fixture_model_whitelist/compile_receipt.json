@@ -1,0 +1,17 @@
+{
+  "pid": 75124,
+  "command": "cmd.exe /d /s /c call compile_model_whitelist.cmd",
+  "source": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\llama_logits_model_whitelist_compilefix.cpp",
+  "source_sha256": "bbb705b5419fcc369f8d1eed54e4cae0683899cfdd8d7c1eac2e662881c23c12",
+  "provider_source_sha256": "9025908c04837fcbacf871eabe9dcb8ad575a8542d4a7da3f9e698288bd7d3ee",
+  "source_diff": "two forward declarations only",
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "exit_code": 0,
+  "elapsed_seconds": 4.118,
+  "process_present_after": false,
+  "executable": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\llama_logits_model_whitelist.exe",
+  "executable_sha256": "f0657ce0b942d3825bd7cab53cca8cdcd19e4c828a7376c506a68103125246bc",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\compile.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\compile.stderr.log"
+}

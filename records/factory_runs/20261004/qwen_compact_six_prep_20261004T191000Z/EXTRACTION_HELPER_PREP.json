@@ -1,0 +1,6 @@
+{
+  "action": "exact string extraction only after terminal stop+DONE+usage+exactmodel",
+  "candidate_import_compile_execution": false,
+  "changes_from_previous": "six allowed job IDs and correct source language classification only",
+  "sha256": "d178658010c99b90e050652c76284b4b546850b6af3bb59bb49dc20d46f71234"
+}

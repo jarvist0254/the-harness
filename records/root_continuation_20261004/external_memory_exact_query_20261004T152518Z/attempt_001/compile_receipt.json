@@ -1,0 +1,16 @@
+{
+  "attempt": 1,
+  "compile_status": "TOOLCHAIN_ENVIRONMENT_FAIL",
+  "failure_stage": "MSVC environment bootstrap before cl.exe",
+  "bootstrap_pid": 80124,
+  "bootstrap_return_code": 1,
+  "bootstrap_timed_out": false,
+  "bootstrap_elapsed_seconds": 0.078,
+  "bootstrap_output_bytes": 0,
+  "compile_executed": false,
+  "runtime_status": "NOT_RUN",
+  "stderr": "The vcvars64.bat invocation was rejected by cmd.exe quoting; see preserved bootstrap stderr in attempt_002 (same error text).",
+  "pid_verified_absent_after_exit": true,
+  "verification_method": "Get-Process -Id 80124 returned no process",
+  "note": "Historical receipt reconstructed from immediately observed tool output; original overwritten receipt was not retained by the first wrapper revision. No compiler or Vulkan executable was run."
+}

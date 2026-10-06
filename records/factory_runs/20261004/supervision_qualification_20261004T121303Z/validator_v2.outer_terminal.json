@@ -1,0 +1,9 @@
+{
+  "pid": 52540,
+  "job": "validator_v2",
+  "log_overflow": false,
+  "exit_code": 0,
+  "seconds": 78.95,
+  "identity": "retained process object",
+  "outer_killed": false
+}

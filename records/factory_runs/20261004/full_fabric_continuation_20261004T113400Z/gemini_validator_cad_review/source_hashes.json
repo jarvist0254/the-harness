@@ -1,0 +1,26 @@
+[
+  {
+    "sha256": "9D1EDD6D0AA81AAA4360187656929C65EBB52DB2BD741F20AF0862C1E11BE81E",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator.prompt.txt"
+  },
+  {
+    "sha256": "A65B399BEB942F69396C0E1CF530E80269B5213F34779A52786B9967948CECCD",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\qualification_validator.py"
+  },
+  {
+    "sha256": "F961496B6C96129C9517BF46CE0EDEBC1CEEDD21E12A5C48554D940297A791AE",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\validator\\tests.candidate.txt"
+  },
+  {
+    "sha256": "E34E7356B267B27C1C98FEE8EA1EC4513599249F8842FB608595673F99A7C790",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad.prompt.txt"
+  },
+  {
+    "sha256": "D2D96BB4BFB5074D9110A5EB9851472691854B40AC7885C57A03669E785039BF",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\integrated_core_draft.py"
+  },
+  {
+    "sha256": "6FE082DB8E358C1A6E879BC69B4D669E6A137556138E83EB4F73C0BAB79580BA",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\full_fabric_continuation_20261004T113400Z\\freecad\\tests.candidate.txt"
+  }
+]

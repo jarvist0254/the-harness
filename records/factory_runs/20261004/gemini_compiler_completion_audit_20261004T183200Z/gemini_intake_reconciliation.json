@@ -1,0 +1,28 @@
+{
+  "extraction": "agy structured_output field; response string also contains toolAction/toolSummary UI fields and was not selected",
+  "provider_status": "SUCCESS",
+  "provider_exit_code": 0,
+  "original_wrapper_status": "PARSE_OR_SCHEMA_ERROR",
+  "original_wrapper_parse_error": "PropertyNotFoundException because response string has extra toolAction/toolSummary keys",
+  "structured_output_keys": [
+    "findings",
+    "safety_checks",
+    "verdict"
+  ],
+  "verdict": "PASS",
+  "findings_count": 0,
+  "safety_checks_count": 12,
+  "num_turns": 1,
+  "usage": {
+    "input_tokens": 28679,
+    "output_tokens": 37491,
+    "thinking_tokens": 35961,
+    "cache_read_tokens": 0,
+    "total_tokens": 66170
+  },
+  "tool_calls": "UNKNOWN",
+  "subagents": "UNKNOWN",
+  "stderr_warning": "--mode plan has no effect while slash command expansion is disabled",
+  "stdout_sha256": "AA891873A36D298CC5A1611041FF6585FDFC5CDEB004445A3CC9A8EB42ABF383",
+  "review_sha256": "DAD7AABFDA286881F449E7B6D9CF796A1CEAB152B191C21A713A93EAD0821A4F"
+}

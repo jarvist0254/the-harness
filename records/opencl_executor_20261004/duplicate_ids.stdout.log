@@ -1,0 +1,11 @@
+{
+  "status": "REFUSED",
+  "reason": "Duplicate explicit runtime device ID",
+  "labels": [
+    "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+    "EXPLICIT_HOST_STAGED",
+    "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+  ],
+  "experimental": true,
+  "timestamp_utc": "2026-10-04T11:08:20.825689+00:00"
+}

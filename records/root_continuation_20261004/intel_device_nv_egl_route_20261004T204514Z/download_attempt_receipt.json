@@ -1,0 +1,13 @@
+{
+  "no_native_driver_gpu_provider_execution": true,
+  "initial_attempt": {
+    "exit_code": 1,
+    "outcome": "HTTP 403 at first registry URL; no primary bytes staged",
+    "script": "stage_primary.py"
+  },
+  "successful_attempt": {
+    "exit_code": 0,
+    "outcome": "12 official raw GitHub snapshots downloaded; no downloaded code executed",
+    "script": "stage_primary_raw.py"
+  }
+}

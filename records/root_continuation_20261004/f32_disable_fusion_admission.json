@@ -1,0 +1,27 @@
+{
+  "utc": "2026-10-04T13:20:38.921909+00:00",
+  "admission": "ONE_FUSION_FACTOR_BASELINE_ONLY_PLUS_CONDITIONAL_CONTROLS",
+  "scope": "Derived F32 model, mixed Vulkan, exact previous KV-F32 source/binary/workload; unchanged numeric gate",
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "executable_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "model_sha256": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+  "baseline_failure": "f32_kv_f32_baseline_receipt.json: 34/151936 outside same .01/.01 gate",
+  "hypothesis": "Pinned backend operator fusion changes grouping and/or approximation; not established as root cause",
+  "primary_source": "records/build_vulkan_real/toolchain/llama_clean_source/ggml/src/ggml-vulkan/ggml-vulkan.cpp:4908,4912,14335",
+  "child_environment": {
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1"
+  },
+  "args_addition": "--kv-f32",
+  "devices": "Vulkan0,Vulkan1",
+  "timeout_seconds": 60,
+  "identity": "Composite experiment hash includes both child environment settings; unchanged C++ workload hash should remain 3257aba03bc8b11a99c84399f8dc7c8e15b99cdeff8bf13dad3113a803fd3187",
+  "must_confirm": [
+    "F32 KV CPU and both GPUs",
+    "29/29 layer offload",
+    "distinct actual model ownership and device logs",
+    "all151936 finite and zero violations for PASS",
+    "exact child environment snapshot, finite timings and owned process cleanup"
+  ],
+  "stop_rule": "On any baseline failure no reverse/corruption. If baselinepasses ALLgates runreverse+comparatorcorruption separately60s each sameenv/modelsettings. No graph-optimize or any otherfactor withoutnewrootadmission."
+}

@@ -1,0 +1,173 @@
+test_anonymous_duplicate_dll_hashes_not_fresh_five (__main__.Tests) ... FAIL
+test_constructor_does_not_bypass_validation (__main__.Tests) ... FAIL
+test_cpu_reference_threshold_accepts_reverse_boundary (__main__.Tests) ... FAIL
+test_cpu_reference_threshold_rejects_001005 (__main__.Tests) ... FAIL
+test_float_context_refused (__main__.Tests) ... FAIL
+test_float_count_refused (__main__.Tests) ... FAIL
+test_float_model_bytes_refused (__main__.Tests) ... FAIL
+test_huge_int_logit_refuses_without_exception (__main__.Tests) ... ERROR
+test_huge_int_metric_refuses_without_exception (__main__.Tests) ... ERROR
+test_input_nested_metadata_cannot_change_ledger (__main__.Tests) ... FAIL
+test_no_native_import_calls (__main__.Tests) ... ok
+test_records_cannot_mutate_model_pass (__main__.Tests) ... FAIL
+test_records_cannot_mutate_prior_state (__main__.Tests) ... FAIL
+test_terminal_cannot_restart_by_omitting_prior (__main__.Tests) ... FAIL
+test_terminal_cannot_restart_with_forged_prior (__main__.Tests) ... FAIL
+test_unhashable_model_key_refuses_without_exception (__main__.Tests) ... ERROR
+test_valid_zero_is_diagnostic_no_hardware_pass (__main__.Tests) ... ok
+
+======================================================================
+ERROR: test_huge_int_logit_refuses_without_exception (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 68, in test_huge_int_logit_refuses_without_exception
+    out=sl.compare_logits(left,ZERO,'0'*64,0.0,0.0,COUNT)
+  File "E:\the_harness\records\factory_runs\20261004\qwen_jlink_stream_six_20261004T184200Z\qwen_vulkan_numeric_state_ledger\source.qwen_untrusted.py", line 168, in compare_logits
+    left = validate_logit_list(cpu_logits)
+  File "E:\the_harness\records\factory_runs\20261004\qwen_jlink_stream_six_20261004T184200Z\qwen_vulkan_numeric_state_ledger\source.qwen_untrusted.py", line 150, in validate_logit_list
+    if not math.isfinite(float(value)):
+OverflowError: int too large to convert to float
+
+======================================================================
+ERROR: test_huge_int_metric_refuses_without_exception (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 71, in test_huge_int_metric_refuses_without_exception
+    out=sl.compare_logits(ZERO,ZERO,ZERO_SHA,10**400,0.0,COUNT)
+  File "E:\the_harness\records\factory_runs\20261004\qwen_jlink_stream_six_20261004T184200Z\qwen_vulkan_numeric_state_ledger\source.qwen_untrusted.py", line 193, in compare_logits
+    if not _close_metadata_number(max_abs_err, max_err):
+  File "E:\the_harness\records\factory_runs\20261004\qwen_jlink_stream_six_20261004T184200Z\qwen_vulkan_numeric_state_ledger\source.qwen_untrusted.py", line 159, in _close_metadata_number
+    if not is_strict_number(actual) or not is_strict_number(expected):
+  File "E:\the_harness\records\factory_runs\20261004\qwen_jlink_stream_six_20261004T184200Z\qwen_vulkan_numeric_state_ledger\source.qwen_untrusted.py", line 40, in is_strict_number
+    return math.isfinite(float(value))
+OverflowError: int too large to convert to float
+
+======================================================================
+ERROR: test_unhashable_model_key_refuses_without_exception (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 74, in test_unhashable_model_key_refuses_without_exception
+    self.assertFalse(sl.validate_model_metadata({'model_key':[]}))
+  File "E:\the_harness\records\factory_runs\20261004\qwen_jlink_stream_six_20261004T184200Z\qwen_vulkan_numeric_state_ledger\source.qwen_untrusted.py", line 68, in validate_model_metadata
+    entry = MODEL_WHITELIST.get(meta.get('model_key'))
+TypeError: unhashable type: 'list'
+
+======================================================================
+FAIL: test_anonymous_duplicate_dll_hashes_not_fresh_five (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 65, in test_anonymous_duplicate_dll_hashes_not_fresh_five
+    self.assertFalse(sl.validate_runtime_metadata(data))
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_constructor_does_not_bypass_validation (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 56, in test_constructor_does_not_bypass_validation
+    with self.assertRaises(ValueError):sl.StateLedger(records=[{'state':'READY','experiment_id':'x','model_pass':True}])
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cpu_reference_threshold_accepts_reverse_boundary (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 33, in test_cpu_reference_threshold_accepts_reverse_boundary
+    self.assertEqual(out['state'],'DIAGNOSTIC_ONLY');self.assertEqual(out['fail_count'],0)
+AssertionError: 'FAILED_NUMERIC' != 'DIAGNOSTIC_ONLY'
+- FAILED_NUMERIC
++ DIAGNOSTIC_ONLY
+
+
+======================================================================
+FAIL: test_cpu_reference_threshold_rejects_001005 (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 30, in test_cpu_reference_threshold_rejects_001005
+    self.assertEqual(out['state'],'FAILED_NUMERIC');self.assertEqual(out['fail_count'],1)
+AssertionError: 'DIAGNOSTIC_ONLY' != 'FAILED_NUMERIC'
+- DIAGNOSTIC_ONLY
++ FAILED_NUMERIC
+
+
+======================================================================
+FAIL: test_float_context_refused (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 37, in test_float_context_refused
+    data=runtime();data['requested_ctx']=128.0;self.assertFalse(sl.validate_runtime_metadata(data))
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_float_count_refused (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 35, in test_float_count_refused
+    self.assertEqual(sl.compare_logits(ZERO,ZERO,ZERO_SHA,0.0,0.0,float(COUNT))['state'],'NOT_CHECKED')
+AssertionError: 'DIAGNOSTIC_ONLY' != 'NOT_CHECKED'
+- DIAGNOSTIC_ONLY
++ NOT_CHECKED
+
+
+======================================================================
+FAIL: test_float_model_bytes_refused (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 40, in test_float_model_bytes_refused
+    self.assertFalse(sl.validate_model_metadata(data))
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_input_nested_metadata_cannot_change_ledger (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 54, in test_input_nested_metadata_cannot_change_ledger
+    self.assertEqual(ledger.records()[0]['metadata']['pins'],['original'])
+AssertionError: Lists differ: ['forged'] != ['original']
+
+First differing element 0:
+'forged'
+'original'
+
+- ['forged']
++ ['original']
+
+======================================================================
+FAIL: test_records_cannot_mutate_model_pass (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 50, in test_records_cannot_mutate_model_pass
+    self.assertFalse(json.loads(ledger.candidate_plan())['records'][0]['model_pass'])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_records_cannot_mutate_prior_state (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 45, in test_records_cannot_mutate_prior_state
+    self.assertEqual(ledger.records()[0]['state'],'FAILED_NUMERIC')
+AssertionError: 'DIAGNOSTIC_ONLY' != 'FAILED_NUMERIC'
+- DIAGNOSTIC_ONLY
++ FAILED_NUMERIC
+
+
+======================================================================
+FAIL: test_terminal_cannot_restart_by_omitting_prior (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 59, in test_terminal_cannot_restart_by_omitting_prior
+    with self.assertRaises(ValueError):ledger.append({'state':'RUNNING','experiment_id':'x'})
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_terminal_cannot_restart_with_forged_prior (__main__.Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_root_audit_20261004T1900Z\test_independent_ledger_red.py", line 62, in test_terminal_cannot_restart_with_forged_prior
+    with self.assertRaises(ValueError):ledger.append({'state':'RUNNING','experiment_id':'x','prior_state':'PENDING'})
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.500s
+
+FAILED (failures=12, errors=3)

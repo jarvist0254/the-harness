@@ -1,0 +1,85 @@
+{
+  "utc": "2026-10-04T23:04:20.017286+00:00",
+  "status": "PREPARATION_ONLY_PENDING_ROOT_ADMISSION",
+  "launch_authorized": false,
+  "job": "grok_l0_collector_high",
+  "model": "grok-4.7-build-fast",
+  "reasoning_effort": "high",
+  "provider_seconds": 600,
+  "outer_seconds": 600,
+  "per_stream_bytes": 2097152,
+  "source_chars_limit": 32000,
+  "tests_chars_limit": 16000,
+  "native_children_actual": 0,
+  "source_execution": false,
+  "prompt": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\grok_l0_collector_high.prompt.txt",
+    "bytes": 55282,
+    "sha256": "647f57cc601f2f1bf3ea492b517fb6cd95ce96aeca66a2d4bb26671eaa5a7418"
+  },
+  "spec": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\grok_l0_collector_high.spec.txt",
+    "bytes": 3097,
+    "sha256": "d4b67d5078e66fff57a4fe480a9bb9ca18f00d1feeb6e4215a66af3c5546f48c"
+  },
+  "source_binding": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp",
+    "bytes": 15764,
+    "sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6"
+  },
+  "full_embedded_inputs": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\source.local_derivative_revision2.cpp",
+      "bytes": 15764,
+      "sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\actual_header_stub_local_revision2.cpp",
+      "bytes": 5591,
+      "sha256": "78250c8d9e780295e3385cf5d5dc88a6c4028064e7383658aaaa00f6f5c7f91d"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\test_measured_requirements.py",
+      "bytes": 2257,
+      "sha256": "6009ac0454f59858a3d49b6156f39c82d1f18145e87fd1f59121f2275f16824b"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_query_local_repair_20261004T214344Z\\ADJUDICATION.md",
+      "bytes": 1644,
+      "sha256": "5f0aadf18c8c5d09615d11f6155a92b50db2092566581c2358dc2fcbe6221d35"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\parser_revision2\\run_output\\parsed_review.json",
+      "bytes": 10956,
+      "sha256": "f88cdad706e88a7af8fa4aad0c6d214d16ead6706a2e9ee1468e5a6092bbf5a1"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high\\review.pending_root_qa.json",
+      "bytes": 12938,
+      "sha256": "0b405573f32bb91e0d4b9de8d299c30698225c9b6c4e38fc5b48826b8d1d1529"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_l0_collector_prep_20261004T220000Z\\ROOT_ADDITIONAL_COLLECTOR_SCOPE_GAPS_20261004T220600Z.json",
+      "bytes": 1165,
+      "sha256": "2e143883a4890886afda93fd7158c5cafa8b29bcd32ea1bd7a7ec3acce42cdb4"
+    }
+  ],
+  "helpers": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\invoke_owned_combined_editor.ps1",
+      "bytes": 8018,
+      "sha256": "223bf1e1692e4c8b02ceb1058b9cb1f05b8ba688df108c100bee064d6c551f51"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\provider_common.ps1",
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\research_artifact.ps1",
+      "bytes": 774,
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36"
+    }
+  ],
+  "wrapper_change": "System role sentence only if matched; all owned-process/auth/timeout/parser behavior unchanged; exactdiff requires ROOT read"
+}

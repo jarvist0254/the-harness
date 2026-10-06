@@ -1,0 +1,12 @@
+{
+  "elapsed_seconds": 300.95,
+  "exit_code": -1,
+  "status": "NOT_ACCEPTED",
+  "outer_killed": true,
+  "model_usage": null,
+  "vendor_reported_cost_usd": null,
+  "stop_reason": null,
+  "pid": 88900,
+  "requested_model": "grok-4.7-build-fast",
+  "usage": null
+}

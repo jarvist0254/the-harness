@@ -1,0 +1,40 @@
+{
+  "status": "UNRESOLVED_DUPLICATE_JSON_RESPONSE",
+  "wrapper_status": "PARSE_OR_SCHEMA_ERROR",
+  "response_objects": 2,
+  "first_verdict": "REFUSED",
+  "second_verdict": "REFUSED",
+  "first_keys": [
+    "findings",
+    "safety_checks",
+    "verdict"
+  ],
+  "second_keys": [
+    "findings",
+    "safety_checks",
+    "toolAction",
+    "toolSummary",
+    "verdict"
+  ],
+  "structured_output_keys": [
+    "findings",
+    "safety_checks",
+    "verdict"
+  ],
+  "raw_stdout_sha256": "6D1D9C7DBB66BEAC4B9451D1CDE75C52FF8AD03D230627799A777E132654C7D9",
+  "response_pair_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_dmabuf_gemini_review_20261004T191500Z\\gemini_response_pair.json",
+  "response_pair_sha256": "DB5E33A0C66D2A8E591723D33149A0AB2377928FEE2D4665C53E58696C46F1F0",
+  "source_execution": false,
+  "compile": false,
+  "provider_edit": false,
+  "input_pins_unchanged": true,
+  "usage": {
+    "input_tokens": 57666,
+    "output_tokens": 29029,
+    "thinking_tokens": 24688,
+    "cache_read_tokens": 31745,
+    "total_tokens": 86695
+  },
+  "tool_calls": "UNKNOWN",
+  "subagents": "UNKNOWN"
+}

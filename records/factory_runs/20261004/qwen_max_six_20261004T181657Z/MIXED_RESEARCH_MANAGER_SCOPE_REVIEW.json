@@ -1,0 +1,11 @@
+{
+  "author": "provider manager independent static scope check, notROOT admission",
+  "artifact_sha256": "cba8fad58f431b1969cbbd9431aef5b6049a20b93f652d904162b7529ef31cf0",
+  "root_adjudication_pending": true,
+  "state": "ADVISORY_ONLY_NO_SOURCE_TESTS_NO_QUALIFICATION",
+  "findings": [
+    "Provider wrongly describes sixworkhorse jobs asfutureonly; wrapper receipts independently prove sixactualrequests. Nativechildren0 remainscorrect.",
+    "Per-device budget/highwater alone doesnot prove four-requiredcapacity; actualresidentuniqueweights and sameworkload numericalfour success +actualone/three OOM needed.",
+    "Pointeridentity/alignment/readbackhash do not establish legalcross-import resourcealiassemantics; unresolvedsharedhostprotocol remainsREFUSED pendingprimaryspecproof."
+  ]
+}

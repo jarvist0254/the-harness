@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "scope": "source-only preparation; no provider call",
+  "task_spec": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\COMPILER_COMPLETION_TASK_SPEC.md",
+    "sha256": "390080FA8E3D17AF2ACF983E94F713C6479BD118178CA3491A51ECF1E3E5FAD2"
+  },
+  "supervisor": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py",
+    "sha256": "FA907E8637870521B573922F6E939E56E388439FA61DC1A76FBEB53F7AD45EF3"
+  },
+  "job_trace": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\job_members.jsonl",
+    "sample_count": 23,
+    "sha256": "A7966F095792168AB54B90F74F936BB23F5C92AB147119820880E218CD7E7D18"
+  },
+  "controller_result": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt4_job_probe_20261004T1722Z\\actual_runtime_evidence\\controller_result.json",
+    "sha256": "F27676905ABEA6526A62387696EDAA474DBDDE41F85008FE205C357D32652EBC"
+  },
+  "muse_executable": "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe",
+  "muse_sha256": "39A97806D315ECE0FC5CDBB88C903EF5BC77655F32E66DC22D267A212C5030BA",
+  "planned_provider": "meta",
+  "planned_model": "CLI default; no model/profile lookup",
+  "planned_flags": [
+    "--json",
+    "--prompt-file",
+    "--output-schema",
+    "--provider meta",
+    "--reasoning-effort high",
+    "--max-model-steps 4",
+    "--max-tool-output-bytes 8192",
+    "--no-parallel-tool-calls",
+    "--approval-mode untrusted",
+    "--disable-shell",
+    "--disable-write",
+    "--disable-web-tools",
+    "--no-foreign-personal-context",
+    "--no-session-log",
+    "--user-input-auto-resolve"
+  ],
+  "status": "PRELAUNCH_PINS_VALIDATED",
+  "task_spec_candidate": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\qwen_compiler_completion\\compiler_adapter.qwen_untrusted.py",
+    "sha256": "E9F4CB6FDD756E53E48DE122ABCC02FE985B72D580262412094DA4E21B25F43F"
+  },
+  "task_tests_candidate": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\qwen_compiler_completion\\test_compiler_adapter.qwen_untrusted.py",
+    "sha256": "BE32488746C0F1C980CE2901C8C1095AB56CDFD28CA9D338C98FD50A7A14F33B"
+  },
+  "strict_intake_helper": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\review_artifact_v2.ps1",
+    "sha256": "A9C7D9BF2A02C6B8E37E8DB251C6F8028F7756D51B6B169C4A33CE2B5FEAD78D"
+  },
+  "v2_intake": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\compiler_completion_repair_20261004T173321Z\\review_artifact_v2.ps1",
+    "sha256": "A9C7D9BF2A02C6B8E37E8DB251C6F8028F7756D51B6B169C4A33CE2B5FEAD78D"
+  },
+  "pure_parser_tests": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\test_jsonl_parser.py",
+    "status": "not_yet_recorded",
+    "expected_tests": 6
+  },
+  "runner": {
+    "suspended_assignment": true,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\run_muse_job.py",
+    "windows_job": "KILL_ON_JOB_CLOSE",
+    "max_total_stdout_stderr_bytes": 2097152,
+    "source_review_only": true,
+    "max_runtime_seconds": 300
+  },
+  "muse_flags": [
+    "--provider",
+    "meta",
+    "--json",
+    "--prompt-file",
+    "prompt.txt",
+    "--output-schema",
+    "output_schema.json",
+    "--reasoning-effort",
+    "high",
+    "--max-model-steps",
+    "4",
+    "--max-tool-output-bytes",
+    "8192",
+    "--no-parallel-tool-calls",
+    "--workspace",
+    "isolated job folder",
+    "--approval-mode",
+    "untrusted",
+    "--disable-shell",
+    "--disable-write",
+    "--disable-web-tools",
+    "--no-foreign-personal-context",
+    "--no-session-log",
+    "--user-input-auto-resolve"
+  ],
+  "tool_suppression_note": "CLI help has no all-tools or no-agents switch; prompt forbids tools/subagents, shell/write/web tools disabled, untrusted approvals and headless auto-resolve configured; observed tool/subagent counts remain UNKNOWN unless events report them.",
+  "provider_usage_note": "No explicit model id; CLI default Meta model. Usage remains UNKNOWN if CLI event stream omits it.",
+  "runner_sha256": "2DBFCD462E49BD15E530674E2E26248D32D4836682E790F289BAC9E562E03431",
+  "root_admission_sha256": "B0D7977A090F2F3491E428F3F80FAD77F13937DBA829B5964415A182070F620B"
+}

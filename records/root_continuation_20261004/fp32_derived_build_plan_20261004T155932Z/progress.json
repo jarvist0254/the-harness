@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-04T16:08:51.524519+00:00",
+  "stage": "PREPARATION_READY_FOR_ROOT_REVIEW",
+  "status": "Actual Grok source/region pins and Luna BUILD_ONLY variant pure+native admission pending",
+  "native_jobs_started": 0,
+  "source_files_copied": 0,
+  "log_limit": 131072,
+  "configure_seconds": 60,
+  "build_seconds": 600
+}

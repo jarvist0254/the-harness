@@ -1,0 +1,55 @@
+{
+  "utc": "2026-10-04T15:53:48.677709+00:00",
+  "state": "COMPACT_V2_PREPARED_NOT_LAUNCHED",
+  "job_id": "gemini_fp32_review_v2",
+  "model": "gemini-3.8-flash-medium",
+  "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\gemini_fp32_review_v2.prompt.txt",
+  "prompt_sha256": "71d1f2e704a18a793dad4007f93f330fd827e0e8f94232d42156cff6f1920874",
+  "prompt_utf16_units": 21050,
+  "prompt_limit": 24000,
+  "argv_raw_sum_with_separators_utf16": 21481,
+  "windows_list2cmdline_utf16_units": 21609,
+  "conservative_quote_escape_upper_bound_utf16_units": 21678,
+  "commandline_target_limit": 28000,
+  "actual_argv_layout": [
+    "exe",
+    "--model gemini-3.8-flash-medium",
+    "--mode plan",
+    "--sandbox",
+    "--new-project",
+    "--disable-slash-commands",
+    "--output-format json",
+    "--print-timeout210s",
+    "--json-schema E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\REVIEW_SCHEMA.json",
+    "--log-file E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\gemini_fp32_review_v2\\provider.log",
+    "--print E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\gemini_fp32_review_v2.prompt.txt CONTENTS (embedded)"
+  ],
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch\\patch.pending_root_qa.json",
+  "source_sha256": "6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "original_cpp_source": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+  "original_cpp_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "exact_full_function_range": [
+    6270,
+    6552
+  ],
+  "essential_support_ranges": [
+    [
+      2736,
+      2739
+    ],
+    [
+      3283,
+      3283
+    ],
+    [
+      6061,
+      6067
+    ]
+  ],
+  "original_failed_job_folder_preserved": true,
+  "helpers_original_prompt_admissions_unchanged": true,
+  "provider_launches": 0,
+  "credentials_reads": 0,
+  "network_gpu_compiler_native_calls": 0,
+  "root_new_launch_binding": "PENDING"
+}

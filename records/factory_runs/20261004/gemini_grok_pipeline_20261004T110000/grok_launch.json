@@ -1,0 +1,12 @@
+{
+  "subagents": false,
+  "source_sha256": "765B2BE5E976DFB6709F3D0E7754F71696E2B9287CC87120A767E8820F69DF94",
+  "outer_deadline_seconds": 240,
+  "pid": 38600,
+  "model": "grok-4.7",
+  "tools_effectively_empty": true,
+  "executable": "C:\\Users\\thoma\\.grok\\bin\\grok.exe",
+  "credential_persisted": false,
+  "memory": false,
+  "mode": "plan"
+}

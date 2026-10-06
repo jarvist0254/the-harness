@@ -1,0 +1,1456 @@
+PREPARATION ONLY. No provider launch until ROOT authorizes the actual hash-pinned packet. Source-only Grok4.7-build-fast HIGH corrective editor; output ONE strict JSON with exactly status,source,tests_source,analysis,prerequisites,evidence_limits,references. Status PROPOSED|REFUSED|ANALYSIS. Complete replacement module and actual-file pure tests each<=131072 characters. Nonempty concise explanation arrays. No tools, files, processes, network, native/GPU execution, subagents or source promotion. Actual hardware qualification remains NOT_CHECKED; synthetic acceptance cannot certify physical VRAM/P2P/capacity.
+
+Continue the completed Muse→Gemini→Grok capacity chain using ROOT measured independent feedback only. Correct EXACTLY these three measured RED cases against actual source4a278926: CPU_payload_disagrees_with_registered_reference_bytes, single_attempt_foreign_physical_population, three_attempt_foreign_physical_population. Preserve the44 current independent passing controls and original4 RED fixes, exact4 policy (5 physical cards refuse), unique positive resident shards on every owner, cumulative peak coverage, matching OOM workload/artifact pins, strict finite numeric types, input immutability, fixed per-logit tolerance and original1e-12 metric rounding bound. Do not widen tolerance, add CPU fallback, fabricate allocator/native evidence or claim whole hardware goal complete. Native current host has NV5070Ti plus AMD shared iGPU, no Intel GPU and no four-card physical result.
+
+ROOT-PENDING bounded CPU reference schema proposal, for ROOT review: the existing named trusted['cpu_reference_hash'] registry slot accepts actual immutable bytes/bytearray or a lowercase64 SHA digest. To validate actual CPU values, bytes must be available: when the slot is digest-only, require separately named trusted['cpu_reference_bytes']; bind its actual SHA to that digest and evidence CPU reference hash. Bytes are UTF-8 JSON containing ONLY a flat ordered nonempty array of finite numbers (no bool, object, null, string, NaN or Infinity), representing EVERY CPU value corresponding one-to-one to four.execution.logits in the same order. Proposed bounds16MiB bytes /1048576 values, not an accepted historical limit or hardware count; explicitly document these proposed bounds for ROOT. Reject missing payload, malformed/oversized reference, count mismatch, unrepresentable/range-invalid numbers or CPU value mismatches fail-closed. Use strict non-bool finite value conversion consistent with the current safely representable numeric contract; compare CPU values exactly after that conversion, never through numeric execution tolerance. Our actual positive reference bytes are b'[1.0]'; preserve that legal fixture and input bytearrays unchanged. Only metadata digest agreement is insufficient. Hash/check full raw reference bytes before parsing and verify all supplied CPU values, not a prefix. Don't infer native execution or reference truth from a registered synthetic payload. Other artifact hash/digest registry semantics remain unchanged.
+
+Population fix: SINGLE and THREE OOM participants must resolve to respectively1 and3 distinct physical owners from the SAME FOUR qualified physical-owner population. Resolve explicit aliases/root-subdevice mappings unambiguously against four owners; repeated enumeration of the same physical canonical root remains legal. Require owner subsets; unrelated hardware OOM must refuse. No index/name/vendor-only fallback. An alias matching multiple physical owners or missing stable ownership is NOT_CHECKED/refused, never counted as another card. Retain exact4 distinct discrete policy and current shared/unknown backing refusal. Do not blindly count runtime subdevices as extra physical devices or reject the current legal same-canonical-root alias controls. The current source stores canonical sets but never compares cross-role participant populations.
+
+Actual evaluator47 tests:44PASS/3RED/0exceptions; original4 fixed. Owned PID83872 exit1/reaped.188s, zero traps, pins unchanged. These are synthetic validator observations only. Preserve all raw old artifacts. Return useful actual-file tests importing CANDIDATE_PATH, never embed a duplicate implementation. Include the three actual mutations plus positive legal baseline and existing coverage regressions; no provider test execution. ROOT will independently retarget unchanged47 controls and additional schema-bound controls after actual-source review.
+
+===== ACTUAL CANDIDATE SHA256 4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211 =====
+import hashlib,math
+ART=('model_hash','workload_hash','source_hash','exe_hash','context_hash','quant')
+HASH=('model_hash','workload_hash','source_hash','exe_hash','context_hash','cpu_reference_hash')
+_FIX=1e-12  # retained tolerance contract; |claimed-actual| <= _FIX*max(1,|claimed|,|actual|)
+class _E(Exception):
+    def __init__(s,st,m):
+        super().__init__(m); s.st=st; s.m=m
+def _i(x):
+    return isinstance(x,int) and not isinstance(x,bool)
+def _n(x):
+    return (not isinstance(x,bool)) and (isinstance(x,int) or (isinstance(x,float) and math.isfinite(x)))
+def _s(x):
+    return isinstance(x,str) and x.strip()!=''
+def _l(x):
+    return x.strip().lower()
+def _hex64(x):
+    return isinstance(x,str) and len(x)==64 and all(c in '0123456789abcdef' for c in x)
+def _ret(st,m):
+    c=0 if st=='PASS' else (1 if st=='FAIL' else 2)
+    return {'status':st,'exit_code':c,'errors':[] if st=='PASS' else [m],'scope':'four discrete GPU VRAM capacity receipt; GPU-free strict validator'}
+def _bind(evidence,trusted):
+    if not isinstance(trusted,dict):
+        raise _E('NOT_CHECKED','untrusted')
+    for k in HASH:
+        ev=evidence.get(k)
+        if not _hex64(ev):
+            raise _E('NOT_CHECKED','hash:'+k)
+        pin=trusted.get(k,None)
+        if isinstance(pin,(bytes,bytearray)):
+            digest=hashlib.sha256(bytes(pin)).hexdigest()
+        elif _hex64(pin):
+            digest=pin
+        elif pin is None:
+            raise _E('NOT_CHECKED','registry:'+k)
+        else:
+            raise _E('NOT_CHECKED','registry_type:'+k)
+        if digest!=ev:
+            raise _E('FAIL','registry_mismatch:'+k)
+    for k in ('artifact_source','quant'):
+        ev=evidence.get(k); pin=trusted.get(k,None)
+        if not _s(ev) or not _s(pin):
+            raise _E('NOT_CHECKED','registry:'+k)
+        if pin!=ev:
+            raise _E('FAIL','registry_mismatch:'+k)
+def _consistent(claimed,actual):
+    if not _n(claimed) or not _n(actual):
+        return False
+    try:
+        fc=float(claimed); fa=float(actual)
+        diff=abs(fc-fa); scale=max(1.0,abs(fc),abs(fa))
+    except (OverflowError,ValueError):
+        return False
+    return math.isfinite(diff) and math.isfinite(scale) and diff<=_FIX*scale
+def _as_float(x):
+    if isinstance(x,float):
+        if not math.isfinite(x):
+            raise _E('NOT_CHECKED','logit_range')
+        return x
+    if not _i(x):
+        raise _E('NOT_CHECKED','logit_tol')
+    try:
+        f=float(x)
+        ok=math.isfinite(f) and int(f)==x
+    except (OverflowError,ValueError):
+        ok=False
+    if not ok:
+        raise _E('NOT_CHECKED','logit_range')
+    return f
+def _pair_err(ob,cp):
+    if not _n(ob) or not _n(cp):
+        raise _E('NOT_CHECKED','logit_tol')
+    d=abs(_as_float(ob)-_as_float(cp))
+    if (not math.isfinite(d)) or d>1e150:
+        raise _E('NOT_CHECKED','logit_range')
+    return d
+def validate_capacity(evidence,*,trusted):
+    try:
+        if not isinstance(evidence,dict):
+            raise _E('NOT_CHECKED','evidence')
+        _bind(evidence,trusted)
+        if not _i(evidence.get('observed_at_ns')):
+            raise _E('NOT_CHECKED','observed_at_ns')
+        mb=evidence.get('model_bytes')
+        if not _i(mb) or mb<=0:
+            raise _E('NOT_CHECKED','model_bytes')
+        tol=evidence.get('logit_tol_abs')
+        if not _n(tol) or tol<=0:
+            raise _E('NOT_CHECKED','tol')
+        ms=evidence.get('max_staleness_ns',10000000000)
+        if not _i(ms) or ms<0:
+            raise _E('NOT_CHECKED','staleness')
+        att=evidence.get('attempts')
+        if not isinstance(att,list):
+            raise _E('NOT_CHECKED','attempts')
+        by={}
+        for a in att:
+            if isinstance(a,dict) and _s(a.get('role')):
+                by.setdefault(a['role'],[]).append(a)
+        bind=tuple(evidence[k] for k in ART)
+        P={}
+        for r in ('single','three','four'):
+            L=by.get(r,[])
+            if len(L)!=1:
+                raise _E('NOT_CHECKED','role:'+r)
+            a=L[0]
+            if tuple(a.get(k) for k in ART)!=bind:
+                raise _E('FAIL','bind:'+r)
+            if not _i(a.get('timestamp_ns')):
+                raise _E('NOT_CHECKED','ts:'+r)
+            if abs(a['timestamp_ns']-evidence['observed_at_ns'])>ms:
+                raise _E('NOT_CHECKED','stale:'+r)
+            c=a.get('controller')
+            if not isinstance(c,dict):
+                raise _E('NOT_CHECKED','ctrl:'+r)
+            for k in ('args_valid','timeout','policy_cap'):
+                if k not in c:
+                    raise _E('NOT_CHECKED','ctrl.'+k)
+            if c['args_valid'] is not True:
+                raise _E('FAIL','args:'+r)
+            if c['timeout'] is not False:
+                raise _E('FAIL','timeout:'+r)
+            if c['policy_cap'] is not False:
+                raise _E('FAIL','policy:'+r)
+            if c.get('native_error') not in (None,'',False):
+                raise _E('FAIL','native:'+r)
+            ds=a.get('devices')
+            if not isinstance(ds,list) or not ds:
+                raise _E('NOT_CHECKED','devs:'+r)
+            seen=set(); canon=set(); phys=0
+            for d in ds:
+                if not isinstance(d,dict):
+                    raise _E('NOT_CHECKED','dev:'+r)
+                cid=d.get('canonical_id'); pal=d.get('physical_alias')
+                if not _s(cid) or not _s(pal):
+                    raise _E('NOT_CHECKED','alias:'+r)
+                al=d.get('aliases')
+                if not isinstance(al,list) or not al:
+                    raise _E('NOT_CHECKED','aliases:'+r)
+                nm={_l(cid),_l(pal)}
+                for x in al:
+                    if not _s(x):
+                        raise _E('NOT_CHECKED','alias2:'+r)
+                    nm.add(_l(x))
+                if 'discrete' not in d or 'form_factor' not in d:
+                    raise _E('NOT_CHECKED','form:'+r)
+                if d['discrete'] is not True or d['form_factor']!='discrete_gpu':
+                    raise _E('FAIL','discrete:'+r)
+                if not (nm & seen):
+                    phys+=1
+                seen|=nm; canon.add(_l(cid))
+            if len(canon)!=phys:
+                raise _E('FAIL','dedup:'+r)
+            al=a.get('allocator')
+            if not isinstance(al,dict):
+                raise _E('NOT_CHECKED','alloc:'+r)
+            if al.get('class')!='dedicated_vram':
+                raise _E('NOT_CHECKED','alloc_class:'+r)
+            if al.get('fresh') is not True:
+                raise _E('NOT_CHECKED','fresh:'+r)
+            if not _s(al.get('source')):
+                raise _E('NOT_CHECKED','alloc_src:'+r)
+            if not _i(al.get('timestamp_ns')):
+                raise _E('NOT_CHECKED','alloc_ts:'+r)
+            if abs(al['timestamp_ns']-a['timestamp_ns'])>ms:
+                raise _E('NOT_CHECKED','alloc_stale:'+r)
+            P[r]={'a':a,'phys':phys,'canon':canon}
+        if P['single']['phys']!=1:
+            raise _E('FAIL','single_phys')
+        if P['three']['phys']!=3:
+            raise _E('FAIL','three_phys')
+        if P['four']['phys']!=4:
+            raise _E('FAIL','four_phys')
+        for r in ('single','three'):
+            ex=P[r]['a'].get('execution')
+            if not isinstance(ex,dict):
+                raise _E('NOT_CHECKED','exec:'+r)
+            if ex.get('status')!='allocator_oom':
+                raise _E('FAIL','oom:'+r)
+            rb=ex.get('requested_bytes')
+            if not _i(rb) or rb<=0:
+                raise _E('NOT_CHECKED','req:'+r)
+            if rb!=mb:
+                raise _E('FAIL','req_mb:'+r)
+        a=P['four']['a']; ex=a.get('execution')
+        if not isinstance(ex,dict):
+            raise _E('NOT_CHECKED','exec4')
+        if ex.get('status')!='success':
+            raise _E('FAIL','success4')
+        rm=ex.get('rmse'); mx=ex.get('max_abs_error')
+        if not _n(rm) or not _n(mx) or rm<0 or mx<0:
+            raise _E('NOT_CHECKED','errs4')
+        lg=ex.get('logits')
+        if not isinstance(lg,list) or not lg:
+            raise _E('NOT_CHECKED','logits')
+        errs=[]
+        for p in lg:
+            if not isinstance(p,dict):
+                raise _E('NOT_CHECKED','logit')
+            cp=p.get('cpu'); ob=p.get('observed'); lt=p.get('tol_abs')
+            if not _n(lt) or lt<=0:
+                raise _E('NOT_CHECKED','logit_tol')
+            if abs(lt-tol)>_FIX:
+                raise _E('FAIL','fixed_tol')
+            e=_pair_err(ob,cp)
+            if e>lt:
+                raise _E('FAIL','logit_tol_fail')
+            errs.append(e)
+        act_max=errs[0]; ss=0.0
+        for e in errs:
+            if e>act_max:
+                act_max=e
+            ss+=e*e
+            if not math.isfinite(ss):
+                raise _E('NOT_CHECKED','logit_range')
+        act_rmse=math.sqrt(ss/len(errs))
+        if not math.isfinite(act_rmse):
+            raise _E('NOT_CHECKED','logit_range')
+        if not _consistent(mx,act_max) or not _consistent(rm,act_rmse):
+            raise _E('FAIL','metric_recompute')
+        if rm>mx:
+            raise _E('FAIL','rmse>maxabs')
+        pk=a.get('allocator',{}).get('peak_bytes_by_device')
+        if not isinstance(pk,dict):
+            raise _E('NOT_CHECKED','peaks')
+        npk={}
+        for k,v in pk.items():
+            if not _s(k):
+                raise _E('NOT_CHECKED','peak_key')
+            if not _i(v) or v<=0:
+                raise _E('NOT_CHECKED','peak_int')
+            lk=_l(k)
+            if lk in npk and npk[lk]!=v:
+                raise _E('FAIL','peak_dup')
+            npk[lk]=v
+        if set(npk)!=P['four']['canon']:
+            raise _E('NOT_CHECKED','peak_set')
+        ws=a.get('weights')
+        if not isinstance(ws,list) or not ws:
+            raise _E('NOT_CHECKED','weights')
+        sh=set(); tot=0
+        owned={c:0 for c in P['four']['canon']}
+        summed={c:0 for c in P['four']['canon']}
+        for w in ws:
+            if not isinstance(w,dict):
+                raise _E('NOT_CHECKED','weight')
+            dv=w.get('device'); h=w.get('shard_hash'); rb=w.get('resident_bytes'); bk=w.get('backing')
+            if not _s(dv) or not _s(h):
+                raise _E('NOT_CHECKED','weight_id')
+            if not _i(rb) or rb<=0:
+                raise _E('NOT_CHECKED','resident')
+            if bk!='device_vram':
+                raise _E('NOT_CHECKED','backing')
+            nd=_l(dv)
+            if nd not in owned:
+                raise _E('FAIL','weight_dev')
+            if h in sh:
+                raise _E('FAIL','replicated_shard')
+            sh.add(h); owned[nd]+=1; summed[nd]+=rb; tot+=rb
+        for c in owned:
+            if owned[c]<1:
+                raise _E('FAIL','shard_coverage')
+            if summed[c]>npk[c]:
+                raise _E('FAIL','peak_cover')
+        if tot!=mb:
+            raise _E('FAIL','reconcile')
+        return _ret('PASS','')
+    except _E as e:
+        return _ret(e.st,e.m)
+    except Exception as e:
+        return _ret('NOT_CHECKED','unexpected:'+repr(e))
+
+
+===== ACTUAL PROVIDER TESTS NOT EXECUTED SHA256 1a885582f610a0144479a90be787d049f8afedadd86da8d7810c2b85c428b114 =====
+import hashlib,importlib.util,math,os,unittest
+P=os.environ.get('CANDIDATE_PATH') or os.environ.get('CANDIDATE_SOURCE_PATH') or 'candidate.py'
+if not os.path.isfile(P):
+    raise RuntimeError('set CANDIDATE_PATH to the actual candidate source path')
+spec=importlib.util.spec_from_file_location('candidate_under_test',P)
+mod=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+RAW=b'root-model-bytes'
+def hx(b):
+    return hashlib.sha256(b).hexdigest()
+MODEL,WORK,SRC,EXE,CTX,CPU=hx(RAW),hx(b'workload'),hx(b'source'),hx(b'exe'),hx(b'context'),hx(b'cpu-ref')
+QUANT='q8_0'
+VALS={'model_hash':MODEL,'workload_hash':WORK,'source_hash':SRC,'exe_hash':EXE,'context_hash':CTX,'quant':QUANT}
+def reg():
+    return {'model_hash':RAW,'workload_hash':bytearray(b'workload'),'source_hash':SRC,'exe_hash':EXE,'context_hash':CTX,'cpu_reference_hash':CPU,'artifact_source':'root-store','quant':QUANT}
+def dev(i):
+    return {'canonical_id':'pci:0000:%02x.0'%i,'physical_alias':'phys:%d'%i,'aliases':['root:%d'%i,'sub:%d:0'%i],'discrete':True,'form_factor':'discrete_gpu'}
+def wt(dev,h,n):
+    return {'device':dev,'shard_hash':h,'resident_bytes':n,'backing':'device_vram'}
+PAIRS=((0.0,0.0),(1.0,1.0625),(2.0,2.0))
+def metrics(pairs):
+    es=[abs(o-c) for c,o in pairs]
+    return math.sqrt(sum(x*x for x in es)/len(es)),max(es)
+def att(role,n,ts=1000):
+    a={'role':role,'timestamp_ns':ts,'controller':{'args_valid':True,'timeout':False,'policy_cap':False,'native_error':None},'devices':[dev(i) for i in range(n)],'allocator':{'class':'dedicated_vram','fresh':True,'source':'allocd','timestamp_ns':ts}}
+    a.update(VALS)
+    if role!='four':
+        a['execution']={'status':'allocator_oom','requested_bytes':4000}
+    else:
+        rm,mx=metrics(PAIRS)
+        a['execution']={'status':'success','rmse':rm,'max_abs_error':mx,'logits':[{'cpu':c,'observed':o,'tol_abs':0.1} for c,o in PAIRS]}
+        a['weights']=[wt('pci:0000:%02x.0'%i,'h%d'%i,1000) for i in range(4)]
+        a['allocator']['peak_bytes_by_device']={'pci:0000:%02x.0'%i:1000 for i in range(4)}
+    return a
+def ev():
+    e={'artifact_source':'root-store','cpu_reference_hash':CPU,'observed_at_ns':1000,'model_bytes':4000,'logit_tol_abs':0.1,'attempts':[att('single',1),att('three',3),att('four',4)]}
+    e.update(VALS)
+    return e
+class T(unittest.TestCase):
+    def runv(self,e,trusted=None):
+        return mod.validate_capacity(e,trusted=reg() if trusted is None else trusted)
+    def test_pass(self):
+        r=self.runv(ev()); self.assertEqual((r['status'],r['exit_code']),('PASS',0))
+    def test_untrusted_bool(self):
+        self.assertEqual(mod.validate_capacity(ev(),trusted=True)['errors'],['untrusted'])
+    def test_nonhex(self):
+        e=ev(); e['model_hash']='not-a-hex'
+        for a in e['attempts']: a['model_hash']=e['model_hash']
+        self.assertEqual(self.runv(e)['errors'],['hash:model_hash'])
+    def test_registry_mismatch(self):
+        e=ev(); e['workload_hash']=hx(b'other')
+        for a in e['attempts']: a['workload_hash']=e['workload_hash']
+        self.assertEqual(self.runv(e)['errors'],['registry_mismatch:workload_hash'])
+    def test_missing_registry(self):
+        t=reg(); del t['exe_hash']
+        self.assertEqual(self.runv(ev(),t)['errors'],['registry:exe_hash'])
+    def test_uppercase_hash(self):
+        e=ev(); e['context_hash']=CTX.upper()
+        for a in e['attempts']: a['context_hash']=e['context_hash']
+        t=reg(); t['context_hash']=CTX.upper()
+        self.assertEqual(self.runv(e,t)['errors'],['hash:context_hash'])
+    def test_three_cards(self):
+        e=ev(); e['attempts'][2]['devices']=e['attempts'][2]['devices'][:3]
+        self.assertEqual(self.runv(e)['errors'],['four_phys'])
+    def test_five_rejected(self):
+        e=ev(); e['attempts'][2]['devices'].append(dev(4))
+        self.assertEqual(self.runv(e)['errors'],['four_phys'])
+    def test_alias_dedup(self):
+        e=ev(); e['attempts'][2]['devices'][1]['aliases'].append('root:0')
+        self.assertEqual(self.runv(e)['errors'],['dedup:four'])
+    def test_repeat_enumeration(self):
+        e=ev(); e['attempts'][2]['devices'].append(dev(0))
+        self.assertEqual(self.runv(e)['status'],'PASS')
+    def test_replicated_weights(self):
+        e=ev(); w=e['attempts'][2]['weights']; w[1]['shard_hash']=w[0]['shard_hash']
+        self.assertEqual(self.runv(e)['errors'],['replicated_shard'])
+    def test_shards_only_device0(self):
+        e=ev(); four=e['attempts'][2]; d0=four['devices'][0]['canonical_id']
+        for w in four['weights']: w['device']=d0
+        four['allocator']['peak_bytes_by_device'][d0]=4000
+        self.assertEqual(self.runv(e)['errors'],['shard_coverage'])
+    def test_cumulative_peak(self):
+        e=ev(); e['attempts'][2]['weights'][:]=[wt('pci:0000:00.0','a',600),wt('pci:0000:00.0','b',600),wt('pci:0000:01.0','c',1000),wt('pci:0000:02.0','d',1000),wt('pci:0000:03.0','e',800)]
+        self.assertEqual(self.runv(e)['errors'],['peak_cover'])
+    def test_multi_shard_ok(self):
+        e=ev(); e['attempts'][2]['weights'][:]=[wt('pci:0000:00.0','a',500),wt('pci:0000:00.0','b',500),wt('pci:0000:01.0','c',1000),wt('pci:0000:02.0','d',1000),wt('pci:0000:03.0','e',1000)]
+        self.assertEqual(self.runv(e)['status'],'PASS')
+    def test_policy_oom_substitute(self):
+        e=ev(); e['attempts'][0]['controller']['policy_cap']=True
+        self.assertEqual(self.runv(e)['errors'],['policy:single'])
+    def test_missing_peak(self):
+        e=ev(); del e['attempts'][2]['allocator']['peak_bytes_by_device']['pci:0000:01.0']
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_missing_residence(self):
+        e=ev(); del e['attempts'][2]['weights'][0]['resident_bytes']
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_stale(self):
+        e=ev(); e['attempts'][2]['timestamp_ns']=999999999999
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_metrics_contradict(self):
+        e=ev(); ex=e['attempts'][2]['execution']; ex['rmse']=0.0; ex['max_abs_error']=0.0
+        self.assertEqual(self.runv(e)['errors'],['metric_recompute'])
+    def test_full_payload(self):
+        e=ev(); ex=e['attempts'][2]['execution']; rm,mx=metrics(PAIRS[:2]); ex['rmse']=rm; ex['max_abs_error']=mx
+        self.assertEqual(self.runv(e)['errors'],['metric_recompute'])
+    def test_no_1e6_loophole(self):
+        e=ev(); ex=e['attempts'][2]['execution']; ex['rmse']=ex['rmse']+1e-6
+        self.assertEqual(self.runv(e)['errors'],['metric_recompute'])
+    def test_logit_tol_fail(self):
+        e=ev(); e['attempts'][2]['execution']['logits'][1]['observed']=1.5
+        self.assertEqual(self.runv(e)['errors'],['logit_tol_fail'])
+    def test_mismatched_model(self):
+        e=ev(); e['attempts'][2]['model_hash']='x'
+        self.assertEqual(self.runv(e)['errors'],['bind:four'])
+    def test_bool_logit(self):
+        e=ev(); e['attempts'][2]['execution']['logits'][0]['observed']=True
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_huge_logit(self):
+        e=ev(); p=e['attempts'][2]['execution']['logits'][0]; p['cpu']=(1<<53)+1; p['observed']=0
+        self.assertEqual(self.runv(e)['errors'],['logit_range'])
+    def test_igpu(self):
+        e=ev(); e['attempts'][2]['devices'][3]['discrete']=False
+        self.assertEqual(self.runv(e)['errors'],['discrete:four'])
+    def test_host_backing(self):
+        e=ev(); e['attempts'][2]['weights'][0]['backing']='host_staged'
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_shared_allocator(self):
+        e=ev(); e['attempts'][2]['allocator']['class']='shared'
+        self.assertEqual(self.runv(e)['status'],'NOT_CHECKED')
+    def test_reconcile(self):
+        e=ev(); e['model_bytes']=4001
+        for a in e['attempts']:
+            if a['role']!='four': a['execution']['requested_bytes']=4001
+        self.assertEqual(self.runv(e)['errors'],['reconcile'])
+if __name__=='__main__':
+    unittest.main()
+
+
+===== INDEPENDENT ACTUAL TEST SOURCE SHA256 740cbe6e24e348181bd205d7c9dd958e9c1d42c9b075a9cddbdd9938f7f1852d =====
+"""Independent exact-file synthetic QA. No embedded implementation or provider tests."""
+import ast, builtins, copy, hashlib, importlib.util, json, math, os, pathlib, sys, time
+
+SOURCE = pathlib.Path(r'E:\the_harness\records\factory_runs\20261004\grok_capacity_repair_prep_20261004T203621Z\grok_capacity_high\source.grok_untrusted.py')
+PIN = '4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211'
+raw = SOURCE.read_bytes()
+assert hashlib.sha256(raw).hexdigest() == PIN
+tree = ast.parse(raw)
+for node in tree.body:
+    assert isinstance(node, (ast.Import, ast.Assign, ast.FunctionDef, ast.ClassDef))
+    if isinstance(node, ast.Import):
+        assert all(n.name in {'hashlib', 'math'} for n in node.names)
+    if isinstance(node, ast.Assign):
+        ast.literal_eval(node.value)
+    if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+        assert not node.decorator_list
+    if isinstance(node, ast.FunctionDef):
+        assert not node.args.defaults and not any(node.args.kw_defaults)
+
+TRAPS = []
+class ImportFence:
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split('.')[0] in {'ctypes', '_winapi', 'socket', 'subprocess', 'multiprocessing', 'urllib', 'http', 'requests', 'winreg', 'torch', 'cupy', 'pyopencl'}:
+            TRAPS.append('import:' + fullname)
+            raise AssertionError('Denied native/process/network/GPU import')
+        return None
+
+finder = ImportFence()
+sys.meta_path.insert(0, finder)
+def audit(event, args):
+    if event in {'subprocess.Popen', 'os.system', 'os.posix_spawn', 'ctypes.dlopen', 'ctypes.dlsym'} or event.startswith('socket.'):
+        TRAPS.append(event)
+        raise AssertionError('Denied side effect')
+sys.addaudithook(audit)
+def denied(*args, **kwargs):
+    TRAPS.append('filesystem/process function')
+    raise AssertionError('Denied side effect')
+originals = (builtins.open, os.open, os.system, os.popen)
+builtins.open = os.open = os.system = os.popen = denied
+try:
+    spec = importlib.util.spec_from_file_location('exact_grok_capacity_under_test', SOURCE)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    # Old RED fixture identities are upgraded to exact named registry bindings.
+    # Its single pair CPU1 / GPU1.05 is retained; baseline metrics now actually
+    # match the pair so unrelated metric refusal cannot mask the four controls.
+    CPU_BYTES = json.dumps([1.0], separators=(',', ':')).encode()
+    BYTES = {'model_hash': b'independent-model', 'workload_hash': b'independent-workload',
+             'source_hash': b'independent-source', 'exe_hash': b'independent-executable',
+             'context_hash': b'independent-context', 'cpu_reference_hash': CPU_BYTES}
+    PINS = {key: hashlib.sha256(value).hexdigest() for key, value in BYTES.items()}
+    ART = ('model_hash', 'workload_hash', 'source_hash', 'exe_hash', 'context_hash', 'quant')
+    def registry():
+        return dict(BYTES, artifact_source='owned-synthetic-registry', quant='q8_0')
+    def dev(i):
+        return {'canonical_id': f'pci:0000:{i:02x}.0', 'physical_alias': f'phys:{i}',
+                'aliases': [f'root:{i}', f'sub:{i}:0'], 'discrete': True, 'form_factor': 'discrete_gpu'}
+    def attempt(role, count):
+        a = {'role': role, 'timestamp_ns': 1000,
+             'controller': {'args_valid': True, 'timeout': False, 'policy_cap': False, 'native_error': None},
+             'devices': [dev(i) for i in range(count)],
+             'allocator': {'class': 'dedicated_vram', 'fresh': True, 'source': 'owned-allocator-fixture', 'timestamp_ns': 1000}}
+        a.update({key: PINS[key] for key in ART if key != 'quant'}); a['quant'] = 'q8_0'
+        if role != 'four':
+            a['execution'] = {'status': 'allocator_oom', 'requested_bytes': 4000}
+        else:
+            d = abs(1.05 - 1.0)
+            a['execution'] = {'status': 'success', 'rmse': d, 'max_abs_error': d,
+                              'logits': [{'cpu': 1.0, 'observed': 1.05, 'tol_abs': 0.1}]}
+            a['weights'] = [{'device': f'pci:0000:{i:02x}.0', 'shard_hash': hashlib.sha256(f'shard-{i}'.encode()).hexdigest(),
+                             'resident_bytes': 1000, 'backing': 'device_vram'} for i in range(4)]
+            a['allocator']['peak_bytes_by_device'] = {f'pci:0000:{i:02x}.0': 1000 for i in range(4)}
+        return a
+    def evidence():
+        return dict(PINS, quant='q8_0', artifact_source='owned-synthetic-registry', observed_at_ns=1000,
+                    model_bytes=4000, logit_tol_abs=0.1,
+                    attempts=[attempt('single', 1), attempt('three', 3), attempt('four', 4)])
+    results = []
+    def case(name, mutate=None, expected='REFUSE', trust_mutate=None, note='', original_red=False, trusted_override=None):
+        e, trusted = evidence(), registry()
+        if mutate: mutate(e)
+        if trust_mutate: trust_mutate(trusted)
+        if trusted_override is not None: trusted = trusted_override
+        before = copy.deepcopy((e, trusted))
+        try:
+            result = module.validate_capacity(e, trusted=trusted)
+            valid = isinstance(result, dict) and result.get('status') in {'PASS', 'FAIL', 'NOT_CHECKED'}
+            observed = result.get('status') if valid else 'INVALID_RESULT'
+            outcome = observed == 'PASS' if expected == 'PASS' else valid and observed != 'PASS'
+            exception = None
+        except Exception as error:
+            result, outcome, exception = None, False, repr(error)
+        unchanged = (e, trusted) == before
+        results.append({'case': name, 'expected': expected, 'passed': outcome and unchanged,
+                        'candidate_result': result, 'uncaught_exception': exception,
+                        'inputs_unchanged': unchanged, 'original_measured_red': original_red, 'note': note})
+    def four(e): return e['attempts'][2]
+    def ex(e): return four(e)['execution']
+    def all_on_one(e):
+        for w in four(e)['weights']: w['device'] = 'pci:0000:00.0'
+        four(e)['allocator']['peak_bytes_by_device']['pci:0000:00.0'] = 4000
+    def old_cumulative(e):
+        four(e)['weights'][1]['device'] = 'pci:0000:00.0'
+    def nonhex(e):
+        for key in PINS:
+            e[key] = 'not-a-hash'
+            if key in ART:
+                for a in e['attempts']: a[key] = e[key]
+    case('legal_four_device_baseline', expected='PASS')
+    case('original_red_all_shards_only_device0', all_on_one, original_red=True)
+    case('original_red_sum_shards_exceeds_peak', old_cumulative, original_red=True,
+         note='Original mutation retained: also removes device1 shard ownership; separate cumulative-only discriminator below.')
+    case('original_red_nonhex_artifact_identifiers', nonhex, original_red=True)
+    case('original_red_metrics_contradict_logits', lambda e: ex(e).update(rmse=0.0, max_abs_error=0.0), original_red=True)
+    case('legal_repeated_root_enumeration', lambda e: four(e)['devices'].append(copy.deepcopy(four(e)['devices'][0])), expected='PASS')
+    def legal_subdevice(e):
+        d = copy.deepcopy(four(e)['devices'][0]); d['aliases'].append('sub:0:1')
+        four(e)['devices'].append(d)
+    case('legal_subdevice_same_canonical_root', legal_subdevice, expected='PASS', note='Physical root canonical ID remains stable; additional runtime subdevice alias is not a new physical card.')
+    case('five_distinct_physical_cards', lambda e: four(e)['devices'].append(dev(4)))
+    case('three_physical_cards_only', lambda e: four(e).update(devices=four(e)['devices'][:3]))
+    case('alias_collision_between_distinct_canonical_ids', lambda e: four(e)['devices'][1]['aliases'].append('root:0'))
+    case('missing_card_weights', lambda e: four(e)['weights'].pop())
+    def cumulative_only(e):
+        four(e)['weights'].append(dict(four(e)['weights'][0], shard_hash=hashlib.sha256(b'extra').hexdigest(), resident_bytes=1))
+        four(e)['weights'][1]['resident_bytes'] = 999
+    case('cumulative_peak_with_all_cards_covered_and_total_reconciled', cumulative_only)
+    def legal_multi(e):
+        w = four(e)['weights'][0]; w['resident_bytes'] = 500
+        four(e)['weights'].append(dict(w, shard_hash=hashlib.sha256(b'split').hexdigest()))
+    case('legal_multiple_shards_per_card', legal_multi, expected='PASS')
+    case('replicated_shard', lambda e: four(e)['weights'][1].update(shard_hash=four(e)['weights'][0]['shard_hash']))
+    case('registry_digest_mismatch', trust_mutate=lambda t: t.update(workload_hash=b'other'))
+    case('registry_invalid_hash', trust_mutate=lambda t: t.update(exe_hash='invalid'))
+    case('registry_missing_source', trust_mutate=lambda t: t.pop('source_hash'))
+    case('registry_boolean_not_authority', trusted_override=True)
+    case('observed_logit_outside_CPU_tolerance', lambda e: ex(e)['logits'][0].update(observed=1.2))
+    case('metric_rounding_within_1e12_bound', lambda e: ex(e).update(rmse=ex(e)['rmse']+5e-13, max_abs_error=ex(e)['max_abs_error']+5e-13), expected='PASS')
+    case('metric_rounding_beyond_1e12_bound', lambda e: ex(e).update(rmse=ex(e)['rmse']+2e-12, max_abs_error=ex(e)['max_abs_error']+2e-12))
+    case('per_logit_tolerance_widened', lambda e: ex(e)['logits'][0].update(tol_abs=0.11))
+    case('shared_iGPU_participant', lambda e: four(e)['devices'][3].update(discrete=False, form_factor='integrated_gpu'))
+    case('shared_allocator', lambda e: four(e)['allocator'].update(**{'class': 'shared'}))
+    case('host_staged_weight_backing', lambda e: four(e)['weights'][0].update(backing='host_staged'))
+    case('unknown_weight_backing', lambda e: four(e)['weights'][0].pop('backing'))
+    for field in ['model_bytes', 'observed_at_ns']:
+        for bad in [True, 4000.0]:
+            case(f'{field}_{type(bad).__name__}_refusal', lambda e, f=field, x=bad: e.update({f: x}))
+    for bad in [True, 1000.0]:
+        case(f'resident_bytes_{type(bad).__name__}_refusal', lambda e, x=bad: four(e)['weights'][0].update(resident_bytes=x))
+        case(f'peak_bytes_{type(bad).__name__}_refusal', lambda e, x=bad: four(e)['allocator']['peak_bytes_by_device'].update({'pci:0000:00.0': x}))
+        case(f'OOM_requested_bytes_{type(bad).__name__}_refusal', lambda e, x=bad: e['attempts'][0]['execution'].update(requested_bytes=x))
+    for bad in [True, float('nan'), float('inf'), '1', 1 << 2000]:
+        case(f'invalid_logit_{type(bad).__name__}_{str(bad)[:8]}', lambda e, x=bad: ex(e)['logits'][0].update(observed=x))
+    case('stale_allocator', lambda e: four(e)['allocator'].update(timestamp_ns=10**12))
+    case('policy_cap_not_allocator_OOM', lambda e: e['attempts'][0]['controller'].update(policy_cap=True))
+    case('timeout_not_allocator_OOM', lambda e: e['attempts'][1]['controller'].update(timeout=True))
+    # New trust-binding discriminators: alter actual payload/population only.
+    def changed_cpu(e):
+        ex(e)['logits'][0].update(cpu=2.0, observed=2.05)
+        d = abs(2.05-2.0); ex(e).update(rmse=d, max_abs_error=d)
+    case('CPU_payload_disagrees_with_registered_reference_bytes', changed_cpu,
+         note='Trusted CPU reference is canonical JSON bytes [1.0], whose digest stays pinned; supplied CPU changes to2.0. No particular serialization is parsed by candidate: this measures missing payload-binding contract.')
+    case('single_attempt_foreign_physical_population', lambda e: e['attempts'][0].update(devices=[dev(7)]),
+         note='Same-workload OOM comparison must use a subset of the qualified four physical participants, not unrelated hardware.')
+    case('three_attempt_foreign_physical_population', lambda e: e['attempts'][1].update(devices=[dev(5), dev(6), dev(7)]))
+    # Ambiguous canonical-root mapping is observed separately, not scored as a bug.
+    e = evidence(); d = copy.deepcopy(four(e)['devices'][0]); d['canonical_id']='runtime-subdevice-0'; four(e)['devices'].append(d)
+    observation = module.validate_capacity(e, trusted=registry())
+finally:
+    builtins.open, os.open, os.system, os.popen = originals
+    sys.meta_path.remove(finder)
+
+after = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
+assert after == PIN
+assert not TRAPS
+passed = sum(r['passed'] for r in results)
+print(json.dumps({'scope': 'INDEPENDENT_PURE_SYNTHETIC_VALIDATOR_QA_NOT_HARDWARE_CAPACITY',
+                  'source_sha256_before': PIN, 'source_sha256_after': after,
+                  'counts': {'total': len(results), 'passed': passed, 'failed': len(results)-passed},
+                  'original_four_red_fixed': all(r['passed'] for r in results if r['original_measured_red']),
+                  'cases': results, 'audit_denied_events': TRAPS,
+                  'canonical_mapping_ambiguity_observation': observation,
+                  'provider_tests_executed': False}, indent=2))
+sys.exit(0 if passed == len(results) else 1)
+
+
+===== INDEPENDENT RAW47 RESULTS SHA256 6b01aba1b1b29ca2eae440cfbf5644a583dfac7092c40cd706dd34f9bb3eb238 =====
+{
+  "scope": "INDEPENDENT_PURE_SYNTHETIC_VALIDATOR_QA_NOT_HARDWARE_CAPACITY",
+  "source_sha256_before": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "source_sha256_after": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "counts": {
+    "total": 47,
+    "passed": 44,
+    "failed": 3
+  },
+  "original_four_red_fixed": true,
+  "cases": [
+    {
+      "case": "legal_four_device_baseline",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "original_red_all_shards_only_device0",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "shard_coverage"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": ""
+    },
+    {
+      "case": "original_red_sum_shards_exceeds_peak",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "peak_cover"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": "Original mutation retained: also removes device1 shard ownership; separate cumulative-only discriminator below."
+    },
+    {
+      "case": "original_red_nonhex_artifact_identifiers",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "hash:model_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": ""
+    },
+    {
+      "case": "original_red_metrics_contradict_logits",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "metric_recompute"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": ""
+    },
+    {
+      "case": "legal_repeated_root_enumeration",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "legal_subdevice_same_canonical_root",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": "Physical root canonical ID remains stable; additional runtime subdevice alias is not a new physical card."
+    },
+    {
+      "case": "five_distinct_physical_cards",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "four_phys"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "three_physical_cards_only",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "four_phys"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "alias_collision_between_distinct_canonical_ids",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "dedup:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "missing_card_weights",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "shard_coverage"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "cumulative_peak_with_all_cards_covered_and_total_reconciled",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "peak_cover"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "legal_multiple_shards_per_card",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "replicated_shard",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "replicated_shard"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_digest_mismatch",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "registry_mismatch:workload_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_invalid_hash",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "registry_type:exe_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_missing_source",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "registry:source_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_boolean_not_authority",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "untrusted"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "observed_logit_outside_CPU_tolerance",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "logit_tol_fail"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "metric_rounding_within_1e12_bound",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "metric_rounding_beyond_1e12_bound",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "metric_recompute"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "per_logit_tolerance_widened",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "fixed_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "shared_iGPU_participant",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "discrete:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "shared_allocator",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "alloc_class:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "host_staged_weight_backing",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "backing"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "unknown_weight_backing",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "backing"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "model_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "model_bytes"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "model_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "model_bytes"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "observed_at_ns_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "observed_at_ns"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "observed_at_ns_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "observed_at_ns"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "resident_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "resident"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "peak_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "peak_int"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "OOM_requested_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "req:single"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "resident_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "resident"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "peak_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "peak_int"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "OOM_requested_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "req:single"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_bool_True",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_float_nan",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_float_inf",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_str_1",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_int_11481306",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_range"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "stale_allocator",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "alloc_stale:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "policy_cap_not_allocator_OOM",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "policy:single"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "timeout_not_allocator_OOM",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "timeout:three"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "CPU_payload_disagrees_with_registered_reference_bytes",
+      "expected": "REFUSE",
+      "passed": false,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": "Trusted CPU reference is canonical JSON bytes [1.0], whose digest stays pinned; supplied CPU changes to2.0. No particular serialization is parsed by candidate: this measures missing payload-binding contract."
+    },
+    {
+      "case": "single_attempt_foreign_physical_population",
+      "expected": "REFUSE",
+      "passed": false,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": "Same-workload OOM comparison must use a subset of the qualified four physical participants, not unrelated hardware."
+    },
+    {
+      "case": "three_attempt_foreign_physical_population",
+      "expected": "REFUSE",
+      "passed": false,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    }
+  ],
+  "audit_denied_events": [],
+  "canonical_mapping_ambiguity_observation": {
+    "status": "FAIL",
+    "exit_code": 1,
+    "errors": [
+      "dedup:four"
+    ],
+    "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+  },
+  "provider_tests_executed": false
+}
+
+
+===== INDEPENDENT AUDIT SHA256 acc960e13aed07471e156ff2179c0b0d4490ef233f730f55a82a0ef69ef95653 =====
+# Independent Grok capacity-validator QA
+
+**RED: 47 independent synthetic controls; 44 passed, 3 failed, zero uncaught exceptions. All four original measured RED contradictions now refuse.** This is actual imported-file pure QA, not a physical four-card capacity result or provider-wide correctness claim. No source promotion or implementation correction occurred.
+
+Actual candidate: `records/factory_runs/20261004/grok_capacity_repair_prep_20261004T203621Z/grok_capacity_high/source.grok_untrusted.py`, SHA256 `4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211`. Actual provider test filename is `tests_source.grok_untrusted.txt`, SHA256 `1a885582f610a0144479a90be787d049f8afedadd86da8d7810c2b85c428b114`; fully read but never executed. The task specification and Root's corrective-editor contract were read before authoring controls.
+
+## Measured remaining defects
+
+1. **CPU payload not bound to registered reference artifact.** `_bind` at candidate21–38 validates the evidence CPU-reference digest against caller-supplied bytes/digest. The later numerical loop193–218 uses arbitrary `logits[*].cpu` without deriving or comparing those values to the registered artifact. Our baseline reference is the exact canonical JSON byte payload `[1.0]`. Changing the supplied CPU to2.0 and GPU to2.05, recomputing their errors, and leaving all registry bytes/hashes unchanged returns `{"status":"PASS","exit_code":0,"errors":[]}`. The observed acceptance is concrete; a production fix also requires an explicit reference serialization/completeness contract, rather than pretending the present API defines one. Correct metric arithmetic does not repair a reference-payload binding gap.
+2. **Single-card OOM may use unrelated hardware.** Candidate166–183 records per-role canonical sets, checks only physical counts1/3/4 and requested model bytes. The positive four-card population is0/1/2/3. Replacing the single attempt's device with7 returns PASS with no errors. There is no comparison of that set against the four-card set. This contradicts the repair prompt's matching device-population requirement; unrelated small-memory hardware OOM cannot demonstrate that this four-card population requires four.
+3. **Three-card OOM may use unrelated hardware.** Replacing the three attempt's devices with5/6/7 similarly returns PASS. This is a second independent population discriminator against the same missing subset constraint. The test changes only those device records; model/workload/source/executable/context/quant bindings remain identical.
+
+The CPU-reference result is a missing API/data-binding contract, not proof that any real CPU artifact was forged. All supplied hardware identities and allocation records are synthetic. Named hash registration is useful consistency checking but does not authenticate arbitrary JSON or certify physical residency.
+
+## Fixed controls and meaningful positive cases
+
+The original four controls are retained semantically: all resident shards on device0; two shards exceeding that device's peak; invalid nonhex artifact identifiers; summary RMSE/max contradicting supplied logits. Each now refuses. The historical cumulative mutation also removes device1's shard coverage, so its new refusal alone would not isolate cumulative peak arithmetic. The additional `cumulative_peak_with_all_cards_covered_and_total_reconciled` case keeps all four covered and total4000 bytes while device0 holds1001 bytes against peak1000; it refuses independently.
+
+Legal baseline, duplicate root enumeration, subdevice enumeration retaining the same physical canonical root, and multiple independent shards per card all PASS. Five distinct cards and three-card success are refused. Alias collision, missing ownership, replicated shard, missing/mismatched/invalid registry, out-of-tolerance CPU comparison, inconsistent metrics, widened per-pair tolerance, shared iGPU, shared allocator and host/unknown backing refuse.
+
+The original1e-12 metric consistency bound is discriminated on both sides: changing recomputed max/RMSE by5e-13 remains accepted, while2e-12 refuses. Floats/bools are refused for model bytes, timestamps, resident bytes, peak bytes and OOM requested bytes. Bool/string/NaN/infinite/huge2001-bit observed logits fail closed with no leaked exception. Stale allocation, policy-cap OOM and timeout OOM refuse. Every test verifies its input and registry are unchanged after the candidate call.
+
+One unscored mapping observation uses a different runtime-subdevice canonical ID sharing root aliases; it returns FAIL `dedup:four`. The present schema does not define canonical-owner remapping for those distinct IDs, so this is preserved as ambiguity rather than falsely demanding acceptance or calling it a physical-count bug. The scored legal alias case uses a stable physical canonical root.
+
+## Explicit independent-test adaptations
+
+Original evidence/test source remains immutable at `records/root_continuation_20261004/capacity_qwen_root_audit_20261004T1945Z/capacity_independent_audit_v3.py` (SHA256440245bf69e5fde1f2d68c94797f971c068d2d3a87ffe6da5e0afd2de394329e). That audit used `trusted=True` and label-shaped hashes. This repair's API requires a named registry. Our fixture supplies exact lowercase64-character digests and registered artifact bytes, updates the same hashes in all attempts, and replaces authority bool with the registry. The original CPU1/GPU1.05 pair is unchanged; baseline claimed metrics are corrected to its actual absolute error so an unrelated new metric refusal cannot mask shard defects. The original contradiction mutation still sets those metrics to zero. Original nonhex mutation still uses invalid identifiers against the valid registry. Those are fixture/API adaptations by this independent agent, not provider changes.
+
+No candidate implementation is embedded in the tests. The exact pinned source is loaded using importlib; static AST admission checks only hashlib/math imports, literal top-level assignments, undecorated definitions and no evaluated function defaults. Native/process/network/GPU import traps and process/network audit traps remain active, with filesystem/process callable traps across import and all candidate calls. Zero denied events were observed.
+
+## Reproducible execution and limits
+
+Run command: fixed Python310 `-B records/root_continuation_20261004/capacity_grok_root_audit_20261004T205640Z/run_bounded_pure.py`. The owned hidden evaluator process PID83872 exited1 (RED tests), was reaped after0.188 seconds, and its retained handle was signaled. Native children cannot be created by the admitted candidate under the traps. Capture limits2MiB each; actual stdout23529 bytes, stderr0; no overflow, reader errors or timeout. All source, provider-test, independent-test, controller and Python hashes remained equal before/after. The outer controller exited0 because capture/cleanup completed; it does not convert the evaluator exit1 into a GREEN verdict.
+
+Exact raw outcomes: `stdout.raw.json`; cleanup/source/tool evidence: `execution_receipt.json`; independent cases: `test_independent_capacity.py`. Expected refusal status is generally FAIL or NOT_CHECKED; tests do not overfit provider error strings. Hardware allocation, one/three true allocator OOM, four-device numerical execution, physical VRAM residency, GPU kernels, P2P and capacity remain NOT_CHECKED. The original rejected intake and historical RED artifacts are preserved.
+

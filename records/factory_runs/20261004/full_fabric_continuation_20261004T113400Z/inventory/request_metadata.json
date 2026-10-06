@@ -1,0 +1,9 @@
+{
+  "http_deadline_seconds": 240,
+  "model": "qwen3.8-flash",
+  "native_max_authorized": 10,
+  "pid": 46184,
+  "native_children_actual": 0,
+  "credential_present": true,
+  "credential_saved": false
+}

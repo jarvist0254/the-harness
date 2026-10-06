@@ -1,0 +1,62 @@
+{
+  "new_closed_receipts": [
+    "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_l0_collector_review_prep_20261004T222800Z\\gemini_l0_collector_high.owned_terminal.json",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\qwen_nv_egl_payload_consumer\\terminal.json"
+  ],
+  "immutable_prior_ledger": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z\\SCOPED_RESUME_40_CLOSED_PLUS_CONSUMER_LIVE.json",
+    "sha256": "dad2c8bdd996ef5556ee08b2e4f41aa5b05729f4dd074c6830abf01da47d5514"
+  },
+  "generated_source_execution": false,
+  "utc": "2026-10-04T23:03:27.8354730Z",
+  "providers": {
+    "Gemini": {
+      "observed_tokens": 182621,
+      "known_jobs": 3,
+      "unknown_jobs": 0,
+      "closed_jobs": 3
+    },
+    "Grok": {
+      "observed_tokens": 335755,
+      "known_jobs": 3,
+      "unknown_jobs": 2,
+      "closed_jobs": 5
+    },
+    "Muse": {
+      "observed_tokens": null,
+      "known_jobs": 0,
+      "unknown_jobs": 3,
+      "closed_jobs": 3
+    },
+    "Qwen": {
+      "observed_tokens": 1360280,
+      "known_jobs": 21,
+      "unknown_jobs": 10,
+      "closed_jobs": 31
+    }
+  },
+  "live_jobs": [
+    {
+      "model": "qwen3.8-max",
+      "job": "qwen_windows_cuda_capability",
+      "session": 28728,
+      "usage": "UNKNOWN_PENDING_FINAL",
+      "owned_http_worker_pid": 85040
+    },
+    {
+      "model": "qwen3.8-max",
+      "job": "qwen_intel_sysman_inventory",
+      "session": 84862,
+      "usage": "UNKNOWN_PENDING_FINAL",
+      "owned_http_worker_pid": 68028
+    }
+  ],
+  "credits_not_tokens": true,
+  "paid_billing_not_inferred": true,
+  "unknown_usage_closed_jobs": 15,
+  "closed_observed_tokens": 1878656,
+  "known_usage_closed_jobs": 27,
+  "old_ledgers_mutated": false,
+  "scope": "MANAGER_SCOPED_CLOSED42_PLUS_TWO_INVENTORY_LIVE_NOT_GLOBAL_FACTORY",
+  "closed_jobs": 42
+}

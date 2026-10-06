@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-04T13:41:40.699393+00:00",
+  "source_sha256_before": "326133a489430f5167bec29a87c28af8ea652e2fe40701d64c153399b85f372c",
+  "source_sha256_after": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+  "provider_candidate": "records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_cad_bboxfix\\integrated_core.grok_corrected.py",
+  "root_action": "Byte-identical candidate promotion after pure+native independent draft gate; preserved old source; updated two existing planned-height expectations; added seven independently authored geometry gates",
+  "gate_evidence": "records\\root_continuation_20261004\\provider_quality_review\\cad_revision4_20261004T133955Z\\review.json",
+  "scope": "Body-envelope-clear integrated draft; safe contacts/interfaces/load/thermal/slicer production unqualified; noSTL",
+  "red_before_promotion": {
+    "command": "python -B -m unittest cad.tests.test_gap_posts -v",
+    "observed_tests": 7,
+    "observed_failures": 5,
+    "observed_errors": 3,
+    "note": "Observed root tool execution at old accepted hash; two subcases each for height and gap-width guards; missing post_boxes fields caused expected feature errors. No native CAD in this RED run."
+  }
+}

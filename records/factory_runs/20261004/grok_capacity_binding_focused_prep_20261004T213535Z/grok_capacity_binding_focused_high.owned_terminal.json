@@ -1,0 +1,36 @@
+{
+  "exit_code": 0,
+  "credential_saved": false,
+  "provider_patch_applied": false,
+  "drain_unknown": false,
+  "pipe_error": false,
+  "pid": 68440,
+  "log_cap_exceeded": false,
+  "lane": "Grok",
+  "finish_reason": "end_turn",
+  "parse_error_type": null,
+  "outer_killed": false,
+  "private_url_output_refused": false,
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 10287,
+      "outputTokens": 85158,
+      "cacheReadInputTokens": 1152,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.36182664
+    }
+  },
+  "native_children_actual": 0,
+  "usage": {
+    "input_tokens": 10287,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 85158,
+    "reasoning_tokens": 74789,
+    "total_tokens": 96597
+  },
+  "requested_model": "grok-4.7-build-fast",
+  "status": "COMPLETE_CORRECTION_STAGED_UNAPPLIED",
+  "elapsed_seconds": 551.92
+}

@@ -1,0 +1,243 @@
+[0/2] Re-checking globbed directories...
+[1/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\benchmark_info.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[2/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\configuration.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[3/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\benchmark_main.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[4/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\test_map.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[5/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\print_device_info.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[6/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\supported_apis.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[7/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\additional\additional_configuration.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[8/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\additional\api_additional.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[9/124] Building CXX object third_party\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.obj
+[10/124] Linking CXX static library lib\gtest.lib
+[11/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\argument\abstract\argument.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[12/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\argument\argument_container.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[13/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\test_case\test_case_argument_container.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[14/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\test_case\test_case_base.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[15/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\buffer_contents_helper.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[16/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\test_case\test_result.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[17/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\test_case\test_case_statistics.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[18/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\common_help_message.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[19/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\command_line_argument.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[20/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\cpu_allocation_helper.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[21/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\compiler_options_builder.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[22/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\file_helper.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[23/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\image_helper.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[24/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\math_operation_helper.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[25/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\process.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[26/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\random_distribution.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[27/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\windows\aligned_allocator.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[28/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\process_group.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[29/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\statistics.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[30/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\windows\cpu_time_timer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[31/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\windows\process_windows.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[32/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\utility\windows\working_directory_helper_windows.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[33/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\workload\workload_statistics.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[34/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\workload\workload_synchronization.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[35/124] Building CXX object source\framework\CMakeFiles\compute_benchmarks_framework.dir\workload\windows\workload_io_windows.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[36/124] Linking CXX static library lib\compute_benchmarks_framework.lib
+[37/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\utility\error_codes.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[38/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\utility\buffer_contents_helper_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[39/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\intel_product\get_intel_product_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[40/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\opencl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[41/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\__\common\main.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[42/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\utility\hostptr_reuse_helper.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[43/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\utility\program_helper_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[44/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\benchmark_info.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[45/124] Building CXX object source\framework\ocl\CMakeFiles\compute_benchmarks_framework_ocl.dir\utility\usm_helper_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[46/124] Linking CXX static library lib\compute_benchmarks_framework_ocl.lib
+[47/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\copy_buffer_rect.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[48/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\copy_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[49/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\copy_buffer_to_image.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[50/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\copy_entire_image.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[51/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\copy_image_region.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[52/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\copy_image_to_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[53/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\fill_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[54/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\full_remote_access.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[55/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\full_remote_access_xe_cores_distributed.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[56/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\map_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[57/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\queue_in_order_memcpy.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[58/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\queue_memcpy.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[59/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\random_access_multi_resource.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[60/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\random_access.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[61/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\read_buffer_misaligned.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[62/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\read_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[63/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\read_device_mem_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[64/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\read_buffer_rect.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[65/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\read_image.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[66/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\remote_access.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[67/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\slm.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[68/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\remote_access_max_saturation.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[69/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\slm_switch_latency.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[70/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\stream_after_transfer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[71/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\stream_memory_immediate.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[72/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\stream_memory.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[73/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\unmap_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[74/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[75/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_concurrent_multiple_blits.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[76/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_concurrent.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[77/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_immediate_after_kernels.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[78/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_immediate.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[79/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_multiple_blits.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[80/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_multiple_blits_immediate.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[81/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_staging_buffers.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[82/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_copy_region.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[83/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_fill.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[84/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_fill_immediate.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[85/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_fill_multiple_blits.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[86/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_fill_specific_pattern.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[87/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\write_buffer.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[88/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\usm_memset.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[89/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\write_buffer_rect.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[90/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\gtest\write_image.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[91/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\__\common\ocl\registrations_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[92/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\copy_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[93/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\copy_buffer_rect_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[94/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\copy_buffer_to_image_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[95/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\copy_entire_image_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[96/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\copy_image_region_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[97/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\copy_image_to_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[98/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\fill_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[99/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\full_remote_access_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[100/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\full_remote_access_xe_cores_distributed_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[101/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\map_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[102/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\read_buffer_misaligned_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[103/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\read_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[104/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\read_buffer_rect_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[105/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\read_image_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[106/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\read_device_mem_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[107/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\remote_access_max_saturation_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[108/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\remote_access_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[109/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\slm_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[110/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\stream_after_transfer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[111/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\unmap_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[112/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\stream_memory_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[113/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\usm_copy_multiple_blits_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[114/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\usm_copy_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[115/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\usm_fill_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[116/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\usm_fill_multiple_blits_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[117/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\usm_fill_specific_pattern_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[118/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\usm_memset_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[119/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\write_buffer_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[120/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\write_buffer_rect_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[121/124] Building CXX object source\benchmarks\memory_benchmark\CMakeFiles\memory_benchmark_ocl.dir\implementations\ocl\write_image_ocl.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[122/124] Building CXX object source\tools\show_devices_ocl\CMakeFiles\show_devices_ocl.dir\main.cpp.obj
+cl : Command line warning D9025 : overriding '/MD' with '/MT'
+[123/124] Linking CXX executable bin\show_devices_ocl.exe
+[124/124] Linking CXX executable bin\memory_benchmark_ocl.exe

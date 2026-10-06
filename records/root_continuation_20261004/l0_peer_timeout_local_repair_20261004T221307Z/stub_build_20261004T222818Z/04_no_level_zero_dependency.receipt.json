@@ -1,0 +1,33 @@
+{
+  "label": "no_level_zero_dependency",
+  "argv": [
+    "C:\\windows\\system32\\wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--exec",
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "5s",
+    "/usr/bin/readelf",
+    "-d",
+    "/mnt/e/the_harness/records/root_continuation_20261004/l0_peer_timeout_local_repair_20261004T221307Z/peer_copy_cpu_fake"
+  ],
+  "pid": 6724,
+  "started_utc": "2026-10-04T22:28:23.102+00:00",
+  "elapsed_seconds": 0.188,
+  "returncode": 0,
+  "outer_timeout": false,
+  "outer_killed_owned_wsl_client": false,
+  "stream_overflow": false,
+  "owned_wsl_client_exited": true,
+  "readers_joined": true,
+  "pipes_drained": true,
+  "reader_errors": [],
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\04_no_level_zero_dependency.stdout.bin",
+  "stdout_sha256": "15f323280163b4b3921b29156ec771181cfda37847227784adf20b605ddaf7e5",
+  "stdout_bytes": 1598,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\04_no_level_zero_dependency.stderr.bin",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_bytes": 0
+}

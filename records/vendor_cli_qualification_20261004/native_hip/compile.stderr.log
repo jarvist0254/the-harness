@@ -1,0 +1,155 @@
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:97:17: error: __device__ function 'isgreater' cannot overload __host__ __device__ function 'isgreater'
+   97 | __DEVICE__ bool isgreater(double, double);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:688:17: note: previous declaration is here
+  688 | _CLANG_BUILTIN2(isgreater)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:98:17: error: __device__ function 'isgreaterequal' cannot overload __host__ __device__ function 'isgreaterequal'
+   98 | __DEVICE__ bool isgreaterequal(double, double);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:689:17: note: previous declaration is here
+  689 | _CLANG_BUILTIN2(isgreaterequal)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:99:17: error: __device__ function 'isgreaterequal' cannot overload __host__ __device__ function 'isgreaterequal'
+   99 | __DEVICE__ bool isgreaterequal(float, float);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:689:17: note: previous declaration is here
+  689 | _CLANG_BUILTIN2(isgreaterequal)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:100:17: error: __device__ function 'isgreater' cannot overload __host__ __device__ function 'isgreater'
+  100 | __DEVICE__ bool isgreater(float, float);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:688:17: note: previous declaration is here
+  688 | _CLANG_BUILTIN2(isgreater)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:106:17: error: __device__ function 'isless' cannot overload __host__ __device__ function 'isless'
+  106 | __DEVICE__ bool isless(double, double);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:690:17: note: previous declaration is here
+  690 | _CLANG_BUILTIN2(isless)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:107:17: error: __device__ function 'islessequal' cannot overload __host__ __device__ function 'islessequal'
+  107 | __DEVICE__ bool islessequal(double, double);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:691:17: note: previous declaration is here
+  691 | _CLANG_BUILTIN2(islessequal)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:108:17: error: __device__ function 'islessequal' cannot overload __host__ __device__ function 'islessequal'
+  108 | __DEVICE__ bool islessequal(float, float);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:691:17: note: previous declaration is here
+  691 | _CLANG_BUILTIN2(islessequal)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:109:17: error: __device__ function 'isless' cannot overload __host__ __device__ function 'isless'
+  109 | __DEVICE__ bool isless(float, float);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:690:17: note: previous declaration is here
+  690 | _CLANG_BUILTIN2(isless)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:110:17: error: __device__ function 'islessgreater' cannot overload __host__ __device__ function 'islessgreater'
+  110 | __DEVICE__ bool islessgreater(double, double);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:692:17: note: previous declaration is here
+  692 | _CLANG_BUILTIN2(islessgreater)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:111:17: error: __device__ function 'islessgreater' cannot overload __host__ __device__ function 'islessgreater'
+  111 | __DEVICE__ bool islessgreater(float, float);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:692:17: note: previous declaration is here
+  692 | _CLANG_BUILTIN2(islessgreater)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:119:17: error: __device__ function 'isunordered' cannot overload __host__ __device__ function 'isunordered'
+  119 | __DEVICE__ bool isunordered(double, double);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:694:17: note: previous declaration is here
+  694 | _CLANG_BUILTIN2(isunordered)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:147:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_cuda_math_forward_declares.h:120:17: error: __device__ function 'isunordered' cannot overload __host__ __device__ function 'isunordered'
+  120 | __DEVICE__ bool isunordered(float, float);
+      |                 ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:694:17: note: previous declaration is here
+  694 | _CLANG_BUILTIN2(isunordered)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:109:31: error: __device__ function 'isgreater' cannot overload __host__ __device__ function 'isgreater'
+  109 | __DEVICE__ __CONSTEXPR__ bool isgreater(float __x, float __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:688:17: note: previous declaration is here
+  688 | _CLANG_BUILTIN2(isgreater)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:112:31: error: __device__ function 'isgreater' cannot overload __host__ __device__ function 'isgreater'
+  112 | __DEVICE__ __CONSTEXPR__ bool isgreater(double __x, double __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:688:17: note: previous declaration is here
+  688 | _CLANG_BUILTIN2(isgreater)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:115:31: error: __device__ function 'isgreaterequal' cannot overload __host__ __device__ function 'isgreaterequal'
+  115 | __DEVICE__ __CONSTEXPR__ bool isgreaterequal(float __x, float __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:689:17: note: previous declaration is here
+  689 | _CLANG_BUILTIN2(isgreaterequal)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:118:31: error: __device__ function 'isgreaterequal' cannot overload __host__ __device__ function 'isgreaterequal'
+  118 | __DEVICE__ __CONSTEXPR__ bool isgreaterequal(double __x, double __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:689:17: note: previous declaration is here
+  689 | _CLANG_BUILTIN2(isgreaterequal)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:121:31: error: __device__ function 'isless' cannot overload __host__ __device__ function 'isless'
+  121 | __DEVICE__ __CONSTEXPR__ bool isless(float __x, float __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:690:17: note: previous declaration is here
+  690 | _CLANG_BUILTIN2(isless)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:124:31: error: __device__ function 'isless' cannot overload __host__ __device__ function 'isless'
+  124 | __DEVICE__ __CONSTEXPR__ bool isless(double __x, double __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:690:17: note: previous declaration is here
+  690 | _CLANG_BUILTIN2(isless)
+      |                 ^
+In file included from <built-in>:1:
+In file included from E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_runtime_wrapper.h:148:
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\lib\clang\23\include\__clang_hip_cmath.h:127:31: error: __device__ function 'islessequal' cannot overload __host__ __device__ function 'islessequal'
+  127 | __DEVICE__ __CONSTEXPR__ bool islessequal(float __x, float __y) {
+      |                               ^
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\cmath:691:17: note: previous declaration is here
+  691 | _CLANG_BUILTIN2(islessequal)
+      |                 ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated when compiling for gfx1036.
+failed to execute:""E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\bin\clang.exe"   --offload-arch=gfx1036 --driver-mode=g++ -fuse-ld=lld --ld-path="E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\lib\llvm\bin\lld-link.exe" --hip-link  -O2 -x hip "E:\the_harness\records\vendor_cli_qualification_20261004\native_hip\hip_vector.cpp" -o "E:\the_harness\records\vendor_cli_qualification_20261004\native_hip\hip_vector.exe""

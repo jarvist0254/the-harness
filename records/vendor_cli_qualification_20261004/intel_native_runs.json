@@ -1,0 +1,23 @@
+[
+  {
+    "name": "default",
+    "command": [
+      "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\intel_vector.exe"
+    ],
+    "pid": 78572,
+    "exit_code": 2,
+    "stdout": "{\"status\":\"NOT_CHECKED\",\"reason\":\"No allowed NVIDIA/AMD OpenCL GPU; CPU fallback forbidden\"}\r\n",
+    "stderr": ""
+  },
+  {
+    "name": "corruption",
+    "command": [
+      "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\intel_vector.exe",
+      "--inject-corruption"
+    ],
+    "pid": 44796,
+    "exit_code": 2,
+    "stdout": "{\"status\":\"NOT_CHECKED\",\"reason\":\"No allowed NVIDIA/AMD OpenCL GPU; CPU fallback forbidden\"}\r\n",
+    "stderr": ""
+  }
+]

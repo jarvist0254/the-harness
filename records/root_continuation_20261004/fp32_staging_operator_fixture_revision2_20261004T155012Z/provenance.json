@@ -1,0 +1,18 @@
+{
+  "attribution": "Independent test apparatus correction under exact ROOT instruction; not backend feature patch",
+  "original_source": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\fp32_staging_operator.cpp",
+  "original_sha256": "74c34a8726c26d6d1349caa2dca1f2e16a8a5b5295c78cc8d4a5f1842434f754",
+  "revision2_source_sha256": "f89510925babac35ef98154b14a27040cf81db35d11bebc888c9b0a97da1ca59",
+  "source_edits": [
+    {
+      "old": "const Case cases[]={{\"contiguous\",0,0},{\"X_transpose\",1,0},{\"Y_stride\",0,2},{\"X_transpose_Y_stride\",1,2},{\"X_stride\",2,0},{\"Y_transpose\",0,1},{\"X_stride_Y_transpose\",2,1}};",
+      "new": "const Case cases[]={{\"contiguous\",0,0},{\"X_stride\",2,0},{\"Y_stride\",0,2},{\"X_stride_Y_stride\",2,2},{\"Y_transpose\",0,1},{\"X_stride_Y_transpose\",2,1}};"
+    },
+    {
+      "old": "ggml_tensor *z=ggml_mul_mat(r.ctx,x.view,y.view);",
+      "new": "if(ggml_is_transposed(x.view))throw Refusal(\"transposed A forbidden by ggml_mul_mat\");ggml_tensor *z=ggml_mul_mat(r.ctx,x.view,y.view);"
+    }
+  ],
+  "unchanged": "Input values/dimensions/tolerances/double reference/ownership/caps/corruption logic; all originals preserved",
+  "reason": "Old fixture violated ggml_mul_mat transposed-A assertion; old crash not numerical RED qualification"
+}

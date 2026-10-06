@@ -1,0 +1,12 @@
+{
+  "tests_sha256": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+  "execution": false,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py",
+  "artifact_sha256": "ecadd70b7c38bdffad4dd7cb900804b9ad43127d638068facd1adbb4e32ad025",
+  "root_admission": "PENDING",
+  "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+  "status": "PROPOSED",
+  "source_chars": 23377,
+  "tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py",
+  "tests_chars": 20611
+}

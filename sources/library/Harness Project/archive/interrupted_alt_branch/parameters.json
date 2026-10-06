@@ -1,0 +1,93 @@
+{
+  "revision": "2.0-draft",
+  "date": "2026-09-30",
+  "printer": {
+    "model": "Creality Ender-3 S1 Pro",
+    "build_volume_mm": [
+      220,
+      220,
+      270
+    ],
+    "core_max_mm": [
+      205,
+      205,
+      250
+    ]
+  },
+  "pod": {
+    "gpu_count": 3,
+    "monolithic_core": true,
+    "mid_print_spool_change": false,
+    "target_mass_kg": 2.8,
+    "review_mass_kg": 3.5,
+    "hard_consumption_limit_kg": 4.3
+  },
+  "gpu_acceptance": {
+    "length_mm": [
+      180,
+      360
+    ],
+    "height_max_mm": 155,
+    "thickness_nominal_mm": [
+      35,
+      60
+    ],
+    "mass_max_kg_each": 2.0,
+    "air_gap_min_mm": 15,
+    "air_gap_preferred_mm": [
+      18,
+      25
+    ],
+    "power_service_clearance_mm": 45
+  },
+  "first_population": {
+    "model": "MSI RTX 3060 Ventus 2X 12G OC",
+    "qty": 3,
+    "dimensions_mm": [
+      235,
+      124,
+      42
+    ],
+    "mass_g": 675,
+    "board_power_w": 170,
+    "aux": "1x 8-pin"
+  },
+  "fans": {
+    "qty": 2,
+    "size_mm": [
+      120,
+      120,
+      25
+    ],
+    "layout": "vertical stack front plenum",
+    "reference": "ARCTIC P12 Max"
+  },
+  "material": {
+    "primary": "5kg single-spool high-speed PETG",
+    "reference": "SUNLU B0FGPBSS1N",
+    "fallback": "Fiberon PA6-GF25 if PETG thermal/creep validation fails"
+  },
+  "fasteners": {
+    "electronics": "M3 machine screws + heat-set inserts/standoffs",
+    "structure": "M4 machine screws + heat-set inserts/through-bolts",
+    "self_tapping_into_print": false
+  },
+  "airflow": {
+    "plenum_depth_mm": [
+      35,
+      50
+    ],
+    "baffle_thickness_mm": [
+      1.6,
+      2.0
+    ],
+    "lanes": 4,
+    "rear_exhaust": "open"
+  },
+  "expansion": {
+    "unit": "another identical 3-GPU pod",
+    "mechanical": "M4 PodLink coupling + 6mm alignment dowels",
+    "power": "independent PSU per pod",
+    "pcie": "independent qualified uplink; no passive lane daisy-chain"
+  }
+}

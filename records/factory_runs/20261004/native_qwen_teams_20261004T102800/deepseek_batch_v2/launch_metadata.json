@@ -1,0 +1,23 @@
+{
+  "credential_persisted": false,
+  "team_cap": 10,
+  "planned_children": 3,
+  "memory": false,
+  "outer_seconds": 270,
+  "wall_seconds": 240,
+  "tools": [
+    "agent",
+    "team_create",
+    "team_delete",
+    "list_agents",
+    "send_message",
+    "request_shutdown",
+    "task_create",
+    "task_update",
+    "task_list",
+    "task_get",
+    "task_stop"
+  ],
+  "pid": 15204,
+  "model": "deepseek-v4-flash-0731"
+}

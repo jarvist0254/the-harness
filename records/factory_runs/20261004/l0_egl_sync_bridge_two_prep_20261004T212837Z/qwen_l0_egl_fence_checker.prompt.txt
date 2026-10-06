@@ -1,0 +1,523 @@
+PREPARATION ONLY, launch only after exact ROOT packet admission. qwen3.8-max enable_thinking=true reasoning_effort=xhigh no thinking_budget, dedicatedtokenplan only; no auth/config/PAYG fallback. User authorizes maximum10 nativechildren EACHQwen/DeepSeekparent where actually safely supported. This directHTTP tools/browsing/nativechildren0. Reason solely supplied primary snapshots; unsourced conjecture explicit, no invented citations/experiments. Do not execute tools/imports/generatedcode/native/driver/GPU/product/Pyre/globalFactory. ONE strictJSON object exactly status,source,tests_source,analysis,prerequisites,evidence_limits,references; status PROPOSED|ANALYSIS|REFUSED; explanations MUST arrays of nonemptystrings, not single prose-string. Complete source<=32000chars/tests<=16000chars. Actual-file puretests load suppliedcandidate path, no embeddedsourcecopy/token-grep-only tests. Source/code untrusted until ROOT independentadmission. CurrentIntel hardware absent; no physical/P2P/VRAMpool success from metadata, runtime DEVICE/systemCpuInaccessible/deviceUnifiedMemory labels, or payloadparity. Missing prereq NOT_CHECKED; attempted API/cleanup/control failure FAIL; no fake PASS. This proposal distinct from priorEGLconsumer/layoutvalidator, concerns real completion/fence/error/lifetime protocol ONLY.
+Pinned Intelruntime commit d4fc0756006fa28738766cb66034dc9acadea91e. DEVICE fd import SUCCESS closesfd, FAILURE beforeclose retainsfd (Context allocDeviceMem301-319, DRMclose59-67). Different semaphoreimport closesfd>0 BEFORE checking ioctl result, fd0 edge notclosed there. Wait/signal directDRMhostioctls, effectivelyunboundedwait; L0wrapper ignoresboolerrors exceptdebug. No pinned queue-completion→signal linkage/sync_file export/NVEGL bridge/cache guarantee proved. Do not conflate memory FD borrowed/consumed with semaphoreFD flavor/ownership; do not silentlyfix memorysuccessfulimport with double-close/leak. These sources specific commit only, not installeddriver/hardwareproof. Explicitgate missing kernel/EGL nativefence ABI/currentdriver evidence; do NOT invent ioctl constants, callbacks or legalexport contract.
+B Independently implement pure adversarial protocol/evidence checker for this same candidate bridge, no reliance on Acode or provider magicreadyflags. Consume explicit compact receipt schema plus ROOTcaller named immutable bytes/hash registry (no cryptographicauth claim); bind source/runtimecommit/executable/driver/physicalIDs/context/workload/payload/producerGPUcommandcompletion/fence/controller lineage to actualreferencedbytes and orderedstages. Refuse prematureCPU-signaled/dummyfence, ignoredioctlfalse/0, stale/crossrunfence/reference, wrongGPU ordriversourceversion, memoryFDborrowed/consumedconflation andsemaphoreFDflavor, closefd0 assumptions/doubleclose/leak, unknown producer-completion source, hiddenmigration/backing OR explicitunknown means NOdirecttransportqualification, timedoutbusycleanup falsePASS. API DEVICE/memorypool names notmeasuredresidency; metadatahashregistry verifiesconsistency not nativeexecution. Sourcepredicate exactsuccessconsume vs failure-retainmemory and semfd>0consume-on-failure separate; do not force identical clean/control digest norhashFDinteger as resourceproof. CPUref stayssame, produceronewordfault BEFORErelease; malformed/missingstage evidence NOT_CHECKED or REFUSED while observedwrongcontrol FAIL. Strict ints excludingbool/float-equality; finite/overflowguard numericalcounts; actualcompletepayloadbytes/hashes/parity notclaimedzero metrics; aliases/fullUUID/PCI distinct matchingrequesteddevices; deepimmutable results/no inputmutation. Return DECLARED_PROTOCOL_CONSISTENT onlyforbound synthetic evidence, NEVERP2P/physicalcapacity/installedruntimeREADY proof. Complete standalonechecker+actualfile discrimination tests, no mirrors/embeddedcopy/nativeprocess/network calls; fixtures explicitlysynthetic. Include cases forgedregistry, stale/provenance mismatch, missingactualGPUcompletion, SIGNALbeforeGPUcomplete, semfalseignored, swappedowners, fd0edges, differentdrivercommit, hostbacking, corruptedpayloadcontrols, timeoutcleanup andlegitimatefullygateddeclarations.
+ACTUAL PRIMARY-PINNED INPUT bridge_contract_findings.md SHA 4e02a99eaf54e92d13ccf5d7a1deb15981f31c050a63f08865eb4862f392dbc8
+# Pinned Intel L0 DMA-BUF import and semaphore trace
+
+Scope: source-only tracing against the staged official Intel compute-runtime tree at commit `d4fc0756006fa28738766cb66034dc9acadea91e`. No compiler, provider, GPU, context, allocation, or transfer was run. The root staging receipt is `records/root_continuation_20261004/intel_runtime_contract_sources_20261004T2100Z/PINNED_SOURCE_RECEIPT.json`. Additional same-commit files are recorded in `source_manifest.json` in this folder; each was obtained by exact path from that commit and checked against the tree entry's declared Git blob ID and byte size, then locally SHA-256 pinned.
+
+## DEVICE external-FD import and lifetime
+
+For `zeMemAllocDevice` with a shared opaque-FD or DMA-BUF descriptor, `Context::allocDeviceMem` calls `getMemHandlePtr` with `isHostIpcAllocation=false` (`context.cpp:301-315`). A null import returns `ZE_RESULT_ERROR_INVALID_ARGUMENT` before `closeExternalHandle(fd)` (`context.cpp:316-319`). Thus, on this path, the caller's FD is consumed by the L0 context only after successful import; on this import failure the caller retains it. The close implementation invokes `close(2)` only for the DRM driver (`context_drm_or_wddm.cpp:59-67`).
+
+The path is `Context::getMemHandlePtr` -> `DriverHandle::importFdHandle` -> `MemoryManager::importFdHandle` -> `DrmMemoryManager::createGraphicsAllocationFromSharedHandle` (`context_drm_or_wddm.cpp:70-107`, `driver_handle.cpp:692-715`, `memory_manager.cpp:1556-1603`, `drm_memory_manager.cpp:1836-2005`). For this non-host-IPC case, NEO's shared-handle import calls PRIME_FD_TO_HANDLE, tags the imported allocation `MemoryPool::systemCpuInaccessible`, and returns a BO-backed `DrmAllocation` with the original FD stored as its shared handle (`drm_memory_manager.cpp:1836-1877, 1993-2005`). L0 marks the allocation imported and classifies it internally as `deviceUnifiedMemory` (`memory_manager.cpp:1595-1603`). These runtime enum/pool labels describe this implementation's allocation bookkeeping; they do not establish where another driver's allocation physically resides or prove VRAM P2P.
+
+On destruction, `DrmMemoryManager::freeGraphicsMemoryImpl` unrefs the BO and closes the shared handle only for non-imported allocations (`drm_memory_manager.cpp:2058-2107`). Since the imported allocation has `setIsImported()`, the importer-side descriptor is not closed a second time through `closeSharedHandle`; L0 already closed its input FD after successful import. This conclusion is specifically for `zeMemAllocDevice`/direct DMA-BUF import above. Do not apply the separate `createUSMHostAllocationFromSharedHandle(... consumeFd ...)` host-IPC ownership rules to it.
+
+## External semaphore import and operations
+
+`ExternalSemaphoreLinux::importSemaphore` passes the incoming FD to DRM `syncObjFdToHandle`; it then closes the descriptor when `fd > 0` before checking ioctl success (`external_semaphore_linux.cpp:55-74`). This differs from the memory-import failure path. The implementation's `fd > 0` guard means this source does not close FD 0; any wrapper must handle that edge deliberately and must not assume uniform ownership semantics.
+
+Wait and signal are immediate DRM ioctls in `ExternalSemaphoreLinux::enqueueWait` and `enqueueSignal`, not command-list appends: timeline and binary paths invoke `syncObjTimelineWait`/`syncObjWait` or `syncObjTimelineSignal`/`syncObjSignal` (`external_semaphore_linux.cpp:77-145`). The waits use an effectively unbounded `int64` timeout and `WAIT_FOR_SUBMIT`; they are not suitable evidence for a bounded protocol. At the Level Zero wrapper layer, `ExternalSemaphoreImp::semaphoreWait` and `semaphoreSignal` store the boolean result in `[[maybe_unused]]` locals and only print it when debug output is enabled (`external_semaphore_imp.cpp:16-35`). The visible implementation does not propagate those ioctl failures to a ZE result.
+
+The inspected `cmdlist.cpp` and `cmdqueue.cpp` have no external-semaphore references. This is bounded to those two pinned files; it is not a claim about every possible entry point or application-side ordering. The shown semaphore signal method has no queue/fence parameter and immediately issues the DRM signal ioctl. Therefore the traced API alone does not prove that a producer GPU queue has completed before the host issues the signal. A correct bridge must establish producer completion first and must account for errors and finite waits.
+
+## Bridge verdict and missing proof
+
+These sources establish how this Intel runtime imports its own DMA-BUF FD and sync FD and which layer closes them. They do not show a legal Intel-to-NVIDIA producer-completion bridge, a conversion from an Intel DRM syncobj to a sync-file accepted by NVIDIA EGL, or an NVIDIA-side completion/release path. No memory cache-domain visibility/barrier guarantee across drivers is established. There is no cross-vendor allocation/import/transfer evidence here, and no direct P2P or dedicated-VRAM claim follows from `deviceUnifiedMemory`, `systemCpuInaccessible`, or a semaphore handle.
+
+Any future one-way experiment still needs a pinned, compatible semaphore export/import path; verified FD ownership on every success/failure edge; a bounded producer GPU-completion wait before signaling; a bounded consumer completion proof; error propagation; a cache/visibility rule for the shared payload; and safe cleanup for timeout while work may be in flight. If these cannot be justified from the actual APIs and driver pairing, keep transfer/import disabled and report `NOT_CHECKED`/unsupported.
+
+## Source references
+
+- Root pin and original staged sources: `records/root_continuation_20261004/intel_runtime_contract_sources_20261004T2100Z/PINNED_SOURCE_RECEIPT.json`.
+- Additional path/size/SHA-256 pins: `source_manifest.json`.
+- Exact same-commit call-chain files: `records/root_continuation_20261004/intel_l0_import_sync_trace_20261004T210634Z/{context.cpp,context_drm_or_wddm.cpp,driver_handle.cpp,memory_manager.cpp,cmdlist.cpp,cmdqueue.cpp}`.
+- Exact semaphore/DRM files: `records/root_continuation_20261004/intel_runtime_contract_sources_20261004T2100Z/{level_zero__core__source__semaphore__external_semaphore_imp.cpp,shared__source__os_interface__linux__external_semaphore_linux.cpp,shared__source__os_interface__linux__drm_memory_manager.cpp}`.
+
+ACTUAL PRIMARY-PINNED INPUT source_excerpts.txt SHA 4170f42fad8e03dd12ad347b39c3fbca29493d1d3ab95f1f17ff7d60f931486e
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\shared__source__os_interface__linux__drm_memory_manager.cpp:1836-2006 =====
+1836: GraphicsAllocation *DrmMemoryManager::createGraphicsAllocationFromSharedHandle(const OsHandleData &osHandleData,
+1837:                                                                                const AllocationProperties &properties,
+1838:                                                                                bool requireSpecificBitness,
+1839:                                                                                bool isHostIpcAllocation,
+1840:                                                                                bool reuseSharedAllocation,
+1841:                                                                                void *mapPointer) {
+1842:     if (isHostIpcAllocation) {
+1843:         return createUSMHostAllocationFromSharedHandle(osHandleData.handle, properties, nullptr, reuseSharedAllocation, true);
+1844:     }
+1845: 
+1846:     if (reuseSharedAllocation && osHandleData.physicalOffset != 0) {
+1847:         return nullptr;
+1848:     }
+1849: 
+1850:     std::unique_lock<std::mutex> lock(mtx);
+1851: 
+1852:     PrimeHandle openFd{};
+1853:     uint64_t gpuRange = 0;
+1854:     openFd.fileDescriptor = osHandleData.handle;
+1855: 
+1856:     auto &drm = this->getDrm(properties.rootDeviceIndex);
+1857:     auto ioctlHelper = drm.getIoctlHelper();
+1858: 
+1859:     auto ret = ioctlHelper->ioctl(DrmIoctl::primeFdToHandle, &openFd);
+1860: 
+1861:     if (ret != 0) {
+1862:         [[maybe_unused]] int err = errno;
+1863:         PRINT_STRING(debugManager.flags.PrintDebugMessages.get(), stderr, "ioctl(PRIME_FD_TO_HANDLE) failed with %d. errno=%d(%s)\n", ret, err, strerror(err));
+1864: 
+1865:         return nullptr;
+1866:     }
+1867: 
+1868:     auto boHandle = static_cast<int>(openFd.handle);
+1869:     BufferObject *bo = nullptr;
+1870:     if (reuseSharedAllocation) {
+1871:         bo = findAndReferenceSharedBufferObject(boHandle, properties.rootDeviceIndex);
+1872:     }
+1873: 
+1874:     const auto memoryPool = MemoryPool::systemCpuInaccessible;
+1875: 
+1876:     std::unique_ptr<Gmm> gmm;
+1877:     size_t size = SysCalls::lseek(osHandleData.handle, 0, SEEK_END);
+1878:     const auto cachePolicy = properties.flags.uncacheable ? CachePolicy::uncached : CachePolicy::writeBack;
+1879:     if (properties.imgInfo) {
+1880:         GemGetTiling getTiling{};
+1881:         getTiling.handle = boHandle;
+1882:         ret = ioctlHelper->getGemTiling(&getTiling);
+1883: 
+1884:         if (ret) {
+1885:             if (getTiling.tilingMode == static_cast<uint32_t>(ioctlHelper->getDrmParamValue(DrmParam::tilingNone))) {
+1886:                 properties.imgInfo->linearStorage = true;
+1887:             }
+1888:         }
+1889: 
+1890:         gmm = std::make_unique<Gmm>(executionEnvironment.rootDeviceEnvironments[properties.rootDeviceIndex]->getGmmHelper(), *properties.imgInfo,
+1891:                                     createStorageInfoFromProperties(properties), properties.flags.preferCompressed);
+1892: 
+1893:         gmm->updateImgInfoAndDesc(*properties.imgInfo, 0, NEO::ImagePlane::noPlane);
+1894:         if (bo) {
+1895:             bo->setPatIndex(drm.getPatIndex(gmm.get(), properties.allocationType, CacheRegion::defaultRegion, cachePolicy, false, MemoryPoolHelper::isSystemMemoryPool(memoryPool), false));
+1896:         }
+1897:     } else {
+1898:         auto gmmHelper = executionEnvironment.rootDeviceEnvironments[properties.rootDeviceIndex]->getGmmHelper();
+1899:         GmmRequirements gmmRequirements{};
+1900:         gmmRequirements.preferCompressed = properties.flags.preferCompressed;
+1901:         if (!properties.flags.preferCompressed && !properties.flags.uncacheable) {
+1902:             gmmRequirements.overriderCacheable = {true, true};
+1903:         }
+1904:         gmm = std::make_unique<Gmm>(gmmHelper, nullptr,
+1905:                                     size, 0u, CacheSettingsHelper::getGmmUsageType(properties.allocationType, properties.flags.uncacheable, drm.getRootDeviceEnvironment().getHelper<ProductHelper>(), gmmHelper->getHardwareInfo()), createStorageInfoFromProperties(properties), gmmRequirements);
+1906:     }
+1907: 
+1908:     // Address the consumer accesses and the size it may access from there. For a
+1909:     // plain import these are just the BO base and size; with a physical offset the
+1910:     // accessible window is the remainder of the BO starting at that offset.
+1911:     uint64_t reportedAddress = 0;
+1912:     size_t reportedSize = 0;
+1913: 
+1914:     if (bo == nullptr) {
+1915:         UNRECOVERABLE_IF(size == std::numeric_limits<size_t>::max());
+1916: 
+1917:         const uint64_t physicalOffset = osHandleData.physicalOffset;
+1918:         if (physicalOffset >= size) {
+1919:             return nullptr;
+1920:         }
+1921:         size_t mappedSize = size - static_cast<size_t>(physicalOffset);
+1922: 
+1923:         auto patIndex = drm.getPatIndex(gmm.get(), properties.allocationType, CacheRegion::defaultRegion, cachePolicy, false, MemoryPoolHelper::isSystemMemoryPool(memoryPool), false);
+1924:         auto boHandleWrapper = reuseSharedAllocation ? BufferObjectHandleWrapper{boHandle, properties.rootDeviceIndex} : tryToGetBoHandleWrapperWithSharedOwnership(boHandle, properties.rootDeviceIndex);
+1925: 
+1926:         bo = new (std::nothrow) BufferObject(properties.rootDeviceIndex, &drm, patIndex, std::move(boHandleWrapper), size, maxOsContextCount);
+1927: 
+1928:         if (!bo) {
+1929:             return nullptr;
+1930:         }
+1931: 
+1932:         auto getHeapIndex = [&] {
+1933:             auto gfxPartition = getGfxPartition(properties.rootDeviceIndex);
+1934:             auto prefer57bitAddressing = (gfxPartition->getHeapLimit(HeapIndex::heapExtended) > 0);
+1935:             if (prefer57bitAddressing) {
+1936:                 return HeapIndex::heapExtended;
+1937:             }
+1938: 
+1939:             if (isLocalMemorySupported(properties.rootDeviceIndex)) {
+1940:                 return HeapIndex::heapStandard2MB;
+1941:             }
+1942: 
+1943:             return HeapIndex::heapStandard;
+1944:         };
+1945: 
+1946:         const bool vmBindAvailable = drm.isVmBindAvailable();
+1947: 
+1948:         if (physicalOffset != 0) {
+1949:             // The offset/length are recorded on the BO; VM bind hands them to the
+1950:             // kernel so only the mapped remainder is bound. The legacy execbuffer
+1951:             // path has no per-bind offset, so the whole BO is placed and the offset
+1952:             // is folded into the returned address instead - byte `offset` of the BO
+1953:             // then resolves to the reported pointer. (Mirrors mapPhysicalDeviceMemoryToVirtualMemory.)
+1954:             bo->setPhysicalMemoryOffset(physicalOffset);
+1955:             bo->setVirtualMappingSize(mappedSize);
+1956:             if (vmBindAvailable) {
+1957:                 gpuRange = mapPointer ? reinterpret_cast<uint64_t>(mapPointer) : acquireGpuRange(mappedSize, properties.rootDeviceIndex, getHeapIndex());
+1958:                 bo->setAddress(gpuRange);
+1959:                 bo->setUnmapSize(mappedSize);
+1960:                 reportedAddress = gpuRange;
+1961:             } else {
+1962:                 gpuRange = mapPointer ? reinterpret_cast<uint64_t>(mapPointer) : acquireGpuRange(size, properties.rootDeviceIndex, getHeapIndex());
+1963:                 bo->setAddress(gpuRange);
+1964:                 bo->setUnmapSize(size);
+1965:                 reportedAddress = gpuRange + physicalOffset;
+1966:             }
+1967:             reportedSize = mappedSize;
+1968:         } else {
+1969:             gpuRange = mapPointer ? reinterpret_cast<uint64_t>(mapPointer) : acquireGpuRange(size, properties.rootDeviceIndex, getHeapIndex());
+1970:             bo->setAddress(gpuRange);
+1971:             bo->setUnmapSize(size);
+1972:             reportedAddress = bo->peekAddress();
+1973:             reportedSize = bo->peekSize();
+1974:         }
+1975: 
+1976:         PRINT_STRING(debugManager.flags.PrintBOCreateDestroyResult.get(), stdout,
+1977:                      "Created BO-%d range: %llx - %llx, size: %lld from PRIME_FD_TO_HANDLE\n",
+1978:                      bo->peekHandle(),
+1979:                      bo->peekAddress(),
+1980:                      ptrOffset(bo->peekAddress(), bo->peekSize()),
+1981:                      bo->peekSize());
+1982: 
+1983:         pushSharedBufferObject(bo);
+1984:     } else {
+1985:         reportedAddress = bo->peekAddress();
+1986:         reportedSize = bo->peekSize();
+1987:     }
+1988: 
+1989:     if (reuseSharedAllocation) {
+1990:         lock.unlock();
+1991:     }
+1992: 
+1993:     auto gmmHelper = getGmmHelper(properties.rootDeviceIndex);
+1994:     auto canonizedGpuAddress = gmmHelper->canonize(reportedAddress);
+1995:     auto drmAllocation = new DrmAllocation(properties.rootDeviceIndex, 1u /*num gmms*/, properties.allocationType, bo, reinterpret_cast<void *>(reportedAddress), reportedSize,
+1996:                                            osHandleData.handle, memoryPool, canonizedGpuAddress);
+1997: 
+1998:     drmAllocation->setDefaultGmm(gmm.release());
+1999:     this->makeAllocationResident(drmAllocation);
+2000: 
+2001:     if (!reuseSharedAllocation) {
+2002:         registerSharedBoHandleAllocation(drmAllocation);
+2003:     }
+2004: 
+2005:     return drmAllocation;
+2006: }
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\shared__source__os_interface__linux__drm_memory_manager.cpp:2058-2118 =====
+2058: void DrmMemoryManager::freeGraphicsMemoryImpl(GraphicsAllocation *gfxAllocation, bool isImported) {
+2059:     if (debugManager.flags.DoNotFreeResources.get()) {
+2060:         return;
+2061:     }
+2062:     if (gfxAllocation->isView()) {
+2063:         DEBUG_BREAK_IF(true);
+2064:         return;
+2065:     }
+2066:     DrmAllocation *drmAlloc = static_cast<DrmAllocation *>(gfxAllocation);
+2067:     bool unregister = !isImported && !gfxAllocation->getIsImported() && Sharing::nonSharedResource == gfxAllocation->peekSharedHandle();
+2068:     if (isImported || gfxAllocation->getIsImported()) {
+2069:         std::lock_guard<std::mutex> lock(allocMutex);
+2070:         const auto &allocations = gfxAllocation->isAllocatedInLocalMemoryPool() ? localMemAllocs[gfxAllocation->getRootDeviceIndex()] : sysMemAllocs;
+2071:         unregister = std::find(allocations.begin(), allocations.end(), gfxAllocation) != allocations.end();
+2072:     }
+2073:     if (unregister) {
+2074:         this->unregisterAllocation(gfxAllocation);
+2075:     }
+2076:     auto rootDeviceIndex = gfxAllocation->getRootDeviceIndex();
+2077:     for (auto &engine : getRegisteredEngines(rootDeviceIndex)) {
+2078:         std::unique_lock<CommandStreamReceiver::MutexType> lock;
+2079:         if (engine.osContext->isDirectSubmissionLightActive()) {
+2080:             lock = engine.commandStreamReceiver->obtainUniqueOwnership();
+2081:             engine.commandStreamReceiver->stopDirectSubmission(true, false);
+2082:             handleFenceCompletion(gfxAllocation);
+2083:         }
+2084: 
+2085:         auto memoryOperationsInterface = static_cast<DrmMemoryOperationsHandler *>(executionEnvironment.rootDeviceEnvironments[rootDeviceIndex]->memoryOperationsInterface.get());
+2086:         memoryOperationsInterface->evictWithinOsContext(engine.osContext, *gfxAllocation);
+2087:     }
+2088: 
+2089:     auto ioctlHelper = getDrm(drmAlloc->getRootDeviceIndex()).getIoctlHelper();
+2090:     if (drmAlloc->getMmapPtr()) {
+2091:         ioctlHelper->munmapFunction(*this, drmAlloc->getMmapPtr(), drmAlloc->getMmapSize());
+2092:     }
+2093: 
+2094:     for (auto handleId = 0u; handleId < gfxAllocation->getNumGmms(); handleId++) {
+2095:         delete gfxAllocation->getGmm(handleId);
+2096:     }
+2097: 
+2098:     if (gfxAllocation->fragmentsStorage.fragmentCount) {
+2099:         cleanGraphicsMemoryCreatedFromHostPtr(gfxAllocation);
+2100:     } else {
+2101:         auto &bos = static_cast<DrmAllocation *>(gfxAllocation)->getBOs();
+2102:         for (auto bo : bos) {
+2103:             unreference(bo, bo && bo->peekIsReusableAllocation() ? false : true);
+2104:         }
+2105:         if (isImported == false) {
+2106:             closeSharedHandle(gfxAllocation);
+2107:         }
+2108:     }
+2109: 
+2110:     ioctlHelper->syncUserptrAlloc(*this, *gfxAllocation);
+2111:     ioctlHelper->releaseGpuRange(*this, gfxAllocation->getReservedAddressPtr(), gfxAllocation->getReservedAddressSize(), gfxAllocation->getRootDeviceIndex(), gfxAllocation->getAllocationType());
+2112:     alignedFreeWrapper(gfxAllocation->getDriverAllocatedCpuPtr());
+2113: 
+2114:     drmAlloc->freeRegisteredBOBindExtHandles(&getDrm(drmAlloc->getRootDeviceIndex()));
+2115: 
+2116:     delete gfxAllocation;
+2117: }
+2118: 
+===== E:\the_harness\records\root_continuation_20261004\intel_l0_import_sync_trace_20261004T210634Z\memory_manager.cpp:1556-1617 =====
+1556: void *MemoryManager::importFdHandle(Device *neoDevice,
+1557:                                     SVMAllocsManager *svmAllocsManager,
+1558:                                     uint64_t handle,
+1559:                                     AllocationType allocationType,
+1560:                                     bool isHostIpcAllocation,
+1561:                                     void *basePointer,
+1562:                                     GraphicsAllocation **pAlloc,
+1563:                                     SvmAllocationData &mappedPeerAllocData,
+1564:                                     bool compressedMemory,
+1565:                                     bool uncachedBias,
+1566:                                     uint64_t physicalOffset) {
+1567:     MemoryManager::OsHandleData osHandleData{handle};
+1568:     osHandleData.physicalOffset = physicalOffset;
+1569:     AllocationProperties unifiedMemoryProperties{neoDevice->getRootDeviceIndex(),
+1570:                                                  MemoryConstants::pageSize,
+1571:                                                  allocationType,
+1572:                                                  neoDevice->getDeviceBitfield()};
+1573:     unifiedMemoryProperties.subDevicesBitfield = neoDevice->getDeviceBitfield();
+1574:     unifiedMemoryProperties.flags.preferCompressed = compressedMemory;
+1575:     unifiedMemoryProperties.flags.uncacheable = uncachedBias;
+1576:     GraphicsAllocation *alloc = this->createGraphicsAllocationFromSharedHandle(osHandleData,
+1577:                                                                                unifiedMemoryProperties,
+1578:                                                                                false,
+1579:                                                                                isHostIpcAllocation,
+1580:                                                                                false,
+1581:                                                                                basePointer);
+1582:     if (alloc == nullptr) {
+1583:         return nullptr;
+1584:     }
+1585: 
+1586:     SvmAllocationData allocData(neoDevice->getRootDeviceIndex());
+1587:     SvmAllocationData *allocDataTmp = nullptr;
+1588:     if (basePointer) {
+1589:         allocDataTmp = &mappedPeerAllocData;
+1590:         allocDataTmp->mappedAllocData = true;
+1591:     } else {
+1592:         allocDataTmp = &allocData;
+1593:         allocDataTmp->mappedAllocData = false;
+1594:     }
+1595:     allocDataTmp->gpuAllocations.addAllocation(alloc);
+1596:     allocDataTmp->cpuAllocation = nullptr;
+1597:     allocDataTmp->size = alloc->getUnderlyingBufferSize();
+1598:     allocDataTmp->memoryType =
+1599:         isHostIpcAllocation ? InternalMemoryType::hostUnifiedMemory : InternalMemoryType::deviceUnifiedMemory;
+1600:     allocDataTmp->device = neoDevice;
+1601:     allocDataTmp->isImportedAllocation = true;
+1602:     alloc->setIsImported();
+1603:     allocDataTmp->setAllocId(++svmAllocsManager->allocationsCounter);
+1604:     if (uncachedBias) {
+1605:         allocDataTmp->allocationFlagsProperty.flags.locallyUncachedResource = 1;
+1606:     }
+1607: 
+1608:     if (!basePointer) {
+1609:         svmAllocsManager->insertSVMAlloc(allocData);
+1610:     }
+1611:     if (pAlloc) {
+1612:         *pAlloc = alloc;
+1613:     }
+1614: 
+1615:     return reinterpret_cast<void *>(alloc->getGpuAddress());
+1616: }
+1617: 
+===== E:\the_harness\records\root_continuation_20261004\intel_l0_import_sync_trace_20261004T210634Z\context.cpp:301-320 =====
+301:     if (lookupTable.isSharedHandle) {
+302:         if (lookupTable.sharedHandleType.isOpaqueFDHandle || lookupTable.sharedHandleType.isDMABUFHandle) {
+303:             ze_ipc_memory_flags_t flags = {};
+304:             if (deviceMemDesc->flags & ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED) {
+305:                 flags |= ZE_IPC_MEMORY_FLAG_BIAS_UNCACHED;
+306:             }
+307:             *ptr = getMemHandlePtr(hDevice,
+308:                                    lookupTable.sharedHandleType.fd,
+309:                                    NEO::AllocationType::buffer,
+310:                                    false,
+311:                                    0u,
+312:                                    flags,
+313:                                    0u,
+314:                                    nullptr, false, false, 0u)
+315:                        .second;
+316:             if (nullptr == *ptr) {
+317:                 return ZE_RESULT_ERROR_INVALID_ARGUMENT;
+318:             }
+319:             closeExternalHandle(lookupTable.sharedHandleType.fd);
+320:         } else {
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\shared__source__os_interface__linux__external_semaphore_linux.cpp:55-145 =====
+55:     auto drm = this->osInterface->getDriverModel()->as<Drm>();
+56: 
+57:     struct SyncObjHandle args = {};
+58:     args.fd = fd;
+59:     args.handle = 0;
+60: 
+61:     auto ioctlHelper = drm->getIoctlHelper();
+62: 
+63:     int ret = ioctlHelper->ioctl(DrmIoctl::syncObjFdToHandle, &args);
+64:     if (fd > 0) {
+65:         SysCalls::close(fd);
+66:     }
+67:     if (ret != 0) {
+68:         return ImportResult::invalidResource;
+69:     }
+70: 
+71:     this->syncHandle = args.handle;
+72:     this->type = type;
+73: 
+74:     return ImportResult::success;
+75: }
+76: 
+77: bool ExternalSemaphoreLinux::enqueueWait(uint64_t *fenceValue) {
+78:     auto drm = this->osInterface->getDriverModel()->as<Drm>();
+79:     auto ioctlHelper = drm->getIoctlHelper();
+80: 
+81:     if (this->type == ExternalSemaphore::TimelineSemaphoreFd) {
+82:         struct SyncObjTimelineWait args = {};
+83:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+84:         args.points = reinterpret_cast<uintptr_t>(fenceValue);
+85:         args.timeoutNs = std::numeric_limits<decltype(args.timeoutNs)>::max();
+86:         args.countHandles = 1u;
+87:         args.flags = 0x2; // DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT
+88: 
+89:         PRINT_STRING(debugManager.flags.PrintExternalSemaphoreTimeline.get() == 1, stdout,
+90:                      "ExternalSemaphore timeline wait: handle=0x%x, value=%" PRIu64 "\n",
+91:                      this->syncHandle,
+92:                      fenceValue ? *fenceValue : 0);
+93: 
+94:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjTimelineWait, &args);
+95:         if (ret != 0) {
+96:             return false;
+97:         }
+98:     } else {
+99:         struct SyncObjWait args = {};
+100:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+101:         args.timeoutNs = std::numeric_limits<decltype(args.timeoutNs)>::max();
+102:         args.countHandles = 1u;
+103:         args.flags = 0x2; // DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT
+104: 
+105:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjWait, &args);
+106:         if (ret != 0) {
+107:             return false;
+108:         }
+109:     }
+110: 
+111:     return true;
+112: }
+113: 
+114: bool ExternalSemaphoreLinux::enqueueSignal(uint64_t *fenceValue) {
+115:     auto drm = this->osInterface->getDriverModel()->as<Drm>();
+116:     auto ioctlHelper = drm->getIoctlHelper();
+117: 
+118:     if (this->type == ExternalSemaphore::TimelineSemaphoreFd) {
+119:         struct SyncObjTimelineArray args = {};
+120:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+121:         args.points = reinterpret_cast<uintptr_t>(fenceValue);
+122:         args.countHandles = 1u;
+123: 
+124:         PRINT_STRING(debugManager.flags.PrintExternalSemaphoreTimeline.get() == 1, stdout,
+125:                      "ExternalSemaphore timeline signal: handle=0x%x, value=%" PRIu64 "\n",
+126:                      this->syncHandle,
+127:                      fenceValue ? *fenceValue : 0);
+128: 
+129:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjTimelineSignal, &args);
+130:         if (ret != 0) {
+131:             return false;
+132:         }
+133:     } else {
+134:         struct SyncObjArray args = {};
+135:         args.handles = reinterpret_cast<uintptr_t>(&this->syncHandle);
+136:         args.countHandles = 1u;
+137: 
+138:         int ret = ioctlHelper->ioctl(DrmIoctl::syncObjSignal, &args);
+139:         if (ret != 0) {
+140:             return false;
+141:         }
+142:     }
+143: 
+144:     return true;
+145: }
+===== E:\the_harness\records\root_continuation_20261004\intel_runtime_contract_sources_20261004T2100Z\level_zero__core__source__semaphore__external_semaphore_imp.cpp:16-35 =====
+16: void ExternalSemaphoreImp::semaphoreWait(const ExternalSemaphoreOperationData &operationData) {
+17:     for (auto [semaphore, value] : operationData.semaphores) {
+18:         [[maybe_unused]] bool result = semaphore->neoExternalSemaphore->enqueueWait(&value);
+19:         PRINT_STRING(NEO::debugManager.flags.PrintExternalSemaphoreOperationResults.get(), stdout,
+20:                      "ExternalSemaphoreImp::semaphoreWait semaphore=%p value=%llu result=%d\n",
+21:                      static_cast<void *>(semaphore),
+22:                      static_cast<unsigned long long>(value),
+23:                      static_cast<int>(result));
+24:     }
+25: };
+26: 
+27: void ExternalSemaphoreImp::semaphoreSignal(const ExternalSemaphoreOperationData &operationData) {
+28:     for (auto [semaphore, value] : operationData.semaphores) {
+29:         [[maybe_unused]] bool result = semaphore->neoExternalSemaphore->enqueueSignal(&value);
+30:         PRINT_STRING(NEO::debugManager.flags.PrintExternalSemaphoreOperationResults.get(), stdout,
+31:                      "ExternalSemaphoreImp::semaphoreSignal semaphore=%p value=%llu result=%d\n",
+32:                      static_cast<void *>(semaphore),
+33:                      static_cast<unsigned long long>(value),
+34:                      static_cast<int>(result));
+35:     }
+
+ACTUAL PRIMARY-PINNED INPUT source_manifest.json SHA 63048bb393643dd9da8bd1a53dc319484790b39aa4fd0ed4d651e09d4ec43823
+[
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\context.cpp",
+    "size_bytes": 138486,
+    "sha256": "298f7f9d04078d23cffb53608b73ab9204d0778a2f802fe093ada543af02471a"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\driver_handle.cpp",
+    "size_bytes": 46557,
+    "sha256": "20ccbc05a38a6a4d7fab7ea2d9ea25185f9f5364611a90202720778d5d27979a"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\memory_manager.cpp",
+    "size_bytes": 82355,
+    "sha256": "b994e44a5001f26c2f1860c9091e6fc8160178abfe1ace3dbba086489b766435"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\context_drm_or_wddm.cpp",
+    "size_bytes": 7025,
+    "sha256": "ceafee2d4152d886d51f07de33aff1ef7c719783ea82152f6eb4b5c15c77576d"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\cmdlist.cpp",
+    "size_bytes": 43337,
+    "sha256": "2fdc69a78815431451f26e53be73b70d9eb86557e444b9366949a4360ea93c20"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\cmdqueue.cpp",
+    "size_bytes": 20393,
+    "sha256": "55e39a0a5a9608b30544f88c7e1dc7dd770cbb04a73a1c45daecd33ee59a5bff"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\level_zero__core__source__semaphore__external_semaphore_imp.cpp",
+    "size_bytes": 6009,
+    "sha256": "3ccf261403276499057f5c3966657d1c24928e9eda162ff61f6ee8e81ec3ddd8"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__external_semaphore_linux.cpp",
+    "size_bytes": 5442,
+    "sha256": "f4e9e16b9deea753720ab85156cbe69795c70aded895910e07632e8f7d55711f"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__drm_memory_manager.cpp",
+    "size_bytes": 192618,
+    "sha256": "f5e68fd52e4a1171bbe48a30c3ca7c7c0da3f02fcb7a5ab1bc82590d7baafc60"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\PINNED_SOURCE_RECEIPT.json",
+    "size_bytes": 2968,
+    "sha256": "61cef267eee1b19e3755059571a62bc3b43134e1a6e55cdf95dafdfb415ff5fb"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "initial_results_not_accepted_as_final": true,
+  "defect": "Inherited fake scheduler reran already-completed reader target during join, causing invalid duplicate close attempts. Fresh derivative returns immediately for dead fake threads, as real Thread.join does.",
+  "initial_files_preserved": true
+}

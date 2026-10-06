@@ -1,0 +1,7 @@
+{
+  "status": "ERROR_MethodInvocationException",
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\architecture_evidence_review_20261004T100656059Z",
+  "http_status": null,
+  "seconds": 180.8941463,
+  "model": "qwen3.8-max"
+}

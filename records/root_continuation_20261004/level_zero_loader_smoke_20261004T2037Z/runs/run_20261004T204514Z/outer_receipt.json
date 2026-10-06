@@ -1,0 +1,109 @@
+{
+  "admission_path": "E:\\the_harness\\records\\root_continuation_20261004\\level_zero_loader_smoke_20261004T2037Z\\ROOT_ADMISSION.json",
+  "admission_sha256": "01304373afe3606596c3505e164553bca45991b610f527763cf43a184c9e832d",
+  "capture_limit_bytes_per_stream": 131072,
+  "capture_ok": true,
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\level_zero_loader_smoke_20261004T2037Z\\probe_controller.py"
+  ],
+  "containment_and_receipt_gates_passed": false,
+  "controller_elapsed_seconds": 0.188,
+  "controller_exit_code": 0,
+  "controller_pid": 85308,
+  "controller_pid_absent_after_wait": true,
+  "controller_reaped": true,
+  "controller_timeout": false,
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\level_zero_loader_smoke_20261004T2037Z",
+  "drain_proof": "CLEANUP",
+  "input_hashes_after": {
+    "controller_sha256": "45a2ad9abcd9680631a0aa70c00039f69771b0e0732c70d384a0c9e202e219c2",
+    "driver_sha256": "30821faf5c560a3fe2bf5d79727af0c559ad9948158e4f7d352b572edeb840cb",
+    "header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "loader_sha256": "0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162",
+    "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "supervisor_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+    "worker_sha256": "4a19fa9c5b67bed8e54bc8a4c3a0515686ea041d9acfca61167401a9bed5670a"
+  },
+  "input_hashes_before": {
+    "controller_sha256": "45a2ad9abcd9680631a0aa70c00039f69771b0e0732c70d384a0c9e202e219c2",
+    "driver_sha256": "30821faf5c560a3fe2bf5d79727af0c559ad9948158e4f7d352b572edeb840cb",
+    "header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "loader_sha256": "0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162",
+    "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "supervisor_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+    "worker_sha256": "4a19fa9c5b67bed8e54bc8a4c3a0515686ea041d9acfca61167401a9bed5670a"
+  },
+  "input_hashes_unchanged": true,
+  "job_active_count": 0,
+  "job_status": "FAILED",
+  "p2p_claim": "UNPROVEN",
+  "parse_error": null,
+  "probe": {
+    "driver_handles_retrieved": false,
+    "loaded_path_matches_pin": true,
+    "loader_expected_sha256": "0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162",
+    "loader_loaded_path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\runtime_source\\build\\bin\\ze_loader.dll",
+    "loader_requested_path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\runtime_source\\build\\bin\\ze_loader.dll",
+    "loader_sha256_after": "0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162",
+    "loader_sha256_before": "0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162",
+    "p2p_claim": "UNPROVEN",
+    "schema": "level-zero-loader-bootstrap-v1",
+    "scope": "zeInit_GPU_ONLY_then_zeDriverGet_count_only",
+    "sdk_header_path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+    "sdk_header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "status": "INITIALIZATION_ERROR",
+    "vendor_qualification": "NOT_PERFORMED",
+    "zeInit_result": 2013265921,
+    "ze_init_flag_gpu_only": 1
+  },
+  "probe_outcome": "INITIALIZATION_ERROR",
+  "restart_commit_verified": true,
+  "restart_matches": true,
+  "schema": "level-zero-loader-smoke-receipt-v1",
+  "stderr_bytes": 0,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\level_zero_loader_smoke_20261004T2037Z\\runs\\run_20261004T204514Z\\controller.stderr.bin",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 5443,
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\level_zero_loader_smoke_20261004T2037Z\\runs\\run_20261004T204514Z\\controller.stdout.bin",
+  "stdout_sha256": "2ca569cd3cb501440f7290d9c83922325880025c4966cef4a805dba3ec60a299",
+  "supervisor_result": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "nonzero_exit",
+    "job_active_count": 0,
+    "logs": {
+      "levelzero_probe": {
+        "stderr": "",
+        "stderr_bytes": 0,
+        "stderr_overflow": false,
+        "stderr_path": "levelzero_probe.stderr.log",
+        "stdout": "{\"schema\":\"level-zero-loader-bootstrap-v1\",\"scope\":\"zeInit_GPU_ONLY_then_zeDriverGet_count_only\",\"vendor_qualification\":\"NOT_PERFORMED\",\"p2p_claim\":\"UNPROVEN\",\"driver_handles_retrieved\":false,\"ze_init_flag_gpu_only\":1,\"loader_requested_path\":\"E:\\\\the_harness\\\\records\\\\toolchains\\\\level_zero_20261004\\\\runtime_source\\\\build\\\\bin\\\\ze_loader.dll\",\"loader_expected_sha256\":\"0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162\",\"sdk_header_path\":\"E:\\\\the_harness\\\\records\\\\toolchains\\\\level_zero_20261004\\\\sdk\\\\include\\\\level_zero\\\\ze_api.h\",\"sdk_header_sha256\":\"c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de\",\"loader_sha256_before\":\"0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162\",\"loader_loaded_path\":\"E:\\\\the_harness\\\\records\\\\toolchains\\\\level_zero_20261004\\\\runtime_source\\\\build\\\\bin\\\\ze_loader.dll\",\"loaded_path_matches_pin\":true,\"zeInit_result\":2013265921,\"status\":\"INITIALIZATION_ERROR\",\"loader_sha256_after\":\"0838c395a7393c313fdfeff8cea5d08a71ba044dc28f793aa4f7d28f60095162\"}\r\n",
+        "stdout_bytes": 1033,
+        "stdout_overflow": false,
+        "stdout_path": "levelzero_probe.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "levelzero_loader_smoke",
+    "status": "FAILED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 1,
+        "pid": 95692,
+        "resumed": true,
+        "worker_id": "levelzero_probe"
+      }
+    ]
+  },
+  "vendor_qualification": "NOT_PERFORMED",
+  "whole_tree_certificate": false,
+  "worker_pids": [
+    95692
+  ],
+  "worker_pids_absent_after_cleanup": true
+}

@@ -1,0 +1,94 @@
+{
+  "underlying_receipts": [
+    {
+      "sha256": "e63fe0d1404b9818c4400a28220eef3d4d54fb379702c319099328e1b180a5ea",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\CLOSED_FOUR_QWEN_USAGE_LEDGER.json"
+    },
+    {
+      "sha256": "20f3ae93444c39f89423f4a178a08225d75cf14cd3eb0e1e437a13006a3e1739",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\cuda_l0_device_dmabuf_prep_20261004T195400Z\\CLOSED_USAGE_SOURCE_RECEIPT.json"
+    },
+    {
+      "sha256": "e2a06868cc76dafa52fd43e2b01a6fbba5c566d798688e0210843115f763f88f",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\gemini_capacity_high.owned_terminal.json"
+    },
+    {
+      "sha256": "8d12a85d2f0a6bab2ede2c8daea7aa83084dee2afde4a3541dddc18d94b22637",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\CLOSED_USAGE_SOURCE_RECEIPT.json"
+    }
+  ],
+  "source_execution": false,
+  "no_global_factory_change": true,
+  "terminal_jobs": 7,
+  "provider_jobs": 7,
+  "live_jobs": 0,
+  "credits": "NOT_DERIVED_FROM_RAW_TOKENS",
+  "observed_total_tokens": 477270,
+  "root_acceptance": "SEPARATE_NO_SOURCE_EXECUTION_BY_MANAGER",
+  "utc": "2026-10-04T21:02:20.9771820Z",
+  "old_scoped_23_jobs": "SCOPED_RESUME_PROVIDER_AGGREGATE_20261004T200700Z.json",
+  "usage_unknown": 0,
+  "usage_known": 7,
+  "combined_with_prior_scoped23": {
+    "requests": 30,
+    "observed_total_tokens": 1156236,
+    "live": 0,
+    "terminal_known": 18,
+    "Gemini": {
+      "requests": 1,
+      "observed_tokens": 65652,
+      "unknown": 0,
+      "known": 1
+    },
+    "Muse": {
+      "requests": 1,
+      "observed_tokens": 0,
+      "unknown": 1,
+      "zero_means_no_observed_usage_not_zero_consumption": true,
+      "known": 0
+    },
+    "Grok": {
+      "requests": 4,
+      "observed_tokens": 335755,
+      "unknown": 1,
+      "known": 3
+    },
+    "terminal_unknown": 12,
+    "Qwen": {
+      "requests": 24,
+      "observed_tokens": 754829,
+      "unknown": 10,
+      "known": 14
+    }
+  },
+  "scope": "CURRENT_SEVEN_PROVIDER_JOBS_ONLY_NO_COPIED_ARTIFACT_DUPLICATION",
+  "intake_outcomes": {
+    "grok": "COMPLETE_UNTRUSTED",
+    "qwen_four_repairs": "ALL4_SCHEMA_REFUSED_EXACT_STRINGS_REVIEW_ONLY",
+    "gemini": "REQUEST_CHANGES_REVIEW",
+    "qwen_combined": "COMPLETE_UNTRUSTED"
+  },
+  "per_provider": {
+    "Grok": {
+      "requests": 1,
+      "usage_known": 1,
+      "internal_model_calls": 1,
+      "observed_total_tokens": 100630,
+      "native_children_actual": 0
+    },
+    "Qwen": {
+      "requests": 5,
+      "usage_known": 5,
+      "internal_model_calls": "NOT_REPORTED",
+      "observed_total_tokens": 310988,
+      "native_children_actual": 0
+    },
+    "Gemini": {
+      "requests": 1,
+      "usage_known": 1,
+      "internal_model_calls": "NOT_REPORTED",
+      "observed_total_tokens": 65652,
+      "native_children_actual": 0
+    }
+  }
+}

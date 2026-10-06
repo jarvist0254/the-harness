@@ -1,0 +1,27 @@
+{
+  "pid": 20096,
+  "command": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\llama-quantize.exe --dry-run --allow-requantize --pure --max-buffer-size 256 E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\Qwen3-0.6B-Q8_0-dequant-F32.gguf E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\dryrun-no-write.gguf F32 4",
+  "timeout_seconds": 60,
+  "timed_out": false,
+  "exit_code": 0,
+  "elapsed_seconds": 0.534,
+  "process_present_after": false,
+  "input": "E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\Qwen3-0.6B-Q8_0-dequant-F32.gguf",
+  "input_sha256": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+  "input_bytes": 2390150816,
+  "tensor_line_count": 310,
+  "f32_tensor_count": 310,
+  "non_f32_tensor_lines": [],
+  "metadata_lines": [
+    "llama_model_loader: loaded meta data with 28 key-value pairs and 310 tensors from E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\Qwen3-0.6B-Q8_0-dequant-F32.gguf (version GGUF V3 (latest))",
+    "llama_model_loader: - kv   6:                          qwen3.block_count u32              = 28",
+    "llama_model_loader: - kv  18:                      tokenizer.ggml.tokens arr[str,151936]  = [\"!\", \"\\\"\", \"#\", \"$\", \"%\", \"&\", \"'\", ...",
+    "llama_model_loader: - kv  27:                          general.file_type u32              = 0",
+    "llama_model_quantize_impl: model size  =  2273.75 MiB (32.00 BPW)",
+    "llama_model_quantize_impl: quant size  =  2273.75 MiB (32.00 BPW)"
+  ],
+  "dryrun_output_target": "E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\dryrun-no-write.gguf",
+  "dryrun_output_exists": false,
+  "stdout": "records\\vulkan_llm_qualification_20261004\\quantizer_build\\f32_verify.stdout.log",
+  "stderr": "records\\vulkan_llm_qualification_20261004\\quantizer_build\\f32_verify.stderr.log"
+}

@@ -1,0 +1,275 @@
+test_actual_hash_mismatch (__main__.Cases) ... ok
+test_aggregate_actual_file_budget (__main__.Cases) ... ok
+test_authority_extra (__main__.Cases) ... FAIL
+test_canonical_alias (__main__.Cases) ... FAIL
+test_duplicate_name (__main__.Cases) ... ok
+test_equal_baseline (__main__.Cases) ... ok
+test_extra_nodes (__main__.Cases) ... FAIL
+test_global_scale_false_match (__main__.Cases) ... ok
+test_manifest_budget (__main__.Cases) ... ok
+test_manifest_extra (__main__.Cases) ... FAIL
+test_metadata_op_mismatch (__main__.Cases) ... FAIL
+test_metadata_shape_mismatch (__main__.Cases) ... FAIL
+test_missing_expected_authority (__main__.Cases) ... FAIL
+test_missing_nodes (__main__.Cases) ... FAIL
+test_mutation_manifest_diagnostic_intrusive (__main__.Cases) ... ok
+test_mutation_manifest_qualification (__main__.Cases) ... ok
+test_mutation_manifest_schema (__main__.Cases) ... ok
+test_mutation_manifest_status (__main__.Cases) ... ok
+test_mutation_node_dims (__main__.Cases) ... ok
+test_mutation_node_dtype (__main__.Cases) ... ok
+test_mutation_node_file_../escape.bin (__main__.Cases) ... ok
+test_mutation_node_file_C:\outside.bin (__main__.Cases) ... ok
+test_mutation_node_file_node.bin:ads (__main__.Cases) ... ok
+test_mutation_node_nbytes (__main__.Cases) ... FAIL
+test_mutation_node_ordinal_0.0 (__main__.Cases) ... FAIL
+test_mutation_node_ordinal_False (__main__.Cases) ... ok
+test_mutation_node_strides (__main__.Cases) ... FAIL
+test_mutation_origin_devices_['Vulkan0',_'Vulka (__main__.Cases) ... ok
+test_mutation_origin_devices_['Vulkan1',_'Vulka (__main__.Cases) ... ok
+test_mutation_origin_executable_sha256 (__main__.Cases) ... ok
+test_mutation_origin_flash_attention (__main__.Cases) ... ok
+test_mutation_origin_model_bytes (__main__.Cases) ... FAIL
+test_mutation_origin_model_sha256 (__main__.Cases) ... ok
+test_mutation_origin_n_ctx_actual (__main__.Cases) ... FAIL
+test_mutation_origin_pinned_commit (__main__.Cases) ... ok
+test_mutation_origin_role (__main__.Cases) ... ok
+test_mutation_origin_source_sha256 (__main__.Cases) ... ok
+test_mutation_origin_vulkan_disable_f16 (__main__.Cases) ... ok
+test_mutation_origin_workload_sha256 (__main__.Cases) ... ok
+test_nested_duplicate_json_key (__main__.Cases) ... ok
+test_node_extra (__main__.Cases) ... FAIL
+test_nonfinite_cpu_inf (__main__.Cases) ... ok
+test_nonfinite_cpu_minus_inf (__main__.Cases) ... ok
+test_nonfinite_cpu_nan (__main__.Cases) ... ok
+test_nonfinite_gpu_inf (__main__.Cases) ... ok
+test_nonfinite_gpu_minus_inf (__main__.Cases) ... ok
+test_nonfinite_gpu_nan (__main__.Cases) ... ok
+test_order_difference (__main__.Cases) ... FAIL
+test_small_noise_reported_for_every_capture (__main__.Cases) ... FAIL
+test_symlink_file_inside_owned_folder (__main__.Cases) ... ok
+test_symlink_root_inside_owned_folder (__main__.Cases) ... FAIL
+test_tokens_both_short (__main__.Cases) ... FAIL
+test_tokens_different_passes (__main__.Cases) ... FAIL
+test_tolerance_bool (__main__.Cases) ... ok
+test_tolerance_inf (__main__.Cases) ... ok
+test_tolerance_nan (__main__.Cases) ... ok
+test_tolerance_narrowed (__main__.Cases) ... FAIL
+test_tolerance_negative (__main__.Cases) ... ok
+test_tolerance_widened (__main__.Cases) ... FAIL
+test_trailing_with_true_hash (__main__.Cases) ... ok
+test_truncated_with_true_hash (__main__.Cases) ... ok
+test_updated_hash_real_corruption_first_observed (__main__.Cases) ... ok
+
+======================================================================
+FAIL: test_authority_extra (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 88, in test_authority_extra
+    def test_authority_extra(self):self.gm['origin']['qualification']='GPU_PASS';self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_canonical_alias (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 76, in test_canonical_alias
+    def test_canonical_alias(self):self.cm['captures'][0]['name']='attn_norm-00';self.gm['captures'][0]['name']='attn_norm-00';self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_extra_nodes (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 70, in test_extra_nodes
+    node=copy.deepcopy(self.gm['captures'][-1]);node.update(name='result_norm',ordinal=3);self.gm['captures'].append(node);self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'reason': 'node_count_mismatch'}, None)
+
+======================================================================
+FAIL: test_manifest_extra (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 89, in test_manifest_extra
+    def test_manifest_extra(self):self.gm['production_pass']=True;self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_metadata_op_mismatch (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 67, in test_metadata_op_mismatch
+    def test_metadata_op_mismatch(self):self.gm['captures'][0]['op']='OTHER_OP';self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': 0, 'reason': 'metadata_mismatch'}, None)
+
+======================================================================
+FAIL: test_metadata_shape_mismatch (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 66, in test_metadata_shape_mismatch
+    self.gm['captures'][0]['dims']=[4,2,1,1];self.gm['captures'][0]['strides']=[4,16,32,32];self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': 0, 'reason': 'metadata_mismatch'}, None)
+
+======================================================================
+FAIL: test_missing_expected_authority (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 85, in test_missing_expected_authority
+    def test_missing_expected_authority(self):self.expected={};self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_missing_nodes (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 68, in test_missing_nodes
+    def test_missing_nodes(self):self.gm['captures'].pop();self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'reason': 'node_count_mismatch'}, None)
+
+======================================================================
+FAIL: test_mutation_node_nbytes (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 117, in test
+    self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: (None, {'type': 'error', 'message': 'bad char in struct format'})
+
+======================================================================
+FAIL: test_mutation_node_ordinal_0.0 (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 117, in test
+    self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_mutation_node_strides (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 117, in test
+    self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_mutation_origin_model_bytes (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 117, in test
+    self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_mutation_origin_n_ctx_actual (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 117, in test
+    self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_node_extra (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 90, in test_node_extra
+    def test_node_extra(self):self.gm['captures'][0]['reference_scale']=1000000;self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_order_difference (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 74, in test_order_difference
+    self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_DIVERGENCE', 'first_divergent_ordinal': 0, 'reason': 'metadata_mismatch'}, None)
+
+======================================================================
+FAIL: test_small_noise_reported_for_every_capture (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 64, in test_small_noise_reported_for_every_capture
+    self.replace_bytes(self.gpu,self.gm,0,[.001,1000000.,-2.,3.,4.,5.,6.,7.]);self.save();r,e=self.call();self.assertIsNone(e);self.assertEqual(r['result'],'DIAGNOSTIC_MATCH');self.assertTrue(any(isinstance(v,list) and len(v)==3 for v in r.values()),'Every observed capture needs statistics even when within tolerance')
+AssertionError: False is not true : Every observed capture needs statistics even when within tolerance
+
+======================================================================
+FAIL: test_symlink_root_inside_owned_folder (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 107, in test_symlink_root_inside_owned_folder
+    self.gpu=link;self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_tokens_both_short (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 86, in test_tokens_both_short
+    def test_tokens_both_short(self):self.cm['origin']['tokens']=[0,1];self.gm['origin']['tokens']=[0,1];self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_tokens_different_passes (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 87, in test_tokens_different_passes
+    def test_tokens_different_passes(self):self.gm['origin']['tokens']=list(reversed(range(16)));self.save();self.refuse()
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_tolerance_narrowed (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 128, in test
+    def test(self):self.refuse(atol=value,rtol=value)
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+======================================================================
+FAIL: test_tolerance_widened (__main__.Cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 128, in test
+    def test(self):self.refuse(atol=value,rtol=value)
+  File "E:\the_harness\records\provider_quality_review\layer_diagnostic_RED_20261004T145150Z\evaluate_comparator.py", line 56, in refuse
+    r,e=self.call(**kw);self.assertTrue(e and e['type']=='CaptureError' or isinstance(r,dict) and r.get('result')=='NOT_CHECKED','Malformed artifact must refuse, not label numeric divergence/match: '+str((r,e)))
+AssertionError: False is not true : Malformed artifact must refuse, not label numeric divergence/match: ({'result': 'DIAGNOSTIC_MATCH', 'comparator': 'COMPARATOR_ONLY'}, None)
+
+----------------------------------------------------------------------
+Ran 62 tests in 0.510s
+
+FAILED (failures=21)

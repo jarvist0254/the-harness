@@ -1,0 +1,138 @@
+{
+  "reported_internal_model_calls": 1,
+  "output_tokens": 97372,
+  "tokens_not_credits": true,
+  "native_children_actual": 0,
+  "tests_execution": false,
+  "scope": "One source-only correction; excludes independent Gemini call and subsequent separate DMA query Grok",
+  "reasoning_tokens": 81173,
+  "reasoning_included_in_output": true,
+  "provider_reported_usage": {
+    "input_tokens": 19672,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 97372,
+    "reasoning_tokens": 81173,
+    "total_tokens": 118196
+  },
+  "provider_jobs": 1,
+  "job_id": "grok_numeric_ledger_high",
+  "model": "grok-4.7-build-fast",
+  "observed_total_tokens": 118196,
+  "utc": "2026-10-04T19:31:40.8857113Z",
+  "cli_pid": 61920,
+  "inputs_before_after": [
+    {
+      "actual_sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py",
+      "expected_sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\tests_source.qwen_untrusted.txt",
+      "expected_sha256": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger.spec.txt",
+      "expected_sha256": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "cbf1c938ec60706f0e5e679655bcdb0c7aa9fbe7acf1bd3af928164bcac22bc5",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_gemini_retry_20261004T191100Z\\gemini_review.extracted.json",
+      "expected_sha256": "cbf1c938ec60706f0e5e679655bcdb0c7aa9fbe7acf1bd3af928164bcac22bc5",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "13f38d27153456da43f4ebc8bf7ceb69ef3f3262ff19d1180193f3a7fff95d34",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\test_independent_ledger_red.py",
+      "expected_sha256": "13f38d27153456da43f4ebc8bf7ceb69ef3f3262ff19d1180193f3a7fff95d34",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "a06084899a858bba2dd45181ca780a8f6669f0df875709a10f4e78fe0c7ebc89",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\AUDIT.md",
+      "expected_sha256": "a06084899a858bba2dd45181ca780a8f6669f0df875709a10f4e78fe0c7ebc89",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "9d1bb0cb263dce2b5f225880ce6549fef8810dcc008e49d51df7e14a5e44a6c3",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\execution_receipt.json",
+      "expected_sha256": "9d1bb0cb263dce2b5f225880ce6549fef8810dcc008e49d51df7e14a5e44a6c3",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "1d04c1449a29727ccadeec105d38d7230d91c7b9d5a2f0be68bcc109878c7781",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_root_audit_20261004T1900Z\\actual_red_results.json",
+      "expected_sha256": "1d04c1449a29727ccadeec105d38d7230d91c7b9d5a2f0be68bcc109878c7781",
+      "unchanged": true
+    },
+    {
+      "actual_sha256": "c69b080dbb0f0bcfa1d7f436f791e5f40a46600cdc7326f16f2fc8a5bb2d379f",
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\fresh_dll_manifest.json",
+      "expected_sha256": "c69b080dbb0f0bcfa1d7f436f791e5f40a46600cdc7326f16f2fc8a5bb2d379f",
+      "unchanged": true
+    }
+  ],
+  "wrapper_pid": 64944,
+  "configured_secrets_match_count": 0,
+  "unknown_usage_calls": 0,
+  "input_tokens": 19672,
+  "terminal": {
+    "model_usage": {
+      "grok-4.7-build-fast": {
+        "inputTokens": 19672,
+        "outputTokens": 97372,
+        "cacheReadInputTokens": 1152,
+        "cacheCreationInputTokens": 0,
+        "modelCalls": 1,
+        "costUSD": 0.42442336
+      }
+    },
+    "outer_killed": false,
+    "log_cap_exceeded": false,
+    "finish_reason": "end_turn",
+    "usage": {
+      "input_tokens": 19672,
+      "cache_read_input_tokens": 1152,
+      "cache_creation_input_tokens": 0,
+      "output_tokens": 97372,
+      "reasoning_tokens": 81173,
+      "total_tokens": 118196
+    },
+    "native_children_actual": 0,
+    "pid": 61920,
+    "elapsed_seconds": 523.33,
+    "requested_model": "grok-4.7-build-fast",
+    "pipe_error": false,
+    "lane": "Grok",
+    "private_url_output_refused": false,
+    "exit_code": 0,
+    "status": "COMPLETE_CORRECTION_STAGED_UNAPPLIED",
+    "parse_error_type": null,
+    "provider_patch_applied": false,
+    "drain_unknown": false,
+    "credential_saved": false
+  },
+  "artifact_accepted_as_functionality": false,
+  "source_pins": {
+    "tests_sha256": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+    "execution": false,
+    "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py",
+    "artifact_sha256": "ecadd70b7c38bdffad4dd7cb900804b9ad43127d638068facd1adbb4e32ad025",
+    "root_admission": "PENDING",
+    "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+    "status": "PROPOSED",
+    "source_chars": 23377,
+    "tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py",
+    "tests_chars": 20611
+  },
+  "credits": "NOT_CHECKED",
+  "owned_session_reaped": 55623,
+  "source_execution": false,
+  "cache_read_input_tokens": 1152,
+  "state": "CLOSED_PROVIDER_JOB_UNTRUSTED_ARTIFACT_PENDING_ROOT_QA"
+}

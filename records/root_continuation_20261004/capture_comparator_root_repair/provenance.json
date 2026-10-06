@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-04T15:14:24.460192+00:00",
+  "provider_source": "records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\grok_capture_edit\\capture_comparator.grok_corrected.py",
+  "provider_sha256": "2786a0213039cdeb1654dd1de7688e9f628672a963355fcfef6ebe94cba87495",
+  "root_source": "records\\root_continuation_20261004\\capture_comparator_root_repair\\capture_comparator.py",
+  "root_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+  "attribution": "ROOT narrow repair derived from actual Grok edit; no new provider job",
+  "changes": [
+    "Validate device item types before set() so malformed nested objects raise CaptureError.",
+    "Use exact 28 canonical suffix strings without unbounded integer conversion."
+  ],
+  "admission": "AST_ONLY_PENDING_INDEPENDENT_SYNTHETIC_CONTROLS",
+  "limitations": [
+    "No opened-handle fstat identity check; bounded reads and static component checks do not certify dynamic filesystem races.",
+    "No complete C++ capture candidate, native tensor capture or GPU/model qualification."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "revision": "1.0-draft",
+  "date": "2026-09-30",
+  "current_population": {
+    "rtx_5070_ti_16gb": 1,
+    "rtx_3060_ventus_2x_12gb": 3,
+    "empty_3060_harness_positions": 1
+  },
+  "future_max_population": {
+    "rtx_5070_ti_16gb": 1,
+    "rtx_3060_12gb": 4
+  },
+  "pcie": {
+    "PCI_E1": "CPU x16 configured x4+x4+x4+x4 for four 3060 harness links",
+    "PCI_E4": "chipset Gen4 x4 for RTX 5070 Ti lower-shelf link",
+    "M2_3": "must remain empty"
+  },
+  "power_domains": {
+    "host_psu": "host system + RTX 5070 Ti slot and auxiliary power",
+    "external_1000w_psu": "3060 receiver slots + 3060 auxiliary power + fans/control"
+  },
+  "mechanical": {
+    "printer": "Ender-3 S1 Pro",
+    "build_volume_mm": [220, 220, 270],
+    "preferred_monolithic_skeleton_mm": [188, 188, 248],
+    "z_tuning_range_mm": [245, 250],
+    "card_gap_nominal_mm": 16,
+    "3060_card_thickness_mm": 42,
+    "3060_card_length_mm": 235,
+    "3060_card_height_mm": 124,
+    "fan_positions": "2x120mm stacked common plenum",
+    "empty_slot_air_dam": true
+  },
+  "software": {
+    "name": "J-Link",
+    "definition": "JE Horizon multi-GPU software fabric; not NVLink/JTAG",
+    "primary_mode": "independent resident CUDA workers and task/pipeline parallelism",
+    "distributed_training": "experimental DDP/DeepSpeed/FSDP after link benchmarking",
+    "aggregate_vram_is_unified": false
+  },
+  "superseded": [
+    "Moore Threads S80 worker choice",
+    "Intel A770 worker choice",
+    "hybrid 2020-aluminum primary chassis",
+    "single shared PCI_E4 x4 active-switch topology as the preferred design"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "command": [
+    "C:\\Windows\\System32\\nvidia-smi.exe",
+    "--query-gpu=pci.bus_id,name,memory.total,memory.free,memory.used,uuid",
+    "--format=csv,nounits"
+  ],
+  "exit_code": 0,
+  "stdout": "pci.bus_id, name, memory.total [MiB], memory.free [MiB], memory.used [MiB], uuid\r\n00000000:01:00.0, NVIDIA GeForce RTX 5070 Ti, 16303, 14644, 1352, GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c\r\n",
+  "stderr": "",
+  "sample_start_utc": "2026-10-04T12:14:36.152541+00:00",
+  "checked_at_utc": "2026-10-04T12:14:36.285411+00:00",
+  "sample_age_seconds": 0.13287,
+  "max_age_seconds": 5,
+  "inventory": {
+    "devices": [
+      {
+        "physical_id": "0000:01:00.0",
+        "vendor_key": "nvidia",
+        "aliases": [
+          "0000:01:00.0",
+          "nv-name:NVIDIA GeForce RTX 5070 Ti",
+          "nv-uuid:GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        ],
+        "memory_kind": "DEDICATED",
+        "advertised_total_bytes": 17094934528,
+        "observed_free_bytes": 15355346944,
+        "sample_timestamp": "2026-10-04T12:14:36.152541+00:00",
+        "freshness_status": "FRESH",
+        "source": {
+          "tool": "nvidia-smi",
+          "exit_code": 0,
+          "uuid": "GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        }
+      }
+    ],
+    "conflicts": [],
+    "refusals": []
+  },
+  "fresh_admission": {
+    "eligible": [
+      {
+        "physical_id": "0000:01:00.0",
+        "vendor_key": "nvidia",
+        "aliases": [
+          "0000:01:00.0",
+          "nv-name:NVIDIA GeForce RTX 5070 Ti",
+          "nv-uuid:GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        ],
+        "memory_kind": "DEDICATED",
+        "advertised_total_bytes": 17094934528,
+        "observed_free_bytes": 15355346944,
+        "sample_timestamp": "2026-10-04T12:14:36.152541+00:00",
+        "freshness_status": "FRESH",
+        "source": {
+          "tool": "nvidia-smi",
+          "exit_code": 0,
+          "uuid": "GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        }
+      }
+    ],
+    "refused": []
+  },
+  "synthetic_age_6s_admission": {
+    "eligible": [],
+    "refused": [
+      {
+        "device": "0000:01:00.0",
+        "reason": "stale"
+      }
+    ]
+  },
+  "same_capture_marked_shared_admission": {
+    "eligible": [],
+    "refused": [
+      {
+        "device": "0000:01:00.0",
+        "reason": "not_dedicated"
+      }
+    ]
+  },
+  "source_sha256": "4d3d5f10a46a92672ce10f16fcc2be2ca1c09a96f605cd87e25b200539280ade",
+  "immutable_provider_sha256": "f8750235d89201ad56205fad3691ace06af5ecac106e4425b7291f4dd17cb56c",
+  "tests_command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "j_link.tests.test_device_inventory"
+  ],
+  "tests_exit": 0,
+  "classification_basis": "Actual RTX5070Ti discrete SKU independently identified by Windows PNP/OpenCL inventory; parser requires caller classification",
+  "limitations": [
+    "Read-only instantaneous NVIDIA sample, not an allocation guarantee/reservation",
+    "AMD/Intel schema selectors are synthetic contracts; live native CLI formats NOT_CHECKED; their free remains None",
+    "Integrated/shared memory is refused for dedicated budgets",
+    "Physical identity is reported PCI BDF, not certified serial/UUID-to-slot lifecycle mapping",
+    "No GPUs allocated, kernels run or models loaded by inventory capture",
+    "Admission API accepts trusted normalized dictionaries, not a security/authentication boundary"
+  ]
+}

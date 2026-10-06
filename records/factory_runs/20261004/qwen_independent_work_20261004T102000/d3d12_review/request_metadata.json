@@ -1,0 +1,8 @@
+{
+  "tools": false,
+  "pid": 13820,
+  "timeout_seconds": 180,
+  "memory": false,
+  "model": "qwen3.8-max",
+  "credential_persisted": false
+}

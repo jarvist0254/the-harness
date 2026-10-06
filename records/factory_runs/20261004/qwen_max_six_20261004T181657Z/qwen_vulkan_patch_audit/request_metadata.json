@@ -1,0 +1,17 @@
+{
+  "max_native_authorized_qwen": 10,
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "native_children_actual": 0,
+  "prompt_sha256": "6DD5AD4CF9BB350D0D6E9DA5FD73D6784F1BAAF0C0E287DB60BD12801CAEECE6",
+  "max_reply_tokens": 16384,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\ggml-vulkan.candidate_snapshot.cpp",
+  "pid": 88740,
+  "credential_saved": false,
+  "source_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "http_deadline_seconds": 330,
+  "response_cap_bytes": 2097152,
+  "requested_model": "qwen3.8-max",
+  "enable_thinking": true,
+  "max_native_authorized_deepseek": 10,
+  "reasoning_effort": "xhigh"
+}

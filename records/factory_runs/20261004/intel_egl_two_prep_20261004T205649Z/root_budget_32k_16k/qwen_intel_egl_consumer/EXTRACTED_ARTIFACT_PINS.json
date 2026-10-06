@@ -1,0 +1,32 @@
+{
+  "source_sha256": "816d95e717de6b5164485fa8a540ebb96f00ad9320fae313a6be62db8de08631",
+  "tests_chars": 2426,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\source.qwen_untrusted.cpp",
+  "source_execution": false,
+  "provider_status": "PROPOSED",
+  "job": "qwen_intel_egl_consumer",
+  "root_acceptance": "PENDING_STATIC_REVIEW",
+  "elapsed_seconds": 718.4,
+  "source_chars": 14885,
+  "owned_pids_point_absent": false,
+  "usage": {
+    "prompt_tokens": 34443,
+    "total_tokens": 72485,
+    "completion_tokens": 38042,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 34443
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 32338,
+      "text_tokens": 38042
+    }
+  },
+  "utc": "2026-10-04T21:22:15.4506077Z",
+  "owned_pids": [
+    94832,
+    47820
+  ],
+  "tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\tests_source.qwen_untrusted.txt",
+  "tests_sha256": "da8eb59c94f549207851ca8a2833f5cbe2ec05772f18c64378b6c8be0440c4e8"
+}

@@ -1,0 +1,15 @@
+{
+  "packet_sha256": "b042308fd1db06bb8eda543a9a21923bb94d3468951752325f55852ff87d7149",
+  "generated_source_execution_authorized": false,
+  "lane": "Grok",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+  "utc": "2026-10-04T21:56:12.5310082Z",
+  "model": "grok-4.7-build-fast",
+  "native_children_actual": 0,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z",
+  "job_id": "grok_combined_high",
+  "provider_launch_authorized": true,
+  "prompt_sha256": "ae4a12fbe36ba4a891a3b80eed2cad549549729d8c96286386dec00b837669f6",
+  "authority": "ROOT explicit exact three admissions after full reads and rehash",
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411"
+}

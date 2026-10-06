@@ -1,0 +1,68 @@
+{
+  "candidate": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_local_fallback_20261004T182833Z\\compiler_completion_adapter.py",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\candidate.snapshot.py",
+    "sha256": "0E5292D39A9D9AFB0D8787904F51D3815C3723694E44F4AB964D8E6BD6E0F564",
+    "bytes": 2780
+  },
+  "spec": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\COMPILER_COMPLETION_TASK_SPEC.md",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\spec.snapshot.md",
+    "sha256": "390080FA8E3D17AF2ACF983E94F713C6479BD118178CA3491A51ECF1E3E5FAD2",
+    "bytes": 4716
+  },
+  "gemini": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_compiler_completion_audit_20261004T183200Z\\gemini_review_attempt2.pending_root_qa.json",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\gemini.snapshot.json",
+    "sha256": "DAD7AABFDA286881F449E7B6D9CF796A1CEAB152B191C21A713A93EAD0821A4F",
+    "bytes": 5635
+  },
+  "gemini_intake": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_compiler_completion_audit_20261004T183200Z\\gemini_intake_reconciliation.json",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\gemini_intake.snapshot.json",
+    "sha256": "2A44277A4663491D284D3ED5D32AF1313DE0AA01F489E70BDC07EFCB4F1E7668",
+    "bytes": 1051
+  },
+  "muse": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\run_output\\parsed_review.json",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\muse.snapshot.json",
+    "sha256": "E2891060AA99855EA9DA9DDD775B7100ABE6BFDADBD2FC5732E5F51E80EEAA95",
+    "bytes": 18510
+  },
+  "proof": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_cleanup_refusal_proof_20261004T183508Z\\proof_results.json",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\proof.snapshot.json",
+    "sha256": "C309D2B54DCC1EE4FFA2578C3F8B9E5A7E95C2555A065C8D28C9307FE4329218",
+    "bytes": 1260
+  },
+  "proof_tests": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_cleanup_refusal_proof_20261004T183508Z\\test_actual_cleanup_demotions.py",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\proof_tests.snapshot.py",
+    "sha256": "DA57D817D92FD5EE6CFFE14E235F5BBCD5A1FC7719B40398BAF43961D7E0E07A",
+    "bytes": 3826
+  },
+  "native_driver": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\native_driver.py",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\native_driver.snapshot.py",
+    "sha256": "E4327908E0DA6F668BA7AE51CF92FB641BB7C4E02DDE019722A863B8217C3C1D",
+    "bytes": 13130
+  },
+  "attempt5_controller": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_completion_driver_prepare_20261004T181731Z\\controller_compiler_completion_attempt5.py",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\attempt5_controller.snapshot.py",
+    "sha256": "23EEBE110753C4BF5D929D6B3D38EB4209ED755FBB11974ED2064AAF8B669137",
+    "bytes": 17188
+  },
+  "runtime_query_helper": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\fixture_runtime_win32_query_revision2.py",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\runtime_query_helper.snapshot.py",
+    "sha256": "33F66211B94D24A3544C1150E6C983ED607B6DDC886A6B64386A56A38D1BBD67",
+    "bytes": 18773
+  },
+  "pure_green": {
+    "original": "E:\\the_harness\\records\\root_continuation_20261004\\compiler_adapter_independent_20261004T1818Z\\fallback_22_GREEN.log",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_compiler_adapter_correction_20261004T184500Z\\pure_green.snapshot.log",
+    "sha256": "603D0DA4507DAE33921D1CE49F79A53C9B7E0708A20C970DF21CDFF840DB1740",
+    "bytes": 1430
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "adjudicator": "ROOT",
+  "authority": "Existing user-authorized bounded smoke tests and meaningful negative controls",
+  "source": "records/root_continuation_20261004/fp32_staging_operator_fixture_20261004T153409Z/fp32_staging_operator.cpp",
+  "source_sha256": "74c34a8726c26d6d1349caa2dca1f2e16a8a5b5295c78cc8d4a5f1842434f754",
+  "executable": "records/root_continuation_20261004/fp32_staging_operator_fixture_20261004T153409Z/compile_original_20261004T153948Z/fp32_staging_operator.exe",
+  "executable_sha256": "35a93fe5fa473332b93d68af331f82829f885febecf8a7fc1c1fbbefb2487c95",
+  "controller_python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "command_arguments": ["--device", "Vulkan0"],
+  "runtime_libraries": "Copy exactly ggml-base.dll, ggml-cpu.dll, ggml-rpc.dll, ggml-vulkan.dll and ggml.dll from original pinned build/bin to a new owned runtime folder; record each source and copied SHA-256 and verify before/after. No executable-directory or global PATH mutation.",
+  "child_environment": {"GGML_VK_DISABLE_F16":"1","GGML_VK_DISABLE_FUSION":"1","GGML_VK_DISABLE_COOPMAT":"1","GGML_VK_DISABLE_COOPMAT2":"1"},
+  "timeout_seconds": 30,
+  "capture_limit_bytes_per_stream": 1048576,
+  "source_review": "Seven fixed tiny matrix layouts; explicit selected Vulkan backend, no scheduler/CPU graph, checked buffer ownership/support/allocation limits, independent double reference, full-output finite/error checks. Only bounded tensors, no model download/load. Existing driver/pipeline allocations cannot be hard-limited by public API.",
+  "purpose": "Before-patch RED control; numerical FAIL is expected for precision-discriminating noncontiguous cases and must remain a failure result, not a passing workload.",
+  "guards": ["Exact source/executable/runtime pins before and after", "Retained hidden owned process, no shell, monotonic deadline and bounded concurrent stream drains", "No concurrent admitted GPU run", "Stop on timeout, corruption of pins, native crash, ownership/unsupported refusal or malformed output; no unchanged retry", "No subsequent corruption or different-device run admitted by this receipt"],
+  "limits": ["Operator fixture only", "No real-model acceptance", "No direct peer access or capacity/residency proof", "Parent environment unchanged", "No driver/global Factory/product modifications"]
+}

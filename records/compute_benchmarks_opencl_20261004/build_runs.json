@@ -1,0 +1,18 @@
+[
+  {
+    "name": "configure",
+    "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && \"C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\cmake.exe\" -S \"E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\source\" -B \"E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\" -G Ninja -DCMAKE_MAKE_PROGRAM=\"C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe\" -DCMAKE_BUILD_TYPE=Release -DBUILD_OCL=ON -DBUILD_L0=OFF -DBUILD_VK=OFF -DBUILD_SYCL=OFF -DBUILD_UR=OFF -DBUILD_OL=OFF -DGENERATE_DOCS=OFF -DALLOW_WARNINGS=ON -DCCACHE_ALLOWED=OFF\"",
+    "pid": 29688,
+    "exit": 0,
+    "timed_out": false,
+    "seconds": 11.32799999974668
+  },
+  {
+    "name": "build",
+    "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && \"C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\cmake.exe\" --build \"E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\" --target memory_benchmark_ocl show_devices_ocl -j 4\"",
+    "pid": 54556,
+    "exit": 0,
+    "timed_out": false,
+    "seconds": 105.92200000025332
+  }
+]

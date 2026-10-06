@@ -1,0 +1,21 @@
+# Muse source-only review prompt: shared-host import protocol
+
+Task: independently adversarially review the pinned draft and its contract for whether the described Vulkan HOST_POINTER import protocol is valid and whether a future bounded test could make the stated transport claim. This is a SOURCE-ONLY review. Do not execute code, invoke a compiler, create a Vulkan instance/device, allocate/import memory, submit work, edit any file, contact a provider, or infer hardware transfer from capability output.
+
+Read these exact files:
+- `E:\the_harness\records\root_continuation_20261004\shared_host_import_fixture_20261004T155216Z\shared_host_import_fixture.cpp` (SHA-256 `21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815`)
+- `E:\the_harness\records\root_continuation_20261004\shared_host_import_fixture_20261004T155216Z\contract.md` (SHA-256 `34ad37e4c80ac54f8b611318bad2a556cea2bd7487f84f1497f0d60ea875f787`)
+- `E:\the_harness\records\root_continuation_20261004\shared_host_import_fixture_20261004T155216Z\ROOT_STATIC_REVIEW_20261004T162000Z.md` (SHA-256 `6cb2a18bbec7df2521b3ae7e9dab9d56109f7592950ad2be912e3d86a160face`)
+
+Use current Vulkan primary specification/reference text for each normative claim and cite the exact section or requirement name plus the source line/function in the draft. In particular, test the protocol around repeated imports of the same host payload into different Vulkan instances, correspondence/aliasing of separate VkBuffer views, `VK_QUEUE_FAMILY_FOREIGN_EXT` ownership release/acquire ranges across devices, intervening CPU writes, first-use ownership, semaphore/fence ordering, host cache visibility, imported pointer lifetime, and exact memory-type/alignment requirements. Distinguish `VK_QUEUE_FAMILY_EXTERNAL` from `VK_QUEUE_FAMILY_FOREIGN_EXT`. Do not assume parity proves the intended ownership path.
+
+Adversarially evaluate the proposed corruption control: identify whether mutating the host pointer between producer release and consumer acquire is legal under the stated ownership protocol. If invalid, propose a testable negative-control placement only if it preserves the same data path and spec-compliant ownership. Also inspect whether allocation-budget refusal is checked before each allocation and whether the contract accurately describes imported-content preservation for HOST_VISIBLE memory.
+
+Report:
+1. verdict per issue: PROVEN, REFUTED, or UNRESOLVED;
+2. exact normative basis and code location for each verdict;
+3. a minimal counterexample/fault injection that would expose each real defect, without running it;
+4. the smallest source correction needed, or why no safe correction is established;
+5. what an eventual runtime result could support and what it could not (in particular, shared host backing is not VRAM P2P).
+
+Constraints: preserve both pinned inputs; do not edit them or produce a patched source file. Do not call tools or launch anything. Do not describe capability bits as a successful import, transfer, or cross-vendor GPU-memory path. Treat previous static review as a hypothesis to independently verify, not as an answer key. Return a concise review with citations, uncertainty, and concrete counterexamples.

@@ -1,0 +1,23 @@
+{
+  "status": "CONFIGURE_TIMEOUT_BUILD_NOT_CHECKED",
+  "controller_exit": 1,
+  "configure_root_exit": 0,
+  "configure_root_pid": 46568,
+  "configure_status": "TIMEOUT",
+  "failure_reason": "deadline",
+  "configuration_output": "Configuring done7.7s; generating done0.1s; AMD64/x86/AVX2 correct",
+  "job_active_count_final": 0,
+  "drain_proof": "CLEANUP",
+  "trace_samples": 23,
+  "trace_bytes": 12134,
+  "trace_sha256": "a7966f095792168ab54b90f74f936bb23f5c92ab147119820880e218cd7e7d18",
+  "trace_failures": 0,
+  "names": [
+    "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\mspdbsrv.exe",
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\vctip.exe"
+  ],
+  "all_listed_job_pids_absent_after_cleanup": true,
+  "build_stage_executed": false,
+  "gpu_executed": false,
+  "scope": "Timeout refusal preserved; no policy changes, retry, names-based kills or whole-tree certification"
+}

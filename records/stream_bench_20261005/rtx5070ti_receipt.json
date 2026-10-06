@@ -1,0 +1,45 @@
+{
+  "schema": "rtx5070ti_harness/1.0",
+  "sampled_at_utc": "2026-10-05T11:31:26.960050+00:00",
+  "target": "5070 Ti",
+  "evidence_host_gpu": "PROVEN",
+  "nvidia_smi_list": [
+    "GPU 0: NVIDIA GeForce RTX 5070 Ti (UUID: GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c)"
+  ],
+  "query": {
+    "probe": {
+      "status": "SAMPLED",
+      "argv": [
+        "nvidia-smi",
+        "--query-gpu=name,pci.bus_id,memory.total,memory.free,driver_version,pcie.link.gen.current,pcie.link.width.current,pcie.link.gen.max,pcie.link.width.max",
+        "--format=csv,noheader,nounits"
+      ],
+      "stdout": "NVIDIA GeForce RTX 5070 Ti, 00000000:01:00.0, 16303, 13859, 591.86, 5, 16, 5, 16\n"
+    },
+    "fields": "name,pci.bus_id,memory.total,memory.free,driver_version,pcie.link.gen.current,pcie.link.width.current,pcie.link.gen.max,pcie.link.width.max",
+    "rows": [
+      "NVIDIA GeForce RTX 5070 Ti, 00000000:01:00.0, 16303, 13859, 591.86, 5, 16, 5, 16"
+    ]
+  },
+  "bar": {
+    "probe_status": "SAMPLED",
+    "bar_lines": [
+      "    BAR1 Memory Usage"
+    ],
+    "note": "full -q output NOT stored; BAR/ReBAR lines only"
+  },
+  "cuda": {
+    "status": "DRIVER_LIBRARY_PRESENT",
+    "library": "nvcuda.dll",
+    "evidence": "NOT_CHECKED",
+    "note": "presence only; no props queried without a compiled CUDA probe"
+  },
+  "intel_slot": {
+    "status": "NOT_CHECKED",
+    "reason": "no Intel GPU on this host; rerun the cross-vendor matrix when a B60 arrives"
+  },
+  "pinned_dma_probe": {
+    "status": "NOT_CHECKED",
+    "reason": "async/pinned bandwidth + overlap benchmark lands in the next edit (cudaMemcpyAsync/Event stream harness); this receipt pins topology/BAR/props first"
+  }
+}

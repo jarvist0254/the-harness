@@ -1,0 +1,20 @@
+{
+  "status": "AST_PARSE_ONLY_PASS",
+  "candidate_imported_or_executed": false,
+  "provider_tests_executed": false,
+  "native_gpu_driver_or_provider_calls": false,
+  "python_path": "C:/Users/thoma/AppData/Local/Programs/Python/Python310/python.exe",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "parsed_files": [
+    {
+      "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/test_adapter_independent_contract_v2.py",
+      "sha256": "eaecf21e7bdd43763b84b74d4d688bab720490e55fae9207b5358ccfb8ff79f2"
+    },
+    {
+      "path": "E:/the_harness/records/root_continuation_20261004/l0_egl_adapter_root_qa_v2_20261004T2228Z/pure_qa_controller_v2.py",
+      "sha256": "00200b8f71a3677bd79e6b6750b532df7bb420c158324f2d772b96142ecc8002"
+    }
+  ],
+  "command": "python.exe -I -c import ast,pathlib; ast.parse(test and controller text)",
+  "scope": "Syntax parsing only; no module imports or test execution."
+}

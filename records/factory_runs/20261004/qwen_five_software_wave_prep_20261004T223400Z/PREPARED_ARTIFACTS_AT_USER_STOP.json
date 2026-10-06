@@ -1,0 +1,129 @@
+{
+  "grok_collector_packet": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_l0_collector_repair_prep_20261004T230400Z\\GROK_COLLECTOR_V2_ROOT_REVIEW_PACKET.json",
+  "prepared_files": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_adapter.ps1",
+      "bytes": 7015,
+      "sha256": "c98504fe65610486b7c4dc443b22371a3bc54ad6218ae3ff1ada946ee4a6f175"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_collector_grok.py",
+      "bytes": 5590,
+      "sha256": "3aa86e7a3b7aa1f1bf8f568ac59ed19ebb5706704188b769daf61726f82fe409"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_inventories.ps1",
+      "bytes": 13160,
+      "sha256": "4ab9cefadb2f32c7aae219054cfc19fbbc8014f1a6f70b9922c3ca7ee3c5c448"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_q8.py",
+      "bytes": 5174,
+      "sha256": "a5d1e7610741bc834ee7e79f48a2394e606e78ba63b3cf908ce34b226663d118"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\prepare_remaining.py",
+      "bytes": 9383,
+      "sha256": "1f845eab9e40c8648b538b7a41a365a032a387a23769f5d1262908d5df89655f"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.prompt.txt",
+      "bytes": 82805,
+      "sha256": "cde777d2af4f62913490b16e16e60a2d06d555ef5a2cd67473a808e4c29f5d37"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.ROOT_REVIEW_PACKET.json",
+      "bytes": 5324,
+      "sha256": "6ac11aac24b74242c5fea58919e4c51b95f76f940cff031abae8d5d4524c3a47"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.spec.txt",
+      "bytes": 3959,
+      "sha256": "4e9589deca4516679f18ad40c29b0e7ee8693b284bb087cd6ea87f1805c4ebbe"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.V3_ROOT_REVIEW_PACKET.json",
+      "bytes": 7008,
+      "sha256": "01d94aa80bcbcecc6d6f6ea790211c8e045b5fa2f30963c7090300f2c0d5def6"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_completion_adapter_repair.v3.prompt.txt",
+      "bytes": 122369,
+      "sha256": "ba1cc0bc5401b00f225606dbf906b1c0bcea7470335def06f68bb0ec4082bc8a"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.prompt.txt",
+      "bytes": 79076,
+      "sha256": "35850337e1d55c09ca96618fce516bfc00ac91a0c239cd614d03a19523591b10"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.ROOT_REVIEW_PACKET.json",
+      "bytes": 3892,
+      "sha256": "aa975c5f80addd93f54afd651cacd87e3bbba5a120c4f5eda80ec40bddc46e88"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_intel_sysman_inventory.spec.txt",
+      "bytes": 4714,
+      "sha256": "5aa8b220d78265c6f64651b477dd883908edb6760caa0f50d6f9a8fa83cd1386"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.prompt.txt",
+      "bytes": 144545,
+      "sha256": "6bff78f368092229fffc108a21f33cad4116bc536788bec79fc013ee1591f92c"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.ROOT_REVIEW_PACKET.json",
+      "bytes": 6958,
+      "sha256": "19e7d671d24418012e57f2481ebb62969aaa9d76185f673fc0e61ee1ccaf0a0b"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.spec.txt",
+      "bytes": 4430,
+      "sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic.spec.txt",
+      "bytes": 4430,
+      "sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.prompt.txt",
+      "bytes": 74690,
+      "sha256": "63be2d7e791c85181480f00374038edce62f6fd3aef06d6cfaa01d6ae26f4bd5"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.ROOT_REVIEW_PACKET.json",
+      "bytes": 4297,
+      "sha256": "b41fb6823a6699601fdc8a0edbdcf20f17fd7806a376d86965d7f95765ab38bb"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse_v2.spec.txt",
+      "bytes": 5378,
+      "sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_vulkan_nv_l0_intel_reverse.spec.txt",
+      "bytes": 5378,
+      "sha256": "c73118701f61837fce1d6dfec2b6ee6f7bf97ff06b70d0d7951aaf3f1f0e47f6"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.prompt.txt",
+      "bytes": 149816,
+      "sha256": "4a2fac93c7a264195dc1f846cfd747bff61d61ffb577e99fa5382ec37d701b05"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.ROOT_REVIEW_PACKET.json",
+      "bytes": 3804,
+      "sha256": "b3e7869eb85959e64e2bd8aa10ab3a8d6e409d364fd2f90fc94db6ab8df6f31d"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.spec.txt",
+      "bytes": 4123,
+      "sha256": "eaab7f37614bff00e04cd5a2e2ccd455d084ae372b51de86c7004311dfcb2d70"
+    }
+  ],
+  "utc": "2026-10-04T23:10:29.1534056Z",
+  "status": "EXISTING_PREPARATION_ONLY_STOPPED_NO_FURTHER_WORK",
+  "no_provider_source_execution": true,
+  "reply32k_batch_prepared": false
+}

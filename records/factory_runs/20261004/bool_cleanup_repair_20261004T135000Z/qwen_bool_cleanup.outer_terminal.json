@@ -1,0 +1,9 @@
+{
+  "outer_killed": false,
+  "log_overflow": false,
+  "identity": "retained process object",
+  "seconds": 174.16,
+  "pid": 68744,
+  "exit_code": 0,
+  "job": "qwen_bool_cleanup"
+}

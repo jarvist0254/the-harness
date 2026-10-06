@@ -1,0 +1,1356 @@
+ROOT authorizes source-only narrowly focused corrective edit of your actual ledger implementation after independent 20 actual-file controls. Original17 PASS; extra3 onePASS/twoFAIL: ordinary ._items storage can rewrite stored FAILED_NUMERIC state and nested pins, altering actual history. Fix internal storage and returned history to be deeply immutable against ordinary mutation, not a superficial deepcopy property while retaining mutable dict backing. Do NOT claim Python arbitrary introspection sandbox. Actual legitimate omitted-prior append transition is legal; preserve it. Provider's old test assertion requiring prior_state always is wrong and must be corrected, not production behavior loosened. ROOT tests and source below authoritative; don't invent failures or change working numeric/device/hash/baseline contracts.
+Minimal cohesive change only to storage/history/append representation and necessary actual-file tests; preserve all17 working controls, CPU-relative tolerance, strict integers/overflow/refusers, trusted namedDLL registry and baseline-bound controls. NO byte-budget contract expansion. Strict JSON same research keys status,source,tests_source,analysis,prerequisites,evidence_limits,references; return complete coherent replacement source/tests, max131072chars each as original authorized schema. No tools, imports, execution, native/GPU, source promotion/globalFactory/auth changes. Generated source untrusted until ROOT independent QA. User max10 nativechildren authorized Qwen/DeepSeek where supported; THIS direct tool-less Grok native children0. Grok4.7BuildFast HIGH,600s owned deadline. Preserve older failures and prior source evidence unchanged.
+EXACT INPUT E:\the_harness\records\factory_runs\20261004\grok_numeric_ledger_correction_20261004T191800Z\grok_numeric_ledger_high\source.grok_untrusted.py SHA256 d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a
+import hashlib
+import json
+import math
+
+MODEL_WHITELIST = {
+    'original_q8': {
+        'sha256': '9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031',
+        'size': 639446688,
+        'quant': 'q8_0',
+    },
+    'derived_f32': {
+        'sha256': 'bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80',
+        'size': 2390150816,
+        'quant': 'f32',
+    },
+}
+SOURCE_COMMIT = '0faee5004297c3bcfa40b7bf11750127b8c1fd7d'
+REQUESTED_CTX = 128
+ACTUAL_CTX = 256
+PINNED_GGML_PAD = 256
+N_BATCH = 32
+N_UBATCH = 32
+EXACT_TOKENS = tuple(range(16))
+VOCAB_COUNT = 151936
+ATOL = 0.01
+RTOL = 0.01
+DLL_COUNT = 5
+ALLOWED_STATES = (
+    'PENDING',
+    'RUNNING',
+    'FAILED_NUMERIC',
+    'FAILED_RUNTIME',
+    'NOT_CHECKED',
+    'DIAGNOSTIC_ONLY',
+)
+TERMINAL_STATES = (
+    'FAILED_NUMERIC',
+    'FAILED_RUNTIME',
+    'NOT_CHECKED',
+    'DIAGNOSTIC_ONLY',
+)
+TRANSITIONS = {
+    'PENDING': ('RUNNING', 'NOT_CHECKED', 'FAILED_RUNTIME'),
+    'RUNNING': ('FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY'),
+    'FAILED_NUMERIC': (),
+    'FAILED_RUNTIME': (),
+    'NOT_CHECKED': (),
+    'DIAGNOSTIC_ONLY': (),
+}
+PLAN_BOUND_DEFAULT = 4096
+HEX_DIGITS = '0123456789abcdef'
+EXPECTED_DLL_NAMES = (
+    'ggml.dll',
+    'ggml-base.dll',
+    'ggml-cpu.dll',
+    'ggml-rpc.dll',
+    'ggml-vulkan.dll',
+)
+TRUSTED_DLL_REGISTRY = (
+    ('ggml.dll', '56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb', 62976),
+    ('ggml-base.dll', 'beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3', 693760),
+    ('ggml-cpu.dll', 'e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481', 1125888),
+    ('ggml-rpc.dll', '11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd', 143872),
+    ('ggml-vulkan.dll', '3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085', 45299712),
+)
+CLOSED_FLAGS = ('model_pass', 'transport_corruption_proof', 'superseded')
+
+
+class FrozenList:
+    __slots__ = ('_items',)
+
+    def __init__(self, items):
+        self._items = tuple(items)
+
+    def __getitem__(self, index):
+        return self._items[index]
+
+    def __len__(self):
+        return len(self._items)
+
+    def __iter__(self):
+        return iter(self._items)
+
+    def __eq__(self, other):
+        if isinstance(other, FrozenList):
+            return self._items == other._items
+        if isinstance(other, (list, tuple)):
+            if len(self._items) != len(other):
+                return False
+            for left, right in zip(self._items, other):
+                if left != right:
+                    return False
+            return True
+        return NotImplemented
+
+
+class FrozenDict:
+    __slots__ = ('_items',)
+
+    def __init__(self, pairs):
+        self._items = dict(pairs)
+
+    def __getitem__(self, key):
+        return self._items[key]
+
+    def __iter__(self):
+        return iter(self._items)
+
+    def __len__(self):
+        return len(self._items)
+
+    def __contains__(self, key):
+        return key in self._items
+
+    def get(self, key, default=None):
+        return self._items.get(key, default)
+
+    def items(self):
+        return self._items.items()
+
+    def keys(self):
+        return self._items.keys()
+
+    def __eq__(self, other):
+        if isinstance(other, FrozenDict):
+            return self._items == other._items
+        if isinstance(other, dict):
+            return self._items == other
+        return NotImplemented
+
+
+def is_strict_int(value):
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _finite_float(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    try:
+        number = float(value)
+    except (OverflowError, ValueError, TypeError, ArithmeticError):
+        return None
+    if not math.isfinite(number):
+        return None
+    return number
+
+
+def is_strict_number(value):
+    return _finite_float(value) is not None
+
+
+def _hex64(value):
+    if not isinstance(value, str) or len(value) != 64:
+        return False
+    for ch in value:
+        if ch not in HEX_DIGITS:
+            return False
+    return True
+
+
+def transition_allowed(old_state, new_state):
+    if new_state not in ALLOWED_STATES:
+        return False
+    if old_state is None:
+        return True
+    return new_state in TRANSITIONS.get(old_state, ())
+
+
+def _expected_dll_table():
+    if not isinstance(TRUSTED_DLL_REGISTRY, tuple) or len(TRUSTED_DLL_REGISTRY) != DLL_COUNT:
+        return None
+    if tuple(EXPECTED_DLL_NAMES) != tuple(row[0] for row in TRUSTED_DLL_REGISTRY):
+        return None
+    mapping = {}
+    sizes = {}
+    for row in TRUSTED_DLL_REGISTRY:
+        if not isinstance(row, tuple) or len(row) != 3:
+            return None
+        name, digest, size = row
+        if not isinstance(name, str) or name in mapping:
+            return None
+        if not _hex64(digest) or digest == ('0' * 64):
+            return None
+        if not is_strict_int(size) or size <= 0:
+            return None
+        mapping[name] = digest
+        sizes[name] = size
+    if len(set(mapping.values())) != DLL_COUNT:
+        return None
+    return mapping, sizes
+
+
+def validate_dll_bindings(declared):
+    try:
+        table = _expected_dll_table()
+        if table is None:
+            return False
+        expected, _sizes = table
+        if not isinstance(declared, dict) or len(declared) != DLL_COUNT:
+            return False
+        if set(declared.keys()) != set(EXPECTED_DLL_NAMES):
+            return False
+        digests = []
+        for name in EXPECTED_DLL_NAMES:
+            digest = declared.get(name)
+            if not _hex64(digest) or digest == ('0' * 64):
+                return False
+            if digest != expected[name]:
+                return False
+            digests.append(digest)
+        return len(set(digests)) == DLL_COUNT
+    except (TypeError, ValueError, OverflowError, ArithmeticError):
+        return False
+
+
+def _dll_bytes_ok(meta):
+    if 'dll_bytes' not in meta:
+        return True
+    table = _expected_dll_table()
+    if table is None:
+        return False
+    _mapping, sizes = table
+    declared = meta.get('dll_bytes')
+    if not isinstance(declared, dict) or set(declared.keys()) != set(EXPECTED_DLL_NAMES):
+        return False
+    for name in EXPECTED_DLL_NAMES:
+        size = declared.get(name)
+        if not is_strict_int(size) or size != sizes[name]:
+            return False
+    return True
+
+
+def validate_tokens(tokens):
+    if not isinstance(tokens, list) or len(tokens) != len(EXACT_TOKENS):
+        return False
+    for idx, value in enumerate(tokens):
+        if not is_strict_int(value) or value != idx:
+            return False
+    return True
+
+
+def validate_model_metadata(meta):
+    try:
+        if not isinstance(meta, dict):
+            return False
+        model_key = meta.get('model_key')
+        if not isinstance(model_key, str) or model_key == '':
+            return False
+        entry = MODEL_WHITELIST.get(model_key)
+        if entry is None:
+            return False
+        if meta.get('sha256') != entry['sha256']:
+            return False
+        size = meta.get('size')
+        if not is_strict_int(size) or size != entry['size']:
+            return False
+        if meta.get('quant') != entry['quant']:
+            return False
+        if meta.get('source_commit') != SOURCE_COMMIT:
+            return False
+        return True
+    except (TypeError, ValueError, OverflowError, ArithmeticError):
+        return False
+
+
+def _pinned_int(meta, key, expected):
+    value = meta.get(key)
+    return is_strict_int(value) and value == expected
+
+
+def validate_runtime_metadata(meta):
+    try:
+        if not isinstance(meta, dict):
+            return False
+        if not _pinned_int(meta, 'requested_ctx', REQUESTED_CTX):
+            return False
+        if not _pinned_int(meta, 'actual_ctx', ACTUAL_CTX):
+            return False
+        if not _pinned_int(meta, 'pinned_ggml_pad', PINNED_GGML_PAD):
+            return False
+        if not _pinned_int(meta, 'n_batch', N_BATCH):
+            return False
+        if not _pinned_int(meta, 'n_ubatch', N_UBATCH):
+            return False
+        if not validate_tokens(meta.get('tokens')):
+            return False
+        if not validate_dll_bindings(meta.get('dll_hashes')):
+            return False
+        if not _dll_bytes_ok(meta):
+            return False
+        devices = meta.get('device_order')
+        if not isinstance(devices, list) or len(devices) == 0:
+            return False
+        for item in devices:
+            if not isinstance(item, str) or item == '':
+                return False
+        origins = meta.get('cpu_vs_gpu_origins')
+        if not isinstance(origins, dict):
+            return False
+        if not isinstance(origins.get('cpu'), str) or origins.get('cpu') == '':
+            return False
+        if not isinstance(origins.get('gpu'), str) or origins.get('gpu') == '':
+            return False
+        if not isinstance(meta.get('build_id'), str) or meta.get('build_id') == '':
+            return False
+        if not _hex64(meta.get('exe_sha256')):
+            return False
+        if not is_strict_int(meta.get('requested_kv')) or meta.get('requested_kv') <= 0:
+            return False
+        if not is_strict_int(meta.get('actual_kv')) or meta.get('actual_kv') <= 0:
+            return False
+        if meta.get('requested_kv') != meta.get('actual_kv'):
+            return False
+        for key in ('child_f16_disabled', 'fusion_disabled', 'coopmat_disabled', 'coopmat2_disabled'):
+            if meta.get(key) is not True:
+                return False
+        return True
+    except (TypeError, ValueError, OverflowError, ArithmeticError):
+        return False
+
+
+def validate_capture_metadata(meta):
+    try:
+        if not isinstance(meta, dict):
+            return False
+        if meta.get('native_capture_claimed') is not False:
+            return False
+        if not isinstance(meta.get('callback_intrusiveness_declared'), bool):
+            return False
+        if meta.get('unsupported_dtype_fail_closed') is not True:
+            return False
+        for key in (
+            'name_op_dim_canonical',
+            'node_order_declared',
+            'common_intended_device_workload_separate_cpu_origin',
+        ):
+            if not isinstance(meta.get(key), bool):
+                return False
+        return True
+    except (TypeError, ValueError, OverflowError, ArithmeticError):
+        return False
+
+
+def _classify_logits(values):
+    if not isinstance(values, list) or len(values) != VOCAB_COUNT:
+        return 'structural'
+    saw_nonfinite = False
+    saw_unrepresentable = False
+    for value in values:
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            return 'structural'
+        try:
+            number = float(value)
+        except (OverflowError, ValueError, TypeError, ArithmeticError):
+            saw_unrepresentable = True
+            continue
+        if not math.isfinite(number):
+            saw_nonfinite = True
+    if saw_nonfinite:
+        return 'nonfinite'
+    if saw_unrepresentable:
+        return 'unrepresentable'
+    return 'ok'
+
+
+def validate_logit_list(values):
+    try:
+        return _classify_logits(values)
+    except (OverflowError, ValueError, TypeError, ArithmeticError):
+        return 'unrepresentable'
+
+
+def canonical_payload_bytes(cpu_logits, gpu_logits):
+    obj = {'cpu': cpu_logits, 'gpu': gpu_logits}
+    return json.dumps(obj, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+
+
+def _close_metadata_number(actual, expected):
+    actual_f = _finite_float(actual)
+    expected_f = _finite_float(expected)
+    if actual_f is None or expected_f is None:
+        return False
+    return abs(actual_f - expected_f) <= 1e-12
+
+
+def _refusal(state, reason):
+    return {
+        'state': state,
+        'reason': reason,
+        'model_pass': False,
+        'transport_corruption_proof': False,
+    }
+
+
+def _compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind):
+    if control_kind not in ('baseline_clean', 'perturbed_negative'):
+        return _refusal('NOT_CHECKED', 'control_kind_malformed')
+    if not is_strict_int(count) or count != VOCAB_COUNT:
+        return _refusal('NOT_CHECKED', 'count_malformed')
+    left = _classify_logits(cpu_logits)
+    right = _classify_logits(gpu_logits)
+    if left == 'structural' or right == 'structural':
+        return _refusal('NOT_CHECKED', 'logit_type_or_length_malformed')
+    if left == 'unrepresentable' or right == 'unrepresentable':
+        return _refusal('NOT_CHECKED', 'logit_unrepresentable')
+    if left == 'nonfinite' or right == 'nonfinite':
+        return _refusal('FAILED_RUNTIME', 'logit_nonfinite')
+    try:
+        computed_sha = hashlib.sha256(canonical_payload_bytes(cpu_logits, gpu_logits)).hexdigest()
+    except (TypeError, ValueError, OverflowError, ArithmeticError):
+        return _refusal('NOT_CHECKED', 'payload_canonicalization_failed')
+    if not _hex64(payload_sha256) or payload_sha256 != computed_sha:
+        return _refusal('NOT_CHECKED', 'payload_sha_mismatch')
+    fail_indices = []
+    max_err = 0.0
+    sum_sq = 0.0
+    for idx in range(VOCAB_COUNT):
+        cpu_value = float(cpu_logits[idx])
+        gpu_value = float(gpu_logits[idx])
+        err = abs(cpu_value - gpu_value)
+        if err > max_err:
+            max_err = err
+        sum_sq += err * err
+        limit = ATOL + (RTOL * abs(cpu_value))
+        if err > limit:
+            fail_indices.append(idx)
+    if not math.isfinite(max_err) or not math.isfinite(sum_sq):
+        return _refusal('NOT_CHECKED', 'metric_unrepresentable')
+    measured_rmse = math.sqrt(sum_sq / float(VOCAB_COUNT))
+    if not math.isfinite(measured_rmse):
+        return _refusal('NOT_CHECKED', 'metric_unrepresentable')
+    if not _close_metadata_number(max_abs_err, max_err):
+        return _refusal('NOT_CHECKED', 'max_abs_err_not_bound')
+    if not _close_metadata_number(rmse, measured_rmse):
+        return _refusal('NOT_CHECKED', 'rmse_not_bound')
+    result = {
+        'state': 'DIAGNOSTIC_ONLY',
+        'reason': 'numerical_diagnostic_complete',
+        'control_kind': control_kind,
+        'count': VOCAB_COUNT,
+        'fail_count': len(fail_indices),
+        'fail_indices_sample': fail_indices[:16],
+        'measured_max_abs_err': max_err,
+        'measured_rmse': measured_rmse,
+        'payload_sha256': computed_sha,
+        'atol': ATOL,
+        'rtol': RTOL,
+        'transport_corruption_proof': False,
+        'model_pass': False,
+    }
+    if control_kind == 'baseline_clean' and fail_indices:
+        result['state'] = 'FAILED_NUMERIC'
+        result['reason'] = 'strict_logit_tolerance_failed'
+    if control_kind == 'perturbed_negative':
+        result['state'] = 'DIAGNOSTIC_ONLY'
+        result['reason'] = 'perturbed_negative_comparison_only'
+        result['transport_corruption_proof'] = False
+        result['model_pass'] = False
+    return result
+
+
+def compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind='baseline_clean'):
+    try:
+        return _compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind)
+    except (OverflowError, TypeError, ValueError, ArithmeticError):
+        return _refusal('NOT_CHECKED', 'comparison_fail_closed')
+
+
+def _evaluate_experiment(record):
+    if not isinstance(record, dict):
+        return _refusal('NOT_CHECKED', 'record_malformed')
+    experiment_id = record.get('experiment_id')
+    if not isinstance(experiment_id, str) or experiment_id == '':
+        return _refusal('NOT_CHECKED', 'experiment_id_malformed')
+    if not validate_model_metadata(record.get('model_metadata')):
+        outcome = _refusal('NOT_CHECKED', 'model_metadata_malformed')
+        outcome['experiment_id'] = experiment_id
+        return outcome
+    if not validate_runtime_metadata(record.get('runtime_metadata')):
+        outcome = _refusal('NOT_CHECKED', 'runtime_metadata_malformed')
+        outcome['experiment_id'] = experiment_id
+        return outcome
+    if not validate_capture_metadata(record.get('capture_metadata')):
+        outcome = _refusal('NOT_CHECKED', 'capture_metadata_malformed')
+        outcome['experiment_id'] = experiment_id
+        return outcome
+    for key in ('cpu_logits', 'gpu_logits', 'payload_sha256', 'max_abs_err', 'rmse', 'count'):
+        if key not in record:
+            outcome = _refusal('NOT_CHECKED', 'payload_field_missing')
+            outcome['experiment_id'] = experiment_id
+            return outcome
+    control_kind = record.get('control_kind', 'baseline_clean')
+    outcome = compare_logits(
+        record['cpu_logits'],
+        record['gpu_logits'],
+        record['payload_sha256'],
+        record['max_abs_err'],
+        record['rmse'],
+        record['count'],
+        control_kind,
+    )
+    outcome['experiment_id'] = experiment_id
+    model_meta = record.get('model_metadata')
+    if isinstance(model_meta, dict) and isinstance(model_meta.get('model_key'), str):
+        outcome['model_key'] = model_meta.get('model_key')
+    outcome['superseded'] = False
+    outcome['model_pass'] = False
+    outcome['transport_corruption_proof'] = False
+    return outcome
+
+
+def evaluate_experiment(record):
+    try:
+        return _evaluate_experiment(record)
+    except (OverflowError, TypeError, ValueError, ArithmeticError):
+        experiment_id = 'malformed'
+        if isinstance(record, dict):
+            candidate = record.get('experiment_id')
+            if isinstance(candidate, str) and candidate != '':
+                experiment_id = candidate
+        outcome = _refusal('NOT_CHECKED', 'evaluation_fail_closed')
+        outcome['experiment_id'] = experiment_id
+        return outcome
+
+
+def _freeze(value, stack):
+    if value is None or isinstance(value, str):
+        return value
+    if isinstance(value, bool):
+        return True if value else False
+    if isinstance(value, int):
+        return int(value)
+    if isinstance(value, float):
+        if not math.isfinite(value):
+            raise ValueError('record_nonfinite')
+        return float(value)
+    if isinstance(value, dict):
+        if id(value) in stack:
+            raise ValueError('record_cycle')
+        stack.add(id(value))
+        pairs = []
+        try:
+            for key, item in value.items():
+                if not isinstance(key, str):
+                    raise ValueError('record_key_malformed')
+                if key in CLOSED_FLAGS:
+                    pairs.append((key, False))
+                else:
+                    pairs.append((key, _freeze(item, stack)))
+        finally:
+            stack.discard(id(value))
+        return FrozenDict(pairs)
+    if isinstance(value, (list, tuple)):
+        if id(value) in stack:
+            raise ValueError('record_cycle')
+        stack.add(id(value))
+        try:
+            items = tuple(_freeze(item, stack) for item in value)
+        finally:
+            stack.discard(id(value))
+        return FrozenList(items)
+    raise ValueError('record_not_serializable')
+
+
+def _actual_prior(existing, experiment_id):
+    actual = None
+    seen = False
+    for rec in existing:
+        if rec.get('experiment_id') == experiment_id:
+            actual = rec.get('state')
+            seen = True
+    if not seen:
+        return None
+    return actual
+
+
+def _accept(record, existing):
+    if not isinstance(record, dict):
+        raise ValueError('record_malformed')
+    state = record.get('state')
+    if state not in ALLOWED_STATES:
+        raise ValueError('state_malformed')
+    experiment_id = record.get('experiment_id')
+    if not isinstance(experiment_id, str) or experiment_id == '':
+        raise ValueError('experiment_id_malformed')
+    if record.get('supersede') is True or 'supersedes' in record:
+        raise ValueError('supersession_forbidden')
+    actual_prior = _actual_prior(existing, experiment_id)
+    if 'prior_state' in record and record.get('prior_state') != actual_prior:
+        raise ValueError('prior_state_forged')
+    if actual_prior in TERMINAL_STATES:
+        raise ValueError('terminal_restart_forbidden')
+    if not transition_allowed(actual_prior, state):
+        raise ValueError('transition_forbidden')
+    stack = set()
+    stack.add(id(record))
+    pairs = []
+    try:
+        for key, item in record.items():
+            if not isinstance(key, str):
+                raise ValueError('record_key_malformed')
+            if key in ('model_pass', 'seq'):
+                continue
+            if key in CLOSED_FLAGS:
+                pairs.append((key, False))
+            else:
+                pairs.append((key, _freeze(item, stack)))
+        pairs.append(('model_pass', False))
+        pairs.append(('seq', len(existing)))
+    finally:
+        stack.discard(id(record))
+    return FrozenDict(pairs)
+
+
+def _thaw(value):
+    if isinstance(value, FrozenDict):
+        return {key: _thaw(item) for key, item in value.items()}
+    if isinstance(value, FrozenList):
+        return [_thaw(item) for item in value]
+    return value
+
+
+class StateLedger:
+    def __init__(self, records=(), plan_bound=PLAN_BOUND_DEFAULT):
+        if not is_strict_int(plan_bound) or plan_bound <= 0:
+            raise ValueError('plan_bound_malformed')
+        if isinstance(records, (str, bytes, dict)) or not isinstance(records, (list, tuple)):
+            raise ValueError('records_malformed')
+        accepted = []
+        for record in records:
+            accepted.append(_accept(record, accepted))
+        self._plan_bound = plan_bound
+        self._records = tuple(accepted)
+
+    def records(self):
+        return self._records
+
+    def append(self, record):
+        accepted = _accept(record, self._records)
+        clone = StateLedger.__new__(StateLedger)
+        clone._plan_bound = self._plan_bound
+        clone._records = self._records + (accepted,)
+        return clone
+
+    def candidate_plan(self):
+        bounded = self._records[-self._plan_bound:]
+        plan = {
+            'schema': 'state-ledger-candidate-plan',
+            'version': 1,
+            'source_commit': SOURCE_COMMIT,
+            'bounded': True,
+            'plan_bound': self._plan_bound,
+            'record_count': len(self._records),
+            'included_count': len(bounded),
+            'records': [_thaw(item) for item in bounded],
+            'no_pass': True,
+        }
+        try:
+            payload = json.dumps(plan, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+            plan['digest'] = hashlib.sha256(payload).hexdigest()
+            return json.dumps(plan, sort_keys=True, separators=(',', ':'), allow_nan=False)
+        except (TypeError, ValueError, OverflowError, ArithmeticError):
+            raise ValueError('candidate_plan_not_serializable')
+
+    def durable_commit_representation(self):
+        plan = self.candidate_plan()
+        return {
+            'kind': 'in_memory_atomic_candidate_plan',
+            'sha256': hashlib.sha256(plan.encode('utf-8')).hexdigest(),
+            'writes_performed': False,
+        }
+
+
+def refusal_record(reason):
+    if not isinstance(reason, str) or reason == '':
+        reason = 'refused'
+    return {
+        'state': 'NOT_CHECKED',
+        'reason': reason,
+        'experiment_id': 'refusal',
+        'model_pass': False,
+        'transport_corruption_proof': False,
+    }
+
+EXACT INPUT E:\the_harness\records\factory_runs\20261004\grok_numeric_ledger_correction_20261004T191800Z\grok_numeric_ledger_high\tests_source.grok_untrusted.py SHA256 c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173
+import hashlib
+import json
+import math
+import unittest
+
+import state_ledger as sl
+
+EXPECTED_DLLS = (
+    ('ggml.dll', '56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb', 62976),
+    ('ggml-base.dll', 'beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3', 693760),
+    ('ggml-cpu.dll', 'e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481', 1125888),
+    ('ggml-rpc.dll', '11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd', 143872),
+    ('ggml-vulkan.dll', '3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085', 45299712),
+)
+
+
+def dll_map():
+    return {name: digest for name, digest, _size in EXPECTED_DLLS}
+
+
+def dll_sizes():
+    return {name: size for name, _digest, size in EXPECTED_DLLS}
+
+
+def fresh_zeros():
+    return [0.0] * sl.VOCAB_COUNT
+
+
+def make_payload(cpu, gpu):
+    data = sl.canonical_payload_bytes(cpu, gpu)
+    digest = hashlib.sha256(data).hexdigest()
+    max_err = 0.0
+    sum_sq = 0.0
+    for left, right in zip(cpu, gpu):
+        err = abs(float(left) - float(right))
+        if err > max_err:
+            max_err = err
+        sum_sq += err * err
+    rmse = math.sqrt(sum_sq / float(sl.VOCAB_COUNT))
+    return digest, max_err, rmse
+
+
+def model_meta(key='original_q8'):
+    entry = sl.MODEL_WHITELIST[key]
+    return {
+        'model_key': key,
+        'sha256': entry['sha256'],
+        'size': entry['size'],
+        'quant': entry['quant'],
+        'source_commit': sl.SOURCE_COMMIT,
+    }
+
+
+def runtime_meta():
+    return {
+        'requested_ctx': sl.REQUESTED_CTX,
+        'actual_ctx': sl.ACTUAL_CTX,
+        'pinned_ggml_pad': sl.PINNED_GGML_PAD,
+        'n_batch': sl.N_BATCH,
+        'n_ubatch': sl.N_UBATCH,
+        'tokens': list(sl.EXACT_TOKENS),
+        'dll_hashes': dll_map(),
+        'device_order': ['Vulkan0', 'Vulkan1'],
+        'cpu_vs_gpu_origins': {'cpu': 'CPU_REFERENCE', 'gpu': 'VULKAN_GPU_GRAPH'},
+        'build_id': 'declared-synthetic-build',
+        'exe_sha256': 'ab' * 32,
+        'requested_kv': 256,
+        'actual_kv': 256,
+        'child_f16_disabled': True,
+        'fusion_disabled': True,
+        'coopmat_disabled': True,
+        'coopmat2_disabled': True,
+    }
+
+
+def capture_meta():
+    return {
+        'native_capture_claimed': False,
+        'callback_intrusiveness_declared': True,
+        'unsupported_dtype_fail_closed': True,
+        'name_op_dim_canonical': True,
+        'node_order_declared': True,
+        'common_intended_device_workload_separate_cpu_origin': True,
+    }
+
+
+def make_record(cpu, gpu, sha, max_err, rmse, control_kind='baseline_clean', model_key='original_q8'):
+    return {
+        'experiment_id': 'exp-' + model_key,
+        'model_metadata': model_meta(model_key),
+        'runtime_metadata': runtime_meta(),
+        'capture_metadata': capture_meta(),
+        'cpu_logits': cpu,
+        'gpu_logits': gpu,
+        'payload_sha256': sha,
+        'max_abs_err': max_err,
+        'rmse': rmse,
+        'count': sl.VOCAB_COUNT,
+        'control_kind': control_kind,
+    }
+
+
+class StaticConstraints(unittest.TestCase):
+    def test_registry_and_tolerance_pins(self):
+        self.assertEqual(sl.TRUSTED_DLL_REGISTRY, EXPECTED_DLLS)
+        self.assertEqual(sl.EXPECTED_DLL_NAMES, tuple(name for name, _digest, _size in EXPECTED_DLLS))
+        self.assertEqual(sl.ATOL, 0.01)
+        self.assertEqual(sl.RTOL, 0.01)
+        self.assertEqual(sl.VOCAB_COUNT, 151936)
+        self.assertNotIn('READY', sl.ALLOWED_STATES)
+        self.assertNotIn('PASS', sl.ALLOWED_STATES)
+        self.assertIn('DIAGNOSTIC_ONLY', sl.TERMINAL_STATES)
+
+    def test_both_models_and_rejects_float_or_bool_size(self):
+        self.assertTrue(sl.validate_model_metadata(model_meta('original_q8')))
+        self.assertTrue(sl.validate_model_metadata(model_meta('derived_f32')))
+        bad = model_meta('original_q8')
+        bad['sha256'] = '0' * 64
+        self.assertFalse(sl.validate_model_metadata(bad))
+        floated = model_meta('original_q8')
+        floated['size'] = float(floated['size'])
+        self.assertFalse(sl.validate_model_metadata(floated))
+        flagged = model_meta('original_q8')
+        flagged['size'] = True
+        self.assertFalse(sl.validate_model_metadata(flagged))
+        drifted = model_meta('derived_f32')
+        drifted['source_commit'] = '0' * 40
+        self.assertFalse(sl.validate_model_metadata(drifted))
+
+    def test_unhashable_model_key_fail_closed(self):
+        self.assertFalse(sl.validate_model_metadata({'model_key': []}))
+        out = sl.evaluate_experiment({'experiment_id': 'x', 'model_metadata': {'model_key': []}})
+        self.assertEqual(out['state'], 'NOT_CHECKED')
+        self.assertFalse(out['model_pass'])
+
+    def test_tokens_exact_strict_int(self):
+        self.assertTrue(sl.validate_tokens(list(range(16))))
+        bad = list(range(16))
+        bad[3] = 4
+        self.assertFalse(sl.validate_tokens(bad))
+        floated = list(range(16))
+        floated[0] = 0.0
+        self.assertFalse(sl.validate_tokens(floated))
+
+    def test_named_dll_registry_accepts_exact_binding(self):
+        meta = runtime_meta()
+        self.assertTrue(sl.validate_dll_bindings(dll_map()))
+        self.assertTrue(sl.validate_runtime_metadata(meta))
+        with_bytes = runtime_meta()
+        with_bytes['dll_bytes'] = dll_sizes()
+        self.assertTrue(sl.validate_runtime_metadata(with_bytes))
+
+    def test_anonymous_duplicate_zero_and_unknown_dlls_rejected(self):
+        meta = runtime_meta()
+        meta['dll_hashes'] = ['0' * 64] * sl.DLL_COUNT
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+        meta['dll_hashes'] = [format(i, '064x') for i in range(1, 6)]
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+        meta['dll_hashes'] = [digest for _name, digest, _size in EXPECTED_DLLS]
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+        named = dll_map()
+        named['ggml.dll'] = '0' * 64
+        self.assertFalse(sl.validate_dll_bindings(named))
+        copied = dll_map()
+        copied['ggml.dll'] = copied['ggml-base.dll']
+        self.assertFalse(sl.validate_dll_bindings(copied))
+        unknown = dll_map()
+        unknown['not-a-ggml.dll'] = unknown.pop('ggml.dll')
+        self.assertFalse(sl.validate_dll_bindings(unknown))
+        missing = dll_map()
+        del missing['ggml-vulkan.dll']
+        self.assertFalse(sl.validate_dll_bindings(missing))
+        wrong = dll_map()
+        wrong['ggml-cpu.dll'] = 'f' * 64
+        self.assertFalse(sl.validate_dll_bindings(wrong))
+        self.assertFalse(sl.validate_runtime_metadata({}))
+
+    def test_wrong_declared_dll_bytes_rejected(self):
+        meta = runtime_meta()
+        sizes = dll_sizes()
+        sizes['ggml.dll'] = sizes['ggml.dll'] + 1
+        meta['dll_bytes'] = sizes
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+        meta['dll_bytes'] = {'ggml.dll': 62976}
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+
+    def test_strict_context_batch_and_flags(self):
+        good = runtime_meta()
+        self.assertTrue(sl.validate_runtime_metadata(good))
+        floated = runtime_meta()
+        floated['requested_ctx'] = 128.0
+        self.assertFalse(sl.validate_runtime_metadata(floated))
+        flagged = runtime_meta()
+        flagged['actual_ctx'] = True
+        self.assertFalse(sl.validate_runtime_metadata(flagged))
+        batch = runtime_meta()
+        batch['n_batch'] = 32.0
+        self.assertFalse(sl.validate_runtime_metadata(batch))
+        pad = runtime_meta()
+        pad['pinned_ggml_pad'] = 256.0
+        self.assertFalse(sl.validate_runtime_metadata(pad))
+        kv = runtime_meta()
+        kv['actual_kv'] = 255
+        self.assertFalse(sl.validate_runtime_metadata(kv))
+        child = runtime_meta()
+        child['child_f16_disabled'] = False
+        self.assertFalse(sl.validate_runtime_metadata(child))
+
+    def test_runtime_shape_pins(self):
+        meta = runtime_meta()
+        meta['dll_hashes'] = dll_map()
+        meta['exe_sha256'] = 'zzz'
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+        meta = runtime_meta()
+        meta['device_order'] = []
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+        meta = runtime_meta()
+        meta['tokens'] = list(range(15))
+        self.assertFalse(sl.validate_runtime_metadata(meta))
+
+    def test_capture_native_claim_rejected(self):
+        cap = capture_meta()
+        self.assertTrue(sl.validate_capture_metadata(cap))
+        cap['native_capture_claimed'] = True
+        self.assertFalse(sl.validate_capture_metadata(cap))
+
+    def test_metadata_rounding_and_huge_metric_number(self):
+        self.assertTrue(sl._close_metadata_number(0.01, 0.0100000000000001))
+        self.assertFalse(sl._close_metadata_number(0.01, 0.0100000001))
+        self.assertFalse(sl._close_metadata_number(True, 1))
+        self.assertFalse(sl.is_strict_number(10 ** 400))
+        self.assertFalse(sl._close_metadata_number(10 ** 400, 10 ** 400))
+        self.assertFalse(sl.is_strict_int(True))
+        self.assertFalse(sl.is_strict_int(1.0))
+        self.assertTrue(sl.is_strict_int(1))
+
+
+class NumericDiagnostic(unittest.TestCase):
+    def test_clean_baseline_is_diagnostic_not_pass(self):
+        cpu = fresh_zeros()
+        gpu = fresh_zeros()
+        sha, max_err, rmse = make_payload(cpu, gpu)
+        out = sl.evaluate_experiment(make_record(cpu, gpu, sha, max_err, rmse))
+        self.assertEqual(out['state'], 'DIAGNOSTIC_ONLY')
+        self.assertEqual(out['fail_count'], 0)
+        self.assertFalse(out['model_pass'])
+        self.assertFalse(out['transport_corruption_proof'])
+        self.assertFalse(out['superseded'])
+
+    def test_cpu_zero_gpu_001005_fails(self):
+        cpu = fresh_zeros()
+        gpu = fresh_zeros()
+        gpu[0] = 0.01005
+        sha, max_err, rmse = make_payload(cpu, gpu)
+        out = sl.evaluate_experiment(make_record(cpu, gpu, sha, max_err, rmse))
+        self.assertEqual(out['state'], 'FAILED_NUMERIC')
+        self.assertEqual(out['fail_count'], 1)
+        self.assertFalse(out['model_pass'])
+
+    def test_cpu_001005_gpu_zero_is_diagnostic(self):
+        cpu = fresh_zeros()
+        gpu = fresh_zeros()
+        cpu[0] = 0.01005
+        sha, max_err, rmse = make_payload(cpu, gpu)
+        out = sl.compare_logits(cpu, gpu, sha, max_err, rmse, sl.VOCAB_COUNT)
+        self.assertEqual(out['state'], 'DIAGNOSTIC_ONLY')
+        self.assertEqual(out['fail_count'], 0)
+        self.assertFalse(out['model_pass'])
+
+    def test_synthetic_three_residual_baseline_is_failed_numeric(self):
+        cpu = fresh_zeros()
+        gpu = fresh_zeros()
+        cpu[10] = 1.0
+        cpu[20] = 1.0
+        cpu[30] = 1.0
+        sha, max_err, rmse = make_payload(cpu, gpu)
+        out = sl.evaluate_experiment(make_record(cpu, gpu, sha, max_err, rmse))
+        self.assertEqual(out['state'], 'FAILED_NUMERIC')
+        self.assertEqual(out['fail_count'], 3)
+        self.assertEqual(out['count'], sl.VOCAB_COUNT)
+
+    def test_perturbed_gpu_logit_is_comparison_only(self):
+        cpu = fresh_zeros()
+        gpu = fresh_zeros()
+        gpu[7] = 1.0
+        sha, max_err, rmse = make_payload(cpu, gpu)
+        out = sl.evaluate_experiment(
+            make_record(cpu, gpu, sha, max_err, rmse, control_kind='perturbed_negative', model_key='derived_f32')
+        )
+        self.assertEqual(out['state'], 'DIAGNOSTIC_ONLY')
+        self.assertEqual(out['reason'], 'perturbed_negative_comparison_only')
+        self.assertEqual(out['fail_count'], 1)
+        self.assertEqual(out['model_key'], 'derived_f32')
+        self.assertFalse(out['transport_corruption_proof'])
+        self.assertFalse(out['model_pass'])
+        baseline = sl.evaluate_experiment(
+            make_record(cpu, gpu, sha, max_err, rmse, control_kind='baseline_clean', model_key='derived_f32')
+        )
+        self.assertEqual(baseline['state'], 'FAILED_NUMERIC')
+
+    def test_bad_arg2_control_is_not_checked(self):
+        cpu = fresh_zeros()
+        sha, max_err, rmse = make_payload(cpu, cpu)
+        out = sl.compare_logits(cpu, cpu, sha, max_err, rmse, sl.VOCAB_COUNT, 'bad_arg2')
+        self.assertEqual(out['state'], 'NOT_CHECKED')
+        self.assertFalse(out['model_pass'])
+
+    def test_nan_and_inf_are_runtime(self):
+        cpu = fresh_zeros()
+        cpu[5] = float('nan')
+        out = sl.compare_logits(cpu, fresh_zeros(), '0' * 64, 0.0, 0.0, sl.VOCAB_COUNT)
+        self.assertEqual(out['state'], 'FAILED_RUNTIME')
+        inf_cpu = fresh_zeros()
+        inf_cpu[1] = float('inf')
+        out = sl.compare_logits(inf_cpu, fresh_zeros(), '0' * 64, 0.0, 0.0, sl.VOCAB_COUNT)
+        self.assertEqual(out['state'], 'FAILED_RUNTIME')
+
+    def test_count_sha_and_metric_binding(self):
+        cpu = fresh_zeros()
+        sha, max_err, rmse = make_payload(cpu, cpu)
+        mismatched = sl.compare_logits(cpu, cpu, '0' * 64, max_err, rmse, sl.VOCAB_COUNT)
+        self.assertEqual(mismatched['state'], 'NOT_CHECKED')
+        floated = sl.compare_logits(cpu, cpu, sha, max_err, rmse, float(sl.VOCAB_COUNT))
+        self.assertEqual(floated['state'], 'NOT_CHECKED')
+        flagged = sl.compare_logits(cpu, cpu, sha, max_err, rmse, True)
+        self.assertEqual(flagged['state'], 'NOT_CHECKED')
+        unbound = sl.compare_logits(cpu, cpu, sha, max_err + 1.0, rmse, sl.VOCAB_COUNT)
+        self.assertEqual(unbound['state'], 'NOT_CHECKED')
+        rmse_bad = sl.compare_logits(cpu, cpu, sha, max_err, rmse + 1.0, sl.VOCAB_COUNT)
+        self.assertEqual(rmse_bad['state'], 'NOT_CHECKED')
+
+    def test_huge_conversions_fail_closed(self):
+        cpu = fresh_zeros()
+        cpu[0] = 10 ** 400
+        out = sl.compare_logits(cpu, fresh_zeros(), '0' * 64, 0.0, 0.0, sl.VOCAB_COUNT)
+        self.assertIn(out['state'], ('NOT_CHECKED', 'FAILED_RUNTIME'))
+        self.assertFalse(out['model_pass'])
+        clean = fresh_zeros()
+        sha, _max_err, rmse = make_payload(clean, clean)
+        metric = sl.compare_logits(clean, clean, sha, 10 ** 400, rmse, sl.VOCAB_COUNT)
+        self.assertEqual(metric['state'], 'NOT_CHECKED')
+        self.assertEqual(sl.validate_logit_list(cpu), 'unrepresentable')
+
+    def test_bool_logit_is_structural(self):
+        cpu = fresh_zeros()
+        cpu[2] = True
+        out = sl.compare_logits(cpu, fresh_zeros(), '0' * 64, 0.0, 0.0, sl.VOCAB_COUNT)
+        self.assertEqual(out['state'], 'NOT_CHECKED')
+
+
+class LedgerTests(unittest.TestCase):
+    def test_append_freezes_and_rejects_ready_or_supersede(self):
+        base = sl.StateLedger()
+        rec = {'state': 'PENDING', 'experiment_id': 'x', 'model_pass': True, 'metadata': {'pins': ['original'], 'model_pass': True}}
+        nxt = base.append(rec)
+        self.assertEqual(len(base.records()), 0)
+        self.assertEqual(len(nxt.records()), 1)
+        self.assertFalse(nxt.records()[0]['model_pass'])
+        self.assertFalse(nxt.records()[0]['metadata']['model_pass'])
+        rec['metadata']['pins'][0] = 'forged'
+        self.assertEqual(nxt.records()[0]['metadata']['pins'], ['original'])
+        with self.assertRaises(TypeError):
+            nxt.records()[0]['state'] = 'DIAGNOSTIC_ONLY'
+        with self.assertRaises(TypeError):
+            nxt.records()[0]['metadata']['pins'][0] = 'forged'
+        with self.assertRaises(ValueError):
+            nxt.append({'state': 'READY', 'experiment_id': 'y'})
+        with self.assertRaises(ValueError):
+            nxt.append({'state': 'PENDING', 'experiment_id': 'y', 'supersede': True})
+        plan = json.loads(nxt.candidate_plan())
+        self.assertFalse(plan['records'][0]['model_pass'])
+        self.assertEqual(plan['records'][0]['metadata']['pins'], ['original'])
+
+    def test_constructor_validates_and_detaches(self):
+        with self.assertRaises(ValueError):
+            sl.StateLedger(records=[{'state': 'READY', 'experiment_id': 'x', 'model_pass': True}])
+        raw = {'state': 'PENDING', 'experiment_id': 'x', 'metadata': {'pins': ['original']}}
+        ledger = sl.StateLedger(records=[raw])
+        raw['metadata']['pins'][0] = 'forged'
+        self.assertEqual(ledger.records()[0]['metadata']['pins'], ['original'])
+        with self.assertRaises(ValueError):
+            sl.StateLedger(records=[
+                {'state': 'FAILED_NUMERIC', 'experiment_id': 'x'},
+                {'state': 'RUNNING', 'experiment_id': 'x', 'prior_state': 'PENDING'},
+            ])
+        with self.assertRaises(ValueError):
+            sl.StateLedger(plan_bound=True)
+        with self.assertRaises(ValueError):
+            sl.StateLedger(plan_bound=1.0)
+
+    def test_actual_prior_binds_forged_and_omitted(self):
+        ledger = sl.StateLedger()
+        ledger = ledger.append({'state': 'PENDING', 'experiment_id': 'x'})
+        ledger = ledger.append({'state': 'RUNNING', 'experiment_id': 'x', 'prior_state': 'PENDING'})
+        with self.assertRaises(ValueError):
+            ledger.append({'state': 'RUNNING', 'experiment_id': 'x', 'prior_state': 'FAILED_NUMERIC'})
+        with self.assertRaises(ValueError):
+            ledger.append({'state': 'FAILED_NUMERIC', 'experiment_id': 'x'})
+        with self.assertRaises(ValueError):
+            sl.StateLedger().append({'state': 'RUNNING', 'experiment_id': 'fresh', 'prior_state': 'PENDING'})
+        ledger = ledger.append({'state': 'DIAGNOSTIC_ONLY', 'experiment_id': 'x', 'prior_state': 'RUNNING'})
+        with self.assertRaises(ValueError):
+            ledger.append({'state': 'RUNNING', 'experiment_id': 'x'})
+        with self.assertRaises(ValueError):
+            ledger.append({'state': 'RUNNING', 'experiment_id': 'x', 'prior_state': 'PENDING'})
+        with self.assertRaises(ValueError):
+            ledger.append({'state': 'DIAGNOSTIC_ONLY', 'experiment_id': 'x', 'prior_state': 'RUNNING', 'supersedes': 'old'})
+
+    def test_historical_failure_stays_beside_later_diagnostic(self):
+        ledger = sl.StateLedger()
+        ledger = ledger.append({'state': 'FAILED_NUMERIC', 'experiment_id': 'historical_q8_workload'})
+        ledger = ledger.append({'state': 'PENDING', 'experiment_id': 'attempt5_derived_f32'})
+        ledger = ledger.append({'state': 'RUNNING', 'experiment_id': 'attempt5_derived_f32'})
+        ledger = ledger.append({'state': 'DIAGNOSTIC_ONLY', 'experiment_id': 'attempt5_derived_f32', 'prior_state': 'RUNNING'})
+        self.assertEqual(ledger.records()[0]['state'], 'FAILED_NUMERIC')
+        self.assertEqual(ledger.records()[0]['experiment_id'], 'historical_q8_workload')
+        self.assertEqual(ledger.records()[-1]['state'], 'DIAGNOSTIC_ONLY')
+        self.assertFalse(ledger.records()[-1]['model_pass'])
+        with self.assertRaises(ValueError):
+            ledger.append({'state': 'DIAGNOSTIC_ONLY', 'experiment_id': 'historical_q8_workload', 'supersede': True})
+
+    def test_candidate_plan_is_bounded_and_no_pass(self):
+        ledger = sl.StateLedger(plan_bound=2)
+        for i in range(3):
+            ledger = ledger.append({'state': 'PENDING', 'experiment_id': 'e' + str(i)})
+        text = ledger.candidate_plan()
+        self.assertEqual(text, ledger.candidate_plan())
+        plan = json.loads(text)
+        self.assertEqual(plan['included_count'], 2)
+        self.assertEqual(plan['record_count'], 3)
+        self.assertEqual(plan['records'][0]['experiment_id'], 'e1')
+        self.assertEqual(plan['records'][1]['experiment_id'], 'e2')
+        self.assertTrue(plan['bounded'])
+        self.assertTrue(plan['no_pass'])
+        self.assertFalse(plan['records'][0]['model_pass'])
+        self.assertEqual(len(plan['digest']), 64)
+
+    def test_durable_commit_representation_has_no_writes(self):
+        ledger = sl.StateLedger().append({'state': 'PENDING', 'experiment_id': 'x'})
+        rep = ledger.durable_commit_representation()
+        self.assertFalse(rep['writes_performed'])
+        self.assertEqual(rep['kind'], 'in_memory_atomic_candidate_plan')
+        self.assertEqual(len(rep['sha256']), 64)
+
+    def test_refusal_and_nonserializable_record(self):
+        rec = sl.refusal_record('not_admitted')
+        self.assertEqual(rec['state'], 'NOT_CHECKED')
+        self.assertFalse(rec['model_pass'])
+        self.assertEqual(sl.refusal_record('')['reason'], 'refused')
+        with self.assertRaises(ValueError):
+            sl.StateLedger().append({'state': 'PENDING', 'experiment_id': 'x', 'score': float('nan')})
+        with self.assertRaises(ValueError):
+            sl.StateLedger().append({'state': 'PENDING', 'experiment_id': 'x', 'blob': set([1])})
+        self.assertEqual(sl.evaluate_experiment([])['state'], 'NOT_CHECKED')
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+EXACT INPUT E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\test_independent_same17_adapted.py SHA256 7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a
+"""Independent actual-file RED controls; synthetic only, no hardware qualification."""
+import pathlib,hashlib,importlib.util,math,unittest,json,builtins,sys
+SOURCE=pathlib.Path(r'E:\the_harness\records\factory_runs\20261004\grok_numeric_ledger_correction_20261004T191800Z\grok_numeric_ledger_high\source.grok_untrusted.py')
+PIN='d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a'
+assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()==PIN
+TRAPS=[]
+original_import=builtins.__import__
+def guarded(name,*a,**kw):
+ if name.split('.')[0] in {'ctypes','_winapi','subprocess','multiprocessing','socket','pyopencl','numpy','torch','cupy'}:
+  TRAPS.append(name);raise AssertionError('native/process/network/GPU dependency forbidden')
+ return original_import(name,*a,**kw)
+builtins.__import__=guarded
+spec=importlib.util.spec_from_file_location('actual_delivered_ledger',SOURCE);sl=importlib.util.module_from_spec(spec);spec.loader.exec_module(sl)
+COUNT=151936
+ZERO=[0.0]*COUNT
+ZERO_SHA=hashlib.sha256(sl.canonical_payload_bytes(ZERO,ZERO)).hexdigest()
+def runtime():
+ return {'requested_ctx':128,'actual_ctx':256,'pinned_ggml_pad':256,'n_batch':32,'n_ubatch':32,'tokens':list(range(16)),'dll_hashes':{'ggml.dll': '56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb', 'ggml-base.dll': 'beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3', 'ggml-cpu.dll': 'e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481', 'ggml-rpc.dll': '11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd', 'ggml-vulkan.dll': '3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085'},'device_order':['Vulkan0','Vulkan1'],'cpu_vs_gpu_origins':{'cpu':'CPU_REFERENCE','gpu':'VULKAN_GPU_GRAPH'},'build_id':'declared_synthetic_only','exe_sha256':'1'*64,'requested_kv':256,'actual_kv':256,'child_f16_disabled':True,'fusion_disabled':True,'coopmat_disabled':True,'coopmat2_disabled':True}
+def compare_one(cpu,gpu):
+ left=list(ZERO);right=list(ZERO);left[0]=cpu;right[0]=gpu
+ # Payload encoding is an API adapter. Error/RMSE are independent one-element analytic values.
+ pin=hashlib.sha256(sl.canonical_payload_bytes(left,right)).hexdigest();error=abs(cpu-gpu)
+ return sl.compare_logits(left,right,pin,error,error/math.sqrt(COUNT),COUNT)
+class Tests(unittest.TestCase):
+ def test_valid_zero_is_diagnostic_no_hardware_pass(self):
+  out=sl.compare_logits(ZERO,ZERO,ZERO_SHA,0.0,0.0,COUNT)
+  self.assertEqual(out['state'],'DIAGNOSTIC_ONLY');self.assertFalse(out['model_pass']);self.assertFalse(out['transport_corruption_proof'])
+ def test_cpu_reference_threshold_rejects_001005(self):
+  out=compare_one(0.0,0.01005)
+  self.assertEqual(out['state'],'FAILED_NUMERIC');self.assertEqual(out['fail_count'],1)
+ def test_cpu_reference_threshold_accepts_reverse_boundary(self):
+  out=compare_one(0.01005,0.0)
+  self.assertEqual(out['state'],'DIAGNOSTIC_ONLY');self.assertEqual(out['fail_count'],0)
+ def test_float_count_refused(self):
+  self.assertEqual(sl.compare_logits(ZERO,ZERO,ZERO_SHA,0.0,0.0,float(COUNT))['state'],'NOT_CHECKED')
+ def test_float_context_refused(self):
+  data=runtime();self.assertTrue(sl.validate_runtime_metadata(data));data['requested_ctx']=128.0;self.assertFalse(sl.validate_runtime_metadata(data))
+ def test_float_model_bytes_refused(self):
+  data={'model_key':'original_q8','sha256':'9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031','size':639446688.0,'quant':'q8_0','source_commit':'0faee5004297c3bcfa40b7bf11750127b8c1fd7d'}
+  self.assertFalse(sl.validate_model_metadata(data))
+ def test_records_cannot_mutate_prior_state(self):
+  ledger=sl.StateLedger().append({'state':'FAILED_NUMERIC','experiment_id':'old'})
+  try:ledger.records()[0]['state']='DIAGNOSTIC_ONLY'
+  except TypeError:return
+  self.assertEqual(ledger.records()[0]['state'],'FAILED_NUMERIC')
+ def test_records_cannot_mutate_model_pass(self):
+  ledger=sl.StateLedger().append({'state':'PENDING','experiment_id':'x'})
+  try:ledger.records()[0]['model_pass']=True
+  except TypeError:return
+  self.assertFalse(json.loads(ledger.candidate_plan())['records'][0]['model_pass'])
+ def test_input_nested_metadata_cannot_change_ledger(self):
+  record={'state':'PENDING','experiment_id':'x','metadata':{'pins':['original']}}
+  ledger=sl.StateLedger().append(record);record['metadata']['pins'][0]='forged'
+  self.assertEqual(ledger.records()[0]['metadata']['pins'],['original'])
+ def test_constructor_does_not_bypass_validation(self):
+  with self.assertRaises(ValueError):sl.StateLedger(records=[{'state':'READY','experiment_id':'x','model_pass':True}])
+ def test_terminal_cannot_restart_by_omitting_prior(self):
+  ledger=sl.StateLedger().append({'state':'FAILED_NUMERIC','experiment_id':'x'})
+  with self.assertRaises(ValueError):ledger.append({'state':'RUNNING','experiment_id':'x'})
+ def test_terminal_cannot_restart_with_forged_prior(self):
+  ledger=sl.StateLedger().append({'state':'FAILED_NUMERIC','experiment_id':'x'})
+  with self.assertRaises(ValueError):ledger.append({'state':'RUNNING','experiment_id':'x','prior_state':'PENDING'})
+ def test_anonymous_duplicate_dll_hashes_not_fresh_five(self):
+  data=runtime();self.assertTrue(sl.validate_runtime_metadata(data));data['dll_hashes']={name:'0'*64 for name in data['dll_hashes']}
+  self.assertFalse(sl.validate_runtime_metadata(data))
+ def test_huge_int_logit_refuses_without_exception(self):
+  left=list(ZERO);left[0]=10**400
+  out=sl.compare_logits(left,ZERO,'0'*64,0.0,0.0,COUNT)
+  self.assertIn(out['state'],('NOT_CHECKED','FAILED_RUNTIME'))
+ def test_huge_int_metric_refuses_without_exception(self):
+  out=sl.compare_logits(ZERO,ZERO,ZERO_SHA,10**400,0.0,COUNT)
+  self.assertEqual(out['state'],'NOT_CHECKED')
+ def test_unhashable_model_key_refuses_without_exception(self):
+  self.assertFalse(sl.validate_model_metadata({'model_key':[]}))
+ def test_no_native_import_calls(self):self.assertEqual(TRAPS,[])
+if __name__=='__main__':
+ suite=unittest.defaultTestLoader.loadTestsFromTestCase(Tests);result=unittest.TextTestRunner(verbosity=2).run(suite)
+ pathlib.Path(__file__).with_name('actual_red_results.json').write_text(json.dumps({'scope':'SYNTHETIC_PURE_ONLY','tests':result.testsRun,'failures':[str(x[0]) for x in result.failures],'errors':[str(x[0]) for x in result.errors],'native_dependency_traps':TRAPS,'source_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest()},indent=2))
+ raise SystemExit(0 if result.wasSuccessful() else 1)
+
+EXACT INPUT E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\test_additional_storage_and_legal_transition.py SHA256 970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3
+"""Additional source-only controls; ROOT execution admission is still required."""
+import importlib.util
+import pathlib
+import unittest
+s=importlib.util.spec_from_file_location('independent_same17',pathlib.Path(__file__).with_name('test_independent_same17_adapted.py'))
+m=importlib.util.module_from_spec(s)
+s.loader.exec_module(m)
+sl=m.sl
+class Additional(unittest.TestCase):
+    def test_returned_wrapper_storage_cannot_rewrite_history(self):
+        ledger=sl.StateLedger().append({'state':'FAILED_NUMERIC','experiment_id':'old'})
+        try:ledger.records()[0]._items['state']='DIAGNOSTIC_ONLY'
+        except (TypeError,AttributeError):return
+        self.assertEqual(ledger.records()[0]['state'],'FAILED_NUMERIC')
+    def test_returned_nested_wrapper_storage_cannot_reassign(self):
+        ledger=sl.StateLedger().append({'state':'PENDING','experiment_id':'x','metadata':{'pins':['original']}})
+        try:ledger.records()[0]['metadata']['pins']._items=('forged',)
+        except (TypeError,AttributeError):return
+        self.assertEqual(ledger.records()[0]['metadata']['pins'],['original'])
+    def test_actual_legal_prior_transition_does_not_require_claim(self):
+        ledger=sl.StateLedger().append({'state':'PENDING','experiment_id':'x'})
+        ledger=ledger.append({'state':'RUNNING','experiment_id':'x','prior_state':'PENDING'})
+        terminal=ledger.append({'state':'FAILED_NUMERIC','experiment_id':'x'})
+        self.assertEqual(terminal.records()[-1]['state'],'FAILED_NUMERIC')
+if __name__=='__main__':unittest.main(verbosity=2)
+
+EXACT INPUT E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\AUDIT_EXECUTED_FOLLOWUP.md SHA256 88aa5e950319050136be28ca84a374ed8b429249cf9d238fbbd017b7470d7afd
+# Actual Grok pure execution followup — not accepted
+
+ROOT admitted only the17 adapted independent controls and3 existing additional controls against source SHA d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a. These controls executed; the earlier pending static report remains historical and unchanged.
+
+Measured outcome: adapted17 passed17/17. Additional3 produced1 pass and2 assertion failures. Aggregate20 controls:18 passes,2 failures,0 errors. This is a pure numerical/state-contract result, not model, GPU, capacity, physical-residency, transport-corruption or P2P qualification.
+
+The original numerical threshold, strict-number, constructor, ordinary immutability, nested input alias, prior-state, anonymous-DLL and huge-input17 controls now pass. They ran against the actual Grok source with the documented named-DLL fixture adaptation; the old Qwen RED was not reused as GREEN.
+
+The two storage hypotheses are now proved within the admitted test boundary:
+
+- Source FrozenDict line101 exposes its actual backing dict through the wrapper returned by records(). Changing records()[0]._items['state'] to DIAGNOSTIC_ONLY changed the ledger's stored FAILED_NUMERIC history.
+- Source FrozenList line73 has an assignable backing slot. Reassigning the returned nested pin list's _items tuple to('forged',) changed the ledger's stored original pin.
+
+These controls directly call internal wrapper attributes, rather than ordinary item assignment (which is correctly blocked). ROOT explicitly admitted this boundary. A fix should detach records() output or protect the backing storage; no fix was made here. Do not claim a hostile-Python memory security boundary or hardware exploit from these findings.
+
+The legal transition control passed: an actual RUNNING experiment can transition to FAILED_NUMERIC without a caller-supplied prior_state. Actual prior lookup enforces the transition. This supports the static finding that provider test397–398's expected ValueError is a provider-test defect. Provider tests themselves were not executed.
+
+Owned children: same17 PID39356 exit0/reaped in0.657s; additional3 PID25184 exit1/reaped in0.140s. Each had a30-second deadline and2MiB per-stream cap. No timeout or overflow; stdout0 for both, stderr1244 and1678 bytes. Both stream readers joined. Source, provider tests and both independent test hashes were identical before and after. The import deny trap list was empty. No provider test, native, network, GPU, model or provider API ran.
+
+Remaining provenance/control/byte-budget limitations in AUDIT_PENDING_EXECUTION.md remain static scope limits, not new executed failure cases. Named DLL hashes match current on-disk attempt5 files but do not independently prove runtime loads. Arbitrary exe/device/origin declarations remain untrusted; perturbed diagnostics are not paired-baseline transport qualification. No integration or promotion was performed.
+
+Evidence: execution_receipt.json, actual_red_results.json, same17.stdout.raw.log, same17.stderr.raw.log, additional3.stdout.raw.log, additional3.stderr.raw.log. Verdict PURE_EXECUTED_ORIGINAL17_PASS_STORAGE2_FAIL_NOT_ACCEPTED.
+
+EXACT INPUT E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\adjudication_executed.json SHA256 b9dd2b41c72d96db13666e2fdcdb87d466cd8f0dd9988c304304c35861f7c645
+{
+  "verdict": "PURE_EXECUTED_ORIGINAL17_PASS_STORAGE2_FAIL_NOT_ACCEPTED",
+  "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+  "original17": {
+    "tests": 17,
+    "passes": 17,
+    "failures": 0,
+    "errors": 0
+  },
+  "additional3": {
+    "tests": 3,
+    "passes": 1,
+    "failures": 2,
+    "errors": 0
+  },
+  "total": {
+    "tests": 20,
+    "passes": 18,
+    "failures": 2,
+    "errors": 0
+  },
+  "hashes_unchanged": true,
+  "candidate_promoted": false,
+  "provider_tests_executed": false,
+  "hardware_qualification": false,
+  "execution_report": "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\AUDIT_EXECUTED_FOLLOWUP.md"
+}
+EXACT INPUT E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\execution_receipt.json SHA256 a51df653ee566242c07a6c32575d69dc386b276fde01539c861c3ef9c4e900ba
+{
+  "scope": "ROOT_ADMITTED_ACTUAL_GROK_PURE_CONTROLS_ONLY",
+  "runs": [
+    {
+      "label": "same17",
+      "pid": 39356,
+      "exit_code": 0,
+      "reaped": true,
+      "seconds": 0.6569999996572733,
+      "timeout": false,
+      "overflow": [],
+      "stream_bytes": {
+        "same17.stdout.raw.log": 0,
+        "same17.stderr.raw.log": 1244
+      },
+      "readers_joined": true
+    },
+    {
+      "label": "additional3",
+      "pid": 25184,
+      "exit_code": 1,
+      "reaped": true,
+      "seconds": 0.14000000059604645,
+      "timeout": false,
+      "overflow": [],
+      "stream_bytes": {
+        "additional3.stdout.raw.log": 0,
+        "additional3.stderr.raw.log": 1678
+      },
+      "readers_joined": true
+    }
+  ],
+  "pins_before": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_independent_same17_adapted.py": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_additional_storage_and_legal_transition.py": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3"
+  },
+  "pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_independent_same17_adapted.py": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_additional_storage_and_legal_transition.py": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3"
+  },
+  "hashes_unchanged": true,
+  "provider_tests_executed": false,
+  "candidate_native_gpu_provider_calls": false
+}

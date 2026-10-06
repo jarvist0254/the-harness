@@ -1,0 +1,67 @@
+[
+  {
+    "kind": "Import",
+    "line": 1,
+    "detail": "import copy, hashlib, importlib.util, math, os"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 4,
+    "detail": "load"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 16,
+    "detail": "sha"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 19,
+    "detail": "dev"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 26,
+    "detail": "weights"
+  },
+  {
+    "kind": "Assign",
+    "line": 45,
+    "detail": "PINS = {'model_hash': b'model-bytes', 'workload_hash': b'workload-bytes', 'source_hash': b'source-bytes', 'exe_hash': b'exe-bytes', 'context_hash': b'context-bytes'}"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 53,
+    "detail": "metrics"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 63,
+    "detail": "make"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 130,
+    "detail": "_ids"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 143,
+    "detail": "call"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 155,
+    "detail": "expect"
+  },
+  {
+    "kind": "FunctionDef",
+    "line": 167,
+    "detail": "test_bindings"
+  },
+  {
+    "kind": "If",
+    "line": 299,
+    "detail": ""
+  }
+]

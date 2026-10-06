@@ -1,0 +1,40 @@
+[
+  {
+    "name": "intel_clang_version",
+    "command": [
+      "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\clang.exe",
+      "--version"
+    ],
+    "pid": 19580,
+    "exit_code": 0,
+    "binary_sha256": "882e0708da94ee433861aa3f12d24571580cceafe1797d793064fe0ddad37740",
+    "environment": "CHILD_LOCAL_PATH_ONLY",
+    "stdout": "DPC++ compiler 7.2.0 (pre-release) (Nightly 2026-10-04) build based on:\nclang version 24.0.0git (https://github.com/intel/llvm b98b3a76c11345f1ff6f295e416755ce8c11b60c)\nTarget: x86_64-pc-windows-msvc\nThread model: posix\nInstalledDir: E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\nBuild config: +assertions\n",
+    "stderr": ""
+  },
+  {
+    "name": "intel_sycl_devices",
+    "command": [
+      "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\sycl-ls.exe"
+    ],
+    "pid": 16328,
+    "exit_code": 0,
+    "binary_sha256": "995f69127c49da9b0089c5434983e2cd4a7967a2dba95b534e7191d72ab7d262",
+    "environment": "CHILD_LOCAL_PATH_ONLY",
+    "stdout": "No platforms found - run with '--verbose' to get more details.\r\n",
+    "stderr": ""
+  },
+  {
+    "name": "intel_sycl_verbose",
+    "command": [
+      "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\sycl-ls.exe",
+      "--verbose"
+    ],
+    "pid": 83520,
+    "exit_code": 0,
+    "binary_sha256": "995f69127c49da9b0089c5434983e2cd4a7967a2dba95b534e7191d72ab7d262",
+    "environment": "CHILD_LOCAL_PATH_ONLY",
+    "stdout": "\r\nPlatforms: 0\r\ndefault_selector()      : No device of requested type available.\r\naccelerator_selector()  : No device of requested type available.\r\ncpu_selector()          : No device of requested type available.\r\ngpu_selector()          : No device of requested type available.\r\ncustom_selector(gpu)    : No device of requested type available.\r\ncustom_selector(cpu)    : No device of requested type available.\r\ncustom_selector(acc)    : No device of requested type available.\r\n",
+    "stderr": "<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[INFO]: ---> urLoaderTearDown() -> UR_RESULT_SUCCESS\r\n"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "ended_utc": "2026-10-04T18:30:47.6102627Z",
+  "wrapper_pid": 71548,
+  "outer_exit_code": 2,
+  "status": "WRAPPER_NONZERO",
+  "failure_reason": null,
+  "elapsed_seconds": 82.063,
+  "wrapper_pid_absent": true,
+  "input_sha256_before": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\run_muse_job.py": "2DBFCD462E49BD15E530674E2E26248D32D4836682E790F289BAC9E562E03431",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\prompt.txt": "AB6A6220AA9B4413B6D96E4D259D2968CBB29850B954BBA0EAB4EC397AA7B4D4",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\output_schema.json": "6D9132A41CA02CE6AFA6F6AE8BF436A06F76EDF865B19EFAF0943C9ED8FFDF16",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe": "39A97806D315ECE0FC5CDBB88C903EF5BC77655F32E66DC22D267A212C5030BA"
+  },
+  "input_sha256_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\run_muse_job.py": "2DBFCD462E49BD15E530674E2E26248D32D4836682E790F289BAC9E562E03431",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\prompt.txt": "AB6A6220AA9B4413B6D96E4D259D2968CBB29850B954BBA0EAB4EC397AA7B4D4",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\compiler_completion_audit\\output_schema.json": "6D9132A41CA02CE6AFA6F6AE8BF436A06F76EDF865B19EFAF0943C9ED8FFDF16",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe": "39A97806D315ECE0FC5CDBB88C903EF5BC77655F32E66DC22D267A212C5030BA"
+  },
+  "input_pins_unchanged": true,
+  "wrapper_stdout_bytes": 0,
+  "wrapper_stderr_bytes": 0
+}

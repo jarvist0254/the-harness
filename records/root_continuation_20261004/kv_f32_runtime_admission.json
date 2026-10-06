@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-04T13:11:45.798637+00:00",
+  "scope": "ONE bounded derived-F32 mixed-Vulkan diagnostic plus conditional controls only",
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "binary_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "gemini_review_sha256": "7a8c5aca2d85a50c6fcb453e7d8f09c7fb8e99c3e293c291c52b2a3973f6179d",
+  "root_admission": "BASELINE_GPU_DIAGNOSTIC_ADMITTED",
+  "required": [
+    "Derived F32 model frozen hash bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+    "--devices Vulkan0,Vulkan1 --kv-f32",
+    "Child environment only GGML_VK_DISABLE_F16=1; composite experiment hash includes delta",
+    "Unchanged 16tokens/context/batch/threads and .01/.01 per-logit comparator",
+    "60-second monotonic external owned-process limit, raw logs, exit and cleanup receipt",
+    "Actual CPU and both GPU KV log types f32, offload29/29 and ownership logs"
+  ],
+  "conditional": "Only if baseline allfinite,fail_count0,exit0 and actualF32KV/offload logs confirmed, run reverse plus comparatorcorruption separately each60s. Otherwise STOP model runs. No original Q8_0 rerun/claim."
+}

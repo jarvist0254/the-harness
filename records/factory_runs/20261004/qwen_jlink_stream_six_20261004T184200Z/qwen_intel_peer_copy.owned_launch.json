@@ -1,0 +1,13 @@
+{
+  "source_sha256": "150cb209673db9697119c7cfeb3eeb7b2c14964eb6ecf50723bce46a2e6456f9",
+  "requested_model": "qwen3.8-max",
+  "deadline_seconds": 1230,
+  "clock": "Stopwatch",
+  "observed_process_start_utc": "2026-10-04T18:45:08.8717947Z",
+  "pid": 96136,
+  "identity": "retained Process object; no PID reattach",
+  "native_children_actual": 0,
+  "prompt_sha256": "150cb209673db9697119c7cfeb3eeb7b2c14964eb6ecf50723bce46a2e6456f9",
+  "lane": "Qwen",
+  "credential_read_by_outer_wrapper": false
+}

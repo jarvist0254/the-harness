@@ -1,0 +1,12 @@
+{
+  "cli_owned_terminal_exit": 0,
+  "identity": "Retained session/process exitrecords primary; PIDabsence informational",
+  "wrapper_tool_session_exit": 0,
+  "provider_patch_applied": false,
+  "no_auth_actions": true,
+  "cli_pid": 82588,
+  "owned_pids_still_alive": [],
+  "wrapper_pid": 29272,
+  "wrapper_tool_session": 14934,
+  "utc": "2026-10-04T16:00:09.8687692Z"
+}

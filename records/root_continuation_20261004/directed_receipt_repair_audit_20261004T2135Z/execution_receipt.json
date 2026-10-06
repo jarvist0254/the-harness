@@ -1,0 +1,31 @@
+{
+  "scope": "ROOT_ADMITTED_SYNTHETIC_DIRECTED_RECEIPT_ONLY",
+  "owned_pid": 86472,
+  "exit_code": 0,
+  "reaped": true,
+  "timeout": false,
+  "seconds": 0.07800000067800283,
+  "capture": {
+    "bytes": {
+      "stderr.raw.log": 0,
+      "stdout.raw.json": 11984
+    },
+    "overflow": [],
+    "errors": []
+  },
+  "readers_joined": true,
+  "pins_before": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt": "fc73cb96c60a4df88815d670f3d6682ff71c3a1cbcaf9dc06942bc780768dc29",
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_repair_audit_20261004T2135Z\\test_independent_directed_v2.py": "6670c353aa5d1cce1284c3b6d243071fa9e604cdd605ebe164d4ba5aa8f33643",
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_repair_audit_20261004T2135Z\\run_bounded_pure.py": "47cb525fea0a77b5376157b48fe1bc3f241e8ff11a48194ec153b5f9341adf3f",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt": "fc73cb96c60a4df88815d670f3d6682ff71c3a1cbcaf9dc06942bc780768dc29",
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_repair_audit_20261004T2135Z\\test_independent_directed_v2.py": "6670c353aa5d1cce1284c3b6d243071fa9e604cdd605ebe164d4ba5aa8f33643",
+    "E:\\the_harness\\records\\root_continuation_20261004\\directed_receipt_repair_audit_20261004T2135Z\\run_bounded_pure.py": "47cb525fea0a77b5376157b48fe1bc3f241e8ff11a48194ec153b5f9341adf3f",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "pins_unchanged": true,
+  "gpu_execution": false
+}

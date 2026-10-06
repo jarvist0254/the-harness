@@ -1,0 +1,9 @@
+{
+  "identity": "retained process object",
+  "job": "cad_gap_posts",
+  "exit_code": 0,
+  "seconds": 88.35,
+  "outer_killed": false,
+  "log_overflow": false,
+  "pid": 57736
+}

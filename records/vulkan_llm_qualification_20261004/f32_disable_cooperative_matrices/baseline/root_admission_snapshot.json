@@ -1,0 +1,51 @@
+{
+  "admission": "ROOT_ADMITTED_MIXED_F32_KV_F32_DISABLE_COOPMAT_AND_COOPMAT2_BASELINE",
+  "binary_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "deadline_seconds": 60.0,
+  "devices": [
+    "Vulkan0",
+    "Vulkan1"
+  ],
+  "environment_delta": {
+    "GGML_VK_DISABLE_COOPMAT": "1",
+    "GGML_VK_DISABLE_COOPMAT2": "1",
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1"
+  },
+  "model_sha256": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+  "note": "Copied locally from root task authorization; not a cryptographic root signature.",
+  "only_if_baseline_passes": [
+    "reverse order",
+    "comparator logit corruption"
+  ],
+  "parameters": {
+    "actual_context": 256,
+    "atol": 0.01,
+    "batch": 32,
+    "flash_attn": "disabled",
+    "kv": "f32",
+    "requested_context": 128,
+    "rtol": 0.01,
+    "threads": 4,
+    "tokens": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ubatch": 32
+  },
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371"
+}

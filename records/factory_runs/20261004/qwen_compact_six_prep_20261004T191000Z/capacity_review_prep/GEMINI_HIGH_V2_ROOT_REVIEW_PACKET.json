@@ -1,0 +1,41 @@
+{
+  "argv_estimate_utf16_chars": 25977,
+  "files": [
+    {
+      "bytes": 23957,
+      "sha256": "cccc25f30eb00f9b10cf2c42f258b9367e9a65198476c1ccb821faae1d11cd6e",
+      "name": "gemini_capacity.high.v2.prompt.txt"
+    },
+    {
+      "bytes": 8819,
+      "sha256": "13427d2f951c556a79dd982ad3d3e8b0bc0a19389e00b03d897dd8d7e9f54454",
+      "name": "invoke_owned_capacity_review.high.v2.pending_admission.ps1"
+    },
+    {
+      "bytes": 4070,
+      "sha256": "2a6b79b3151aefdb7e704192506aa9f3e03c6107c79b22f9350cd247c3035975",
+      "name": "provider_common.high.v2.ps1"
+    },
+    {
+      "bytes": 1388,
+      "sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+      "name": "REVIEW_SCHEMA.json"
+    }
+  ],
+  "model": "gemini-3.8-flash-high",
+  "source_execution": false,
+  "previous_preps_immutable": true,
+  "muse_review_sha256": "de2b5a98c4ad598c69db85e9a9c376d4e1840c892c9b1f4e3b67127f0e8a9fb0",
+  "state": "ACTUAL_GEMINI_HIGH_DEPENDENT_PACKET_PENDING_ROOT_ADMISSION",
+  "parse_errors": [],
+  "changes_from_mediumprep": [
+    "Root explicitly requests actualGemHIGH",
+    "add rootMuseadjudication constraints without blindlyrewritingvalidexactfour scope",
+    "newmodelmap/common+wrapper copiesonly"
+  ],
+  "actual_root_audit_sha256": "86cc4fc6fb7062e758b27802944fad2c40c67d9703d2f5df8e18cdfad5eb3d71",
+  "prompt_utf16_chars": 23957,
+  "provider_launch_authorized": false,
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "utc": "2026-10-04T20:03:20.1326879Z"
+}

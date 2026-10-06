@@ -1,0 +1,16 @@
+{
+  "verdict": "REJECTED_ACTUAL_PURE_RED",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py",
+  "source_sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1",
+  "provider_tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\tests_source.qwen_untrusted.txt",
+  "provider_tests_sha256": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5",
+  "spec_sha256": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9",
+  "independent_tests_sha256": "13f38d27153456da43f4ebc8bf7ceb69ef3f3262ff19d1180193f3a7fff95d34",
+  "tests": 17,
+  "failures": 12,
+  "errors": 3,
+  "passes": 2,
+  "scope": "Synthetic pure diagnostic controls only; no hardware/model qualification",
+  "provider_tests_executed": false,
+  "source_or_provider_tests_modified": false
+}

@@ -1,0 +1,57 @@
+2490: 
+2491: [open,refpage='VkImportMemoryFdInfoKHR',desc='Import memory created on the same physical device from a file descriptor',type='structs']
+2492: --
+2493: To import memory from a POSIX file descriptor handle, add a
+2494: slink:VkImportMemoryFdInfoKHR structure to the pname:pNext chain of the
+2495: slink:VkMemoryAllocateInfo structure.
+2496: The sname:VkImportMemoryFdInfoKHR structure is defined as:
+2497: 
+2498: include::{generated}/api/structs/VkImportMemoryFdInfoKHR.adoc[]
+2499: 
+2500:   * pname:sType is a elink:VkStructureType value identifying this structure.
+2501:   * pname:pNext is `NULL` or a pointer to a structure extending this
+2502:     structure.
+2503:   * pname:handleType is a elink:VkExternalMemoryHandleTypeFlagBits value
+2504:     specifying the handle type of pname:fd.
+2505:   * pname:fd is the external handle to import.
+2506: 
+2507: Importing memory from a file descriptor transfers ownership of the file
+2508: descriptor from the application to the Vulkan implementation.
+2509: The application must: not perform any operations on the file descriptor
+2510: after a successful import.
+2511: The imported memory object holds a reference to its payload.
+2512: 
+2513: Applications can: import the same payload into multiple instances of Vulkan,
+2514: into the same instance from which it was exported, and multiple times into a
+2515: given Vulkan instance.
+2516: In all cases, each import operation must: create a distinct
+2517: sname:VkDeviceMemory object.
+2518: 
+2519: .Valid Usage
+2520: ****
+2521:   * [[VUID-VkImportMemoryFdInfoKHR-handleType-09862]]
+2522:     If pname:handleType is not `0`, it must: be supported for import, as
+2523:     reported by
+2524: ifdef::VK_ARM_tensors[slink:VkExternalTensorPropertiesARM,]
+2525:     slink:VkExternalImageFormatProperties or
+2526:     slink:VkExternalBufferProperties
+2527:   * [[VUID-VkImportMemoryFdInfoKHR-fd-00668]]
+2528:     The memory from which pname:fd was exported must: have been created on
+2529:     the same underlying physical device as pname:device
+2530:   * [[VUID-VkImportMemoryFdInfoKHR-handleType-00669]]
+2531:     If pname:handleType is not `0`, it must: be
+2532:     ename:VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT or
+2533:     ename:VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT
+2534:   * [[VUID-VkImportMemoryFdInfoKHR-handleType-00670]]
+2535:     If pname:handleType is not `0`, pname:fd must: be a valid handle of the
+2536:     type specified by pname:handleType
+2537:   * [[VUID-VkImportMemoryFdInfoKHR-fd-01746]]
+2538:     The memory represented by pname:fd must: have been created from a
+2539:     physical device and driver that is compatible with pname:device and
+2540:     pname:handleType, as described in
+2541:     <<external-memory-handle-types-compatibility>>
+2542:   * [[VUID-VkImportMemoryFdInfoKHR-fd-01520]]
+2543:     pname:fd must: obey any requirements listed for pname:handleType in
+2544:     <<external-memory-handle-types-compatibility,external memory handle
+2545:     types compatibility>>
+2546: ****

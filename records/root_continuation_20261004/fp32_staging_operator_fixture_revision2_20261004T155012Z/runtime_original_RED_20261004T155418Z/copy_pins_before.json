@@ -1,0 +1,38 @@
+[
+  {
+    "source": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\compile_original_20261004T155012Z\\fp32_staging_operator.exe",
+    "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\runtime_original_RED_20261004T155418Z\\fp32_staging_operator.exe",
+    "sha256_before": "ad449a153447080836e25a5ca264ebd4b3afa5b14dbb239b11a5bad5be117b5b",
+    "copy_sha256_before": "ad449a153447080836e25a5ca264ebd4b3afa5b14dbb239b11a5bad5be117b5b"
+  },
+  {
+    "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-base.dll",
+    "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\runtime_original_RED_20261004T155418Z\\ggml-base.dll",
+    "sha256_before": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9",
+    "copy_sha256_before": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9"
+  },
+  {
+    "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-cpu.dll",
+    "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\runtime_original_RED_20261004T155418Z\\ggml-cpu.dll",
+    "sha256_before": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52",
+    "copy_sha256_before": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52"
+  },
+  {
+    "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-rpc.dll",
+    "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\runtime_original_RED_20261004T155418Z\\ggml-rpc.dll",
+    "sha256_before": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a",
+    "copy_sha256_before": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a"
+  },
+  {
+    "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-vulkan.dll",
+    "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\runtime_original_RED_20261004T155418Z\\ggml-vulkan.dll",
+    "sha256_before": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00",
+    "copy_sha256_before": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00"
+  },
+  {
+    "source": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml.dll",
+    "copy": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\runtime_original_RED_20261004T155418Z\\ggml.dll",
+    "sha256_before": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab",
+    "copy_sha256_before": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab"
+  }
+]

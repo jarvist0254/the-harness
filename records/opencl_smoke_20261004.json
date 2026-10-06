@@ -1,0 +1,212 @@
+{
+  "status": "PASS",
+  "timestamp_utc": "2026-10-04T09:56:37.856527+00:00",
+  "experimental": true,
+  "transport": "EXPLICIT_HOST_STAGED",
+  "timing_scope": "single smoke sample per count and direction; not a performance benchmark",
+  "counts": [
+    32,
+    2048,
+    262144
+  ],
+  "max_vector_bytes": 1048576,
+  "inject_corruption": false,
+  "numpy_version": "2.2.6",
+  "pyopencl_version": "2025.2.6",
+  "devices": [
+    {
+      "identity": {
+        "runtime_id": "platform_0/device_0",
+        "confidence": "RUNTIME_REPORTED_PCI_IDENTITY",
+        "pci_identity": {
+          "domain": 0,
+          "bus": 1,
+          "slot_raw_nv": 0
+        }
+      },
+      "platform": "NVIDIA CUDA",
+      "platform_vendor": "NVIDIA Corporation",
+      "platform_version": "OpenCL 3.0 CUDA 13.1.123",
+      "name": "NVIDIA GeForce RTX 5070 Ti",
+      "vendor": "NVIDIA Corporation",
+      "device_type": "ALL | GPU",
+      "global_mem_bytes_reported": 17094475776,
+      "host_unified_memory": false,
+      "memory_classification": "DEVICE_LOCAL_MEMORY_REPORTED",
+      "max_alloc_bytes_reported": 4273618944,
+      "interop_extensions_advertised_only": [
+        "cl_khr_external_semaphore",
+        "cl_khr_external_memory",
+        "cl_khr_external_semaphore_win32",
+        "cl_khr_external_memory_win32"
+      ],
+      "svm_capabilities_advertised_only": 1
+    },
+    {
+      "identity": {
+        "runtime_id": "platform_1/device_0",
+        "confidence": "REPORTED_RUNTIME_ID_ONLY",
+        "pci_identity": null
+      },
+      "platform": "AMD Accelerated Parallel Processing",
+      "platform_vendor": "Advanced Micro Devices, Inc.",
+      "platform_version": "OpenCL 2.1 AMD-APP (3652.0)",
+      "name": "gfx1036",
+      "vendor": "Advanced Micro Devices, Inc.",
+      "device_type": "ALL | GPU",
+      "global_mem_bytes_reported": 38382632960,
+      "host_unified_memory": true,
+      "memory_classification": "SHARED_HOST_MEMORY_NOT_DEDICATED_VRAM",
+      "max_alloc_bytes_reported": 32168897740,
+      "interop_extensions_advertised_only": [],
+      "svm_capabilities_advertised_only": 3
+    }
+  ],
+  "negative_controls": {
+    "cross_platform_single_context": {
+      "status": "PASS",
+      "rejected": true,
+      "returncode": 3221225477,
+      "stdout": "ATTEMPT_CROSS_PLATFORM_CONTEXT\n",
+      "stderr": "",
+      "rejection_kind": "NATIVE_PROCESS_EXIT"
+    },
+    "corrupted_intermediate": {
+      "status": "PASS",
+      "detected_in_all_runs": true
+    }
+  },
+  "runs": [
+    {
+      "direction": "AMD->NVIDIA",
+      "count": 32,
+      "vector_bytes": 128,
+      "status": "PASS",
+      "source_runtime_id": "platform_1/device_0",
+      "destination_runtime_id": "platform_0/device_0",
+      "source_kernel_executed": true,
+      "destination_kernel_executed": true,
+      "source_max_abs_error": 0.0,
+      "final_max_abs_error": 0.0,
+      "source_parity": true,
+      "final_parity": true,
+      "final_sum": 3008.0,
+      "corrupted_intermediate_rejected": true,
+      "corrupted_control_max_abs_error": 3.0,
+      "source_kernel_event_ms": 0.00244,
+      "destination_kernel_event_ms": 0.008064,
+      "wall_ms_including_copies_and_negative_control": 3.302900120615959
+    },
+    {
+      "direction": "AMD->NVIDIA",
+      "count": 2048,
+      "vector_bytes": 8192,
+      "status": "PASS",
+      "source_runtime_id": "platform_1/device_0",
+      "destination_runtime_id": "platform_0/device_0",
+      "source_kernel_executed": true,
+      "destination_kernel_executed": true,
+      "source_max_abs_error": 0.0,
+      "final_max_abs_error": 0.0,
+      "source_parity": true,
+      "final_parity": true,
+      "final_sum": 12578816.0,
+      "corrupted_intermediate_rejected": true,
+      "corrupted_control_max_abs_error": 3.0,
+      "source_kernel_event_ms": 0.00068,
+      "destination_kernel_event_ms": 0.00384,
+      "wall_ms_including_copies_and_negative_control": 3.278699703514576
+    },
+    {
+      "direction": "AMD->NVIDIA",
+      "count": 262144,
+      "vector_bytes": 1048576,
+      "status": "PASS",
+      "source_runtime_id": "platform_1/device_0",
+      "destination_runtime_id": "platform_0/device_0",
+      "source_kernel_executed": true,
+      "destination_kernel_executed": true,
+      "source_max_abs_error": 0.0,
+      "final_max_abs_error": 0.0,
+      "source_parity": true,
+      "final_parity": true,
+      "final_sum": 206157905920.0,
+      "corrupted_intermediate_rejected": true,
+      "corrupted_control_max_abs_error": 3.0,
+      "source_kernel_event_ms": 0.09691,
+      "destination_kernel_event_ms": 0.056192,
+      "wall_ms_including_copies_and_negative_control": 7.662000134587288
+    },
+    {
+      "direction": "NVIDIA->AMD",
+      "count": 32,
+      "vector_bytes": 128,
+      "status": "PASS",
+      "source_runtime_id": "platform_0/device_0",
+      "destination_runtime_id": "platform_1/device_0",
+      "source_kernel_executed": true,
+      "destination_kernel_executed": true,
+      "source_max_abs_error": 0.0,
+      "final_max_abs_error": 0.0,
+      "source_parity": true,
+      "final_parity": true,
+      "final_sum": 3008.0,
+      "corrupted_intermediate_rejected": true,
+      "corrupted_control_max_abs_error": 3.0,
+      "source_kernel_event_ms": 0.004032,
+      "destination_kernel_event_ms": 0.00204,
+      "wall_ms_including_copies_and_negative_control": 1.4730002731084824
+    },
+    {
+      "direction": "NVIDIA->AMD",
+      "count": 2048,
+      "vector_bytes": 8192,
+      "status": "PASS",
+      "source_runtime_id": "platform_0/device_0",
+      "destination_runtime_id": "platform_1/device_0",
+      "source_kernel_executed": true,
+      "destination_kernel_executed": true,
+      "source_max_abs_error": 0.0,
+      "final_max_abs_error": 0.0,
+      "source_parity": true,
+      "final_parity": true,
+      "final_sum": 12578816.0,
+      "corrupted_intermediate_rejected": true,
+      "corrupted_control_max_abs_error": 3.0,
+      "source_kernel_event_ms": 0.004224,
+      "destination_kernel_event_ms": 0.00064,
+      "wall_ms_including_copies_and_negative_control": 1.179700717329979
+    },
+    {
+      "direction": "NVIDIA->AMD",
+      "count": 262144,
+      "vector_bytes": 1048576,
+      "status": "PASS",
+      "source_runtime_id": "platform_0/device_0",
+      "destination_runtime_id": "platform_1/device_0",
+      "source_kernel_executed": true,
+      "destination_kernel_executed": true,
+      "source_max_abs_error": 0.0,
+      "final_max_abs_error": 0.0,
+      "source_parity": true,
+      "final_parity": true,
+      "final_sum": 206157905920.0,
+      "corrupted_intermediate_rejected": true,
+      "corrupted_control_max_abs_error": 3.0,
+      "source_kernel_event_ms": 0.00384,
+      "destination_kernel_event_ms": 0.15228,
+      "wall_ms_including_copies_and_negative_control": 6.686000153422356
+    }
+  ],
+  "limitations": [
+    "No direct P2P, shared allocation, VRAM pool or LLM execution tested",
+    "AMD integrated GPU memory is shared host memory, not dedicated VRAM",
+    "Extensions describe advertised availability, not exercised interoperability",
+    "Intel GPU execution NOT_CHECKED; this probe requires AMD and NVIDIA",
+    "Runtime IDs are session-local unless a physical PCI identity is exposed"
+  ],
+  "required_pairs": [
+    "AMD->NVIDIA",
+    "NVIDIA->AMD"
+  ]
+}

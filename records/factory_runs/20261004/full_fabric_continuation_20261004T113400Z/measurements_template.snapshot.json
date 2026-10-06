@@ -1,0 +1,116 @@
+{
+  "status": "PENDING_PHYSICAL_MEASUREMENTS",
+  "units": "mm",
+  "printer": {
+    "actual_model": null,
+    "usable_build_volume": null,
+    "hole_coupon_results": null
+  },
+  "receivers": {
+    "exact_sku": null,
+    "pcb_size": null,
+    "mounting_hole_xy": null,
+    "hole_diameters": null,
+    "underside_keepout_z": null,
+    "slot_datum": null,
+    "connector_keepouts": null
+  },
+  "cards": [
+    {
+      "bay": "A",
+      "sku": null,
+      "dimensions": null,
+      "mass_kg": null,
+      "safe_support_patches": null,
+      "power_connector_keepout": null,
+      "vendor": null,
+      "vram_mib": null,
+      "maximum_board_power_w": null,
+      "auxiliary_power_connectors": null,
+      "receiver_sku": null,
+      "host_branch_mapping": null
+    },
+    {
+      "bay": "B",
+      "sku": null,
+      "dimensions": null,
+      "mass_kg": null,
+      "safe_support_patches": null,
+      "power_connector_keepout": null,
+      "vendor": null,
+      "vram_mib": null,
+      "maximum_board_power_w": null,
+      "auxiliary_power_connectors": null,
+      "receiver_sku": null,
+      "host_branch_mapping": null
+    },
+    {
+      "bay": "C",
+      "sku": null,
+      "dimensions": null,
+      "mass_kg": null,
+      "safe_support_patches": null,
+      "power_connector_keepout": null,
+      "vendor": null,
+      "vram_mib": null,
+      "maximum_board_power_w": null,
+      "auxiliary_power_connectors": null,
+      "receiver_sku": null,
+      "host_branch_mapping": null
+    },
+    {
+      "bay": "D",
+      "sku": null,
+      "dimensions": null,
+      "mass_kg": null,
+      "safe_support_patches": null,
+      "power_connector_keepout": null,
+      "vendor": null,
+      "vram_mib": null,
+      "maximum_board_power_w": null,
+      "auxiliary_power_connectors": null,
+      "receiver_sku": null,
+      "host_branch_mapping": null
+    }
+  ],
+  "psu": {
+    "sku": null,
+    "body_dimensions": null,
+    "cable_inventory": null,
+    "connector_service_volume": null,
+    "intake_exhaust_keepouts": null
+  },
+  "host": {
+    "installed_cpu": null,
+    "bios_bifurcation": null,
+    "m2_3_occupied": null,
+    "display_gpu_route": null,
+    "actual_link_states": null,
+    "motherboard_model": null,
+    "host_adapter_sku": null,
+    "branch_mappings": {
+      "A": null,
+      "B": null,
+      "C": null,
+      "D": null
+    },
+    "display_gpu": {
+      "sku": null,
+      "vram_mib": null,
+      "role": "separate_host_display",
+      "included_in_external_capacity": false,
+      "pci_route": null,
+      "power_domain": null,
+      "mechanical_support": null
+    }
+  },
+  "print_release": {
+    "orientation": null,
+    "brim_footprint": null,
+    "model_mass_kg": null,
+    "support_brim_mass_kg": null,
+    "spool_mass_kg": null,
+    "load_test_pass": null,
+    "thermal_test_pass": null
+  }
+}

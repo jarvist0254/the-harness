@@ -1,0 +1,14 @@
+{
+  "job_id": "grok_numeric_ledger_high",
+  "prompt_sha256": "22cbd92b95d336e04a310a109e6af985c895314976a4557ade93e6bc72ebe75f",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py",
+  "authority": "ROOT explicit ONEGrok4.7BuildFastHIGH ledgercorrection600s; relayedalsoLuna",
+  "reasoning_effort": "high",
+  "provider_launch_authorized": true,
+  "model": "grok-4.7-build-fast",
+  "owned_deadline_seconds": 600,
+  "source_sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1",
+  "native_children_actual": 0,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z",
+  "lane": "Grok"
+}

@@ -1,0 +1,103 @@
+{
+  "source_limit_chars": 32000,
+  "deadline_seconds": 600,
+  "intake": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\research_artifact.ps1",
+    "bytes": 774,
+    "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36"
+  },
+  "common": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\provider_common.ps1",
+    "bytes": 4072,
+    "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+  },
+  "inputs": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+      "bytes": 12831,
+      "sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\cuda_l0_device_dmabuf_prep_20261004T195400Z\\qwen_cuda_l0_device_dmabuf_v3\\tests_source.qwen_untrusted.txt",
+      "bytes": 1255,
+      "sha256": "8d468ec191f45ae44de3b136de8420846517717ed8accb1a282145c23f6f0ccb"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\run_output\\muse_review.extracted.json",
+      "bytes": 9693,
+      "sha256": "4ad7f5d9c2fd92d489dba5f3836e164e74b1783a0f3461207b685ce8fe064e16"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_combined_dma_prep_20261004T211555Z\\gemini_combined_high_v3_with_companion\\review.pending_root_qa.json",
+      "bytes": 12236,
+      "sha256": "3d48d94ef26a6161d8b63795b348af9392b7b102958918255b443b23f1740ed4"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\cuda_l0_source_compile_20261004T202000Z_attempt2\\compile_qa_findings.md",
+      "bytes": 4647,
+      "sha256": "02fe3b2499e3e09650913fb0b7d018694da88ac144048662c4127faa8ed3e568"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\cuda_l0_source_compile_20261004T202000Z_attempt2\\compile.stderr.txt",
+      "bytes": 14061,
+      "sha256": "596ee059c228e456dd0809cd8868d53af8671fa1b0e3f070f3213ea6b36b12ab"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\cuda_l0_source_compile_20261004T202000Z_attempt2\\compile_receipt.json",
+      "bytes": 9476,
+      "sha256": "ec09eda33ade8a8826e31d3a28d2bba5af291f820fb5a399d2825afc9888649f"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\bridge_contract_findings.md",
+      "bytes": 6314,
+      "sha256": "4e02a99eaf54e92d13ccf5d7a1deb15981f31c050a63f08865eb4862f392dbc8"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_fd_sync_bridge_trace_20261004T2115Z\\source_excerpts.txt",
+      "bytes": 23295,
+      "sha256": "4170f42fad8e03dd12ad347b39c3fbca29493d1d3ab95f1f17ff7d60f931486e"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\ROOT_COMBINED_DMA_STATIC_REVIEW_20261004T205616Z.json",
+      "bytes": 4234,
+      "sha256": "273d953e4f8d0133a1822cdfbcb325d0fc6fd507933fe25b9caf3b93aadad3fc"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\EGL_LEVEL_ZERO_PINNED_API_EXCERPTS_20261004T2101Z.txt",
+      "bytes": 13513,
+      "sha256": "8710bdd2b1e65c03e9262efc9a4acd1d297f6666c2159f299ef6b8039b1ec757"
+    }
+  ],
+  "job": "grok_combined_high",
+  "prompt": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\grok_combined_high.prompt.txt",
+    "bytes": 116447,
+    "sha256": "ae4a12fbe36ba4a891a3b80eed2cad549549729d8c96286386dec00b837669f6"
+  },
+  "native_children_actual": 0,
+  "stderr_cap_bytes": 2097152,
+  "wrapper": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\invoke_owned_combined_editor.ps1",
+    "bytes": 8086,
+    "sha256": "38d2f1ba7e382e3aace52b0cc1a29200497bae689ff87717a6faf9e432e00459"
+  },
+  "reasoning_effort": "high",
+  "stdout_cap_bytes": 2097152,
+  "wrapper_diff": {
+    "count": 1,
+    "replace": "Tool-less CUDA device DMA-BUF to Level Zero payload-experiment corrective C++ source editor.",
+    "only_replacement_search": "Tool-less four-physical-card measured-capacity validator corrective source editor.",
+    "deadline_transport_secret_controls_unchanged": true
+  },
+  "launch_authorized": false,
+  "spec": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_combined_dma_repair_prep_20261004T214800Z\\grok_combined_high.spec.txt",
+    "bytes": 3686,
+    "sha256": "3d1dbe677c2ca848e14d6c77139fbb31fb5fe850a2ae9c4f6f81caf6c5c928aa"
+  },
+  "tests_limit_chars": 16000,
+  "model": "grok-4.7-build-fast",
+  "utc": "2026-10-04T21:51:30.7046826Z",
+  "status": "PREPARATION_ONLY_PENDING_ROOT_ADMISSION",
+  "generated_source_execution": false
+}

@@ -1,0 +1,136 @@
+{
+  "created_utc": "2026-10-04T13:22:20.709001+00:00",
+  "import_manifest_sha256": "1fa06d57c2956e05db2f6073ae4f6d597ead46add6a2fbab521ff3c59442ae52",
+  "checked": 5671,
+  "unchanged": 5651,
+  "missing": [],
+  "changes": [
+    {
+      "path": "README.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "03fbcb2cfa697fd24331e56f274b084a4491fccdd051b004234a4c3228dcb285",
+      "current_sha256": "45039078e36eb49e9504e37c02033a5f88923289ec1201d2f6dcf315b7f3b2f1"
+    },
+    {
+      "path": "docs/00_STATUS_AND_PRECEDENCE.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "14e20ab8cb7214dfcf505ae89735b25bd5bcbce0f145676c619df7b946190e10",
+      "current_sha256": "5b7859e1e0c4df2946194734958b5036e92d7bee5e9c79fa287ffec7bcca2e67"
+    },
+    {
+      "path": "docs/01_HARNESS_MASTER.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "9dcc0a704877abe15bee5e927dd3f351edc9387e281716df8f9bc7e4e277d4cb",
+      "current_sha256": "1a83c28a62ab54f714a193e68f474b7b1af6dfd34b97fff5435ccb3241aff886"
+    },
+    {
+      "path": "docs/02_J_LINK_RESEARCH.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "6d3cec575a9d533b0fbfd9839b580b797a1f47f3d5c479ed2fe66c3a6384a538",
+      "current_sha256": "b2400ce56ad640feb6a2401b342bbe379fa685f1e1e92cf1f50b9f3e6aed7996"
+    },
+    {
+      "path": "docs/03_EXPERIMENT_RUNBOOK.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "31b1acd2ded7d73656fd680472351627c6e6c3e5e9016044d13b64ac1e0b06bd",
+      "current_sha256": "7f7a67e3ea390ea5510310e2918a380e6acb294ced097dbc31ec33381889974f"
+    },
+    {
+      "path": "docs/04_PYRE_INTEGRATION.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "16b5df19ed07927f6040419fb60e85798b908fb07b6b5b463d7a46fdec7604fd",
+      "current_sha256": "810e478e4e5cf6e1a72478ec518a4d7e67053e8aab4f938e20183f77649285e4"
+    },
+    {
+      "path": "docs/05_PRIMARY_SOURCES.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "748b58e1168e1e6aa524b82908e86f237d04864989c38f0ad9c761418d2a8b3c",
+      "current_sha256": "5f15fec8d8bb370ee1d07274a1b4778d098c0349e58afcb44770bf396008cd42"
+    },
+    {
+      "path": "docs/06_LOCAL_AGENT_HANDOFF.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "84b8f7d786c4f3dc5313dd095e6868a0f1dd6eb2fe47c9215dd105af5279e721",
+      "current_sha256": "6171e8b76728e7101b1d71f92306af44e764aa14a4ff72feaa7be1c6b96e3779"
+    },
+    {
+      "path": "docs/07_5050_CANDIDATE.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "eea155754759ece4dfcbee2215dd5485c927dca8608f29a44a4d5359df3bb237",
+      "current_sha256": "9c8e7cb8fa67d04e0942ea95718a1411c17babb215262c57ebe72f47b72375a0"
+    },
+    {
+      "path": "j_link/README.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "496dbc87df7fad4981dac60e87e709106089731a93f650afe066b638b0b93b51",
+      "current_sha256": "be74f4f6e42d6683d5dcb53015113e5dccc49d2b267a94fb7f142cccd40b81a1"
+    },
+    {
+      "path": "j_link/examples/all_amd.json",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "cfd72af9e530052a2e2eca174ba3a505f80313aba960f8784f764083ac424085",
+      "current_sha256": "e28edeccc97bad239c99c41c272a5ca0c907baf61678b6c47f95900fa105ad8a"
+    },
+    {
+      "path": "j_link/examples/all_intel.json",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "33ec44ad83f75e53855ccb9367480d813a90d2da0f9a8cf61e395ba4402ba2cd",
+      "current_sha256": "889bfa76b7a65e15ea3d1bff6707b0132a5bc8abd55d91413be19d4b24a5762c"
+    },
+    {
+      "path": "j_link/examples/all_nvidia.json",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "d0610a375b062c93531cc6c9a6c100f63ceb33bc9983d83567a18d26664aaaf0",
+      "current_sha256": "1d6831318ae8a0f6ed399658c661d5e757fb5840a2b6b5dbe9cea86081cf9c34"
+    },
+    {
+      "path": "j_link/examples/mixed.json",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "d2c07e895c1dc2c439cb36bbdfa7d9a17a0073863802748612451725c67bee2e",
+      "current_sha256": "2b9f7d0160bf1ee2b33ed0a3d731360227564eedaecf0fa3c2888f6e9112762c"
+    },
+    {
+      "path": "j_link/tests/test_planner.py",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "41dad6e6bba09b6ce2f92623fa6a183d1e2c1707623fda76e04c9136210ee86a",
+      "current_sha256": "21adea127b2171633c6ef7097b83f3924421c12febba2b0641a3cb92eead79a3"
+    },
+    {
+      "path": "records/VALIDATION.md",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "33cc1beea635c1190c1d3916fef22fd9c178060bd7694fdb7383bd36995b81e4",
+      "current_sha256": "b300f6d94917535180928607389cf80192eda2654b79f20de6be4b0c8e1d8838"
+    },
+    {
+      "path": "records/measurements_template.json",
+      "classification": "AUTHORIZED_HARNESS_ADAPTATION",
+      "import_sha256": "610dbf1d3593d8c51467293f9f79b51d846903534570d8a63337091e8dd791df",
+      "current_sha256": "9ec9b56e52c49d6a000ef43103803b2f9f9d76796eda7fe8136d3946fb5e2d7a"
+    },
+    {
+      "path": "repos/compute-benchmarks/.git/index",
+      "classification": "GIT_INDEX_METADATA_DRIFT_PRESERVED",
+      "import_sha256": "46f24439e17efe83f98f5bf1108119e02e7356dd584008ac2dbe747884ece446",
+      "current_sha256": "2092167da1f669354a04d9ad2d74a2022af5a828b296c54596fdfdbb346ce7dd"
+    },
+    {
+      "path": "repos/compute-benchmarks/.git/modules/third_party/googletest/index",
+      "classification": "GIT_INDEX_METADATA_DRIFT_PRESERVED",
+      "import_sha256": "f3648524755eb54e463a0a51741b93b52826aa13856f4cd545c24ba2a02bc214",
+      "current_sha256": "b88bfde6f407689f085124b8f255f2755759c665f65280812b6d70ff74306773"
+    },
+    {
+      "path": "repos/llama.cpp/.git/index",
+      "classification": "GIT_INDEX_METADATA_DRIFT_PRESERVED",
+      "import_sha256": "a0d42a22f99c46f4806c1d1a96e824534aeebf1b39b2218e0d4256fbd9c65976",
+      "current_sha256": "60e2f3912c82be10615c4d9af858515c581c3c2a1d39ce061af924f60297aa1e"
+    }
+  ],
+  "unexpected_content_changes": [],
+  "status": "CONTENT_PRESERVED_WITH_DECLARED_ADAPTATION_AND_GIT_METADATA_VARIANCE",
+  "limitations": [
+    "Git indexes differ from imported snapshot; cause not independently established; preserved without restoring/mutating repos",
+    "All other original repository/recovered-source bytes match imported manifest; extra derived local artifacts are outside imported inventory",
+    "Integrity is not hardware/model/CAD qualification"
+  ]
+}

@@ -1,0 +1,25 @@
+test_clean_full_parity (__main__.Extended) ... ok
+test_cleanup_failure_not_success (__main__.Extended) ... ok
+test_corruption_exact_word (__main__.Extended) ... ok
+test_duplicate_flag_no_API (__main__.Extended) ... ok
+test_each_submitted_stage_timeout_quarantines (__main__.Extended) ... ok
+test_peer_unavailable (__main__.Extended) ... ok
+test_surplus_cli_refused (__main__.Extended) ... ok
+test_surplus_cli_zero_API_calls (__main__.Extended) ... ok
+test_timeout_exact_api (__main__.Extended) ... ok
+test_timeout_no_pending_destruction (__main__.Extended) ... ok
+test_timeout_quarantine_no_cleanup_claim (__main__.Extended) ... ok
+test_clean_full_parity (test_receipt_requirements.Gates) ... ok
+test_cleanup_failure_not_success (test_receipt_requirements.Gates) ... ok
+test_corruption_exact_word (test_receipt_requirements.Gates) ... ok
+test_peer_unavailable (test_receipt_requirements.Gates) ... ok
+test_surplus_cli_refused (test_receipt_requirements.Gates) ... ok
+test_surplus_cli_zero_API_calls (test_receipt_requirements.Gates) ... ok
+test_timeout_exact_api (test_receipt_requirements.Gates) ... ok
+test_timeout_no_pending_destruction (test_receipt_requirements.Gates) ... ok
+test_timeout_quarantine_no_cleanup_claim (test_receipt_requirements.Gates) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.007s
+
+OK

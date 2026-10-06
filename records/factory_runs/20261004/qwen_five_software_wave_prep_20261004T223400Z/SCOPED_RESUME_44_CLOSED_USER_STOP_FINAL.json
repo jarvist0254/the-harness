@@ -1,0 +1,46 @@
+{
+  "new_closed_receipts": [
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\USER_STOP_TWO_OWNED_QWEN_20261004T230832Z.json"
+  ],
+  "immutable_prior_ledger": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\SCOPED_RESUME_42_CLOSED_PLUS_TWO_INVENTORY_LIVE.json",
+    "sha256": "2bc5ca4bc30d09f31fb1a0b3f8eb612bc13982d8e7ed4e38d680d5f14f4a576f"
+  },
+  "generated_source_execution": false,
+  "utc": "2026-10-04T23:10:29.1149968Z",
+  "providers": {
+    "Gemini": {
+      "observed_tokens": 182621,
+      "known_jobs": 3,
+      "unknown_jobs": 0,
+      "closed_jobs": 3
+    },
+    "Grok": {
+      "observed_tokens": 335755,
+      "known_jobs": 3,
+      "unknown_jobs": 2,
+      "closed_jobs": 5
+    },
+    "Muse": {
+      "observed_tokens": null,
+      "known_jobs": 0,
+      "unknown_jobs": 3,
+      "closed_jobs": 3
+    },
+    "Qwen": {
+      "observed_tokens": 1360280,
+      "known_jobs": 21,
+      "unknown_jobs": 12,
+      "closed_jobs": 33
+    }
+  },
+  "live_jobs": [],
+  "credits_not_tokens": true,
+  "paid_billing_not_inferred": true,
+  "unknown_usage_closed_jobs": 17,
+  "closed_observed_tokens": 1878656,
+  "known_usage_closed_jobs": 27,
+  "old_ledgers_mutated": false,
+  "scope": "MANAGER_SCOPED_CLOSED44_NO_LIVE_PROVIDER_GOAL_PAUSED",
+  "closed_jobs": 44
+}

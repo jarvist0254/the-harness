@@ -1,0 +1,184 @@
+{
+  "scope": "Independent read-only source and retained BRep evidence review; no native rebuild or CAD edits",
+  "timestamp_utc": "20261004T121942Z",
+  "evidence_sha256": {
+    "cad/integrated_core.py": "cf88c9ec845bf1ce2acead5e10771d8d13e9d4996b224ff96d1e8b57ec910cb7",
+    "records/cad_draft_20261004/compact_revision2/state.json": "c325988d411140e3575b80fd0bdc14c61b279796348b7f298fdaf942c65f5186",
+    "records/cad_draft_20261004/universal_revision2/state.json": "8a5b681f886ccdbce9447364acd79b40cb0c1f911516d6eb31a8f3a476607ba3",
+    "records/cad_draft_20261004/integrated_tetris_actual_brep.png": "8b7552d0cd35fd4879c2b9664b6eef35a41acff5c34fe51490cb2ac60a504962",
+    "records/cad_draft_20261004/native_build_revision2_runs.json": "629f66d160d742a43466481074a3cb0821dd8bdaef04e2a0d304b3c62b659637",
+    "records/cad_draft_20261004/export_preview_geometry.py": "400990510b9e32ac906198dfba198b7196d36fe002457ae209bf70bd59c18896",
+    "records/cad_draft_20261004/preview_export_receipt.json": "15804bee285a125dee04637dd59f3e717214c24d7e9d67e10a8bdbe89cacfe50"
+  },
+  "checks": {
+    "compact": {
+      "one_valid_continuous_solid": true,
+      "actual_printed_bbox_mm": [
+        188.0,
+        200.0,
+        200.0
+      ],
+      "rotated_print_bbox_mm": [
+        200.0,
+        188.0,
+        200.0
+      ],
+      "body_clear": true,
+      "body_interferences": [],
+      "three_upright_fourth_rolled": true,
+      "production_fit_qualified": false,
+      "production_release": false,
+      "safe_support_interfaces": "UNKNOWN",
+      "D_load_capacity": "UNKNOWN",
+      "airflow_removal_cables_PSU_receiver_brim_mass_thermal": "NOT_CHECKED"
+    },
+    "universal": {
+      "one_valid_continuous_solid": true,
+      "actual_printed_bbox_mm": [
+        188.0,
+        200.0,
+        254.0
+      ],
+      "rotated_print_bbox_mm": [
+        200.0,
+        188.0,
+        254.0
+      ],
+      "body_clear": false,
+      "body_interferences": [
+        {
+          "bay": "A",
+          "printed_overlap_mm3": 33000.000000000015
+        },
+        {
+          "bay": "C",
+          "printed_overlap_mm3": 33000.0
+        }
+      ],
+      "three_upright_fourth_rolled": true,
+      "production_fit_qualified": false,
+      "production_release": false,
+      "safe_support_interfaces": "UNKNOWN",
+      "D_load_capacity": "UNKNOWN",
+      "airflow_removal_cables_PSU_receiver_brim_mass_thermal": "NOT_CHECKED"
+    }
+  },
+  "preview_review": "Preview has actual saved BRep geometry provenance. Compact body-clear and universal collision captions match state. DRAFT ONLY and unknown interfaces are explicit. No production fit claim found.",
+  "new_findings": [
+    {
+      "severity": "P2",
+      "lines": [
+        36,
+        39,
+        110,
+        111,
+        130
+      ],
+      "finding": "Individual positive dimension bounds do not enforce positive derived box dimensions. rail_depth=1 gives rail depth -1; core_depth=10 with rail_depth=8 gives side length -6. Reject relationally invalid dimensions before FreeCAD construction."
+    },
+    {
+      "severity": "P2",
+      "lines": [
+        39,
+        61,
+        125,
+        129
+      ],
+      "finding": "Beam plus metal height may exceed gap. Accepted beam_height=20 and metal_height=2 against gap=12 puts beam bottom at130 while A-C top140, so beam penetrates10 mm into body envelopes. Require a clearance relation or explicitly reject on collision."
+    },
+    {
+      "severity": "P2",
+      "lines": [
+        48,
+        61,
+        65,
+        127,
+        131
+      ],
+      "finding": "D contact footprint is not validated against fixed front and rear rails. An accepted D length100 mm never reaches rear rail y193..199; generic two-rail D support is not established for arbitrary accepted envelopes. Current compact geometry contacts both ideal envelope boundaries, but safe hardware contact and load capacity remain unknown."
+    }
+  ],
+  "parameter_probes": [
+    {
+      "case": "rail_depth_one",
+      "planner_accepted": true,
+      "input_override": {
+        "rail_depth_mm": 1
+      },
+      "metal_rail_depth_mm": -1.0,
+      "base_side_length_mm": 198.0,
+      "rear_rail_y_mm": [
+        200.0,
+        199.0
+      ],
+      "D_y_mm": [
+        0,
+        199.0
+      ],
+      "beam_bottom_mm": 144.0,
+      "ABC_top_mm": 140.0
+    },
+    {
+      "case": "depth_ten",
+      "planner_accepted": true,
+      "input_override": {
+        "core_depth_mm": 10
+      },
+      "metal_rail_depth_mm": 6.0,
+      "base_side_length_mm": -6.0,
+      "rear_rail_y_mm": [
+        3.0,
+        9.0
+      ],
+      "D_y_mm": [
+        0,
+        199.0
+      ],
+      "beam_bottom_mm": 144.0,
+      "ABC_top_mm": 140.0
+    },
+    {
+      "case": "beam_too_deep",
+      "planner_accepted": true,
+      "input_override": {
+        "d_beam_height_mm": 20
+      },
+      "metal_rail_depth_mm": 6.0,
+      "base_side_length_mm": 184.0,
+      "rear_rail_y_mm": [
+        193.0,
+        199.0
+      ],
+      "D_y_mm": [
+        0,
+        199.0
+      ],
+      "beam_bottom_mm": 130.0,
+      "ABC_top_mm": 140.0
+    },
+    {
+      "case": "short_D",
+      "planner_accepted": true,
+      "input_override": {
+        "cards.D.length_mm": 100
+      },
+      "metal_rail_depth_mm": 6.0,
+      "base_side_length_mm": 184.0,
+      "rear_rail_y_mm": [
+        193.0,
+        199.0
+      ],
+      "D_y_mm": [
+        0,
+        100.0
+      ],
+      "beam_bottom_mm": 144.0,
+      "ABC_top_mm": 140.0
+    }
+  ],
+  "limits": [
+    "One-solid and intersection results are reviewed retained native revision-2 receipts, not independently recomputed in a second expensive FreeCAD run.",
+    "Pure stdlib planner probes and analytical dimensions do not establish material strength, actual hardware clearances, or printability.",
+    "Universal build exports a collision-bearing draft and exits zero; its explicit collision state and wrapper REFUSED_BODY_INTERFERENCE must remain authoritative."
+  ]
+}

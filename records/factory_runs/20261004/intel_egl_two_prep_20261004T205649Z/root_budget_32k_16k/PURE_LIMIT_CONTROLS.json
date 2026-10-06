@@ -1,0 +1,32 @@
+[
+  {
+    "pass": true,
+    "actual_accept": true,
+    "case": "exact32k16k",
+    "expected_accept": true
+  },
+  {
+    "pass": true,
+    "actual_accept": false,
+    "case": "source32001",
+    "expected_accept": false
+  },
+  {
+    "pass": true,
+    "actual_accept": false,
+    "case": "tests16001",
+    "expected_accept": false
+  },
+  {
+    "pass": true,
+    "actual_accept": false,
+    "case": "bothover",
+    "expected_accept": false
+  },
+  {
+    "pass": true,
+    "actual_accept": false,
+    "case": "badstatus",
+    "expected_accept": false
+  }
+]

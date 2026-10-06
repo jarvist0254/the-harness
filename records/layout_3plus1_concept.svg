@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="960" viewBox="0 0 1200 960" role="img" aria-labelledby="title desc">
+  <title id="title">Integrated four-card Tetris packaging: three upright cards and one rolled top card</title>
+  <desc id="desc">Exact GPU envelope rectangles with twelve millimetre gaps. Dashed printed-core bounds and suggested load paths are concept constraints, not modeled structural members. GPU overhang is authorized. All support, receiver and cable interfaces remain unmeasured.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#334155"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#172b46;font-size:14px} .heading{font-size:21px;font-weight:bold}.small{font-size:12px}.dim{stroke:#334155;stroke-width:1;marker-start:url(#arrow);marker-end:url(#arrow)}.core{fill:none;stroke:#64748b;stroke-width:2;stroke-dasharray:8 5}.gpu{fill:#dceef9;stroke:#1677a5;stroke-width:2}.top{fill:#dfefdf;stroke:#398353;stroke-width:2}.suggestion{fill:none;stroke:#b45309;stroke-width:2;stroke-dasharray:4 6}.note{fill:#92400e}.divider{stroke:#cbd5e1;stroke-width:1}
+    </style>
+  </defs>
+  <rect width="1200" height="960" fill="#f8fafc"/>
+  <text x="35" y="35" class="heading">Integrated core • GPU overhang allowed • four mounts in one continuous skeleton</text>
+  <text x="35" y="60">CONCEPT PACKING ONLY — rectangles show card envelopes, not product CAD or a completed chassis.</text>
+  <text x="35" y="90" class="heading">1 / Compact front view</text>
+  <text x="490" y="90" class="heading">2 / Compact side view: serial fan + plenum</text>
+
+  <!-- Compact front, 1.5 drawing pixels per millimetre. Core 254W x188H. GPU datum z=0. -->
+  <rect class="core" x="50" y="105" width="381" height="282"/>
+  <rect class="gpu" x="132.5" y="213" width="60" height="174"/>
+  <rect class="gpu" x="210.5" y="213" width="60" height="174"/>
+  <rect class="gpu" x="288.5" y="213" width="60" height="174"/>
+  <rect class="top" x="153.5" y="135" width="174" height="60"/>
+  <text x="157" y="282">A</text><text x="235" y="282">B</text><text x="313" y="282">C</text>
+  <text x="163" y="308" class="small" transform="rotate(-90 163 308)">40 W ×116 H</text>
+  <text x="184" y="160">D • rolled 90°</text><text x="184" y="180" class="small">116 W ×40 H</text>
+  <text x="347" y="206" class="small">12 mm</text><line x1="333" y1="195" x2="333" y2="213" class="dim"/>
+  <line x1="195" y1="350" x2="208" y2="350" class="dim"/><text x="195" y="339" class="small">12</text>
+  <line x1="273" y1="350" x2="286" y2="350" class="dim"/><text x="273" y="339" class="small">12</text>
+  <!-- Suggestions deliberately dashed: no structural clearance or strength claim. -->
+  <path class="suggestion" d="M120 387V198H148 M361 387V198H334"/>
+  <text x="62" y="124" class="small">Recovered core bound:254 W ×188 H</text>
+  <line x1="113" y1="411" x2="368" y2="411" class="dim"/>
+  <text x="125" y="433">170 mm =13+40+12+40+12+40+13</text>
+  <line x1="449" y1="135" x2="449" y2="387" class="dim"/>
+  <text x="445" y="265" class="small" transform="rotate(-90 445 265)">168 mm =116+12+40</text>
+  <text x="50" y="454" class="small">Datum aligned to core base for arithmetic only; floor thickness UNKNOWN.</text>
+  <text x="50" y="473" class="small note">Dashed amber: suggested integrated load paths; not modeled members.</text>
+
+  <!-- Compact side, same scale. 199L; fan25D; illustrative plenum30D. -->
+  <rect class="core" x="490" y="105" width="300" height="282"/>
+  <rect x="490" y="207" width="37.5" height="180" fill="#e5e7eb" stroke="#64748b"/>
+  <rect x="527.5" y="135" width="45" height="252" fill="#fef3c7" fill-opacity="0.6" stroke="#ca8a04" stroke-dasharray="3 4"/>
+  <rect class="gpu" x="572.5" y="213" width="298.5" height="174"/>
+  <rect class="top" x="572.5" y="135" width="298.5" height="60"/>
+  <text x="619" y="169">D:199 mm length</text><text x="619" y="293">A/B/C:199 mm length</text>
+  <text x="497" y="336" class="small" transform="rotate(-90 497 336)">120 mm fan frame</text>
+  <text x="545" y="300" class="small" transform="rotate(-90 545 300)">30 mm plenum shown</text>
+  <text x="490" y="124" class="small">Recovered core bound:200 D ×188 H</text>
+  <line x1="490" y1="411" x2="871" y2="411" class="dim"/>
+  <text x="491" y="433">25 fan +25–35 plenum +199 card =249–259 D</text>
+  <text x="491" y="454" class="small">Beyond200 D:49–59 mm. GPU overhang authorized.</text>
+  <text x="491" y="473" class="small note">Fan/plenum placement is illustrative; receiver/cable intrusion UNKNOWN.</text>
+  <line class="divider" x1="35" y1="495" x2="1165" y2="495"/>
+
+  <text x="35" y="525" class="heading">3 / Universal envelopes and installed-core orientation search</text>
+  <text x="35" y="548">Cards:360 L ×165 h ×68 t. Pack:254 W ×360 D ×245 H, including width margins and12 mm gaps.</text>
+  <!-- Universal front at 1 pixel/mm, pack X60..314; datum y827. -->
+  <rect class="core" x="60" y="639" width="254" height="188"/>
+  <rect class="gpu" x="73" y="662" width="68" height="165"/>
+  <rect class="gpu" x="153" y="662" width="68" height="165"/>
+  <rect class="gpu" x="233" y="662" width="68" height="165"/>
+  <rect class="top" x="104.5" y="582" width="165" height="68"/>
+  <text x="109" y="610">D:165 W ×68 H</text>
+  <text x="99" y="744">A</text><text x="179" y="744">B</text><text x="259" y="744">C</text>
+  <text x="60" y="851" class="small">Recovered orientation:254 W ×200 D ×188 H</text>
+  <text x="60" y="870" class="small">Pack exceeds188 H by57 mm; rear depth overhang160 mm.</text>
+  <text x="60" y="889" class="small note">Card extension allowed; upper support location not established.</text>
+
+  <!-- Tall core alternative at same scale:188W x254H. Center GPU pack on it. -->
+  <rect class="core" x="459" y="573" width="188" height="254"/>
+  <rect class="gpu" x="439" y="662" width="68" height="165"/>
+  <rect class="gpu" x="519" y="662" width="68" height="165"/>
+  <rect class="gpu" x="599" y="662" width="68" height="165"/>
+  <rect class="top" x="470.5" y="582" width="165" height="68"/>
+  <text x="480" y="610">D:245 H pack top</text>
+  <text x="465" y="744">A</text><text x="545" y="744">B</text><text x="625" y="744">C</text>
+  <line x1="426" y1="839" x2="459" y2="839" class="dim"/>
+  <line x1="647" y1="839" x2="680" y2="839" class="dim"/>
+  <text x="432" y="857" class="small">33</text><text x="653" y="857" class="small">33</text>
+  <text x="418" y="877" class="small">Alternate core:188 W ×200 D ×254 H</text>
+  <text x="418" y="896" class="small">Pack extends 33 mm/side; includes 13 mm margins.</text>
+  <text x="418" y="913" class="small note">Only9 mm height reserve; support footprints UNKNOWN.</text>
+
+  <text x="730" y="585" class="heading">Orientation is a variable</text>
+  <text x="730" y="615">Same conservative print box:</text>
+  <text x="730" y="638">200 ×188 ×254 mm</text>
+  <text x="730" y="673">Recovered installed:254 W /200 D /188 H</text>
+  <text x="730" y="696">Tall alternative:188 W /200 D /254 H</text>
+  <text x="730" y="719">Also search:200 W /188 D /254 H</text>
+  <text x="730" y="756" class="small">No arbitrary rotation preserves fan wall or load direction.</text>
+  <text x="730" y="779" class="small">Every printed pillar and mount must remain in ONE core.</text>
+  <text x="730" y="802" class="small">D carries load into own pillars/qualified metal rail,</text>
+  <text x="730" y="820" class="small">never onto lower cards, fans or PCIe connector.</text>
+  <text x="730" y="855" class="small note">GATES:receiver90° pose; independent removal;</text>
+  <text x="730" y="875" class="small note">≥12 mm intake paths; PSU/fan/cable zones;</text>
+  <text x="730" y="895" class="small note">load/tip/thermal; brim/support; one-spool mass.</text>
+  <rect x="0" y="930" width="1200" height="30" fill="#172b46"/>
+  <text x="28" y="950" style="fill:white;font-size:14px;font-weight:bold">ALL SUPPORT / RECEIVER / CABLE INTERFACES UNMEASURED — NOT CAD / FIT PASS</text>
+</svg>

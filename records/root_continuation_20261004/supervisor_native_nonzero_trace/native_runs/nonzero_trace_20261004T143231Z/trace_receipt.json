@@ -1,0 +1,137 @@
+{
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_nonzero_trace\\trace_controller.py",
+    "--output",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_nonzero_trace\\native_runs\\nonzero_trace_20261004T143231Z\\supervisor_output",
+    "--trace",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_nonzero_trace\\native_runs\\nonzero_trace_20261004T143231Z\\native_api_trace.jsonl"
+  ],
+  "controller_elapsed_seconds": 0.141,
+  "controller_exit_code": 0,
+  "controller_payload": {
+    "controller_status": "RETURNED",
+    "hashes_after": {
+      "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+      "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+    },
+    "hashes_before": {
+      "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+      "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+    },
+    "hashes_unchanged": true,
+    "restart_matches": true,
+    "restart_receipt": {
+      "containment_policy": "kill_on_close",
+      "drain_proof": "UNKNOWN_DRAIN",
+      "failure_reason": "nonzero_exit",
+      "job_active_count": 0,
+      "logs": {
+        "nonzero_worker": {
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stderr_overflow": false,
+          "stderr_path": "nonzero_worker.stderr.log",
+          "stdout": "nonzero_worker:nonzero\r\n",
+          "stdout_bytes": 24,
+          "stdout_overflow": false,
+          "stdout_path": "nonzero_worker.stdout.log"
+        }
+      },
+      "reattach": false,
+      "replay": false,
+      "run_id": "native_nonzero_trace",
+      "status": "FAILED",
+      "version": 1,
+      "whole_tree_certificate": false,
+      "workers": [
+        {
+          "assigned": true,
+          "exit_code": 3,
+          "pid": 24592,
+          "resumed": true,
+          "worker_id": "nonzero_worker"
+        }
+      ]
+    },
+    "result": {
+      "containment_policy": "kill_on_close",
+      "drain_proof": "UNKNOWN_DRAIN",
+      "failure_reason": "nonzero_exit",
+      "job_active_count": 0,
+      "logs": {
+        "nonzero_worker": {
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stderr_overflow": false,
+          "stderr_path": "nonzero_worker.stderr.log",
+          "stdout": "nonzero_worker:nonzero\r\n",
+          "stdout_bytes": 24,
+          "stdout_overflow": false,
+          "stdout_path": "nonzero_worker.stdout.log"
+        }
+      },
+      "reattach": false,
+      "replay": false,
+      "run_id": "native_nonzero_trace",
+      "status": "FAILED",
+      "version": 1,
+      "whole_tree_certificate": false,
+      "workers": [
+        {
+          "assigned": true,
+          "exit_code": 3,
+          "pid": 24592,
+          "resumed": true,
+          "worker_id": "nonzero_worker"
+        }
+      ]
+    },
+    "trace": {
+      "bytes": 2777,
+      "complete": true,
+      "dropped_events": 0,
+      "event_count": 21,
+      "path": "native_api_trace.jsonl"
+    }
+  },
+  "controller_pid": 56752,
+  "controller_pid_absent_after_wait": true,
+  "controller_timeout": false,
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_nonzero_trace",
+  "hashes_after": {
+    "python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+    "trace_contract.json": "99d04af267885505d8decdc7eac2bad2ee890565878f5b7151010d4b79a78faf",
+    "trace_controller.py": "ba71bc4fe694ebc821e24e8f9b3df3cabb904cc6fb1680e8016d1260d84b13c0",
+    "trace_driver.py": "49373af94bfd59de8a4c4a3c5bb5df1826df9e755ddc86b6e2aa0c690dd4fcfa",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "hashes_before": {
+    "python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+    "trace_contract.json": "99d04af267885505d8decdc7eac2bad2ee890565878f5b7151010d4b79a78faf",
+    "trace_controller.py": "ba71bc4fe694ebc821e24e8f9b3df3cabb904cc6fb1680e8016d1260d84b13c0",
+    "trace_driver.py": "49373af94bfd59de8a4c4a3c5bb5df1826df9e755ddc86b6e2aa0c690dd4fcfa",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "hashes_unchanged": true,
+  "limitations": [
+    "one diagnostic case only",
+    "point-in-time process snapshots",
+    "no whole-tree certificate",
+    "resource high-water unmeasured"
+  ],
+  "native_trace_bytes": 2777,
+  "native_trace_lines": 21,
+  "native_trace_sha256": "e86f13bc13198458875f27e7781dd924b19efe41e075534467da2aa3132d91de",
+  "python_abi_bits": 64,
+  "python_machine": "AMD64",
+  "raw_worker_receipt": "{\"version\": 1, \"run_id\": \"native_nonzero_trace\", \"status\": \"FAILED\", \"failure_reason\": \"nonzero_exit\", \"containment_policy\": \"kill_on_close\", \"workers\": [{\"worker_id\": \"nonzero_worker\", \"pid\": 24592, \"exit_code\": 3, \"assigned\": true, \"resumed\": true}], \"job_active_count\": 0, \"drain_proof\": \"UNKNOWN_DRAIN\", \"whole_tree_certificate\": false, \"logs\": {\"nonzero_worker\": {\"stdout\": \"nonzero_worker:nonzero\\r\\n\", \"stdout_bytes\": 24, \"stdout_overflow\": false, \"stdout_path\": \"nonzero_worker.stdout.log\", \"stderr\": \"\", \"stderr_bytes\": 0, \"stderr_overflow\": false, \"stderr_path\": \"nonzero_worker.stderr.log\"}}, \"reattach\": false, \"replay\": false}",
+  "run_id": "nonzero_trace_20261004T143231Z",
+  "status": "TRACE_CAPTURED",
+  "worker_pids": [
+    24592
+  ],
+  "worker_pids_absent_after_cleanup": true
+}

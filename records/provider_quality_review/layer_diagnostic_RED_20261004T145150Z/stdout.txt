@@ -1,0 +1,17 @@
+{
+  "scope": "SYNTHETIC_COMPARATOR_ONLY_NOT_GPU_OR_MODEL_QUALIFICATION",
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+  "source_sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+  "tests_run": 62,
+  "failures": 21,
+  "errors": 0,
+  "not_checked": 0,
+  "forbidden_calls": [],
+  "adapter": "Actual Qwen result key result, first_divergent_ordinal, stats; malformed artifacts must CaptureError or resultNOT_CHECKED, not numeric divergence. Output root/file writes remain external caller responsibility.",
+  "limits": [
+    "Metadata pin matching does not authenticate execution or original model.",
+    "144-node cap cannot get otherwise-valid145names under142canonical-name whitelist.",
+    "Synthetic fixture storage maximumabout16MiB, no candidate16MiBfullfloatcomparison.",
+    "No provider-generated tests executed."
+  ]
+}

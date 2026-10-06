@@ -1,0 +1,32 @@
+{
+  "grok_patch_sha256": "4d90acfb1f9f004e3a0dced9b2d02eb7fb8f731bdfa64e1b840f9d0db09cb203",
+  "source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "tests_compile_gpu_run": false,
+  "patch_applied": false,
+  "source_expected_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "qwen_patch_sha256": "6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "regions": [
+    {
+      "region": 1,
+      "replace_equals_qwen": true,
+      "search_matches": 0,
+      "search_equals_qwen": true
+    },
+    {
+      "region": 2,
+      "replace_equals_qwen": true,
+      "search_matches": 0,
+      "search_equals_qwen": true
+    },
+    {
+      "region": 3,
+      "replace_equals_qwen": false,
+      "search_matches": 1,
+      "search_equals_qwen": true
+    }
+  ],
+  "acceptance": "PENDING_ROOT_QA",
+  "mode": "DATA_ONLY_NO_APPLY",
+  "utc": "2026-10-04T16:10:52.1833355Z",
+  "region3_exact_root_formula": true
+}

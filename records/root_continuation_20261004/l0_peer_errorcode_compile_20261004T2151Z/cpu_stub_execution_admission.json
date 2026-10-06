@@ -1,0 +1,63 @@
+{
+  "scope": "STATIC_ABI_AND_STUB_LINK_ADMISSION_FOR_CPU_TESTS_ONLY",
+  "admitted": true,
+  "candidate_source_sha256": "6185dcf242e4c847544c07455468119d67fae35d5aaf341ebaa8d14a0b920aa6",
+  "candidate_object_sha256": "6a186a6893f550741c7a4dea208d9b95bcf412c9dacf333034b44203aa5177d4",
+  "fake_source_sha256": "bfff2acc383607b74fbca4e288f0dfff3ac99d3297f3f9947cca867b5c92353f",
+  "fake_object_sha256": "953d3e5cb163dc0113a6f3a51e861e4c972bb08830052195baf69a2da031ae6e",
+  "fake_executable_sha256": "0e4d30423a391f9cf8dc078f5f0be2ab30aca68f2456e9664eee4307922b7cdc",
+  "official_header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "compiler": {
+    "path": "/usr/bin/c++",
+    "version": "GCC 13.3.0",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+  },
+  "abi_basis": "Candidate object and fake API definitions both compiled against the same pinned official Level Zero 1.19 header. The CPU executable linked successfully from candidate object plus fake object only; readelf -d lists libstdc++, libgcc_s, libc and no libze_loader. The fake defines every ze* function referenced in the source, so none are resolved through a Level Zero runtime.",
+  "synthetic_calls": [
+    "zeInit",
+    "zeDriverGet",
+    "zeDeviceGet",
+    "zeDeviceGetProperties",
+    "zeDeviceGetCommandQueueGroupProperties",
+    "zeDeviceCanAccessPeer",
+    "zeDeviceGetP2PProperties",
+    "zeContextCreateEx",
+    "zeMemAllocDevice",
+    "zeMemAllocHost",
+    "zeMemGetAllocProperties",
+    "zeCommandQueueCreate",
+    "zeCommandListCreate",
+    "zeCommandListAppendMemoryFill",
+    "zeCommandListAppendMemoryCopy",
+    "zeCommandListClose",
+    "zeFenceCreate",
+    "zeCommandQueueExecuteCommandLists",
+    "zeFenceHostSynchronize",
+    "zeFenceDestroy",
+    "zeCommandListDestroy",
+    "zeCommandQueueDestroy",
+    "zeMemFree",
+    "zeContextDestroy"
+  ],
+  "simulation_limits": "Two synthetic Intel-tagged handles; malloc-backed buffers only; all results and API traces are CPU simulations. The timeout case holds a synthetic pending flag through teardown; it is designed to reveal application control flow, not model actual hardware scheduling.",
+  "permitted_runs": [
+    "clean pattern",
+    "single-word corruption",
+    "peer access unavailable",
+    "fence timeout branch",
+    "cleanup error",
+    "invalid UUID CLI refusal",
+    "surplus CLI argument behavior"
+  ],
+  "forbidden_claims": [
+    "real Level Zero behavior",
+    "device/VRAM allocation",
+    "P2P",
+    "peer transfer",
+    "cache visibility",
+    "GPU safety",
+    "hardware validation"
+  ],
+  "static_review_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_errorcode_compile_20261004T2151Z\\cpu_stub_static_abi_review.md",
+  "static_review_sha256": "541b48189eed0c3f75cc7c35ecc5274cd3daf700963294a02d3ed59d7e0ffb12"
+}

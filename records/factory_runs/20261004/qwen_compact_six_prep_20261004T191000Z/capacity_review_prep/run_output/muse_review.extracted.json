@@ -1,0 +1,89 @@
+{
+  "findings": [
+    {
+      "exact_source": "if len(sh)!=len(P['four']['canon']): raise _E('FAIL','shard_count')",
+      "minimal_fix": "Require exactly one weight shard per canonical device (Counter(nd)==1 for every canon) in addition to unique-hash count and tot==mb.",
+      "reason": "Only unique shard_hash count is compared to device count. Duplicate-device plus missing-device layout (e.g. 2 shards on dev0, 0 on dev3) keeps len(sh)==4, passes weight_dev/peak_cover/reconcile and overstates pooled distribution.",
+      "region": "weights per-device bijection"
+    },
+    {
+      "exact_source": "if not (nm & seen): phys+=1",
+      "minimal_fix": "Require len(devices)==phys and len(canon)==len(devices); duplicate canonical entries must FAIL instead of collapsing.",
+      "reason": "Duplicate canonical_id entries share nm so phys does not increment and len(canon)==phys still holds. Single role with 2 copies of same GPU yields phys==1 and passes single_phys, hiding duplicate list.",
+      "region": "device list duplicate collapse"
+    },
+    {
+      "exact_source": "if len(canon)!=phys: raise _E('FAIL','dedup:'+r)",
+      "minimal_fix": "Add explicit len(ds)==phys check; keep alias-overlap FAIL but also fail duplicate-canonical padding.",
+      "reason": "Catches distinct-canonical alias collision but not same-canonical duplication, so root/subdevice alias dedup is incomplete.",
+      "region": "root/subdevice alias dedup"
+    },
+    {
+      "exact_source": "if isinstance(a,dict) and _s(a.get('role')): by.setdefault(a['role'],[]).append(a)",
+      "minimal_fix": "Reject extraneous roles and enforce total attempts==3 with roles exactly {single,three,four}; malformed entries => NOT_CHECKED.",
+      "reason": "Non-dict/missing-role entries ignored and extra roles (e.g. 'two','five') never examined; unbound extra evidence passes silently alongside valid single/three/four.",
+      "region": "attempt role scope"
+    },
+    {
+      "exact_source": "ms=evidence.get('max_staleness_ns',10000000000)",
+      "minimal_fix": "Remove default; missing/non-int/negative max_staleness_ns => NOT_CHECKED staleness.",
+      "reason": "Missing staleness bound silently defaults to 10s and widens acceptance; contract requires explicit fresh source/timestamps bound, not a fallback.",
+      "region": "staleness bound default"
+    },
+    {
+      "exact_source": "if abs(al['timestamp_ns']-a['timestamp_ns'])>ms: raise _E('NOT_CHECKED','alloc_stale:'+r)",
+      "minimal_fix": "Also require abs(alloc_ts-observed_at_ns)<=ms.",
+      "reason": "Allocator checked only against attempt while attempt checked against observed, so allocator vs observed can be up to 2*ms and still PASS; fresh-allocator claim allows double window.",
+      "region": "allocator freshness window"
+    },
+    {
+      "exact_source": "if P['four']['phys']!=4: raise _E('FAIL','four_phys')",
+      "minimal_fix": "Either allow >=4 with matching peak/shard reconciliation or document scope as exactly-four receipt.",
+      "reason": "Task states >=4 distinct physical DISCRETE participants for four-card claim; ==4 rejects a valid 5+ GPU pooled receipt as FAIL.",
+      "region": "four-device cardinality"
+    },
+    {
+      "exact_source": "for k in ART+('artifact_source','cpu_reference_hash'):",
+      "minimal_fix": "Document limit: trusted==True is sole authority; no logit-to-cpu-hash binding is performed, so PASS is not measurement authentication.",
+      "reason": "artifact_source/cpu_reference_hash only checked non-empty; logit cpu values never tied to cpu_reference_hash, so any in-tolerance numbers pass when trusted.",
+      "region": "CPU reference binding"
+    },
+    {
+      "exact_source": "if bk!='device_vram': raise _E('NOT_CHECKED','backing')",
+      "minimal_fix": "Keep as-is but scope PASS as schema/logic receipt only; physical backing requires ROOT admission, never string flag alone.",
+      "reason": "Self-reported backing string cannot prove device-VRAM residency vs CPU/spill/host-staged/shared; advertisement/parity/metadata alone is not backing proof.",
+      "region": "residency backing proof"
+    },
+    {
+      "exact_source": "if al.get('class')!='dedicated_vram': raise _E('NOT_CHECKED','alloc_class:'+r)",
+      "minimal_fix": "Keep NOT_CHECKED for non-dedicated classes and scope PASS as logic-only; actual peak allocation needs runtime admission.",
+      "reason": "Allocator class/source/peak numbers are self-reported fields; highwater-minus-reserve proxy, driver delta, or planned budget would still be rejected only if fields omitted, fabricated equal numbers pass.",
+      "region": "allocator peak proof"
+    },
+    {
+      "exact_source": "if c.get('native_error') not in (None,'',False): raise _E('FAIL','native:'+r)",
+      "minimal_fix": "Require native_error is None for clean OOM/success; ''/False => NOT_CHECKED or FAIL.",
+      "reason": "Empty-string/False accepted as no native error, lenient sentinel for controller state that must show no native-error substitute.",
+      "region": "controller native_error sentinel"
+    },
+    {
+      "exact_source": "if abs(lt-tol)>1e-12: raise _E('FAIL','fixed_tol')",
+      "minimal_fix": "Document 1e-12 as binary-repr guard or require exact fixed-tolerance equality with stated decimal handling.",
+      "reason": "Undocumented 1e-12 slack widens fixed-tolerance semantics; small but violates no-tolerance-widening without justification.",
+      "region": "fixed per-logit tolerance"
+    }
+  ],
+  "safety_checks": [
+    "Source imports only math; GPU-free import holds by inspection, no CUDA/Level-Zero/driver/hardware access.",
+    "No source execution, import, tests, tools, or file alteration performed in this audit; static review only.",
+    "Candidate is UNTRUSTED until ROOT compile/test/admission; any PASS is schema/logic receipt only, not physical-capacity proof.",
+    "Synthetic fixtures validate schema/logic only and cannot authenticate measured resident bytes, peaks, or backing.",
+    "THIS audit native child launches 0; authorized maximum-10 Qwen/DeepSeek children not exercised.",
+    "Exit mapping PASS 0 / FAIL 1 / NOT_CHECKED 2 preserved; missing authority stays NOT_CHECKED, no CPU/spill/shared/iGPU counted as discrete.",
+    "Strict bool/int/float and finite checks present via _i/_n; RMSE<=maxabs and per-logit tol bound CPU refs enforced.",
+    "Actual-file tests load CANDIDATE_PATH with no embedded duplicate source and assert FAIL/NOT_CHECKED negatives, not fake PASS.",
+    "Shared iGPU arithmetic allowed but discrete==True and form_factor==discrete_gpu required; iGPU cannot satisfy four-discrete count.",
+    "No purchasing advice, no tolerance widening (except noted 1e-12), no old-evidence reuse; bounded waits with no uninterruptible-driver cancellation promise."
+  ],
+  "verdict": "REQUEST_CHANGES"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+    "sha256": "56a55d66798f476cc0cd39d0fd21942b046d24e13985e76af41ecf85ca9de1da",
+    "lines": 256,
+    "AST_only": "PASS_NO_IMPORT"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_tests\\test_capture_comparator.py",
+    "sha256": "53173520f595635dc06582c8abd86c390f4790660b35d49d28fb3a87d0095acd",
+    "lines": 360,
+    "AST_only": "PASS_NO_IMPORT"
+  }
+]

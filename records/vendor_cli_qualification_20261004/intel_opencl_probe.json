@@ -1,0 +1,19 @@
+{
+  "command": [
+    "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\sycl-ls.exe",
+    "--verbose"
+  ],
+  "pid": 21312,
+  "exit_code": 0,
+  "child_local_overrides": {
+    "ONEAPI_DEVICE_SELECTOR": "opencl:gpu",
+    "UR_ADAPTERS_SEARCH_PATH": "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin",
+    "UR_LOG_LOADER": "level:debug;output:stderr",
+    "UR_LOG_OPENCL": "level:debug;output:stderr"
+  },
+  "stdout": "No platforms found - run with '--verbose' to get more details.\r\n\r\nPlatforms: 0\r\ndefault_selector()      : No device of requested type available.\r\naccelerator_selector()  : No device of requested type available.\r\ncpu_selector()          : No device of requested type available.\r\ngpu_selector()          : No device of requested type available.\r\ncustom_selector(gpu)    : No device of requested type available.\r\ncustom_selector(cpu)    : No device of requested type available.\r\ncustom_selector(acc)    : No device of requested type available.\r\n",
+  "stderr": "INFO: Output filtered by ONEAPI_DEVICE_SELECTOR environment variable, which is set to opencl:gpu.\r\nTo see device ids, use the --ignore-device-selectors CLI option.\r\n\r\n<LOADER>[DEBUG]: Logger loader initialized successfully!\r\n<LOADER>[ERROR]: Wrong format of the UR_ADAPTERS_SEARCH_PATH environment variable value: 'E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin'\r\nProper format is: ENV_VAR=\"value_1\",\"value_2\",\"value_3\"\r\n<LOADER>[DEBUG]: loading adapter failed with error 126: E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\ur_adapter_cuda.dll\r\n<LOADER>[DEBUG]: loading adapter failed with error 126: E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\ur_adapter_hip.dll\r\n<LOADER>[DEBUG]: loading adapter failed with error 126: E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\ur_adapter_native_cpu.dll\r\n<LOADER>[DEBUG]: loading adapter failed with error 126: E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\ur_adapter_offload.dll\r\n<LOADER>[DEBUG]: zeInit with flags value of 1\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[DEBUG]: zeInit with flags value of 1\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[DEBUG]: Successfully loaded OpenCL.dll from system directory\r\n<LOADER>[DEBUG]: zeInit with flags value of 1\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[DEBUG]: zeInit with flags value of 1\r\n<LOADER>[ERROR]: zeInit failed with ZE_RESULT_ERROR_UNINITIALIZED\r\n<LOADER>[ERROR]: Level Zero Uninitialized\r\n<LOADER>[INFO]: ---> urLoaderTearDown() -> UR_RESULT_SUCCESS\r\n",
+  "opencl_dll_exists": true,
+  "archive_opencl_adapter_files": [],
+  "force_load_not_attempted": "No actual UR OpenCL adapter DLL found; forcing the OpenCL ICD DLL as a UR adapter would use the wrong ABI"
+}

@@ -1,0 +1,12 @@
+{
+  "native_compile_gpu_run": false,
+  "ledger": "USAGE_FINAL_SIXTH.json",
+  "status": "PROVIDER_BATCH_CLOSED_PENDING_ROOT_QA",
+  "source_applied": false,
+  "secret_process_audit": "SECRET_PROCESS_AUDIT_SIXTH.json",
+  "source_gate": "GROK_TEXT_MATCH_GATE.json",
+  "full_goal_complete": false,
+  "utc": "2026-10-04T16:10:52.2118009Z",
+  "paid_jobs": 3,
+  "observed_tokens": 89186
+}

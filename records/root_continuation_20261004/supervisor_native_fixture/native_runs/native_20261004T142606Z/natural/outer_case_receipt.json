@@ -1,0 +1,221 @@
+{
+  "accepted": true,
+  "capture_limit_ok": true,
+  "case_id": "natural",
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture\\fixture_controller.py",
+    "--case",
+    "natural",
+    "--output",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture\\native_runs\\native_20261004T142606Z\\natural\\supervisor_output"
+  ],
+  "controller_elapsed_seconds": 0.235,
+  "controller_exit_code": 0,
+  "controller_pid": 90832,
+  "controller_pid_absent_after_wait": true,
+  "controller_source_hash_after": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "controller_timeout": false,
+  "controller_worker_hash_after": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture",
+  "restart_commit_verified": true,
+  "restart_matches": true,
+  "restart_receipt": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "",
+    "job_active_count": 0,
+    "logs": {
+      "natural_a": {
+        "stderr": "natural_a:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_a.stderr.log",
+        "stdout": "natural_a:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_a.stdout.log"
+      },
+      "natural_b": {
+        "stderr": "natural_b:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_b.stderr.log",
+        "stdout": "natural_b:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_b.stdout.log"
+      },
+      "natural_c": {
+        "stderr": "natural_c:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_c.stderr.log",
+        "stdout": "natural_c:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_c.stdout.log"
+      },
+      "natural_d": {
+        "stderr": "natural_d:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_d.stderr.log",
+        "stdout": "natural_d:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_d.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "native_natural",
+    "status": "PROCESS_COMPLETED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 47496,
+        "resumed": true,
+        "worker_id": "natural_a"
+      },
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 8788,
+        "resumed": true,
+        "worker_id": "natural_b"
+      },
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 2992,
+        "resumed": true,
+        "worker_id": "natural_c"
+      },
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 79208,
+        "resumed": true,
+        "worker_id": "natural_d"
+      }
+    ]
+  },
+  "source_and_runtime_hashes_after": {
+    "admission": "bde464446433dd20b58df2a38905b78f8873f72d707727a8244f061db4037109",
+    "contract": "27879a5ee1f8b2d63e138fb2c8b67c3bd16b33400901643e420470acb8fae52e",
+    "controller": "d85f31373c78fd8c066427c296e918ef1adbfee34a31f318d6d393f2c82a24ce",
+    "driver": "9a7f4158a8bf1b9b9f41fc26d0e3063c44d60e0388b9f49768f218d765c9ee2f",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "source_and_runtime_hashes_before": {
+    "admission": "bde464446433dd20b58df2a38905b78f8873f72d707727a8244f061db4037109",
+    "contract": "27879a5ee1f8b2d63e138fb2c8b67c3bd16b33400901643e420470acb8fae52e",
+    "controller": "d85f31373c78fd8c066427c296e918ef1adbfee34a31f318d6d393f2c82a24ce",
+    "driver": "9a7f4158a8bf1b9b9f41fc26d0e3063c44d60e0388b9f49768f218d765c9ee2f",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "source_and_runtime_hashes_unchanged": true,
+  "stderr_bytes": 0,
+  "stdout_bytes": 3435,
+  "supervisor": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "",
+    "job_active_count": 0,
+    "logs": {
+      "natural_a": {
+        "stderr": "natural_a:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_a.stderr.log",
+        "stdout": "natural_a:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_a.stdout.log"
+      },
+      "natural_b": {
+        "stderr": "natural_b:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_b.stderr.log",
+        "stdout": "natural_b:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_b.stdout.log"
+      },
+      "natural_c": {
+        "stderr": "natural_c:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_c.stderr.log",
+        "stdout": "natural_c:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_c.stdout.log"
+      },
+      "natural_d": {
+        "stderr": "natural_d:stderr\r\n",
+        "stderr_bytes": 18,
+        "stderr_overflow": false,
+        "stderr_path": "natural_d.stderr.log",
+        "stdout": "natural_d:stdout\r\n",
+        "stdout_bytes": 18,
+        "stdout_overflow": false,
+        "stdout_path": "natural_d.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "native_natural",
+    "status": "PROCESS_COMPLETED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 47496,
+        "resumed": true,
+        "worker_id": "natural_a"
+      },
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 8788,
+        "resumed": true,
+        "worker_id": "natural_b"
+      },
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 2992,
+        "resumed": true,
+        "worker_id": "natural_c"
+      },
+      {
+        "assigned": true,
+        "exit_code": 0,
+        "pid": 79208,
+        "resumed": true,
+        "worker_id": "natural_d"
+      }
+    ]
+  },
+  "supervisor_failure_reason": "",
+  "supervisor_status": "PROCESS_COMPLETED",
+  "worker_pids": [
+    47496,
+    8788,
+    2992,
+    79208
+  ],
+  "worker_pids_absent_after_cleanup": true
+}

@@ -1,0 +1,49 @@
+{
+  "failed": 0,
+  "provider_calls": 0,
+  "scope": "PURE_INTAKE_FUNCTION_BOUNDARY_CONTROLS_ONLY",
+  "intake_sha256_before": "458c5e8b30dc91cb490e324c6572ad4b7b642f7ce068ad2d9b43905d93b931b6",
+  "intake_sha256_after": "458c5e8b30dc91cb490e324c6572ad4b7b642f7ce068ad2d9b43905d93b931b6",
+  "cases": [
+    {
+      "error": null,
+      "passed": true,
+      "observed": "PASS",
+      "expected": "PASS",
+      "name": "exact_source_and_test_character_limits"
+    },
+    {
+      "error": "source bound",
+      "passed": true,
+      "observed": "REFUSE",
+      "expected": "REFUSE",
+      "name": "source_limit_plus_one"
+    },
+    {
+      "error": "source bound",
+      "passed": true,
+      "observed": "REFUSE",
+      "expected": "REFUSE",
+      "name": "test_limit_plus_one"
+    },
+    {
+      "error": "status invalid",
+      "passed": true,
+      "observed": "REFUSE",
+      "expected": "REFUSE",
+      "name": "unknown_status_enum"
+    },
+    {
+      "error": "research array bound",
+      "passed": true,
+      "observed": "REFUSE",
+      "expected": "REFUSE",
+      "name": "explanation_string_instead_of_array"
+    }
+  ],
+  "candidate_source_imported_or_executed": false,
+  "native_gpu_calls": 0,
+  "total": 5,
+  "hash_unchanged": true,
+  "passed": 5
+}

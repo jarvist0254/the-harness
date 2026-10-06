@@ -1,0 +1,41 @@
+{
+  "scope": "STATIC_NONEXECUTING_REVIEW",
+  "variant_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "base_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+  "variant_line_diff": [
+    "--- \n",
+    "+++ \n",
+    "@@ -173,7 +173,7 @@\n",
+    "     workers = manifest.get(\"workers\")",
+    "     if not isinstance(workers, list) or not (1 <= len(workers) <= 4):",
+    "         raise ValueError(\"workers\")",
+    "-    deadline = _int(manifest.get(\"deadline_seconds\"), 1, 60, \"deadline\")",
+    "+    deadline = _int(manifest.get(\"deadline_seconds\"), 1, 600, \"deadline\")",
+    "     startup = _int(manifest.get(\"startup_seconds\"), 1, 10, \"startup\")",
+    "     log_limit = _int(manifest.get(\"log_limit_bytes\"), 1024, 131072, \"log_limit\")",
+    "     policy = manifest.get(\"containment_policy\", \"explicit_terminate\")"
+  ],
+  "actual_schema_checks": {
+    "logs_worker_id": true,
+    "stream_overflow": true,
+    "job_active_count": true,
+    "assigned_resumed_exit": true,
+    "deadline600": true,
+    "log_cap_128KiB": true
+  },
+  "destination_parent": "E:\\the_harness\\records",
+  "source_parents2": "E:\\the_harness\\records",
+  "parent_confinement_equal": true,
+  "destination_is_absent": true,
+  "quoting": "Stage batch path under exact no-space timestamp destination; argv cmd.exe /d /c <absolute.batch>; supervisor list2cmdline. CMake/MSVC paths and each-D argument quoted inside CMD. Original prior-run nonraw Python literal mistakes do not occur in generated pathlib strings.",
+  "command_execution_verified": "NOT_CHECKED: no cmd/configure/build execution in this task",
+  "tasklist": "English no-tasks response is conservative host-specific refusal if absent. No PID attach/kill; owned root identity comes from retained supervisor handle and Job accounting.",
+  "remaining_concerns": [
+    "Dynamic reparse/rename TOCTOU not eliminated by pathname hashes/lstat checks. Trusted owned records assumed; not sandboxing malicious local writers.",
+    "Current controller verify_all exception in finalization can prevent separate controller_result emission; supervisor own terminal receipt remains primary. Cannot treat absent result as success.",
+    "Preparation helper assertions require normal Python mode; do not invoke with -O.",
+    "Heartbeat begins just before manifest write; if manifest write fails before run_workers, that drafting path needs lifecycle hardening before native admission.",
+    "Original manifest and toolpin input paths require root-pinned manifests; controller checks derived manifest hash, but separate original/toolpin file binding relies on trusted preparation evidence. Root should pin these before final native use."
+  ],
+  "native_execution": "NOT_RUN"
+}

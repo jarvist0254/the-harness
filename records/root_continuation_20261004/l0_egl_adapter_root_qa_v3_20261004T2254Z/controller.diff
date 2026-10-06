@@ -1,0 +1,18 @@
+--- v2-controller
++++ v3-controller
+@@ -10,12 +10,12 @@
+ import time
+ from datetime import datetime, timezone
+ 
+-ROOT = Path(r"E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v2_20261004T2228Z")
++ROOT = Path(r"E:\the_harness\records\root_continuation_20261004\l0_egl_adapter_root_qa_v3_20261004T2254Z")
+ SOURCE = Path(r"E:\the_harness\records\factory_runs\20261004\l0_egl_sync_bridge_two_prep_20261004T212837Z\qwen_l0_egl_fence_adapter\source.qwen_untrusted.py")
+ PROVIDER_TESTS = Path(r"E:\the_harness\records\factory_runs\20261004\l0_egl_sync_bridge_two_prep_20261004T212837Z\qwen_l0_egl_fence_adapter\tests_source.qwen_untrusted.txt")
+-TESTS = ROOT / "test_adapter_independent_contract_v2.py"
++TESTS = ROOT / "test_adapter_independent_contract_v3.py"
+ PYTHON = Path(r"C:\Users\thoma\AppData\Local\Programs\Python\Python310\python.exe")
+-ROOT_ADMISSION = ROOT / "ROOT_PURE_QA_ADMISSION_V2.json"
++ROOT_ADMISSION = ROOT / "ROOT_PURE_QA_ADMISSION_V3.json"
+ CAP_BYTES = 128 * 1024
+ DEADLINE_SECONDS = 20
+ CREATE_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)

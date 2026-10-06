@@ -1,0 +1,16 @@
+{
+  "admission_sha256": "078825eb1ef7c21e2f915c3508cd435f4a83afb84495d1194f7d9dc09d201803",
+  "python_parse_import_execute": false,
+  "native_fixture_compile_gpu": false,
+  "status": "COMPLETE_SOURCE_STRINGS_STAGED_UNTRUSTED",
+  "wrapper_pid": 40256,
+  "snapshot_after_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "owned_pids_still_alive": [],
+  "utc": "2026-10-04T17:46:33.7032693Z",
+  "wrapper_session": 57681,
+  "original_after_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "wrapper_session_exit": 0,
+  "artifact_sha256": "edf6735cd7a553dc0625f89964e97918dd741c138d8f168d3bb017e36eb7b082",
+  "native_children_actual": 0,
+  "worker_pid": 77184
+}

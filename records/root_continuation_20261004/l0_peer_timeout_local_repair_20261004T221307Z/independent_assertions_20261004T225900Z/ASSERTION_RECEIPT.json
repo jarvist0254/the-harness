@@ -1,0 +1,84 @@
+{
+  "scope": "UNCHANGED_INDEPENDENT_RAW_RECEIPT_ASSERTIONS_CPU_FAKE_NOT_GPU",
+  "source_tests_unchanged": true,
+  "pins_before": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\cpu_stub_controller_phase_pinned.py": "5e9b5964bf0805fd9d91a48ff65f23e84d85c63b96d4ba1293a9a8bd63ee3c4d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\test_receipt_requirements.py": "8b8565714c70fdbd0fe0ce063d0b376c83d76aa8b2da34d717cc122060ae16ca",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\test_extended_receipt_requirements.py": "112888e31170da74fc01a73f6d03089ef4e85cc1abb7d36fa2ad2b34158f9deb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.cpp": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.cpp": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_cpu_fake": "1b889f1f11884b8b9d0cd92fb7badd3c6468035cdea8a3a4ac358f6535e27c40",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\ROOT_CPU_STUB_RUN_ADMISSION_V2.json": "021245e3fa4de8ea74e17f07d9a9733f853dd9638bb9579cea1ad5355c00351b"
+  },
+  "pins_after": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\cpu_stub_controller_phase_pinned.py": "5e9b5964bf0805fd9d91a48ff65f23e84d85c63b96d4ba1293a9a8bd63ee3c4d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\test_receipt_requirements.py": "8b8565714c70fdbd0fe0ce063d0b376c83d76aa8b2da34d717cc122060ae16ca",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\test_extended_receipt_requirements.py": "112888e31170da74fc01a73f6d03089ef4e85cc1abb7d36fa2ad2b34158f9deb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.cpp": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.cpp": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_cpu_fake": "1b889f1f11884b8b9d0cd92fb7badd3c6468035cdea8a3a4ac358f6535e27c40",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\ROOT_CPU_STUB_RUN_ADMISSION_V2.json": "021245e3fa4de8ea74e17f07d9a9733f853dd9638bb9579cea1ad5355c00351b"
+  },
+  "runs": [
+    {
+      "label": "original9",
+      "argv": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import os,sys,runpy;os.environ['PEER_CASE_ROOT']='E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\stub_runs_20261004T225852Z';sys.path.insert(0,'E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z');sys.argv=['E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\test_receipt_requirements.py','-v'];runpy.run_path('E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\test_receipt_requirements.py',run_name='__main__')"
+      ],
+      "pid": 23684,
+      "started_utc": "2026-10-04T22:59:31.036+00:00",
+      "elapsed_seconds": 0.172,
+      "returncode": 0,
+      "outer_timeout": false,
+      "outer_killed_owned_wsl_client": false,
+      "stream_overflow": false,
+      "owned_wsl_client_exited": true,
+      "readers_joined": true,
+      "pipes_drained": true,
+      "reader_errors": [],
+      "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\01_original9.stdout.bin",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\01_original9.stderr.bin",
+      "stderr_sha256": "97ebfeee057d2b5a0c9c53523f02fadf2c7dcd24d2c88be7a3adf3a7ef9a3f92",
+      "stderr_bytes": 590
+    },
+    {
+      "label": "extended_discovery20",
+      "argv": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import os,sys,runpy;os.environ['PEER_CASE_ROOT']='E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\stub_runs_20261004T225852Z';sys.path.insert(0,'E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z');sys.argv=['E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\test_extended_receipt_requirements.py','-v'];runpy.run_path('E:\\\\the_harness\\\\records\\\\root_continuation_20261004\\\\l0_peer_timeout_local_repair_20261004T221307Z\\\\test_extended_receipt_requirements.py',run_name='__main__')"
+      ],
+      "pid": 80860,
+      "started_utc": "2026-10-04T22:59:31.203+00:00",
+      "elapsed_seconds": 0.109,
+      "returncode": 0,
+      "outer_timeout": false,
+      "outer_killed_owned_wsl_client": false,
+      "stream_overflow": false,
+      "owned_wsl_client_exited": true,
+      "readers_joined": true,
+      "pipes_drained": true,
+      "reader_errors": [],
+      "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.stdout.bin",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\independent_assertions_20261004T225900Z\\02_extended_discovery20.stderr.bin",
+      "stderr_sha256": "185e67dbdea16a56aabd852ed397a9f994d32a0836cdf8ce7eeb68b6d86c81c1",
+      "stderr_bytes": 1387
+    }
+  ],
+  "all_capture_complete": true,
+  "all_exit_zero": true,
+  "unique_test_methods": 11,
+  "test_executions_expected": 29,
+  "duplicates": "Original9 plus extended20 (9 imported Gates + 9 inherited methods +2new); duplicates are not additional coverage",
+  "child_bootstrap": "Sets PEER_CASE_ROOT and explicit owned test-directory sys.path under isolated Python; runs exact original files via runpy, no assertions copied"
+}

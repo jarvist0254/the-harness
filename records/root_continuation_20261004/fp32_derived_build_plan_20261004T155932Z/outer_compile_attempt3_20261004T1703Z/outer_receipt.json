@@ -1,0 +1,33 @@
+{
+  "status": "NONZERO_OR_UNKNOWN",
+  "attempt": 3,
+  "pid": 55416,
+  "exit_code": 1,
+  "timed_out": false,
+  "stream_overflow": false,
+  "elapsed_seconds": 617.454,
+  "process_absent": true,
+  "changed_inputs": [],
+  "input_hashes_unchanged": true,
+  "before_hashes": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt3_skip_telemetry.py": "7f0af5fc2d61a1c3a52a7b4d5ef1383f7943a63bd9920621f68519381c58d52d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_ATTEMPT3_ADMISSION.json": "a8eec72a0e0534615c5538a11417a32b361ed88272601fd54d65bccf031fcd79",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt3.cmd": "b607f4e5d5174c0ec79db567c737b724332663de724e1e58b4b8248d52400aac",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt3.cmd": "bef1532e7865ae6f83cd679a3f9762e75ffc8163db221d964d8319c815111ae5"
+  },
+  "after_hashes": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt3_skip_telemetry.py": "7f0af5fc2d61a1c3a52a7b4d5ef1383f7943a63bd9920621f68519381c58d52d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_ATTEMPT3_ADMISSION.json": "a8eec72a0e0534615c5538a11417a32b361ed88272601fd54d65bccf031fcd79",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt3.cmd": "b607f4e5d5174c0ec79db567c737b724332663de724e1e58b4b8248d52400aac",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt3.cmd": "bef1532e7865ae6f83cd679a3f9762e75ffc8163db221d964d8319c815111ae5"
+  },
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt3_20261004T1703Z\\controller.stdout.log",
+  "stdout_bytes": 0,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_attempt3_20261004T1703Z\\controller.stderr.log",
+  "stderr_bytes": 614,
+  "completed_utc": "2026-10-04T17:12:19.9917836Z"
+}

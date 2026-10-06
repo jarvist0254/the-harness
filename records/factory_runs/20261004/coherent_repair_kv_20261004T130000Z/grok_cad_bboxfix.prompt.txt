@@ -1,0 +1,221 @@
+ActualGrok narrow CAD bbox/code test correction after actualrootRED and Geminiindependentreview. JSON {replacements:[{old,new}],test_source,notes}, exactuniqueoldspans ONLY. Sourceartifactnoimports/FreeCAD/nativeexecution; rootownsadmission. printed_height currently min(254,Dbodytop+8) mismatches actualprintedposts/beamTOP: compact200declaredvs150actual,universal254declaredvs199actual. Setprinted_height=beam_top exact. Removealwayswrongd_base>=printed_height becauseDsupportis2aboveprintedbeamtop; replaceactualpositivebeam/postheight andunclippedprintedheight<=254. Dsupportuniversal201, Dbodytop269 remain OVERHANG notprintedcore; no clipfakefit. Preserve allGPUposes12mmgaps188x200core bounds/postrelocatedgaps/connectedperimeterring4posts6shoes2Dbeams unknowninterfacesNULL/noSTL/noFITPASS. Test EXACTprintedbbox188200150compact188200199universal, printedheight==postheight==beamtop, printrotationbbox200188height, keepDsupport201+Dbody269overhang,oversizepost/gap gates. Existingtestimportacceptedcadnonexistent fixactualcandidate importloader via controlledCANDIDATE_PATH/default adjacent integrated_core.grok_corrected.py, pureactualsource notcopiedlogic; noprovider/native/CADjobs. Returncompactactual-importunittest regressions with exactexpectedheights, avoidweakonly<=254. NativeMAX10Qwen/DeepSeekauthorizedeachactual0here.
+EXACTplan_layout
+def plan_layout(config):
+    """Joint installed/print pose and body envelopes, without a fit certificate."""
+    config = copy.deepcopy(config)
+    dims = {key: _dimension(config[key], key, upper) for key, upper in (
+        ('core_width_mm', 188), ('core_depth_mm', 200), ('base_mm', 20),
+        ('post_mm', 20), ('shoe_height_mm', 40), ('gap_mm', 40),
+        ('rail_depth_mm', 20), ('d_beam_height_mm', 20), ('metal_rail_height_mm', 10))}
+    if dims['gap_mm'] < 12:
+        raise ValueError('Recovered twelve mm body-envelope gap is a minimum')
+    if dims['post_mm'] >= dims['gap_mm']:
+        raise ValueError('Post width must be strictly less than gap for positive clearance')
+    if dims['rail_depth_mm'] <= 2:
+        raise ValueError('Metal rail concept needs positive depth after two mm clearance')
+    if (dims['core_width_mm'] <= 2 * max(dims['post_mm'], dims['rail_depth_mm']) or
+            dims['core_depth_mm'] <= 2 * max(dims['post_mm'], dims['rail_depth_mm'])):
+        raise ValueError('Core dimensions must contain distinct posts and positive base sides')
+    if dims['d_beam_height_mm'] + dims['metal_rail_height_mm'] > dims['gap_mm']:
+        raise ValueError('D beam and metal rail must remain above lower card bodies')
+    if not isinstance(config.get('cards'), list) or len(config['cards']) != 4:
+        raise ValueError('Supply exactly four card envelopes A-D')
+    cards = []
+    for bay, source in zip('ABCD', config['cards']):
+        if source.get('bay') != bay:
+            raise ValueError('Cards must be ordered A, B, C, D')
+        length = _dimension(source['length_mm'], bay + '.length', 500)
+        height = _dimension(source['height_mm'], bay + '.height', 250)
+        thickness = _dimension(source['thickness_mm'], bay + '.thickness', 120)
+        cards.append({'bay': bay, 'length': length, 'height': height, 'thickness': thickness})
+    base_top = dims['base_mm'] + dims['shoe_height_mm']
+    span = sum(c['thickness'] for c in cards[:3]) + 2 * dims['gap_mm']
+    x = -span / 2
+    body_boxes = []
+    for card in cards[:3]:
+        if card['length'] <= dims['core_depth_mm'] - dims['rail_depth_mm']:
+            raise ValueError(f'Bay {card["bay"]} misses the rear nominal shoe footprint')
+        if min(x + card['thickness'], dims['core_width_mm']/2) <= max(x, -dims['core_width_mm']/2):
+            raise ValueError(f'Bay {card["bay"]} has no nominal shoe footprint inside the core')
+        body_boxes.append({'bay': card['bay'], 'origin_mm': [x, 0.0, base_top],
+                           'size_mm': [card['thickness'], card['length'], card['height']],
+                           'orientation': 'UPRIGHT', 'measured': False})
+        x += card['thickness'] + dims['gap_mm']
+    d_base = base_top + max(c['height'] for c in cards[:3]) + dims['gap_mm']
+    d = cards[3]
+    if d['length'] <= dims['core_depth_mm'] - dims['rail_depth_mm'] + 1:
+        raise ValueError('D misses the rear nominal metal rail footprint')
+    body_boxes.append({'bay': 'D', 'origin_mm': [-d['height'] / 2, 0.0, d_base],
+                       'size_mm': [d['height'], d['length'], d['thickness']],
+                       'orientation': 'ROLLED_90_DEGREES', 'measured': False})
+    
+    # Derive post X positions from actual body edges (A-B and B-C gaps)
+    post_x_positions = []
+    for i in range(2):
+        right_edge = body_boxes[i]['origin_mm'][0] + body_boxes[i]['size_mm'][0]
+        left_edge_next = body_boxes[i+1]['origin_mm'][0]
+        gap_center = (right_edge + left_edge_next) / 2.0
+        post_x_positions.append(gap_center - dims['post_mm'] / 2.0)
+        
+    beam_top = d_base - dims['metal_rail_height_mm']
+    post_height = beam_top
+    
+    post_boxes = []
+    for px in post_x_positions:
+        for py in (0.0, dims['core_depth_mm'] - dims['post_mm']):
+            post_boxes.append({
+                'origin_mm': [px, py, 0.0],
+                'size_mm': [dims['post_mm'], dims['post_mm'], post_height]
+            })
+            
+    printed_height = min(254.0, d_base + d['thickness'] + 8.0)
+    if d_base >= printed_height:
+        raise ValueError('D support elevation cannot fit the printed core')
+    width, depth = dims['core_width_mm'], dims['core_depth_mm']
+    print_bbox = [depth, width, printed_height]  # 90 degree rotation around Z
+    if any(actual > limit for actual, limit in zip(print_bbox, [200, 188, 254])):
+        raise ValueError('Actual planned core exceeds conservative print envelope')
+    gpu_bbox = [max(span, d['height']), max(c['length'] for c in cards),
+                d_base + d['thickness'] - base_top]
+                
+    core_bbox = [width, depth, printed_height]
+    
+    return {'status': 'DRAFT_UNQUALIFIED', 'production_release': False,
+            'measured_interfaces': False, 'config': config, 'dimensions': dims,
+            'cards': body_boxes, 'mount_bays': list('ABCD'),
+            'printed_bbox_mm': [width, depth, printed_height], 'print_bbox_mm': print_bbox,
+            'print_rotation': 'Z_PLUS_90_DEGREES', 'gpu_bbox_mm': gpu_bbox,
+            'frame_policy': 'ONE_CONNECTED_CORE_NO_APPEND_D',
+            'support_bodies': ['BASE', 'POSTS', 'D_BEAMS', 'METAL_RAIL_CONCEPT'],
+            'd_support_elevation_mm': d_base,
+            'post_boxes': post_boxes,
+            'post_height_mm': post_height,
+            'beam_top_mm': beam_top,
+            'core_bbox_mm': core_bbox,
+            'nominal_support_footprints': 'BOTH_FRONT_AND_REAR_BODY_OVERLAP_ONLY_NOT_SAFE_CONTACTS',
+            'unknown_interfaces': ['receiver_hole_datums', 'safe_support_patches',
+                                   'psu_interfaces', 'cable_bends', 'fan_plenum',
+                                   'removal_sweeps', 'brim', 'slicer_mass', 'loads', 'thermal'],
+            'claims': ['GPU_BODY_BOXES_ONLY', 'GPU_OVERHANG_ALLOWED',
+                       'CONTACT_AND_AIRFLOW_UNQUALIFIED', 'NO_PRODUCTION_STL']}
+
+EXISTINGtestheader
+# tests/test_integrated_core.py
+"""Pure regression tests for integrated_core plan_layout. No FreeCAD execution here."""
+import copy
+import math
+import pytest
+from acceptedcad.integrated_core import default_config, plan_layout
+
+
+def test_default_configs_exist():
+    assert default_config('compact')['profile'] == 'compact'
+    assert default_config('universal')['profile'] == 'universal'
+    with pytest.raises(ValueError):
+        default_config('invalid')
+
+
+def test_plan_returns_required_fields():
+    cfg = default_config('compact')
+    layout = plan_layout(cfg)
+    for field in ['status', 'cards', 'post_boxes', 'printed_bbox_mm', 'core_bbox_mm', 
+                  'post_height_mm', 'beam_top_mm', 'd_support_elevation_mm', 'dimensions']:
+        assert field in layout
+
+
+def test_exactly_four_posts():
+    layout = plan_layout(default_config('compact'))
+    assert len(layout['post_boxes']) == 4
+
+
+def test_post_gap_derivation_compact():
+    layout = plan_layout(default_config('compact'))
+    cards = layout['cards']
+    dims = layout['dimensions']
+    post_w = dims['post_mm']
+    
+    # Two gaps: A-B and B-C
+    for i in range(2):
+        right_edge = cards[i]['origin_mm'][0] + cards[i]['size_mm'][0]
+        left_edge_next = cards[i+1]['origin_mm'][0]
+        gap_center = (right_edge + left_edge_next) / 2.0
+        
+        # Front and back post for this gap
+        front_post = layout['post_boxes'][i * 2]
+        back_post = layout['post_boxes'][i * 2 + 1]
+        
+        expecte
+ROOTACTUALRED
+{
+  "utc": "2026-10-04T13:27:33.786205+00:00",
+  "source_sha256": "26e90d2c1af98f942f02696073a6ab186d2a6f1f545ddbced2b33bad249bf1a6",
+  "gate": "REJECTED_DECLARED_ACTUAL_GEOMETRY_HEIGHT_MISMATCH",
+  "tests": [
+    {
+      "profile": "compact",
+      "declared_bbox": [
+        188.0,
+        200.0,
+        200.0
+      ],
+      "actual_geometry_height_from_posts_and_beams": 150.0,
+      "matches": false
+    },
+    {
+      "profile": "universal",
+      "declared_bbox": [
+        188.0,
+        200.0,
+        254.0
+      ],
+      "actual_geometry_height_from_posts_and_beams": 199.0,
+      "matches": false
+    }
+  ],
+  "scope": "Pure actual-candidate imports and plans only; no FreeCAD or native geometry calls",
+  "explanation": "Candidate shortened posts and beam geometry but retains old printed_height=min(254,Dbodytop+8), so native build would refuse the actual 150/199 high geometry against declared200/254."
+}
+
+ACTUAL GEMINI REVIEW
+{
+  "findings": [
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\integrated_core.fence_extracted.py",
+      "discriminating_test": "def test_printed_bbox_matches_actual_printed_part_height():\n    cfg = default_config('compact')\n    layout = plan_layout(cfg)\n    assert layout['printed_bbox_mm'][2] == layout['beam_top_mm'] == 150.0\n    assert layout['print_bbox_mm'][2] == layout['beam_top_mm'] == 150.0\n    assert layout['core_bbox_mm'][2] == layout['beam_top_mm'] == 150.0\n    cfg_u = default_config('universal')\n    layout_u = plan_layout(cfg_u)\n    assert layout_u['printed_bbox_mm'][2] == layout_u['beam_top_mm'] == 199.0\n",
+      "exact_source": "printed_height = min(254.0, d_base + d['thickness'] + 8.0)\nif d_base >= printed_height:\n    raise ValueError('D support elevation cannot fit the printed core')\nwidth, depth = dims['core_width_mm'], dims['core_depth_mm']\nprint_bbox = [depth, width, printed_height]  # 90 degree rotation around Z\nif any(actual > limit for actual, limit in zip(print_bbox, [200, 188, 254])):\n    raise ValueError('Actual planned core exceeds conservative print envelope')\ngpu_bbox = [max(span, d['height']), max(c['length'] for c in cards),\n            d_base + d['thickness'] - base_top]\n            \ncore_bbox = [width, depth, printed_height]",
+      "line": 104,
+      "minimal_fix": "printed_height = post_height\nif printed_height > 254.0:\n    raise ValueError('Printed core exceeds conservative vertical print envelope 254 mm')\nwidth, depth = dims['core_width_mm'], dims['core_depth_mm']\nprint_bbox = [depth, width, printed_height]  # 90 degree rotation around Z\nif any(actual > limit for actual, limit in zip(print_bbox, [200, 188, 254])):\n    raise ValueError('Actual planned core exceeds conservative print envelope')\ngpu_bbox = [max(span, d['height']), max(c['length'] for c in cards),\n            d_base + d['thickness'] - base_top]\n            \ncore_bbox = [width, depth, printed_height]",
+      "reason": "printed_height is derived from the hypothetical GPU D bounding box (d_base + d['thickness'] + 8.0 = 200mm in compact, 249mm in universal) rather than the actual printed parts. Since the 4 gap posts and D-beams terminate at beam_top (150mm compact, 199mm universal), the actual built BRep solid has core.BoundBox.ZLength == 150.0mm. In build(), line 184 checks 'any(abs(a-b) > 1e-6 for a, b in zip(actual, layout[\\\"printed_bbox_mm\\\"]))', which will raise RuntimeError('Actual geometry differs from declared print bounds') due to a 50mm mismatch. The print bbox must reflect actual printed parts, not GPU envelope height.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\tests.fence_extracted.py",
+      "discriminating_test": "def test_root_importability():\n    import importlib\n    mod = importlib.import_module('integrated_core')\n    assert hasattr(mod, 'plan_layout')\n    assert hasattr(mod, 'default_config')\n",
+      "exact_source": "from acceptedcad.integrated_core import default_config, plan_layout",
+      "line": 6,
+      "minimal_fix": "from integrated_core import default_config, plan_layout",
+      "reason": "tests.fence_extracted.py hardcodes import from 'acceptedcad.integrated_core' (also in line 249: 'import acceptedcad.integrated_core as mod') based on a file header comment. Under Root-ONLY admission, this causes ModuleNotFoundError when executed in the standard test root without an installed 'acceptedcad' package. Imports must be root-relative.",
+      "severity": "CRITICAL"
+    },
+    {
+      "artifact": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\tests.fence_extracted.py",
+      "discriminating_test": "def test_core_bbox_matches_beam_top_exactly():\n    for profile, expected_beam_top in [('compact', 150.0), ('universal', 199.0)]:\n        layout = plan_layout(default_config(profile))\n        assert math.isclose(layout['core_bbox_mm'][2], expected_beam_top, abs_tol=1e-6)\n        assert math.isclose(layout['printed_bbox_mm'][2], expected_beam_top, abs_tol=1e-6)\n",
+      "exact_source": "def test_core_bbox_derived_not_gpu_top():\n    layout = plan_layout(default_config('compact'))\n    bbox = layout['core_bbox_mm']\n    dims = layout['dimensions']\n    \n    assert math.isclose(bbox[0], dims['core_width_mm'], abs_tol=1e-6)\n    assert math.isclose(bbox[1], dims['core_depth_mm'], abs_tol=1e-6)\n    assert bbox[2] <= 254.0",
+      "line": 141,
+      "minimal_fix": "def test_core_bbox_derived_not_gpu_top():\n    layout = plan_layout(default_config('compact'))\n    bbox = layout['core_bbox_mm']\n    dims = layout['dimensions']\n    \n    assert math.isclose(bbox[0], dims['core_width_mm'], abs_tol=1e-6)\n    assert math.isclose(bbox[1], dims['core_depth_mm'], abs_tol=1e-6)\n    assert math.isclose(bbox[2], layout['beam_top_mm'], abs_tol=1e-6)",
+      "reason": "test_core_bbox_derived_not_gpu_top asserts weak upper bound 'bbox[2] <= 254.0' rather than asserting equality with the actual derived printed core height (beam_top_mm = 150.0), allowing the GPU top (200.0) bug in plan_layout to silently pass.",
+      "severity": "MAJOR"
+    }
+  ],
+  "qualification_limits": [
+    "PSU interfaces, receiver hole datums, safe support patches, cable bends, fan plenum remain NULL and unqualified.",
+    "Thermal performance, slicer mass, print orientation warpage, brim, removal sweeps, and dynamic socket/shroud loads remain unmeasured and unvalidated.",
+    "No production STL or FITPASS certificate is granted; assembly envelopes and core remain DRAFT_UNQUALIFIED.",
+    "Native BRep connectedness and multiFuse validity require native FreeCAD execution gate; static code review passes structural geometry inspection only and does not execute native CAD kernels."
+  ],
+  "toolAction": "Completing substantive mechanical code review",
+  "toolSummary": "Mechanical CAD code review verdict",
+  "verdict": "STATIC_REJECTED"
+}
+
+ADJUDICATION: Gemini universal arithmetic249 is wrong; actualROOTRED declared254 vs199nativegeometry. Rootexactmetrics authoritative. Fix centralbbox usingbeamtop, no clamp/noGPUbodyheight.

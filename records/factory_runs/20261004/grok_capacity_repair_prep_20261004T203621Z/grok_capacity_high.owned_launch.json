@@ -1,0 +1,13 @@
+{
+  "credential_read_by_outer_wrapper": false,
+  "clock": "Stopwatch",
+  "prompt_sha256": "cfd8f05f04dce70b0654ad8f023e5f63837b479f3a14388e08e950079293795c",
+  "pid": 75996,
+  "native_children_actual": 0,
+  "identity": "retained Process object; no PID reattach",
+  "deadline_seconds": 600,
+  "requested_model": "grok-4.7-build-fast",
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "lane": "Grok",
+  "observed_process_start_utc": "2026-10-04T20:38:47.3282701Z"
+}

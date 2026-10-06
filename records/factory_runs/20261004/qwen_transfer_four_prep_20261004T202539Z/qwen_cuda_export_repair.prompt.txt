@@ -1,0 +1,176 @@
+PREPARATION ONLY: ROOT exact-pin launch admission required; no provider/native/tool/source execution now.
+At admitted request: qwen3.8-max enable_thinking=true reasoning_effort=xhigh, no simultaneous thinking_budget. Max10 native children each Qwen/DeepSeek parent authorized where actually supported; THIS directHTTP tools/children0. Return strict JSON status PROPOSED|REFUSED|ANALYSIS,source,tests_source,analysis,prerequisites,evidence_limits,references. Complete source<=16000chars/tests<=8000chars. Meaningful actual-file tests load caller-supplied candidate, no embedded source duplicate. Do not execute code/tests/tools. Existing raw failures/8k refusals immutable. ROOT independently reviews/compiles/executes later. No globalFactory/PyRe/product/auth/settings/driver/purchases. Current hostNV5070Ti+AMDsharediGPU, NO IntelGPU enumerated; SKUs undecided. Do not infer actual capacity, directP2P or cachecoherence from declarations/query/parity. Unsupported/missinghardwareNOT_CHECKED2; attemptednative/cleanup/parityfailureFAIL1. Bounded API waits<=10s +ROOTouterownedprocess, no impossible driver-hang cancellation claim. JSON bounded/robustescaping allpaths; report exactAPI result and actual cleanup uncertainty.
+OfficialSDKv1.34.0/spec1.19.12 ze_api.h pinned c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de, officialsourcecommit934714b278f850d164627eeaaa043eee02785a9e. Header/importlib present, runtimeDLL NOTVERIFIED. Device API https://oneapi-src.github.io/level-zero-spec/level-zero/1.19.12/core/api/apis/device.html ; memory https://oneapi-src.github.io/level-zero-spec/level-zero/1.19.12/core/api/apis/mem.html . CUDA13.4 https://docs.nvidia.com/cuda/cuda-driver-api/cuda_driver_api/group__CUDA__MEM.html exports supported DEVICE DMA_BUF range pagealigned, PCIeBAR1flag orerror. L0documented DMA_BUFimport suggests directedNVownedexport→Intelview HYPOTHESIS, not proof. Reverse desktopCUDA DMABUFimport documentedThor-only; never invent Intelownedexport→desktopCUDAimport. Host import/sharedbacking NOT VRAMP2P.
+2 FOCUSED actual completed CUDA EXPORTONLY source repair; NOT combinedIntelimport work. Actualsource91ec...cb43 below, original8krefusalimmutable. ROOTfullread defects: Q(x) stringifies macro arg but supplies unquotedJSON keys/strings in emit (schema/allocation/errors/etc); CLI ignoresunknown/duplicates; normHex strips arbitrarynonhex; Abort canleaveNOT_CHECKED despite cleanup failure. Fix complete bounded LinuxC++17 source and actualfile pureCLI/receiptcontrols. OfficialCUDA PFN typedefs/entrypoint/version/headergates, strict fullUUID32lowerhex or explicitcanonical PCI selector, no lossyfiltering; rejectunknown/duplicates/missing/malformedargs before CUDAcalls. DEVICE allocation/capability/pagealignedrange/64KiBpayload<=1MiBallocation; robustJSON EVERYpath; exactAPICodes and supportedvsattemptfailed distinction. ActualCUDA deviceconstantfill legal, GPUonewordcorruption beforefull readback; CPUoriginal unchanged; full16384wordcompare, allcounts/hash/range/FDlifetime ownercleanup truthful. CleanupfailureFAIL evenafter earlier unsupported classification. Scope DEVICE_DMA_BUF_EXPORT_ONLY, direct_transport_qualified=false; no Intelimport/P2Pqualification. Preserve actualdocBAR1flag/hostalignedranges and no managed/host substitute. Tests must exercise actualparser/emitpure helpers via admittedbuild later or independentrecordcontract fixtures, no mirrorcode/fakeexecutedbinary. No native execution byprovider/manager.
+ACTUAL SOURCE INPUT E:\the_harness\records\factory_runs\20261004\qwen_compact_six_prep_20261004T191000Z\qwen_cuda_dmabuf_export\source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt SHA256 91ec7a579d98f4a4be533842386bf8356f643420f47f6cfbc37d7d979b87cb43
+#include <cuda.h>
+#include <dlfcn.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <cerrno>
+#include <cstdint>
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <sstream>
+using namespace std;
+typedef CUresult(CUDAAPI*cuInit_t)(unsigned int);
+typedef CUresult(CUDAAPI*cuDriverGetVersion_t)(int*);
+typedef CUresult(CUDAAPI*cuDeviceGetCount_t)(int*);
+typedef CUresult(CUDAAPI*cuDeviceGet_t)(CUdevice*,int);
+typedef CUresult(CUDAAPI*cuDeviceGetUuid_t)(CUuuid*,CUdevice);
+typedef CUresult(CUDAAPI*cuDeviceGetPCIBusId_t)(char*,int,CUdevice);
+typedef CUresult(CUDAAPI*cuDeviceGetAttribute_t)(int*,CUdevice_attribute,CUdevice);
+typedef CUresult(CUDAAPI*cuCtxCreate_t)(CUcontext*,unsigned int,CUdevice);
+typedef CUresult(CUDAAPI*cuMemAlloc_t)(CUdeviceptr*,size_t);
+typedef CUresult(CUDAAPI*cuMemsetD32_t)(CUdeviceptr,unsigned int,size_t);
+typedef CUresult(CUDAAPI*cuMemcpyDtoH_t)(void*,CUdeviceptr,size_t);
+typedef CUresult(CUDAAPI*cuMemFree_t)(CUdeviceptr);
+typedef CUresult(CUDAAPI*cuCtxDestroy_t)(CUcontext);
+typedef CUresult(CUDAAPI*cuCtxSynchronize_t)(void);
+typedef CUresult(CUDAAPI*cuGetErrorString_t)(CUresult,const char**);
+typedef CUresult(CUDAAPI*cuMemGetHandleForAddressRange_t)(void*,CUdeviceptr,size_t,CUmemRangeHandleType,unsigned long long);
+struct Api{cuInit_t Init=nullptr;cuDriverGetVersion_t DriverGetVersion=nullptr;cuDeviceGetCount_t DeviceGetCount=nullptr;cuDeviceGet_t DeviceGet=nullptr;cuDeviceGetUuid_t DeviceGetUuid=nullptr;cuDeviceGetPCIBusId_t DeviceGetPCIBusId=nullptr;cuDeviceGetAttribute_t DeviceGetAttribute=nullptr;cuCtxCreate_t CtxCreate=nullptr;cuMemAlloc_t MemAlloc=nullptr;cuMemsetD32_t MemsetD32=nullptr;cuMemcpyDtoH_t MemcpyDtoH=nullptr;cuMemFree_t MemFree=nullptr;cuCtxDestroy_t CtxDestroy=nullptr;cuCtxSynchronize_t CtxSynchronize=nullptr;cuGetErrorString_t ErrStr=nullptr;cuMemGetHandleForAddressRange_t GetHandle=nullptr;};
+static Api G;
+static vector<string> ERR;
+#define S(x) #x
+#define Q(x) S(x)
+static string esc(const string&s){string o;for(char c:s){if(c==34||c==92)o.push_back(92);o.push_back(c);}return o;}
+static string q(const string&s){string r;r.push_back(34);r+=esc(s);r.push_back(34);return r;}
+static const char* jbool(bool b){return b?"true":"false";}
+static string cerrs(CUresult r){const char*s=nullptr;if(G.ErrStr&&G.ErrStr(r,&s)==CUDA_SUCCESS&&s)return s;return to_string((int)r);}
+static void addCuda(const string&a,CUresult r){ERR.push_back(a+'='+to_string((int)r)+'('+cerrs(r)+')');}
+static void addErrno(const string&a,int e){ERR.push_back(a+'='+to_string(e)+'('+strerror(e)+')');}
+struct Abort{int code;string status,scope,reason,kv;};
+static int emit(int code,const string&status,const string&scope,const string&reason,const string&kv=""){ostringstream os;os<<'{'<<Q(schema)<<':'<<Q(task5_cuda_dmabuf_export_v1)<<','<<Q(status)<<':'<<q(status)<<','<<Q(exit_code)<<':'<<code<<','<<Q(scope)<<':'<<q(scope);if(!reason.empty())os<<','<<Q(reason)<<':'<<q(reason);if(!kv.empty())os<<','<<kv;os<<','<<Q(errors)<<':[';for(size_t i=0;i<ERR.size();++i){if(i)os<<',';os<<q(ERR[i]);}os<<']'<<'}';puts(os.str().c_str());return code;}
+static string normHex(const string&s){string o;for(char c:s){if((c>='0'&&c<='9')||(c>='a'&&c<='f')||(c>='A'&&c<='F')){if(c>='A'&&c<='F')c=c-'A'+'a';o.push_back(c);}}return o;}
+static string lower(const string&s){string o;for(char c:s){if(c>='A'&&c<='Z')c=c-'A'+'a';if(c!=' ')o.push_back(c);}return o;}
+#define REQ(f,n) G.f=(n##_t)dlsym(lib,#n);if(!G.f)throw Abort{2,Q(NOT_CHECKED),Q(INIT),"missing entrypoint: " #n,""}
+int main(int argc,char**argv){string uuid,pci;for(int i=1;i<argc;i++){string a=argv[i];if(a.rfind("--uuid=",0)==0)uuid=a.substr(7);else if(a.rfind("--pci=",0)==0)pci=a.substr(6);}
+void*lib=nullptr;CUcontext ctx=nullptr;CUdeviceptr dptr=0;int fd=-1;bool ctx_ok=false,alloc_ok=false;
+try{
+if(uuid.empty()&&pci.empty())throw Abort{1,Q(FAIL),Q(INPUT),"missing --uuid= or --pci=",""};
+lib=dlopen("libcuda.so.1",RTLD_LAZY|RTLD_LOCAL);if(!lib)throw Abort{2,Q(NOT_CHECKED),Q(INIT),"libcuda.so.1 not loadable",""};
+G.ErrStr=(cuGetErrorString_t)dlsym(lib,Q(cuGetErrorString));
+REQ(Init,cuInit);REQ(DriverGetVersion,cuDriverGetVersion);REQ(DeviceGetCount,cuDeviceGetCount);REQ(DeviceGet,cuDeviceGet);REQ(DeviceGetUuid,cuDeviceGetUuid);REQ(DeviceGetPCIBusId,cuDeviceGetPCIBusId);REQ(DeviceGetAttribute,cuDeviceGetAttribute);REQ(CtxCreate,cuCtxCreate);REQ(MemAlloc,cuMemAlloc);REQ(MemsetD32,cuMemsetD32);REQ(MemcpyDtoH,cuMemcpyDtoH);REQ(MemFree,cuMemFree);REQ(CtxDestroy,cuCtxDestroy);REQ(CtxSynchronize,cuCtxSynchronize);REQ(GetHandle,cuMemGetHandleForAddressRange);
+CUresult r=G.Init(0);if(r!=CUDA_SUCCESS){addCuda(Q(cuInit),r);throw Abort{2,Q(NOT_CHECKED),Q(INIT),"cuInit failed",""};}
+int drv=0;r=G.DriverGetVersion(&drv);if(r!=CUDA_SUCCESS){addCuda(Q(cuDriverGetVersion),r);throw Abort{2,Q(NOT_CHECKED),Q(INIT),"cuDriverGetVersion failed",""};}
+int count=0;r=G.DeviceGetCount(&count);if(r!=CUDA_SUCCESS||count<=0){addCuda(Q(cuDeviceGetCount),r);throw Abort{2,Q(NOT_CHECKED),Q(DEVICE),"no CUDA devices",""};}
+string wantU=normHex(uuid);if(!uuid.empty()&&wantU.size()!=32)throw Abort{1,Q(FAIL),Q(INPUT),"uuid must contain 32 hex digits",""};
+string wantP=lower(pci);int chosen=-1;CUdevice dev=0;string devU,devP;
+for(int i=0;i<count;i++){CUdevice d;if(G.DeviceGet(&d,i)!=CUDA_SUCCESS)continue;CUuuid u;string uh,ph;if(G.DeviceGetUuid(&u,d)==CUDA_SUCCESS){char b[33];for(int j=0;j<16;j++)snprintf(b+2*j,3,"%02x",(unsigned char)u.bytes[j]);uh=b;}
+char p[64];if(G.DeviceGetPCIBusId(p,sizeof(p),d)==CUDA_SUCCESS)ph=lower(p);
+bool mu=uuid.empty()||uh==wantU;bool mp=pci.empty()||ph==wantP;if(mu&&mp&&(!uuid.empty()||!pci.empty())){chosen=i;dev=d;devU=uh;devP=ph;break;}}
+if(chosen<0)throw Abort{2,Q(NOT_CHECKED),Q(DEVICE),"selected device not found",""};
+ostringstream base;base<<Q(driver_version)<<':'<<drv<<','<<Q(device)<<':'<<'{'<<Q(index)<<':'<<chosen<<','<<Q(uuid_hex)<<':'<<q(devU)<<','<<Q(pci_bus_id)<<':'<<q(devP)<<'}';
+int attr=0;r=G.DeviceGetAttribute(&attr,CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED,dev);if(r!=CUDA_SUCCESS){addCuda(Q(cuDeviceGetAttribute),r);throw Abort{2,Q(NOT_CHECKED),Q(ATTRIBUTE),"CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED query failed",base.str()};}
+if(attr==0)throw Abort{2,Q(NOT_CHECKED),Q(ATTRIBUTE),"CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED false",base.str()};
+r=G.CtxCreate(&ctx,0,dev);if(r!=CUDA_SUCCESS){addCuda(Q(cuCtxCreate),r);throw Abort{1,Q(FAIL),Q(CONTEXT),"cuCtxCreate failed",base.str()};}ctx_ok=true;
+long ps=sysconf(_SC_PAGESIZE);if(ps<=0)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"page size unavailable",base.str()};
+size_t page=(size_t)ps,req=65536,maxr=1048576;if(page>maxr)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"page size exceeds bounded range",base.str()};
+size_t sz=((req+page-1)/page)*page;if(sz>maxr)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"aligned range exceeds bound",base.str()};
+r=G.MemAlloc(&dptr,sz);if(r!=CUDA_SUCCESS){addCuda(Q(cuMemAlloc),r);throw Abort{1,Q(FAIL),Q(ALLOC),"cuMemAlloc failed",base.str()};}alloc_ok=true;
+if((static_cast<uintptr_t>(dptr)%page)!=0)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"cuMemAlloc base not host-page aligned",base.str()};
+ostringstream bs;bs<<'0'<<'x'<<hex<<(unsigned long long)dptr<<dec;
+ostringstream kv;kv<<base.str()<<','<<Q(allocation)<<':'<<'{'<<Q(class)<<':'<<Q(DEVICE)<<','<<Q(api)<<':'<<Q(cuMemAlloc)<<','<<Q(api_status)<<':'<<Q(CUDA_SUCCESS)<<','<<Q(requested_payload_bytes)<<':'<<65536<<','<<Q(aligned_range_bytes)<<':'<<sz<<','<<Q(base)<<':'<<q(bs.str())<<','<<Q(page_size)<<':'<<page<<','<<Q(bounded_max_bytes)<<':'<<1048576<<'}';
+uint32_t pat=0x5A5A5A5Au;size_t n=sz/4;r=G.MemsetD32(dptr,pat,n);if(r!=CUDA_SUCCESS){addCuda(Q(cuMemsetD32),r);throw Abort{1,Q(FAIL),Q(MEMSET),"cuMemsetD32 failed",kv.str()};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(Q(cuCtxSynchronize),r);throw Abort{1,Q(FAIL),Q(SYNC),"cuCtxSynchronize failed",kv.str()};}
+r=G.GetHandle(&fd,dptr,sz,CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD,(unsigned long long)CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE);
+if(r!=CUDA_SUCCESS){addCuda(Q(cuMemGetHandleForAddressRange),r);int c=(r==CUDA_ERROR_NOT_SUPPORTED||r==CUDA_ERROR_INVALID_VALUE||r==CUDA_ERROR_INVALID_DEVICE||r==CUDA_ERROR_NO_DEVICE)?2:1;throw Abort{c,c==2?Q(NOT_CHECKED):Q(FAIL),c==2?Q(EXPORT_UNSUPPORTED):Q(EXPORT),"cuMemGetHandleForAddressRange failed",kv.str()};}
+if(fd<0)throw Abort{1,Q(FAIL),Q(EXPORT),"export returned invalid fd",kv.str()};
+struct stat st;if(fstat(fd,&st)!=0){addErrno(Q(fstat),errno);throw Abort{1,Q(FAIL),Q(EXPORT),"fstat failed",kv.str()};}
+kv<<','<<Q(export)<<':'<<'{'<<Q(api)<<':'<<Q(cuMemGetHandleForAddressRange)<<','<<Q(api_status)<<':'<<Q(CUDA_SUCCESS)<<','<<Q(handle_type)<<':'<<Q(CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD)<<','<<Q(flags)<<':'<<Q(CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE)<<','<<Q(fd)<<':'<<fd<<','<<Q(fstat_size)<<':'<<(long long)st.st_size<<','<<Q(fstat_mode)<<':'<<(unsigned long)st.st_mode<<'}';
+vector<uint32_t> hb(n);r=G.MemcpyDtoH(hb.data(),dptr,sz);if(r!=CUDA_SUCCESS){addCuda(Q(cuMemcpyDtoH),r);throw Abort{1,Q(FAIL),Q(READBACK),"cuMemcpyDtoH failed",kv.str()};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(Q(cuCtxSynchronize),r);throw Abort{1,Q(FAIL),Q(SYNC),"cuCtxSynchronize failed",kv.str()};}
+size_t bad=size_t(-1);for(size_t i=0;i<n;i++)if(hb[i]!=pat){bad=i;break;}
+if(bad!=size_t(-1)){ostringstream re;re<<"readback mismatch at uint32 index "<<bad;throw Abort{1,Q(FAIL),Q(READBACK),re.str(),kv.str()};}
+kv<<','<<Q(readback)<<':'<<'{'<<Q(api)<<':'<<Q(cuMemcpyDtoH)<<','<<Q(api_status)<<':'<<Q(CUDA_SUCCESS)<<','<<Q(bytes)<<':'<<sz<<','<<Q(pattern)<<':'<<Q(0x5a5a5a5a)<<','<<Q(match)<<':'<<jbool(true)<<'}';
+bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(Q(close),errno);fd=-1;}
+if(alloc_ok){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(Q(cuMemFree),fr);alloc_ok=false;}
+if(ctx_ok){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(Q(cuCtxDestroy),cr);ctx_ok=false;}
+kv<<','<<Q(ownership)<<':'<<'{'<<Q(fd_closed)<<':'<<jbool(fc)<<','<<Q(allocation_freed)<<':'<<jbool(mf)<<','<<Q(cuda_context_destroyed)<<':'<<jbool(cd)<<'}';
+if(!fc||!mf||!cd)return emit(1,Q(FAIL),Q(CLEANUP),"resource cleanup failed",kv.str());
+return emit(0,Q(DEVICE_DMA_BUF_EXPORT_OBSERVED),Q(DEVICE_DMA_BUF_EXPORT_OBSERVED),"",kv.str());
+}catch(Abort&a){bool had_fd=(fd>=0),had_alloc=alloc_ok,had_ctx=ctx_ok;bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(Q(close),errno);fd=-1;}if(had_alloc&&G.MemFree){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(Q(cuMemFree),fr);alloc_ok=false;}if(had_ctx&&G.CtxDestroy){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(Q(cuCtxDestroy),cr);ctx_ok=false;}string kv=a.kv;if(had_fd||had_alloc||had_ctx){if(!kv.empty())kv+=',';kv+=Q(ownership);kv+=':';kv+='{';kv+=Q(fd_closed);kv+=':';kv+=jbool(had_fd&&fc);kv+=',';kv+=Q(allocation_freed);kv+=':';kv+=jbool(had_alloc&&mf);kv+=',';kv+=Q(cuda_context_destroyed);kv+=':';kv+=jbool(had_ctx&&cd);kv+='}';}return emit(a.code,a.status,a.scope,a.reason,kv);
+}catch(exception&e){bool had_fd=(fd>=0),had_alloc=alloc_ok,had_ctx=ctx_ok;if(fd>=0){close(fd);fd=-1;}if(had_alloc&&G.MemFree)G.MemFree(dptr);if(had_ctx&&G.CtxDestroy)G.CtxDestroy(ctx);return emit(1,Q(FAIL),Q(EXCEPTION),e.what(),"");}
+}
+ACTUAL SOURCE INPUT E:\the_harness\records\factory_runs\20261004\qwen_compact_six_prep_20261004T191000Z\qwen_cuda_dmabuf_export\tests_source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt SHA256 eec5ea8a23c94d1d7ef5cfcf43b2b9feb1fbeed4df28114ff29398725cb72f79
+#!/usr/bin/env python3
+import os, sys, json
+CANDIDATE = os.environ.get('CANDIDATE_SOURCE_PATH')
+if not CANDIDATE and len(sys.argv) > 1:
+    CANDIDATE = sys.argv[1]
+FAILURES = []
+def check(name, cond, detail=''):
+    if not cond:
+        FAILURES.append(name + (': ' + detail if detail else ''))
+def receipt_ok(r):
+    if not isinstance(r, dict): return False, 'not dict'
+    status = r.get('status')
+    code = r.get('exit_code')
+    scope = r.get('scope')
+    if status not in ('DEVICE_DMA_BUF_EXPORT_OBSERVED','NOT_CHECKED','FAIL'): return False, 'bad status'
+    if not isinstance(code, int): return False, 'exit_code not int'
+    if status == 'DEVICE_DMA_BUF_EXPORT_OBSERVED':
+        if code != 0: return False, 'success exit must be 0'
+        if scope != 'DEVICE_DMA_BUF_EXPORT_OBSERVED': return False, 'scope mismatch'
+        a = r.get('allocation', {})
+        if a.get('class') != 'DEVICE': return False, 'allocation class must be DEVICE'
+        if a.get('api') != 'cuMemAlloc': return False, 'allocation api must be cuMemAlloc'
+        if int(a.get('requested_payload_bytes', 0)) != 65536: return False, 'payload must be 64KiB'
+        if int(a.get('aligned_range_bytes', 0)) > 1048576: return False, 'range bound exceeded'
+        page = int(a.get('page_size', 4096))
+        if page <= 0: return False, 'bad page_size'
+        if int(a.get('aligned_range_bytes', 0)) % page != 0: return False, 'range not page aligned'
+        base = str(a.get('base', ''))
+        if base.startswith('0x'):
+            try:
+                if int(base, 16) % page != 0: return False, 'base not page aligned'
+            except Exception:
+                return False, 'base not hex'
+        e = r.get('export', {})
+        if e.get('handle_type') != 'CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD': return False, 'handle_type'
+        if e.get('flags') != 'CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE': return False, 'flags'
+        if not isinstance(e.get('fd'), int) or e['fd'] < 0: return False, 'fd'
+        if 'fstat_size' not in e: return False, 'fstat_size missing'
+        rb = r.get('readback', {})
+        if rb.get('match') is not True: return False, 'readback match'
+        o = r.get('ownership', {})
+        if not (o.get('fd_closed') and o.get('allocation_freed') and o.get('cuda_context_destroyed')): return False, 'ownership cleanup'
+        txt = json.dumps(r).lower()
+        for banned in ('intel import', 'p2p proven', 'cache coherence proven'):
+            if banned in txt: return False, 'overclaim'
+    elif status == 'NOT_CHECKED':
+        if code != 2: return False, 'NOT_CHECKED exit must be 2'
+    elif status == 'FAIL':
+        if code != 1: return False, 'FAIL exit must be 1'
+    return True, ''
+if CANDIDATE and os.path.isfile(CANDIDATE):
+    src = open(CANDIDATE, 'r', encoding='utf-8', errors='replace').read()
+    check('source_size', len(src) <= 8000, str(len(src)))
+    for token in ['CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED','cuMemGetHandleForAddressRange','CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD','CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE','cuMemAlloc','cuMemsetD32','cuMemcpyDtoH','fstat','close','cuMemFree','NOT_CHECKED','DEVICE_DMA_BUF_EXPORT_OBSERVED']:
+        check('source_token_' + token, token in src)
+    check('no_host_attr_substitution', 'HOST_ALLOC_DMA_BUF_SUPPORTED' not in src)
+else:
+    check('candidate_path', False, 'CANDIDATE_SOURCE_PATH missing')
+good = {'schema':'task5_cuda_dmabuf_export_v1','status':'DEVICE_DMA_BUF_EXPORT_OBSERVED','exit_code':0,'scope':'DEVICE_DMA_BUF_EXPORT_OBSERVED','driver_version':13040,'device':{'index':0,'uuid_hex':'00000000000000000000000000000000','pci_bus_id':'0000:01:00.0'},'allocation':{'class':'DEVICE','api':'cuMemAlloc','api_status':'CUDA_SUCCESS','requested_payload_bytes':65536,'aligned_range_bytes':65536,'base':'0x1000','page_size':4096,'bounded_max_bytes':1048576},'export':{'api':'cuMemGetHandleForAddressRange','api_status':'CUDA_SUCCESS','handle_type':'CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD','flags':'CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE','fd':3,'fstat_size':65536,'fstat_mode':0},'readback':{'api':'cuMemcpyDtoH','api_status':'CUDA_SUCCESS','bytes':65536,'pattern':'0x5a5a5a5a','match':True},'ownership':{'fd_closed':True,'allocation_freed':True,'cuda_context_destroyed':True},'errors':[]}
+unsupported = {'schema':'task5_cuda_dmabuf_export_v1','status':'NOT_CHECKED','exit_code':2,'scope':'ATTRIBUTE','reason':'CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED false','errors':[]}
+wrong_host = dict(good)
+wrong_host['allocation'] = dict(good['allocation'])
+wrong_host['allocation']['class'] = 'HOST'
+misaligned_success = dict(good)
+misaligned_success['allocation'] = dict(good['allocation'])
+misaligned_success['allocation']['base'] = '0x1001'
+leaked_fd = dict(good)
+leaked_fd['ownership'] = dict(good['ownership'])
+leaked_fd['ownership']['fd_closed'] = False
+fixtures = [('good', good, True), ('unsupported_attr', unsupported, True), ('wrong_host_label', wrong_host, False), ('misaligned_success', misaligned_success, False), ('leaked_fd', leaked_fd, False)]
+for name, receipt, expected in fixtures:
+    ok, why = receipt_ok(receipt)
+    check('fixture_' + name, ok == expected, why)
+instructions = ['Compile on Linux with CUDA 13.4 headers: g++ -std=c++17 candidate.cpp -o candidate -ldl -I/usr/local/cuda/include', 'Run under ROOT 30s supervision: ./candidate --uuid=<GPU-UUID> or ./candidate --pci=<PCI_BUS_ID>', 'Exit 0 only for DEVICE_DMA_BUF_EXPORT_OBSERVED; exit 2 NOT_CHECKED for missing API/attribute/unsupported; exit 1 FAIL for actual errors.', 'Do not infer Intel import, P2P, or cache coherence from FD export.']
+if FAILURES:
+    print(json.dumps({'tests':'task5-receipt-validator','passed':False,'failures':FAILURES,'native_execution':'NOT_PERFORMED'}, indent=1))
+    sys.exit(1)
+print(json.dumps({'tests':'task5-receipt-validator','passed':True,'native_execution':'NOT_PERFORMED','instructions':instructions}, indent=1))

@@ -1,0 +1,116 @@
+{
+  "accepted": true,
+  "capture_limit_ok": true,
+  "case_id": "overflow",
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture_revision2\\fixture_controller.py",
+    "--case",
+    "overflow",
+    "--output",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture_revision2\\native_runs\\native_20261004T144031Z\\overflow\\supervisor_output"
+  ],
+  "controller_elapsed_seconds": 0.141,
+  "controller_exit_code": 0,
+  "controller_pid": 44620,
+  "controller_pid_absent_after_wait": true,
+  "controller_source_hash_after": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+  "controller_timeout": false,
+  "controller_worker_hash_after": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture_revision2",
+  "restart_commit_verified": true,
+  "restart_matches": true,
+  "restart_receipt": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "LOG_LIMIT",
+    "job_active_count": 0,
+    "logs": {
+      "overflow_worker": {
+        "stderr": "Traceback (most recent call last):\r\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture_revision2\\worker.py\", line 21, in <module>\r\n    sys.stdout.write(\"X\" * 16384)\r\nBrokenPipeError: [Errno 32] Broken pipe\r\n",
+        "stderr_bytes": 240,
+        "stderr_overflow": false,
+        "stderr_path": "overflow_worker.stderr.log",
+        "stdout": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "stdout_bytes": 1024,
+        "stdout_overflow": true,
+        "stdout_path": "overflow_worker.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "native_overflow",
+    "status": "FAILED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 1,
+        "pid": 12704,
+        "resumed": true,
+        "worker_id": "overflow_worker"
+      }
+    ]
+  },
+  "source_and_runtime_hashes_after": {
+    "admission": "4bea1ec365301f841f9d4f2c0c262c795eeb5aec2b583d20244867a3703e8f77",
+    "contract": "2a7e725fc0ad4d792861ce6ab31559e3b100634673108a27b5ddd68a7df7e43d",
+    "controller": "b1ced2be448d29a1cf75da33f9388e9c74e9f21d1a5ccecaf324034572a6d6cd",
+    "driver": "0e15e0f108c8635b8b1a2adeee63efc47fd3eb959a3faebc0c48ed4069da0e18",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "source_and_runtime_hashes_before": {
+    "admission": "4bea1ec365301f841f9d4f2c0c262c795eeb5aec2b583d20244867a3703e8f77",
+    "contract": "2a7e725fc0ad4d792861ce6ab31559e3b100634673108a27b5ddd68a7df7e43d",
+    "controller": "b1ced2be448d29a1cf75da33f9388e9c74e9f21d1a5ccecaf324034572a6d6cd",
+    "driver": "0e15e0f108c8635b8b1a2adeee63efc47fd3eb959a3faebc0c48ed4069da0e18",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "source_and_runtime_hashes_unchanged": true,
+  "stderr_bytes": 0,
+  "stdout_bytes": 4057,
+  "supervisor": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "LOG_LIMIT",
+    "job_active_count": 0,
+    "logs": {
+      "overflow_worker": {
+        "stderr": "Traceback (most recent call last):\r\n  File \"E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture_revision2\\worker.py\", line 21, in <module>\r\n    sys.stdout.write(\"X\" * 16384)\r\nBrokenPipeError: [Errno 32] Broken pipe\r\n",
+        "stderr_bytes": 240,
+        "stderr_overflow": false,
+        "stderr_path": "overflow_worker.stderr.log",
+        "stdout": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "stdout_bytes": 1024,
+        "stdout_overflow": true,
+        "stdout_path": "overflow_worker.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "native_overflow",
+    "status": "FAILED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 1,
+        "pid": 12704,
+        "resumed": true,
+        "worker_id": "overflow_worker"
+      }
+    ]
+  },
+  "supervisor_failure_reason": "LOG_LIMIT",
+  "supervisor_status": "FAILED",
+  "worker_pids": [
+    12704
+  ],
+  "worker_pids_absent_after_cleanup": true
+}

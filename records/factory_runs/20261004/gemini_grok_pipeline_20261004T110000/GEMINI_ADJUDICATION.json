@@ -1,0 +1,24 @@
+{
+  "review_model": "gemini-3.8-flash-high",
+  "review_source_sha256": "765B2BE5E976DFB6709F3D0E7754F71696E2B9287CC87120A767E8820F69DF94",
+  "review_completion": "SUBSTANTIVE_COMPLETE",
+  "findings": [
+    {
+      "finding": "pci_domain_id_nv absent in current PyOpenCL/NVIDIA implementation",
+      "verdict": "DISPROVEN_BY_PARENT_LIVE_QUERY",
+      "parent_reported_device": "NVIDIA RTX 5070 Ti",
+      "parent_reported_device_info": {"PCI_DOMAIN_ID_NV": 16394, "PCI_BUS_ID_NV": 16392, "PCI_SLOT_ID_NV": 16393},
+      "parent_reported_device_values": {"pci_domain_id_nv": 0, "pci_bus_id_nv": 1, "pci_slot_id_nv": 0},
+      "action": "Keep existing strict identity fallback. Do not invent a PCI domain when its query is unavailable.",
+      "qualification": "Parent performed the live query; this file records the received team evidence rather than claiming an independent local probe.",
+      "illustrative_verification_query": "import pyopencl as cl; print({name: getattr(cl.device_info, name, None) for name in ('PCI_DOMAIN_ID_NV','PCI_BUS_ID_NV','PCI_SLOT_ID_NV')}); print([(d.name, getattr(d,'pci_domain_id_nv',None),getattr(d,'pci_bus_id_nv',None),getattr(d,'pci_slot_id_nv',None)) for p in cl.get_platforms() for d in p.get_devices() if 'NVIDIA' in d.vendor])"
+    },
+    {
+      "finding": "Corruption selects a device boundary rather than first vendor boundary",
+      "verdict": "SOURCE_CONFIRMED",
+      "action": "Grok exact patch requested for vendor-aware boundary selection and GPU-free discriminator tests. Same-vendor-only corruption must refuse."
+    }
+  ],
+  "additional_lead_confirmed_patch_target": "Unknown or nonpositive maximum allocation size currently disables largest-buffer admission checks; Grok patch must refuse before native allocations.",
+  "primary_source_caution": "The 2009 Khronos NVIDIA extension text is not sufficient to characterize the current installed PyOpenCL/NVIDIA extension constants. Its absence of current PCI entries does not prove runtime attribute absence."
+}

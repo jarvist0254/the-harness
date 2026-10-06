@@ -1,0 +1,63 @@
+{
+  "provider_calls": 0,
+  "native_children_actual": 0,
+  "credentials_read": false,
+  "native_process_fixture_or_gpu_run": false,
+  "scope": "PURE_ADAPTER_INTAKE_ONLY",
+  "utc": "2026-10-04T17:36:18.2445415Z",
+  "passed": 7,
+  "failed": 0,
+  "semantic_adapter_admission": false,
+  "tests": [
+    {
+      "error_type": null,
+      "name": "valid_bounded_complete_source_strings_intake_only",
+      "passed": true,
+      "actual_accept": true,
+      "expected_accept": true
+    },
+    {
+      "error_type": "RuntimeException",
+      "name": "unknown_status_field_refused",
+      "passed": true,
+      "actual_accept": false,
+      "expected_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "name": "unknown_execution_field_refused",
+      "passed": true,
+      "actual_accept": false,
+      "expected_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "name": "empty_adapter_source_refused",
+      "passed": true,
+      "actual_accept": false,
+      "expected_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "name": "source_object_refused_without_execution",
+      "passed": true,
+      "actual_accept": false,
+      "expected_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "name": "oversized_source_refused",
+      "passed": true,
+      "actual_accept": false,
+      "expected_accept": false
+    },
+    {
+      "error_type": "RuntimeException",
+      "name": "wrong_explanation_type_refused",
+      "passed": true,
+      "actual_accept": false,
+      "expected_accept": false
+    }
+  ],
+  "python_parse_eval_import": false
+}

@@ -1,0 +1,13 @@
+{
+  "job_id": "qwen_l0_peer_copy",
+  "authority": "ROOT full sixpacket helper scope review actual provider-only sixlaunch approval19:29UTC",
+  "native_children_actual": 0,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_peer_copy.spec.txt",
+  "source_sha256": "26de6cccb52a7214fb1625fb287ffa38273fac254ec1ca30e2e1e740f8f90553",
+  "provider_launch_authorized": true,
+  "model": "qwen3.8-max",
+  "lane": "Qwen",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z",
+  "prompt_sha256": "26de6cccb52a7214fb1625fb287ffa38273fac254ec1ca30e2e1e740f8f90553",
+  "packet_sha256": "6820ca489ce27be5c3bee175a01a0102030ea06c208e2fbde5b8dd8283212612"
+}

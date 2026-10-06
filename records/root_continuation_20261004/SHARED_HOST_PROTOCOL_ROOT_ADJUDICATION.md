@@ -1,0 +1,13 @@
+# Shared-host protocol: ROOT adjudication of seventh batch
+
+ROOT reviewed the actual Qwen proposal, the extracted Gemini structured review and Grok's final artifact. The draft and Qwen edits remain refused for execution. No C++ patch, allocation, import or GPU submission was applied.
+
+The Qwen proposal's first two searches target documentation absent from the pinned C++ source. Its allocation checks remain after the allocations. Its corruption operation writes four bytes and changes the comparison reference to incorporate corruption. That cannot serve as the required independent negative control. Its identical-backing argument also does not establish the unresolved corresponding-resource relationship for the distinct imported views.
+
+Gemini identified these defects. Its wrapper parse error remains preserved because the CLI response mixed prose and JSON. The valid CLI structured_output was extracted separately without content edits. The review's stronger wording about specification prohibition is not adopted as proof that all such protocols are impossible; correspondence remains unestablished for this draft.
+
+Grok's final artifact is REFUSED with changes=[] ([actual JSON](../factory_runs/20261004/shared_host_protocol_repair_20261004T170147Z/grok_shared_host_edit/protocol.pending_root_qa.json), SHA256 87171b0723bef4b0f952d612094324ec9a1a96291a4e41f27ba008d3cb7c25a2). Its bounded explicit GPU readback → CPU copy → GPU upload fallback is design only. Existing executed host-staged probes remain separate evidence. Future shared-import probes need their own valid synchronization protocol; a plain CPU-copy transport does not need to inherit the original shared-import capability prerequisites.
+
+Seventh batch actually used Qwen3.8-max, Gemini3.8-flash-medium and Grok4.7-build-fast. It closed three paid jobs with 86,991 reported tokens: 14,904 + 46,677 + 25,410. Native child agents were zero. All seven closed batches have 53 provider jobs and 2,691,377 observed tokens, with two other usage-unknown jobs retained. Tokens do not establish monthly quota credits consumed. Cached/thinking/extraction metadata is not added twice. See [closed ledger](../factory_runs/20261004/shared_host_protocol_repair_20261004T170147Z/USAGE_FINAL_SEVENTH.json).
+
+The source remains 21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815. The actual query still establishes only NVIDIA/AMD HOST_ALLOCATION import advertisements. Intel is unqualified. A later successful shared-host path must be labelled SHARED_HOST_BACKING_NOT_VRAM_P2P; this report proves neither direct peer DMA nor four-card capacity.

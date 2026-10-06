@@ -1,0 +1,17 @@
+{
+  "pid": 10836,
+  "command": "C:\\Windows\\System32\\cmd.exe /d /s /c \"call \"\"E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_single_device\\compile_single_diag.cmd\"\"\"",
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_single_device\\llama_logits_single_diagnostic.cpp",
+  "source_sha256": "3e5423ce5085576389083b46f32519e5005f930004e3bc3e85aec98b7150c6ea",
+  "command_file": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_single_device\\compile_single_diag.cmd",
+  "timeout_seconds": 180,
+  "timed_out": false,
+  "exit_code": 0,
+  "elapsed_seconds": 4.66,
+  "process_present_after": false,
+  "executable": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_single_device\\llama_logits_single_diag.exe",
+  "executable_exists": true,
+  "executable_sha256": "58d3568a8148b7a4749b54eddc2413d15bf5897abf8aa21726967f6382c54830",
+  "stdout": "records\\vulkan_llm_qualification_20261004\\fixture_single_device\\compile.stdout.log",
+  "stderr": "records\\vulkan_llm_qualification_20261004\\fixture_single_device\\compile.stderr.log"
+}

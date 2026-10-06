@@ -1,0 +1,40 @@
+{
+  "status": "UNMEASURED",
+  "run_id": null,
+  "timestamp_utc": null,
+  "population": null,
+  "os": null,
+  "bios": null,
+  "software_commit": null,
+  "executable_sha256": null,
+  "devices": [],
+  "directed_transfers": [],
+  "model": {
+    "file_sha256": null,
+    "architecture": null,
+    "quantization": null,
+    "weight_bytes": null,
+    "context": null,
+    "batch": null,
+    "active_sequences": null,
+    "kv_dtype": null,
+    "split_mode": null,
+    "block_ownership": null
+  },
+  "results": {
+    "load_seconds": null,
+    "prefill_tokens_per_second": null,
+    "decode_tokens_per_second": null,
+    "first_token_latency_seconds": null,
+    "peak_memory_per_device_bytes": null,
+    "host_staging_peak_bytes": null,
+    "numerical_parity_fixture": null,
+    "numerical_tolerance": null,
+    "numerical_parity_pass": null,
+    "larger_than_single_card_usable_capacity": null,
+    "unexpected_cpu_offload": null,
+    "worker_failure_test": null,
+    "oom_admission_test": null,
+    "thermal_result": null
+  }
+}

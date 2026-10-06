@@ -1,0 +1,87 @@
+{
+  "pid": 82168,
+  "elapsed_seconds": 120.65600000042468,
+  "status": "RUNNING",
+  "new_job_member_observations": [
+    {
+      "monotonic": 4611131.39,
+      "original_counts": [
+        2,
+        221
+      ],
+      "observation": {
+        "status": "LIST_OBSERVED",
+        "assigned": 2,
+        "returned": 2,
+        "members": [
+          {
+            "pid": 52068,
+            "status": "IMAGE_OBSERVED",
+            "image": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\vctip.exe"
+          },
+          {
+            "pid": 23820,
+            "status": "IMAGE_OBSERVED",
+            "image": "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\mspdbsrv.exe"
+          }
+        ],
+        "scope": "Read-only sampled membership and names; races may invalidate identity"
+      }
+    },
+    {
+      "monotonic": 4611136.39,
+      "original_counts": [
+        2,
+        221
+      ],
+      "observation": {
+        "status": "LIST_OBSERVED",
+        "assigned": 2,
+        "returned": 2,
+        "members": [
+          {
+            "pid": 52068,
+            "status": "IMAGE_OBSERVED",
+            "image": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\vctip.exe"
+          },
+          {
+            "pid": 23820,
+            "status": "IMAGE_OBSERVED",
+            "image": "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\mspdbsrv.exe"
+          }
+        ],
+        "scope": "Read-only sampled membership and names; races may invalidate identity"
+      }
+    },
+    {
+      "monotonic": 4611141.39,
+      "original_counts": [
+        2,
+        221
+      ],
+      "observation": {
+        "status": "LIST_OBSERVED",
+        "assigned": 2,
+        "returned": 2,
+        "members": [
+          {
+            "pid": 52068,
+            "status": "IMAGE_OBSERVED",
+            "image": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\vctip.exe"
+          },
+          {
+            "pid": 23820,
+            "status": "IMAGE_OBSERVED",
+            "image": "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\mspdbsrv.exe"
+          }
+        ],
+        "scope": "Read-only sampled membership and names; races may invalidate identity"
+      }
+    }
+  ],
+  "capture": {
+    "bytes": 0,
+    "overflow": false,
+    "reader_errors": []
+  }
+}

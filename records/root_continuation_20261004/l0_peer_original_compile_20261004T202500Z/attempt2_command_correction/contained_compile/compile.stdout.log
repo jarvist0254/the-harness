@@ -1,0 +1,15 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.0
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+source.original_untrusted.cpp
+E:\the_harness\records\root_continuation_20261004\l0_peer_original_compile_20261004T202500Z\source.original_untrusted.cpp(41): error C2660: 'zeCommandQueueCreate': function does not take 5 arguments
+E:\the_harness\records\toolchains\level_zero_20261004\sdk\include\level_zero/ze_api.h(3588): note: see declaration of 'zeCommandQueueCreate'
+E:\the_harness\records\root_continuation_20261004\l0_peer_original_compile_20261004T202500Z\source.original_untrusted.cpp(41): note: while trying to match the argument list '(ze_context_handle_t, ze_device_handle_t, int, ze_command_queue_desc_t *, ze_command_queue_handle_t *)'
+E:\the_harness\records\root_continuation_20261004\l0_peer_original_compile_20261004T202500Z\source.original_untrusted.cpp(47): error C2660: 'zeCommandQueueCreate': function does not take 5 arguments
+E:\the_harness\records\toolchains\level_zero_20261004\sdk\include\level_zero/ze_api.h(3588): note: see declaration of 'zeCommandQueueCreate'
+E:\the_harness\records\root_continuation_20261004\l0_peer_original_compile_20261004T202500Z\source.original_untrusted.cpp(47): note: while trying to match the argument list '(ze_context_handle_t, ze_device_handle_t, int, ze_command_queue_desc_t *, ze_command_queue_handle_t *)'
+E:\the_harness\records\root_continuation_20261004\l0_peer_original_compile_20261004T202500Z\source.original_untrusted.cpp(50): error C2660: 'zeCommandQueueCreate': function does not take 5 arguments
+E:\the_harness\records\toolchains\level_zero_20261004\sdk\include\level_zero/ze_api.h(3588): note: see declaration of 'zeCommandQueueCreate'
+E:\the_harness\records\root_continuation_20261004\l0_peer_original_compile_20261004T202500Z\source.original_untrusted.cpp(50): note: while trying to match the argument list '(ze_context_handle_t, ze_device_handle_t, int, ze_command_queue_desc_t *, ze_command_queue_handle_t *)'

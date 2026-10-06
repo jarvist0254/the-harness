@@ -1,0 +1,8 @@
+{
+  "stage": "build",
+  "status": "RUNNING",
+  "elapsed_seconds": 585.2190000005066,
+  "utc": "2026-10-04T17:11:58.903348+00:00",
+  "deadline_seconds": 600,
+  "scope": "Compiler/shader only; root can read supervisor journal for owned PID"
+}

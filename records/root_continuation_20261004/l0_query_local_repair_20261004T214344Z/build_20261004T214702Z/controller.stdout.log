@@ -1,0 +1,1 @@
+{"status": "COMPILE_SUCCEEDED", "cleanup_verified": true, "worker": {"worker_id": "compile", "pid": 25400, "exit_code": 0, "assigned": true, "resumed": true}, "job_active_count": 0, "drain": "CLEANUP", "hashes_unchanged": true}

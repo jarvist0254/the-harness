@@ -1,0 +1,60 @@
+#ifndef CANDIDATE_PATH
+#error CANDIDATE_PATH must be defined as a quoted include path
+#endif
+#define LZQ_TEST_NO_HEADER
+#define LZQ_TEST_NO_MAIN
+#include <cstdint>
+#include <cstring>
+#ifndef Q
+#define Q(x) #x
+#endif
+#define ZE_MAX_DEVICE_NAME 64
+typedef enum ze_result_t { ZE_RESULT_SUCCESS=0, ZE_RESULT_ERROR_UNINITIALIZED=1, ZE_RESULT_ERROR_DEVICE_LOST=2, ZE_RESULT_ERROR_INVALID_ARGUMENT=3, ZE_RESULT_ERROR_INVALID_NULL_HANDLE=4, ZE_RESULT_ERROR_INVALID_SIZE=5, ZE_RESULT_ERROR_UNSUPPORTED_FEATURE=6, ZE_RESULT_ERROR_UNSUPPORTED_SIZE=7 } ze_result_t;
+typedef enum ze_init_flags_t { ZE_INIT_FLAG_GPU_ONLY=1 } ze_init_flags_t;
+typedef enum ze_device_type_t { ZE_DEVICE_TYPE_GPU=1, ZE_DEVICE_TYPE_CPU=2 } ze_device_type_t;
+typedef enum ze_structure_type_t { ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES=1, ZE_STRUCTURE_TYPE_COMMAND_QUEUE_GROUP_PROPERTIES=2, ZE_STRUCTURE_TYPE_DEVICE_EXTERNAL_MEMORY_PROPERTIES=3, ZE_STRUCTURE_TYPE_DEVICE_P2P_PROPERTIES=4 } ze_structure_type_t;
+typedef uint8_t ze_bool_t;
+typedef uint32_t ze_external_memory_type_flags_t;
+typedef uint32_t ze_command_queue_group_property_flags_t;
+typedef uint32_t ze_device_p2p_property_flags_t;
+typedef struct lzq_mock_driver* ze_driver_handle_t;
+typedef struct lzq_mock_device* ze_device_handle_t;
+typedef struct ze_device_uuid_t { uint8_t id[16]; } ze_device_uuid_t;
+typedef struct ze_device_properties_t { ze_structure_type_t stype; void* pNext; ze_device_type_t type; uint32_t vendorId; uint32_t deviceId; uint32_t subdeviceId; ze_device_uuid_t uuid; char name[ZE_MAX_DEVICE_NAME]; } ze_device_properties_t;
+typedef struct ze_command_queue_group_properties_t { ze_structure_type_t stype; void* pNext; ze_command_queue_group_property_flags_t flags; uint32_t numQueues; } ze_command_queue_group_properties_t;
+typedef struct ze_device_external_memory_properties_t { ze_structure_type_t stype; void* pNext; ze_external_memory_type_flags_t memoryAllocationImportTypes; ze_external_memory_type_flags_t memoryAllocationExportTypes; } ze_device_external_memory_properties_t;
+typedef struct ze_device_p2p_properties_t { ze_structure_type_t stype; void* pNext; ze_device_p2p_property_flags_t flags; } ze_device_p2p_properties_t;
+ze_result_t zeInit(ze_init_flags_t flags);
+ze_result_t zeDriverGet(uint32_t* pCount, ze_driver_handle_t* phDrivers);
+ze_result_t zeDeviceGet(ze_driver_handle_t hDriver, uint32_t* pCount, ze_device_handle_t* phDevices);
+ze_result_t zeDeviceGetSubDevices(ze_device_handle_t hDevice, uint32_t* pCount, ze_device_handle_t* phSubdevices);
+ze_result_t zeDeviceGetProperties(ze_device_handle_t hDevice, ze_device_properties_t* p);
+ze_result_t zeDeviceGetCommandQueueGroupProperties(ze_device_handle_t hDevice, uint32_t* pCount, ze_command_queue_group_properties_t* p);
+ze_result_t zeDeviceGetExternalMemoryProperties(ze_device_handle_t hDevice, ze_device_external_memory_properties_t* p);
+ze_result_t zeDeviceCanAccessPeer(ze_device_handle_t hDevice, ze_device_handle_t hPeer, ze_bool_t* can);
+ze_result_t zeDeviceGetP2PProperties(ze_device_handle_t hDevice, ze_device_handle_t hPeer, ze_device_p2p_properties_t* p);
+#include CANDIDATE_PATH
+static int mock_driverCount=1;
+static int mock_rootCount=0;
+static int mock_subPerRoot=0;
+static ze_result_t mock_propRes=ZE_RESULT_SUCCESS;
+static bool mock_asym=false;
+static bool mock_p2pUnsup=false;
+static void resetMock(){ mock_driverCount=1; mock_rootCount=0; mock_subPerRoot=0; mock_propRes=ZE_RESULT_SUCCESS; mock_asym=false; mock_p2pUnsup=false; }
+static bool mock_isRoot(ze_device_handle_t h,int& idx){ uintptr_t v=(uintptr_t)h; if(v>=0x100u && v<0x100u+(uintptr_t)mock_rootCount){ idx=int(v-0x100u); return true; } return false; }
+static bool mock_isSub(ze_device_handle_t h,int& root,int& sub){ uintptr_t v=(uintptr_t)h; if(v>=0x1000u){ uintptr_t x=v-0x1000u; int r=int(x/64u); int s=int(x%64u); if(r<mock_rootCount && s<mock_subPerRoot){ root=r; sub=s; return true; } } return false; }
+static void mock_uuidRoot(ze_device_uuid_t& u,int i){ memset(&u,0,sizeof(u)); u.id[0]=0x00; u.id[1]=0x11; u.id[2]=0x22; u.id[3]=0x33; u.id[4]=uint8_t((i>>8)&255); u.id[5]=uint8_t(i&255); u.id[15]=0x01; }
+static void mock_uuidSub(ze_device_uuid_t& u,int r,int s){ mock_uuidRoot(u,r); u.id[6]=0x80; u.id[7]=uint8_t(s&255); u.id[15]=0x02; }
+ze_result_t zeInit(ze_init_flags_t){ return ZE_RESULT_SUCCESS; }
+ze_result_t zeDriverGet(uint32_t* pCount, ze_driver_handle_t* ph){ if(!pCount) return ZE_RESULT_ERROR_INVALID_ARGUMENT; if(!ph){ *pCount=uint32_t(mock_driverCount); return ZE_RESULT_SUCCESS; } uint32_t n=*pCount; if(n>uint32_t(mock_driverCount)) n=uint32_t(mock_driverCount); for(uint32_t i=0;i<n;++i) ph[i]=(ze_driver_handle_t)(uintptr_t)(1+i); *pCount=n; return ZE_RESULT_SUCCESS; }
+ze_result_t zeDeviceGet(ze_driver_handle_t, uint32_t* pCount, ze_device_handle_t* ph){ if(!pCount) return ZE_RESULT_ERROR_INVALID_ARGUMENT; if(!ph){ *pCount=uint32_t(mock_rootCount); return ZE_RESULT_SUCCESS; } uint32_t n=*pCount; if(n>uint32_t(mock_rootCount)) n=uint32_t(mock_rootCount); for(uint32_t i=0;i<n;++i) ph[i]=(ze_device_handle_t)(uintptr_t)(0x100u+i); *pCount=n; return ZE_RESULT_SUCCESS; }
+ze_result_t zeDeviceGetSubDevices(ze_device_handle_t h, uint32_t* pCount, ze_device_handle_t* ph){ int root; if(!mock_isRoot(h,root)) return ZE_RESULT_ERROR_INVALID_NULL_HANDLE; if(!pCount) return ZE_RESULT_ERROR_INVALID_ARGUMENT; if(!ph){ *pCount=uint32_t(mock_subPerRoot); return ZE_RESULT_SUCCESS; } uint32_t n=*pCount; if(n>uint32_t(mock_subPerRoot)) n=uint32_t(mock_subPerRoot); for(uint32_t i=0;i<n;++i) ph[i]=(ze_device_handle_t)(uintptr_t)(0x1000u + uintptr_t(root)*64u + uintptr_t(i)); *pCount=n; return ZE_RESULT_SUCCESS; }
+ze_result_t zeDeviceGetProperties(ze_device_handle_t h, ze_device_properties_t* p){ if(!p) return ZE_RESULT_ERROR_INVALID_ARGUMENT; if(mock_propRes!=ZE_RESULT_SUCCESS) return mock_propRes; memset(p,0,sizeof(*p)); int root,sub; static const char rn[]={'R','o','o','t',0}; static const char sn[]={'S','u','b',0}; if(mock_isRoot(h,root)){ p->stype=ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES; p->type=ZE_DEVICE_TYPE_GPU; p->vendorId=0x10deu; p->deviceId=0x5070u; p->subdeviceId=0; mock_uuidRoot(p->uuid,root); memcpy(p->name,rn,sizeof(rn)); return ZE_RESULT_SUCCESS; } if(mock_isSub(h,root,sub)){ p->stype=ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES; p->type=ZE_DEVICE_TYPE_GPU; p->vendorId=0x10deu; p->deviceId=0x5070u; p->subdeviceId=uint32_t(sub+1); mock_uuidSub(p->uuid,root,sub); memcpy(p->name,sn,sizeof(sn)); return ZE_RESULT_SUCCESS; } return ZE_RESULT_ERROR_INVALID_NULL_HANDLE; }
+ze_result_t zeDeviceGetCommandQueueGroupProperties(ze_device_handle_t, uint32_t* pCount, ze_command_queue_group_properties_t* p){ if(!pCount) return ZE_RESULT_ERROR_INVALID_ARGUMENT; if(!p){ *pCount=1; return ZE_RESULT_SUCCESS; } uint32_t n=*pCount; if(n>1) n=1; if(n>0){ p[0].stype=ZE_STRUCTURE_TYPE_COMMAND_QUEUE_GROUP_PROPERTIES; p[0].pNext=nullptr; p[0].flags=1; p[0].numQueues=1; } *pCount=n; return ZE_RESULT_SUCCESS; }
+ze_result_t zeDeviceGetExternalMemoryProperties(ze_device_handle_t, ze_device_external_memory_properties_t* p){ if(!p) return ZE_RESULT_ERROR_INVALID_ARGUMENT; p->stype=ZE_STRUCTURE_TYPE_DEVICE_EXTERNAL_MEMORY_PROPERTIES; p->pNext=nullptr; p->memoryAllocationImportTypes=0; p->memoryAllocationExportTypes=0x80u; return ZE_RESULT_SUCCESS; }
+ze_result_t zeDeviceCanAccessPeer(ze_device_handle_t h, ze_device_handle_t peer, ze_bool_t* can){ if(!can) return ZE_RESULT_ERROR_INVALID_ARGUMENT; *can=0; uintptr_t a=(uintptr_t)h; uintptr_t b=(uintptr_t)peer; if(mock_asym){ if(a==0x100u && b==0x101u) *can=1; else { int ar,as,br,bs; if(mock_isSub(h,ar,as)&&mock_isSub(peer,br,bs)&&ar==br) *can=1; } return ZE_RESULT_SUCCESS; } return ZE_RESULT_SUCCESS; }
+ze_result_t zeDeviceGetP2PProperties(ze_device_handle_t, ze_device_handle_t, ze_device_p2p_properties_t* p){ if(!p) return ZE_RESULT_ERROR_INVALID_ARGUMENT; if(mock_p2pUnsup) return ZE_RESULT_ERROR_UNSUPPORTED_FEATURE; p->stype=ZE_STRUCTURE_TYPE_DEVICE_P2P_PROPERTIES; p->pNext=nullptr; p->flags=1; return ZE_RESULT_SUCCESS; }
+#define CHECK(c) do{ if(!(c)) return __LINE__; }while(0)
+static long findInt(const char* s,const char* key){ const char* p=strstr(s,key); if(!p) return -1; const char* c=strchr(p,':'); if(!c) return -1; ++c; while(*c==' ')++c; int neg=0; if(*c=='-'){neg=1;++c;} long v=0; while(*c>='0'&&*c<='9'){v=v*10+(*c-'0');++c;} return neg?-v:v; }
+static long arrVal(const char* s,const char* key,int idx){ const char* p=strstr(s,key); if(!p) return -999; const char* b=strchr(p,'['); if(!b) return -999; ++b; int cur=0; while(*b && *b!=']'){ while(*b && *b!=']' && (*b<'0'||*b>'9') && *b!='-')++b; if(*b==']' || !*b) break; int neg=0; if(*b=='-'){neg=1;++b;} long v=0; while(*b>='0'&&*b<='9'){v=v*10+(*b-'0');++b;} if(cur==idx) return neg?-v:v; ++cur; while(*b && *b!=',' && *b!=']')++b; if(*b==',')++b; } return -999; }
+int main(){ static char buf[LZQ_OUT_BYTES+1]; resetMock(); mock_rootCount=2; mock_subPerRoot=1; size_t n=lzq_collect(buf,sizeof(buf)-1); buf[n]=0; CHECK(n>0); CHECK(buf[0]=='{'); CHECK(buf[n-1]=='}'); int quotes=0; for(size_t i=0;i<n;++i) if(buf[i]==0x22) ++quotes; CHECK((quotes%2)==0); CHECK(strstr(buf,Q(00112233000000000000000000000001))!=nullptr); CHECK(strstr(buf,Q(00112233000100000000000000000001))!=nullptr); CHECK(findInt(buf,Q(physical_root_devices))==2); CHECK(findInt(buf,Q(subdevice_nodes))==2); CHECK(findInt(buf,Q(node_total))==4); resetMock(); mock_rootCount=2; mock_subPerRoot=0; mock_asym=true; n=lzq_collect(buf,sizeof(buf)-1); buf[n]=0; CHECK(findInt(buf,Q(node_count))==2); CHECK(arrVal(buf,Q(can_matrix),1)==1); CHECK(arrVal(buf,Q(can_matrix),2)==0); resetMock(); mock_rootCount=200; n=lzq_collect(buf,sizeof(buf)-1); buf[n]=0; CHECK(findInt(buf,Q(node_total))==96); CHECK(findInt(buf,Q(inventory_truncated_int))==1); resetMock(); mock_rootCount=1; mock_propRes=ZE_RESULT_ERROR_INVALID_ARGUMENT; n=lzq_collect(buf,sizeof(buf)-1); buf[n]=0; CHECK(strstr(buf,Q(FAIL1))!=nullptr); CHECK(findInt(buf,Q(result_code))==3); resetMock(); mock_rootCount=2; mock_subPerRoot=0; mock_asym=false; n=lzq_collect(buf,sizeof(buf)-1); buf[n]=0; CHECK(strstr(buf,Q(00008086))==nullptr); CHECK(arrVal(buf,Q(can_matrix),1)==0); CHECK(arrVal(buf,Q(can_matrix),2)==0); return 0; }

@@ -1,0 +1,19 @@
+{
+  "owned_wrapper_pid": 31356,
+  "artifact_sha256": "4f1e86bd808ea0a0c3bc0cd7617db3fa97022bfdc65b8c89690e3bded66d7c4d",
+  "total_tokens": 62270,
+  "tests_chars": 1255,
+  "reasoning_tokens_included": 55292,
+  "owned_cli_pid": 83092,
+  "owned_pids_point_absent": true,
+  "source_chars": 12831,
+  "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\cuda_l0_device_dmabuf_prep_20261004T195400Z\\qwen_cuda_l0_device_dmabuf_v3\\terminal.json",
+  "session_reaped": 77619,
+  "source_execution": false,
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+  "status": "COMPLETE_UNTRUSTED_PENDING_ROOT_STATIC_REVIEW",
+  "native_children_actual": 0,
+  "provider_status": "PROPOSED",
+  "tests_sha256": "8d468ec191f45ae44de3b136de8420846517717ed8accb1a282145c23f6f0ccb",
+  "utc": "2026-10-04T20:41:32.8373182Z"
+}

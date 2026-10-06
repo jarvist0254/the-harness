@@ -1,0 +1,55 @@
+{
+  "verdict": "PURE_SYNTHETIC_QA_GREEN_73_OF_73_NOT_HARDWARE_CAPACITY",
+  "counts": {
+    "total": 73,
+    "passed": 73,
+    "failed": 0
+  },
+  "uncaught_exceptions": 0,
+  "input_mutations": 0,
+  "denied_events": [],
+  "original_four_red_fixed": true,
+  "previous_three_red_fixed": {
+    "CPU_payload_disagrees_with_registered_reference_bytes": {
+      "status": "FAIL",
+      "exit_code": 1,
+      "errors": [
+        "cpu_ref_mismatch"
+      ],
+      "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+    },
+    "single_attempt_foreign_physical_population": {
+      "status": "FAIL",
+      "exit_code": 1,
+      "errors": [
+        "owner_subset:single"
+      ],
+      "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+    },
+    "three_attempt_foreign_physical_population": {
+      "status": "FAIL",
+      "exit_code": 1,
+      "errors": [
+        "owner_subset:three"
+      ],
+      "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+    }
+  },
+  "pid": 87892,
+  "exit_code": 0,
+  "reaped": true,
+  "readers_joined": true,
+  "timeout": false,
+  "pins_unchanged": true,
+  "limits": [
+    "Synthetic caller evidence is not authenticated physical residency, capacity or P2P",
+    "Only the admitted73 controls executed, no exhaustive arbitrary Python object or everyboundary claim",
+    "Provider tests never executed; source never promoted"
+  ],
+  "pins": {
+    "stdout.raw.json": "6fbb8cf9f598773eea3e898f18b8d8f7d06104c6f5783cb57a58fa63c822e0bf",
+    "execution_receipt.json": "e330782cdd5cc9a90e34ed45a39e2d691b3cbe4992c3b0e760c369cc3d8605c4",
+    "test_independent_capacity.py": "aa1609b74ca0ff2633a1f43e4be9c2fc8a79db4cf3d8c8cc00670024bab91fb7",
+    "test_adaptation.diff": "60c7866a22e1f74757624fbcd74e0ebbfff3f0a58cd63db9453a47155f60c9c0"
+  }
+}

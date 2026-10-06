@@ -1,0 +1,33 @@
+{
+  "point_owned_pids_alive": [],
+  "job": "qwen_vulkan_numeric_state_ledger",
+  "candidate_imported_compiled_executed": false,
+  "artifact": "COMPLETE_SOURCE_UNTRUSTED_PENDING_ROOT_GATE",
+  "wrapper_pid": 83116,
+  "session_exit_code": 0,
+  "session": 24312,
+  "wrapper_terminal": {
+    "credential_saved": false,
+    "lane": "Qwen",
+    "parse_error_type": null,
+    "log_cap_exceeded": false,
+    "drain_unknown": false,
+    "outer_killed": false,
+    "pipe_error": false,
+    "usage": null,
+    "exit_code": 0,
+    "finish_reason": null,
+    "elapsed_seconds": 839.91,
+    "private_url_output_refused": false,
+    "requested_model": "qwen3.8-max",
+    "model_usage": null,
+    "pid": 88240,
+    "status": "OWNED_CHILD_TERMINAL_CHECK_WORKER_RECEIPT",
+    "provider_patch_applied": false,
+    "native_children_actual": 0
+  },
+  "source_pin_after": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9",
+  "generated_tests_run": false,
+  "prompt_pin_after": "a871be94dd72a9af787b50cf3b69b85bc370f78dbca0cddc61ea1b42e00dd0e9",
+  "root_admission": false
+}

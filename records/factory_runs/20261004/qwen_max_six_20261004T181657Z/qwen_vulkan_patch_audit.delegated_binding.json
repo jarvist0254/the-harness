@@ -1,0 +1,14 @@
+{
+  "job_id": "qwen_vulkan_patch_audit",
+  "actual_native_children": 0,
+  "enable_thinking": true,
+  "model": "qwen3.8-max",
+  "provider_launch_authorized": true,
+  "source_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+  "reasoning_effort": "xhigh",
+  "prompt_sha256": "6dd5ad4cf9bb350d0d6e9da5fd73d6784f1baaf0c0e287db60bd12801caeece6",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\ggml-vulkan.candidate_snapshot.cpp",
+  "lane": "Qwen",
+  "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+}

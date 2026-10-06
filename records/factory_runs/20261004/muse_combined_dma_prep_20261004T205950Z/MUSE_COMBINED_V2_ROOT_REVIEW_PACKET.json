@@ -1,0 +1,48 @@
+{
+  "utc": "2026-10-04T21:05:52.8291971Z",
+  "inputs": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+      "sha256": "E8916BC07EE2A058F5AF9371B073B2F47810071C6949480FE0C0A4B2D3064411"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\tests.snapshot.txt",
+      "sha256": "8D468EC191F45AE44DE3B136DE8420846517717ED8ACCB1A282145C23F6F0CCB"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\spec.snapshot.txt",
+      "sha256": "6FB3E449272CFD176AD0961FDC11077EAA84A8FD84155CF89025EDF6141F4493"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\root_review.snapshot.json",
+      "sha256": "273D953E4F8D0133A1822CDFBCB325D0FC6FD507933FE25B9CAF3B93AADAD3FC"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\compile_qa_findings.md",
+      "sha256": "02FE3B2499E3E09650913FB0B7D018694DA88AC144048662C4127FAA8ED3E568"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\compile.stderr.txt",
+      "sha256": "596EE059C228E456DD0809CD8868D53AF8671FA1B0E3F070F3213EA6B36B12AB"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\compile_receipt.json",
+      "sha256": "EC09EDA33ADE8A8826E31D3A28D2BBA5AF291F820FB5A399D2825AFC9888649F"
+    }
+  ],
+  "schema_sha256": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+  "source_execution": false,
+  "state": "READY_PENDING_ROOT_EXACT_ADMISSION",
+  "prompt_chars": 56251,
+  "prompt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\muse_combined.v2.prompt.txt",
+  "capture_cap_aggregate_bytes": 2097152,
+  "wrapper_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\run_muse_combined.v2.pending_admission.py",
+  "wrapper_changes": "newbatch/prompt/PINS/promptSHA ONLY, all ownedprocess/Job/toolguard/log controls original",
+  "tests_sha256": "8d468ec191f45ae44de3b136de8420846517717ed8accb1a282145c23f6f0ccb",
+  "prompt_sha256": "ae6a1a7ffb51189d871957c4349a7b475ca09cfa98407397feffbe0541748ffe",
+  "deadline_seconds": 300,
+  "wrapper_sha256": "4d6e7789745e7bfc61e5a5edc97acb66b40d81e0510d16e3e613a23d42a732f5",
+  "provider_launch_authorized": false,
+  "compiler_diagnostics": "ACTUAL_OBJECT_ONLY_FAILURE_NO_NATIVE_EXECUTION"
+}

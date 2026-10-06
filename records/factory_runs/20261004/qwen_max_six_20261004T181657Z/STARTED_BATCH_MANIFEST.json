@@ -1,0 +1,130 @@
+{
+  "state": "SIX_OWNED_PROVIDER_JOBS_STARTED_NO_GENERATED_CODE_EXECUTION",
+  "jobs": [
+    {
+      "job": "qwen_compiler_adapter",
+      "worker_start": "2026-10-04T18:20:15.0386601Z",
+      "wrapper_pid": 29368,
+      "model": "qwen3.8-max",
+      "worker_pid": 82540,
+      "prompt_sha256": "4540c8a46c90f34e837befe1b845168a9caafff9894061bbf7d385b2adfb0388",
+      "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3"
+    },
+    {
+      "job": "qwen_vulkan_patch_audit",
+      "worker_start": "2026-10-04T18:22:32.2774571Z",
+      "wrapper_pid": 96880,
+      "model": "qwen3.8-max",
+      "worker_pid": 88740,
+      "prompt_sha256": "6dd5ad4cf9bb350d0d6e9da5fd73d6784f1baaf0c0e287db60bd12801caeece6",
+      "source_sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd"
+    },
+    {
+      "job": "qwen_intel_peer_fixture",
+      "worker_start": "2026-10-04T18:22:32.2772729Z",
+      "wrapper_pid": 94840,
+      "model": "qwen3.8-max",
+      "worker_pid": 84300,
+      "prompt_sha256": "eab94178a52eaf93084f9bda37eec92e3292dcfce0eb0ee3a0038e5d2c125a72",
+      "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275"
+    },
+    {
+      "job": "qwen_intel_nvidia_interop",
+      "worker_start": "2026-10-04T18:22:32.3031378Z",
+      "wrapper_pid": 95404,
+      "model": "qwen3.8-max",
+      "worker_pid": 26064,
+      "prompt_sha256": "07e8f289afffdca66b71615e93a9c9f2f3cc986114592c80ec4e9d232104159a",
+      "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275"
+    },
+    {
+      "job": "qwen_four_card_acceptance",
+      "worker_start": "2026-10-04T18:22:32.3460454Z",
+      "wrapper_pid": 22464,
+      "model": "qwen3.8-max",
+      "worker_pid": 81208,
+      "prompt_sha256": "e43e98f618373729d2c6513821f3f99cb42406fa93291546a3d17df01f34d4af",
+      "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275"
+    },
+    {
+      "job": "qwen_mixed_transport_research",
+      "worker_start": "2026-10-04T18:22:32.3272359Z",
+      "wrapper_pid": 82740,
+      "model": "qwen3.8-max",
+      "worker_pid": 77272,
+      "prompt_sha256": "4bfbf8ec176f19c95802aabcb6f48df05f5eec09266d17e38ca877e02031f54d",
+      "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275"
+    }
+  ],
+  "credits": "NOT_CHECKED",
+  "thinking_setting": "enable_thinking=true;reasoning_effort=xhigh;thinking_budget absent",
+  "native_children_actual": 0,
+  "generic_supervisor_modified": false,
+  "batch": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+  "old_batch_files_changed": false,
+  "max_native_authorized_each_qwen_deepseek": 10,
+  "authority": "ROOT explicit delegated six-concurrent QwenMax provider-only scope",
+  "global_factory_started": false,
+  "log_response_cap_bytes": 2097152,
+  "http_deadline_seconds": 330,
+  "immutable_pins": [
+    {
+      "relative_path": "provider_common.ps1",
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    {
+      "relative_path": "adapter_artifact.ps1",
+      "bytes": 966,
+      "sha256": "6fea50c7fe20b12ade9f8b0d69144e1ca6a52412db6113d2625af71a0937059d"
+    },
+    {
+      "relative_path": "qwen_http_adapter.ps1",
+      "bytes": 5473,
+      "sha256": "0302c5e635274429db35177160603e7fd69d1a2fb51fee182e529ee6647b5cee"
+    },
+    {
+      "relative_path": "invoke_owned_adapter.ps1",
+      "bytes": 8032,
+      "sha256": "7cc57f9cc8e84c02f73894fb0c8cd1513358683184afb3a6e7ae1bab9c50a704"
+    },
+    {
+      "relative_path": "research_artifact.ps1",
+      "bytes": 722,
+      "sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459"
+    },
+    {
+      "relative_path": "qwen_http_research.ps1",
+      "bytes": 5477,
+      "sha256": "d6d813e6d7fd0e0317cd383751b6ba21f7c5b6b6d72067e1105d130195f6b6dc"
+    },
+    {
+      "relative_path": "invoke_owned_research.ps1",
+      "bytes": 8033,
+      "sha256": "73230275664742ebf858f6684d9e0732ae1d8acbec3adb86bccb1292b9ea8f50"
+    },
+    {
+      "relative_path": "supervisor_snapshot.py",
+      "bytes": 31535,
+      "sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3"
+    },
+    {
+      "relative_path": "ggml-vulkan.candidate_snapshot.cpp",
+      "bytes": 898508,
+      "sha256": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd"
+    },
+    {
+      "relative_path": "hardware_contract.txt",
+      "bytes": 359,
+      "sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275"
+    },
+    {
+      "relative_path": "REASONING_REQUEST_PROVENANCE.json",
+      "bytes": 612,
+      "sha256": "2eb5f09393d6c0ec990b80ef01be0195ddeba5b754c4f9767e1709423f9727f1"
+    }
+  ],
+  "outer_deadline_seconds": 360,
+  "max_reply_tokens": 16384,
+  "provider_outputs_are_untrusted": true
+}

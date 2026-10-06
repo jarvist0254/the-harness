@@ -1,0 +1,51 @@
+{
+  "intake_rejection_reason": "change search must match exactly once in source snapshot",
+  "status": "COMPLETE_PROVIDER_RESPONSE_REJECTED_INTAKE_PENDING_REVIEW",
+  "owned_pids_still_alive": [],
+  "wrapper_pid": 80144,
+  "native_children_actual": 0,
+  "source_matches": [
+    {
+      "source_search_matches": 0,
+      "region": 1
+    },
+    {
+      "source_search_matches": 0,
+      "region": 2
+    },
+    {
+      "source_search_matches": 1,
+      "region": 3
+    },
+    {
+      "source_search_matches": 1,
+      "region": 4
+    },
+    {
+      "source_search_matches": 1,
+      "region": 5
+    },
+    {
+      "source_search_matches": 1,
+      "region": 6
+    },
+    {
+      "source_search_matches": 1,
+      "region": 7
+    },
+    {
+      "source_search_matches": 1,
+      "region": 8
+    }
+  ],
+  "utc": "2026-10-04T17:15:27.4936253Z",
+  "worker_pid": 58864,
+  "wrapper_session_exit": 0,
+  "admission_sha256": "1fa93e6dada3c91388af976dad07264bdf3d84c829d828f1bf6a379b89408524",
+  "wrapper_session": 6097,
+  "gemini_grok_launched": false,
+  "original_after_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "snapshot_after_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "raw_artifact_sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+  "patch_applied": false
+}

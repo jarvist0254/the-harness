@@ -1,0 +1,158 @@
+{
+  "timestamp_utc": "20261004T130458Z",
+  "scope": "Preparation/credibility audit only. No candidate imports or execution in this turn. No native/worker/GPU calls.",
+  "input_sha256": {
+    "CHECKLIST.md": "92c131d03ab55cb0d21c742e0ebbc3c61877d3e4f6a03cd5e42b17174c245182",
+    "adversarial_eval/test_actual_candidates.py": "e5bc15f1fcfe822115ae46c09c16fd7c765d8a624fb254ce4b99a03359d05872",
+    "adversarial_eval/evaluation.json": "480a841b6820230bf0bbb1e8131d3929aec419cb420e8976baa9fe9863114253",
+    "adversarial_eval/summary.json": "e4cc25f5838551da5d0637503fd1f02225f6c20849b25b26673ef28a5f3350f8"
+  },
+  "preserved_prior_result": {
+    "tests": 17,
+    "failures": 14,
+    "errors": 0,
+    "baselines_passed": 3
+  },
+  "credibility_audit": [
+    "17-case evaluation against original exact hashes remains unchanged: 14 failures, 0 errors, 3 passing baselines. No native or worker calls occurred.",
+    "Passing guard baselines distinguish wholesale refusal from intended behavior, but need successful fake-supervisor execution and cleanup baseline for next revision too.",
+    "Auto-trust of all referenced SHA values was intentional to clear earlier gates and expose deeper bugs. It is not security/hardware proof; new explicit trust-negative tests must remove one required hash or substitute an unrelated trusted artifact.",
+    "ImmediateThread models a legal reader-completes-before-next-thread-start schedule. It is sufficient for observed double close, but does not model asynchronous scheduling, blocking ReadFile or join cancellation. Add deterministic scheduled fake threads, never real pipes/threads for this phase.",
+    "Set equality in existing pipe/duplicate tests catches leaks but not double close. A per-handle ledger must track kind, creation, transfer, inheritance, assignment, close attempts/outcomes and termination/wait state; assert exactly one owner on all intermediate steps.",
+    "Direct _spawn tests isolate setup ownership but bypass public run_workers cleanup. Reproduce each setup fault through actual public run_workers with injected fake deps, two workers and exact fake root handles.",
+    "Existing query/wait tests deliberately catch OSError then examine closes; record raised exception and structured-return absence explicitly. New cleanup tests should ensure one failure does not skip all later cleanup, not just assert a close was attempted.",
+    "Three-card case has highwater2GB with ~2.667GB assigned per device, so it contains a second missing-proof defect. Next fixtures must align highwater/resident per-card bytes and provide every earlier required successful-run artifact before varying only fourth identity/count.",
+    "Zero-highwater test removes kernel and ownership along with zero residency, demonstrating architectural insufficiency but not isolating each guard. Split into independent highwater-only, ownership-only, completed-kernel-only and multi/four-success-only cases.",
+    "CPU/OTHER fixtures currently retain dedicated memory labels; candidate accepts this contradiction. Next non-GPU-participation cases should use internally consistent UNKNOWN or SHARED_HOST memory with no discrete-VRAM implication and then independently assert GPU execution qualification is refused.",
+    "LLM no-device case has a comparator bound to p1/p2, which separately exposes missing control-device binding. Next no-GPU test should have fully matching empty participant control; also retain separate mismatched IDs test.",
+    "Observed LLM failure and tolerance loosening controls correctly reject. Add full metric sanity (RMSE<=max_abs), predeclared-tolerance required, finite/count/dimension/physical-ID and model/quant/context/batch/build/reference/control matching checks.",
+    "Current launch guards cover the exact AST-reviewed candidates, not arbitrary Python sandboxing. Before new imports inspect all top-level AST and all native/process routes, bind exact new hashes, inject deny-only _winapi module or guard all process exports, and block ctypes WinDLL/windll/CDLL and os spawn/startfile/subprocess factories. Native structure introspection must use approved pure ctypes only, not DLL access."
+  ],
+  "expanded_supervisor_failure_matrix": [
+    {
+      "group": "pipe_allocation",
+      "variants": [
+        "first CreatePipe raises",
+        "second CreatePipe raises"
+      ],
+      "oracle": "Each prior successful NUL duplicate and pipe read/write handle has exactly one owner and is closed once. No CreateProcess on setup failure."
+    },
+    {
+      "group": "duplicate_allocation",
+      "variants": [
+        "stdin duplicate raises",
+        "stdout writer duplicate raises",
+        "stderr writer duplicate raises"
+      ],
+      "oracle": "No earlier successful original or duplicate disappears from ledger; each is closed exactly once; no process resumed."
+    },
+    {
+      "group": "reader_start",
+      "variants": [
+        "first thread construction raises",
+        "first start raises before running",
+        "second construction raises",
+        "second start raises before running",
+        "first reader reaches EOF before second start fails",
+        "first reader remains blocked when second start fails"
+      ],
+      "oracle": "Ownership transfer is tracked per reader; no double close and no abandoned read handles. Whole partial job cleanup proceeds and joins/cancellation stay bounded."
+    },
+    {
+      "group": "multiworker_partial_launch",
+      "variants": [
+        "second CreateProcess raises",
+        "second AssignProcessToJobObject false",
+        "second ResumeThread returns0xffffffff",
+        "startup expires during last spawn",
+        "cancel sets immediately before resume"
+      ],
+      "oracle": "All prior roots and suspended unassigned current roots are tracked before failure; assignment precedes any resume; cancellation/deadline respected before resume; terminate and drain all owned roots."
+    },
+    {
+      "group": "termination_failure",
+      "variants": [
+        "TerminateJobObject returns false",
+        "TerminateJobObject raises",
+        "one TerminateProcess raises",
+        "one root already exited",
+        "one root termination fails and another succeeds"
+      ],
+      "oracle": "Every other exact owned root still gets termination/wait attempts within one common bound. A failed termination never skips waits. No cleanup proof without all signaled roots and checked empty job."
+    },
+    {
+      "group": "wait_exit_query_failure",
+      "variants": [
+        "first root WAIT_FAILED",
+        "first root WAIT_TIMEOUT",
+        "first root wait raises",
+        "first GetExitCodeProcess raises",
+        "accounting returns failure",
+        "accounting raises",
+        "roots signaled but child remains active until deadline"
+      ],
+      "oracle": "Later roots still cleaned; no early exception skips later handles/readers. Receipt UNKNOWN for incomplete proof and no PROCESS_COMPLETED. Query failure must not fabricate active_count0."
+    },
+    {
+      "group": "handle_close_failure",
+      "variants": [
+        "first reader close raises",
+        "first process close raises",
+        "first thread close raises",
+        "job CloseHandle returns false",
+        "writer-close error before assignment"
+      ],
+      "oracle": "Record close failure, retain truthful unknown resource state, attempt all remaining independent closes. No false closed=True. Any retry must use owned handle identity and bounded policy."
+    },
+    {
+      "group": "pipe_io_failure",
+      "variants": [
+        "ReadFile returns nonbytes",
+        "ReadFile err is bool",
+        "ReadFile err is unexpected nonzero",
+        "ReadFile raises unexpected I/O error",
+        "expected broken-pipe EOF",
+        "reader cannot be unblocked/joined"
+      ],
+      "oracle": "Expected EOF distinct from failure; malformed or failed log transport cannot be treated as successful completion. Reader errors visible, late data bounded and closure/join outcomes truthful."
+    },
+    {
+      "group": "receipt_failure",
+      "variants": [
+        "journal open/write/fsync fails before spawn",
+        "journal fails after first resume",
+        "partial file write",
+        "zero file write",
+        "log fsync fails",
+        "receipt replace fails",
+        "terminal journal fails after receipt replacement",
+        "eight streams at cap with worst JSON escaping"
+      ],
+      "oracle": "Actual algorithm cleans all live owned workers on write failure; no stale PROCESS_COMPLETED/no durable-success claim. Bounded logs and aggregate receipt <=131072 bytes with truthful externalization. No caller root files overwritten."
+    },
+    {
+      "group": "authority_and_paths",
+      "variants": [
+        "provider ROOT_STATIC_ADMISSION True/False/absent",
+        "fixture env absent",
+        "existing output root",
+        "invalid schema/bool/range",
+        "oversized identifiers",
+        "unknown manifest keys"
+      ],
+      "oracle": "Admission comes from root hash-specific authorization outside candidate. Invalid input rejected before native/resource allocation. No source-authored flag can start fixtures or infer approval."
+    }
+  ],
+  "real_fixture_admission_gate": [
+    "Root independently admits exact final source and test hashes after completed Qwen/Gemini/Grok reviews; internal flags never grant approval.",
+    "All expanded pure/mock cases pass on actual imported candidate, with no hidden skipped tests, no fixture env, zero forbidden native attempts, successful fake baseline and preserved controls; independent reviewer checks every failure-path coverage ledger.",
+    "Fresh static gate verifies native x64 signatures/struct layouts, explicit handle inheritance, suspended creation, assign before resume, minimal child environment and exact-handle cleanup. Mock success does not establish Windows ABI/driver behavior.",
+    "Only then root authorizes narrow real fixtures explicitly: one harmless self-expiring Python child first, then two workers and a self-expiring grandchild; sleep/nonzero/flood/cancel/deadline cases have known hashes, fresh owned cwd/output and no shell/network/GPU.",
+    "Use an independent proven outer containment/cleanup owner with retained handles and <=60-second limit; otherwise do not start default explicit-terminate fixtures whose controller failure could orphan unbounded children. Do not depend on unqualified candidate cleanup as the only safety boundary.",
+    "Native receipts must verify actual assignment/resume ordering, each retained process handle signaled and exit code, checked active job count, bounded reader EOF/joins and bytes, and separate cleanup UNKNOWN on any missing proof. Record known lifetime uncertainty rather than claiming all historical descendants captured.",
+    "After each admitted native case check exact owned identities absent and no owned ports/background tree; failure stops further fixtures. Controller loss in default explicit-terminate remains UNKNOWN_INTERRUPTED without a cooperating acknowledged handle owner, and atomic JSON is not durable KV/replay proof."
+  ],
+  "new_candidate_status": "NOT_CHECKED_PENDING_ROOT_HASH_DELIVERY",
+  "real_fixture_status": "NOT_ADMITTED",
+  "accepted_modules_or_docs_changed": false
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "name": "missing_args",
+    "pid": 6368,
+    "args": [
+      "--model"
+    ],
+    "exit_code": "2",
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\missing_args.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\missing_args.stderr.log",
+    "process_present_after": false
+  },
+  {
+    "name": "bad_arg",
+    "pid": 81368,
+    "args": [
+      "--bogus"
+    ],
+    "exit_code": "2",
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\bad_arg.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\bad_arg.stderr.log",
+    "process_present_after": false
+  }
+]

@@ -1,0 +1,277 @@
+Memory Benchmark is a set of tests aimed at measuring bandwidth of memory transfers.
+
+The benchmark works in two modes - all-tests mode and single-test mode. They are further described below. Global parameters applicable for both modes:
+	--help                   Shows this message
+	--version                Shows benchmark version
+	--hwInfo                 Shows available devices
+	--generateDocs           Generate .md file describing available tests
+	--listTestSuites         List all test suites with the number of test cases in each
+	--oclPlatformIndex=X     OpenCL platform index
+	--oclDeviceIndex=X       OpenCL device index inside the platform
+	--useOOQ=X               Use out of order queue if it is supported (0 or 1)
+	--l0DriverIndex=X        LevelZero driver index
+	--l0DeviceIndex=X        LevelZero device index inside the driver
+	--urPlatformIndex=X      UR adapter index
+	--urDeviceIndex=X        UR device index inside the adapter
+	--vkDeviceIndex=X        Vulkan physical device index
+	--vkEnableValidation     Enable the Vulkan validation layer
+	--olDeviceIndex=X        Liboffload device index
+	--test=X                 Selects particular test for execution. All arguments of the test must be provided
+	--subDeviceSelection=X   Device to be used in the benchmarks. Might be ignored by some specific tests (Root or Tile0 or Tile1 or Tile2 or Tile3)
+	--csv                    dump results in CSV format for easy imports to spreadsheets
+	--verbose                dump results from all iterations
+	--interactivePrints      display test name before running it. May cause unexcpected results when redirecting output to files.
+	--iterations=X           select how many times each test will be run
+	--warmupIterations=X     select how many warmup iterations will be run before actual test iterations
+	--trimOutliers=X         percentage of samples to trim from each end before computing statistics (0-49)
+	--sleepFor=X             sleep for specified amount of time after running each test, in milliseconds
+	--cpuAffinityMask=X      pin the benchmark to the given logical CPUs (up to 64, bit i = CPU i), either as a bitmask - decimal or 0x-prefixed hex (e.g. 5 or 0x5 = CPU0+CPU2) - or as a CPU list (e.g. 0,2,4-7); threads and child processes inherit the mask; 0 (default) leaves CPU affinity untouched, so use 1 to pin to CPU0 alone
+	--api=X                  Compute API to be used (ocl or l0 or sycl or omp or ol or opt or vk or all)
+	--no-intel-extensions    do not run benchmark requiring Intel specific extensions
+	--dumpCommandLines       output commandline arguments to run the each test
+	--allowLimitedTests      allow only limited scenarios to be run
+	--noop                   do not run any tests, only print their names and parameters
+	--noHeaders              Do not print any informational messages at the top of the output
+	--noColumnNames          Do not print column names at the top of the output
+	--noProgressBar          Do not show the progress bar during benchmark execution
+	--htmlOutput=X           Write results to an HTML file at the given path
+	--mdOutput=X             Write results to a Markdown file at the given path
+	--doNotPrintBandwidth    Make every results that are normally in [GB/s] to be printed in [us]
+	--dumpErrorsImmediately=X print errors to stdout immediately after they happen, not at the end of the run (0 or 1)
+	--argFilter=X            filter tests by their arguments
+	--testFilter=X           filter tests by their names
+	--forceSubmissionProfilingOverrides profiling to return submission time instead of workload time
+	--markTimers             Provides prints around Timer Start & End
+	--measurePower           Measures power and energy in supported benchmarks
+	--printAllResults        Prints all test results
+	--printHistogram         Prints a histogram of the result distribution across all iterations for each benchmark (default/verbose output only; ignored for --csv and --noop)
+	--profilerType=X         If supported by the benchmark, dictates the profiler/statistic used/reported by the benchmark (timer or cpucounter)
+	--extended               Run the benchmark with extended parameters
+	--reducedSizeCAL         Run benchmark with lower buffer size
+
+
+First mode is the default and it runs all available benchmarks in many predefined configurations. Underlying test engine is googletest, so standard googletest arguments like --gtest_filter can be used, if necessary.
+
+Second mode runs one specific benchmark with custom parameter values. Running benchmarks in this fashion requires using --test argument, along with benchmark-specific parameters. All parameters have to be specified, there are no default values.
+
+Example invocations:
+	memory_benchmark.exe                                                runs all possible tests
+	memory_benchmark.exe --api=ocl                                      runs all possible OpenCL tests
+	memory_benchmark.exe --iterations=1000 --csv                        runs all possible tests with 1000 iterations and dumps results as CSV
+	memory_benchmark.exe --gtest_filter=<regex>                         runs all tests matching a regular expression
+	memory_benchmark.exe --gtest_filter=*TestName*                      runs a test named "TestName" in all predefined configurations
+	memory_benchmark.exe --test=TestName --someParam=1 --otherParam=30  runs a test named "TestName" with specified parameters
+
+All available test cases with their parameters:
+	CopyBuffer - allocates two OpenCL buffers and measures copy bandwidth between them. Buffers will be placed in device memory, if it's available. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffers
+		--contents=X             Contents of the buffers (Zeros or Random)
+		--compressedSource=X     Select if the source buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--compressedDestination=X Select if the destination buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	CopyBufferRect - allocates two OpenCL buffers and measures rectangle copy bandwidth between them. Buffers will be placed in device memory, if it's available. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--srcCompressed=X        Select if the source buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--dstCompressed=X        Select if the destination buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--origin=X               Origin of the rectangle
+		--region=X               Size of the rectangle
+		--rPitch=X               Row pitch of the rectangle
+		--sPitch=X               Silice pitch of the rectangle
+
+	CopyBufferToImage - allocates buffer and image and measures copy bandwidth between them using immediate command list for Level Zero and command queue for OpenCL. Supported compute APIs: OpenCL. Parameters:
+		--region=X               Size of the destination image region
+		--src=X                  Placement of the source buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the buffer
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	CopyEntireImage - allocates two image objects and measures copy bandwidth between them. Images will be placed in device memory, if it's available. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the image
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	CopyImageRegion - allocates two image objects and measures region copy bandwidth between them using immediate command list for Level Zero and command queue for OpenCL. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the image
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	CopyImageToBuffer - allocates image and buffer and measures copy bandwidth between them using immediate command list for Level Zero and command queue for OpenCL. Supported compute APIs: OpenCL. Parameters:
+		--dst=X                  Placement of the destination buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the buffer
+		--region=X               Size of the source image region
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	FillBuffer - allocates an OpenCL buffer and measures fill bandwidth. Buffer will be placed in device memory, if it's available. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--patternSize=X          Size of the fill pattern
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	FullRemoteAccessMemory - Uses stream memory in a fashion described by 'type' to measure bandwidth of full remote memory access. Supported compute APIs: OpenCL. Parameters:
+		--type=X                 Memory streaming type (Read or Write or Scale or Triad)
+		--size=X                 Size of the memory to stream. Must be divisible by element size and a power of 2
+		--elementSize=X          Size of the single element to read in bytes (1, 2, 4, 8)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--workItems=X            Number of work items equal to SIMD size * used hwthreads. Must be a power of 2
+		--blockAccess=X          Block access (1) or scatter access (0) (0 or 1)
+
+	FullRemoteAccessMemoryXeCoresDistributed - Uses stream memory in a fashion described by 'type' to measure bandwidth of full remote memory accesswhen hwthreads are distributed between XeCores. Supported compute APIs: OpenCL. Parameters:
+		--type=X                 Memory streaming type (Read or Write or Scale or Triad)
+		--size=X                 Size of the memory to stream. Must be a power of 2
+		--elementSize=X          Size of the single element to read in bytes (1, 2, 4, 8)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--workItems=X            Number of work items equal to SIMD size * used hwthreads
+		--blockAccess=X          Block access (1) or scatter access (0) (0 or 1)
+
+	MapBuffer - allocates an OpenCL buffer and measures map bandwidth. Mapping operation means memory transfer from GPU to CPU or a no-op, depending on map flags. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--mapFlags=X             OpenCL map flags passed during memory mapping (Read or Write or WriteInvalidate)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	ReadBuffer - allocates an OpenCL buffer and measures read bandwidth. Read operation means transfer from GPU to CPU. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--reuse=X                How hostptr allocation can be reused due to previous operations (Aligned4KB or Misaligned or Usm or Map)
+
+	ReadBufferMisaligned - allocates an OpenCL buffer and measures read bandwidth. Read operation means transfer from GPU to CPU. Destination pointer passed by the application will be misaligned by the specified amount of bytes. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--misalignment=X         Number of bytes by which misaligned the destination pointer will be misaligned
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	ReadBufferRect - allocates an OpenCL buffer and measures rectangle read bandwidth. Rectangle read operation means transfer from GPU to CPU. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--origin=X               Origin of the rectangle
+		--region=X               Size of the rectangle
+		--rPitch=X               Row pitch of the rectangle
+		--sPitch=X               Silice pitch of the rectangle
+
+	ReadDeviceMemBuffer - allocates two OpenCL buffers and measures source buffer read bandwidth. Source buffer resides in device memory. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+
+	ReadImage - Measures time spent during Read Image calls  Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the image
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--ptrPlacement=X         memory placement of host_ptr passed to ReadImage call (Aligned4KB or Misaligned or Usm or Map)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--ptrAlignment=X         host pointer alignment
+
+	RemoteAccessMemory - Uses stream memory in a fashion described by 'type' to measure bandwidth with differentpercentages of remote memory access. Triad means two buffers are read and one is written to.In read and write memory is only read or written to. Supported compute APIs: OpenCL. Parameters:
+		--type=X                 Memory streaming type (Read or Write or Scale or Triad)
+		--size=X                 Size of the memory to stream. Must be divisible by datatype size.
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--remoteFraction=X       Fraction of remote memory access. 1 / n
+		--workItemSize=X         Number of work items group together for remote check
+
+	RemoteAccessMemoryMaxSaturation - Uses stream memory write to measure max data bus saturation with different percentages of remote memory access Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the memory to stream. Must be divisible by datatype size.
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--remoteFraction=X       Fraction of remote memory access. 1 / n
+		--workItemSize=X         Number of work items group together for remote check
+		--writesPerWorkgroup=X   Number of work items per workgroup that access memory
+
+	SLM_DataAccessLatency - generates SLM local memory transactions inside thread group to measure latency between reads (uses Intel only private intel_get_cycle_counter() ) Supported compute APIs: OpenCL. Parameters:
+		--size=X                 SLM Size
+		--occupancyDiv=X         H/W load divider by 8, 4, 2, full occupancy
+		--direction=X            write or read mode (0 or 1)
+
+	StreamAfterTransfer - Goal of this test is to measure how stream kernels perform right after host to device transfer populating the data. Test does clean caches, then emits transfers and then follows with stream kernel and measures GPU execution time of it. Supported compute APIs: OpenCL. Parameters:
+		--type=X                 Memory streaming type (Read or Write or Scale or Triad)
+		--size=X                 Size of the memory to stream. Must be divisible by datatype size.
+
+	StreamMemory - Streams memory inside of kernel in a fashion described by 'type'. Copy means one memory location is read from and the second one is written to. Triad means two buffers are read and one is written to. In read and write memory is only read or written to. Supported compute APIs: OpenCL. Parameters:
+		--type=X                 Memory streaming type (Read or Write or Scale or Triad)
+		--size=X                 Size of the memory to stream. Must be divisible by datatype size.
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--contents=X             Buffer contents zeros/random (Zeros or Random)
+		--memory=X               Memory type used for stream (Device or Host or Shared)
+		--multiplier=X           multiplies id used for accessing the resources to simulate partials
+		--vectorSize=X           size of uint vector type 1/2/4/8/16
+		--lws=X                  local work size
+
+	UnmapBuffer - allocates an OpenCL buffer and measures unmap bandwidth. Unmapping operation meansmemory transfer from CPU to GPU or a no-op, depending on map flags. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--mapFlags=X             OpenCL map flags passed during memory mapping (Read or Write or WriteInvalidate)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	UsmCopy - allocates two unified shared memory buffers and measures copy bandwidth between them. Supported compute APIs: OpenCL. Parameters:
+		--src=X                  Placement of the source buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--dst=X                  Placement of the destination buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffers (Zeros or Random)
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--reuseCmdList=X         Command list is reused between iterations (0 or 1)
+
+	UsmCopyMultipleBlits - allocates two unified shared memory buffers, divides them into chunks, copies each chunk using a different copy engine and measures bandwidth. Results for each individual blitter engine is measured using GPU-based timings and reported separately. Total bandwidths are calculated by dividing the total buffer size by the worst result from all engines. Division of work among blitters is not always even - if main copy engine is specified (rightmost bit in --bliters argument), it gets a half of the buffer and the rest is divided between remaining copy engines. Otherwise the division is even. Supported compute APIs: OpenCL. Parameters:
+		--src=X                  Placement of the source buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--dst=X                  Placement of the destination buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the operation processed by each engine
+		--blitters=X             A bit mask for selecting copy engines
+
+	UsmFill - allocates a unified memory buffer and measures fill bandwidth Supported compute APIs: OpenCL. Parameters:
+		--memory=X               Placement of the buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--patternSize=X          Size of the fill pattern
+		--patternContents=X      Select contents of the fill pattern (Zeros or Random)
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	UsmFillMultipleBlits - allocates a unified shared memory buffer, divides it into chunks, copies each chunk using a different copy engine and measures bandwidth. Refer to UsmCopyMultipleBlits for more details. Supported compute APIs: OpenCL. Parameters:
+		--memory=X               Placement of buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the operation processed by each engine
+		--patternSize=X          Size of the fill pattern
+		--patternContents=X      Select contents of the fill pattern (Zeros or Random)
+		--blitters=X             A bit mask for selecting copy engines
+
+	UsmFillSpecificPattern - allocates a unified memory buffer and measures fill bandwidth. Allow specifying arbitrary pattern. Supported compute APIs: OpenCL. Parameters:
+		--memory=X               Placement of the buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--pattern=X              The fill pattern represented hexadecimally, e.g. 0x91ABCD1254
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	UsmMemset - allocates a unified memory buffer and measures memset bandwidth Supported compute APIs: OpenCL. Parameters:
+		--memory=X               Placement of the buffer (Device or Host or Shared or non-USM-mapped or non-USMmisaligned or non-USM4KBAligned or non-USM2MBAligned or non-USMmisaligned-imported or non-USM4KBAligned-imported or non-USM2MBAligned-imported or non-USM)
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+
+	WriteBuffer - allocates an OpenCL buffer and measures write bandwidth. Write operation means transfer from CPU to GPU. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--contents=X             Contents of the buffer (Zeros or Random)
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+		--reuse=X                How hostptr allocation can be reused due to previous operations (Aligned4KB or Misaligned or Usm or Map)
+
+	WriteBufferRect - allocates an OpenCL buffer and measures rectangle write bandwidth. Rectangle write operation means transfer from CPU to GPU. Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the buffer
+		--compressed=X           Select if the buffer is to be compressed. Will be skipped, if device does not support compression (0 or 1)
+		--origin=X               Origin of the rectangle
+		--region=X               Size of the rectangle
+		--rPitch=X               Row pitch of the rectangle
+		--sPitch=X               Silice pitch of the rectangle
+		--inOrderQueue=X         If set use IOQ, otherwise OOQ. Applicable only for OCL. (0 or 1)
+		--reuse=X                How hostptr allocation can be reused due to previous operations (Aligned4KB or Misaligned or Usm or Map)
+		--contents=X             Contents of the buffer (Zeros or Random)
+
+	WriteImage - Measures time spent during Write Image calls  Supported compute APIs: OpenCL. Parameters:
+		--size=X                 Size of the image
+		--forceBlitter=X         Force blitter engine. Test will be skipped if device does not support blitter. Warning: in OpenCL blitter may still be used even if not forced (0 or 1)
+		--ptrPlacement=X         memory placement of host_ptr passed to WriteImage call (Aligned4KB or Misaligned or Usm or Map)
+		--useEvents=X            Perform GPU-side measurements using events (0 or 1)
+

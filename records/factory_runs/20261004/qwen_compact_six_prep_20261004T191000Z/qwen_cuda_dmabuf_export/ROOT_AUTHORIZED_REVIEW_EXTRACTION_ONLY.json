@@ -1,0 +1,20 @@
+{
+  "accepted_functionality": false,
+  "original_intake_refusal_unchanged": true,
+  "import_test_execution": false,
+  "files": [
+    {
+      "chars": 11296,
+      "sha256": "91ec7a579d98f4a4be533842386bf8356f643420f47f6cfbc37d7d979b87cb43",
+      "field": "source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+    },
+    {
+      "chars": 5924,
+      "sha256": "eec5ea8a23c94d1d7ef5cfcf43b2b9feb1fbeed4df28114ff29398725cb72f79",
+      "field": "tests_source",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\tests_source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt"
+    }
+  ],
+  "action": "ROOT authorized exact string extractiononly txt afterfinishstop DONEusage exactmodel"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "sha256": "2AFF3925329A8CA6CA4834F665A8ED07ACB1D3E341F73908DFECB3989057C371",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp"
+  },
+  {
+    "sha256": "55D1EBEBEA85ECDA9BCB70D8415516CA6BB238D520F951022DAFF836E1110189",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\kv_f32_selftest.candidate.cpp"
+  },
+  {
+    "sha256": "EDEA14F935E2729D157E063B1EBDDE3DEECA9714389AAF0D5A20424B6B98A5FF",
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\include\\llama.h"
+  }
+]

@@ -1,0 +1,68 @@
+```json
+{
+  "current_verified_vs_unchecked": [
+    "VERIFIED: OpenCL residual MLP execution on NVIDIA/AMD pair (host-staged, shared memory).",
+    "VERIFIED: Pure planner capacity logic and refusal states.",
+    "UNCHECKED: Four physical discrete cards (not present).",
+    "UNCHECKED: Dedicated VRAM allocation and P2P transfers.",
+    "UNCHECKED: Intel/SYCL backend qualification.",
+    "UNCHECKED: Larger-than-one-card LLM model loading."
+  ],
+  "tests": [
+    {
+      "id": "T1_Physical_Deduplication",
+      "setup": "Invoke executor with --device-ids <A> <B> <C> <D>. Ensure A-D map to four unique physical PCI IDs. Attempt a run where two aliases resolve to the same physical GPU ID.",
+      "negative_discriminator": "Executor must reject duplicate physical IDs before native allocation or context creation.",
+      "expected_observation": "Exit code 2 (REFUSED) with error 'Duplicate physical device'. No GPU kernels launched.",
+      "exit_or_gate": "exit == 2 AND no_kernel_launch_count > 0",
+      "required_evidence": "JSON receipt showing 'status': 'REJECTED' and zero kernel events recorded."
+    },
+    {
+      "id": "T2_Unique_Layer_Ownership",
+      "setup": "Run standard 4-device MLP fixture (width 512, layers 16). Inspect per-device logs for weight hashes and layer indices.",
+      "negative_discriminator": "Detects whole-model replication or CPU offload fallback which would show identical weights on multiple devices or missing GPU kernel counts.",
+      "expected_observation": "Each of the 4 devices reports exactly 4 unique layer ownerships. Total unique weights = 16. No device reports 'CPU_fallback' or duplicate weight hashes.",
+      "exit_or_gate": "exit == 0 AND sum(unique_layers_per_device) == 16",
+      "required_evidence": "Per-device JSON blocks containing distinct 'assigned_layer_ids' and matching 'weight_hash' entries."
+    },
+    {
+      "id": "T3_Capacity_Refusal_Three_Cards",
+      "setup": "Configure policy-mib such that total modeled budget for 3 cards is insufficient for the 16-layer workload (e.g., force 3-device mode with tight caps), while 4-device mode fits.",
+      "negative_discriminator": "Planner or Executor must refuse allocation if aggregate budget < required block size, rather than silently offloading to CPU or crashing.",
+      "expected_observation": "Exit code 2 (REFUSED) with message indicating 'Total block memory exceeds usable aggregate budget' or similar capacity failure.",
+      "exit_or_gate": "exit == 2 AND status == 'CAPACITY_REFUSED'",
+      "required_evidence": "Receipt showing attempted allocation bytes vs available budget per device."
+    },
+    {
+      "id": "T4_Boundary_Corruption_Control",
+      "setup": "Execute 4-device run with --inject-corruption flag targeting the activation buffer at the boundary between Device B and Device C.",
+      "negative_discriminator": "Ensures corruption propagates through subsequent layers (C and D) and fails final parity check against independent CPU reference.",
+      "expected_observation": "Devices A and B complete successfully. Device C executes corrupted input. Final output mismatch detected. Exit code 1 (FAIL).",
+      "exit_or_gate": "exit == 1 AND final_error_magnitude > tolerance",
+      "required_evidence": "Log showing 'corruption_detected_at_boundary' and final tensor comparison failure."
+    },
+    {
+      "id": "T5_Fresh_Allocation_Proof",
+      "setup": "Monitor actual VRAM usage via driver API (nvidia-smi/rocm-smi/intel_gpu_top) during T2 execution. Compare advertised free memory vs peak allocated memory.",
+      "negative_discriminator": "Prevents false PASS based on stale 'free' memory readings or host-shared memory being counted as dedicated VRAM.",
+      "expected_observation": "Peak VRAM usage matches expected weight+activation footprint. Advertised free memory decreases by measured amount. AMD integrated memory explicitly labeled 'shared_host_memory' and excluded from dedicated VRAM totals.",
+      "exit_or_gate": "measured_peak_vram_delta > 0 AND dedicated_vram_total != shared_memory_total",
+      "required_evidence": "Snapshot of driver memory stats before/during/after execution."
+    }
+  ],
+  "release_gates": [
+    "Four unique physical GPUs discovered and mapped without alias duplication.",
+    "All 16 layers assigned uniquely across 4 devices with no CPU offload in GPU path.",
+    "Capacity refusal verified when using only 3 devices under constrained policy.",
+    "Corruption injection causes measurable numerical divergence and FAIL exit.",
+    "Actual dedicated VRAM allocation confirmed via driver telemetry, excluding shared host memory."
+  ],
+  "unsupported_claims": [
+    "No claim of direct P2P peer-to-peer DMA transfer; all cross-device data is host-staged.",
+    "No claim of larger-than-one-card LLM inference capability; this test uses small MLP fixture.",
+    "No claim of thermal stability or electrical safety; hardware not present.",
+    "No claim of durable session recovery or worker restart resilience.",
+    "No claim of performance benefit over single-card execution; correctness only."
+  ]
+}
+```

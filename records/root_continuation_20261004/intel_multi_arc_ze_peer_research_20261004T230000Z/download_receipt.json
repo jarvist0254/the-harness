@@ -1,0 +1,205 @@
+[
+  {
+    "url": "https://cdrdv2-public.intel.com/863931/863931_Platform%20Evaluation%20Guide%20for%20Multi-ARC%20Solution_Rev1p0.pdf",
+    "utc": "2026-10-04T23:03:07.496015+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\intel_863931_rev1p0.pdf",
+    "size": 3158833,
+    "sha256": "8e0f722ea8c7c20674dd80938172d79a78354a0c2ef35c596b203999b826dc90"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests",
+    "utc": "2026-10-04T23:03:08.399643+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\repo_metadata.json",
+    "size": 6745,
+    "sha256": "fa5f5242897c90f6b0b54153e4f729944e50bec879c2d35af89591857798a756"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests/commits/master",
+    "utc": "2026-10-04T23:03:08.617754+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\commit_metadata.json",
+    "size": 7271,
+    "sha256": "9e70479cc8060ae7f9c524e9dc2f204027a72d2344873420fb09f4ac57a9a8e7"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests/contents/perf_tests?ref=88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82",
+    "utc": "2026-10-04T23:03:08.927018+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\perf_directory.json",
+    "size": 10416,
+    "sha256": "323975db3d07998e47aa6d9356e111b25b9548d233c812c0cb1abbf7068b98b8"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests/contents/perf_tests/ze_peer?ref=88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82",
+    "utc": "2026-10-04T23:03:43.390152+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\ze_peer_directory.json",
+    "size": 5041,
+    "sha256": "a42fc2962380fbb56805a8270fa45c9122d8ed530672c1e6712b39fdfdf6ca2f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/CMakeLists.txt",
+    "utc": "2026-10-04T23:03:43.573741+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\CMakeLists.txt",
+    "size": 596,
+    "sha256": "ea30d4ff42e3b328fa404dd780bd535c80e7c85bc8d5b5342553344985e788cd"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/README.md",
+    "utc": "2026-10-04T23:03:43.733223+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\README.md",
+    "size": 6390,
+    "sha256": "68f8fced0fb1e671ce24d5ec0a9d8bc119bd69deeaa7c084e556d48ac3979de4"
+  },
+  {
+    "url": "https://api.github.com/repos/intel/compute-runtime/issues/921",
+    "utc": "2026-10-04T23:03:43.992685+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\issue_921.json",
+    "size": 28194,
+    "sha256": "0b804f249b56696348e6c299bcfa9e38b6a91db38e2f7bfdfffc5cbe707e90e1"
+  },
+  {
+    "url": "https://api.github.com/repos/intel/compute-runtime/issues/921/comments",
+    "utc": "2026-10-04T23:03:44.313527+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\issue_921_comments.json",
+    "size": 79413,
+    "sha256": "25f666a4f21efb22607ee1a607f80da974986c6719e31b4b7cd9d3b106b3acef"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests/contents/perf_tests/ze_peer/src?ref=88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82",
+    "utc": "2026-10-04T23:04:04.131588+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\src_directory.json",
+    "size": 9831,
+    "sha256": "a1c04d76c4dfc55b3451bb08d3d6662ae298613e937534b049bb7f9ca9cd53aa"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer.cpp",
+    "utc": "2026-10-04T23:04:04.304432+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer.cpp",
+    "size": 27527,
+    "sha256": "b5f32245badb90170685bcd36b1d56046dedfedf7d6582623366aa20d910fd13"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_bidirectional.cpp",
+    "utc": "2026-10-04T23:04:04.538612+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_bidirectional.cpp",
+    "size": 9289,
+    "sha256": "5ffd2069f09d35f361ce1c4ad0cb8ae1bfd9c46d2ededeb651afb64082c16473"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_common.cpp",
+    "utc": "2026-10-04T23:04:04.687318+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_common.cpp",
+    "size": 13701,
+    "sha256": "32f931eac881b6d57cdeb80e2f8e18592457e7991166b24caa6977b730c6b6a9"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_ipc.cpp",
+    "utc": "2026-10-04T23:04:04.842287+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_ipc.cpp",
+    "size": 8368,
+    "sha256": "91db5052bfabd7e5a0ad78cade256d43b90d7b9ca511aea7e4c27581ca95e69e"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_parallel_multiple_targets.cpp",
+    "utc": "2026-10-04T23:04:05.051442+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_parallel_multiple_targets.cpp",
+    "size": 55052,
+    "sha256": "9a78fe31dce490d80f89165b30d26d8aef7900be1d349acd17125d3871cd26aa"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_parallel_pair_targets.cpp",
+    "utc": "2026-10-04T23:04:05.222620+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_parallel_pair_targets.cpp",
+    "size": 48570,
+    "sha256": "4b5ce212492789abb4d1974222f0fedf51852b55e26089839c2e4da24731c2b8"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_parallel_single_target.cpp",
+    "utc": "2026-10-04T23:04:05.380704+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_parallel_single_target.cpp",
+    "size": 18758,
+    "sha256": "62fb62e286de71a176207eae1b06b405817aad95fb813ccacaa277e470bd89a5"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/src/ze_peer_unidirectional.cpp",
+    "utc": "2026-10-04T23:04:05.605896+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\src\\ze_peer_unidirectional.cpp",
+    "size": 4609,
+    "sha256": "27c6cbf4f0d4fe9b76ca69a788d0235771450140e0ec612684782d605502dfc6"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests/contents/perf_tests/ze_peer/include?ref=88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82",
+    "utc": "2026-10-04T23:04:05.771219+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\include_directory.json",
+    "size": 1143,
+    "sha256": "545bde1880c3d5f2c2f8f717b96c172e473e7aa2f5a0079ad35e3063ba000872"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/include/ze_peer.h",
+    "utc": "2026-10-04T23:04:05.922545+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\include\\ze_peer.h",
+    "size": 14149,
+    "sha256": "f56871cbf04c8a5b42f792eabaa9c5a7393922c1ba6b65eea12493b84b0ad8c0"
+  },
+  {
+    "url": "https://api.github.com/repos/oneapi-src/level-zero-tests/contents/perf_tests/ze_peer/kernels?ref=88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82",
+    "utc": "2026-10-04T23:04:06.093641+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\kernels_directory.json",
+    "size": 2456,
+    "sha256": "44f24e6785f98b9ed94d0290ea19475d7cdadeae8366b23696163346c223e096"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/kernels/ze_peer_benchmarks.cl",
+    "utc": "2026-10-04T23:04:06.246439+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\kernels\\ze_peer_benchmarks.cl",
+    "size": 286,
+    "sha256": "d840e1f8a5c6ef3d971e203c0c344afcedd0e3ffe173442b9f70cff403f5cba2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/ze_peer/kernels/ze_peer_benchmarks.spv",
+    "utc": "2026-10-04T23:04:06.395460+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\ze_peer\\kernels\\ze_peer_benchmarks.spv",
+    "size": 764,
+    "sha256": "4f2e34610223ddd6f8d89e4a3c9a9d7ae42abc6476045d55c5689cd5bd57f1c2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/common/src/ze_app.cpp",
+    "utc": "2026-10-04T23:04:50.278044+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\common\\src\\ze_app.cpp",
+    "size": 19910,
+    "sha256": "8bb1b924c98378ba6d61b33a9671a82b4aff47887970f26d5063911f6a663953"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/perf_tests/common/include/ze_app.hpp",
+    "utc": "2026-10-04T23:04:50.451013+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\perf_tests\\common\\include\\ze_app.hpp",
+    "size": 7200,
+    "sha256": "7967eb51a465a9b8d18d6adae0daf022abfa411d65d5e68df1447e83ce486087"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/LICENSE",
+    "utc": "2026-10-04T23:04:50.616664+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\LICENSE",
+    "size": 1074,
+    "sha256": "8c95643f47a244153bef1c2d3a2801dde2b566f0294aae956c8a5226f7acd789"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/oneapi-src/level-zero-tests/88447c0abb2ad48bd4fee0b7dbb4ff8b5fcd9e82/CMakeLists.txt",
+    "utc": "2026-10-04T23:04:50.780456+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\upstream\\CMakeLists.txt",
+    "size": 15140,
+    "sha256": "905d796f1c7ea08baf0e69dbc7a703fe31c8be168bb36d673e240f74ffe122d7"
+  },
+  {
+    "url": "https://api.github.com/repos/intel/compute-runtime/commits/e91243a9d03de849f45d8b862a62afd4424cff8b",
+    "utc": "2026-10-04T23:06:05.338898+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\e91243a9d03de849f45d8b862a62afd4424cff8b.commit.json",
+    "size": 17133,
+    "sha256": "38cdfb741ac18458b013d64620f1a9618d43631ceffc3122e0168540bfa3b0b3"
+  },
+  {
+    "url": "https://api.github.com/repos/intel/compute-runtime/commits/258518f8039afba59c46d98bb7f6f068d12f026d",
+    "utc": "2026-10-04T23:06:05.654801+00:00",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_multi_arc_ze_peer_research_20261004T230000Z\\258518f8039afba59c46d98bb7f6f068d12f026d.commit.json",
+    "size": 9363,
+    "sha256": "11e67ddd4264355e19269b53119b959c92ffd5347c26c8afa8a4cf9c83665e39"
+  }
+]

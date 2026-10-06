@@ -1,0 +1,39 @@
+{
+  "scope": "ROOT_ADMITTED_EXACT_SOURCE_INDEPENDENT_PURE_QA",
+  "pid": 83872,
+  "exit_code": 1,
+  "reaped": true,
+  "owned_process_handle_signaled": true,
+  "pid_absent_at_owned_handle_observation": true,
+  "seconds": 0.1880000000819564,
+  "timeout_seconds": 30,
+  "timeout": false,
+  "stream_cap_bytes": 2097152,
+  "capture": {
+    "bytes": {
+      "stderr.raw.log": 0,
+      "stdout.raw.json": 23529
+    },
+    "overflow": [],
+    "errors": []
+  },
+  "readers_joined": true,
+  "pins_before": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\source.grok_untrusted.py": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\tests_source.grok_untrusted.txt": "1a885582f610a0144479a90be787d049f8afedadd86da8d7810c2b85c428b114",
+    "E:\\the_harness\\records\\root_continuation_20261004\\capacity_grok_root_audit_20261004T205640Z\\test_independent_capacity.py": "740cbe6e24e348181bd205d7c9dd958e9c1d42c9b075a9cddbdd9938f7f1852d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\capacity_grok_root_audit_20261004T205640Z\\run_bounded_pure.py": "bc61d7db5795b1ecef44dfaa318ac99a2c313cdfbd1d1e9432bb997cbb5ea388",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\source.grok_untrusted.py": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\tests_source.grok_untrusted.txt": "1a885582f610a0144479a90be787d049f8afedadd86da8d7810c2b85c428b114",
+    "E:\\the_harness\\records\\root_continuation_20261004\\capacity_grok_root_audit_20261004T205640Z\\test_independent_capacity.py": "740cbe6e24e348181bd205d7c9dd958e9c1d42c9b075a9cddbdd9938f7f1852d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\capacity_grok_root_audit_20261004T205640Z\\run_bounded_pure.py": "bc61d7db5795b1ecef44dfaa318ac99a2c313cdfbd1d1e9432bb997cbb5ea388",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "hashes_unchanged": true,
+  "provider_tests_executed": false,
+  "native_gpu_provider_calls": false,
+  "process_identity_scope": "Retained owned process handle only; no arbitrary PID control or descendant fixture."
+}

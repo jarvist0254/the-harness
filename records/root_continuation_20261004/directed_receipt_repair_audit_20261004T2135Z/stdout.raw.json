@@ -1,0 +1,450 @@
+{
+  "scope": "SYNTHETIC_NAMED_DIGEST_REGISTRY_ONLY_NO_GPU_OR_CRYPTOGRAPHIC_AUTHENTICATION",
+  "source_sha256": "fc73cb96c60a4df88815d670f3d6682ff71c3a1cbcaf9dc06942bc780768dc29",
+  "scored": 24,
+  "pass": 24,
+  "red": 0,
+  "errors": 0,
+  "observations": 3,
+  "traps": [],
+  "outcomes": [
+    {
+      "case": "legal_forward_declarations",
+      "verdict": "PASS",
+      "expected": "consistent",
+      "result": {
+        "status": "EVIDENCE_CONSISTENT",
+        "classification": "DEVICE_P2P",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "legal_reverse_declarations",
+      "verdict": "PASS",
+      "expected": "consistent",
+      "result": {
+        "status": "EVIDENCE_CONSISTENT",
+        "classification": "DEVICE_P2P",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "original_baseline_unbound",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "clean_baseline_not_pinned",
+          "clean_baseline_unregistered"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "original_same_physical_alias",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "source_target_same_physical_identity"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "original_unregistered_residency",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "residency_registry_absent"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "unregistered_measurement_digest",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "residency_measurement_unregistered"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "unregistered_corruption",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "corruption_control_unregistered"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "unregistered_producer_event",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "producer_event_unregistered"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "identical_producer_consumer_events",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "sync_event_not_distinct"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "artifact_model_mismatch",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "artifact_pin_mismatch:model"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "payload_size_mismatch",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "payload_bytes_not_pinned",
+          "payload_bytes_mismatch"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "FD_resource_mismatch",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "fd_binding"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "FD_provenance_mismatch",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "fd_provenance_binding"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "unregistered_resource_provenance",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "resource_provenance_registry_absent"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "export_wrong_backing",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "export_backing_allocation_mismatch"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "target_api_path_mismatch",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "device_api_path_mismatch"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "stale_residency",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "residency_stale"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "far_future_residency",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "residency_stale"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "source_not_resident",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "source_not_resident"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "untrusted_registry",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "trusted_authoritative_pins_absent"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "reverse_visibility_unregistered",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "NOT_CHECKED",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [
+          "reverse_visibility_registry_absent"
+        ],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "reverse_written_allocation_wrong",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "nv_allocation_binding"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "reverse_pattern_mismatch",
+      "verdict": "PASS",
+      "expected": "refuse",
+      "result": {
+        "status": "FAIL",
+        "classification": "NOT_CHECKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": [
+          "write_read_pattern_mismatch"
+        ]
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "host_staging_classification",
+      "verdict": "PASS",
+      "expected": "host",
+      "result": {
+        "status": "EVIDENCE_CONSISTENT",
+        "classification": "HOST_BACKED",
+        "transport_accepted": false,
+        "scope": "evidence_consistency_only",
+        "gaps": [],
+        "failures": []
+      },
+      "exception": null,
+      "inputs_unchanged": true
+    },
+    {
+      "case": "malformed_bool_payload_size",
+      "verdict": "OBSERVATION",
+      "expected": "refuse",
+      "result": null,
+      "exception": {
+        "type": "ValueError",
+        "message": "payload.bytes"
+      },
+      "inputs_unchanged": true
+    },
+    {
+      "case": "malformed_unknown_top_field",
+      "verdict": "OBSERVATION",
+      "expected": "refuse",
+      "result": null,
+      "exception": {
+        "type": "ValueError",
+        "message": "unknown_field:receipt.extra"
+      },
+      "inputs_unchanged": true
+    },
+    {
+      "case": "malformed_sync_object",
+      "verdict": "OBSERVATION",
+      "expected": "refuse",
+      "result": null,
+      "exception": {
+        "type": "ValueError",
+        "message": "sync"
+      },
+      "inputs_unchanged": true
+    }
+  ],
+  "source_unchanged": true
+}

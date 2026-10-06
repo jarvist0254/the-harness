@@ -1,0 +1,49 @@
+{
+  "capture_limit_per_stream_bytes": 1048576,
+  "compile_target": "E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z\\external_memory_query.exe",
+  "compiler": "MSVC 14.51.36231 x64 from existing VS 18 Community install",
+  "compiler_command": [
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "/nologo",
+    "/std:c++17",
+    "/EHsc",
+    "/W4",
+    "/IE:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Include",
+    "E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z\\external_memory_query.cpp",
+    "/link",
+    "/LIBPATH:E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Lib",
+    "vulkan-1.lib",
+    "/OUT:E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z\\external_memory_query.exe"
+  ],
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z",
+  "environment_bootstrap_command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "call \"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" x64 >nul && set"
+  ],
+  "input_hashes_before": {
+    "compiler": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "controller_python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "core_header": "944cd8f81d98e94999c7353dd632f73be471f2da95afecbc7d9ffe0ad5295deb",
+    "source": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+    "vcvars64": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "vulkan_library": "02caa31b8665a79f327cbfe97286fd7d0017c0b1f9b39eb78687b7a509de52b3"
+  },
+  "input_paths": {
+    "compiler": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "controller_python": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "core_header": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Include\\vulkan\\vulkan_core.h",
+    "source": "E:\\the_harness\\records\\root_continuation_20261004\\external_memory_exact_query_20261004T152518Z\\external_memory_query.cpp",
+    "vcvars64": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+    "vulkan_library": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Lib\\vulkan-1.lib"
+  },
+  "link_libraries": [
+    "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Lib\\vulkan-1.lib"
+  ],
+  "runtime_status": "NOT_RUN_BY_THIS_SCRIPT",
+  "scope": "compile only; native executable must not be run before separate root admission",
+  "sdk": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk",
+  "sdk_source": "existing copy-only extracted LunarG SDK recorded under build_vulkan_real/toolchain",
+  "timeout_seconds": 60.0
+}

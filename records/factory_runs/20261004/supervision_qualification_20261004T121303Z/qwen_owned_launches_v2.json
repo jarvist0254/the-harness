@@ -1,0 +1,20 @@
+[
+  {
+    "pid": 95860,
+    "job": "supervisor_v2",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "observed_process_start_utc": "2026-10-04T12:22:06.4466559Z",
+    "clock": "Stopwatch monotonic",
+    "model": "qwen3.8-max",
+    "outer_deadline_seconds": 270
+  },
+  {
+    "pid": 52540,
+    "job": "validator_v2",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "observed_process_start_utc": "2026-10-04T12:22:06.4646147Z",
+    "clock": "Stopwatch monotonic",
+    "model": "qwen3.8-flash",
+    "outer_deadline_seconds": 270
+  }
+]

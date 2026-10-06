@@ -1,0 +1,38 @@
+{
+  "scope": "SYNTHETIC_PURE_ONLY",
+  "source_sha256": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f",
+  "tests": 3,
+  "failures": [
+    "test_consistent_but_untrusted_clean_baseline_must_refuse (__main__.Controls)",
+    "test_same_physical_uuid_and_pci_must_not_classify_peer (__main__.Controls)",
+    "test_unregistered_self_reported_residency_not_device_p2p (__main__.Controls)"
+  ],
+  "errors": [],
+  "observed": {
+    "baseline_unbound_to_trusted": {
+      "status": "EVIDENCE_CONSISTENT",
+      "classification": "DEVICE_P2P",
+      "transport_accepted": false,
+      "scope": "evidence_consistency_only",
+      "gaps": [],
+      "failures": []
+    },
+    "same_physical_identity": {
+      "status": "EVIDENCE_CONSISTENT",
+      "classification": "DEVICE_P2P",
+      "transport_accepted": false,
+      "scope": "evidence_consistency_only",
+      "gaps": [],
+      "failures": []
+    },
+    "unregistered_measurement": {
+      "status": "EVIDENCE_CONSISTENT",
+      "classification": "DEVICE_P2P",
+      "transport_accepted": false,
+      "scope": "evidence_consistency_only",
+      "gaps": [],
+      "failures": []
+    }
+  },
+  "native_import_traps": []
+}

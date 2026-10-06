@@ -1,0 +1,22 @@
+{
+  "qwen": {
+    "changes": [
+      "Add dot-source protocol_artifact.ps1 after unchanged provider_common.ps1",
+      "Replace Assert-PatchArtifact with Assert-ProtocolArtifact",
+      "Stage protocol.pending_root_qa.json instead of patch.pending_root_qa.json",
+      "Terminal COMPLETE_PROTOCOL_STAGED_UNAPPLIED instead of COMPLETE_PATCH_STAGED_UNAPPLIED"
+    ],
+    "adapted": "qwen_http_protocol.ps1",
+    "original": "qwen_http_patch.ps1"
+  },
+  "wrapper": {
+    "changes": [
+      "Add dot-source protocol_artifact.ps1",
+      "Qwen child targets qwen_http_protocol.ps1",
+      "Grok override requests strict new protocol schema, honest refusal and no fabricated changes",
+      "Grok Assert-ProtocolArtifact and protocol stage/status replaces exact3 patch intake"
+    ],
+    "adapted": "invoke_owned_protocol.ps1",
+    "original": "invoke_owned_provider.ps1"
+  }
+}

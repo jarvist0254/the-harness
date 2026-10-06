@@ -1,0 +1,18 @@
+{
+  "packet_sha256": "ee9f1fdd80fcf8d003fa8b0768844b0e7b4f866c234d35f4b8ef0a146707393f",
+  "generated_source_execution_authorized": false,
+  "enable_thinking": true,
+  "lane": "Qwen",
+  "reasoning_effort": "xhigh",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_l0_peer_repair\\source.SCHEMA_REFUSED_UNTRUSTED_REVIEW_ONLY.txt",
+  "utc": "2026-10-04T21:56:12.5154832Z",
+  "model": "qwen3.8-max",
+  "native_children_actual": 0,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_compiler_two_prep_v2_20261004T214600Z",
+  "job_id": "qwen_l0_peer_compile_repair",
+  "provider_launch_authorized": true,
+  "thinking_budget_absent": true,
+  "prompt_sha256": "3b84c6d91803079d654b1442a21289426c667d5ae59215c1b2f6aabe9d68ffa6",
+  "authority": "ROOT explicit exact three admissions after full reads and rehash",
+  "source_sha256": "4144749084d6b74dddfb5ff314c461c8444c12413f57bb380a0bbe32d13c893f"
+}

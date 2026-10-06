@@ -1,0 +1,32 @@
+{
+  "source_sha256": "9da36c9700d1ecedde8f63913d4d72a953bfaf572e87df6753fc8388ca9742b0",
+  "tests_chars": 5592,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_exporter_sync_contract\\source.qwen_untrusted.py",
+  "source_execution": false,
+  "provider_status": "ANALYSIS",
+  "job": "qwen_intel_exporter_sync_contract",
+  "root_acceptance": "PENDING_STATIC_REVIEW",
+  "elapsed_seconds": 751.32,
+  "source_chars": 19125,
+  "owned_pids_point_absent": true,
+  "usage": {
+    "prompt_tokens": 34298,
+    "total_tokens": 76518,
+    "completion_tokens": 42220,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 34298
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 31783,
+      "text_tokens": 42220
+    }
+  },
+  "utc": "2026-10-04T21:22:15.5004104Z",
+  "owned_pids": [
+    60612,
+    95744
+  ],
+  "tests_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_exporter_sync_contract\\tests_source.qwen_untrusted.txt",
+  "tests_sha256": "ad8d75201b9f52bb59b3722d0bdc8fec743eae9fe32e78c72bf77e4ee72f8fc6"
+}

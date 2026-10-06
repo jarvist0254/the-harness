@@ -1,0 +1,39 @@
+{
+  "compile_argv": [
+    "C:\\windows\\system32\\wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--exec",
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "85s",
+    "/usr/bin/c++",
+    "-std=c++17",
+    "-I/mnt/e/the_harness/records/toolchains/cuda_driver_headers_20261004/include",
+    "/mnt/e/the_harness/records/root_continuation_20261004/external_cuda_capability_query_20261004T2005Z/cuda_driver_capability_query.cpp",
+    "-ldl",
+    "-o",
+    "/mnt/e/the_harness/records/root_continuation_20261004/external_cuda_capability_query_20261004T2005Z/out/cuda_driver_capability_query"
+  ],
+  "query_argv": [
+    "C:\\windows\\system32\\wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--exec",
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "30s",
+    "/mnt/e/the_harness/records/root_continuation_20261004/external_cuda_capability_query_20261004T2005Z/out/cuda_driver_capability_query"
+  ],
+  "shell_used": false,
+  "compiler_path": "/usr/bin/c++",
+  "distro": "Ubuntu-24.04",
+  "compile_worker_deadline_seconds": 85,
+  "compile_kill_grace_seconds": 5,
+  "query_worker_deadline_seconds": 30,
+  "query_kill_grace_seconds": 5,
+  "outer_compile_wsl_client_seconds": 100,
+  "outer_query_wsl_client_seconds": 45
+}

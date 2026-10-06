@@ -1,0 +1,38 @@
+[
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "spawn_transaction",
+    "model": "qwen3.8-max",
+    "outer_deadline_seconds": 270,
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "pid": 88068,
+    "observed_process_start_utc": "2026-10-04T12:49:37.6343543Z"
+  },
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "cleanup_transaction",
+    "model": "qwen3.8-max",
+    "outer_deadline_seconds": 270,
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "pid": 64460,
+    "observed_process_start_utc": "2026-10-04T12:49:37.6706824Z"
+  },
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "capacity_participation",
+    "model": "qwen3.8-max",
+    "outer_deadline_seconds": 270,
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "pid": 22780,
+    "observed_process_start_utc": "2026-10-04T12:49:37.6809164Z"
+  },
+  {
+    "clock": "Stopwatch monotonic",
+    "job": "proof_bindings",
+    "model": "qwen3.8-max",
+    "outer_deadline_seconds": 270,
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "pid": 50164,
+    "observed_process_start_utc": "2026-10-04T12:49:37.6917193Z"
+  }
+]

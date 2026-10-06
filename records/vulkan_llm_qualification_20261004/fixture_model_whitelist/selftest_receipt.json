@@ -1,0 +1,42 @@
+[
+  {
+    "name": "self_test",
+    "pid": 26504,
+    "args": [
+      "--self-test"
+    ],
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_ms": 142,
+    "process_present_after": false,
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\self_test.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\self_test.stderr.log",
+    "stdout_text": "{\"self_test\":true,\"status\":\"SELF_TEST_OK\",\"hardware_pass\":false,\"failures\":[]}\r\n"
+  },
+  {
+    "name": "missing_args",
+    "pid": 43232,
+    "args": [],
+    "exit_code": 2,
+    "timed_out": false,
+    "elapsed_ms": 24,
+    "process_present_after": false,
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\missing_args.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\missing_args.stderr.log",
+    "stdout_text": "{\"status\":\"ERROR\",\"exit_code\":2,\"error\":\"usage\",\"model\":\"\",\"file_size\":null,\"sha256\":null,\"devices\":[],\"device_details\":[],\"device_population\":0,\"device_registry_count\":null,\"vendor_population\":null,\"workload_sha256\":null,\"tokens\":[],\"n_layer\":null,\"n_vocab\":null,\"n_ctx_actual\":null,\"n_batch_actual\":null,\"n_ubatch_actual\":null,\"description\":null,\"quant\":null,\"max_abs\":null,\"rmse\":null,\"fail_count\":null,\"all_finite_cpu\":null,\"all_finite_gpu\":null,\"inject_corruption\":false,\"requested\":{\"n_ctx\":128,\"n_batch\":32,\"n_ubatch\":32,\"n_threads\":4,\"cpu_n_gpu_layers\":0,\"gpu_n_gpu_layers\":2147483647,\"split_mode\":null,\"tensor_split\":null,\"flash_attn\":\"disabled\",\"cpu_devices\":\"ggml_backend_dev_by_type(CPU),null\",\"offload_kqv_cpu\":false,\"op_offload_cpu\":false,\"offload_kqv_gpu\":true,\"op_offload_gpu\":true},\"qualification_limits\":[\"public_API_cannot_prove_per_layer_ownership_stderr_llama_logs_required\",\"NOT_VRAM_pool_NOT_4cards_NOT_P2P_NOT_gt_one_card_capacity\",\"AMD_shared_memory_total_NOT_dedicated_capacity\",\"device_id_UNKNOWN_when_props.device_id_null_no_fake_pci\",\"abort_callback_installed_header_says_CPU_execution_only\",\"model_load_not_aborted_by_abort_callback_parent_owns_60s\",\"atol_0.01_rtol_0.01_provisional\",\"flash_attn_disabled_on_both_contexts\",\"capacity_qualified_false\",\"f32_derived_dequant_separate_workload_does_not_validate_q8_0\"],\"pinned_commit\":\"0faee5004297c3bcfa40b7bf11750127b8c1fd7d\"}\r\n"
+  },
+  {
+    "name": "invalid_arg",
+    "pid": 93504,
+    "args": [
+      "--bad-flag"
+    ],
+    "exit_code": 2,
+    "timed_out": false,
+    "elapsed_ms": 24,
+    "process_present_after": false,
+    "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\invalid_arg.stdout.log",
+    "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_model_whitelist\\invalid_arg.stderr.log",
+    "stdout_text": "{\"status\":\"ERROR\",\"exit_code\":2,\"error\":\"bad_arg\",\"model\":\"\",\"file_size\":null,\"sha256\":null,\"devices\":[],\"device_details\":[],\"device_population\":0,\"device_registry_count\":null,\"vendor_population\":null,\"workload_sha256\":null,\"tokens\":[],\"n_layer\":null,\"n_vocab\":null,\"n_ctx_actual\":null,\"n_batch_actual\":null,\"n_ubatch_actual\":null,\"description\":null,\"quant\":null,\"max_abs\":null,\"rmse\":null,\"fail_count\":null,\"all_finite_cpu\":null,\"all_finite_gpu\":null,\"inject_corruption\":false,\"requested\":{\"n_ctx\":128,\"n_batch\":32,\"n_ubatch\":32,\"n_threads\":4,\"cpu_n_gpu_layers\":0,\"gpu_n_gpu_layers\":2147483647,\"split_mode\":null,\"tensor_split\":null,\"flash_attn\":\"disabled\",\"cpu_devices\":\"ggml_backend_dev_by_type(CPU),null\",\"offload_kqv_cpu\":false,\"op_offload_cpu\":false,\"offload_kqv_gpu\":true,\"op_offload_gpu\":true},\"qualification_limits\":[\"public_API_cannot_prove_per_layer_ownership_stderr_llama_logs_required\",\"NOT_VRAM_pool_NOT_4cards_NOT_P2P_NOT_gt_one_card_capacity\",\"AMD_shared_memory_total_NOT_dedicated_capacity\",\"device_id_UNKNOWN_when_props.device_id_null_no_fake_pci\",\"abort_callback_installed_header_says_CPU_execution_only\",\"model_load_not_aborted_by_abort_callback_parent_owns_60s\",\"atol_0.01_rtol_0.01_provisional\",\"flash_attn_disabled_on_both_contexts\",\"capacity_qualified_false\",\"f32_derived_dequant_separate_workload_does_not_validate_q8_0\"],\"pinned_commit\":\"0faee5004297c3bcfa40b7bf11750127b8c1fd7d\"}\r\n"
+  }
+]

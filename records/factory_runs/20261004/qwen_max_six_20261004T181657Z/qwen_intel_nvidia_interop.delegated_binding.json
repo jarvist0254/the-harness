@@ -1,0 +1,14 @@
+{
+  "job_id": "qwen_intel_nvidia_interop",
+  "actual_native_children": 0,
+  "enable_thinking": true,
+  "model": "qwen3.8-max",
+  "provider_launch_authorized": true,
+  "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+  "reasoning_effort": "xhigh",
+  "prompt_sha256": "07e8f289afffdca66b71615e93a9c9f2f3cc986114592c80ec4e9d232104159a",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+  "lane": "Qwen",
+  "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+}

@@ -1,0 +1,20 @@
+{
+  "usage": {
+    "prompt_tokens": 6955,
+    "total_tokens": 11013,
+    "completion_tokens": 4058,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 6955
+    }
+  },
+  "native_children_actual": 0,
+  "finish_reason": "stop",
+  "observed_model": "qwen3.8-max",
+  "pid": 62704,
+  "elapsed_seconds": 85.26,
+  "job": "supervisor",
+  "status": "COMPLETE_UNTRUSTED_PENDING_GATES",
+  "http": 200,
+  "requested_model": "qwen3.8-max"
+}

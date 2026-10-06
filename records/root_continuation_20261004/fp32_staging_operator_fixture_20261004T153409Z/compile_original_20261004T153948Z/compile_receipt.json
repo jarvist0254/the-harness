@@ -1,0 +1,49 @@
+{
+  "scope": "COMPILE_ONLY_NO_FIXTURE_OR_GPU_EXECUTION",
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\compile_original.cmd",
+    "E:\\the_harness\\records\\build_vulkan_real\\build"
+  ],
+  "pid": 89836,
+  "exit_code": 0,
+  "elapsed_seconds": 2.875,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "stream_cap_each": 1048576,
+  "streams": {
+    "stdout": {
+      "observed_bytes": 428,
+      "captured_bytes": 428,
+      "truncated": false
+    },
+    "stderr": {
+      "observed_bytes": 1100,
+      "captured_bytes": 1100,
+      "truncated": false
+    }
+  },
+  "source_headers_libs_unchanged": true,
+  "compiler": {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "sha256_before": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "sha256_after": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "version": "19.51.36246.0 /Bv actual stdout/stderr"
+  },
+  "child_presence_after_wait": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "outputs": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\fp32_staging_operator.exe",
+      "bytes": 32768,
+      "sha256": "35a93fe5fa473332b93d68af331f82829f885febecf8a7fc1c1fbbefb2487c95"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_original_20261004T153948Z\\fp32_staging_operator.obj",
+      "bytes": 149546,
+      "sha256": "a9c11370d4d91b47d68d497adc985fc110aa7d06649dedcf8e2f6455623eda93"
+    }
+  ],
+  "attempt_history": "Attempt1 Windows cmd serialization failure before compile; attempt2 Python nonraw path escapes corrupted linker path. Both preserved, source/object compile succeeded onattempt2. Attempt3 raw build path; no source changes."
+}

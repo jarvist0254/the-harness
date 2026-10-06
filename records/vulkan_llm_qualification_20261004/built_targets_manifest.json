@@ -1,0 +1,17 @@
+[
+  {
+    "path": "records/build_vulkan_real/build/bin/llama-cli.exe",
+    "bytes": 10240,
+    "sha256": "bd605609cc82637d31346fc32638387f4a245e683482e4d50b1b0c4ce07193df"
+  },
+  {
+    "path": "records/build_vulkan_real/build/bin/test-backend-ops.exe",
+    "bytes": 1216000,
+    "sha256": "f24f088517feac5825319f818f59edc89982795d495980acab5bea6737adbdf0"
+  },
+  {
+    "path": "records/build_vulkan_real/build/bin/ggml-rpc-server.exe",
+    "bytes": 104960,
+    "sha256": "90f2015edbb471b3843ca1b442d3335d676caaf2a24c288b20df268e72c0e797"
+  }
+]

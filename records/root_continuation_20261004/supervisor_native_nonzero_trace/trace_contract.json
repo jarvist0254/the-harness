@@ -1,0 +1,32 @@
+{
+  "experiment": "one-case-observability-diagnostic-for-native-nonzero_exit-UNKNOWN_DRAIN",
+  "source_path": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+  "source_sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "worker_path": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture\\worker.py",
+  "worker_sha256": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+  "worker_argv_suffix": ["nonzero_worker", "nonzero"],
+  "manifest": {
+    "run_id": "native_nonzero_trace",
+    "workers": 1,
+    "deadline_seconds": 5,
+    "startup_seconds": 5,
+    "log_limit_bytes": 1024,
+    "containment_policy": "kill_on_close"
+  },
+  "observed_calls": [
+    "_winapi.TerminateProcess",
+    "_winapi.WaitForSingleObject",
+    "_winapi.GetExitCodeProcess",
+    "_winapi.CloseHandle",
+    "kernel32.TerminateJobObject",
+    "kernel32.CloseHandle",
+    "kernel32.QueryInformationJobObject"
+  ],
+  "proxy_behavior": "delegates same args to original native method; records actual return or exception; returns original result or re-raises same exception; no result override",
+  "trace_caps": {"max_events": 128, "max_bytes": 65536, "max_line_bytes": 2048},
+  "outer_controller_deadline_seconds": 30,
+  "network": false,
+  "provider": false,
+  "gpu": false,
+  "scope": "one diagnostic case, no rerun and no other fixture cases"
+}

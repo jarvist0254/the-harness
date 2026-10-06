@@ -1,0 +1,8 @@
+{
+  "job": "grok_ledger_storage_high",
+  "source": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py",
+  "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+  "batch": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z",
+  "admission": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high.delegated_binding.json",
+  "prompt": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high.prompt.txt"
+}

@@ -1,0 +1,11 @@
+{
+  "initial_build_pid": 56500,
+  "initial_process_still_present": false,
+  "build_verify_pid": 77356,
+  "build_verify_exit_code": 0,
+  "artifacts": [
+    "bin/llama-cli.exe",
+    "bin/test-backend-ops.exe",
+    "bin/ggml-rpc-server.exe"
+  ]
+}

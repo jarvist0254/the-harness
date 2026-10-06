@@ -1,0 +1,10 @@
+{
+  "pid": 20524,
+  "exit_code": "0",
+  "source": "records/factory_runs/20261004/supervision_qualification_20261004T121303Z/grok_context_padding/llama_logits_context_corrected.cpp",
+  "source_sha256": "54AD6FD03CADF8B302B4F6705AEC9AB280253277A2F5E00468E59B379CECD2FC",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile_contextfix.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_compile_contextfix.stderr.log",
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\compile_contextfix.cmd",
+  "ran_executable": false
+}

@@ -1,0 +1,28 @@
+{
+  "text": "{\"verdict\":\"NO_SOURCE_CHANGES\",\"adapter_findings\":[],\"adapter_changes\":[],\"helper_findings\":[],\"helper_changes\":[],\"tests\":[\"No new pure test is required. The embedded adapter already matches the pinned compiler-root contract, and the embedded helper has no GetExitCodeProcess call whose zero BOOL result returns a false value or raises outside the existing refusal path.\"],\"rationale\":[\"The adapter install closes over private_module._monotonic and private_module._sleep and assigns only _wait_run. The module body performs zero native, filesystem, or process actions at import or install.\",\"wait_run admits only policy kill_on_close, one worker, and one owned record with assigned True, resumed True, and a non-None ph. Any other shape returns UNKNOWN with compiler_policy_mismatch or compiler_root_ownership.\",\"guards() runs before WaitForSingleObject, after the wait result is stored, and after an integer GetExitCodeProcess result is stored. Cancel returns CANCELLED/cancelled, overflow returns FAILED/LOG_LIMIT, bad_read returns UNKNOWN/bad_read, and monotonic() >= dead_by returns TIMEOUT/deadline.\",\"Wait status 258 sleeps 0.02 through the private supervisor sleep and retries. A non-int wait, any other status, or a wait exception returns UNKNOWN/wait_failed. A non-int exit or exit exception returns UNKNOWN/exit_query_failed. A nonzero exit, including 259, returns FAILED/nonzero_exit. Exit integer 0 returns COMPILER_ROOT_EXITED_CLEANUP_REQUIRED/compiler_root_exited_zero. The hook calls only WaitForSingleObject and GetExitCodeProcess on the supplied owned handle.\",\"Embedded proof C309D2B5 on supervisor FA907 and driver E4327908 records job_close, owned_close, reader, and shutdown. Each keeps status COMPILER_ROOT_EXITED_CLEANUP_REQUIRED, sets drain_proof UNKNOWN_DRAIN, and makes validate_result raise cleanup/durability refusal, with native_process_calls empty. The embedded driver and attempt5 controller both require drain_proof CLEANUP, job_active_count 0, and whole_tree_certificate false before stage acceptance. That caller gate is the cleanup refusal for this status. Supervisor demotion edits stay outside the adapter.\",\"Earlier Muse items about a post-exit hole, a deps/time clock fallback, renamed wait/exit reasons, worker-id mismatch tests, and STILL_ACTIVE-as-UNKNOWN describe a previous candidate. This source rechecks every terminal guard after the exit query, binds the private supervisor clock, uses wait_failed and exit_query_failed, and follows the spec rule that nonzero exit is FAILED.\",\"Helper SHA 33F66211 contains no GetExitCodeProcess call. Completion uses proc.poll() is None, proc.wait, and proc.returncode, so child exit integer 0 stays a completed process. K32EnumProcessModules BOOL zero and K32GetModuleFileNameExW DWORD zero already raise ctypes.WinError. Those failures reach the helper's recorded-error path and INTEGRITY_REFUSED_OR_UNKNOWN when an error is stored. There is no zero-result false return to replace.\"],\"safety_checks\":[\"Adapter success is exactly COMPILER_ROOT_EXITED_CLEANUP_REQUIRED with reason compiler_root_exited_zero. whole_tree_certificate stays with the supervisor and caller, which require it false.\",\"The wait hook's process calls are WaitForSingleObject and GetExitCodeProcess on the already-owned root handle. Job termination remains on the existing supervisor shutdown path.\",\"The embedded four-case mock records caller_refused true and an empty native call list for job close, owned close, reader failure, and shutdown failure.\",\"Helper module-query BOOL/DWORD zero results raise ctypes.WinError. Receipt status becomes INTEGRITY_REFUSED_OR_UNKNOWN when errors are recorded. A zero child exit remains distinct because poll is compared with None.\",\"This audit is source-only. It applies zero patches, runs zero tests, admits zero native fixtures, and authorizes zero GPU execution.\"]}",
+  "stopReason": "end_turn",
+  "sessionId": "b369ff39-9f69-4846-8e03-66c1716716c4",
+  "requestId": "1234e73b-97ae-4d45-a101-d592baa427b7",
+  "thought": "The user wants me to perform a read-only corrective audit. I need to return exact JSON only. Let me carefully analyze the candidate adapter source and the helper source against the specification.\n{\n  \"status\": \"PASS\",\n  \"findings\": [],\n  \"issues\": [],\n  \"patch\": null,\n  \"reason\": \"No concrete defects identified after end-to-end tracing of the ROOT spec against the candidate adapter and helper sources. All four-case supervisor/caller mock proofs (shutdown, owned-close 1, reader/job-close) correctly produce UNKNOWN_DRAIN and are refused by the native driver. The helper source uses subprocess.Popen + proc.poll()/returncode + proc.kill()/wait + _handle.Close() and does not contain GetExitCodeProcess, so the proposed 3-line correction is inapplicable. Zero changes proposed for both adapter and helper.",
+  "usage": {
+    "input_tokens": 30657,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 23404,
+    "reasoning_tokens": 22520,
+    "total_tokens": 55213
+  },
+  "num_turns": 1,
+  "total_cost_usd": 0.13757352,
+  "total_cost_usd_ticks": 1375735200,
+  "modelUsage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 30657,
+      "outputTokens": 23404,
+      "cacheReadInputTokens": 1152,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.13757352
+    }
+  }
+}

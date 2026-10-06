@@ -1,0 +1,230 @@
+{
+  "reported_internal_model_calls_known": 1,
+  "prior_six": {
+    "sha256": "3290e2ee5dd6a8c22cd1e99b8631c648680be02a2ff60f4d913f342e5a5463f0",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\USAGE_FINAL_SIXTH.json"
+  },
+  "utc": "2026-10-04T17:28:38.5834815Z",
+  "per_provider": {
+    "Gemini": {
+      "jobs": 1,
+      "observed_tokens": 46677
+    },
+    "Grok": {
+      "jobs": 1,
+      "observed_tokens": 25410
+    },
+    "Qwen": {
+      "jobs": 1,
+      "observed_tokens": 14904
+    }
+  },
+  "accounting": "Deduplicate actual jobs, not raw/extracted/copied artifacts. Use vendor reported totals; do not add cached/thinking/reasoning fields again. Unknown prior usage is not zero. CLI num_turns and modelCalls have separate semantics.",
+  "paid_provider_jobs": 3,
+  "internal_call_counts_unknown_jobs": 2,
+  "snapshot": {
+    "sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\source_snapshot.cpp"
+  },
+  "patch_applied": false,
+  "direct_http_requests": 1,
+  "definition": "SEVENTH isolated batch CLOSED; three actual paid jobs; prior six immutable",
+  "unknown_usage_jobs": 0,
+  "cli_jobs": 2,
+  "calls": [
+    {
+      "reported_total_tokens": 14904,
+      "wrapper_pid": 80144,
+      "provider_status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "admission": {
+        "sha256": "1fa93e6dada3c91388af976dad07264bdf3d84c829d828f1bf6a379b89408524",
+        "path": "E:\\the_harness\\records\\root_continuation_20261004\\ROOT_QWEN_SHARED_HOST_PROTOCOL_ADMISSION.json"
+      },
+      "finish_reason": "stop",
+      "artifact_acceptance": "COMPLETE_RESPONSE_REJECTED_INTAKE",
+      "elapsed_seconds": 55.22,
+      "worker_pid": 58864,
+      "transport": "DIRECT_HTTP",
+      "reported_internal_model_calls": null,
+      "usage": {
+        "prompt_tokens": 11839,
+        "total_tokens": 14904,
+        "completion_tokens": 3065,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 11839
+        }
+      },
+      "job": "qwen_shared_host_protocol",
+      "terminal": {
+        "sha256": "8a49e28c79abad9ebaa20b5ac080dff594ce588feb640b69c09684a16d63aefb",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\qwen_shared_host_protocol\\terminal.json"
+      },
+      "observed_model": "qwen3.8-max",
+      "requested_model": "qwen3.8-max",
+      "http": 200,
+      "role": "Qwen_Workhorse",
+      "artifact": {
+        "sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\qwen_shared_host_protocol\\protocol.raw.unaccepted.json"
+      },
+      "prompt": {
+        "sha256": "185b4683b745384357fad4806a181e4a88dd091722646d3e08ce20906c8e53f5",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\qwen_shared_host_protocol.prompt.txt"
+      }
+    },
+    {
+      "reported_total_tokens": 46677,
+      "wrapper_pid": 88972,
+      "provider_status": "PARSE_OR_SCHEMA_ERROR",
+      "num_turns_not_modelcalls": 2,
+      "raw_verdict": "REJECT",
+      "artifact_acceptance": "STATIC_REVIEW_PENDING_ROOT_ADJUDICATION",
+      "elapsed_seconds": 64.4,
+      "transport": "AGY_CLI",
+      "reported_internal_model_calls": null,
+      "cli_pid": 37448,
+      "usage": {
+        "input_tokens": 38203,
+        "output_tokens": 8474,
+        "thinking_tokens": 5283,
+        "cache_read_tokens": 25420,
+        "total_tokens": 46677
+      },
+      "job": "gemini_shared_host_review",
+      "terminal": {
+        "sha256": "38f1b67c89093b1ecc1b27ee62f7c7308f7d4710c571cdd8a26b61b11a0fa1b6",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\gemini_shared_host_review.owned_terminal.json"
+      },
+      "admission": {
+        "sha256": "65b74971809093d9b8de5cac675be36755d36117bb5320adb99a3ad810238564",
+        "path": "E:\\the_harness\\records\\root_continuation_20261004\\ROOT_GEMINI_SHARED_HOST_REVIEW_ADMISSION.json"
+      },
+      "exit_code": 0,
+      "secondary_state": "STRUCTURED_OUTPUT_EXTRACTED_WITHOUT_CONTENT_EDITS",
+      "requested_model": "gemini-3.8-flash-medium",
+      "role": "Gemini_Reviewer",
+      "artifact": {
+        "sha256": "194e15e75747a10410889519f32d36d708a07c619053abe5d95b9854bafa2216",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\gemini_shared_host_review\\review.structured_output.extracted.json"
+      },
+      "prompt": {
+        "sha256": "ef48273fa1c4221266618026b5d870688ae2f66f5fe6e71123241e6ac965bf81",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\gemini_shared_host_review.prompt.txt"
+      }
+    },
+    {
+      "exit_code": 0,
+      "usage": {
+        "input_tokens": 22978,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 2432,
+        "reasoning_tokens": 589,
+        "total_tokens": 25410
+      },
+      "cli_pid": 70372,
+      "actual_source": {
+        "sha256": "194e15e75747a10410889519f32d36d708a07c619053abe5d95b9854bafa2216",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\gemini_shared_host_review\\review.structured_output.extracted.json"
+      },
+      "terminal": {
+        "sha256": "c31a5104a48f15c089fc627091cfd660829f1eb0313202863c27e4c46ecb1348",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\grok_shared_host_edit.owned_terminal.json"
+      },
+      "changes_count": 0,
+      "elapsed_seconds": 22.57,
+      "transport": "GROK_CLI",
+      "artifact_status": "REFUSED",
+      "artifact": {
+        "sha256": "87171b0723bef4b0f952d612094324ec9a1a96291a4e41f27ba008d3cb7c25a2",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\grok_shared_host_edit\\protocol.pending_root_qa.json"
+      },
+      "provider_status": "COMPLETE_PROTOCOL_STAGED_UNAPPLIED",
+      "wrapper_pid": 7748,
+      "finish_reason": "end_turn",
+      "artifact_acceptance": "STATIC_REFUSAL_AND_FALLBACK_DESIGN_PENDING_ROOT_ADJUDICATION",
+      "reported_total_tokens": 25410,
+      "reported_internal_model_calls": 1,
+      "role": "Grok_Editor",
+      "job": "grok_shared_host_edit",
+      "requested_model": "grok-4.7-build-fast",
+      "prompt": {
+        "sha256": "638b2b81bb7fa2b23a0e43b5d76ff1441cb40f253b4db893ca9ca8a0274eb8a5",
+        "path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\grok_shared_host_edit.prompt.txt"
+      },
+      "model_usage": {
+        "grok-4.7-build-fast": {
+          "inputTokens": 22978,
+          "outputTokens": 2432,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "modelCalls": 1,
+          "costUSD": 0.04117264
+        }
+      },
+      "admission": {
+        "sha256": "abb9728d2a3017a6c8465d3d2c4a9bf519ac0dacfdf2062c300d351155193f87",
+        "path": "E:\\the_harness\\records\\root_continuation_20261004\\ROOT_GROK_SHARED_HOST_EDIT_ADMISSION.json"
+      },
+      "preparation_old_source_field": "Qwen field preserved in GROK_PROMPT_PREPARATION; actual ROOT admission and launch bind Gemini review"
+    }
+  ],
+  "observed_total_tokens": 86991,
+  "full_goal_complete": false,
+  "scope": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z",
+  "credits": "Tokens are not ModelStudio Credits; per-job Credits/billing NOT_CHECKED. No new quota query or observation.",
+  "native_compile_gpu_run": false,
+  "secret_process_audit": "SECRET_PROCESS_AUDIT_SEVENTH.json",
+  "prior_six_totals": {
+    "per_provider": {
+      "Qwen": {
+        "tokens": 394235,
+        "unknown_usage_jobs": 1,
+        "jobs": 21
+      },
+      "Gemini": {
+        "tokens": 1377614,
+        "unknown_usage_jobs": 0,
+        "jobs": 12
+      },
+      "Grok": {
+        "tokens": 832537,
+        "unknown_usage_jobs": 1,
+        "jobs": 17
+      }
+    },
+    "unknown_usage_jobs": 2,
+    "observed_tokens": 2604386,
+    "jobs": 50
+  },
+  "max_authorized_native_children_each_qwen_deepseek_parent": 10,
+  "original_cpp": {
+    "sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\shared_host_import_fixture_20261004T155216Z\\shared_host_import_fixture.cpp"
+  },
+  "root_adjudication": "PENDING_SEPARATE_RECEIPT; provider verdict does not admit runtime",
+  "native_children_actual": 0,
+  "all_seven": {
+    "per_provider": {
+      "Gemini": {
+        "observed_tokens": 1424291,
+        "jobs": 13,
+        "unknown_usage_jobs": 0
+      },
+      "Grok": {
+        "observed_tokens": 857947,
+        "jobs": 18,
+        "unknown_usage_jobs": 1
+      },
+      "Qwen": {
+        "observed_tokens": 409139,
+        "jobs": 22,
+        "unknown_usage_jobs": 1
+      }
+    },
+    "observed_tokens": 2691377,
+    "jobs": 53,
+    "unknown_usage_jobs": 2
+  }
+}

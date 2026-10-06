@@ -1,0 +1,20 @@
+{
+  "source": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_reviews_20261004T190300Z\\source.snapshot.py",
+    "sha256": "6DFB6A72A1310D23CF435C73F32DCD0B6A57B85CEF774C9A47C8748CE3E68DC1",
+    "bytes": 12056
+  },
+  "tests": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\tests_source.qwen_untrusted.txt",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_reviews_20261004T190300Z\\tests.snapshot.txt",
+    "sha256": "612325517BF27FD37D2A3AA0C96906C013F97CA48D4A8BFC1E9934AB674CA2A5",
+    "bytes": 7681
+  },
+  "spec": {
+    "original": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger.spec.txt",
+    "snapshot": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_reviews_20261004T190300Z\\spec.snapshot.txt",
+    "sha256": "A871BE94DD72A9AF787B50CF3B69B85BC370F78DBCA0CDDC61EA1B42E00DD0E9",
+    "bytes": 4752
+  }
+}

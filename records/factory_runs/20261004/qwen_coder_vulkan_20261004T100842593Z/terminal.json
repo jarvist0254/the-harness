@@ -1,0 +1,7 @@
+{
+  "status": "HTTP_405",
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_coder_vulkan_20261004T100842593Z",
+  "model": "qwen3-coder-plus",
+  "seconds": 2.029042,
+  "http_status": 405
+}

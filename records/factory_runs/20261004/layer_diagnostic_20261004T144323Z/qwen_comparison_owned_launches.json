@@ -1,0 +1,20 @@
+[
+  {
+    "pid": 91568,
+    "clock": "Stopwatch monotonic",
+    "outer_deadline_seconds": 270,
+    "observed_process_start_utc": "2026-10-04T14:45:43.2110543Z",
+    "model": "qwen3.8-max",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "job": "qwen_capture_comparator"
+  },
+  {
+    "pid": 82652,
+    "clock": "Stopwatch monotonic",
+    "outer_deadline_seconds": 270,
+    "observed_process_start_utc": "2026-10-04T14:45:43.2261549Z",
+    "model": "qwen3.8-max",
+    "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+    "job": "qwen_capture_tests"
+  }
+]

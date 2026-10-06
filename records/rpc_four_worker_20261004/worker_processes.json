@@ -1,0 +1,62 @@
+[
+  {
+    "pid": 36224,
+    "port": 50072,
+    "command": [
+      "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "50072",
+      "--device",
+      "CPU",
+      "--threads",
+      "1"
+    ]
+  },
+  {
+    "pid": 55496,
+    "port": 50073,
+    "command": [
+      "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "50073",
+      "--device",
+      "CPU",
+      "--threads",
+      "1"
+    ]
+  },
+  {
+    "pid": 72516,
+    "port": 50074,
+    "command": [
+      "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "50074",
+      "--device",
+      "CPU",
+      "--threads",
+      "1"
+    ]
+  },
+  {
+    "pid": 56896,
+    "port": 50075,
+    "command": [
+      "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "50075",
+      "--device",
+      "CPU",
+      "--threads",
+      "1"
+    ]
+  }
+]

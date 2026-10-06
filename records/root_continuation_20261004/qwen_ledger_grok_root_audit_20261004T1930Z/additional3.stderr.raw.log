@@ -1,0 +1,27 @@
+test_actual_legal_prior_transition_does_not_require_claim (__main__.Additional) ... ok
+test_returned_nested_wrapper_storage_cannot_reassign (__main__.Additional) ... FAIL
+test_returned_wrapper_storage_cannot_rewrite_history (__main__.Additional) ... FAIL
+
+======================================================================
+FAIL: test_returned_nested_wrapper_storage_cannot_reassign (__main__.Additional)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\test_additional_storage_and_legal_transition.py", line 19, in test_returned_nested_wrapper_storage_cannot_reassign
+    self.assertEqual(ledger.records()[0]['metadata']['pins'],['original'])
+AssertionError: <actual_delivered_ledger.FrozenList object at 0x000002954E3BF670> != ['original']
+
+======================================================================
+FAIL: test_returned_wrapper_storage_cannot_rewrite_history (__main__.Additional)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\qwen_ledger_grok_root_audit_20261004T1930Z\test_additional_storage_and_legal_transition.py", line 14, in test_returned_wrapper_storage_cannot_rewrite_history
+    self.assertEqual(ledger.records()[0]['state'],'FAILED_NUMERIC')
+AssertionError: 'DIAGNOSTIC_ONLY' != 'FAILED_NUMERIC'
+- DIAGNOSTIC_ONLY
++ FAILED_NUMERIC
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=2)

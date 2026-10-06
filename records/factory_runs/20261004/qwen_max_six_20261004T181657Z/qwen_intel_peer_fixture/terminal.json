@@ -1,0 +1,18 @@
+{
+  "credential_saved": false,
+  "response_cap_exceeded": false,
+  "elapsed_seconds": 330.13,
+  "provider_patch_applied": false,
+  "pid": 84300,
+  "timeout": true,
+  "usage": null,
+  "failure_stage": "transport",
+  "observed_model": null,
+  "http": null,
+  "parse_error_type": null,
+  "status": "HTTP_TIMEOUT_USAGE_UNKNOWN",
+  "finish_reason": null,
+  "requested_model": "qwen3.8-max",
+  "usage_known": false,
+  "native_children_actual": 0
+}

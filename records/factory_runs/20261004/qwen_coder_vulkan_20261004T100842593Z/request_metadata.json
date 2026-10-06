@@ -1,0 +1,7 @@
+{
+  "endpoint": "https://coding-intl.dashscope.aliyuncs.com/v1/chat/completions",
+  "model": "qwen3-coder-plus",
+  "timeout_seconds": 180,
+  "credential_persisted": false,
+  "fallback_reason": "Kimi model AccessDenied.Unpurchased"
+}

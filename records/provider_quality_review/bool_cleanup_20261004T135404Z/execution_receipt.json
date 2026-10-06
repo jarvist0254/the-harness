@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_20261004T135404Z\\evaluate_final.py"
+  ],
+  "pid": 68660,
+  "exit_code": 1,
+  "elapsed_seconds": 1.0149999996647239,
+  "timeout": false,
+  "source_sha256": "77c15ee3d756316078a718a4d0bf39d440b1a00cb1e2d83619520203420f80b8",
+  "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "scope": "Mock-only child; no worker processes or native Job APIs permitted"
+}

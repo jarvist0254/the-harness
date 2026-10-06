@@ -1,0 +1,44 @@
+{
+  "command": [
+    "C:\\Windows\\System32\\nvidia-smi.exe",
+    "--query-gpu=pci.bus_id,name,memory.total,memory.free,memory.used,uuid",
+    "--format=csv,nounits"
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "normalized": {
+    "devices": [
+      {
+        "physical_id": "0000:01:00.0",
+        "vendor_key": "nvidia",
+        "aliases": [
+          "0000:01:00.0",
+          "nv-name:NVIDIA GeForce RTX 5070 Ti",
+          "nv-uuid:GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        ],
+        "memory_kind": "DEDICATED",
+        "advertised_total_bytes": null,
+        "observed_free_bytes": null,
+        "sample_timestamp": "2026-10-04T12:01:39.849682+00:00",
+        "freshness_status": "FRESH",
+        "source": {
+          "tool": "nvidia-smi",
+          "exit_code": 0,
+          "uuid": "GPU-ba8e88c4-0d93-ed2d-3c78-901e812e103c"
+        }
+      }
+    ],
+    "conflicts": [],
+    "refusals": []
+  },
+  "admission": {
+    "eligible": [],
+    "refused": [
+      {
+        "device": "0000:01:00.0",
+        "reason": "invalid_total"
+      }
+    ]
+  },
+  "memory_classification_source": "Known actual discrete NVIDIA RTX5070Ti SKU; vendor CLI total is advertised and free sample is instantaneous, not allocation guarantee"
+}

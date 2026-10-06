@@ -1,0 +1,137 @@
+test_bad_read_never_process_completed (__main__.SupervisorCases) ... FAIL
+test_failed_job_termination_still_waits_roots (__main__.SupervisorCases) ... FAIL
+test_query_exception_still_closes_owned_handles (__main__.SupervisorCases) ... FAIL
+test_second_pipe_failure_no_leaks (__main__.SupervisorCases) ... FAIL
+test_second_reader_start_no_double_close (__main__.SupervisorCases) ... FAIL
+test_second_writer_duplicate_failure_no_leaks (__main__.SupervisorCases) ... FAIL
+test_wait_exception_still_closes_owned_handles (__main__.SupervisorCases) ... FAIL
+test_cpu_participants (__main__.ValidatorCases) ... FAIL
+test_declared_tolerance_metric_inconsistency (__main__.ValidatorCases) ... FAIL
+test_four_required_exactly_three_devices (__main__.ValidatorCases) ... FAIL
+test_llm_without_gpu (__main__.ValidatorCases) ... FAIL
+test_observed_llm_failure_refused (__main__.ValidatorCases) ... ok
+test_other_participants (__main__.ValidatorCases) ... FAIL
+test_positive_two_vendor_baseline (__main__.ValidatorCases) ... ok
+test_tolerance_loosening_refused_baseline (__main__.ValidatorCases) ... ok
+test_unrelated_workload_control (__main__.ValidatorCases) ... FAIL
+test_zero_highwater_no_resident_or_kernel_capacity (__main__.ValidatorCases) ... FAIL
+
+======================================================================
+FAIL: test_bad_read_never_process_completed (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 168, in test_bad_read_never_process_completed
+    r=self.run_fake(FakeAPI(bad_read=True),FakeKernel());observe(self.id(),{'result':r});self.assertNotEqual(r['status'],'PROCESS_COMPLETED','Malformed reader result cannot establish successful execution logs')
+AssertionError: 'PROCESS_COMPLETED' == 'PROCESS_COMPLETED' : Malformed reader result cannot establish successful execution logs
+
+======================================================================
+FAIL: test_failed_job_termination_still_waits_roots (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 155, in test_failed_job_termination_still_waits_roots
+    r=cs._shutdown(deps(a),k,900,owned,True);observe(self.id(),{'result':r,'fake_api_calls':a.calls,'fake_kernel_calls':k.calls});self.assertTrue(any(c[0]=='wait' and c[1]==123 for c in a.calls),'Job termination failure cannot skip exact owned-root waits')
+AssertionError: False is not true : Job termination failure cannot skip exact owned-root waits
+
+======================================================================
+FAIL: test_query_exception_still_closes_owned_handles (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 166, in test_query_exception_still_closes_owned_handles
+    roots=[h for pair in a.proc for h in pair];closed=[c[1] for c in a.calls if c[0]=='close'];self.assertTrue(roots and all(h in closed for h in roots),'Cleanup query exception must not bypass handle closure')
+AssertionError: False is not true : Cleanup query exception must not bypass handle closure
+
+======================================================================
+FAIL: test_second_pipe_failure_no_leaks (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 148, in test_second_pipe_failure_no_leaks
+    a=self.spawn_fake(FakeAPI(fail_pipe=2));closed=[c[1] for c in a.calls if c[0]=='close'];self.assertEqual(set(closed),{h for _,h in a.alloc},'Successful first pipe pair must remain owned')
+AssertionError: Items in the second set but not the first:
+102
+103 : Successful first pipe pair must remain owned
+
+======================================================================
+FAIL: test_second_reader_start_no_double_close (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 152, in test_second_reader_start_no_double_close
+    a=self.spawn_fake(FakeAPI(),True);reads=[h for kind,h in a.alloc if kind=='read'];closed=[c[1] for c in a.calls if c[0]=='close'];self.assertTrue(all(closed.count(h)==1 for h in reads),'Started reader already owns its handle; _spawn must not also close it')
+AssertionError: False is not true : Started reader already owns its handle; _spawn must not also close it
+
+======================================================================
+FAIL: test_second_writer_duplicate_failure_no_leaks (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 150, in test_second_writer_duplicate_failure_no_leaks
+    a=self.spawn_fake(FakeAPI(fail_dup=3));closed=[c[1] for c in a.calls if c[0]=='close'];self.assertEqual(set(closed),{h for _,h in a.alloc},'Successful stdout duplicate must remain owned')
+AssertionError: Items in the second set but not the first:
+106 : Successful stdout duplicate must remain owned
+
+======================================================================
+FAIL: test_wait_exception_still_closes_owned_handles (__main__.SupervisorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 160, in test_wait_exception_still_closes_owned_handles
+    roots=[h for pair in a.proc for h in pair];closed=[c[1] for c in a.calls if c[0]=='close'];self.assertTrue(roots and all(h in closed for h in roots),'Cleanup wait exception must not bypass handle closure')
+AssertionError: False is not true : Cleanup wait exception must not bypass handle closure
+
+======================================================================
+FAIL: test_cpu_participants (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 72, in test_cpu_participants
+    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1,'CPU'),device(2,'CPU')],numerical=numerical(['p1','p2']),controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_declared_tolerance_metric_inconsistency (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 82, in test_declared_tolerance_metric_inconsistency
+    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1),device(2)],numerical=e,controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED','RMSE cannot exceed max absolute error')
+AssertionError: 'QUALIFIED' == 'QUALIFIED' : RMSE cannot exceed max absolute error
+
+======================================================================
+FAIL: test_four_required_exactly_three_devices (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 63, in test_four_required_exactly_three_devices
+    r=evaluate(self.id(),['FOUR_REQUIRED_CAPACITY'],[device(i) for i in range(1,4)],capacity=capacity(3));self.assertNotEqual(r['status'],'QUALIFIED','Three cards and no four-card run cannot prove FOUR_REQUIRED_CAPACITY')
+AssertionError: 'QUALIFIED' == 'QUALIFIED' : Three cards and no four-card run cannot prove FOUR_REQUIRED_CAPACITY
+
+======================================================================
+FAIL: test_llm_without_gpu (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 77, in test_llm_without_gpu
+    r=evaluate(self.id(),['LLM_LOGIT_PARITY'],[],llm=self.llm(),controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED','No GPU execution evidence')
+AssertionError: 'QUALIFIED' == 'QUALIFIED' : No GPU execution evidence
+
+======================================================================
+FAIL: test_other_participants (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 74, in test_other_participants
+    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1,'OTHER'),device(2,'OTHER')],numerical=numerical(['p1','p2']),controls=[control()]);self.assertNotEqual(r['status'],'QUALIFIED')
+AssertionError: 'QUALIFIED' == 'QUALIFIED'
+
+======================================================================
+FAIL: test_unrelated_workload_control (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 70, in test_unrelated_workload_control
+    r=evaluate(self.id(),['TWO_VENDOR_NUMERICAL'],[device(1),device(2)],numerical=numerical(['p1','p2']),controls=[c]);self.assertNotEqual(r['status'],'QUALIFIED','Trusted unrelated comparator cannot qualify current model')
+AssertionError: 'QUALIFIED' == 'QUALIFIED' : Trusted unrelated comparator cannot qualify current model
+
+======================================================================
+FAIL: test_zero_highwater_no_resident_or_kernel_capacity (__main__.ValidatorCases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\records\root_continuation_20261004\provider_quality_review\adversarial_eval\test_actual_candidates.py", line 67, in test_zero_highwater_no_resident_or_kernel_capacity
+    r=evaluate(self.id(),['DEDICATED_CAPACITY_GT_ONE_CARD','FOUR_REQUIRED_CAPACITY'],ds,capacity=capacity(4));self.assertNotEqual(r['status'],'QUALIFIED','Plans and OOM labels do not prove actual allocation or successful inference')
+AssertionError: 'QUALIFIED' == 'QUALIFIED' : Plans and OOM labels do not prove actual allocation or successful inference
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.022s
+
+FAILED (failures=14)

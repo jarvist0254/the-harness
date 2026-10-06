@@ -1,0 +1,9 @@
+{
+  "job": "qwen_layer_capture",
+  "clock": "Stopwatch monotonic",
+  "model": "qwen3.8-max",
+  "observed_process_start_utc": "2026-10-04T14:43:41.2002699Z",
+  "identity": "retained System.Diagnostics.Process handle; no PID lookup",
+  "outer_deadline_seconds": 270,
+  "pid": 95288
+}

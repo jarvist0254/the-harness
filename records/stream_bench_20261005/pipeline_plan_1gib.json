@@ -1,0 +1,21 @@
+{
+  "transport_selection": {
+    "transport": "PINNED_DMA_PIPELINE",
+    "evidence": "PLAUSIBLE",
+    "reason": "both GPUs DMA against one pinned host allocation; staged, NOT direct P2P",
+    "direct": false
+  },
+  "stage_bandwidth_gbps": {
+    "intel_to_host": 57.514,
+    "host_to_nvidia": 57.514,
+    "basis": "pinned_67108864",
+    "symmetric_assumption": true
+  },
+  "pipeline": {
+    "pipelined_seconds": 0.01983605188301979,
+    "sequential_seconds": 0.037338450603331366,
+    "overlap_gain": 1.8823529411764706
+  },
+  "evidence": "PLAUSIBLE",
+  "note": "promotes to PROVEN only with both halves measured on a two-card rig plus control R and N1"
+}

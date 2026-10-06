@@ -1,0 +1,53 @@
+{
+  "status": "CONTROLLER_EXIT_NONZERO",
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-I",
+    "-B",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\pure_qa_controller_v2.py",
+    "--admission-sha256",
+    "22163230760f602e9a9ba1dc7a397a061f05b92093a47f7bed9c910b02fddd0c"
+  ],
+  "admission_sha256": "22163230760f602e9a9ba1dc7a397a061f05b92093a47f7bed9c910b02fddd0c",
+  "pins_before": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\pure_qa_controller_v2.py": "00200b8f71a3677bd79e6b6750b532df7bb420c158324f2d772b96142ecc8002",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\tests_source.qwen_untrusted.txt": "0e4372f0c706c2e7f9b5ba8354b4e46b7c70649b2f585e8824ab1c8598014491",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\ROOT_PURE_QA_ADMISSION_V2.json": "22163230760f602e9a9ba1dc7a397a061f05b92093a47f7bed9c910b02fddd0c",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\source.qwen_untrusted.py": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\test_adapter_independent_contract_v2.py": "eaecf21e7bdd43763b84b74d4d688bab720490e55fae9207b5358ccfb8ff79f2"
+  },
+  "pins_after": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\pure_qa_controller_v2.py": "00200b8f71a3677bd79e6b6750b532df7bb420c158324f2d772b96142ecc8002",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\tests_source.qwen_untrusted.txt": "0e4372f0c706c2e7f9b5ba8354b4e46b7c70649b2f585e8824ab1c8598014491",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\ROOT_PURE_QA_ADMISSION_V2.json": "22163230760f602e9a9ba1dc7a397a061f05b92093a47f7bed9c910b02fddd0c",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\source.qwen_untrusted.py": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\test_adapter_independent_contract_v2.py": "eaecf21e7bdd43763b84b74d4d688bab720490e55fae9207b5358ccfb8ff79f2"
+  },
+  "pins_unchanged": true,
+  "retained_controller_pid": 23544,
+  "process_handle_exited": true,
+  "pid_present_at_absence_check": false,
+  "exit_code": 1,
+  "outer_timeout_seconds": 40,
+  "outer_timeout": false,
+  "per_stream_cap_bytes": 131072,
+  "stream_overflow": false,
+  "elapsed_seconds": 0.246,
+  "started_utc": "2026-10-04T22:49:44.6906863Z",
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\runs\\outer_20261004T2240Z\\controller.stdout.bin",
+  "stdout_sha256": "b5996c4f35428aa72a10ac9d609f83dfbbc5b193da0a33821b40d02c9be510ee",
+  "stdout_bytes": 252,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\runs\\outer_20261004T2240Z\\controller.stderr.bin",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_bytes": 0,
+  "controller_stdout_json": {
+    "status": "PURE_QA_FAILED_OR_INCOMPLETE",
+    "result": 1,
+    "pid": 53756,
+    "elapsed_seconds": 0.094,
+    "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\runs\\pure_qa_20261004T224944Z\\receipt.json"
+  },
+  "provider_tests_in_controller_command": false
+}

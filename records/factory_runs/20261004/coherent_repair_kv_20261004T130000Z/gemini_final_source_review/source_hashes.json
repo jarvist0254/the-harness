@@ -1,0 +1,26 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_supervisor_final\\contained_supervisor.grok_final.py",
+    "sha256": "60391680917CBBE84FE432596C399DCCC064C1FC5658A1CC6401C5BECF8B0F21"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_supervisor_final\\tests.candidate.py",
+    "sha256": "27ED0D166F8CEA9D5D9ECDA15CB29316CF2CA523B09AA6DA467019E800BA4644"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_validator_final\\qualification_validator.grok_final.py",
+    "sha256": "1C998CEB0CE7B905102D1DF40D4BC2FDEA36351717714EEB67F708137C571B5F"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_validator_final\\tests.candidate.py",
+    "sha256": "F62A5250804AF5D86943BFC17E3C976F8693E8C6E583ABD6F895BF204252626E"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\CHECKLIST.md",
+    "sha256": "92C131D03AB55CB0D21C742E0EBBC3C61877D3E4F6A03CD5E42B17174C245182"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py",
+    "sha256": "E5BC15F1FCFE822115AE46C09C16FD7C765D8A624FB254CE4B99A03359D05872"
+  }
+]

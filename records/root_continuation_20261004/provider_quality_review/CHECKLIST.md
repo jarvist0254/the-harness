@@ -1,0 +1,42 @@
+# Provider quality review gates
+
+Static read only. Candidate modules and tests were never imported or executed.
+
+Baseline: both candidates REJECTED; Gemini verdict REJECTED. Corrected Grok sources are pending root notification.
+
+## Contained supervisor
+
+- Strict schema=1 and type/size/range/id/path/SHA validation completes before job, pipe, process or output allocation; output root must be fresh and absolute.
+- Typed pointer-sized HANDLEs; correct x64 native structure alignment/size; SetInformationJobObject installs kill-on-close with a full EXTENDED_LIMIT_INFORMATION and checked success; default explicitly does not install that policy.
+- CreateJobObject valid HANDLE plus ERROR_ALREADY_EXISTS must be rejected and handle closed; distinguish this from NULL creation failure.
+- CreateProcess suspended and hidden, explicit STARTUPINFOEX handle list restricted to inheritable NUL/stdout/stderr duplicates; retain exact process/thread handles and PID before assignment; AssignProcessToJobObject precedes typed kernel32.ResumeThread.
+- All failures after any partial allocation or launch must clean exact owned suspended/unassigned roots and every prior assigned worker/job; terminate job then bounded wait and query before closing handles. Inject failure at each allocation, duplicate, CreateProcess, assign, resume, query, receipt and second-worker launch step.
+- Startup and whole deadline use monotonic time measured before launch; check cancellation before resume and throughout startup; preserve cancellation and log overflow versus later completion status.
+- Wait APIs only OBJECT_0 proves termination; WAIT_FAILED/TIMEOUT and query/terminate failures cannot become successful drain proof. PROCESS_COMPLETED requires every owned root exit zero and checked active job count zero.
+- Pipe reader correctly handles _winapi.ReadFile (bytes,errorcode); closes parent writer originals/duplicates immediately after child creation; no inherited readers; drain/join readers within bounds and close once on every path.
+- Output flood consumes bounded memory/file bytes; overflow signals termination or truthful truncation policy. Aggregate JSON-escaped logs from up to eight streams plus metadata must fit 128 KiB receipt limit, not just each stream limit.
+- Atomic receipt uses complete writes, fsync, replace and single-close ownership; failure still triggers cleanup. Sequence/journal must match implemented semantics; restart in-flight UNKNOWN_INTERRUPTED with no stale PID attach or fabricated KV/replay proof.
+- Pure tests import the actual candidate and mock its native API helpers to verify order and full cleanup; actual child fixtures only after root static admission and RUN_CONTAINMENT_FIXTURES=1. No tests that accept PROCESS_COMPLETED as evidence log overflow was caught.
+
+## Measured qualification validator
+
+- Documented schema=1; strict collections and field types including no bool-as-bytes, NaN, Inf, negative counts or unchecked arbitrary nested object access. Malformed/contradictory/known false REFUSED; missing/unknown/untrusted NOT_CHECKED; empty/unknown requested claims never QUALIFIED.
+- Nonempty required evidence artifacts individually bind to external trusted SHA256 set; default empty trust cannot qualify anything. Extra unrelated trusted artifacts cannot bless unbound summaries or evidence fields.
+- PCI full domain:bus:device.function, domain exactly4/8 hex with numeric<=ffff, bus2 hex, device<=1f, function<=7; normalize4hex domain and reject aliases. Missing identity NOT_CHECKED, not fabricated domain.
+- Timestamps aware UTC and finite fresh age0..max_age; strict now/max_age types; per-device allocator and every comparative artifact fresh/bound to same model/workload/quant/context/batch/build/executable/physical IDs.
+- TWO_VENDOR_NUMERICAL requires actual participating GPU executions, full independent finite CPU comparison/count/hashes/atol/rtol/maxabs/RMSE/zero violations and a trusted failure discriminator. Vendor label count or success boolean alone is insufficient.
+- FOUR_PHYSICAL_GPU requires four unique physical discrete GPUs with real completed kernels and unique nonempty resident block ownership; CPU, shared iGPU and whole-model replication rejected. Qualify requested claims only; never infer capacity from device count.
+- DEDICATED_CAPACITY_GT_ONE_CARD independently requires actual allocator basis, total/free/reserve/peak and weight/KV/activation requirements, per-device fit and residency exceeding the largest single usable budget, same-workload actual single-card allocator OOM versus multi-card parity pass. Driver deltas/policy OOM are not sufficient.
+- FOUR_REQUIRED_CAPACITY independently adds actual three-card allocator OOM of exactly the same workload, not a synthetic policy restriction. Four-card success and fresh evidence must bind all comparisons.
+- LLM_LOGIT_PARITY requires real hashed licensed model, pinned build and attention/KV operators, independent full-vocabulary finite numeric arrays and counts, predeclared tolerances and zero violations. Equal arbitrary hashes cannot bypass metrics/reference trust; tiny real model parity does not prove capacity.
+- DIRECT_P2P requires directed-device identity, actual direct primitive and trusted full parity; host-staged/system-heap transfer rejected; a primitive label alone is insufficient. DURABLE_REPLAY requires trusted checkpoint identity, committed sequence, replay boundary, worker loss/cancel/restart evidence; final atomic JSON alone insufficient.
+- Refused/not-checked results must not retain misleading qualified claims. Pure tests import actual validator; isolate one defect in otherwise valid trusted synthetic fixture, and clearly distinguish synthetic schema-test trust from hardware proof.
+
+## Discriminating test quality
+
+- Supervisor tests.candidate.py constructs fake path objects in _base_m; mkdir lambdas omit the bound self argument and test cwd becomes an object repr instead of a valid path. These can fail before the intended assertions. Replace with real TemporaryDirectory path fixtures for validation tests.
+- Supervisor log overflow test explicitly accepts PROCESS_COMPLETED, allowing the broken detector to pass.
+- Validator tests contain an unused validate_result_mock pass placeholder, contrary to actual-source test contract.
+- Several Gemini example tests combine malformed PCI, duplicate identity and invalid memory, so the desired failure may be masked by earlier guards. Named job collision example uses a different generated job name and an invalid executable hash; it cannot discriminate the stated collision bug. Treat Gemini reasoning as supporting review, not ready-to-run test proof.
+
+Hashes, source paths and explicit limits: checklist.json.

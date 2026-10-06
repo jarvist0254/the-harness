@@ -1,0 +1,26 @@
+{
+  "fixture_kind": "bounded_native_windows_job_supervisor_experiment",
+  "source": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+  "source_sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "interpreter": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "interpreter_version": "3.10.11",
+  "interpreter_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "controller": "fixture_controller.py",
+  "controller_import_policy": "imports the pinned supervisor only in an owned fresh child controller",
+  "containment_policy": "kill_on_close",
+  "max_workers": 4,
+  "controller_deadline_seconds": 30,
+  "startup_seconds": 5,
+  "max_log_bytes_per_stream": 1024,
+  "network": "not used",
+  "GPU_or_provider": "not used",
+  "cases": [
+    {"id": "natural", "workers": 4, "deadline_seconds": 5, "expected": "PROCESS_COMPLETED; each exit 0; assigned and resumed; job_active_count 0; drain_proof CLEANUP"},
+    {"id": "nonzero", "workers": 1, "deadline_seconds": 5, "expected": "FAILED; failure_reason nonzero_exit; exit 3"},
+    {"id": "timeout", "workers": 1, "deadline_seconds": 1, "expected": "TIMEOUT; worker requests 5 second sleep"},
+    {"id": "cancel", "workers": 1, "deadline_seconds": 5, "cancel_after_seconds": 0.25, "expected": "CANCELLED; worker requests 5 second sleep"},
+    {"id": "overflow", "workers": 1, "deadline_seconds": 5, "stdout_bytes_requested": 16384, "expected": "FAILED; failure_reason LOG_LIMIT; stdout retained <=1024 bytes"}
+  ],
+  "stop_conditions": ["baseline not exactly PROCESS_COMPLETED", "unexpected API exception or UNKNOWN status", "owned child PID remains after cleanup", "outer controller exceeds 30 seconds"],
+  "limitations": ["fixture evidence only; no production admission", "absence checks are point-in-time process queries", "resource high-water is unmeasured", "job containment is not a whole-tree certificate"]
+}

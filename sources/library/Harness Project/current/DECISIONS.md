@@ -1,0 +1,24 @@
+# Frozen Decisions — Revision 2.0-preCAD
+
+- Pod count design unit: **3 GPUs exactly**.
+- Expansion: build another identical 3-GPU pod; do not enlarge Pod 1.
+- Passive PCIe daisy chaining between pods: **not allowed**.
+- Chassis: one continuous print.
+- Mid-print spool changes: **not allowed**.
+- Production material: plain quality PETG from one 5 kg spool.
+- Max print bounding box: 200 × 188 × 254 mm.
+- Operational printed-body envelope: ~254 W × 200 D × 188 H mm.
+- Universal target: 35–68 mm card thickness, <=165 mm body height, <=360 mm length via rear overhang.
+- Max-envelope inter-card air gap: >=12 mm.
+- Cooling: 2 × 120 mm pressure-oriented PWM fans, common 25–35 mm plenum.
+- Structural fasteners: M4 through-bolts/washers/metal nuts; no reusable structural threads directly in PETG.
+- PCB/electronics: M3 machine screws + metal standoffs.
+- Heat-set inserts: secondary/serviceable attachments only.
+- Receiver candidate: ADT F9Q-BK10; exact board hole coordinates remain a hard CAD verification gate.
+- Host adapter candidate: RIITOP PCIe 4.0 x16 -> 4 × OCuLink SFF-8612; use 3 branches for this pod.
+- Host board: MSI PRO X870-P WIFI; PCI_E1 x4+x4+x4+x4 bifurcation.
+- M2_3 remains empty when preserving PCI_E4 x4.
+- RTX 5070 Ti remains an independent worker on PCI_E4 extension.
+- First pod population: 3 × MSI RTX 3060 Ventus 2X 12GB, but chassis is not 3060-specific.
+- J-Link = JE Horizon software fabric, not NVLink/JTAG.
+- Aggregate VRAM is not represented as unified memory.

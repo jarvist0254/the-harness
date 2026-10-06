@@ -1,0 +1,12 @@
+{
+  "findings_count": 12,
+  "raw_sha256": "61d32941c9a87a154e229aab891f32954f1edaeb2509bc43c741f8b092df9401",
+  "extracted_sha256": "de2b5a98c4ad598c69db85e9a9c376d4e1840c892c9b1f4e3b67127f0e8a9fb0",
+  "usage": "UNKNOWN",
+  "original_wrapper_status": "UNKNOWN_RESULT_SHAPE preserved",
+  "verdict": "REQUEST_CHANGES",
+  "source_import_execution": false,
+  "schema": "manual strict exactkeys/count/stringbounds",
+  "terminal_events": 1,
+  "actual_shape": "run.terminal.completed.payload.text strictJSON"
+}

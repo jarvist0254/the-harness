@@ -1,0 +1,26 @@
+{
+  "utc": "2026-10-04T22:47:42.386914+00:00",
+  "scope": "PURE_CALLBACK_STATE_MACHINE_TESTS_ONLY",
+  "admitted": true,
+  "source_sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c",
+  "independent_tests_sha256": "eaecf21e7bdd43763b84b74d4d688bab720490e55fae9207b5358ccfb8ff79f2",
+  "controller_sha256": "00200b8f71a3677bd79e6b6750b532df7bb420c158324f2d772b96142ecc8002",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "deadline_seconds": 20,
+  "per_stream_cap_bytes": 131072,
+  "provider_tests_executed": false,
+  "native_or_gpu_calls": false,
+  "root_full_read": [
+    "original exact pure adapter source previously at unchanged pin",
+    "v2 independent controls",
+    "v2 controller"
+  ],
+  "root_admission_packet": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\l0_egl_adapter_root_qa_v2_20261004T2228Z\\ROOT_REVIEW_PACKET_V2.json",
+    "bytes": 1948,
+    "sha256": "f4f21d5de9f18f08fc55aec64b99206a70e9f8865062c54064908e4c2835ade3"
+  },
+  "source_promotion_authorized": false,
+  "meaning": "Behavioral RED is permitted evidence; no runtime/native qualification can follow from synthetic pass",
+  "v2_control_correction": "CPU relay order is partial evidence; absent export FD must refuse before EGL import, so no baseline READY is required"
+}

@@ -1,0 +1,9 @@
+{
+  "job": "qwen_layer_capture",
+  "outer_killed": false,
+  "log_overflow": false,
+  "seconds": 241.35,
+  "exit_code": 0,
+  "identity": "retained process object",
+  "pid": 95288
+}

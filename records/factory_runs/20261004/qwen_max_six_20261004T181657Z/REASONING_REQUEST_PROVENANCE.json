@@ -1,0 +1,13 @@
+{
+  "maximum_final_reply_tokens": 16384,
+  "observed_documentation_text": "qwen3.8-max options low,medium,xhigh; cannot set reasoning_effort and thinking_budget simultaneously",
+  "request_enable_thinking": true,
+  "outer_deadline_seconds": 360,
+  "official_documentation": "https://docs.qwencloud.com/developer-guides/text-generation/thinking",
+  "request_reasoning_effort": "xhigh",
+  "request_thinking_budget_set": false,
+  "actual_native_children": 0,
+  "endpoint_service_acceptance": "PENDING actual HTTP/model/usage receipt",
+  "http_deadline_seconds": 330,
+  "tokens_are_not_credits": true
+}

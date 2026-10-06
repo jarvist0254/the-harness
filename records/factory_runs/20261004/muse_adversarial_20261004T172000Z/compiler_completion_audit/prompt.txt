@@ -1,0 +1,613 @@
+You are conducting an adversarial, source-only review of a compiler-root completion adapter proposal. This is a review task; do not implement the adapter, edit files, run code, invoke tools, spawn agents, query processes, build, access credentials, or make network calls. Rely only on the exact requirements, pinned source excerpts, and trace facts embedded below. If a claim requires evidence not provided, classify it as unresolved and name that evidence.
+
+The new policy is deliberately narrower than natural process-tree completion: after a synchronous, pinned CMake configure/build root has exited with code 0, a dedicated adapter may report that the compiler root succeeded but cleanup is required. Existing shutdown then terminates the one assigned owned Job. This must never be represented as natural whole-tree completion. Analyze whether the specified status handoff and existing cleanup code actually enforce that distinction, and identify executable counterexamples for races, bad API results, timeout/cancel/log errors, cleanup/query/close failures, or caller misclassification. Do not alter tolerance, workload, GPU, or source scope.
+
+Return only JSON that conforms to the attached output schema. Be technically skeptical: separate requirements from guarantees, source behavior from policy claims, and a successful root command from successful cleanup and stage acceptance. Recommend the smallest safe design corrections, but do not write replacement source code.
+
+## Pinned inputs
+
+- Task specification: $specPath (SHA-256 $specHash)
+- Supervisor: $superPath (SHA-256 $superHash)
+- Actual attempt-4 Job membership trace: $tracePath (SHA-256 $traceHash)
+- Actual attempt-4 controller result: $controllerPath (SHA-256 $ctrlHash)
+
+## Compiler completion task specification (verbatim)
+
+# Compiler-only completion adapter specification
+
+ROOT design decision: a synchronous, pinned CMake configure/build root returning zero establishes compiler-root completion. Resident compiler telemetry/PDB auxiliaries may then be terminated through that root's owned Job. This is a distinct completion policy, not natural whole-tree completion. Original supervisor files, failed receipts, source and system installation stay unchanged.
+
+Actual diagnostic evidence: attempt4 configure root returned zero after successful generation, but owned Job membership retained vctip.exe and mspdbsrv.exe. The existing supervisor correctly returned TIMEOUT under its natural-drain policy. Twenty-three complete typed samples observed both members; final cleanup killed the owned Job, recorded active zero and CLEANUP. No names-based process control occurred.
+
+Implement a small side-effect-free Python adapter installed only into a private imported copy of the pinned build supervisor. Never change the generic original file. Replace that private module's _wait_run with a compiler-only hook; leave creation, suspended assignment, launch, shutdown, log readers, typed APIs, durability and close handling unchanged. No native API/filesystem/process actions at import or install.
+
+Only one root and kill_on_close are supported by this adapter. Reject inconsistent records rather than generalizing it to ordinary workers, asynchronous launchers, production processes or multiple workers. The admitted caller still pins the exact CMake batch command, compiler tools, source, adapter, supervisor and admission. It checks compiler-root outcome and cleanup independently before admitting DLLs.
+
+The hook signature matches the pinned _wait_run. Use its supplied dependencies and already-owned root process handle. Check cancellation, stream overflow or bad_read, and monotonic deadline before waits and again before returning success. WaitForSingleObject must be zero for the owned root, not merely an absent PID. WAIT_TIMEOUT keeps waiting with a bounded small sleep; other statuses or exceptions produce UNKNOWN. Query GetExitCodeProcess through that same handle; nonzero is FAILED, exceptions UNKNOWN. Do not inspect or terminate processes by PID/name, reopen process control handles, kill anything inside this wait hook, suppress an exception, or weaken a deadline/log bound.
+
+After a verified zero root exit, return COMPILER_ROOT_EXITED_CLEANUP_REQUIRED with an explicit reason. Do not return PROCESS_COMPLETED. Existing run_workers therefore takes its existing TerminateJobObject/shutdown path. This hook never claims auxiliaries exited naturally, cleanup succeeded, log drain succeeded, DLLs exist, numerical results passed or an arbitrary tree is certified.
+
+A caller may accept a compiler stage only after receiving the explicit compiler-root status, root exit zero with assigned/resumed true, final job_active_count zero, drain_proof CLEANUP, complete bounded log capture with no overflow, no ambiguous handle/read/close state, unchanged input/admission/source/tool pins and verified owned-root reaping. A failed cleanup remains refused. The caller records the different completion semantics and keeps whole_tree_certificate false. No GPU execution is authorized by the adapter.
+
+Supply independent pure tests using injected fake wait/exit/clock/event behavior. Required discriminating controls: root success with auxiliaries still present requests cleanup (not natural completion); nonzero root; root timeout; cancellation before/after exit; log overflow or bad reader before/after exit; unexpected wait/exit query exceptions; wrong worker count or policy. Check exact returned state, cleanup-not-performed-in-hook and no import-time native/process calls. Do not execute the native Windows APIs in these pure tests.
+
+A separately ROOT-admitted native CPU-only fixture must then test one successful root, a successful root with a resident child holding inherited pipes, a failed root, a live root timeout, and cancellation. It must use owned Job/retained-handle cleanup, finite deadlines, tiny bounded memory and logs, exact markers/PID observations, cleanup failure refusal, and source/pin preservation. Plan that fixture; do not launch it from a provider response.
+
+Deliver strict JSON with exactly adapter_source, pure_tests_source, rationale, safety_checks, native_fixture_plan. The first two are bounded complete Python source strings. The other fields are nonempty arrays of strings. No markdown fences, auth/driver/environment/global Factory modifications, live product edits, candidate execution or provider tools. The root will parse, inspect, stage and test separately. No tolerance or workload change is permitted.
+
+
+## Exact supervisor code excerpts (verbatim, numbered from the pinned file)
+
+`python
+--- lines 463-520 ---
+463: def _wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by):
+464:     wapi = deps["_winapi"]
+465:     while True:
+466:         if cancel_event.is_set():
+467:             return "CANCELLED", "cancelled"
+468:         if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+469:             return "FAILED", "LOG_LIMIT"
+470:         if _monotonic() >= dead_by:
+471:             return "TIMEOUT", "deadline"
+472:         running = False
+473:         for rec in owned:
+474:             try:
+475:                 waited = wapi.WaitForSingleObject(rec["ph"], 0)
+476:             except Exception:
+477:                 return "UNKNOWN", "wait_failed"
+478:             rec["wait"] = waited
+479:             if waited == _WAIT_TIMEOUT:
+480:                 running = True
+481:             elif waited != _WAIT_OBJECT_0:
+482:                 return "UNKNOWN", "wait_failed"
+483:         if running:
+484:             _sleep(0.02)
+485:             continue
+486:         try:
+487:             counts = _accounting(deps, kernel, job)
+488:         except Exception:
+489:             return "UNKNOWN", "query_failed"
+490:         if counts is None:
+491:             return "UNKNOWN", "query_failed"
+492:         spec["active"] = counts[0]
+493:         if counts[0] > 0:
+494:             _sleep(0.02)
+495:             continue
+496:         if _join(threads, 2, dead_by) is not True:
+497:             return "UNKNOWN", "reader_join"
+498:         if any(thread.is_alive() for thread in threads):
+499:             return "UNKNOWN", "reader_join"
+500:         if cancel_event.is_set():
+501:             return "CANCELLED", "cancelled"
+502:         if _monotonic() >= dead_by:
+503:             return "TIMEOUT", "deadline"
+504:         if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+505:             return "FAILED", "LOG_LIMIT"
+506:         if any(slot.get("bad_read") for slot in slots):
+507:             return "UNKNOWN", "bad_read"
+508:         failed = False
+509:         for rec in owned:
+510:             if rec["wait"] != _WAIT_OBJECT_0:
+511:                 return "UNKNOWN", "wait_failed"
+512:             try:
+513:                 rec["exit_code"] = wapi.GetExitCodeProcess(rec["ph"])
+514:             except Exception:
+515:                 return "UNKNOWN", "exit_query_failed"
+516:             if rec["exit_code"] != 0:
+517:                 failed = True
+518:         if failed:
+519:             return "FAILED", "nonzero_exit"
+520:         return "PROCESS_COMPLETED", ""
+--- lines 544-607 ---
+544: def _shutdown(deps, kernel, job, owned, terminate, deadline):
+545:     wapi = deps["_winapi"]
+546:     terminate_ok = True
+547:     if terminate:
+548:         for rec in owned:
+549:             if rec["ph"] is not None:
+550:                 try:
+551:                     before_termination = wapi.WaitForSingleObject(rec["ph"], 0)
+552:                 except Exception:
+553:                     before_termination = None
+554:                     terminate_ok = False
+555:                 if before_termination == _WAIT_OBJECT_0:
+556:                     # A signaled process handle remains signaled after exit.
+557:                     # TerminateProcess on that exited object returns access
+558:                     # denied; skip that redundant call, retain the exit status,
+559:                     # and still terminate/query the Job to cover descendants.
+560:                     continue
+561:                 if before_termination != _WAIT_TIMEOUT:
+562:                     terminate_ok = False
+563:                 try:
+564:                     terminated = wapi.TerminateProcess(rec["ph"], 1)
+565:                 except Exception:
+566:                     terminate_ok = False
+567:                 else:
+568:                     if terminated is False or terminated == 0:
+569:                         terminate_ok = False
+570:         try:
+571:             job_terminated = kernel.TerminateJobObject(job, 1)
+572:         except Exception:
+573:             terminate_ok = False
+574:         else:
+575:             if not job_terminated:
+576:                 terminate_ok = False
+577:     waits_ok = True
+578:     for rec in owned:
+579:         if rec["ph"] is None:
+580:             waits_ok = False
+581:             continue
+582:         left = int(max(0.0, deadline - _monotonic()) * 1000)
+583:         try:
+584:             waited = wapi.WaitForSingleObject(rec["ph"], left)
+585:         except Exception:
+586:             waits_ok = False
+587:             rec["wait"] = None
+588:             continue
+589:         rec["wait"] = waited
+590:         if waited != _WAIT_OBJECT_0:
+591:             waits_ok = False
+592:             continue
+593:         try:
+594:             rec["exit_code"] = wapi.GetExitCodeProcess(rec["ph"])
+595:         except Exception:
+596:             waits_ok = False
+597:     counts = None
+598:     try:
+599:         counts = _accounting(deps, kernel, job)
+600:     except Exception:
+601:         counts = None
+602:     if counts is None or not waits_ok or not terminate_ok:
+603:         return (None if counts is None else counts[0]), "UNKNOWN_DRAIN"
+604:     active = counts[0]
+605:     if active != 0:
+606:         return active, "UNKNOWN_DRAIN"
+607:     return active, "CLEANUP"
+--- lines 681-784 ---
+681: def run_workers(manifest, output_root, *, cancel_event=None):
+682:     if not _windows():
+683:         raise NotImplementedError("NOT_IMPLEMENTED")
+684:     if cancel_event is None:
+685:         cancel_event = threading.Event()
+686:     spec = _validate(manifest, output_root)
+687:     deps = _imports()
+688:     kernel = _kernel(deps)
+689:     job = _open_job(deps, kernel, spec["run_id"])
+690:     owned, threads, slots = [], [], []
+691:     overflow_event = threading.Event()
+692:     status, reason, active, drain = "UNKNOWN", "init", None, "UNKNOWN_DRAIN"
+693:     result = None
+694:     try:
+695:         spec["output"].mkdir()
+696:         try:
+697:             _journal(spec, {"event": "start", "policy": spec["policy"]})
+698:         except Exception:
+699:             status, reason = "FAILED", "UNKNOWN_DURABILITY"
+700:             raise
+701:         if spec["policy"] == "kill_on_close":
+702:             _enable_kill_on_close(deps, kernel, job)
+703:         status, reason = _launch_and_wait(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event)
+704:         active = spec.get("active")
+705:     except WindowsJobError as exc:
+706:         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+707:             status, reason = "FAILED", exc.code
+708:     except Exception:
+709:         if status not in ("CANCELLED", "TIMEOUT", "FAILED"):
+710:             status, reason = "FAILED", "EXCEPTION"
+711:     finally:
+712:         cleanup_deadline = _monotonic() + 8.0
+713:         try:
+714:             try:
+715:                 active2, drain = _shutdown(deps, kernel, job, owned, status != "PROCESS_COMPLETED", cleanup_deadline)
+716:                 if active2 is not None:
+717:                     active = active2
+718:             except Exception:
+719:                 drain = "UNKNOWN_DRAIN"
+720:             join_certain = False
+721:             try:
+722:                 join_certain = _join(threads, 2, cleanup_deadline)
+723:             except Exception:
+724:                 join_certain = False
+725:             readers_unresolved = join_certain is not True
+726:             for thread in threads:
+727:                 try:
+728:                     if thread.is_alive():
+729:                         readers_unresolved = True
+730:                 except Exception:
+731:                     readers_unresolved = True
+732:             if readers_unresolved or drain not in ("CLEANUP", "UNKNOWN_DRAIN"):
+733:                 drain = "UNKNOWN_DRAIN"
+734:             if drain != "CLEANUP" and status == "PROCESS_COMPLETED":
+735:                 status, reason = "UNKNOWN", "proof_incomplete"
+736:             if any(
+737:                 slot.get("bad_read") or slot.get("close_uncertain") or slot.get("closed") is not True
+738:                 for slot in slots
+739:             ):
+740:                 if status == "PROCESS_COMPLETED":
+741:                     status, reason = "UNKNOWN", "bad_read" if any(slot.get("bad_read") for slot in slots) else "close_uncertain"
+742:                 drain = "UNKNOWN_DRAIN"
+743:             owned_closed = False
+744:             try:
+745:                 owned_closed = _close_owned(deps["_winapi"], owned)
+746:             except Exception:
+747:                 owned_closed = False
+748:             if owned_closed is not True or spec.get("parent_close_uncertain") or any(rec.get("close_uncertain") for rec in owned):
+749:                 drain = "UNKNOWN_DRAIN"
+750:                 if status == "PROCESS_COMPLETED":
+751:                     status, reason = "UNKNOWN", "close_uncertain"
+752:             job_close_ok = True
+753:             try:
+754:                 jres = kernel.CloseHandle(job)
+755:                 if not jres:
+756:                     job_close_ok = False
+757:             except Exception:
+758:                 job_close_ok = False
+759:             if not job_close_ok:
+760:                 if status == "PROCESS_COMPLETED":
+761:                     status, reason = "UNKNOWN", "job_close_failed"
+762:                 drain = "UNKNOWN_DRAIN"
+763:             try:
+764:                 if spec["output"].is_dir():
+765:                     result = _emit(spec, status, reason, owned, slots, active, drain)
+766:                 else:
+767:                     result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": "UNKNOWN_DRAIN", "whole_tree_certificate": False, "reattach": False, "replay": False}
+768:             except Exception:
+769:                 if status not in ("CANCELLED", "TIMEOUT"):
+770:                     status, reason = "FAILED", "UNKNOWN_DURABILITY"
+771:                 result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "durability": "UNKNOWN_DURABILITY", "whole_tree_certificate": False, "reattach": False, "replay": False}
+772:                 # Never leave a prior successful receipt after a failed terminal
+773:                 # journal commit. This best-effort refusal is not a durability
+774:                 # certificate; a failed write remains UNKNOWN_DURABILITY.
+775:                 try:
+776:                     if spec["output"].is_dir():
+777:                         _atomic_write(spec["output"] / f"{spec['run_id']}_receipt.json", json.dumps(result).encode())
+778:                 except Exception:
+779:                     pass
+780:         except Exception:
+781:             pass
+782:     if result is None:
+783:         result = {"version": 1, "run_id": spec["run_id"], "status": status, "failure_reason": reason, "drain_proof": drain, "whole_tree_certificate": False, "reattach": False, "replay": False}
+784:     return result
+`
+
+## Attempt-4 trace facts
+
+The pinned job_members.jsonl has exactly 23 JSONL samples and SHA-256 $traceHash. Each sample reports original_counts: [2, 221], observation.status: LIST_OBSERVED, ssigned: 2, eturned: 2, and lists the same two members inside the assigned Job: ctip.exe and mspdbsrv.exe. The trace labels the observations read-only sampled membership; a sample is not a claim that either process caused a hang. The controller result has SHA-256 $ctrlHash and reports the p32_configure worker PID 46568, exit code 0, assigned/resumed true, stage status TIMEOUT, failure reason deadline, final job_active_count 0 after cleanup, drain_proof CLEANUP, and ll_completed: false. The configure log reached CMake generation completion. Keep the exact distinction: root exit success, natural drain failure, later owned-Job cleanup, and overall controller rejection. These attempt-4 facts do not prove attempt 3 had the same cause.
+
+## Required adversarial coverage
+
+1. Walk the status path exactly: proposed hook result -> un_workers finally -> _shutdown termination/wait/accounting -> reader join/close -> receipt -> caller acceptance. State which outcomes the core module records and which it cannot prove.
+2. Give executable fake-dependency counterexamples for at least: WaitForSingleObject returns each relevant value or raises; exit-code query returns zero/nonzero/raises; cancellation/overflow/bad-read/deadline flips immediately before and after root signal; TerminateJobObject fails or reports success but active count is nonzero/unknown; wait/accounting/reader/handle/job close failures; duplicate/wrong worker or policy records. For each, state expected status and acceptance consequence. Do not claim the current adapter exists or has passed tests.
+3. Challenge races in the proposed compiler-only hook: root exits while descendants remain; stream readers still draining; cancellation or log-limit event races with a zero exit; deadline crosses between a check and return; unknown wait result; exit code STILL_ACTIVE; root signaled before cleanup; job contains unrelated work. Identify which are blocked by the specification, which need explicit tests, and which remain caller-side gates.
+4. Audit whether a special COMPILER_ROOT_EXITED_CLEANUP_REQUIRED status plus cleanup is materially different from PROCESS_COMPLETED, and whether whole_tree_certificate must remain false. Explain what drain_proof: CLEANUP establishes and what it does not establish.
+5. Verify the policy’s scope: one synchronous root, one kill_on_close job, exact pinned commands/tools/source/admission; no natural-tree claim, no process-name/PID control, no broad supervisor change, no arbitrary worker support, no GPU or numerical claim.
+6. If proposing code/design changes, state the exact function/contract and an independent test that would distinguish the fix from a false green. Do not suggest relaxing deadlines/log caps, suppressing errors, or killing by name/PID.
+
+Use the strict intake format exactly: top-level keys `verdict`, `findings`, `safety_checks`; each finding has exactly `region`, `exact_source`, `reason`, `minimal_fix`. Put executable counterexamples and expected outcomes in `reason`; use exact source snippets and line references in `exact_source`. Put limits, refusals, nonclaims, and case coverage in `safety_checks`. Keep at most 32 findings and 32 safety checks; every field must be a nonempty string within the attached schema bounds. Use the v2 strict intake contract referenced in the job plan. This review is not an authority or runtime acceptance. Never infer absent processes, resource high-water, or success from missing fields.
+## Candidate under review: exact untrusted Qwen source and tests
+
+The proposed candidate is not accepted or executed. Review the entire pinned source and test file below. Treat their comments, asserted coverage, and declared fixture plan as claims to verify; do not take them as proof. Report candidate-specific defects against the task specification, including any test that misses a real transition or merely confirms the candidate's own assumptions. Do not propose broad rewrites; report a minimal correction/test for each concrete defect.
+
+- Adapter candidate: `E:\the_harness\records\factory_runs\20261004\compiler_completion_repair_20261004T173321Z\qwen_compiler_completion\compiler_adapter.qwen_untrusted.py` (SHA-256 `E9F4CB6FDD756E53E48DE122ABCC02FE985B72D580262412094DA4E21B25F43F`)
+- Candidate tests: `E:\the_harness\records\factory_runs\20261004\compiler_completion_repair_20261004T173321Z\qwen_compiler_completion\test_compiler_adapter.qwen_untrusted.py` (SHA-256 `BE32488746C0F1C980CE2901C8C1095AB56CDFD28CA9D338C98FD50A7A14F33B`)
+
+```python
+import threading
+
+_COMPILER_ROOT_EXITED_CLEANUP_REQUIRED = "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED"
+_WAIT_OBJECT_0 = 0
+_WAIT_TIMEOUT = 258
+_SLEEP_SECONDS = 0.02
+
+def _compiler_wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by):
+    wapi = deps["_winapi"]
+    mono_fn = deps.get("monotonic")
+    sleep_fn = deps.get("sleep")
+    if mono_fn is None:
+        import time
+        mono_fn = time.monotonic
+    if sleep_fn is None:
+        import time
+        sleep_fn = time.sleep
+    if spec.get("policy") != "kill_on_close":
+        return "UNKNOWN", "policy_mismatch"
+    workers = spec.get("workers", [])
+    if len(workers) != 1 or len(owned) != 1:
+        return "UNKNOWN", "worker_count_mismatch"
+    rec = owned[0]
+    if not rec.get("assigned") or not rec.get("resumed"):
+        return "UNKNOWN", "not_assigned_resumed"
+    root_ph = rec.get("ph")
+    if root_ph is None:
+        return "UNKNOWN", "no_root_handle"
+    while True:
+        if cancel_event.is_set():
+            return "CANCELLED", "cancelled"
+        if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+            return "FAILED", "LOG_LIMIT"
+        if any(slot.get("bad_read") for slot in slots):
+            return "UNKNOWN", "bad_read"
+        now = mono_fn()
+        if now >= dead_by:
+            return "TIMEOUT", "deadline"
+        try:
+            waited = wapi.WaitForSingleObject(root_ph, 0)
+        except Exception:
+            return "UNKNOWN", "wait_exception"
+        rec["wait"] = waited
+        if waited == _WAIT_OBJECT_0:
+            break
+        elif waited == _WAIT_TIMEOUT:
+            sleep_fn(_SLEEP_SECONDS)
+            continue
+        else:
+            return "UNKNOWN", "unexpected_wait_status"
+    if cancel_event.is_set():
+        return "CANCELLED", "cancelled"
+    if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+        return "FAILED", "LOG_LIMIT"
+    if any(slot.get("bad_read") for slot in slots):
+        return "UNKNOWN", "bad_read"
+    now = mono_fn()
+    if now >= dead_by:
+        return "TIMEOUT", "deadline"
+    try:
+        exit_code = wapi.GetExitCodeProcess(root_ph)
+    except Exception:
+        return "UNKNOWN", "exit_query_exception"
+    rec["exit_code"] = exit_code
+    if exit_code != 0:
+        return "FAILED", "nonzero_exit"
+    return _COMPILER_ROOT_EXITED_CLEANUP_REQUIRED, "compiler_root_zero_auxiliaries_possible"
+
+def install(private_module):
+    private_module._wait_run = _compiler_wait_run
+```
+
+```python
+import sys
+import types
+import threading
+import unittest
+
+ADAPTER_SRC = '''import threading
+
+_COMPILER_ROOT_EXITED_CLEANUP_REQUIRED = "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED"
+_WAIT_OBJECT_0 = 0
+_WAIT_TIMEOUT = 258
+_SLEEP_SECONDS = 0.02
+
+def _compiler_wait_run(deps, kernel, job, spec, owned, threads, slots, overflow_event, cancel_event, dead_by):
+    wapi = deps["_winapi"]
+    mono_fn = deps.get("monotonic")
+    sleep_fn = deps.get("sleep")
+    if mono_fn is None:
+        import time
+        mono_fn = time.monotonic
+    if sleep_fn is None:
+        import time
+        sleep_fn = time.sleep
+    if spec.get("policy") != "kill_on_close":
+        return "UNKNOWN", "policy_mismatch"
+    workers = spec.get("workers", [])
+    if len(workers) != 1 or len(owned) != 1:
+        return "UNKNOWN", "worker_count_mismatch"
+    rec = owned[0]
+    if not rec.get("assigned") or not rec.get("resumed"):
+        return "UNKNOWN", "not_assigned_resumed"
+    root_ph = rec.get("ph")
+    if root_ph is None:
+        return "UNKNOWN", "no_root_handle"
+    while True:
+        if cancel_event.is_set():
+            return "CANCELLED", "cancelled"
+        if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+            return "FAILED", "LOG_LIMIT"
+        if any(slot.get("bad_read") for slot in slots):
+            return "UNKNOWN", "bad_read"
+        now = mono_fn()
+        if now >= dead_by:
+            return "TIMEOUT", "deadline"
+        try:
+            waited = wapi.WaitForSingleObject(root_ph, 0)
+        except Exception:
+            return "UNKNOWN", "wait_exception"
+        rec["wait"] = waited
+        if waited == _WAIT_OBJECT_0:
+            break
+        elif waited == _WAIT_TIMEOUT:
+            sleep_fn(_SLEEP_SECONDS)
+            continue
+        else:
+            return "UNKNOWN", "unexpected_wait_status"
+    if cancel_event.is_set():
+        return "CANCELLED", "cancelled"
+    if overflow_event.is_set() or any(slot.get("overflow") for slot in slots):
+        return "FAILED", "LOG_LIMIT"
+    if any(slot.get("bad_read") for slot in slots):
+        return "UNKNOWN", "bad_read"
+    now = mono_fn()
+    if now >= dead_by:
+        return "TIMEOUT", "deadline"
+    try:
+        exit_code = wapi.GetExitCodeProcess(root_ph)
+    except Exception:
+        return "UNKNOWN", "exit_query_exception"
+    rec["exit_code"] = exit_code
+    if exit_code != 0:
+        return "FAILED", "nonzero_exit"
+    return _COMPILER_ROOT_EXITED_CLEANUP_REQUIRED, "compiler_root_zero_auxiliaries_possible"
+
+def install(private_module):
+    private_module._wait_run = _compiler_wait_run
+'''
+
+def _load_adapter():
+    mod = types.ModuleType("compiler_adapter_test_copy")
+    exec(ADAPTER_SRC, mod.__dict__)
+    return mod
+
+class FakeWapi:
+    def __init__(self, wait_seq=None, exit_code=0, wait_exc=False, exit_exc=False):
+        self.wait_seq = list(wait_seq) if wait_seq else [0]
+        self.exit_code = exit_code
+        self.wait_exc = wait_exc
+        self.exit_exc = exit_exc
+        self.wait_calls = 0
+        self.exit_calls = 0
+    def WaitForSingleObject(self, handle, timeout):
+        self.wait_calls += 1
+        if self.wait_exc:
+            raise RuntimeError("fake_wait_exc")
+        idx = min(self.wait_calls - 1, len(self.wait_seq) - 1)
+        return self.wait_seq[idx]
+    def GetExitCodeProcess(self, handle):
+        self.exit_calls += 1
+        if self.exit_exc:
+            raise RuntimeError("fake_exit_exc")
+        return self.exit_code
+
+class FakeClock:
+    def __init__(self, values):
+        self.values = list(values)
+        self.idx = 0
+    def monotonic(self):
+        v = self.values[min(self.idx, len(self.values)-1)]
+        self.idx += 1
+        return v
+
+class TestCompilerAdapter(unittest.TestCase):
+    def setUp(self):
+        self.adapter = _load_adapter()
+        self.cancel = threading.Event()
+        self.overflow = threading.Event()
+    def _make_env(self, wapi, clock_vals, exit_code=0, policy="kill_on_close", assigned=True, resumed=True, workers_count=1, owned_count=1, ph=1234):
+        clk = FakeClock(clock_vals)
+        deps = {"_winapi": wapi, "monotonic": clk.monotonic, "sleep": lambda s: None}
+        spec = {"policy": policy, "workers": [{"worker_id": "w"}] * workers_count}
+        owned = []
+        for i in range(owned_count):
+            owned.append({"ph": ph if i==0 else None, "assigned": assigned, "resumed": resumed, "worker_id": f"w{i}"})
+        return deps, None, None, spec, owned, [], [{}], self.overflow, self.cancel, 100.0
+    def test_root_zero_requests_cleanup(self):
+        wapi = FakeWapi([0], 0)
+        args = self._make_env(wapi, [0.0, 1.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED")
+        self.assertEqual(reason, "compiler_root_zero_auxiliaries_possible")
+        self.assertEqual(args[4][0]["exit_code"], 0)
+        self.assertEqual(args[4][0]["wait"], 0)
+        self.assertEqual(wapi.exit_calls, 1)
+    def test_root_nonzero_failed(self):
+        wapi = FakeWapi([0], 1)
+        args = self._make_env(wapi, [0.0, 1.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "FAILED")
+        self.assertEqual(reason, "nonzero_exit")
+    def test_deadline_before_wait(self):
+        wapi = FakeWapi([258])
+        args = self._make_env(wapi, [200.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "TIMEOUT")
+        self.assertEqual(reason, "deadline")
+    def test_deadline_after_wait(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0, 200.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "TIMEOUT")
+    def test_cancel_before_wait(self):
+        wapi = FakeWapi([0])
+        self.cancel.set()
+        args = self._make_env(wapi, [0.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "CANCELLED")
+    def test_cancel_after_wait(self):
+        wapi = FakeWapi([258, 0])
+        args = self._make_env(wapi, [0.0, 1.0, 2.0])
+        def set_cancel(s):
+            self.cancel.set()
+        args[0]["sleep"] = set_cancel
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "CANCELLED")
+    def test_overflow_before_wait(self):
+        wapi = FakeWapi([0])
+        self.overflow.set()
+        args = self._make_env(wapi, [0.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "FAILED")
+        self.assertEqual(reason, "LOG_LIMIT")
+    def test_bad_read_before_wait(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0])
+        args[7] = [{"bad_read": True}]
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "bad_read")
+    def test_overflow_after_wait(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0, 1.0])
+        self.overflow.set()
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "FAILED")
+    def test_bad_read_after_wait(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0, 1.0])
+        args[7] = [{"bad_read": True}]
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+    def test_wait_exception(self):
+        wapi = FakeWapi(wait_exc=True)
+        args = self._make_env(wapi, [0.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "wait_exception")
+    def test_exit_exception(self):
+        wapi = FakeWapi([0], exit_exc=True)
+        args = self._make_env(wapi, [0.0, 1.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "exit_query_exception")
+    def test_unexpected_wait_status(self):
+        wapi = FakeWapi([99])
+        args = self._make_env(wapi, [0.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "unexpected_wait_status")
+    def test_policy_mismatch(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0], policy="explicit_terminate")
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "policy_mismatch")
+    def test_worker_count_mismatch(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0], workers_count=2, owned_count=2)
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "worker_count_mismatch")
+    def test_not_assigned(self):
+        wapi = FakeWapi([0])
+        args = self._make_env(wapi, [0.0], assigned=False)
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(reason, "not_assigned_resumed")
+    def test_no_side_effects_on_import(self):
+        mod = types.ModuleType("side_effect_check")
+        exec(ADAPTER_SRC, mod.__dict__)
+        self.assertTrue(hasattr(mod, "install"))
+        self.assertTrue(hasattr(mod, "_compiler_wait_run"))
+    def test_install_replaces_wait_run(self):
+        pm = types.ModuleType("private_mod")
+        pm._wait_run = lambda: "original"
+        self.adapter.install(pm)
+        self.assertIs(pm._wait_run, self.adapter._compiler_wait_run)
+    def test_timeout_loop(self):
+        wapi = FakeWapi([258, 258, 0])
+        args = self._make_env(wapi, [0.0, 1.0, 2.0, 3.0])
+        status, reason = self.adapter._compiler_wait_run(*args)
+        self.assertEqual(status, "COMPILER_ROOT_EXITED_CLEANUP_REQUIRED")
+        self.assertEqual(wapi.wait_calls, 3)
+
+if __name__ == "__main__":
+    unittest.main()
+```

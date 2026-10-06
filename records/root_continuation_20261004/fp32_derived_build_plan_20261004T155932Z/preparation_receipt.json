@@ -1,0 +1,25 @@
+{
+  "scope": "NONEXECUTING_PREPARATION_ONLY",
+  "source_tools": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\prepare_derived.py",
+      "ast_parse": "PASS_SYNTAX_ONLY",
+      "sha256": "9a207e9a22cf4d503d241c180e0c4297479f34cb2083948cad54fd5eef023cc5",
+      "executed_or_imported": false
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\build_controller_DRAFT.py",
+      "ast_parse": "PASS_SYNTAX_ONLY",
+      "sha256": "4c23701e27723a123713d460ed90be4cb69df31087ddbfd006586182dc278feb",
+      "executed_or_imported": false
+    }
+  ],
+  "contract_sha256": "bd669e7e0d9b693c3f07a12292ffe7694110e8d11b8eee50a2e666e0d7cf9ed5",
+  "actual_Grok_patch": "PENDING_NOT_GUESSED",
+  "copied_source_files": 0,
+  "configure_build_processes": 0,
+  "GPU_calls": 0,
+  "containment_integration": "Pending exact BUILD_ONLY variant SHA,44pure/boundary controls and root native admission; logs128KiB config60s build600s",
+  "baseline_pins": "Read/hash only",
+  "authoring_gate_correction": "AST syntax correction made before any import/execution; scripts untested and require root review"
+}

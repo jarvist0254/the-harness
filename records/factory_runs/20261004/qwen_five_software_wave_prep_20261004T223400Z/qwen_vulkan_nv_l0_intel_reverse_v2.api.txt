@@ -1,0 +1,318 @@
+VULKAN {"path": "E:\\the_harness\\records\\vendor_headers\\vulkan_1.4.321\\include\\vulkan\\vulkan_core.h", "sha256": "3172a758081a172f4c46771a88046a53d5791ef2bd24329ff4bd7ed8c6f12abd", "bytes": 1204373}
+typedef struct VkPhysicalDeviceExternalBufferInfo {
+    VkStructureType                       sType;
+    const void*                           pNext;
+    VkBufferCreateFlags                   flags;
+    VkBufferUsageFlags                    usage;
+    VkExternalMemoryHandleTypeFlagBits    handleType;
+} VkPhysicalDeviceExternalBufferInfo;
+
+typedef struct VkExternalMemoryProperties {
+    VkExternalMemoryFeatureFlags       externalMemoryFeatures;
+    VkExternalMemoryHandleTypeFlags    exportFromImportedHandleTypes;
+    VkExternalMemoryHandleTypeFlags    compatibleHandleTypes;
+} VkExternalMemoryProperties;
+
+typedef struct VkExternalBufferProperties {
+    VkStructureType               sType;
+    void*                         pNext;
+    VkExternalMemoryProperties    externalMemoryProperties;
+} VkExternalBufferProperties;
+
+typedef struct VkExternalMemoryBufferCreateInfo {
+    VkStructureType                    sType;
+    const void*                        pNext;
+    VkExternalMemoryHandleTypeFlags    handleTypes;
+} VkExternalMemoryBufferCreateInfo;
+
+typedef struct VkExportMemoryAllocateInfo {
+    VkStructureType                    sType;
+    const void*                        pNext;
+    VkExternalMemoryHandleTypeFlags    handleTypes;
+} VkExportMemoryAllocateInfo;
+
+typedef struct VkMemoryGetFdInfoKHR {
+    VkStructureType                       sType;
+    const void*                           pNext;
+    VkDeviceMemory                        memory;
+    VkExternalMemoryHandleTypeFlagBits    handleType;
+} VkMemoryGetFdInfoKHR;
+
+typedef struct VkPhysicalDeviceIDProperties {
+    VkStructureType    sType;
+    void*              pNext;
+    uint8_t            deviceUUID[VK_UUID_SIZE];
+    uint8_t            driverUUID[VK_UUID_SIZE];
+    uint8_t            deviceLUID[VK_LUID_SIZE];
+    uint32_t           deviceNodeMask;
+    VkBool32           deviceLUIDValid;
+} VkPhysicalDeviceIDProperties;
+
+typedef struct VkPhysicalDevicePCIBusInfoPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           pciDomain;
+    uint32_t           pciBus;
+    uint32_t           pciDevice;
+    uint32_t           pciFunction;
+} VkPhysicalDevicePCIBusInfoPropertiesEXT;
+
+typedef struct VkMemoryDedicatedRequirements {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           prefersDedicatedAllocation;
+    VkBool32           requiresDedicatedAllocation;
+} VkMemoryDedicatedRequirements;
+
+typedef struct VkMemoryDedicatedAllocateInfo {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkImage            image;
+    VkBuffer           buffer;
+} VkMemoryDedicatedAllocateInfo;
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryFdKHR(
+    VkDevice                                    device,
+    const VkMemoryGetFdInfoKHR*                 pGetFdInfo,
+    int*                                        pFd);
+
+VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalBufferProperties(
+    VkPhysicalDevice                            physicalDevice,
+    const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
+    VkExternalBufferProperties*                 pExternalBufferProperties);
+
+VKAPI_ATTR void VKAPI_CALL vkGetBufferMemoryRequirements2(
+    VkDevice                                    device,
+    const VkBufferMemoryRequirementsInfo2*      pInfo,
+    VkMemoryRequirements2*                      pMemoryRequirements);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdFillBuffer(
+    VkCommandBuffer                             commandBuffer,
+    VkBuffer                                    dstBuffer,
+    VkDeviceSize                                dstOffset,
+    VkDeviceSize                                size,
+    uint32_t                                    data);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdUpdateBuffer(
+    VkCommandBuffer                             commandBuffer,
+    VkBuffer                                    dstBuffer,
+    VkDeviceSize                                dstOffset,
+    VkDeviceSize                                dataSize,
+    const void*                                 pData);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdPipelineBarrier(
+    VkCommandBuffer                             commandBuffer,
+    VkPipelineStageFlags                        srcStageMask,
+    VkPipelineStageFlags                        dstStageMask,
+    VkDependencyFlags                           dependencyFlags,
+    uint32_t                                    memoryBarrierCount,
+    const VkMemoryBarrier*                      pMemoryBarriers,
+    uint32_t                                    bufferMemoryBarrierCount,
+    const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
+    uint32_t                                    imageMemoryBarrierCount,
+    const VkImageMemoryBarrier*                 pImageMemoryBarriers);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkWaitForFences(
+    VkDevice                                    device,
+    uint32_t                                    fenceCount,
+    const VkFence*                              pFences,
+    VkBool32                                    waitAll,
+    uint64_t                                    timeout);
+LEVEL ZERO {"path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h", "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de", "bytes": 1240682}
+typedef struct _ze_external_memory_import_fd_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_external_memory_type_flags_t flags;                                  ///< [in] flags specifying the memory import type for the file descriptor.
+                                                                            ///< must be 0 (default) or a valid combination of ::ze_external_memory_type_flags_t
+    int fd;                                                                 ///< [in] the file descriptor handle to import
+
+} ze_external_memory_import_fd_t;
+
+typedef enum _ze_external_memory_type_flag_t
+{
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_FD = ZE_BIT(0),                     ///< an opaque POSIX file descriptor handle
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF = ZE_BIT(1),                       ///< a file descriptor handle for a Linux dma_buf
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_WIN32 = ZE_BIT(2),                  ///< an NT handle
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_OPAQUE_WIN32_KMT = ZE_BIT(3),              ///< a global share (KMT) handle
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D11_TEXTURE = ZE_BIT(4),                 ///< an NT handle referring to a Direct3D 10 or 11 texture resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D11_TEXTURE_KMT = ZE_BIT(5),             ///< a global share (KMT) handle referring to a Direct3D 10 or 11 texture
+                                                                            ///< resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D12_HEAP = ZE_BIT(6),                    ///< an NT handle referring to a Direct3D 12 heap resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_D3D12_RESOURCE = ZE_BIT(7),                ///< an NT handle referring to a Direct3D 12 committed resource
+    ZE_EXTERNAL_MEMORY_TYPE_FLAG_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_EXTERNAL_MEMORY_TYPE_FLAG_* ENUMs
+
+} ze_external_memory_type_flag_t;
+
+typedef struct _ze_device_external_memory_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_external_memory_type_flags_t memoryAllocationImportTypes;            ///< [out] Supported external memory import types for memory allocations.
+    ze_external_memory_type_flags_t memoryAllocationExportTypes;            ///< [out] Supported external memory export types for memory allocations.
+    ze_external_memory_type_flags_t imageImportTypes;                       ///< [out] Supported external memory import types for images.
+    ze_external_memory_type_flags_t imageExportTypes;                       ///< [out] Supported external memory export types for images.
+
+} ze_device_external_memory_properties_t;
+
+typedef struct _ze_device_mem_alloc_desc_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_device_mem_alloc_flags_t flags;                                      ///< [in] flags specifying additional allocation controls.
+                                                                            ///< must be 0 (default) or a valid combination of ::ze_device_mem_alloc_flag_t;
+                                                                            ///< default behavior may use implicit driver-based heuristics.
+    uint32_t ordinal;                                                       ///< [in] ordinal of the device's local memory to allocate from.
+                                                                            ///< must be less than the count returned from ::zeDeviceGetMemoryProperties.
+
+} ze_device_mem_alloc_desc_t;
+
+typedef struct _ze_host_mem_alloc_desc_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_host_mem_alloc_flags_t flags;                                        ///< [in] flags specifying additional allocation controls.
+                                                                            ///< must be 0 (default) or a valid combination of ::ze_host_mem_alloc_flag_t;
+                                                                            ///< default behavior may use implicit driver-based heuristics.
+
+} ze_host_mem_alloc_desc_t;
+
+typedef struct _ze_device_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_device_type_t type;                                                  ///< [out] generic device type
+    uint32_t vendorId;                                                      ///< [out] vendor id from PCI configuration
+    uint32_t deviceId;                                                      ///< [out] device id from PCI configuration.
+                                                                            ///< Note, the device id uses little-endian format.
+    ze_device_property_flags_t flags;                                       ///< [out] 0 (none) or a valid combination of ::ze_device_property_flag_t
+    uint32_t subdeviceId;                                                   ///< [out] sub-device id. Only valid if ::ZE_DEVICE_PROPERTY_FLAG_SUBDEVICE
+                                                                            ///< is set.
+    uint32_t coreClockRate;                                                 ///< [out] Clock rate for device core.
+    uint64_t maxMemAllocSize;                                               ///< [out] Maximum memory allocation size.
+    uint32_t maxHardwareContexts;                                           ///< [out] Maximum number of logical hardware contexts.
+    uint32_t maxCommandQueuePriority;                                       ///< [out] Maximum priority for command queues. Higher value is higher
+                                                                            ///< priority.
+    uint32_t numThreadsPerEU;                                               ///< [out] Maximum number of threads per EU.
+    uint32_t physicalEUSimdWidth;                                           ///< [out] The physical EU simd width.
+    uint32_t numEUsPerSubslice;                                             ///< [out] Maximum number of EUs per sub-slice.
+    uint32_t numSubslicesPerSlice;                                          ///< [out] Maximum number of sub-slices per slice.
+    uint32_t numSlices;                                                     ///< [out] Maximum number of slices.
+    uint64_t timerResolution;                                               ///< [out] @deprecated when using ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES
+                                                                            ///< since 1.17: Use ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES_1_2 to obtain
+                                                                            ///< timerResolution in cycles/sec for profiling and timestamps.
+    uint32_t timestampValidBits;                                            ///< [out] Returns the number of valid bits in the timestamp value. (i.e
+                                                                            ///< can be used to calculate the max value of the device timestamp in
+                                                                            ///< hardware or get the mask of valid bits in the timestamp value).
+                                                                            ///< timestampValidBits may or may not be same as the
+                                                                            ///< kernelTimestampValidBits as they may be tracked using different
+                                                                            ///< register sizes which are platform specific.
+    uint32_t kernelTimestampValidBits;                                      ///< [out] Returns the number of valid bits in the kernel timestamp values.
+                                                                            ///< (i.e can beused to calculate the max value of the  kernel timestamp in
+                                                                            ///< hardware or get the mask of valid bits in the kernel timestamp value).
+    ze_device_uuid_t uuid;                                                  ///< [out] universal unique identifier. Note: Subdevices will have their
+                                                                            ///< own uuid.
+    char name[ZE_MAX_DEVICE_NAME];                                          ///< [out] Device name
+
+} ze_device_properties_t;
+
+typedef struct _ze_memory_allocation_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_memory_type_t type;                                                  ///< [out] type of allocated memory
+    uint64_t id;                                                            ///< [out] identifier for this allocation
+    uint64_t pageSize;                                                      ///< [out] page size used for allocation
+
+} ze_memory_allocation_properties_t;
+
+typedef enum _ze_device_mem_alloc_flag_t
+{
+    ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_CACHED = ZE_BIT(0),                       ///< device should cache allocation
+    ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_UNCACHED = ZE_BIT(1),                     ///< device should not cache allocation (UC)
+    ZE_DEVICE_MEM_ALLOC_FLAG_BIAS_INITIAL_PLACEMENT = ZE_BIT(2),            ///< optimize shared allocation for first access on the device
+    ZE_DEVICE_MEM_ALLOC_FLAG_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_DEVICE_MEM_ALLOC_FLAG_* ENUMs
+
+} ze_device_mem_alloc_flag_t;
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeDeviceGetExternalMemoryProperties(
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device
+    ze_device_external_memory_properties_t* pExternalMemoryProperties       ///< [in,out] query result for external memory properties
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemAllocDevice(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    const ze_device_mem_alloc_desc_t* device_desc,                          ///< [in] pointer to device memory allocation descriptor
+    size_t size,                                                            ///< [in] size in bytes to allocate; must be less than or equal to the
+                                                                            ///< `maxMemAllocSize` member of ::ze_device_properties_t
+    size_t alignment,                                                       ///< [in] minimum alignment in bytes for the allocation; must be a power of
+                                                                            ///< two
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device
+    void** pptr                                                             ///< [out] pointer to device allocation
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemGetAllocProperties(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    const void* ptr,                                                        ///< [in] memory pointer to query
+    ze_memory_allocation_properties_t* pMemAllocProperties,                 ///< [in,out] query result for memory allocation properties
+    ze_device_handle_t* phDevice                                            ///< [out][optional] device associated with this allocation
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemAllocHost(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    const ze_host_mem_alloc_desc_t* host_desc,                              ///< [in] pointer to host memory allocation descriptor
+    size_t size,                                                            ///< [in] size in bytes to allocate; must be less than or equal to the
+                                                                            ///< `maxMemAllocSize` member of ::ze_device_properties_t
+    size_t alignment,                                                       ///< [in] minimum alignment in bytes for the allocation; must be a power of
+                                                                            ///< two
+    void** pptr                                                             ///< [out] pointer to host allocation
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeCommandListAppendMemoryCopy(
+    ze_command_list_handle_t hCommandList,                                  ///< [in] handle of command list
+    void* dstptr,                                                           ///< [in] pointer to destination memory to copy to
+    const void* srcptr,                                                     ///< [in] pointer to source memory to copy from
+    size_t size,                                                            ///< [in] size in bytes to copy
+    ze_event_handle_t hSignalEvent,                                         ///< [in][optional] handle of the event to signal on completion
+    uint32_t numWaitEvents,                                                 ///< [in][optional] number of events to wait on before launching; must be 0
+                                                                            ///< if `nullptr == phWaitEvents`
+    ze_event_handle_t* phWaitEvents                                         ///< [in][optional][range(0, numWaitEvents)] handle of the events to wait
+                                                                            ///< on before launching
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeCommandQueueSynchronize(
+    ze_command_queue_handle_t hCommandQueue,                                ///< [in] handle of the command queue
+    uint64_t timeout                                                        ///< [in] if non-zero, then indicates the maximum time (in nanoseconds) to
+                                                                            ///< yield before returning ::ZE_RESULT_SUCCESS or ::ZE_RESULT_NOT_READY;
+                                                                            ///< if zero, then immediately returns the status of the command queue;
+                                                                            ///< if `UINT64_MAX`, then function will not return until complete or
+                                                                            ///< device is lost.
+                                                                            ///< Due to external dependencies, timeout may be rounded to the closest
+                                                                            ///< value allowed by the accuracy of those dependencies.
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeCommandQueueCreate(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device object
+    const ze_command_queue_desc_t* desc,                                    ///< [in] pointer to command queue descriptor
+    ze_command_queue_handle_t* phCommandQueue                               ///< [out] pointer to handle of command queue object created
+    );
+
+ZE_APIEXPORT ze_result_t ZE_APICALL
+zeMemFree(
+    ze_context_handle_t hContext,                                           ///< [in] handle of the context object
+    void* ptr                                                               ///< [in][release] pointer to memory to free
+    );

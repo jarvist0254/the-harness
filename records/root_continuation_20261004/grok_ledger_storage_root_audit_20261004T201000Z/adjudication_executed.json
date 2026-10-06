@@ -1,0 +1,20 @@
+{
+  "verdict": "PURE_QA_20_PASS_0_FAIL_0_ERROR_NOT_PROMOTED",
+  "same17": {
+    "tests": 17,
+    "failures": 0,
+    "errors": 0
+  },
+  "storage_and_legal3": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0
+  },
+  "source_sha256": "e44e86db99225b95cb9c9b63a41987d978e692eb0efc3f431741e2adf28833df",
+  "report_sha256": "af31a590f1def1a3c22d05a65db46910ed557b09b66a84faaed658b998b2dc4a",
+  "execution_receipt_sha256": "7ac732676ec874898a92d0e49f294f9ece4952bca8a618799293534e54982e23",
+  "provider_tests_executed": false,
+  "promotion": false,
+  "hardware_qualification": "NOT_CHECKED",
+  "prior_red_preserved": true
+}

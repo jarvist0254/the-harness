@@ -1,0 +1,15 @@
+{
+  "outer_killed": false,
+  "pid": 19120,
+  "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+  "exit_code": 0,
+  "usage": {
+    "input_tokens": 54990,
+    "output_tokens": 27130,
+    "thinking_tokens": 23019,
+    "cache_read_tokens": 175424,
+    "total_tokens": 82120
+  },
+  "elapsed_seconds": 118.24,
+  "requested_model": "gemini-3.8-flash-high"
+}

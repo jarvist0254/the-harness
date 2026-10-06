@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-04T16:40:01.290945+00:00",
+  "status": "SOURCE_ONLY_NOT_EXECUTED",
+  "original_controller_sha256": "c989cc4c8ccd915d499d1e441c5de6048064f1ca1aec37e00cbc4ecc81022202",
+  "controller_sha256": "0ce3644a997194365d361560545e8834ea414852b1a4b99db3d08916c956f6b2",
+  "ast": "PASS",
+  "configure_seconds": 120,
+  "build_seconds": 600,
+  "stream_bytes": 131072,
+  "runtime_outputs": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt2_configure120",
+  "runtime_outputs_exist": false,
+  "static_evidence_unchanged_directory": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence",
+  "preexisting_build_state": [
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build\\CMakeCache.txt",
+      "snapshot": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\attempt2_preexisting_build_state\\CMakeCache.txt",
+      "bytes": 33785,
+      "sha256": "147582fd87e38dac7d0e7136a29b3a9233083e57edc2e87f24ba57a6392d666f"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build\\build.ninja",
+      "snapshot": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\attempt2_preexisting_build_state\\build.ninja",
+      "bytes": 816525,
+      "sha256": "b877e23f588e4167252d601fe88387f68c317bc6e5f7d393c0ffd97d5eb5f809"
+    }
+  ],
+  "prior_configure": "TIMEOUT remains a failed historical attempt",
+  "configuration_build_gpu_execution": false
+}

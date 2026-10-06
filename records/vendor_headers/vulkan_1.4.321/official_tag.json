@@ -1,0 +1,10 @@
+{
+  "ref": "refs/tags/v1.4.321",
+  "node_id": "MDM6UmVmMTMyMDQzMzkzOnJlZnMvdGFncy92MS40LjMyMQ==",
+  "url": "https://api.github.com/repos/KhronosGroup/Vulkan-Headers/git/refs/tags/v1.4.321",
+  "object": {
+    "sha": "4c8aa84a61c12cab9780fa44298617666b491d71",
+    "type": "tag",
+    "url": "https://api.github.com/repos/KhronosGroup/Vulkan-Headers/git/tags/4c8aa84a61c12cab9780fa44298617666b491d71"
+  }
+}

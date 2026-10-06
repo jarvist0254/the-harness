@@ -1,0 +1,14 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\integrated_core.fence_extracted.py",
+    "sha256": "26E90D2C1AF98F942F02696073A6AB186D2A6F1F545DDBCED2B33BAD249BF1A6"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\cad_gap_posts\\tests.fence_extracted.py",
+    "sha256": "F05B9BB7108FCABF5400AE6AC8DD4625589479DDF6694622FA786B5DAD6CDDF2"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\cad_gap_posts_work_v2\\integrated_core.snapshot.py",
+    "sha256": "326133A489430F5167BEC29A87C28AF8EA652E2FE40701D64C153399B85F372C"
+  }
+]

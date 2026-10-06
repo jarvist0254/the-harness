@@ -1,0 +1,295 @@
+1: import hashlib
+2: import json
+3: import math
+4: 
+5: MODEL_WHITELIST = {
+6:     'original_q8': {'sha256': '9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031', 'size': 639446688, 'quant': 'q8_0'},
+7:     'derived_f32': {'sha256': 'bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80', 'size': 2390150816, 'quant': 'f32'},
+8: }
+9: SOURCE_COMMIT = '0faee5004297c3bcfa40b7bf11750127b8c1fd7d'
+10: REQUESTED_CTX = 128
+11: ACTUAL_CTX = 256
+12: PINNED_GGML_PAD = 256
+13: N_BATCH = 32
+14: N_UBATCH = 32
+15: EXACT_TOKENS = tuple(range(16))
+16: VOCAB_COUNT = 151936
+17: ATOL = 0.01
+18: RTOL = 0.01
+19: DLL_COUNT = 5
+20: ALLOWED_STATES = ('PENDING', 'RUNNING', 'FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY')
+21: TRANSITIONS = {
+22:     'PENDING': ('RUNNING', 'NOT_CHECKED', 'FAILED_RUNTIME'),
+23:     'RUNNING': ('FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY'),
+24:     'FAILED_NUMERIC': (),
+25:     'FAILED_RUNTIME': (),
+26:     'NOT_CHECKED': (),
+27:     'DIAGNOSTIC_ONLY': (),
+28: }
+29: PLAN_BOUND_DEFAULT = 4096
+30: HEX_DIGITS = '0123456789abcdef'
+31: 
+32: def is_strict_int(value):
+33:     return isinstance(value, int) and not isinstance(value, bool)
+34: 
+35: def is_strict_number(value):
+36:     if isinstance(value, bool):
+37:         return False
+38:     if not isinstance(value, (int, float)):
+39:         return False
+40:     return math.isfinite(float(value))
+41: 
+42: def _hex64(value):
+43:     if not isinstance(value, str) or len(value) != 64:
+44:         return False
+45:     for ch in value:
+46:         if ch not in HEX_DIGITS:
+47:             return False
+48:     return True
+49: 
+50: def transition_allowed(old_state, new_state):
+51:     if new_state not in ALLOWED_STATES:
+52:         return False
+53:     if old_state is None:
+54:         return True
+55:     return new_state in TRANSITIONS.get(old_state, ())
+56: 
+57: def validate_tokens(tokens):
+58:     if not isinstance(tokens, list) or len(tokens) != len(EXACT_TOKENS):
+59:         return False
+60:     for idx, value in enumerate(tokens):
+61:         if not is_strict_int(value) or value != idx:
+62:             return False
+63:     return True
+64: 
+65: def validate_model_metadata(meta):
+66:     if not isinstance(meta, dict):
+67:         return False
+68:     entry = MODEL_WHITELIST.get(meta.get('model_key'))
+69:     if entry is None:
+70:         return False
+71:     if meta.get('sha256') != entry['sha256']:
+72:         return False
+73:     if meta.get('size') != entry['size']:
+74:         return False
+75:     if meta.get('quant') != entry['quant']:
+76:         return False
+77:     if meta.get('source_commit') != SOURCE_COMMIT:
+78:         return False
+79:     return True
+80: 
+81: def validate_runtime_metadata(meta):
+82:     if not isinstance(meta, dict):
+83:         return False
+84:     if meta.get('requested_ctx') != REQUESTED_CTX:
+85:         return False
+86:     if meta.get('actual_ctx') != ACTUAL_CTX:
+87:         return False
+88:     if meta.get('pinned_ggml_pad') != PINNED_GGML_PAD:
+89:         return False
+90:     if meta.get('n_batch') != N_BATCH:
+91:         return False
+92:     if meta.get('n_ubatch') != N_UBATCH:
+93:         return False
+94:     if not validate_tokens(meta.get('tokens')):
+95:         return False
+96:     dlls = meta.get('dll_hashes')
+97:     if not isinstance(dlls, list) or len(dlls) != DLL_COUNT:
+98:         return False
+99:     for item in dlls:
+100:         if not _hex64(item):
+101:             return False
+102:     devices = meta.get('device_order')
+103:     if not isinstance(devices, list) or len(devices) == 0:
+104:         return False
+105:     for item in devices:
+106:         if not isinstance(item, str) or item == '':
+107:             return False
+108:     origins = meta.get('cpu_vs_gpu_origins')
+109:     if not isinstance(origins, dict):
+110:         return False
+111:     if not isinstance(origins.get('cpu'), str) or origins.get('cpu') == '':
+112:         return False
+113:     if not isinstance(origins.get('gpu'), str) or origins.get('gpu') == '':
+114:         return False
+115:     if not isinstance(meta.get('build_id'), str) or meta.get('build_id') == '':
+116:         return False
+117:     if not _hex64(meta.get('exe_sha256')):
+118:         return False
+119:     if not is_strict_int(meta.get('requested_kv')) or meta.get('requested_kv') <= 0:
+120:         return False
+121:     if not is_strict_int(meta.get('actual_kv')) or meta.get('actual_kv') <= 0:
+122:         return False
+123:     if meta.get('requested_kv') != meta.get('actual_kv'):
+124:         return False
+125:     for key in ('child_f16_disabled', 'fusion_disabled', 'coopmat_disabled', 'coopmat2_disabled'):
+126:         if meta.get(key) is not True:
+127:             return False
+128:     return True
+129: 
+130: def validate_capture_metadata(meta):
+131:     if not isinstance(meta, dict):
+132:         return False
+133:     if meta.get('native_capture_claimed') is not False:
+134:         return False
+135:     if not isinstance(meta.get('callback_intrusiveness_declared'), bool):
+136:         return False
+137:     if meta.get('unsupported_dtype_fail_closed') is not True:
+138:         return False
+139:     for key in ('name_op_dim_canonical', 'node_order_declared', 'common_intended_device_workload_separate_cpu_origin'):
+140:         if not isinstance(meta.get(key), bool):
+141:             return False
+142:     return True
+143: 
+144: def validate_logit_list(values):
+145:     if not isinstance(values, list) or len(values) != VOCAB_COUNT:
+146:         return 'structural'
+147:     for value in values:
+148:         if isinstance(value, bool) or not isinstance(value, (int, float)):
+149:             return 'structural'
+150:         if not math.isfinite(float(value)):
+151:             return 'nonfinite'
+152:     return 'ok'
+153: 
+154: def canonical_payload_bytes(cpu_logits, gpu_logits):
+155:     obj = {'cpu': cpu_logits, 'gpu': gpu_logits}
+156:     return json.dumps(obj, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+157: 
+158: def _close_metadata_number(actual, expected):
+159:     if not is_strict_number(actual) or not is_strict_number(expected):
+160:         return False
+161:     return abs(float(actual) - float(expected)) <= 1e-12
+162: 
+163: def compare_logits(cpu_logits, gpu_logits, payload_sha256, max_abs_err, rmse, count, control_kind='baseline_clean'):
+164:     if control_kind not in ('baseline_clean', 'perturbed_negative'):
+165:         return {'state': 'NOT_CHECKED', 'reason': 'control_kind_malformed'}
+166:     if count != VOCAB_COUNT:
+167:         return {'state': 'NOT_CHECKED', 'reason': 'count_malformed'}
+168:     left = validate_logit_list(cpu_logits)
+169:     right = validate_logit_list(gpu_logits)
+170:     if left == 'structural' or right == 'structural':
+171:         return {'state': 'NOT_CHECKED', 'reason': 'logit_type_or_length_malformed'}
+172:     if left == 'nonfinite' or right == 'nonfinite':
+173:         return {'state': 'FAILED_RUNTIME', 'reason': 'logit_nonfinite'}
+174:     try:
+175:         computed_sha = hashlib.sha256(canonical_payload_bytes(cpu_logits, gpu_logits)).hexdigest()
+176:     except Exception:
+177:         return {'state': 'NOT_CHECKED', 'reason': 'payload_canonicalization_failed'}
+178:     if not _hex64(payload_sha256) or payload_sha256 != computed_sha:
+179:         return {'state': 'NOT_CHECKED', 'reason': 'payload_sha_mismatch'}
+180:     fail_indices = []
+181:     max_err = 0.0
+182:     sum_sq = 0.0
+183:     for idx in range(VOCAB_COUNT):
+184:         a = float(cpu_logits[idx])
+185:         b = float(gpu_logits[idx])
+186:         err = abs(a - b)
+187:         if err > max_err:
+188:             max_err = err
+189:         sum_sq += err * err
+190:         if err > (ATOL + RTOL * abs(b)):
+191:             fail_indices.append(idx)
+192:     measured_rmse = math.sqrt(sum_sq / float(VOCAB_COUNT))
+193:     if not _close_metadata_number(max_abs_err, max_err):
+194:         return {'state': 'NOT_CHECKED', 'reason': 'max_abs_err_not_bound'}
+195:     if not _close_metadata_number(rmse, measured_rmse):
+196:         return {'state': 'NOT_CHECKED', 'reason': 'rmse_not_bound'}
+197:     result = {
+198:         'state': 'DIAGNOSTIC_ONLY',
+199:         'reason': 'numerical_diagnostic_complete',
+200:         'control_kind': control_kind,
+201:         'count': VOCAB_COUNT,
+202:         'fail_count': len(fail_indices),
+203:         'fail_indices_sample': fail_indices[:16],
+204:         'measured_max_abs_err': max_err,
+205:         'measured_rmse': measured_rmse,
+206:         'payload_sha256': computed_sha,
+207:         'atol': ATOL,
+208:         'rtol': RTOL,
+209:         'transport_corruption_proof': False,
+210:         'model_pass': False,
+211:     }
+212:     if control_kind == 'baseline_clean' and fail_indices:
+213:         result['state'] = 'FAILED_NUMERIC'
+214:         result['reason'] = 'strict_logit_tolerance_failed'
+215:     if control_kind == 'perturbed_negative':
+216:         result['reason'] = 'perturbed_negative_comparison_only'
+217:         result['transport_corruption_proof'] = False
+218:     return result
+219: 
+220: def evaluate_experiment(record):
+221:     if not isinstance(record, dict):
+222:         return {'state': 'NOT_CHECKED', 'reason': 'record_malformed'}
+223:     experiment_id = record.get('experiment_id')
+224:     if not isinstance(experiment_id, str) or experiment_id == '':
+225:         return {'state': 'NOT_CHECKED', 'reason': 'experiment_id_malformed'}
+226:     if not validate_model_metadata(record.get('model_metadata')):
+227:         return {'state': 'NOT_CHECKED', 'reason': 'model_metadata_malformed', 'experiment_id': experiment_id}
+228:     if not validate_runtime_metadata(record.get('runtime_metadata')):
+229:         return {'state': 'NOT_CHECKED', 'reason': 'runtime_metadata_malformed', 'experiment_id': experiment_id}
+230:     if not validate_capture_metadata(record.get('capture_metadata')):
+231:         return {'state': 'NOT_CHECKED', 'reason': 'capture_metadata_malformed', 'experiment_id': experiment_id}
+232:     required = ('cpu_logits', 'gpu_logits', 'payload_sha256', 'max_abs_err', 'rmse', 'count')
+233:     for key in required:
+234:         if key not in record:
+235:             return {'state': 'NOT_CHECKED', 'reason': 'payload_field_missing', 'experiment_id': experiment_id}
+236:     control_kind = record.get('control_kind', 'baseline_clean')
+237:     outcome = compare_logits(record['cpu_logits'], record['gpu_logits'], record['payload_sha256'], record['max_abs_err'], record['rmse'], record['count'], control_kind)
+238:     outcome['experiment_id'] = experiment_id
+239:     outcome['model_key'] = record.get('model_metadata', {}).get('model_key')
+240:     outcome['superseded'] = False
+241:     return outcome
+242: 
+243: class StateLedger:
+244:     def __init__(self, records=(), plan_bound=PLAN_BOUND_DEFAULT):
+245:         if not is_strict_int(plan_bound) or plan_bound <= 0:
+246:             raise ValueError('plan_bound_malformed')
+247:         self._records = tuple(records)
+248:         self._plan_bound = plan_bound
+249: 
+250:     def records(self):
+251:         return self._records
+252: 
+253:     def append(self, record):
+254:         if not isinstance(record, dict):
+255:             raise ValueError('record_malformed')
+256:         if record.get('state') not in ALLOWED_STATES:
+257:             raise ValueError('state_malformed')
+258:         if not isinstance(record.get('experiment_id'), str) or record.get('experiment_id') == '':
+259:             raise ValueError('experiment_id_malformed')
+260:         if record.get('supersede') is True or 'supersedes' in record:
+261:             raise ValueError('supersession_forbidden')
+262:         prior = record.get('prior_state')
+263:         if prior is not None and not transition_allowed(prior, record.get('state')):
+264:             raise ValueError('transition_forbidden')
+265:         frozen = dict(record)
+266:         frozen['seq'] = len(self._records)
+267:         frozen['model_pass'] = False
+268:         return StateLedger(self._records + (frozen,), self._plan_bound)
+269: 
+270:     def candidate_plan(self):
+271:         bounded = self._records[-self._plan_bound:]
+272:         plan = {
+273:             'schema': 'state-ledger-candidate-plan',
+274:             'version': 1,
+275:             'source_commit': SOURCE_COMMIT,
+276:             'bounded': True,
+277:             'plan_bound': self._plan_bound,
+278:             'record_count': len(self._records),
+279:             'included_count': len(bounded),
+280:             'records': list(bounded),
+281:             'no_pass': True,
+282:         }
+283:         payload = json.dumps(plan, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+284:         digest = hashlib.sha256(payload).hexdigest()
+285:         plan['digest'] = digest
+286:         return json.dumps(plan, sort_keys=True, separators=(',', ':'), allow_nan=False)
+287: 
+288:     def durable_commit_representation(self):
+289:         plan = self.candidate_plan()
+290:         return {'kind': 'in_memory_atomic_candidate_plan', 'sha256': hashlib.sha256(plan.encode('utf-8')).hexdigest(), 'writes_performed': False}
+291: 
+292: def refusal_record(reason):
+293:     if not isinstance(reason, str) or reason == '':
+294:         reason = 'refused'
+295:     return {'state': 'NOT_CHECKED', 'reason': reason, 'experiment_id': 'refusal', 'model_pass': False}

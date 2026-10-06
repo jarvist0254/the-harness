@@ -1,0 +1,22 @@
+{
+  "root_admitted_only_thiscall": true,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\source.snapshot.txt",
+  "job_id": "gemini_capacity_high",
+  "model": "gemini-3.8-flash-high",
+  "prompt_sha256": "cccc25f30eb00f9b10cf2c42f258b9367e9a65198476c1ccb821faae1d11cd6e",
+  "lane": "Gemini",
+  "authority": "ROOT explicit exactpin Gemini HIGH onecall launchadmission",
+  "max_deadline_seconds": 240,
+  "helper_pins": {
+    "gemini_capacity.high.v2.prompt.txt": "cccc25f30eb00f9b10cf2c42f258b9367e9a65198476c1ccb821faae1d11cd6e",
+    "source.snapshot.txt": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+    "provider_common.high.v2.ps1": "2a6b79b3151aefdb7e704192506aa9f3e03c6107c79b22f9350cd247c3035975",
+    "REVIEW_SCHEMA.json": "049318fd4338375a9798bfa32ece33ae60c28da2ac8e05b78bd30419ee9e659f",
+    "invoke_owned_capacity_review.high.v2.pending_admission.ps1": "13427d2f951c556a79dd982ad3d3e8b0bc0a19389e00b03d897dd8d7e9f54454"
+  },
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep",
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "utc": "2026-10-04T20:20:51.1602699Z",
+  "provider_launch_authorized": true,
+  "source_execution": false
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "name": "build_manifest.json",
+    "bytes": 631,
+    "sha256": "eae4f571057992f0ce4065e9a8d4db6657347e9031687f0954a85e384d8fc730"
+  },
+  {
+    "name": "build_progress.json",
+    "bytes": 247,
+    "sha256": "aaabbe2790cfbcf053fc04080c21bd393f10f45d6a2e2a439381cf1aa345adef"
+  },
+  {
+    "name": "build_result_copy.json",
+    "bytes": 37338,
+    "sha256": "8af64e21b4b229de419960a610aaf4bdb83a7407fe5e5b2a08a46822f7c9e800"
+  },
+  {
+    "name": "build_worker_pid_absence.json",
+    "bytes": 285,
+    "sha256": "48d4bf19e142ec41b2b4def9017ed26143ec4e086dab2983f6b7817029a985b0"
+  },
+  {
+    "name": "build.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "build.stdout.log",
+    "bytes": 34757,
+    "sha256": "4361d100add2514c8ff44e242836018fd05e63e969fbd1fd15f6288802503d09"
+  },
+  {
+    "name": "configure_manifest.json",
+    "bytes": 643,
+    "sha256": "dc316fd4f44e956397e9257d31e2354f61982731c3051abb4dd07837589e03c0"
+  },
+  {
+    "name": "configure_pid_absence.json",
+    "bytes": 143,
+    "sha256": "0d3bc708f4522c6b1056150248c3f952b6909fc4db4c980b4934bc33df434533"
+  },
+  {
+    "name": "configure_progress.json",
+    "bytes": 296,
+    "sha256": "a17fc49a9f8dbfb1cc6a9ab706716ccf15f7a46fc5c87fcbf61717850aab3b78"
+  },
+  {
+    "name": "configure_result_copy.json",
+    "bytes": 2166,
+    "sha256": "a373f31065fbe760d49632d7b48e4f6694ee2b0a2cdc93ff2a3dc3e031d9ef00"
+  },
+  {
+    "name": "configure.stderr.log",
+    "bytes": 163,
+    "sha256": "85cd5be7ed0d902d8cb0d9e7c8ca7f4303820bf360588baf9cab04ff8bf79ffa"
+  },
+  {
+    "name": "configure.stdout.log",
+    "bytes": 1218,
+    "sha256": "14553107473d63ed0dc616bb64a5ba66303bf8660dcbee08ee12d78539eb5ade"
+  },
+  {
+    "name": "controller_result.json",
+    "bytes": 40485,
+    "sha256": "c9d3792e198475c48f36df079cae0ae643fd7d868660bb02acf9671524f59170"
+  },
+  {
+    "name": "fp32_build_receipt.json",
+    "bytes": 37174,
+    "sha256": "cf19b75d6fcb29711d24d3add066b5bbe7fe509c28b63d4e84267bec2740532d"
+  },
+  {
+    "name": "fp32_build.journal",
+    "bytes": 187,
+    "sha256": "411d1d64cb648d3016d231166609950c0ae1de7f0380de30e29e4d4ded87185e"
+  },
+  {
+    "name": "fp32_configure_receipt.json",
+    "bytes": 2002,
+    "sha256": "6ce753237c80ed19c9498477a4c604997f29cf57fe825bdcf863e081f920ce81"
+  },
+  {
+    "name": "fp32_configure.journal",
+    "bytes": 193,
+    "sha256": "ab2a4bd8d03816d2a9a4711f7f8a0d755446cfa6a80f8f3b47ff631132180db7"
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "http_seconds": 2400,
+  "spec": {
+    "bytes": 4123,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.spec.txt",
+    "sha256": "eaab7f37614bff00e04cd5a2e2ccd455d084ae372b51de86c7004311dfcb2d70"
+  },
+  "source_binding": {
+    "bytes": 1280649,
+    "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cuda.h",
+    "sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072"
+  },
+  "utc": "2026-10-04T22:44:46.5591385Z",
+  "api": {
+    "bytes": 145398,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.api.txt",
+    "sha256": "542c0f60249cd075ed3fdc2fd0a3cec6a98b8024ec3c45515d9cd3cce7449dc1"
+  },
+  "tests_chars_limit": 16000,
+  "helper_diffs": "NONE exactfrozen32k16k transport/parser/caps",
+  "launch_authorized": false,
+  "prompt": {
+    "bytes": 149816,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_windows_cuda_capability.prompt.txt",
+    "sha256": "4a2fac93c7a264195dc1f846cfd747bff61d61ffb577e99fa5382ec37d701b05"
+  },
+  "model": "qwen3.8-max",
+  "native_children_actual": 0,
+  "job": "qwen_windows_cuda_capability",
+  "thinking_budget_absent": true,
+  "source_only_no_credential_read": true,
+  "normalized_each_cap": 2097152,
+  "outer_seconds": 2430,
+  "input_pins": [
+    {
+      "bytes": 1280649,
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cuda.h",
+      "sha256": "7a79d67ca888061b1dfbe4739b51ad64f85a2f3ad874947ce09b2c635b4c7072"
+    },
+    {
+      "bytes": 93153,
+      "path": "E:\\the_harness\\records\\toolchains\\cuda_driver_headers_20261004\\include\\cudaTypedefs.h",
+      "sha256": "77eb4072ae5da75bec31c4cf6291967e8ecbd6981ece0d47b07dbbabf781782c"
+    },
+    {
+      "bytes": 188,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\NVCUDA_SYSTEM32_READ_ONLY_PIN.json",
+      "sha256": "15108f31cba2c613ef3df5216ced85b107e23644ac37dfcacf436e30d3e55ff9"
+    }
+  ],
+  "raw_stream_cap_bytes": 16777216,
+  "helpers": [
+    {
+      "bytes": 8048,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\invoke_owned_stream_research.v3.ps1",
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063"
+    },
+    {
+      "bytes": 4072,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    {
+      "bytes": 582,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PURE_LIMIT_CONTROLS.json",
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e"
+    },
+    {
+      "bytes": 8011,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_http_stream_research.v3.ps1",
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c"
+    },
+    {
+      "bytes": 774,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\research_artifact.v3.ps1",
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36"
+    }
+  ],
+  "source_execution": false,
+  "status": "SOURCE_ONLY_PREPARATION_PENDING_ROOT_REVIEW",
+  "source_chars_limit": 32000,
+  "enable_thinking": true,
+  "reasoning_effort": "xhigh"
+}

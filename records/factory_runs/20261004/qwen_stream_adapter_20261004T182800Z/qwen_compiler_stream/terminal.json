@@ -1,0 +1,23 @@
+{
+  "frames": 7670,
+  "pid": 93148,
+  "response_cap_exceeded": true,
+  "native_children_actual": 0,
+  "timeout": false,
+  "reasoning_bytes": 115330,
+  "credential_saved": false,
+  "usage_known": false,
+  "known_secret_match_refused": false,
+  "parse_error_type": null,
+  "status": "RESPONSE_CAP_REFUSED",
+  "requested_model": "qwen3.8-max",
+  "usage": null,
+  "raw_bytes": 2096424,
+  "observed_model": "qwen3.8-max",
+  "http": 200,
+  "finish_reason": null,
+  "content_bytes": 0,
+  "elapsed_seconds": 621.4,
+  "done": false,
+  "provider_patch_applied": false
+}

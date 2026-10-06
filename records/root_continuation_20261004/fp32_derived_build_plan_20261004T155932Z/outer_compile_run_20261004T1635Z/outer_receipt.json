@@ -1,0 +1,28 @@
+{
+  "status": "NONZERO_OR_UNKNOWN",
+  "pid": 576,
+  "exit_code": 1,
+  "timed_out": false,
+  "stream_overflow": false,
+  "elapsed_seconds": 72.003,
+  "process_absent": true,
+  "changed_inputs": [],
+  "input_hashes_unchanged": true,
+  "before_hashes": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\build_controller_DRAFT.py": "c989cc4c8ccd915d499d1e441c5de6048064f1ca1aec37e00cbc4ecc81022202",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_NATIVE_ADMISSION.json": "de83be81c64c08596bb87b7ffea8374a7ad8bbfd80973abf00d833729d47bfeb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "after_hashes": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\build_controller_DRAFT.py": "c989cc4c8ccd915d499d1e441c5de6048064f1ca1aec37e00cbc4ecc81022202",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_NATIVE_ADMISSION.json": "de83be81c64c08596bb87b7ffea8374a7ad8bbfd80973abf00d833729d47bfeb",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "stdout_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_run_20261004T1635Z\\controller.stdout.log",
+  "stdout_bytes": 0,
+  "stderr_path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\outer_compile_run_20261004T1635Z\\controller.stderr.log",
+  "stderr_bytes": 590,
+  "completed_utc": "2026-10-04T16:37:21.3262618Z"
+}

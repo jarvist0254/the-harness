@@ -1,0 +1,10 @@
+{
+  "provider_launch_authorized": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z",
+  "job_id": "grok_shared_host_edit",
+  "lane": "Grok",
+  "model": "grok-4.7-build-fast",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\gemini_shared_host_review\\review.structured_output.extracted.json",
+  "source_sha256": "194e15e75747a10410889519f32d36d708a07c619053abe5d95b9854bafa2216",
+  "prompt_sha256": "638b2b81bb7fa2b23a0e43b5d76ff1441cb40f253b4db893ca9ca8a0274eb8a5"
+}

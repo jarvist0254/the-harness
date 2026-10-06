@@ -1,0 +1,124 @@
+{
+  "accepted": [
+    {
+      "assigned": true,
+      "exit_code": 1,
+      "pid": 78020,
+      "resumed": true,
+      "worker_id": "cancel_worker"
+    }
+  ],
+  "capture_limit_ok": true,
+  "case_id": "cancel",
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\native_fixture_prepared\\fixture_controller.py",
+    "--case",
+    "cancel",
+    "--output",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\native_fixture_prepared\\native_runs\\native_20261004T162557Z\\cancel\\supervisor_output"
+  ],
+  "controller_elapsed_seconds": 0.391,
+  "controller_exit_code": 0,
+  "controller_pid": 50440,
+  "controller_pid_absent_after_wait": true,
+  "controller_source_hash_after": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "controller_timeout": false,
+  "controller_worker_hash_after": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+  "cwd": "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\native_fixture_prepared",
+  "restart_commit_verified": true,
+  "restart_matches": true,
+  "restart_receipt": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "cancelled",
+    "job_active_count": 0,
+    "logs": {
+      "cancel_worker": {
+        "stderr": "",
+        "stderr_bytes": 0,
+        "stderr_overflow": false,
+        "stderr_path": "cancel_worker.stderr.log",
+        "stdout": "cancel_worker:sleeping\r\n",
+        "stdout_bytes": 24,
+        "stdout_overflow": false,
+        "stdout_path": "cancel_worker.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "native_cancel",
+    "status": "CANCELLED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 1,
+        "pid": 78020,
+        "resumed": true,
+        "worker_id": "cancel_worker"
+      }
+    ]
+  },
+  "source_and_runtime_hashes_after": {
+    "admission": "38dccba35270518c2d282370a76dd7f437a3e0d4e488e075549a15a124d102ba",
+    "contract": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc",
+    "controller": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+    "driver": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "source_and_runtime_hashes_before": {
+    "admission": "38dccba35270518c2d282370a76dd7f437a3e0d4e488e075549a15a124d102ba",
+    "contract": "e28cb0072e69df9e863984ac744e57aa157c4e0f4a44f075335b1d7ea44aecdc",
+    "controller": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+    "driver": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+    "interpreter": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "source": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "worker": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "source_and_runtime_hashes_unchanged": true,
+  "stderr_bytes": 0,
+  "stdout_bytes": 1527,
+  "supervisor": {
+    "containment_policy": "kill_on_close",
+    "drain_proof": "CLEANUP",
+    "failure_reason": "cancelled",
+    "job_active_count": 0,
+    "logs": {
+      "cancel_worker": {
+        "stderr": "",
+        "stderr_bytes": 0,
+        "stderr_overflow": false,
+        "stderr_path": "cancel_worker.stderr.log",
+        "stdout": "cancel_worker:sleeping\r\n",
+        "stdout_bytes": 24,
+        "stdout_overflow": false,
+        "stdout_path": "cancel_worker.stdout.log"
+      }
+    },
+    "reattach": false,
+    "replay": false,
+    "run_id": "native_cancel",
+    "status": "CANCELLED",
+    "version": 1,
+    "whole_tree_certificate": false,
+    "workers": [
+      {
+        "assigned": true,
+        "exit_code": 1,
+        "pid": 78020,
+        "resumed": true,
+        "worker_id": "cancel_worker"
+      }
+    ]
+  },
+  "supervisor_failure_reason": "cancelled",
+  "supervisor_status": "CANCELLED",
+  "worker_pids": [
+    78020
+  ],
+  "worker_pids_absent_after_cleanup": true
+}

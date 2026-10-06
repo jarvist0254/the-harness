@@ -1,0 +1,92 @@
+#include <cuda.h>
+#include <dlfcn.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <cerrno>
+#include <cstdint>
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <sstream>
+using namespace std;
+typedef CUresult(CUDAAPI*cuInit_t)(unsigned int);
+typedef CUresult(CUDAAPI*cuDriverGetVersion_t)(int*);
+typedef CUresult(CUDAAPI*cuDeviceGetCount_t)(int*);
+typedef CUresult(CUDAAPI*cuDeviceGet_t)(CUdevice*,int);
+typedef CUresult(CUDAAPI*cuDeviceGetUuid_t)(CUuuid*,CUdevice);
+typedef CUresult(CUDAAPI*cuDeviceGetPCIBusId_t)(char*,int,CUdevice);
+typedef CUresult(CUDAAPI*cuDeviceGetAttribute_t)(int*,CUdevice_attribute,CUdevice);
+typedef CUresult(CUDAAPI*cuCtxCreate_t)(CUcontext*,unsigned int,CUdevice);
+typedef CUresult(CUDAAPI*cuMemAlloc_t)(CUdeviceptr*,size_t);
+typedef CUresult(CUDAAPI*cuMemsetD32_t)(CUdeviceptr,unsigned int,size_t);
+typedef CUresult(CUDAAPI*cuMemcpyDtoH_t)(void*,CUdeviceptr,size_t);
+typedef CUresult(CUDAAPI*cuMemFree_t)(CUdeviceptr);
+typedef CUresult(CUDAAPI*cuCtxDestroy_t)(CUcontext);
+typedef CUresult(CUDAAPI*cuCtxSynchronize_t)(void);
+typedef CUresult(CUDAAPI*cuGetErrorString_t)(CUresult,const char**);
+typedef CUresult(CUDAAPI*cuMemGetHandleForAddressRange_t)(void*,CUdeviceptr,size_t,CUmemRangeHandleType,unsigned long long);
+struct Api{cuInit_t Init=nullptr;cuDriverGetVersion_t DriverGetVersion=nullptr;cuDeviceGetCount_t DeviceGetCount=nullptr;cuDeviceGet_t DeviceGet=nullptr;cuDeviceGetUuid_t DeviceGetUuid=nullptr;cuDeviceGetPCIBusId_t DeviceGetPCIBusId=nullptr;cuDeviceGetAttribute_t DeviceGetAttribute=nullptr;cuCtxCreate_t CtxCreate=nullptr;cuMemAlloc_t MemAlloc=nullptr;cuMemsetD32_t MemsetD32=nullptr;cuMemcpyDtoH_t MemcpyDtoH=nullptr;cuMemFree_t MemFree=nullptr;cuCtxDestroy_t CtxDestroy=nullptr;cuCtxSynchronize_t CtxSynchronize=nullptr;cuGetErrorString_t ErrStr=nullptr;cuMemGetHandleForAddressRange_t GetHandle=nullptr;};
+static Api G;
+static vector<string> ERR;
+#define S(x) #x
+#define Q(x) S(x)
+static string esc(const string&s){string o;for(char c:s){if(c==34||c==92)o.push_back(92);o.push_back(c);}return o;}
+static string q(const string&s){string r;r.push_back(34);r+=esc(s);r.push_back(34);return r;}
+static const char* jbool(bool b){return b?"true":"false";}
+static string cerrs(CUresult r){const char*s=nullptr;if(G.ErrStr&&G.ErrStr(r,&s)==CUDA_SUCCESS&&s)return s;return to_string((int)r);}
+static void addCuda(const string&a,CUresult r){ERR.push_back(a+'='+to_string((int)r)+'('+cerrs(r)+')');}
+static void addErrno(const string&a,int e){ERR.push_back(a+'='+to_string(e)+'('+strerror(e)+')');}
+struct Abort{int code;string status,scope,reason,kv;};
+static int emit(int code,const string&status,const string&scope,const string&reason,const string&kv=""){ostringstream os;os<<'{'<<Q(schema)<<':'<<Q(task5_cuda_dmabuf_export_v1)<<','<<Q(status)<<':'<<q(status)<<','<<Q(exit_code)<<':'<<code<<','<<Q(scope)<<':'<<q(scope);if(!reason.empty())os<<','<<Q(reason)<<':'<<q(reason);if(!kv.empty())os<<','<<kv;os<<','<<Q(errors)<<':[';for(size_t i=0;i<ERR.size();++i){if(i)os<<',';os<<q(ERR[i]);}os<<']'<<'}';puts(os.str().c_str());return code;}
+static string normHex(const string&s){string o;for(char c:s){if((c>='0'&&c<='9')||(c>='a'&&c<='f')||(c>='A'&&c<='F')){if(c>='A'&&c<='F')c=c-'A'+'a';o.push_back(c);}}return o;}
+static string lower(const string&s){string o;for(char c:s){if(c>='A'&&c<='Z')c=c-'A'+'a';if(c!=' ')o.push_back(c);}return o;}
+#define REQ(f,n) G.f=(n##_t)dlsym(lib,#n);if(!G.f)throw Abort{2,Q(NOT_CHECKED),Q(INIT),"missing entrypoint: " #n,""}
+int main(int argc,char**argv){string uuid,pci;for(int i=1;i<argc;i++){string a=argv[i];if(a.rfind("--uuid=",0)==0)uuid=a.substr(7);else if(a.rfind("--pci=",0)==0)pci=a.substr(6);}
+void*lib=nullptr;CUcontext ctx=nullptr;CUdeviceptr dptr=0;int fd=-1;bool ctx_ok=false,alloc_ok=false;
+try{
+if(uuid.empty()&&pci.empty())throw Abort{1,Q(FAIL),Q(INPUT),"missing --uuid= or --pci=",""};
+lib=dlopen("libcuda.so.1",RTLD_LAZY|RTLD_LOCAL);if(!lib)throw Abort{2,Q(NOT_CHECKED),Q(INIT),"libcuda.so.1 not loadable",""};
+G.ErrStr=(cuGetErrorString_t)dlsym(lib,Q(cuGetErrorString));
+REQ(Init,cuInit);REQ(DriverGetVersion,cuDriverGetVersion);REQ(DeviceGetCount,cuDeviceGetCount);REQ(DeviceGet,cuDeviceGet);REQ(DeviceGetUuid,cuDeviceGetUuid);REQ(DeviceGetPCIBusId,cuDeviceGetPCIBusId);REQ(DeviceGetAttribute,cuDeviceGetAttribute);REQ(CtxCreate,cuCtxCreate);REQ(MemAlloc,cuMemAlloc);REQ(MemsetD32,cuMemsetD32);REQ(MemcpyDtoH,cuMemcpyDtoH);REQ(MemFree,cuMemFree);REQ(CtxDestroy,cuCtxDestroy);REQ(CtxSynchronize,cuCtxSynchronize);REQ(GetHandle,cuMemGetHandleForAddressRange);
+CUresult r=G.Init(0);if(r!=CUDA_SUCCESS){addCuda(Q(cuInit),r);throw Abort{2,Q(NOT_CHECKED),Q(INIT),"cuInit failed",""};}
+int drv=0;r=G.DriverGetVersion(&drv);if(r!=CUDA_SUCCESS){addCuda(Q(cuDriverGetVersion),r);throw Abort{2,Q(NOT_CHECKED),Q(INIT),"cuDriverGetVersion failed",""};}
+int count=0;r=G.DeviceGetCount(&count);if(r!=CUDA_SUCCESS||count<=0){addCuda(Q(cuDeviceGetCount),r);throw Abort{2,Q(NOT_CHECKED),Q(DEVICE),"no CUDA devices",""};}
+string wantU=normHex(uuid);if(!uuid.empty()&&wantU.size()!=32)throw Abort{1,Q(FAIL),Q(INPUT),"uuid must contain 32 hex digits",""};
+string wantP=lower(pci);int chosen=-1;CUdevice dev=0;string devU,devP;
+for(int i=0;i<count;i++){CUdevice d;if(G.DeviceGet(&d,i)!=CUDA_SUCCESS)continue;CUuuid u;string uh,ph;if(G.DeviceGetUuid(&u,d)==CUDA_SUCCESS){char b[33];for(int j=0;j<16;j++)snprintf(b+2*j,3,"%02x",(unsigned char)u.bytes[j]);uh=b;}
+char p[64];if(G.DeviceGetPCIBusId(p,sizeof(p),d)==CUDA_SUCCESS)ph=lower(p);
+bool mu=uuid.empty()||uh==wantU;bool mp=pci.empty()||ph==wantP;if(mu&&mp&&(!uuid.empty()||!pci.empty())){chosen=i;dev=d;devU=uh;devP=ph;break;}}
+if(chosen<0)throw Abort{2,Q(NOT_CHECKED),Q(DEVICE),"selected device not found",""};
+ostringstream base;base<<Q(driver_version)<<':'<<drv<<','<<Q(device)<<':'<<'{'<<Q(index)<<':'<<chosen<<','<<Q(uuid_hex)<<':'<<q(devU)<<','<<Q(pci_bus_id)<<':'<<q(devP)<<'}';
+int attr=0;r=G.DeviceGetAttribute(&attr,CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED,dev);if(r!=CUDA_SUCCESS){addCuda(Q(cuDeviceGetAttribute),r);throw Abort{2,Q(NOT_CHECKED),Q(ATTRIBUTE),"CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED query failed",base.str()};}
+if(attr==0)throw Abort{2,Q(NOT_CHECKED),Q(ATTRIBUTE),"CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED false",base.str()};
+r=G.CtxCreate(&ctx,0,dev);if(r!=CUDA_SUCCESS){addCuda(Q(cuCtxCreate),r);throw Abort{1,Q(FAIL),Q(CONTEXT),"cuCtxCreate failed",base.str()};}ctx_ok=true;
+long ps=sysconf(_SC_PAGESIZE);if(ps<=0)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"page size unavailable",base.str()};
+size_t page=(size_t)ps,req=65536,maxr=1048576;if(page>maxr)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"page size exceeds bounded range",base.str()};
+size_t sz=((req+page-1)/page)*page;if(sz>maxr)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"aligned range exceeds bound",base.str()};
+r=G.MemAlloc(&dptr,sz);if(r!=CUDA_SUCCESS){addCuda(Q(cuMemAlloc),r);throw Abort{1,Q(FAIL),Q(ALLOC),"cuMemAlloc failed",base.str()};}alloc_ok=true;
+if((static_cast<uintptr_t>(dptr)%page)!=0)throw Abort{2,Q(NOT_CHECKED),Q(ALIGNMENT),"cuMemAlloc base not host-page aligned",base.str()};
+ostringstream bs;bs<<'0'<<'x'<<hex<<(unsigned long long)dptr<<dec;
+ostringstream kv;kv<<base.str()<<','<<Q(allocation)<<':'<<'{'<<Q(class)<<':'<<Q(DEVICE)<<','<<Q(api)<<':'<<Q(cuMemAlloc)<<','<<Q(api_status)<<':'<<Q(CUDA_SUCCESS)<<','<<Q(requested_payload_bytes)<<':'<<65536<<','<<Q(aligned_range_bytes)<<':'<<sz<<','<<Q(base)<<':'<<q(bs.str())<<','<<Q(page_size)<<':'<<page<<','<<Q(bounded_max_bytes)<<':'<<1048576<<'}';
+uint32_t pat=0x5A5A5A5Au;size_t n=sz/4;r=G.MemsetD32(dptr,pat,n);if(r!=CUDA_SUCCESS){addCuda(Q(cuMemsetD32),r);throw Abort{1,Q(FAIL),Q(MEMSET),"cuMemsetD32 failed",kv.str()};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(Q(cuCtxSynchronize),r);throw Abort{1,Q(FAIL),Q(SYNC),"cuCtxSynchronize failed",kv.str()};}
+r=G.GetHandle(&fd,dptr,sz,CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD,(unsigned long long)CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE);
+if(r!=CUDA_SUCCESS){addCuda(Q(cuMemGetHandleForAddressRange),r);int c=(r==CUDA_ERROR_NOT_SUPPORTED||r==CUDA_ERROR_INVALID_VALUE||r==CUDA_ERROR_INVALID_DEVICE||r==CUDA_ERROR_NO_DEVICE)?2:1;throw Abort{c,c==2?Q(NOT_CHECKED):Q(FAIL),c==2?Q(EXPORT_UNSUPPORTED):Q(EXPORT),"cuMemGetHandleForAddressRange failed",kv.str()};}
+if(fd<0)throw Abort{1,Q(FAIL),Q(EXPORT),"export returned invalid fd",kv.str()};
+struct stat st;if(fstat(fd,&st)!=0){addErrno(Q(fstat),errno);throw Abort{1,Q(FAIL),Q(EXPORT),"fstat failed",kv.str()};}
+kv<<','<<Q(export)<<':'<<'{'<<Q(api)<<':'<<Q(cuMemGetHandleForAddressRange)<<','<<Q(api_status)<<':'<<Q(CUDA_SUCCESS)<<','<<Q(handle_type)<<':'<<Q(CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD)<<','<<Q(flags)<<':'<<Q(CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE)<<','<<Q(fd)<<':'<<fd<<','<<Q(fstat_size)<<':'<<(long long)st.st_size<<','<<Q(fstat_mode)<<':'<<(unsigned long)st.st_mode<<'}';
+vector<uint32_t> hb(n);r=G.MemcpyDtoH(hb.data(),dptr,sz);if(r!=CUDA_SUCCESS){addCuda(Q(cuMemcpyDtoH),r);throw Abort{1,Q(FAIL),Q(READBACK),"cuMemcpyDtoH failed",kv.str()};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(Q(cuCtxSynchronize),r);throw Abort{1,Q(FAIL),Q(SYNC),"cuCtxSynchronize failed",kv.str()};}
+size_t bad=size_t(-1);for(size_t i=0;i<n;i++)if(hb[i]!=pat){bad=i;break;}
+if(bad!=size_t(-1)){ostringstream re;re<<"readback mismatch at uint32 index "<<bad;throw Abort{1,Q(FAIL),Q(READBACK),re.str(),kv.str()};}
+kv<<','<<Q(readback)<<':'<<'{'<<Q(api)<<':'<<Q(cuMemcpyDtoH)<<','<<Q(api_status)<<':'<<Q(CUDA_SUCCESS)<<','<<Q(bytes)<<':'<<sz<<','<<Q(pattern)<<':'<<Q(0x5a5a5a5a)<<','<<Q(match)<<':'<<jbool(true)<<'}';
+bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(Q(close),errno);fd=-1;}
+if(alloc_ok){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(Q(cuMemFree),fr);alloc_ok=false;}
+if(ctx_ok){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(Q(cuCtxDestroy),cr);ctx_ok=false;}
+kv<<','<<Q(ownership)<<':'<<'{'<<Q(fd_closed)<<':'<<jbool(fc)<<','<<Q(allocation_freed)<<':'<<jbool(mf)<<','<<Q(cuda_context_destroyed)<<':'<<jbool(cd)<<'}';
+if(!fc||!mf||!cd)return emit(1,Q(FAIL),Q(CLEANUP),"resource cleanup failed",kv.str());
+return emit(0,Q(DEVICE_DMA_BUF_EXPORT_OBSERVED),Q(DEVICE_DMA_BUF_EXPORT_OBSERVED),"",kv.str());
+}catch(Abort&a){bool had_fd=(fd>=0),had_alloc=alloc_ok,had_ctx=ctx_ok;bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(Q(close),errno);fd=-1;}if(had_alloc&&G.MemFree){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(Q(cuMemFree),fr);alloc_ok=false;}if(had_ctx&&G.CtxDestroy){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(Q(cuCtxDestroy),cr);ctx_ok=false;}string kv=a.kv;if(had_fd||had_alloc||had_ctx){if(!kv.empty())kv+=',';kv+=Q(ownership);kv+=':';kv+='{';kv+=Q(fd_closed);kv+=':';kv+=jbool(had_fd&&fc);kv+=',';kv+=Q(allocation_freed);kv+=':';kv+=jbool(had_alloc&&mf);kv+=',';kv+=Q(cuda_context_destroyed);kv+=':';kv+=jbool(had_ctx&&cd);kv+='}';}return emit(a.code,a.status,a.scope,a.reason,kv);
+}catch(exception&e){bool had_fd=(fd>=0),had_alloc=alloc_ok,had_ctx=ctx_ok;if(fd>=0){close(fd);fd=-1;}if(had_alloc&&G.MemFree)G.MemFree(dptr);if(had_ctx&&G.CtxDestroy)G.CtxDestroy(ctx);return emit(1,Q(FAIL),Q(EXCEPTION),e.what(),"");}
+}

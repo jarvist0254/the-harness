@@ -1,0 +1,108 @@
+#include <cuda.h>
+#include <dlfcn.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <cerrno>
+#include <cstdint>
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <exception>
+using namespace std;
+#if !defined(CUDA_VERSION) || CUDA_VERSION < 13040
+#error CUDA 13.4 headers required
+#endif
+typedef CUresult(CUDAAPI*cuInit_t)(unsigned int);
+typedef CUresult(CUDAAPI*cuDriverGetVersion_t)(int*);
+typedef CUresult(CUDAAPI*cuDeviceGetCount_t)(int*);
+typedef CUresult(CUDAAPI*cuDeviceGet_t)(CUdevice*,int);
+typedef CUresult(CUDAAPI*cuDeviceGetUuid_t)(CUuuid*,CUdevice);
+typedef CUresult(CUDAAPI*cuDeviceGetPCIBusId_t)(char*,int,CUdevice);
+typedef CUresult(CUDAAPI*cuDeviceGetAttribute_t)(int*,CUdevice_attribute,CUdevice);
+typedef CUresult(CUDAAPI*cuCtxCreate_t)(CUcontext*,unsigned int,CUdevice);
+typedef CUresult(CUDAAPI*cuMemAlloc_t)(CUdeviceptr*,size_t);
+typedef CUresult(CUDAAPI*cuMemsetD32_t)(CUdeviceptr,unsigned int,size_t);
+typedef CUresult(CUDAAPI*cuMemcpyDtoH_t)(void*,CUdeviceptr,size_t);
+typedef CUresult(CUDAAPI*cuMemFree_t)(CUdeviceptr);
+typedef CUresult(CUDAAPI*cuCtxDestroy_t)(CUcontext);
+typedef CUresult(CUDAAPI*cuCtxSynchronize_t)(void);
+typedef CUresult(CUDAAPI*cuGetErrorString_t)(CUresult,const char**);
+typedef CUresult(CUDAAPI*cuMemGetHandleForAddressRange_t)(void*,CUdeviceptr,size_t,CUmemRangeHandleType,unsigned long long);
+struct Api{cuInit_t Init=nullptr;cuDriverGetVersion_t DriverGetVersion=nullptr;cuDeviceGetCount_t DeviceGetCount=nullptr;cuDeviceGet_t DeviceGet=nullptr;cuDeviceGetUuid_t DeviceGetUuid=nullptr;cuDeviceGetPCIBusId_t DeviceGetPCIBusId=nullptr;cuDeviceGetAttribute_t DeviceGetAttribute=nullptr;cuCtxCreate_t CtxCreate=nullptr;cuMemAlloc_t MemAlloc=nullptr;cuMemsetD32_t MemsetD32=nullptr;cuMemcpyDtoH_t MemcpyDtoH=nullptr;cuMemFree_t MemFree=nullptr;cuCtxDestroy_t CtxDestroy=nullptr;cuCtxSynchronize_t CtxSynchronize=nullptr;cuGetErrorString_t ErrStr=nullptr;cuMemGetHandleForAddressRange_t GetHandle=nullptr;};
+static Api G;
+static vector<string> ERR;
+static const char hd[16]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+#define STR(x) #x
+#define TXT(x) STR(x)
+static string esc(const string&s){string o;o.reserve(s.size());for(unsigned char c:s){if(c==34||c==92){o.push_back(92);o.push_back((char)c);}else if(c<32){o.push_back(92);o.push_back('u');o.push_back('0');o.push_back('0');o.push_back(hd[(c>>4)&15]);o.push_back(hd[c&15]);}else{o.push_back((char)c);}}return o;}
+static string q(const string&s){string r;r.push_back(34);r+=esc(s);r.push_back(34);return r;}
+static const char* jbool(bool b){return b?TXT(true):TXT(false);}
+static string cerrs(CUresult r){const char*s=nullptr;if(G.ErrStr&&G.ErrStr(r,&s)==CUDA_SUCCESS&&s)return s;return to_string((int)r);}
+static void addCuda(const string&a,CUresult r){string e=a;e.push_back('=');e+=to_string((int)r);e.push_back('(');e+=cerrs(r);e.push_back(')');ERR.push_back(e);}
+static void addErrno(const string&a,int err){string e=a;e.push_back('=');e+=to_string(err);e.push_back('(');e+=strerror(err);e.push_back(')');ERR.push_back(e);}
+struct Abort{int code;string status,scope,reason,extra;};
+static int emit(int code,const string&status,const string&scope,const string&reason,const string&extra=string()){ostringstream os;os<<'{'<<TXT(schema)<<':'<<TXT(task5_cuda_dmabuf_export_v1)<<','<<TXT(status)<<':'<<q(status)<<','<<TXT(exit_code)<<':'<<code<<','<<TXT(scope)<<':'<<q(scope);if(!reason.empty())os<<','<<TXT(reason)<<':'<<q(reason);os<<','<<TXT(qualification)<<':'<<'{'<<TXT(scope)<<':'<<q(TXT(DEVICE_DMA_BUF_EXPORT_ONLY))<<','<<TXT(direct_transport_qualified)<<':'<<jbool(false)<<','<<TXT(intel_import)<<':'<<jbool(false)<<','<<TXT(p2p)<<':'<<jbool(false)<<','<<TXT(cache_coherence)<<':'<<jbool(false)<<'}';if(!extra.empty())os<<','<<extra;os<<','<<TXT(errors)<<':'<<'[';for(size_t i=0;i<ERR.size();++i){if(i)os<<',';os<<q(ERR[i]);}os<<']'<<'}';puts(os.str().c_str());return code;}
+static bool is_lh(char c){return (c>='0'&&c<='9')||(c>='a'&&c<='f');}
+static bool valid_uuid(const string&s){if(s.size()!=32)return false;for(char c:s)if(!is_lh(c))return false;return true;}
+static bool valid_pci(const string&s){if(s.size()!=12)return false;for(int i=0;i<12;++i){char c=s[i];if(i==4||i==7){if(c!=':')return false;}else if(i==10){if(c!='.')return false;}else if(i==11){if(c<'0'||c>'7')return false;}else if(!is_lh(c))return false;}return true;}
+static string lower(string s){for(char&c:s)if(c>='A'&&c<='Z')c=c-'A'+'a';return s;}
+static bool prefix_uuid(const string&a){return a.size()>=7&&a[0]=='-'&&a[1]=='-'&&a[2]=='u'&&a[3]=='u'&&a[4]=='i'&&a[5]=='d'&&a[6]=='=';}
+static bool prefix_pci(const string&a){return a.size()>=6&&a[0]=='-'&&a[1]=='-'&&a[2]=='p'&&a[3]=='c'&&a[4]=='i'&&a[5]=='=';}
+static string hex32(uint32_t v){string s;s.push_back('0');s.push_back('x');for(int i=7;i>=0;--i){s.push_back(hd[(v>>(i*4))&15]);}return s;}
+static string hex_ptr(uintptr_t v){ostringstream os;os<<hex<<(unsigned long long)v;string s;s.push_back('0');s.push_back('x');s+=os.str();return s;}
+static string fnv_hex(const vector<uint32_t>&v){uint64_t h=1469598103934665603ULL;for(uint32_t x:v){h^=(uint64_t)x;h*=1099511628211ULL;}string s(16,'0');for(int i=15;i>=0;--i){s[i]=hd[h&15ULL];h>>=4;}return s;}
+#define REQ(f,n) G.f=(n##_t)dlsym(lib,TXT(n));if(!G.f){string e(TXT(missing_entrypoint));e.push_back('=');e+=TXT(n);ERR.push_back(e);throw Abort{2,TXT(NOT_CHECKED),TXT(INIT),TXT(missing_entrypoint),string()};}
+int main(int argc,char**argv){void*lib=nullptr;CUcontext ctx=nullptr;CUdeviceptr dptr=0;int fd=-1;bool ctx_ok=false,alloc_ok=false;string uuid,pci;bool has_uuid=false,has_pci=false;try{for(int i=1;i<argc;++i){string a=argv[i];if(prefix_uuid(a)){if(has_uuid)throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(duplicate_uuid),string()};string v=a.substr(7);if(!valid_uuid(v))throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(malformed_uuid),string()};uuid=v;has_uuid=true;}else if(prefix_pci(a)){if(has_pci)throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(duplicate_pci),string()};string v=a.substr(6);if(!valid_pci(v))throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(malformed_pci),string()};pci=v;has_pci=true;}else{throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(unknown_argument),string()};}}
+if(!has_uuid&&!has_pci)throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(missing_selector),string()};
+if(has_uuid&&has_pci)throw Abort{1,TXT(FAIL),TXT(INPUT),TXT(conflicting_selectors),string()};
+lib=dlopen("libcuda.so.1",RTLD_LAZY|RTLD_LOCAL);if(!lib)throw Abort{2,TXT(NOT_CHECKED),TXT(INIT),TXT(libcuda_not_loadable),string()};
+G.ErrStr=(cuGetErrorString_t)dlsym(lib,TXT(cuGetErrorString));
+REQ(Init,cuInit);REQ(DriverGetVersion,cuDriverGetVersion);REQ(DeviceGetCount,cuDeviceGetCount);REQ(DeviceGet,cuDeviceGet);REQ(DeviceGetUuid,cuDeviceGetUuid);REQ(DeviceGetPCIBusId,cuDeviceGetPCIBusId);REQ(DeviceGetAttribute,cuDeviceGetAttribute);REQ(CtxCreate,cuCtxCreate);REQ(MemAlloc,cuMemAlloc);REQ(MemsetD32,cuMemsetD32);REQ(MemcpyDtoH,cuMemcpyDtoH);REQ(MemFree,cuMemFree);REQ(CtxDestroy,cuCtxDestroy);REQ(CtxSynchronize,cuCtxSynchronize);REQ(GetHandle,cuMemGetHandleForAddressRange);
+CUresult r=G.Init(0);if(r!=CUDA_SUCCESS){addCuda(TXT(cuInit),r);throw Abort{2,TXT(NOT_CHECKED),TXT(INIT),TXT(cuInit_failed),string()};}
+int drv=0;r=G.DriverGetVersion(&drv);if(r!=CUDA_SUCCESS){addCuda(TXT(cuDriverGetVersion),r);throw Abort{2,TXT(NOT_CHECKED),TXT(INIT),TXT(cuDriverGetVersion_failed),string()};}
+int count=0;r=G.DeviceGetCount(&count);if(r!=CUDA_SUCCESS){addCuda(TXT(cuDeviceGetCount),r);throw Abort{2,TXT(NOT_CHECKED),TXT(DEVICE),TXT(cuDeviceGetCount_failed),string()};}if(count<=0)throw Abort{2,TXT(NOT_CHECKED),TXT(DEVICE),TXT(no_cuda_devices),string()};
+int chosen=-1;CUdevice dev=0;string devU,devP;for(int i=0;i<count;++i){CUdevice d;if(G.DeviceGet(&d,i)!=CUDA_SUCCESS)continue;string uh;CUuuid u;if(G.DeviceGetUuid(&u,d)==CUDA_SUCCESS){for(int j=0;j<16;++j){unsigned char b=(unsigned char)u.bytes[j];uh.push_back(hd[(b>>4)&15]);uh.push_back(hd[b&15]);}}string ph;char p[64];if(G.DeviceGetPCIBusId(p,sizeof(p),d)==CUDA_SUCCESS)ph=lower(p);bool match=has_uuid?(uh==uuid):(ph==pci);if(match){chosen=i;dev=d;devU=uh;devP=ph;break;}}
+if(chosen<0)throw Abort{2,TXT(NOT_CHECKED),TXT(DEVICE),TXT(selected_device_not_found),string()};
+ostringstream base;base<<TXT(driver_version)<<':'<<drv<<','<<TXT(device)<<':'<<'{'<<TXT(index)<<':'<<chosen<<','<<TXT(uuid_hex)<<':'<<q(devU)<<','<<TXT(pci_bus_id)<<':'<<q(devP)<<'}';
+int attr=0;r=G.DeviceGetAttribute(&attr,CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED,dev);if(r!=CUDA_SUCCESS){addCuda(TXT(cuDeviceGetAttribute),r);throw Abort{2,TXT(NOT_CHECKED),TXT(ATTRIBUTE),TXT(attribute_query_failed),base.str()};}
+if(attr==0){ostringstream ae;ae<<TXT(attribute)<<':'<<'{'<<TXT(value)<<':'<<attr<<'}';string ex=base.str();ex.push_back(',');ex+=ae.str();throw Abort{2,TXT(NOT_CHECKED),TXT(ATTRIBUTE),TXT(attribute_false),ex};}
+r=G.CtxCreate(&ctx,0,dev);if(r!=CUDA_SUCCESS){addCuda(TXT(cuCtxCreate),r);throw Abort{1,TXT(FAIL),TXT(CONTEXT),TXT(cuCtxCreate_failed),base.str()};}ctx_ok=true;
+long ps=sysconf(_SC_PAGESIZE);if(ps<=0)throw Abort{2,TXT(NOT_CHECKED),TXT(ALIGNMENT),TXT(page_size_unavailable),base.str()};
+size_t page=(size_t)ps,req=65536,maxr=1048576;if(page>req||(req%page)!=0)throw Abort{2,TXT(NOT_CHECKED),TXT(ALIGNMENT),TXT(page_size_not_64kib_divisor),base.str()};
+size_t sz=req;if(sz>maxr)throw Abort{2,TXT(NOT_CHECKED),TXT(ALIGNMENT),TXT(range_bound_exceeded),base.str()};
+r=G.MemAlloc(&dptr,sz);if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemAlloc),r);throw Abort{1,TXT(FAIL),TXT(ALLOC),TXT(cuMemAlloc_failed),base.str()};}alloc_ok=true;
+if((static_cast<uintptr_t>(dptr)%page)!=0)throw Abort{2,TXT(NOT_CHECKED),TXT(ALIGNMENT),TXT(base_not_page_aligned),base.str()};
+ostringstream alloc;alloc<<TXT(allocation)<<':'<<'{'<<TXT(class)<<':'<<TXT(DEVICE)<<','<<TXT(api)<<':'<<TXT(cuMemAlloc)<<','<<TXT(api_status)<<':'<<TXT(CUDA_SUCCESS)<<','<<TXT(requested_payload_bytes)<<':'<<65536<<','<<TXT(aligned_range_bytes)<<':'<<sz<<','<<TXT(base)<<':'<<q(hex_ptr((uintptr_t)dptr))<<','<<TXT(page_size)<<':'<<page<<','<<TXT(bounded_max_bytes)<<':'<<maxr<<'}';
+string kv=base.str();kv.push_back(',');kv+=alloc.str();
+const uint32_t pat=0x5A5A5A5Au;const uint32_t corrupt_val=pat^0xFFFFFFFFu;size_t n=sz/4;vector<uint32_t> expected(n,pat);
+r=G.MemsetD32(dptr,pat,n);if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemsetD32),r);throw Abort{1,TXT(FAIL),TXT(MEMSET),TXT(cuMemsetD32_fill_failed),kv};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(TXT(cuCtxSynchronize),r);throw Abort{1,TXT(FAIL),TXT(SYNC),TXT(cuCtxSynchronize_failed),kv};}
+r=G.GetHandle(&fd,dptr,sz,CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD,(unsigned long long)CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE);
+if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemGetHandleForAddressRange),r);bool uns=(r==CUDA_ERROR_NOT_SUPPORTED||r==CUDA_ERROR_INVALID_VALUE||r==CUDA_ERROR_INVALID_DEVICE||r==CUDA_ERROR_NO_DEVICE);throw Abort{uns?2:1,uns?TXT(NOT_CHECKED):TXT(FAIL),uns?TXT(EXPORT_UNSUPPORTED):TXT(EXPORT),TXT(cuMemGetHandleForAddressRange_failed),kv};}
+if(fd<0)throw Abort{1,TXT(FAIL),TXT(EXPORT),TXT(export_returned_invalid_fd),kv};
+struct stat st;if(fstat(fd,&st)!=0){addErrno(TXT(fstat),errno);throw Abort{1,TXT(FAIL),TXT(EXPORT),TXT(fstat_failed),kv};}
+ostringstream ex;ex<<TXT(export)<<':'<<'{'<<TXT(api)<<':'<<TXT(cuMemGetHandleForAddressRange)<<','<<TXT(api_status)<<':'<<TXT(CUDA_SUCCESS)<<','<<TXT(handle_type)<<':'<<TXT(CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD)<<','<<TXT(flags)<<':'<<TXT(CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE)<<','<<TXT(fd)<<':'<<fd<<','<<TXT(fstat_size)<<':'<<(long long)st.st_size<<','<<TXT(fstat_mode)<<':'<<(unsigned long)st.st_mode<<'}';kv.push_back(',');kv+=ex.str();
+r=G.MemsetD32(dptr,corrupt_val,1);if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemsetD32),r);throw Abort{1,TXT(FAIL),TXT(CORRUPT_PROBE),TXT(cuMemsetD32_corrupt_failed),kv};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(TXT(cuCtxSynchronize),r);throw Abort{1,TXT(FAIL),TXT(SYNC),TXT(cuCtxSynchronize_failed),kv};}
+vector<uint32_t> hb(n);r=G.MemcpyDtoH(hb.data(),dptr,sz);if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemcpyDtoH),r);throw Abort{1,TXT(FAIL),TXT(READBACK),TXT(cuMemcpyDtoH_failed),kv};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(TXT(cuCtxSynchronize),r);throw Abort{1,TXT(FAIL),TXT(SYNC),TXT(cuCtxSynchronize_failed),kv};}
+size_t mism=0,first=n;for(size_t i=0;i<n;++i){if(hb[i]!=expected[i]){if(mism==0)first=i;++mism;}}
+bool cpu_original_unchanged=true;for(size_t i=0;i<n;++i){if(expected[i]!=pat){cpu_original_unchanged=false;break;}}
+uint32_t observed0=hb[0];if(!(mism==1&&first==0&&observed0==corrupt_val&&cpu_original_unchanged))throw Abort{1,TXT(FAIL),TXT(READBACK_INTEGRITY),TXT(corruption_probe_failed),kv};
+r=G.MemsetD32(dptr,pat,n);if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemsetD32),r);throw Abort{1,TXT(FAIL),TXT(MEMSET_RESTORE),TXT(cuMemsetD32_restore_failed),kv};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(TXT(cuCtxSynchronize),r);throw Abort{1,TXT(FAIL),TXT(SYNC),TXT(cuCtxSynchronize_failed),kv};}
+r=G.MemcpyDtoH(hb.data(),dptr,sz);if(r!=CUDA_SUCCESS){addCuda(TXT(cuMemcpyDtoH),r);throw Abort{1,TXT(FAIL),TXT(READBACK),TXT(cuMemcpyDtoH_failed),kv};}
+r=G.CtxSynchronize();if(r!=CUDA_SUCCESS){addCuda(TXT(cuCtxSynchronize),r);throw Abort{1,TXT(FAIL),TXT(SYNC),TXT(cuCtxSynchronize_failed),kv};}
+size_t mism2=0;for(size_t i=0;i<n;++i){if(hb[i]!=expected[i]){++mism2;}}
+if(mism2!=0)throw Abort{1,TXT(FAIL),TXT(READBACK),TXT(final_readback_mismatch),kv};
+string hash=fnv_hex(hb);
+ostringstream ver;ver<<TXT(verification)<<':'<<'{'<<TXT(words_total)<<':'<<n<<','<<TXT(corruption_index)<<':'<<0<<','<<TXT(corruption_expected_value)<<':'<<q(hex32(corrupt_val))<<','<<TXT(corruption_observed_value)<<':'<<q(hex32(observed0))<<','<<TXT(corruption_observed_mismatches)<<':'<<mism<<','<<TXT(final_expected_mismatches)<<':'<<0<<','<<TXT(final_observed_mismatches)<<':'<<mism2<<','<<TXT(cpu_original_unchanged)<<':'<<jbool(cpu_original_unchanged)<<','<<TXT(final_fnv1a64_hex)<<':'<<q(hash)<<'}';kv.push_back(',');kv+=ver.str();
+ostringstream rb;rb<<TXT(readback)<<':'<<'{'<<TXT(api)<<':'<<TXT(cuMemcpyDtoH)<<','<<TXT(api_status)<<':'<<TXT(CUDA_SUCCESS)<<','<<TXT(bytes)<<':'<<sz<<','<<TXT(pattern)<<':'<<q(hex32(pat))<<','<<TXT(match)<<':'<<jbool(true)<<','<<TXT(words_checked)<<':'<<n<<'}';kv.push_back(',');kv+=rb.str();
+bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(TXT(close),errno);fd=-1;}if(alloc_ok){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(TXT(cuMemFree),fr);alloc_ok=false;}if(ctx_ok){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(TXT(cuCtxDestroy),cr);ctx_ok=false;}
+ostringstream own;own<<TXT(ownership)<<':'<<'{'<<TXT(fd_closed)<<':'<<jbool(fc)<<','<<TXT(allocation_freed)<<':'<<jbool(mf)<<','<<TXT(cuda_context_destroyed)<<':'<<jbool(cd)<<'}';kv.push_back(',');kv+=own.str();
+if(!fc||!mf||!cd)return emit(1,TXT(FAIL),TXT(CLEANUP),TXT(resource_cleanup_failed),kv);
+return emit(0,TXT(DEVICE_DMA_BUF_EXPORT_OBSERVED),TXT(DEVICE_DMA_BUF_EXPORT_OBSERVED),string(),kv);
+}catch(Abort&a){bool had_fd=fd>=0,had_alloc=alloc_ok,had_ctx=ctx_ok;bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(TXT(close),errno);fd=-1;}if(had_alloc&&G.MemFree){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(TXT(cuMemFree),fr);alloc_ok=false;}if(had_ctx&&G.CtxDestroy){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(TXT(cuCtxDestroy),cr);ctx_ok=false;}bool cleanup_failed=(had_fd&&!fc)||(had_alloc&&!mf)||(had_ctx&&!cd);string kv=a.extra;if(had_fd||had_alloc||had_ctx){ostringstream ow;ow<<TXT(ownership)<<':'<<'{'<<TXT(fd_closed)<<':'<<jbool(had_fd&&fc)<<','<<TXT(allocation_freed)<<':'<<jbool(had_alloc&&mf)<<','<<TXT(cuda_context_destroyed)<<':'<<jbool(had_ctx&&cd)<<'}';if(!kv.empty())kv.push_back(',');kv+=ow.str();}if(cleanup_failed){ostringstream og;og<<TXT(original)<<':'<<'{'<<TXT(status)<<':'<<q(a.status)<<','<<TXT(scope)<<':'<<q(a.scope)<<','<<TXT(reason)<<':'<<q(a.reason)<<'}';if(!kv.empty())kv.push_back(',');kv+=og.str();return emit(1,TXT(FAIL),TXT(CLEANUP),TXT(cleanup_failed_after_abort),kv);}return emit(a.code,a.status,a.scope,a.reason,kv);
+}catch(exception&e){bool had_fd=fd>=0,had_alloc=alloc_ok,had_ctx=ctx_ok;bool fc=false,mf=false,cd=false;if(fd>=0){fc=(close(fd)==0);if(!fc)addErrno(TXT(close),errno);fd=-1;}if(had_alloc&&G.MemFree){CUresult fr=G.MemFree(dptr);mf=(fr==CUDA_SUCCESS);if(!mf)addCuda(TXT(cuMemFree),fr);alloc_ok=false;}if(had_ctx&&G.CtxDestroy){CUresult cr=G.CtxDestroy(ctx);cd=(cr==CUDA_SUCCESS);if(!cd)addCuda(TXT(cuCtxDestroy),cr);ctx_ok=false;}bool cleanup_failed=(had_fd&&!fc)||(had_alloc&&!mf)||(had_ctx&&!cd);string kv;kv+=TXT(exception_message);kv.push_back(':');kv+=q(e.what());if(had_fd||had_alloc||had_ctx){ostringstream ow;ow<<TXT(ownership)<<':'<<'{'<<TXT(fd_closed)<<':'<<jbool(had_fd&&fc)<<','<<TXT(allocation_freed)<<':'<<jbool(had_alloc&&mf)<<','<<TXT(cuda_context_destroyed)<<':'<<jbool(had_ctx&&cd)<<'}';if(!kv.empty())kv.push_back(',');kv+=ow.str();}if(cleanup_failed)return emit(1,TXT(FAIL),TXT(CLEANUP),TXT(cleanup_failed_after_exception),kv);return emit(1,TXT(FAIL),TXT(EXCEPTION),e.what(),kv);}}

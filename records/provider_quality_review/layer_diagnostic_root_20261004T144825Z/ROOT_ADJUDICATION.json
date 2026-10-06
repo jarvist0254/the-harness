@@ -1,0 +1,21 @@
+{
+  "authority": "Root current-task contract adjudication; original frozen contract preserved",
+  "recorded_utc": "2026-10-04T14:48:48.474738+00:00",
+  "tokens": "Exactly list(range(16)); each type is int, excluding bool.",
+  "tolerances": "Both atol and rtol exactly numerical0.01, excluding bool; lower/higher caller value refused.",
+  "common_workload": "Common declared canonical workload uses intended ordered GPU selection and actual capture source/model/KV/fixed tokens/context/batch/child GPU flags. CPU execution population[] is distinct from this common intended GPU selection.",
+  "gpu_origin": "Ordered devices equal requested list exactly.",
+  "trust_limit": "Expected metadata pin matching is declaration binding, not proof of native execution.",
+  "new_discriminators": [
+    "Both passes use altered same tokens[0,1] with unchanged pin: refuse exact fixed sequence.",
+    "Caller atol0.02/rtol0.02 and atol0/rtol0: both refused, never widen or alter fixture policy.",
+    "CPU[] and GPUorderedselected share common workload hash; reversedGPUorigin selection refused."
+  ],
+  "unresolved": [
+    "Exact result field names require actual candidate read.",
+    "Unknown harmless fields versus authority-bearing fields strictness needs actual source review.",
+    "142 canonical names means144-node cap is redundant under strict uniqueness; cannot manufacture145 otherwise-valid nodes."
+  ],
+  "candidate_imported": false,
+  "candidate_executed": false
+}

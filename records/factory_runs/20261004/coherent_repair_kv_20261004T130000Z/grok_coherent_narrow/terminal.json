@@ -1,0 +1,28 @@
+{
+  "outer_killed": false,
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 34890,
+      "outputTokens": 38686,
+      "cacheReadInputTokens": 21376,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 2,
+      "costUSD": 0.21255712
+    }
+  },
+  "elapsed_seconds": 234.11,
+  "vendor_reported_cost_usd": 0.21255712,
+  "usage": {
+    "input_tokens": 34890,
+    "cache_read_input_tokens": 21376,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 38686,
+    "reasoning_tokens": 38647,
+    "total_tokens": 94952
+  },
+  "requested_model": "grok-4.7-build-fast",
+  "exit_code": 1,
+  "stop_reason": "cancelled",
+  "pid": 44980,
+  "status": "NOT_ACCEPTED"
+}

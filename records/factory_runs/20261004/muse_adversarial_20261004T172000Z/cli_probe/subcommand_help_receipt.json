@@ -1,0 +1,65 @@
+{
+  "observed_utc": "2026-10-04T17:33:15.0315094Z",
+  "binary": "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe",
+  "binary_sha256": "39a97806d315ece0fc5cdbb88c903ef5bc77655f32e66dc22d267a212c5030ba",
+  "cwd": "E:\\the_harness",
+  "stream_caps_bytes": 2097152,
+  "runs": [
+    {
+      "subcommand": "exec --help",
+      "pid": 31624,
+      "status": "EXIT_0",
+      "exit_code": 0,
+      "elapsed_seconds": 0.07,
+      "process_absent": true,
+      "stdout_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\exec.stdout.log",
+      "stdout_bytes": 3784,
+      "stderr_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\exec.stderr.log",
+      "stderr_bytes": 0,
+      "stdout_sha256": "37c58683f1de94fa4d60f8b3dc185d37ec620102a448169c82719484a722babc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "subcommand": "sandbox --help",
+      "pid": 48540,
+      "status": "EXIT_0",
+      "exit_code": 0,
+      "elapsed_seconds": 0.064,
+      "process_absent": true,
+      "stdout_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\sandbox.stdout.log",
+      "stdout_bytes": 68,
+      "stderr_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\sandbox.stderr.log",
+      "stderr_bytes": 0,
+      "stdout_sha256": "2c2e245c6871611fd89eccd05b8dd0bab1f8106997289d5e42e6d9a0f0118432",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "subcommand": "skills --help",
+      "pid": 85040,
+      "status": "EXIT_0",
+      "exit_code": 0,
+      "elapsed_seconds": 0.055,
+      "process_absent": true,
+      "stdout_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\skills.stdout.log",
+      "stdout_bytes": 1012,
+      "stderr_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\skills.stderr.log",
+      "stderr_bytes": 0,
+      "stdout_sha256": "acca1177f456ad3fd3fccaf3042a8c2ac26d18c44b4724bb21f19994776128d7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "subcommand": "model-profile --help",
+      "pid": 8888,
+      "status": "EXIT_0",
+      "exit_code": 0,
+      "elapsed_seconds": 0.066,
+      "process_absent": true,
+      "stdout_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\model-profile.stdout.log",
+      "stdout_bytes": 309,
+      "stderr_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\model-profile.stderr.log",
+      "stderr_bytes": 0,
+      "stdout_sha256": "2e75b387a13e0867208c27b4023fd25deb1e0b635ab7c5b4cc88bef730c5662d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

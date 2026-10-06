@@ -1,0 +1,20 @@
+test_d_thickness_can_overhang_without_inflating_print_height (test_gap_posts.GapPostGeometryTests) ... ok
+test_each_gap_has_positive_clearance_on_both_sides (test_gap_posts.GapPostGeometryTests) ... ok
+test_frame_bounds_follow_actual_post_and_beam_height (test_gap_posts.GapPostGeometryTests) ... ok
+test_no_post_intersects_any_gpu_body (test_gap_posts.GapPostGeometryTests) ... ok
+test_posts_end_below_rolled_card (test_gap_posts.GapPostGeometryTests) ... ok
+test_posts_that_fill_or_exceed_gap_are_refused (test_gap_posts.GapPostGeometryTests) ... ok
+test_tall_frame_is_refused_without_clipping (test_gap_posts.GapPostGeometryTests) ... ok
+test_a_card_outside_core_cannot_claim_integral_support (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_all_cards_must_reach_both_nominal_support_footprints (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_body_gaps_and_independent_integrated_supports (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_d_beam_cannot_intrude_into_lower_card_bodies (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_fourth_card_rolls_same_fixture_dimensions (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_invalid_dimensions_and_fixed_print_limit_are_refused (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_structural_primitives_must_have_positive_sizes (test_integrated_layout.IntegratedLayoutTests) ... ok
+test_universal_boxes_are_not_silently_certified (test_integrated_layout.IntegratedLayoutTests) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.029s
+
+OK

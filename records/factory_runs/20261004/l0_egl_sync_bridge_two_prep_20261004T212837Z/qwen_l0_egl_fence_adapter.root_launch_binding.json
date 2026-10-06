@@ -1,0 +1,18 @@
+{
+  "native_children_actual": 0,
+  "reasoning_effort": "xhigh",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter.spec.txt",
+  "lane": "Qwen",
+  "provider_launch_authorized": true,
+  "job_id": "qwen_l0_egl_fence_adapter",
+  "prompt_sha256": "0f225f4105af59dd2a4a13a75c1a47670730f0a86a0b4284291f872af93b7012",
+  "tests_limit": 16000,
+  "authority": "ROOT exact two bridge Qwen Max xhigh launch admission fullread/rehashed19inputs",
+  "source_sha256": "a97a6e0bb9552f267c0ff1b1bdb24f8f58a3484da564194f75a89f8c23191eae",
+  "model": "qwen3.8-max",
+  "source_limit": 32000,
+  "utc": "2026-10-04T21:33:43.1295970Z",
+  "source_execution": false,
+  "packet_sha256": "d23955a423daf40f335384cbc24ff6b4a1b885876ff47c954d0ff82754698026"
+}

@@ -1,0 +1,31 @@
+import unittest,subprocess,sys,os,shutil
+BIN=os.environ.get('LOGITS_QUAL_BIN','')
+class TestComparatorSelfTest(unittest.TestCase):
+ def test_selftest_runs(self):
+  if not BIN or not os.path.isfile(BIN):self.skipTest('SKIPUNBUILT')
+  r=subprocess.run([BIN,'--self-test'],capture_output=True,text=True,timeout=30)
+  self.assertEqual(r.returncode,0)
+  self.assertIn('SELFTEST finite pass=1',r.stderr)
+  self.assertIn('SELFTEST nan detected=1',r.stderr)
+  self.assertIn('SELFTEST inf detected=1',r.stderr)
+  self.assertIn('SELFTEST shape1 fail=1',r.stderr)
+  self.assertIn('SELFTEST perturb fail=1',r.stderr)
+  self.assertIn('SELFTEST complete - no hardware PASS claimed',r.stderr)
+ def test_missing_args_returns_2(self):
+  if not BIN or not os.path.isfile(BIN):self.skipTest('SKIPUNBUILT')
+  r=subprocess.run([BIN],capture_output=True,text=True,timeout=10)
+  self.assertEqual(r.returncode,2)
+ def test_bad_sha_prefix_returns_2(self):
+  if not BIN or not os.path.isfile(BIN):self.skipTest('SKIPUNBUILT')
+  r=subprocess.run([BIN,'--model','/tmp/x','--expected-sha256','0000'+'a'*60,'--devices','A,B'],capture_output=True,text=True,timeout=10)
+  self.assertEqual(r.returncode,2)
+ def test_short_sha_returns_2(self):
+  if not BIN or not os.path.isfile(BIN):self.skipTest('SKIPUNBUILT')
+  r=subprocess.run([BIN,'--model','/tmp/x','--expected-sha256','9465abc','--devices','A,B'],capture_output=True,text=True,timeout=10)
+  self.assertEqual(r.returncode,2)
+ def test_single_device_returns_2(self):
+  if not BIN or not os.path.isfile(BIN):self.skipTest('SKIPUNBUILT')
+  r=subprocess.run([BIN,'--model','/tmp/x','--expected-sha256','9465'+'a'*60,'--devices','ONLYONE'],capture_output=True,text=True,timeout=10)
+  self.assertEqual(r.returncode,2)
+if __name__=='__main__':unittest.main()
+

@@ -1,0 +1,45 @@
+{
+  "pure_controls": "PURE_REVIEW_INTAKE_V2_CONTROLS.json",
+  "review_verdict_is_runtime_admission": false,
+  "original_wrapper_sha256": "a998042a41d8abf9bed72a0a290a4d707251c03bfd02c13be982c9ad57897036",
+  "syntax_parse_errors": [],
+  "state": "PREPARED_NOT_PROVIDER_LAUNCHED",
+  "v2_wrapper_sha256": "9b14f497c7104d9e45d737a709a5b51f710bf812730b9da8c7ef94132d4629df",
+  "utc": "2026-10-04T17:46:33.7411428Z",
+  "old_gemini_parse_failures_unchanged": true,
+  "intake": "Prefer actual structured_output; if absent/null use response strictly JSON; invalid present structured output never falls back",
+  "pure_controls_passed": 7,
+  "pure_controls_failed": 0,
+  "line_set_diff": [
+    {
+      "side": "=>",
+      "text": ". (Join-Path $PSScriptRoot 'review_artifact_v2.ps1')"
+    },
+    {
+      "side": "=>",
+      "text": " $state='NOT_ACCEPTED';$usage=$null;$modelUsage=$null;$finish=$null;$parseError=$null;$reviewInputSource=$null"
+    },
+    {
+      "side": "=>",
+      "text": "   if($Lane-eq'Gemini'){$selectedReview=Get-StrictReviewFromCli $r;$parsed=$selectedReview.artifact;$reviewInputSource=$selectedReview.source;Save-NewJson (Join-Path $work 'review.pending_root_qa.json') $parsed;$state='COMPLETE_REVIEW_STAGED';$finish='NOT_REPORTED'}"
+    },
+    {
+      "side": "=>",
+      "text": " try{Save-NewJson (Join-Path $PSScriptRoot ($Job+'.owned_terminal.json')) @{lane=$Lane;requested_model=$models[$Lane];pid=if($started){$p.Id}else{$null};exit_code=$exit;elapsed_seconds=[math]::Round($clock.Elapsed.TotalSeconds,2);status=$state;outer_killed=$killed;log_cap_exceeded=$overflow;pipe_error=$pipeError;drain_unknown=$drainUnknown;private_url_output_refused=$privateUrl;usage=$usage;model_usage=$modelUsage;review_input_source=$reviewInputSource;finish_reason=$finish;parse_error_type=$parseError;native_children_actual=0;provider_patch_applied=$false;credential_saved=$false}"
+    },
+    {
+      "side": "<=",
+      "text": " $state='NOT_ACCEPTED';$usage=$null;$modelUsage=$null;$finish=$null;$parseError=$null"
+    },
+    {
+      "side": "<=",
+      "text": "   if($Lane-eq'Gemini'){$answer=$r.response;if($answer-isnot[string]){$answer=$answer|ConvertTo-Json -Depth 40};$parsed=Read-StrictJson $answer;if($parsed.verdict-isnot[string]-or$parsed.findings-isnot[array]-or$parsed.safety_checks-isnot[array]){throw 'invalid review schema'};Save-NewJson (Join-Path $work 'review.pending_root_qa.json') $parsed;$state='COMPLETE_REVIEW_STAGED';$finish='NOT_REPORTED'}"
+    },
+    {
+      "side": "<=",
+      "text": " try{Save-NewJson (Join-Path $PSScriptRoot ($Job+'.owned_terminal.json')) @{lane=$Lane;requested_model=$models[$Lane];pid=if($started){$p.Id}else{$null};exit_code=$exit;elapsed_seconds=[math]::Round($clock.Elapsed.TotalSeconds,2);status=$state;outer_killed=$killed;log_cap_exceeded=$overflow;pipe_error=$pipeError;drain_unknown=$drainUnknown;private_url_output_refused=$privateUrl;usage=$usage;model_usage=$modelUsage;finish_reason=$finish;parse_error_type=$parseError;native_children_actual=0;provider_patch_applied=$false;credential_saved=$false}"
+    }
+  ],
+  "review_intake_sha256": "a9c7d9bf2a02c6b8e37e8db251c6f8028f7756d51b6b169c4a33ce2b5fead78d",
+  "transport_deadline_credential_controls_changed": false
+}

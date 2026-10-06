@@ -1,0 +1,45 @@
+{
+  "hashes_unchanged": true,
+  "cleanup_verified": true,
+  "cases": [
+    {
+      "case": "normal",
+      "pid": 69288,
+      "exit_code": 0,
+      "strict_json_valid": false,
+      "counters": {
+        "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+        "external_queries": 0,
+        "peer_queries": 2,
+        "property_queries": 2,
+        "candidate_exit": 0
+      }
+    },
+    {
+      "case": "init_error",
+      "pid": 47496,
+      "exit_code": 2,
+      "strict_json_valid": true,
+      "counters": {
+        "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+        "external_queries": 0,
+        "peer_queries": 0,
+        "property_queries": 0,
+        "candidate_exit": 2
+      }
+    },
+    {
+      "case": "duplicate_root",
+      "pid": 35532,
+      "exit_code": 0,
+      "strict_json_valid": false,
+      "counters": {
+        "scope": "ACTUAL_HEADER_LOCAL_CPU_STUB_NOT_HARDWARE",
+        "external_queries": 0,
+        "peer_queries": 6,
+        "property_queries": 3,
+        "candidate_exit": 0
+      }
+    }
+  ]
+}

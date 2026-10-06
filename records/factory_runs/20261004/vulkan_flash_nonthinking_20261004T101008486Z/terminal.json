@@ -1,0 +1,7 @@
+{
+  "http_status": 200,
+  "model": "qwen3.8-flash",
+  "status": "ERROR_ArgumentException",
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\vulkan_flash_nonthinking_20261004T101008486Z",
+  "seconds": 95.3999171
+}

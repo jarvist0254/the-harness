@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_20261004T135404Z\\evaluate_credible.py"
+  ],
+  "pid": 47572,
+  "exit": 1,
+  "seconds": 0.9840000001713634,
+  "timeout": false,
+  "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "evaluator_sha256": "cece175744bd1eaa96066f3b2b0f4589c7bfcb9aed46e517b7b02657316d4708"
+}

@@ -1,0 +1,17 @@
+{
+  "pins": {
+    "main": "1ee56614644622ea9a0c8d702fe483ce19cec97e",
+    "googletest": "35b75a2cba6ef72b7ce2b6b94b05c54ca07df866"
+  },
+  "archives": {
+    "googletest.tar": {
+      "sha256": "dcc81bda9b63a64ea51a616ef5707e6ba477e2a7bfbf0adf4dc6a9b35d1059ad",
+      "size": 4433920
+    },
+    "main.tar": {
+      "sha256": "22e9721b1891dc89ee7b4e049d880c405b8430c454b56a1874b1bf85fc2c57a4",
+      "size": 16670720
+    }
+  },
+  "export": "git archive exact commits; explicit clean googletest export; original dirty trees untouched"
+}

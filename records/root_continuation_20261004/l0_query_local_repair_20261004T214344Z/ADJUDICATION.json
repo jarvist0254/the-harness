@@ -1,0 +1,58 @@
+{
+  "scope": "CPU-only actual-official-header synthetic collector regression; no real Level Zero loader, driver, GPU or transfer",
+  "promotion": "PENDING_ROOT_FULL_SOURCE_REVIEW",
+  "baseline": {
+    "tests": 7,
+    "pass": 1,
+    "fail": 6
+  },
+  "derivative": {
+    "tests": 7,
+    "pass": 7,
+    "fail": 0
+  },
+  "cases": {
+    "normal": {
+      "pid": 85004,
+      "exit": 0,
+      "external_queries": 2,
+      "peer_queries": 2,
+      "properties_queries": 2
+    },
+    "init_error": {
+      "pid": 42256,
+      "exit": 1,
+      "status": "FAIL",
+      "result_code": 1879048193,
+      "external_queries": 0
+    },
+    "duplicate_root": {
+      "pid": 40100,
+      "exit": 0,
+      "roots": 2,
+      "external_queries": 2,
+      "peer_queries": 2,
+      "properties_queries": 2
+    }
+  },
+  "cleanup": "All three actual owned jobs final active_processes 0, CLEANUP; retained outer PID80744 reaped; source/tool/exe pins unchanged per raw receipts",
+  "intermediate_snapshots": "Four sequential source-only construction snapshots; not compiled or executed, no intermediate PASS claims",
+  "not_checked": [
+    "Distinct handles sharing a full UUID alias",
+    "Unsupported external-properties API return branch",
+    "Malformed returned-count cases",
+    "Physical device identity, actual capabilities, P2P or payload transfer"
+  ],
+  "pins": {
+    "source.local_derivative_revision2.cpp": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+    "actual_header_stub_local_revision2.cpp": "78250c8d9e780295e3385cf5d5dc88a6c4028064e7383658aaaa00f6f5c7f91d",
+    "test_measured_requirements.py": "6009ac0454f59858a3d49b6156f39c82d1f18145e87fd1f59121f2275f16824b",
+    "requirements_RED.stderr.log": "29b55cc7f465825852b887195216c646e596e3858f81e926469f41f795e3227d",
+    "requirements_GREEN.stderr.log": "88efc050564d9fda5f15a3b6d636db0c043633ae2b874e90e9557fbdd98742ac",
+    "build_20261004T214702Z/stub.exe": "f9c7bfd399adb3bba2c5541553a817fa1ec99b6fa6fa0fbf0a0f65e9cb036ba5",
+    "build_20261004T214702Z/runtime_receipt.json": "15c423ee01e3c82143b0b9f58e227ca6f5d0ce6f1e63acc406a47ef975567838",
+    "build_20261004T214702Z/runtime_outer_receipt.json": "c2dcb32ebc0266a5d1f4ec786b95721b17c995ba444563f1f041890e1c56bad8",
+    "build_20261004T214702Z/compile_receipt.json": "de33d3dffc03ccbf25650adfb8f9bec2da07dfdd2f35c03d239a14db9da22aeb",
+    "build_20261004T214702Z/pe_imports.raw.txt": "34cd11a69606a957db062bcda3eb3fa9e619bb88cfeaf9523a97598c5e058d14"
+  }
+}

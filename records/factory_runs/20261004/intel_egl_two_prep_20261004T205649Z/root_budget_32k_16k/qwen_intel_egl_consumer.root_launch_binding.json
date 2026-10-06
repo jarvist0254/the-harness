@@ -1,0 +1,18 @@
+{
+  "source_execution": false,
+  "native_children_actual": 0,
+  "provider_launch_authorized": true,
+  "job_id": "qwen_intel_egl_consumer",
+  "reasoning_effort": "xhigh",
+  "lane": "Qwen",
+  "source_sha256": "26d9198d2eb8ac74dfc6e27cf343b97dddc8a283da4e1783679099b99662f711",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer.spec.txt",
+  "model": "qwen3.8-max",
+  "authority": "ROOT explicit two EGL requests existing32k16k+exactv2 appendedprimary",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k",
+  "tests_limit": 16000,
+  "source_limit": 32000,
+  "prompt_sha256": "910bd52699de98fbfca8216f36bb00184a4aa350e3853fcb0c0c81f01b0182fb",
+  "primary_excerpt_sha256": "8710bdd2b1e65c03e9262efc9a4acd1d297f6666c2159f299ef6b8039b1ec757",
+  "utc": "2026-10-04T21:04:09.6109837Z"
+}

@@ -1,0 +1,37 @@
+EEEE
+======================================================================
+ERROR: test_all_unknown_stage_errors_report_unknown (j_link.tests.test_executor_diagnostics.StageErrorAggregation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_executor_diagnostics.py", line 19, in test_all_unknown_stage_errors_report_unknown
+    self.assertIsNone(executor._max_stage_abs_error([None, None]))
+AttributeError: module 'opencl_executor' has no attribute '_max_stage_abs_error'
+
+======================================================================
+ERROR: test_empty_stage_error_sequence_keeps_empty_case_default (j_link.tests.test_executor_diagnostics.StageErrorAggregation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_executor_diagnostics.py", line 22, in test_empty_stage_error_sequence_keeps_empty_case_default
+    self.assertEqual(executor._max_stage_abs_error([]), 0.0)
+AttributeError: module 'opencl_executor' has no attribute '_max_stage_abs_error'
+
+======================================================================
+ERROR: test_finite_stage_errors_keep_the_maximum (j_link.tests.test_executor_diagnostics.StageErrorAggregation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_executor_diagnostics.py", line 13, in test_finite_stage_errors_keep_the_maximum
+    self.assertEqual(executor._max_stage_abs_error([0.0, 0.25, 0.125]), 0.25)
+AttributeError: module 'opencl_executor' has no attribute '_max_stage_abs_error'
+
+======================================================================
+ERROR: test_mixed_finite_and_unknown_stage_errors_report_unknown (j_link.tests.test_executor_diagnostics.StageErrorAggregation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\the_harness\j_link\tests\test_executor_diagnostics.py", line 16, in test_mixed_finite_and_unknown_stage_errors_report_unknown
+    self.assertIsNone(executor._max_stage_abs_error([0.0, 1.5e-6, None, 2.0e-6]))
+AttributeError: module 'opencl_executor' has no attribute '_max_stage_abs_error'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.007s
+
+FAILED (errors=4)

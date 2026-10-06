@@ -1,0 +1,8 @@
+{
+  "pid": 56500,
+  "status": "EXIT_CODE_NOT_CAPTURED_BY_FIRST_RECEIPT",
+  "elapsed_seconds": 149,
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\build_targets.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\build_targets.stderr.log",
+  "command": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\build_targets.cmd"
+}

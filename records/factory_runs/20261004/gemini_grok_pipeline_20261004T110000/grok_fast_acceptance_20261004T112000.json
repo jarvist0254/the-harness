@@ -1,0 +1,39 @@
+{
+  "state": "COMPLETE_PATCH_STATIC_MATCHED_PENDING_IMPLEMENTER_GATE",
+  "model": "grok-4.7-build-fast",
+  "raw_terminal": "grok_fast_terminal.json",
+  "raw_response": "grok_fast_stdout.json",
+  "extraction_field": "text",
+  "stop_reason": "end_turn",
+  "exit_code": 0,
+  "seconds": 57.12,
+  "replacement_count": 4,
+  "exact_source_matches": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "usage": {
+    "input_tokens": 9239,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 9594,
+    "reasoning_tokens": 7527,
+    "total_tokens": 19985
+  },
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 9239,
+      "outputTokens": 9594,
+      "cacheReadInputTokens": 1152,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.05210024
+    }
+  },
+  "reported_cost_usd": 0.05210024,
+  "actual_native_children": 0,
+  "source_edited_by_this_agent": false,
+  "root_approved_subject_to_independent_gate": true
+}

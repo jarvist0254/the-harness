@@ -1,0 +1,21 @@
+{
+  "verdict": "STATIC_REJECTED_NO_EXECUTION",
+  "gemini_terminal": "gemini_repaired_admission_review/terminal.json",
+  "gemini_reported_total_tokens": 178259,
+  "independent_root_review": "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\GROK_STATIC_REVIEW.md",
+  "accepted_findings": [
+    "FOUR_REQUIRED needs actual four physical devices and actual numerical-success capacity evidence",
+    "TerminateJobObject failure must still wait exact owned roots and preserve unknown cleanup",
+    "provider ROOT_STATIC_ADMISSION=True is not manager authority",
+    "trusted digest list alone does not bind summary fields to hashed artifact bytes",
+    "partial pipe and duplicate allocation leaks; reader handle ownership races; bad_read ignored"
+  ],
+  "questionable_findings": [
+    {
+      "source": "Gemini supervisor line376",
+      "adjudication": "owned.append(rec) transfers exact handles to caller cleanup; local ph/th=None is not alone a leak. Suggested delayed transfer can cause local+caller double cleanup. Keep explicit single ownership and fix actual caller exception handling instead."
+    }
+  ],
+  "runtime_tests": "NOT_RUN_ROOT_ADMISSION_REQUIRED",
+  "size_ceiling_note": "Original and corrective coding size ceilings differ; line count compliance is separate from execution safety. Do not minify or remove safety checks to satisfy a line budget."
+}

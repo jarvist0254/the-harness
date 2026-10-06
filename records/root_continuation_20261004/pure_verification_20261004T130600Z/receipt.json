@@ -1,0 +1,72 @@
+{
+  "created_utc": "2026-10-04T13:06:28.841644+00:00",
+  "scope": "GPU-free unit verification only; no hardware or physical fit qualification",
+  "cases": [
+    {
+      "name": "j_link",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "j_link/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 0.266,
+      "stderr_tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 79 tests in 0.076s",
+        "",
+        "OK"
+      ]
+    },
+    {
+      "name": "cad",
+      "command": [
+        "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "cad/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 0.078,
+      "stderr_tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 8 tests in 0.017s",
+        "",
+        "OK"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "j_link/device_inventory.py",
+      "sha256": "8a8f3ffc6d130e36847588b1e1d58d8e8013431b85b525e7bf389d84bf9a3100"
+    },
+    {
+      "path": "j_link/tests/test_device_inventory.py",
+      "sha256": "2480d2d09baca56c06486623247bc564fd048e33f0a964f207767340b2c61413"
+    },
+    {
+      "path": "j_link/opencl_executor.py",
+      "sha256": "ff13c3783bda61cf153b1bb58afb9472bbe9c2404fa056c2816d011e749ea387"
+    },
+    {
+      "path": "cad/integrated_core.py",
+      "sha256": "326133a489430f5167bec29a87c28af8ea652e2fe40701d64c153399b85f372c"
+    },
+    {
+      "path": "cad/tests/test_integrated_layout.py",
+      "sha256": "2d2630ce5391a69de37ee23ccba6f6bd8fb8f530e7fa66eecec52dd8b266092a"
+    }
+  ]
+}

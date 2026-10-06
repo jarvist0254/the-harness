@@ -1,0 +1,15 @@
+{
+  "source_sha256": "fc73cb96c60a4df88815d670f3d6682ff71c3a1cbcaf9dc06942bc780768dc29",
+  "refusal_reason": "analysis/prerequisites/evidence_limits/references are strings, schema requires arrays; no normalization",
+  "source_execution": false,
+  "session_reaped": 22518,
+  "total_tokens": 45036,
+  "source_chars": 14770,
+  "candidate_acceptance": "NOT_ACCEPTED_SCHEMA_REFUSAL_EXACT_STRINGS_REVIEW_ONLY",
+  "utc": "2026-10-04T20:47:52.7750949Z",
+  "tests_sha256": "85ee5853b0534ffb89d993225956894554eb12e57bc6dfe323e030dd303965f0",
+  "original_status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+  "owned_pids_point_absent": true,
+  "elapsed_seconds": 746.38,
+  "tests_chars": 7253
+}

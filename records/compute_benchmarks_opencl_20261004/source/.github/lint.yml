@@ -1,0 +1,38 @@
+use-configs:                
+  - lint/opensource/copyrights   
+  - lint/opensource/banned_words 
+lint:
+  clang-format:
+    included:
+      - \.cpp$
+      - \.h$
+      - \.inl$
+      - \.hpp$
+    excluded:
+      - third_party/
+      - scripts/
+
+  cmake-format:
+    disabled: true
+
+  copyright:
+    excluded:
+      - third_party/
+    mit_header:
+      year_constraints:
+        _default: 2022
+      file_types:
+        bat:
+          comment_begin: REM
+          comment_end: REM
+          comment_char: REM
+
+  banned_words:
+    exclude:
+      - third_party/
+
+  ults-needed:
+    disabled: true
+
+  binary_files:
+    disabled: true

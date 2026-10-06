@@ -1,0 +1,22 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\source.qwen_untrusted.cpp",
+    "sha256": "7052c8ebaa49d9807f6428b5a1ed6779a093392bccf6ef3266b254c0eac3cb5b"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\tests_source.qwen_untrusted.txt",
+    "sha256": "6363369cf5ba49b2b82397893d42d622f35ef5bd434ddffefd578733b6568e76"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport.spec.txt",
+    "sha256": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_qwen_linux_dmabuf_audit_20261004T190700Z\\muse_result.extracted.json",
+    "sha256": "02f11109af35bdbaf9715879b9a3b542f7aed9d99b32c7dcc19a2532cad79168"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_dmabuf_gemini_review_20261004T191500Z\\gemini_response_pair.json",
+    "sha256": "db5e33a0c66d2a8e591723d33149a0ab2377928fee2d4665c53e58696c46f1f0"
+  }
+]

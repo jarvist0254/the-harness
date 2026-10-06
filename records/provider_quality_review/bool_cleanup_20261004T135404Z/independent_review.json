@@ -1,0 +1,80 @@
+{
+  "scope": "INDEPENDENT_MOCK_ONLY_NOT_NATIVE_ADMISSION",
+  "candidate": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\qwen_bool_cleanup\\contained_supervisor.py",
+  "candidate_sha256": "6bb4e7edb317044e34d426d44b0035c2ea57fb762aade601f81e3be599ca59f9",
+  "independent_static_gate": "PASS for mock-only import; top-level stdlib imports, literal assignments, undecorated definitions; class body methods only",
+  "qwen": {
+    "tests_run": 36,
+    "failures": 18,
+    "errors": 0,
+    "actual_native_process_calls": []
+  },
+  "baseline": {
+    "source_sha256": "60391680917cbbe84fe432596c399dccc064c1fc5658a1cc6401c5becf8b0f21",
+    "tests_run": 36,
+    "failures": 23,
+    "errors": 0,
+    "actual_native_process_calls": []
+  },
+  "findings": [
+    {
+      "name": "Cleanup deadline starts before execution",
+      "source_lines": [
+        662
+      ],
+      "detail": "Twenty seconds of successful work leaves zero milliseconds for cleanup waits."
+    },
+    {
+      "name": "Writer release uncertainty discarded",
+      "source_lines": [
+        405,
+        420
+      ],
+      "detail": "Ten independently injected writer/duplicate close exceptions still permit CLEANUP; initial close result is not retained."
+    },
+    {
+      "name": "Reader close failure drain mismatch",
+      "source_lines": [
+        696
+      ],
+      "detail": "Four reader self-close exceptions return UNKNOWN status while drain remains CLEANUP because slot uncertainty is processed only in the completed branch."
+    },
+    {
+      "name": "Inspection exception bypasses remaining cleanup",
+      "source_lines": [
+        692
+      ],
+      "detail": "A fake is_alive exception bypasses process/thread and job handle closes and receipt emission."
+    },
+    {
+      "name": "Stale durable receipt on terminal journal failure",
+      "source_lines": [
+        645
+      ],
+      "detail": "Receipt is written before terminal journal; failure returns UNKNOWN_DURABILITY but restart loads the previous PROCESS_COMPLETED receipt."
+    },
+    {
+      "name": "Reader join failure",
+      "source_lines": [
+        689
+      ],
+      "detail": "First join exception is swallowed; subsequent readers are not joined, and live reader handles remain unresolved. Mock failure proves incomplete ownership resolution, not permission to close a handle underneath a real reader."
+    }
+  ],
+  "independent_test_attribution": "Evaluator authored/adapted by Codex; extracted fake helper classes as text, never imported stale evaluators/provider tests. No provider tests executed. Current candidate paths and SHA guards explicit. _validate/native ABI injected. No actual _imports calls.",
+  "coverage": [
+    "All nineteen allocated fake handle close positions, with per-handle ownership and attempt/success counts.",
+    "Four independent stdout/stderr ReadFile error positions.",
+    "ctypes job integer-zero and bool-False failure; CPython CloseHandle successful None preserved and failures modeled as exceptions.",
+    "Job close before durable receipt, terminal journal failure and actual candidate restart_receipt result.",
+    "Shared explicit join deadline and twenty-second work followed by cleanup budget.",
+    "Reader join and is_alive exceptions; log/receipt write failures."
+  ],
+  "limits": [
+    "No real processes, pipes, threads, Job APIs, GPUs, or native ABI validation.",
+    "Selected fake interleavings are not concurrency qualification.",
+    "Failed close is deliberately not retried in these controls; tests require uncertainty propagation and remaining close attempts.",
+    "No whole-goal, production, durable supervision, or worker containment PASS."
+  ],
+  "initial_evaluator_correction": "Initial helper fake join reran already completed reader targets. Original attempt preserved; evaluate_credible.py and final evaluate_baseline_complete.py/evaluate_qwen.py return immediately for dead threads. Successful baseline proves exact-once closure of all nineteen fake handles."
+}

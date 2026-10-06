@@ -1,0 +1,18 @@
+{
+  "existing_seven_control_success": "PRESERVED_SCOPED_CPU_HEADER_STUB_7_PASS_0_FAIL",
+  "status": "ADDITIONAL_GAPS_UNQUALIFIED_BY_SEVEN_STUB_CONTROLS",
+  "source_execution_or_promotion": false,
+  "muse_provider_launch_authorized": false,
+  "utc": "2026-10-04T22:06:05.6438031Z",
+  "source_sha256": "5e8c32b98c1fec8fa708435fc7c039828b1ed1326fca269a0e1bb75fcd3edbd6",
+  "historical_red": "PRESERVED_ORIGINAL_1_PASS_6_FAIL_AND_MEASURED_FOUR_DEFECTS",
+  "authority": "ROOT explicit additional scope gaps before collector promotion",
+  "gaps": [
+    "zeInit UNINITIALIZED does not establish that the cause is a missing driver.",
+    "JSON output truncation may emit an invalid prefix while returning exit0; bounded output needs fail-closed observation.",
+    "Duplicate fullUUID aliases and GPU-type filtering are not qualified by current seven controls.",
+    "Physical-root directed-peer coverage when subdevices fill the first16 node slots is not qualified.",
+    "Unsupported results, genuine API errors, enumeration count mutation and bounded retry branches need independent discriminating cases."
+  ],
+  "prior_prompt_packet_unchanged": true
+}

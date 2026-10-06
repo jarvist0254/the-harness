@@ -1,0 +1,14 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\grok_capture_edit\\capture_comparator.grok_corrected.py",
+    "sha256": "2786a0213039cdeb1654dd1de7688e9f628672a963355fcfef6ebe94cba87495",
+    "AST_only": "PASS_NO_IMPORT",
+    "lines": 350
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\grok_capture_edit\\test_capture_comparator.grok_corrected.py",
+    "sha256": "aacde5983be983eb303837a045a6a85278dae08bef7ae1b1ea1d6eeede98fa47",
+    "AST_only": "PASS_NO_IMPORT",
+    "lines": 582
+  }
+]

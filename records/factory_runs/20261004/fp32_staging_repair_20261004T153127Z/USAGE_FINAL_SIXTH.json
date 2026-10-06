@@ -1,0 +1,142 @@
+{
+  "credits": "Provider tokens are not ModelStudio Credits; per-job Credits/billing NOT_CHECKED",
+  "acceptance": "All patches unapplied; ROOT QA pending",
+  "direct_http_requests": 1,
+  "all_six": {
+    "per_provider": {
+      "Qwen": {
+        "tokens": 394235,
+        "unknown_usage_jobs": 1,
+        "jobs": 21
+      },
+      "Gemini": {
+        "tokens": 1377614,
+        "unknown_usage_jobs": 0,
+        "jobs": 12
+      },
+      "Grok": {
+        "tokens": 832537,
+        "unknown_usage_jobs": 1,
+        "jobs": 17
+      }
+    },
+    "unknown_usage_jobs": 2,
+    "observed_tokens": 2604386,
+    "jobs": 50
+  },
+  "utc": "2026-10-04T16:10:52.2091653Z",
+  "unknown_usage_jobs": 0,
+  "definition": "SIXTH isolated CLOSED batch; prior five immutable",
+  "max_authorized_native_children_each_qwen_deepseek_parent": 10,
+  "excluded_local_startup": {
+    "reason": "Windows argument length, no child/provider launch",
+    "job": "gemini_fp32_review",
+    "paid_job": false,
+    "status": "LOCAL_PRE_PROVIDER_START_FAILURE"
+  },
+  "per_provider": {
+    "Qwen": {
+      "jobs": 1,
+      "tokens": 11992
+    },
+    "Gemini": {
+      "jobs": 1,
+      "tokens": 54292
+    },
+    "Grok": {
+      "jobs": 1,
+      "tokens": 22902
+    }
+  },
+  "native_children_actual": 0,
+  "later_root_adjudication": "Separate receipt only; preserve this immutable ledger",
+  "calls": [
+    {
+      "artifact_sha256": "6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+      "transport": "DIRECT_HTTP",
+      "elapsed_seconds": 20.76,
+      "terminal": "qwen_fp32_patch\\terminal.json",
+      "worker_pid": 87556,
+      "role": "Qwen_Workhorse",
+      "job": "qwen_fp32_patch",
+      "internal_model_calls": null,
+      "reported_tokens": 11992,
+      "usage": {
+        "prompt_tokens": 10682,
+        "total_tokens": 11992,
+        "completion_tokens": 1310,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 10682
+        }
+      },
+      "wrapper_pid": 55480,
+      "model": "qwen3.8-max"
+    },
+    {
+      "cli_pid": 82588,
+      "usage": {
+        "input_tokens": 30267,
+        "output_tokens": 24025,
+        "thinking_tokens": 23515,
+        "cache_read_tokens": 0,
+        "total_tokens": 54292
+      },
+      "artifact_sha256": "aff99c3703e70b339da7e8d8dfee6cb8dd614dc6c331d7bae0e0add9a35290f1",
+      "execution_approval": false,
+      "terminal": "gemini_fp32_review_v2.owned_terminal.json",
+      "internal_model_calls": null,
+      "model": "gemini-3.8-flash-medium",
+      "transport": "AGY_CLI",
+      "reported_tokens": 54292,
+      "elapsed_seconds": 100.56,
+      "role": "Gemini_Reviewer",
+      "job": "gemini_fp32_review_v2",
+      "wrapper_pid": 29272,
+      "raw_review_verdict": "PASS"
+    },
+    {
+      "cli_pid": 51436,
+      "usage": {
+        "input_tokens": 16817,
+        "cache_read_input_tokens": 2432,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 3653,
+        "reasoning_tokens": 1926,
+        "total_tokens": 22902
+      },
+      "artifact_sha256": "4d90acfb1f9f004e3a0dced9b2d02eb7fb8f731bdfa64e1b840f9d0db09cb203",
+      "terminal": "grok_fp32_patch.owned_terminal.json",
+      "internal_model_calls": 1,
+      "model": "grok-4.7-build-fast",
+      "transport": "GROK_CLI",
+      "reported_tokens": 22902,
+      "elapsed_seconds": 22.09,
+      "role": "Grok_Editor",
+      "model_usage": {
+        "grok-4.7-build-fast": {
+          "inputTokens": 16817,
+          "outputTokens": 3653,
+          "cacheReadInputTokens": 2432,
+          "cacheCreationInputTokens": 0,
+          "modelCalls": 1,
+          "costUSD": 0.03860224
+        }
+      },
+      "job": "grok_fp32_patch",
+      "wrapper_pid": 31016
+    }
+  ],
+  "paid_jobs": 3,
+  "prior_five": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\USAGE_FINAL_SIX_20261004T150416Z.json",
+    "sha256": "dd93a69f202c851ad45a568f432db5f1a81ad745a64b057f12254d0b3603a962",
+    "unknown_usage_jobs": 2,
+    "observed_tokens": 2515200,
+    "jobs": 47
+  },
+  "secret_process_audit": "SECRET_PROCESS_AUDIT_SIXTH.json",
+  "source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "cli_jobs": 2,
+  "observed_total_tokens": 89186
+}

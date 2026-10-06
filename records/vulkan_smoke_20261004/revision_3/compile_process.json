@@ -1,0 +1,5 @@
+{
+  "pid": 15752,
+  "timeout_seconds": 60,
+  "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && cl /nologo /EHsc /std:c++17 /W4 /O2 /Irecords\\vendor_headers\\vulkan_1.4.321\\include /Forecords\\vulkan_smoke_20261004\\revision_3\\vulkan_smoke.obj /Ferecords\\vulkan_smoke_20261004\\revision_3\\vulkan_smoke.exe j_link\\vulkan_smoke.cpp /link records\\vulkan_smoke_20261004\\sdk_link\\vulkan-1.lib\""
+}

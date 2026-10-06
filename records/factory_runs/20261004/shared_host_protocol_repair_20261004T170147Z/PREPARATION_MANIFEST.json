@@ -1,0 +1,213 @@
+{
+  "qwen_context_embedded": true,
+  "preserved_exact_helpers": [
+    {
+      "exact_copy": true,
+      "file": "provider_common.ps1",
+      "original_sha256": "24ca09ca269491adca571ab495ff8a382a9ae2c74c79a3d9b4dbbff92ba3cae1",
+      "copy_sha256": "24ca09ca269491adca571ab495ff8a382a9ae2c74c79a3d9b4dbbff92ba3cae1"
+    },
+    {
+      "exact_copy": true,
+      "file": "qwen_http_patch.ps1",
+      "original_sha256": "5b04db9e56202aae55d32543355eacf8bba934d10013720a768acaac943a5fe0",
+      "copy_sha256": "5b04db9e56202aae55d32543355eacf8bba934d10013720a768acaac943a5fe0"
+    },
+    {
+      "exact_copy": true,
+      "file": "invoke_owned_provider.ps1",
+      "original_sha256": "a2d0adfa589bfc533f4b6ced4f1406f03f045fc92c31d2a3c04e93752697254d",
+      "copy_sha256": "a2d0adfa589bfc533f4b6ced4f1406f03f045fc92c31d2a3c04e93752697254d"
+    },
+    {
+      "exact_copy": true,
+      "file": "REVIEW_SCHEMA.json",
+      "original_sha256": "3449a633613cafee7dd19f670c5d715dd8926db566c27dc3a84a7f2cfe5c0c97",
+      "copy_sha256": "3449a633613cafee7dd19f670c5d715dd8926db566c27dc3a84a7f2cfe5c0c97"
+    },
+    {
+      "exact_copy": true,
+      "file": "ROOT_LAUNCH_RECEIPT_SCHEMA.json",
+      "original_sha256": "427d6444c28c472d5ec52738a36b36f1c79566fd0230edf231c427f412acab4a",
+      "copy_sha256": "427d6444c28c472d5ec52738a36b36f1c79566fd0230edf231c427f412acab4a"
+    }
+  ],
+  "native_children_actual": 0,
+  "expected_chain_cost": "UNKNOWN_UNTIL_ACTUAL_PROVIDER_USAGE; tokens not Credits",
+  "utc": "2026-10-04T17:06:06.5787351Z",
+  "credentials_read_at_preparation": false,
+  "models": {
+    "Grok": "grok-4.7-build-fast",
+    "Gemini": "gemini-3.8-flash-medium",
+    "Qwen": "qwen3.8-max"
+  },
+  "state": "PREPARATION_ONLY_NO_LAUNCH",
+  "qwen_prompt_sha256": "185b4683b745384357fad4806a181e4a88dd091722646d3e08ce20906c8e53f5",
+  "batch": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z",
+  "jobs": [
+    "qwen_shared_host_protocol",
+    "gemini_shared_host_review",
+    "grok_shared_host_edit"
+  ],
+  "transport_limits": {
+    "grok_outer_seconds": 300,
+    "qwen_enable_thinking": false,
+    "max_completion_tokens": 8192,
+    "qwen_outer_seconds": 270,
+    "bytes_per_response_stream": 2097152,
+    "http_seconds": 240,
+    "gemini_outer_seconds": 240,
+    "gemini_provider_seconds": 210
+  },
+  "native_max_authorized_each_qwen_deepseek_parent": 10,
+  "source_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "syntax_only": [
+    {
+      "file": "provider_common.ps1",
+      "parse_errors": [],
+      "count": 0
+    },
+    {
+      "file": "qwen_http_patch.ps1",
+      "parse_errors": [],
+      "count": 0
+    },
+    {
+      "file": "invoke_owned_provider.ps1",
+      "parse_errors": [],
+      "count": 0
+    },
+    {
+      "file": "protocol_artifact.ps1",
+      "parse_errors": [],
+      "count": 0
+    },
+    {
+      "file": "qwen_http_protocol.ps1",
+      "parse_errors": [],
+      "count": 0
+    },
+    {
+      "file": "invoke_owned_protocol.ps1",
+      "parse_errors": [],
+      "count": 0
+    }
+  ],
+  "gemini_final_context": "DEPENDENT_NOT_BUILT; must embed sufficient actual source and artifact <=24000 UTF16; no unsafe read tools",
+  "inventory": [
+    {
+      "bytes": 2525,
+      "name": "CAPABILITY_FINDINGS.md",
+      "sha256": "ba117f38b50a57acff7bf2c878815202e15ca0cdb3994d692f2dd5566813abfe"
+    },
+    {
+      "bytes": 1308,
+      "name": "gemini_shared_host_review.template.txt",
+      "sha256": "94d558cd37e6edf44b734a3b607995311050eb4d226fb842947b8c5b903a35aa"
+    },
+    {
+      "bytes": 1308,
+      "name": "grok_shared_host_edit.template.txt",
+      "sha256": "94d558cd37e6edf44b734a3b607995311050eb4d226fb842947b8c5b903a35aa"
+    },
+    {
+      "bytes": 7995,
+      "name": "invoke_owned_protocol.ps1",
+      "sha256": "647c516363d3835c88fbd795c5df1d8765d024506bfb6ebd3b94b42605639c4a"
+    },
+    {
+      "bytes": 7806,
+      "name": "invoke_owned_provider.ps1",
+      "sha256": "a2d0adfa589bfc533f4b6ced4f1406f03f045fc92c31d2a3c04e93752697254d"
+    },
+    {
+      "bytes": 9674,
+      "name": "original_contract.md",
+      "sha256": "34ad37e4c80ac54f8b611318bad2a556cea2bd7487f84f1497f0d60ea875f787"
+    },
+    {
+      "bytes": 2106,
+      "name": "PRIMARY_REFERENCES.md",
+      "sha256": "1ce5615e24e078971738d79b220c45274237e6618bde3187c8de0f6ffa9cc730"
+    },
+    {
+      "bytes": 2576,
+      "name": "protocol_artifact.ps1",
+      "sha256": "99622be807ec2a16745496d9e90a3227cce4907f4dd592d4e3838da7b1bd9fed"
+    },
+    {
+      "bytes": 1767,
+      "name": "PROTOCOL_SCHEMA.json",
+      "sha256": "19f4b9d21dbac7caa2f022dd162516e27148d3fc6666b7fc764ec7011e1c2253"
+    },
+    {
+      "bytes": 4120,
+      "name": "provider_common.ps1",
+      "sha256": "24ca09ca269491adca571ab495ff8a382a9ae2c74c79a3d9b4dbbff92ba3cae1"
+    },
+    {
+      "bytes": 5370,
+      "name": "qwen_http_patch.ps1",
+      "sha256": "5b04db9e56202aae55d32543355eacf8bba934d10013720a768acaac943a5fe0"
+    },
+    {
+      "bytes": 5432,
+      "name": "qwen_http_protocol.ps1",
+      "sha256": "ffc33ebfa5afcbc6ddfea6a0062274511a7a419f5bbf491f6b7e62654bf1f309"
+    },
+    {
+      "bytes": 50681,
+      "name": "qwen_shared_host_protocol.prompt.txt",
+      "sha256": "185b4683b745384357fad4806a181e4a88dd091722646d3e08ce20906c8e53f5"
+    },
+    {
+      "bytes": 906,
+      "name": "REVIEW_SCHEMA.json",
+      "sha256": "3449a633613cafee7dd19f670c5d715dd8926db566c27dc3a84a7f2cfe5c0c97"
+    },
+    {
+      "bytes": 882,
+      "name": "ROOT_LAUNCH_RECEIPT_SCHEMA.json",
+      "sha256": "427d6444c28c472d5ec52738a36b36f1c79566fd0230edf231c427f412acab4a"
+    },
+    {
+      "bytes": 2907,
+      "name": "ROOT_REVIEW.md",
+      "sha256": "6cb2a18bbec7df2521b3ae7e9dab9d56109f7592950ad2be912e3d86a160face"
+    },
+    {
+      "bytes": 26860,
+      "name": "source_snapshot.cpp",
+      "sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815"
+    },
+    {
+      "bytes": 3615,
+      "name": "TASK_CONTRACT.md",
+      "sha256": "06d690a8381687c7bf107e52911fa7039fead5f756ddc6e767f481def4938335"
+    }
+  ],
+  "root_admission_required": true,
+  "paid_jobs_started": 0,
+  "adaptation": {
+    "qwen": {
+      "changes": [
+        "Add dot-source protocol_artifact.ps1 after unchanged provider_common.ps1",
+        "Replace Assert-PatchArtifact with Assert-ProtocolArtifact",
+        "Stage protocol.pending_root_qa.json instead of patch.pending_root_qa.json",
+        "Terminal COMPLETE_PROTOCOL_STAGED_UNAPPLIED instead of COMPLETE_PATCH_STAGED_UNAPPLIED"
+      ],
+      "adapted": "qwen_http_protocol.ps1",
+      "original": "qwen_http_patch.ps1"
+    },
+    "wrapper": {
+      "changes": [
+        "Add dot-source protocol_artifact.ps1",
+        "Qwen child targets qwen_http_protocol.ps1",
+        "Grok override requests strict new protocol schema, honest refusal and no fabricated changes",
+        "Grok Assert-ProtocolArtifact and protocol stage/status replaces exact3 patch intake"
+      ],
+      "adapted": "invoke_owned_protocol.ps1",
+      "original": "invoke_owned_provider.ps1"
+    }
+  }
+}

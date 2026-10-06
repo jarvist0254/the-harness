@@ -1,0 +1,40 @@
+{
+  "scope": "READ_ONLY_PRIMARY_RESEARCH_NO_RUNTIME",
+  "downloaded_primary_pins": [
+    {
+      "url": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-Docs/v1.4.321/chapters/memory.adoc",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_vulkan_route_20261004T204500Z\\vulkan_memory_v1.4.321.adoc",
+      "bytes": 228340,
+      "sha256": "c8d7a1d8e885ff79c0ca574434c94bd4e15a502ab31319c703ce8c94f667e795",
+      "identity": "Version tag"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-Docs/main/chapters/memory.adoc",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_vulkan_route_20261004T204500Z\\vulkan_memory_main_snapshot.adoc",
+      "bytes": 296430,
+      "sha256": "99fd2126286cc54b0510614cc14c121e8a824232a17932e03c0e7670fe23afad",
+      "identity": "Mutable main URL, point-in-time content hash only; no installed-driver binding"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-kernel-modules/main/kernel-open/nvidia-drm/nvidia-drm-gem.c",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_vulkan_route_20261004T204500Z\\nvidia_drm_gem_main_snapshot.c",
+      "bytes": 11711,
+      "sha256": "34e051a3e73c76e2e16a1fc6070806d551fe725111f86bdca993b2b7a15ad807",
+      "identity": "Mutable main URL, point-in-time content hash only; no installed-driver binding"
+    }
+  ],
+  "level_zero_header": {
+    "path": "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h",
+    "sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "lines": [
+      "2738-2748",
+      "2776-2778",
+      "7727",
+      "8050-8066",
+      "8095-8118"
+    ]
+  },
+  "verdict": "NORMATIVE_SCOPE_CONFLICT_UNRESOLVED",
+  "current_hardware_route": "NOT_CHECKED_INTEL_ABSENT",
+  "native_build_gpu_provider_execution": false
+}

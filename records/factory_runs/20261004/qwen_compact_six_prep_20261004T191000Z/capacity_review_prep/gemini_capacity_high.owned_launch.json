@@ -1,0 +1,13 @@
+{
+  "lane": "Gemini",
+  "requested_model": "gemini-3.8-flash-high",
+  "deadline_seconds": 240,
+  "observed_process_start_utc": "2026-10-04T20:20:51.3575735Z",
+  "native_children_actual": 0,
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "identity": "retained Process object; no PID reattach",
+  "pid": 16584,
+  "clock": "Stopwatch",
+  "prompt_sha256": "cccc25f30eb00f9b10cf2c42f258b9367e9a65198476c1ccb821faae1d11cd6e",
+  "credential_read_by_outer_wrapper": false
+}

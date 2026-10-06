@@ -1,0 +1,56 @@
+{
+  "utc": "2026-10-04T22:25:38.974591+00:00",
+  "admitted": true,
+  "scope": "Single source-only actual NVIDIA EGL/GLES payload-consumer proposal, no runtime/source/native execution",
+  "packet_sha256": "af8564eb43aae1f35cf20d7be85b3b062dddd2e1c1864c170c31809ba28b5f9b",
+  "checked_pin_entries": 29,
+  "pin_mismatches": [],
+  "full_embedded_inputs_verified": 11,
+  "prompt": {
+    "sha256": "4b1c3b888187e1b37e2cc00004eb67a213b4b22af20620a1ee51a61c4e9d1eb8",
+    "bytes": 207193,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\qwen_nv_egl_payload_consumer.v4.prompt.txt"
+  },
+  "helpers": [
+    {
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "bytes": 8048,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\invoke_owned_stream_research.v3.ps1"
+    },
+    {
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\provider_common.ps1"
+    },
+    {
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e",
+      "bytes": 582,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\PURE_LIMIT_CONTROLS.json"
+    },
+    {
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "bytes": 8011,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\qwen_http_stream_research.v3.ps1"
+    },
+    {
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36",
+      "bytes": 774,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\research_artifact.v3.ps1"
+    }
+  ],
+  "contract_sha256": "7d52117b514abe2f556b6da737ff324109662b3c08f00bc0cb2cc8fbd64e7e22",
+  "spec_sha256": "a5fb0b8758c9382f680f76caa85e98e64de6aa6b392dac2196d25dc2e5586c5d",
+  "ROOT_review": "Complete task spec and frozen contract read; measured prior EGL failure and faithful CPU-relay correction included; all exact frozen helper hashes unchanged. No physical layout/cache/FD/proof claim is accepted by this source-only call.",
+  "limits": {
+    "source_chars_limit": 32000,
+    "tests_chars_limit": 16000,
+    "raw_stream_cap_bytes": 16777216,
+    "normalized_each_cap": 2097152,
+    "http_seconds": 2400,
+    "outer_seconds": 2430
+  },
+  "model": "qwen3.8-max",
+  "reasoning_effort": "xhigh",
+  "native_children_actual": 0,
+  "response_acceptance": "untrusted until separate ROOT static/ABI/behavior QA"
+}

@@ -1,0 +1,10 @@
+{
+  "provider_launch_authorized": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z",
+  "job_id": "gemini_shared_host_review",
+  "lane": "Gemini",
+  "model": "gemini-3.8-flash-medium",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\shared_host_protocol_repair_20261004T170147Z\\qwen_shared_host_protocol\\protocol.raw.unaccepted.json",
+  "source_sha256": "b919c423727254e494fb6e056475a380b00bbff51148ba1a86a50139de5fdad8",
+  "prompt_sha256": "ef48273fa1c4221266618026b5d870688ae2f66f5fe6e71123241e6ac965bf81"
+}

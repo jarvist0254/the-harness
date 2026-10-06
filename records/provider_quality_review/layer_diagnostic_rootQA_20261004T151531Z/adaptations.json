@@ -1,0 +1,8 @@
+{
+  "prior_evaluator": "E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_GREEN_20261004T151059Z\\evaluate_comparator.py",
+  "prior_sha256": "3ac2843100b47a330ae48bfbb99681e56a79556a4966ffd8d679c6c3972f332d",
+  "changes": [
+    "Exact root-repair path/hash and result filename retargeted. No test assertions, controls, traps or AST gate changes."
+  ],
+  "scope": "Same65 independent synthetic controls; no provider-generated tests"
+}

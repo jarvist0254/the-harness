@@ -1,0 +1,8 @@
+test_actual_legal_prior_transition_does_not_require_claim (__main__.Additional) ... ok
+test_returned_nested_wrapper_storage_cannot_reassign (__main__.Additional) ... ok
+test_returned_wrapper_storage_cannot_rewrite_history (__main__.Additional) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

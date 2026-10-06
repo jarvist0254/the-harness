@@ -1,0 +1,16 @@
+{
+  "source_execution": false,
+  "model": "gemini-3.8-flash-high",
+  "lane": "Gemini",
+  "authority": "ROOT explicit Gemini combined v3 review",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_combined_dma_prep_20261004T205950Z\\source.snapshot.txt",
+  "source_sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411",
+  "utc": "2026-10-04T21:35:02.1385532Z",
+  "provider_launch_authorized": true,
+  "packet_sha256": "b66d353f85a6780ff4b53691307a0b8831d70a2804f8ed36d6b7d09f94fdbaac",
+  "actual_quoted_cmdline_chars": 24759,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\gemini_combined_dma_prep_20261004T211555Z",
+  "native_children_actual": 0,
+  "prompt_sha256": "f1246cddb8e08f3ff1a2cec27d7fa2d7e2bb858a3e8df82f81ffa70e30311847",
+  "job_id": "gemini_combined_high"
+}

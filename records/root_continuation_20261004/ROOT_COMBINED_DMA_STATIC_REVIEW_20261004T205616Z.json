@@ -1,0 +1,31 @@
+{
+  "schema": "root-source-review-v1",
+  "review_utc": "2026-10-04T20:56:16Z",
+  "scope": "Full static source/test read; compiler-only measurement separately authorized; no candidate execution",
+  "source": {
+    "path": "E:/the_harness/records/factory_runs/20261004/cuda_l0_device_dmabuf_prep_20261004T195400Z/qwen_cuda_l0_device_dmabuf_v3/source.qwen_untrusted.cpp",
+    "sha256": "e8916bc07ee2a058f5af9371b073b2f47810071c6949480fe0c0a4b2d3064411"
+  },
+  "provider_tests": {
+    "path": "E:/the_harness/records/factory_runs/20261004/cuda_l0_device_dmabuf_prep_20261004T195400Z/qwen_cuda_l0_device_dmabuf_v3/tests_source.qwen_untrusted.txt",
+    "sha256": "8d468ec191f45ae44de3b136de8420846517717ed8accb1a282145c23f6f0ccb",
+    "executed": false,
+    "coverage": "Shell greps and byte limit only; no compilation, API behavior, CLI failure receipts, FD lifecycle, synchronization or cleanup controls"
+  },
+  "official_level_zero_header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "verdict": "REQUEST_CHANGES_NOT_ACCEPTED",
+  "findings": [
+    {"id":"receipt_format","observed":"All paths emit key=value lines via printf/KV2/KVL, rather than required JSON.","required":"One parseable terminal JSON receipt with documented status and exit mapping."},
+    {"id":"exit_classification","observed":"stop calls exit(1) on every status, including NOT_CHECKED; FAIL1 is also used as a status string.","required":"Preserve required status enum and NOT_CHECKED exit2; distinguish unavailable prerequisites from attempted runtime errors."},
+    {"id":"cleanup_certainty","observed":"cleanup ignores all release and close results, yet receipts declare cleanup_unknown=false; no verified GPU quiescence exists after fence timeout.","required":"Checked cleanup before terminal receipt; actual uncertainty/error propagation; never claim resources safely drained without evidence."},
+    {"id":"api_contracts","observed":"Source omits context/alignment/device-array arguments in multiple Level Zero calls; uses ZE_COMMAND_QUEUE_GROUP_COPY_BIT and COMPUTE_BIT instead of the header PROPERTY_FLAG names; uses ifd.type although actual import descriptor field is flags.","required":"Compile exact candidate against pinned official headers; bind actual diagnostics before repair.","header_lines":[2378,2380,2381,3588,3983,5507,7619,8080,8085]},
+    {"id":"cuda_context_signature","observed":"cuCtxCreate call has three arguments; CUDA13.4 macro-selected signature requires actual compiler adjudication.","required":"Use the exact pinned CUDA ABI, without silently substituting older headers."},
+    {"id":"import_fd_ownership","observed":"import_fd is set to -1 after successful zeMemAllocDevice, assuming importer consumes the application duplicate.","required":"Verify actual import FD ownership contract and retain/close only application-owned descriptors at the documented point; unknown ownership is an unresolved gate."},
+    {"id":"eligibility_order","observed":"CUDA context/allocation/export occurs before Intel device/import eligibility is known; CUDA context also precedes the DMA_BUF capability gate.","required":"Check prerequisite identities/capabilities before allocation where possible; unsupported current WSL export capability must yield an honest unavailable outcome."},
+    {"id":"device_identity","observed":"Enumeration counts are unbounded and some query errors are silently skipped; Intel root device type and imported allocation owner handle are not validated.","required":"Bound enumeration and report actual query errors; bind full UUID/PCI, GPU/root status and allocation owner to the intended physical devices."},
+    {"id":"transport_scope","observed":"The fixture labels direct_transport_qualified=false, which is an appropriate limited claim.","required":"Preserve that limit even after successful payload tests; API DEVICE labels and byte parity do not establish direct VRAM transport."}
+  ],
+  "compiler_diagnostics": "PENDING_SEPARATE_ACTUAL_COMPILE",
+  "candidate_native_or_gpu_execution": false,
+  "current_hardware_limit": "Local NVIDIA plus AMD shared iGPU; no Intel target. Actual WSL CUDA attribute query reported DMA_BUF_SUPPORTED API0/value0. No general impossibility claim."
+}

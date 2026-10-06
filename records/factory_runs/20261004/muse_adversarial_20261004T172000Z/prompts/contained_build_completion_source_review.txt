@@ -1,0 +1,22 @@
+# Muse source-only review prompt: contained compiler completion semantics
+
+Task: review the pinned Windows build-supervisor source and the preserved attempt-3 evidence as an adversarial systems reviewer. Decide whether the evidence supports a completed build, and identify which lifecycle events are proven versus merely plausible. SOURCE ONLY: do not run a compiler, build command, process query, shell command, provider call, GPU workload, or edit any source/evidence file.
+
+Inspect only these task artifacts:
+- `E:\the_harness\records\root_continuation_20261004\supervisor_cleanup_root_repair\contained_supervisor_revision2.py` (SHA-256 `3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c`) for the Windows contained-process/job/pipe-drain pattern, if present at that exact path; if absent, state NOT_CHECKED rather than searching elsewhere.
+- `E:\the_harness\records\root_continuation_20261004\contained_build_policy_20261004T160430Z\contained_build_supervisor.py` (SHA-256 `fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3`)
+- Attempt-3 evidence directory `E:\the_harness\records\root_continuation_20261004\fp32_derived_build_plan_20261004T155932Z\outer_compile_attempt3_20261004T1703Z\controller_evidence\`, particularly `build_result_copy.json`, `controller_result.json`, `build.stdout.log`, and `build_progress.json`.
+- Build rule/cache evidence only if present in that same owned build plan: `E:\the_harness\records\build_vulkan_fp32_staging_20261004T155932Z\build_attempt2\build.ninja`, `E:\the_harness\records\build_vulkan_fp32_staging_20261004T155932Z\build_attempt2\CMakeCache.txt`, and `E:\the_harness\repos\llama.cpp\ggml\src\ggml-vulkan\CMakeLists.txt`.
+
+Use the attempt’s actual recorded statuses and process/job fields. Answer these separately: (a) did the underlying build command report exit 0? (b) did the supervisor report PROCESS_COMPLETED? (c) did its job become empty? (d) did both redirected output pipes reach EOF? (e) did the outer controller accept the complete stage? Do not collapse these into one PASS. Explain the timeout/cleanup state even though the captured build output reaches the final link steps. Distinguish a PID-existence point-in-time check from proof of causality.
+
+Review the relevant process lifecycle in order: suspended creation, job assignment, resume, root wait, job active-count wait, stdout/stderr EOF joins, deadline path, job cleanup, and outer-stage validation. Analyze whether a surviving `vctip.exe` or `mspdbsrv.exe` could cause a job or inherited-pipe drain to remain incomplete, but label that only as a hypothesis unless the evidence actually establishes it. Check the official MSVC `/FS` rule: `/MP` implies `/FS`; then reconcile it with the generated Ninja rule text and Release debug flags. Do not claim an actual PDB write without `/Zi` or `/ZI` evidence. Do not recommend process breakaway, arbitrary process termination, undocumented compiler switches, or global telemetry mutations.
+
+Return:
+1. a compact fact table with status, exact evidence path/field, and confidence;
+2. proven lifecycle facts vs competing hypotheses;
+3. one minimal, isolated, child-only diagnostic that would distinguish the leading hypotheses while preserving pinned source/toolchain/Release flags and the job/pipe containment; say what outcome would discriminate, not predict it;
+4. explicit NOT_CHECKED items and limits.
+
+The correct result may be that no root cause is established. Do not edit/build/retry anything; preserve the attempt as failed/incomplete evidence. Cite upstream Microsoft/CMake docs only for claims they actually support.
+

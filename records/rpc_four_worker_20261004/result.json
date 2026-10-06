@@ -1,0 +1,91 @@
+{
+  "qualification": "CPU_ONLY_NOT_GPU_QUALIFICATION",
+  "ports": [
+    50072,
+    50073,
+    50074,
+    50075
+  ],
+  "workers": [
+    {
+      "pid": 36224,
+      "port": 50072,
+      "command": [
+        "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "50072",
+        "--device",
+        "CPU",
+        "--threads",
+        "1"
+      ]
+    },
+    {
+      "pid": 55496,
+      "port": 50073,
+      "command": [
+        "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "50073",
+        "--device",
+        "CPU",
+        "--threads",
+        "1"
+      ]
+    },
+    {
+      "pid": 72516,
+      "port": 50074,
+      "command": [
+        "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "50074",
+        "--device",
+        "CPU",
+        "--threads",
+        "1"
+      ]
+    },
+    {
+      "pid": 56896,
+      "port": 50075,
+      "command": [
+        "E:\\the_harness\\records\\build_cpu_rpc\\bin\\ggml-rpc-server.exe",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "50075",
+        "--device",
+        "CPU",
+        "--threads",
+        "1"
+      ]
+    }
+  ],
+  "status": "PASS",
+  "client_exit": 0,
+  "client_stdout": "{\"status\":\"PASS\",\"qualification\":\"CPU_ONLY_NOT_GPU_QUALIFICATION\",\"workers\":4,\"computed_stages\":4,\"interworker_tensor_transfers\":3,\"values\":[136,312,184,424]}\n",
+  "client_stderr": "",
+  "cleanup": {
+    "owned_workers_closed": true,
+    "worker_exit_codes": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "ports_bindable": {
+      "50072": true,
+      "50073": true,
+      "50074": true,
+      "50075": true
+    }
+  },
+  "wall_seconds": 0.23400000017136335
+}

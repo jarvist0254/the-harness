@@ -1,0 +1,22 @@
+{
+  "adjudicator": "ROOT",
+  "authority": "Existing user instruction to use Qwen implementation, Gemini review and Grok edits for scoped harness work",
+  "provider_launch_authorized": true,
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "job_id": "qwen_fp32_patch",
+  "lane": "Qwen",
+  "model": "qwen3.8-max",
+  "source_path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+  "source_sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+  "prompt_sha256": "b8c65a481a8097a74bba8f9e1c61b98494a4edab3217405457dc5b5e7a592865",
+  "root_review": "Read exact source/function, source-backed analysis, common schema/pin helpers, streamed bounded HTTP helper and retained-process wrapper. Admit one targeted JSON patch request only.",
+  "expected_artifact": "Exactly three unapplied search/replace regions preserving F32 staging types and both scratch byte sizes under the narrow all-F32/no-fp16/no-coopmat predicate",
+  "http_timeout_seconds": 240,
+  "outer_timeout_seconds": 270,
+  "max_completion_tokens": 8192,
+  "response_limit_bytes": 2097152,
+  "native_children_actual": 0,
+  "native_child_maximum_authorized_each_qwen_deepseek_parent": 10,
+  "dependent_actions": "Gemini and Grok calls require distinct source/prompt-bound root records after completed artifact inspection; no build or GPU execution is admitted by this provider receipt.",
+  "prohibited": ["Patch application", "Provider-generated code execution", "Global Factory/Rolex starts", "Live PyRe edits", "Driver or BIOS changes", "Credential printing or persistence", "Unchanged retries"]
+}

@@ -1,0 +1,68 @@
+{
+  "provider_jobs": 1,
+  "native_children_actual": 0,
+  "terminal": {
+    "pid": 36224,
+    "finish_reason": null,
+    "parse_error_type": null,
+    "lane": "Grok",
+    "usage": null,
+    "log_cap_exceeded": false,
+    "native_children_actual": 0,
+    "exit_code": -1,
+    "requested_model": "grok-4.7-build-fast",
+    "private_url_output_refused": false,
+    "provider_patch_applied": false,
+    "model_usage": null,
+    "pipe_error": false,
+    "credential_saved": false,
+    "elapsed_seconds": 600.26,
+    "outer_killed": true,
+    "status": "OWNED_DEADLINE_OR_LOG_CAP_TERMINATION",
+    "drain_unknown": false
+  },
+  "tokens_not_credits": true,
+  "internal_model_calls": "UNKNOWN",
+  "utc": "2026-10-04T19:38:14.3160746Z",
+  "credits": "NOT_CHECKED",
+  "candidate_delivered": false,
+  "owned_session_reaped": 60443,
+  "inputs_before_after": [
+    {
+      "expected_sha256": "7052c8ebaa49d9807f6428b5a1ed6779a093392bccf6ef3266b254c0eac3cb5b",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\source.qwen_untrusted.cpp",
+      "actual_sha256": "7052c8ebaa49d9807f6428b5a1ed6779a093392bccf6ef3266b254c0eac3cb5b",
+      "unchanged": true
+    },
+    {
+      "expected_sha256": "6363369cf5ba49b2b82397893d42d622f35ef5bd434ddffefd578733b6568e76",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\tests_source.qwen_untrusted.txt",
+      "actual_sha256": "6363369cf5ba49b2b82397893d42d622f35ef5bd434ddffefd578733b6568e76",
+      "unchanged": true
+    },
+    {
+      "expected_sha256": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport.spec.txt",
+      "actual_sha256": "7714b45230dbd5db30a52a186b5934c8a944b60d21053a762ef34d0169d5d8cc",
+      "unchanged": true
+    },
+    {
+      "expected_sha256": "02f11109af35bdbaf9715879b9a3b542f7aed9d99b32c7dcc19a2532cad79168",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_qwen_linux_dmabuf_audit_20261004T190700Z\\muse_result.extracted.json",
+      "actual_sha256": "02f11109af35bdbaf9715879b9a3b542f7aed9d99b32c7dcc19a2532cad79168",
+      "unchanged": true
+    },
+    {
+      "expected_sha256": "db5e33a0c66d2a8e591723d33149a0ab2377928fee2d4665c53e58696c46f1f0",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_dmabuf_gemini_review_20261004T191500Z\\gemini_response_pair.json",
+      "actual_sha256": "db5e33a0c66d2a8e591723d33149a0ab2377928fee2d4665c53e58696c46f1f0",
+      "unchanged": true
+    }
+  ],
+  "state": "CLOSED_TIMEOUT_NO_COMPLETE_ARTIFACT",
+  "source_execution": false,
+  "known_token_total": null,
+  "reported_usage": "UNKNOWN",
+  "replacement_launched": false,
+  "secret_matches": 0
+}

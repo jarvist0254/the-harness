@@ -1,0 +1,11 @@
+--- 2611
++++ explicit_variant_pin
+@@ -61,7 +61,7 @@
+  if set(a)!=required or a['authorization']!='ROOT_BUILD_ONLY_NATIVE_ADMITTED' or a['pure_controls_pass'] is not True or a['native_admitted'] is not True:raise ValueError('strict admission')
+  if digest(HERE/'CONTRACT.json')!=a['plan_sha256'] or digest(__file__)!=a['controller_sha256']:raise ValueError('plan/controller binding')
+  cfg=read_json(HERE/'CONTRACT.json')
+- if a['variant_sha256']!=cfg['containment']['variant_source_sha256']:raise ValueError('actual FA907 variant binding')
++ if a['variant_sha256']!='fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3' or cfg['containment']['base_sha256']!='3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c':raise ValueError('explicit ROOT-admitted FA907 variant and original3CB lineage binding')
+  qualification=qualified_receipts(a)
+  root=pathlib.Path(a['derived_root']).resolve()
+  if str(root).casefold()!=cfg['proposed_new_root'].casefold():raise ValueError('root confinement')

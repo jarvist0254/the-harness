@@ -1,0 +1,81 @@
+{
+  "status": "PLANNED_NOT_ALLOCATED",
+  "hypothetical": true,
+  "unit": "MiB",
+  "objective": "capacity balance, not execution speed",
+  "block_memory_mib": 12288,
+  "aggregate_free_mib": 49152,
+  "aggregate_budget_mib": 44544,
+  "devices": [
+    {
+      "id": "Intel_0",
+      "physical_id": "example_card_0",
+      "vendor": "Intel",
+      "free_mib": 16384,
+      "reserve_mib": 1024,
+      "workspace_mib": 512,
+      "budget_mib": 14848,
+      "blocks": [
+        "layer_00",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07"
+      ],
+      "block_memory_mib": 4096,
+      "remaining_budget_mib": 10752
+    },
+    {
+      "id": "Intel_1",
+      "physical_id": "example_card_1",
+      "vendor": "Intel",
+      "free_mib": 16384,
+      "reserve_mib": 1024,
+      "workspace_mib": 512,
+      "budget_mib": 14848,
+      "blocks": [
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "layer_13",
+        "layer_14",
+        "layer_15"
+      ],
+      "block_memory_mib": 4096,
+      "remaining_budget_mib": 10752
+    },
+    {
+      "id": "Intel_2",
+      "physical_id": "example_card_2",
+      "vendor": "Intel",
+      "free_mib": 16384,
+      "reserve_mib": 1024,
+      "workspace_mib": 512,
+      "budget_mib": 14848,
+      "blocks": [
+        "layer_16",
+        "layer_17",
+        "layer_18",
+        "layer_19",
+        "layer_20",
+        "layer_21",
+        "layer_22",
+        "layer_23"
+      ],
+      "block_memory_mib": 4096,
+      "remaining_budget_mib": 10752
+    }
+  ],
+  "limitations": [
+    "No discovery, driver probe, allocator, leases or execution",
+    "memory_mib must include block weights and block-local KV/activation requirements",
+    "Extra embeddings/output/workspace must be represented explicitly",
+    "Free samples precede modeled reserves; do not double-subtract resident leases",
+    "Topology ordering is caller supplied; no transfer-time optimization"
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "thinking_budget_absent": true,
+  "utc": "2026-10-04T22:21:07.8160177Z",
+  "spec": {
+    "sha256": "a5fb0b8758c9382f680f76caa85e98e64de6aa6b392dac2196d25dc2e5586c5d",
+    "bytes": 6743,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\qwen_nv_egl_payload_consumer.spec.txt"
+  },
+  "provider_source_execution": false,
+  "primary_headers": [
+    {
+      "sha256": "96fb65aeeb4d06e5f23c099faab610e015c355bc0f1a54a3f3cd10fb738dfda1",
+      "bytes": 12033,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_ANDROID_native_fence_sync.txt"
+    },
+    {
+      "sha256": "a7c24c828bf2e1a4dfe6511b4f4812b948a285eb54787074015896976d4da076",
+      "bytes": 19286,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\egl_h.txt"
+    },
+    {
+      "sha256": "8973f2a9fa1acef7938569ee1f940334551eff99605b9c4701574cb66c84e087",
+      "bytes": 23478,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_KHR_fence_sync.txt"
+    },
+    {
+      "sha256": "46f5b9273c134931a22d33430b63a9579df50cd748398943c88d2084925f3410",
+      "bytes": 11216,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_KHR_wait_sync.txt"
+    },
+    {
+      "sha256": "a5f574a0074001400c6c50232235ee00e9a67b2168bfd1c364ba0f6f52e5a75c",
+      "bytes": 73780,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\eglext_h.txt"
+    },
+    {
+      "sha256": "9afc725e9dda7c8b476e7337e75b22fa660ed462c169e203ec28c10e62f91f4c",
+      "bytes": 251413,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\gl2ext_h.txt"
+    },
+    {
+      "sha256": "bb17bfde4aeba912d3686a0cc68ac04710ddacbcc5df7354994927747357daf3",
+      "bytes": 106392,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\gl31_h.txt"
+    },
+    {
+      "sha256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83",
+      "bytes": 11131,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\khrplatform_h.txt"
+    },
+    {
+      "sha256": "4f4e222c5c42da81f1d25f550de7d624e5284c0c508de15e809d660820d842de",
+      "bytes": 4368,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\openssl_sha_h.txt"
+    }
+  ],
+  "normalized_each_cap": 2097152,
+  "launch_authorized": false,
+  "prompt": {
+    "sha256": "4b1c3b888187e1b37e2cc00004eb67a213b4b22af20620a1ee51a61c4e9d1eb8",
+    "bytes": 207193,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\qwen_nv_egl_payload_consumer.v4.prompt.txt"
+  },
+  "json_dependency": {
+    "sha256": "5f09d1eebe9b3557f21df155869af13bcde79b74a0748f82ca946e8cc088aaa0",
+    "bytes": 978962,
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\vendor\\nlohmann\\json.hpp"
+  },
+  "physical_backing_or_transport_qualified": false,
+  "contract": {
+    "sha256": "7d52117b514abe2f556b6da737ff324109662b3c08f00bc0cb2cc8fbd64e7e22",
+    "bytes": 3313,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\EXTERNAL_CONSUMER_CONTRACT_V1.json"
+  },
+  "raw_stream_cap_bytes": 16777216,
+  "outer_seconds": 2430,
+  "helper_diffs": "NONE; exactcopiedROOTread32k/16k helpers",
+  "secret_credentials_in_prompt": false,
+  "full_embedded_inputs": [
+    {
+      "sha256": "816d95e717de6b5164485fa8a540ebb96f00ad9320fae313a6be62db8de08631",
+      "bytes": 14885,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\source.qwen_untrusted.cpp"
+    },
+    {
+      "sha256": "da8eb59c94f549207851ca8a2833f5cbe2ec05772f18c64378b6c8be0440c4e8",
+      "bytes": 2426,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\tests_source.qwen_untrusted.txt"
+    },
+    {
+      "sha256": "f58a0feaadc44044942ee19b0a6dbab14f66f3dbc61bbd2c6685e50aa85690a1",
+      "bytes": 6513,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\egl_proposal_independent_audit_20261004T2130Z\\audit_findings.md"
+    },
+    {
+      "sha256": "51462c8299c9d53d11fb3ef303b8904ba52e8f046ed590e4dd38da9784b22faf",
+      "bytes": 11381,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_egl_route_20261004T204514Z\\RESEARCH.md"
+    },
+    {
+      "sha256": "9aed25066bbef4354492571393c7aa874af77ee60e0bfab65af104b950fc189f",
+      "bytes": 6915,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_egl_route_20261004T204514Z\\source_receipt.json"
+    },
+    {
+      "sha256": "3559242ddf2a8ab72632cd4f4c4cb5310a470e14e131a0956ec91dd021e022bd",
+      "bytes": 4165,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\dma_buf_sync_bridge_primary_20261004T2144Z\\host_relay_correction_addendum.md"
+    },
+    {
+      "sha256": "f5f0db712978596aecd4aa7d6d3e0b28fcbdab7c0d8a03da533df5f3c397a8b8",
+      "bytes": 89324,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\OFFICIAL_USED_API_DECLARATIONS.v4.txt"
+    },
+    {
+      "sha256": "96fb65aeeb4d06e5f23c099faab610e015c355bc0f1a54a3f3cd10fb738dfda1",
+      "bytes": 12033,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_ANDROID_native_fence_sync.txt"
+    },
+    {
+      "sha256": "46f5b9273c134931a22d33430b63a9579df50cd748398943c88d2084925f3410",
+      "bytes": 11216,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\EGL_KHR_wait_sync.txt"
+    },
+    {
+      "sha256": "47074fe0b0b5a7b6812aa721387dcb924d10bf2c57a6a36f7bbe5f4198dac3f0",
+      "bytes": 18727,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_egl_route_20261004T204514Z\\EGL_EXT_image_dma_buf_import.txt"
+    },
+    {
+      "sha256": "0d00cba131f6ccebc1712425054eb1bd4e81472dce4b4e7cec000306b9dbdb5f",
+      "bytes": 17693,
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_device_nv_egl_route_20261004T204514Z\\OES_EGL_image.txt"
+    }
+  ],
+  "source_pin": {
+    "sha256": "816d95e717de6b5164485fa8a540ebb96f00ad9320fae313a6be62db8de08631",
+    "bytes": 14885,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_egl_consumer\\source.qwen_untrusted.cpp"
+  },
+  "source_chars_limit": 32000,
+  "job": "qwen_nv_egl_payload_consumer",
+  "model": "qwen3.8-max",
+  "helpers": [
+    {
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "bytes": 8048,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\invoke_owned_stream_research.v3.ps1"
+    },
+    {
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\provider_common.ps1"
+    },
+    {
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e",
+      "bytes": 582,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\PURE_LIMIT_CONTROLS.json"
+    },
+    {
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "bytes": 8011,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\qwen_http_stream_research.v3.ps1"
+    },
+    {
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36",
+      "bytes": 774,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\research_artifact.v3.ps1"
+    }
+  ],
+  "reasoning_effort": "xhigh",
+  "http_seconds": 2400,
+  "native_children_actual": 0,
+  "prior_local_guard_failure": "V1promptnotwritten/launchneverattempted; originalprep preserved",
+  "tests_chars_limit": 16000,
+  "status": "SOURCE_ONLY_PREPARATION_PENDING_ROOT_EXACT_ADMISSION",
+  "enable_thinking": true
+}

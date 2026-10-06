@@ -1,0 +1,53 @@
+{
+  "controls": {
+    "BASELINE": "All16384words match independent original reference.",
+    "PRODUCER_CORRUPTION": "External GPU producer changes one named word AFTER READY and BEFORE completion/release; consumer compares original reference, returns FAIL1 with expected exact mismatch index/count/value and control_detected.",
+    "comparison_selftest": "Optional separate CPU comparer mutation, always labelled comparator-only, cannot replace producer-GPU control."
+  },
+  "layout": {
+    "offset_bytes": 0,
+    "modifier": "DRM_FORMAT_MOD_LINEAR",
+    "width": 256,
+    "height": 64,
+    "fourcc": "DRM_FORMAT_ARGB8888",
+    "word_count": 16384,
+    "plane_count": 1,
+    "little_endian": true,
+    "payload_bytes": 65536,
+    "pitch_bytes": 1024
+  },
+  "fd_ownership": {
+    "socket": "Consumer owns only its inherited endpoint, never parent original or unrelated handles.",
+    "dma_buf": "Consumer owns supplied inherited duplicate; eglCreateImageKHR retains backing reference but does NOT take FD ownership; caller closes own FD exactly once.",
+    "native_fence": "Distinct EGL_ANDROID_native_fence_sync FD ownership rule; duplicate if provider needs retention, never apply memory-FD rules to sync FD; source contract ambiguity/failure cleanup must remain truthful."
+  },
+  "description": "Frozen proposal interface, not runtime admission or proof. Provider may refuse ambiguous details explicitly, but cannot silently invent external Intel work.",
+  "claims": {
+    "dedicated_vram_or_physical_p2p_inferred": false,
+    "direct_transport_qualified": false,
+    "intel_execution_inferred_from_consumer": false,
+    "cache_visibility_physical_path_unproved": true,
+    "success_scope": "PAYLOAD_EXPERIMENT_ONLY"
+  },
+  "handshake": {
+    "order": [
+      "consumer validates pinned contract/reference, selects exact NVIDIA EGL device, creates GLES3.1 context, imports memory/image and binds texture",
+      "consumer sends READY with nonce and actual selected identity over inherited control socket",
+      "external producer writes actual GPU payload after READY and finishes its bounded real completion control",
+      "producer sends RELEASE with same nonce/source/model-independent payload contract and actual completion receipt; exactly one sync_file via SCM_RIGHTS for native-fence mode, zero for explicit host-relay mode",
+      "consumer enqueues properly imported fence wait where selected; samples all pixels into SSBO and awaits own completion under10s internal/60s externally owned parent deadline",
+      "full original reference comparison; emit one bounded strictJSON after truthful cleanup disposition"
+    ]
+  },
+  "schema": "NV_EGL_EXTERNAL_PAYLOAD_CONTRACT_V1",
+  "source_only_runtime_not_admitted": true,
+  "missing_gate": "Incomplete external layout/producer completion/selected device/required runtime extension=>NOT_CHECKED2; actual attempted API error=>FAIL1 preserving code.",
+  "trusted_parent_inputs": [
+    "exact contract bytes + SHA256",
+    "selected NVIDIA PCI BDF and EGL render-node association",
+    "owned inherited DMA_BUF FD duplicate",
+    "owned SOCK_SEQPACKET control endpoint",
+    "independent original reference file64KiB + SHA256",
+    "named producer source/build/run/identity pins supplied externally"
+  ]
+}

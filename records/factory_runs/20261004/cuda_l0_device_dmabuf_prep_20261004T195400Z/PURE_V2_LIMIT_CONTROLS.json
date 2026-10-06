@@ -1,0 +1,26 @@
+[
+  {
+    "observed_accept": true,
+    "pass": true,
+    "name": "exactbounds",
+    "expected_accept": true
+  },
+  {
+    "observed_accept": true,
+    "pass": false,
+    "name": "source_over",
+    "expected_accept": false
+  },
+  {
+    "observed_accept": false,
+    "pass": true,
+    "name": "tests_over",
+    "expected_accept": false
+  },
+  {
+    "observed_accept": false,
+    "pass": true,
+    "name": "unknown_status",
+    "expected_accept": false
+  }
+]

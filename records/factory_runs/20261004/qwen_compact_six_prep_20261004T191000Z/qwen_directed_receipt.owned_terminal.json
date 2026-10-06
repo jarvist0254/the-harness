@@ -1,0 +1,20 @@
+{
+  "model_usage": null,
+  "finish_reason": null,
+  "native_children_actual": 0,
+  "pid": 43692,
+  "parse_error_type": null,
+  "private_url_output_refused": false,
+  "requested_model": "qwen3.8-max",
+  "pipe_error": false,
+  "usage": null,
+  "exit_code": 0,
+  "outer_killed": false,
+  "lane": "Qwen",
+  "status": "OWNED_CHILD_TERMINAL_CHECK_WORKER_RECEIPT",
+  "log_cap_exceeded": false,
+  "provider_patch_applied": false,
+  "credential_saved": false,
+  "drain_unknown": false,
+  "elapsed_seconds": 928.94
+}

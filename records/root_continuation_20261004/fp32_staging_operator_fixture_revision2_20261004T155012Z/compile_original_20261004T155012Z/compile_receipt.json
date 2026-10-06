@@ -1,0 +1,48 @@
+{
+  "scope": "REVISION2_COMPILE_ONLY_NO_NATIVE_FIXTURE_OR_GPU_EXECUTION",
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\compile_original_20261004T155012Z\\compile_original.cmd",
+    "E:\\the_harness\\records\\build_vulkan_real\\build"
+  ],
+  "pid": 48600,
+  "exit_code": 0,
+  "elapsed_seconds": 2.8590000001713634,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "stream_cap_each": 1048576,
+  "streams": {
+    "stderr": {
+      "observed_bytes": 1100,
+      "captured_bytes": 1100,
+      "truncated": false
+    },
+    "stdout": {
+      "observed_bytes": 428,
+      "captured_bytes": 428,
+      "truncated": false
+    }
+  },
+  "source_headers_libs_unchanged": true,
+  "compiler": {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "sha256_before": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "sha256_after": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "version": "19.51.36246.0 /Bv"
+  },
+  "child_presence_after_wait": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "outputs": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\compile_original_20261004T155012Z\\fp32_staging_operator.exe",
+      "bytes": 32768,
+      "sha256": "ad449a153447080836e25a5ca264ebd4b3afa5b14dbb239b11a5bad5be117b5b"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_revision2_20261004T155012Z\\compile_original_20261004T155012Z\\fp32_staging_operator.obj",
+      "bytes": 149702,
+      "sha256": "ff0547b833d4b651011cebd3235fdaac4f72e368d222d22483e6fc9418620827"
+    }
+  ]
+}

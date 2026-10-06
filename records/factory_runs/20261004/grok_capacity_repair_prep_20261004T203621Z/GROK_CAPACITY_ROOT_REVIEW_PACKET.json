@@ -1,0 +1,75 @@
+{
+  "source_execution": false,
+  "reasoning_effort": "high",
+  "prompt_sha256": "cfd8f05f04dce70b0654ad8f023e5f63837b479f3a14388e08e950079293795c",
+  "native_children_actual": 0,
+  "input_pins": [
+    {
+      "chars": 7296,
+      "sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\source.qwen_untrusted.py"
+    },
+    {
+      "chars": 3522,
+      "sha256": "aae6be310522f4d7a3152652ffd2816df186db72a317f5ead1372ec9dda95239",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\tests_source.qwen_untrusted.txt"
+    },
+    {
+      "chars": 5354,
+      "sha256": "8ab81aa30e7ccd104b2e8ae6fbb9d19c87b31fffb7fcb32880dc97f0c02d1bb8",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity.spec.txt"
+    },
+    {
+      "chars": 6913,
+      "sha256": "de2b5a98c4ad598c69db85e9a9c376d4e1840c892c9b1f4e3b67127f0e8a9fb0",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\run_output\\muse_review.extracted.json"
+    },
+    {
+      "chars": 7669,
+      "sha256": "f3058220ca3f4433b35966aeb64296be0910051790d5761e93cdd1205cdf9408",
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\gemini_capacity_high\\review.pending_root_qa.json"
+    },
+    {
+      "chars": 4653,
+      "sha256": "86cc4fc6fb7062e758b27802944fad2c40c67d9703d2f5df8e18cdfad5eb3d71",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\stdout.attempt3.raw.json"
+    },
+    {
+      "chars": 8448,
+      "sha256": "440245bf69e5fde1f2d68c94797f971c068d2d3a87ffe6da5e0afd2de394329e",
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_qwen_root_audit_20261004T1945Z\\capacity_independent_audit_v3.py"
+    }
+  ],
+  "helper_changes": "Only role name changed in existing admitted ledger wrapper; all execution/deadline/log/credential/parse controls retained",
+  "prompt_chars": 47766,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\source.qwen_untrusted.py",
+  "job": "grok_capacity_high",
+  "stdout_stderr_each_cap": 2097152,
+  "utc": "2026-10-04T20:36:21.9492616Z",
+  "provider_launch_authorized": false,
+  "deadline_seconds": 600,
+  "source_sha256": "7005c1fc83a4a9901e30cf8e705dbe5961dc1010c645e963bb08ec75a7808267",
+  "files": [
+    {
+      "name": "grok_capacity_high.prompt.txt",
+      "sha256": "cfd8f05f04dce70b0654ad8f023e5f63837b479f3a14388e08e950079293795c",
+      "bytes": 47766
+    },
+    {
+      "name": "invoke_owned_capacity_editor.ps1",
+      "sha256": "4c31e32ca8baf6d8b231c38a0a8e3845c667341b6e85f87e5449b08d2b974005",
+      "bytes": 8076
+    },
+    {
+      "name": "provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072
+    },
+    {
+      "name": "research_artifact.ps1",
+      "sha256": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+      "bytes": 722
+    }
+  ],
+  "model": "grok-4.7-build-fast"
+}

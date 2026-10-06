@@ -1,0 +1,2 @@
+hip_module_host.cpp
+E:\tmp\PyReExperimental\rocm\Lib\site-packages\_rocm_sdk_core\include\hip/linker_types.h(119): fatal error C1189: #error:  ("Must define exactly one of __HIP_PLATFORM_AMD__ or __HIP_PLATFORM_NVIDIA__");

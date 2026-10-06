@@ -1,0 +1,769 @@
+{
+  "source_sha256_before": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+  "source_sha256_after": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+  "all_native_post_card_intersections": [
+    {
+      "post": 0,
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 0,
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 0,
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 0,
+      "bay": "D",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 1,
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 1,
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 1,
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 1,
+      "bay": "D",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 2,
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 2,
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 2,
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 2,
+      "bay": "D",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 3,
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 3,
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 3,
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "post": 3,
+      "bay": "D",
+      "volume_mm3": 0.0
+    }
+  ],
+  "all_native_metal_card_intersections": [
+    {
+      "rail": 0,
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 0,
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 0,
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 0,
+      "bay": "D",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 1,
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 1,
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 1,
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "rail": 1,
+      "bay": "D",
+      "volume_mm3": 0.0
+    }
+  ],
+  "all_native_core_card_intersections": [
+    {
+      "bay": "A",
+      "volume_mm3": 0.0
+    },
+    {
+      "bay": "B",
+      "volume_mm3": 0.0
+    },
+    {
+      "bay": "C",
+      "volume_mm3": 0.0
+    },
+    {
+      "bay": "D",
+      "volume_mm3": 0.0
+    }
+  ],
+  "six_actual_shoe_primitives_equal_revision3": true,
+  "actual_shoes": [
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -72.0,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -72.0,
+        192.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -20.0,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -20.0,
+        192.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        32.0,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        32.0,
+        192.0,
+        8.0
+      ]
+    }
+  ],
+  "GPU_and_metal_saved_BRep_equivalence_revision3": [
+    {
+      "name": "GPU_A_Envelope",
+      "old_minus_new_mm3": 0.0,
+      "new_minus_old_mm3": 0.0,
+      "bounds_equal": true
+    },
+    {
+      "name": "GPU_B_Envelope",
+      "old_minus_new_mm3": 0.0,
+      "new_minus_old_mm3": 0.0,
+      "bounds_equal": true
+    },
+    {
+      "name": "GPU_C_Envelope",
+      "old_minus_new_mm3": 0.0,
+      "new_minus_old_mm3": 0.0,
+      "bounds_equal": true
+    },
+    {
+      "name": "GPU_D_Envelope",
+      "old_minus_new_mm3": 0.0,
+      "new_minus_old_mm3": 0.0,
+      "bounds_equal": true
+    },
+    {
+      "name": "MetalDLoadRailConcept_0",
+      "old_minus_new_mm3": 0.0,
+      "new_minus_old_mm3": 0.0,
+      "bounds_equal": true
+    },
+    {
+      "name": "MetalDLoadRailConcept_1",
+      "old_minus_new_mm3": 0.0,
+      "new_minus_old_mm3": 0.0,
+      "bounds_equal": true
+    }
+  ],
+  "state": {
+    "status": "DRAFT_UNQUALIFIED",
+    "production_release": false,
+    "measured_interfaces": false,
+    "config": {
+      "profile": "compact",
+      "core_width_mm": 188,
+      "core_depth_mm": 200,
+      "base_mm": 8,
+      "post_mm": 10,
+      "shoe_height_mm": 16,
+      "gap_mm": 12,
+      "rail_depth_mm": 8,
+      "d_beam_height_mm": 6,
+      "metal_rail_height_mm": 2,
+      "cards": [
+        {
+          "bay": "A",
+          "length_mm": 199,
+          "height_mm": 116,
+          "thickness_mm": 40,
+          "measured": false
+        },
+        {
+          "bay": "B",
+          "length_mm": 199,
+          "height_mm": 116,
+          "thickness_mm": 40,
+          "measured": false
+        },
+        {
+          "bay": "C",
+          "length_mm": 199,
+          "height_mm": 116,
+          "thickness_mm": 40,
+          "measured": false
+        },
+        {
+          "bay": "D",
+          "length_mm": 199,
+          "height_mm": 116,
+          "thickness_mm": 40,
+          "measured": false
+        }
+      ],
+      "receiver_hole_datums": null,
+      "safe_support_patches": null,
+      "psu_interfaces": null,
+      "cable_bends": null,
+      "fan_plenum": null
+    },
+    "dimensions": {
+      "core_width_mm": 188.0,
+      "core_depth_mm": 200.0,
+      "base_mm": 8.0,
+      "post_mm": 10.0,
+      "shoe_height_mm": 16.0,
+      "gap_mm": 12.0,
+      "rail_depth_mm": 8.0,
+      "d_beam_height_mm": 6.0,
+      "metal_rail_height_mm": 2.0
+    },
+    "cards": [
+      {
+        "bay": "A",
+        "origin_mm": [
+          -72.0,
+          0.0,
+          24.0
+        ],
+        "size_mm": [
+          40.0,
+          199.0,
+          116.0
+        ],
+        "orientation": "UPRIGHT",
+        "measured": false
+      },
+      {
+        "bay": "B",
+        "origin_mm": [
+          -20.0,
+          0.0,
+          24.0
+        ],
+        "size_mm": [
+          40.0,
+          199.0,
+          116.0
+        ],
+        "orientation": "UPRIGHT",
+        "measured": false
+      },
+      {
+        "bay": "C",
+        "origin_mm": [
+          32.0,
+          0.0,
+          24.0
+        ],
+        "size_mm": [
+          40.0,
+          199.0,
+          116.0
+        ],
+        "orientation": "UPRIGHT",
+        "measured": false
+      },
+      {
+        "bay": "D",
+        "origin_mm": [
+          -58.0,
+          0.0,
+          152.0
+        ],
+        "size_mm": [
+          116.0,
+          199.0,
+          40.0
+        ],
+        "orientation": "ROLLED_90_DEGREES",
+        "measured": false
+      }
+    ],
+    "mount_bays": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "printed_bbox_mm": [
+      188.0,
+      200.0,
+      150.0
+    ],
+    "print_bbox_mm": [
+      200.0,
+      188.0,
+      150.0
+    ],
+    "print_rotation": "Z_PLUS_90_DEGREES",
+    "gpu_bbox_mm": [
+      144.0,
+      199.0,
+      168.0
+    ],
+    "frame_policy": "ONE_CONNECTED_CORE_NO_APPEND_D",
+    "support_bodies": [
+      "BASE",
+      "POSTS",
+      "D_BEAMS",
+      "METAL_RAIL_CONCEPT"
+    ],
+    "d_support_elevation_mm": 152.0,
+    "post_boxes": [
+      {
+        "origin_mm": [
+          -31.0,
+          0.0,
+          0.0
+        ],
+        "size_mm": [
+          10.0,
+          10.0,
+          150.0
+        ]
+      },
+      {
+        "origin_mm": [
+          -31.0,
+          190.0,
+          0.0
+        ],
+        "size_mm": [
+          10.0,
+          10.0,
+          150.0
+        ]
+      },
+      {
+        "origin_mm": [
+          21.0,
+          0.0,
+          0.0
+        ],
+        "size_mm": [
+          10.0,
+          10.0,
+          150.0
+        ]
+      },
+      {
+        "origin_mm": [
+          21.0,
+          190.0,
+          0.0
+        ],
+        "size_mm": [
+          10.0,
+          10.0,
+          150.0
+        ]
+      }
+    ],
+    "post_height_mm": 150.0,
+    "beam_top_mm": 150.0,
+    "core_bbox_mm": [
+      188.0,
+      200.0,
+      150.0
+    ],
+    "nominal_support_footprints": "BOTH_FRONT_AND_REAR_BODY_OVERLAP_ONLY_NOT_SAFE_CONTACTS",
+    "unknown_interfaces": [
+      "receiver_hole_datums",
+      "safe_support_patches",
+      "psu_interfaces",
+      "cable_bends",
+      "fan_plenum",
+      "removal_sweeps",
+      "brim",
+      "slicer_mass",
+      "loads",
+      "thermal"
+    ],
+    "claims": [
+      "GPU_BODY_BOXES_ONLY",
+      "GPU_OVERHANG_ALLOWED",
+      "CONTACT_AND_AIRFLOW_UNQUALIFIED",
+      "NO_PRODUCTION_STL"
+    ],
+    "actual_printed_bbox_mm": [
+      188.0,
+      200.0,
+      150.0
+    ],
+    "solid_count": 1,
+    "brep_valid": true,
+    "core_volume_mm3": 151903.99999999994,
+    "body_interferences": [],
+    "body_envelope_collision_status": "CLEAR_BODIES_ONLY",
+    "contact_patch_status": "UNMEASURED_NOT_QUALIFIED",
+    "airflow_and_removal": "NOT_CHECKED",
+    "exports_are_draft": true
+  },
+  "all_22_actual_Primitives": [
+    {
+      "size_mm": [
+        188.0,
+        8.0,
+        8.0
+      ],
+      "origin_mm": [
+        -94.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        188.0,
+        8.0,
+        8.0
+      ],
+      "origin_mm": [
+        -94.0,
+        192.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        8.0,
+        184.0,
+        8.0
+      ],
+      "origin_mm": [
+        -94.0,
+        8.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        8.0,
+        184.0,
+        8.0
+      ],
+      "origin_mm": [
+        86.0,
+        8.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        10.0,
+        10.0,
+        150.0
+      ],
+      "origin_mm": [
+        -31.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        10.0,
+        10.0,
+        150.0
+      ],
+      "origin_mm": [
+        -31.0,
+        190.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        10.0,
+        10.0,
+        150.0
+      ],
+      "origin_mm": [
+        21.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        10.0,
+        10.0,
+        150.0
+      ],
+      "origin_mm": [
+        21.0,
+        190.0,
+        0.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -72.0,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -72.0,
+        192.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -20.0,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        -20.0,
+        192.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        32.0,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        8.0,
+        16.0
+      ],
+      "origin_mm": [
+        32.0,
+        192.0,
+        8.0
+      ]
+    },
+    {
+      "size_mm": [
+        188.0,
+        8.0,
+        6.0
+      ],
+      "origin_mm": [
+        -94.0,
+        0.0,
+        144.0
+      ]
+    },
+    {
+      "size_mm": [
+        178.0,
+        6.0,
+        2.0
+      ],
+      "origin_mm": [
+        -89.0,
+        1.0,
+        150.0
+      ]
+    },
+    {
+      "size_mm": [
+        188.0,
+        8.0,
+        6.0
+      ],
+      "origin_mm": [
+        -94.0,
+        192.0,
+        144.0
+      ]
+    },
+    {
+      "size_mm": [
+        178.0,
+        6.0,
+        2.0
+      ],
+      "origin_mm": [
+        -89.0,
+        193.0,
+        150.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        199.0,
+        116.0
+      ],
+      "origin_mm": [
+        -72.0,
+        0.0,
+        24.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        199.0,
+        116.0
+      ],
+      "origin_mm": [
+        -20.0,
+        0.0,
+        24.0
+      ]
+    },
+    {
+      "size_mm": [
+        40.0,
+        199.0,
+        116.0
+      ],
+      "origin_mm": [
+        32.0,
+        0.0,
+        24.0
+      ]
+    },
+    {
+      "size_mm": [
+        116.0,
+        199.0,
+        40.0
+      ],
+      "origin_mm": [
+        -58.0,
+        0.0,
+        152.0
+      ]
+    }
+  ]
+}

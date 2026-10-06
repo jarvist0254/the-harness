@@ -1,0 +1,12 @@
+#!/bin/sh
+set -u
+f=${1:-dma_payload.cpp}
+[ -f $f ] || { echo missing_source; exit 1; }
+sz=$(wc -c < $f)
+[ $sz -le 16000 ] || { echo source_too_large; exit 1; }
+for t in cuInit cuDeviceGetUuid cuMemAlloc cuMemsetD32 cuCtxSynchronize cuMemGetHandleForAddressRange CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE zeInit zeDeviceGetProperties ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF ze_external_memory_import_fd_t zeMemAllocDevice zeCommandListAppendMemoryCopy zeCommandListAppendBarrier zeFenceHostSynchronize PAYLOAD_EXPERIMENT_ONLY direct_transport_qualified=false bare_query_p2p_false inject-corruption duplicate_option unknown_option wrong_direction reverse_direction_not_implemented no_intel_root cuda_uuid_alias l0_subdevice_alias wrong_gpu_vendor cuda_dma_attr l0_dma_import_cap cuda_host_class host_alloc_class corruption_detected corruption_unexpected cleanup_unknown same_physical_alias cuda_to_levelzero levelzero_to_cuda; do grep -q -- $t $f || { echo missing_$t; exit 1; }; done
+grep -q TODO $f && { echo placeholder; exit 1; }
+grep -q FIXME $f && { echo placeholder; exit 1; }
+grep -q placeholder $f && { echo placeholder; exit 1; }
+grep -q UNIMPLEMENTED $f && { echo placeholder; exit 1; }
+echo PASS_STATIC_RECEIPT

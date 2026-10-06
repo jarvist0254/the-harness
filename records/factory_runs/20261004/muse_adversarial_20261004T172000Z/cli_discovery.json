@@ -1,0 +1,20 @@
+{
+  "status": "MUSE_CLI_NOT_FOUND_IN_CURRENT_POWERSHELL_PATH",
+  "observed_utc": "2026-10-04T17:20:11.1897000Z",
+  "cwd": "E:\\the_harness",
+  "get_command_muse": null,
+  "where_exe_muse": {
+    "results": [],
+    "exit_code": 1
+  },
+  "checked_exact_shim_directories": [
+    "C:\\Users\\thoma\\AppData\\Roaming\\npm",
+    "D:\\DevCache\\npm"
+  ],
+  "matching_muse_shims": [],
+  "help_invocation": "NOT_RUN",
+  "version_invocation": "NOT_RUN",
+  "interactive_or_provider_actions": "NOT_ATTEMPTED",
+  "credential_or_config_reads": "NOT_ATTEMPTED",
+  "scope": "Local command resolution only; no recursive drive scan"
+}

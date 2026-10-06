@@ -1,0 +1,19 @@
+{
+  "adjudicator":"ROOT",
+  "authority":"Existing authorized Qwen → Gemini → Grok pipeline",
+  "provider_launch_authorized":true,
+  "batch_path":"E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z",
+  "job_id":"grok_fp32_patch",
+  "lane":"Grok",
+  "model":"grok-4.7-build-fast",
+  "source_path":"E:\\the_harness\\records\\factory_runs\\20261004\\fp32_staging_repair_20261004T153127Z\\qwen_fp32_patch\\patch.pending_root_qa.json",
+  "source_sha256":"6e8f22e13aa447137a17c49c6bfea41735816793122f27750a5d704b085a21eb",
+  "prompt_sha256":"0abfef51beffcbab83b95aa62cd21afb99139c4db52b79e2d1096a0d6b21ca36",
+  "gemini_review_sha256":"aff99c3703e70b339da7e8d8dfee6cb8dd614dc6c331d7bae0e0add9a35290f1",
+  "root_review":"Read actual Gemini static PASS/findings-empty review and actual Grok prompt. Admit an exact patch edit preserving correct Qwen regions 1/2, equivalent simplified nonquantized-Y type-size expression, and truthful source-backed safety explanations. No critical defect or runtime PASS is invented.",
+  "outer_timeout_seconds":300,
+  "maximum_turns":3,
+  "reasoning_effort":"low",
+  "native_children_actual":0,
+  "guards":["Prompt-file transport; tool-less JSON edit only","Raw usage and artifacts retained","No patch application or provider-authored tests","No native/GPU, global Factory/Rolex, product, credentials, driver or BIOS changes","No unchanged retry"]
+}

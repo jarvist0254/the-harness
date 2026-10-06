@@ -1,0 +1,12 @@
+{
+  "pid": 72260,
+  "exit_code": "1",
+  "elapsed_ms": 3824,
+  "command": "llama_logits_qual.exe --model E:\\the_harness\\records\\models\\qwen3_06b\\Qwen3-0.6B-Q8_0.gguf --expected-sha256 9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031 --devices Vulkan1,Vulkan0",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_reverse.stdout.json",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_reverse.stderr.log",
+  "working_directory": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin",
+  "process_present_after": false,
+  "source_sha256": "54AD6FD03CADF8B302B4F6705AEC9AB280253277A2F5E00468E59B379CECD2FC",
+  "executable_sha256": "9FFE782754B8F1858742848F471DC2215DB70B080E0DCFAE30B8331527F30CB8"
+}

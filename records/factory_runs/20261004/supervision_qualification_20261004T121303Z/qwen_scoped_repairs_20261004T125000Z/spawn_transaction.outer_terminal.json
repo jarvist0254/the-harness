@@ -1,0 +1,9 @@
+{
+  "job": "spawn_transaction",
+  "seconds": 98.4,
+  "identity": "retained process object",
+  "pid": 88068,
+  "exit_code": 0,
+  "outer_killed": false,
+  "log_overflow": false
+}

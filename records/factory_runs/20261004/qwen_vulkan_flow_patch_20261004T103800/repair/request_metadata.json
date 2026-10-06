@@ -1,0 +1,8 @@
+{
+  "timeout_seconds": 180,
+  "pid": 47952,
+  "memory": false,
+  "tools": false,
+  "credential_persisted": false,
+  "model": "qwen3.8-flash"
+}

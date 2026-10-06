@@ -1,0 +1,12 @@
+{
+  "attempt": "first launch preflight only",
+  "status": "ABORTED_BEFORE_PROVIDER_PROCESS",
+  "observed_error": "input missing: spec at launcher source pin loop (line 23)",
+  "cause": "inputs.json initially pointed to qwen_linux_dmabuf_transport.spec.txt inside the transport directory, but exact pinned spec is the adjacent qwen_linux_dmabuf_transport.spec.txt under qwen_jlink_stream_six_20261004T184200Z.",
+  "provider_process_started": false,
+  "pid": null,
+  "correction": "inputs.json spec.original updated to exact adjacent spec path; its SHA256 verified as 7714B45230DBD5DB30A52A186B5934C8A944B60D21053A762EF34D0169D5D8CC before second attempt.",
+  "source_execution": false,
+  "compile": false,
+  "device_query": false
+}

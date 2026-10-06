@@ -1,0 +1,8 @@
+{
+  "timeout_seconds": 180,
+  "pid": 6780,
+  "memory": false,
+  "credential_persisted": false,
+  "tools": false,
+  "model": "deepseek-v4-pro-0813"
+}

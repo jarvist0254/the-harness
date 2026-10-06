@@ -1,0 +1,13 @@
+{
+  "candidate_acceptance": "NOT_ACCEPTED_SCHEMA_REFUSAL_EXACT_STRINGS_REVIEW_ONLY",
+  "session_reaped": 11252,
+  "utc": "2026-10-04T21:01:04.6447911Z",
+  "original_status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+  "source_chars": 14670,
+  "tests_chars": 10203,
+  "source_execution": false,
+  "refusal_reason": "compact source bound",
+  "tests_sha256": "9a63e63278a2bd71e65a71b80b1e2aa171cbd9e1c92e46d8ed77c857d5e8f387",
+  "source_sha256": "9f2635be587804c88c2988066142ef4c307d98adc0afc4649422a39ac880b694",
+  "owned_pids_point_absent": true
+}

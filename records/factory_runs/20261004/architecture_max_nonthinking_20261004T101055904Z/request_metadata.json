@@ -1,0 +1,8 @@
+{
+  "model": "qwen3.8-max",
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "timeout_seconds": 180,
+  "prior_request": "E:\\the_harness\\records\\factory_runs\\20261004\\architecture_evidence_review_20261004T100656059Z\\request_body.json",
+  "enable_thinking": false,
+  "credential_persisted": false
+}

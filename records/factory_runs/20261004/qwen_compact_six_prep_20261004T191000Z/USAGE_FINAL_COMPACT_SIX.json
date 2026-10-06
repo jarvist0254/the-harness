@@ -1,0 +1,203 @@
+{
+  "unknown_usage_jobs": 1,
+  "credits": "NOT_CHECKED",
+  "native_children_actual": 0,
+  "original_source_budget_refused_complete_responses": 4,
+  "reasoning_tokens_included_not_added": 245599,
+  "state": "SIX_PROVIDER_JOBS_CLOSED_UNTRUSTED_ARTIFACTS",
+  "original_intake_accepted_artifacts": 1,
+  "observed_total_tokens": 325533,
+  "observed_prompt_tokens": 53713,
+  "incomplete_streams": 1,
+  "provider": "Qwen",
+  "internal_model_calls": "NOT_REPORTED",
+  "provider_jobs": 6,
+  "accepted_functionality": 0,
+  "observed_completion_tokens": 271820,
+  "model": "qwen3.8-max",
+  "known_usage_jobs": 5,
+  "tokens_not_credits": true,
+  "scope": "ONLY six originally admitted compact Qwen HTTP requests; excludes Muse/Gem/Grok followup calls",
+  "utc": "2026-10-04T20:04:35.8558858Z",
+  "tests_execution": false,
+  "credentials_scan_matches": 0,
+  "jobs": [
+    {
+      "usage": null,
+      "job_id": "qwen_l0_query",
+      "model": "qwen3.8-max",
+      "source_executed": false,
+      "elapsed_seconds": 1146.78,
+      "process_reaped": true,
+      "raw_response_sha256": "8699d38f521fe0cea4036437e99d7455c787d7415218eacd86a8a3b5a7ce7151",
+      "source_unchanged": true,
+      "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_query\\terminal.json",
+      "source_sha256_after": "b8656e969032b14244d6311959f6451fb180ca8698281a3ef9fc49ce2912f462",
+      "prompt_unchanged": true,
+      "http": 200,
+      "status": "INCOMPLETE_STREAM_NOT_ACCEPTED",
+      "owned_exit_code": 0,
+      "source_sha256_before": "b8656e969032b14244d6311959f6451fb180ca8698281a3ef9fc49ce2912f462",
+      "owned_terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_query.owned_terminal.json",
+      "usage_known": false
+    },
+    {
+      "usage": {
+        "prompt_tokens": 1142,
+        "total_tokens": 73645,
+        "completion_tokens": 72503,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 1142
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 66894,
+          "text_tokens": 72503
+        }
+      },
+      "job_id": "qwen_l0_peer_copy",
+      "model": "qwen3.8-max",
+      "source_executed": false,
+      "elapsed_seconds": 1559.03,
+      "process_reaped": true,
+      "raw_response_sha256": "b67aafc94cd35b01e8dafa0c181384430ba9ad44ef822cee95dd04111ec1c570",
+      "source_unchanged": true,
+      "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_peer_copy\\terminal.json",
+      "source_sha256_after": "26de6cccb52a7214fb1625fb287ffa38273fac254ec1ca30e2e1e740f8f90553",
+      "prompt_unchanged": true,
+      "http": 200,
+      "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "owned_exit_code": 0,
+      "source_sha256_before": "26de6cccb52a7214fb1625fb287ffa38273fac254ec1ca30e2e1e740f8f90553",
+      "owned_terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_peer_copy.owned_terminal.json",
+      "usage_known": true
+    },
+    {
+      "usage": {
+        "prompt_tokens": 1190,
+        "total_tokens": 45332,
+        "completion_tokens": 44142,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 1190
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 39684,
+          "text_tokens": 44142
+        }
+      },
+      "job_id": "qwen_directed_receipt",
+      "model": "qwen3.8-max",
+      "source_executed": false,
+      "elapsed_seconds": 928.38,
+      "process_reaped": true,
+      "raw_response_sha256": "ea3822096d07897b3a0045fa7f25c5f5b93441e75f5ced89863590c2bf42e720",
+      "source_unchanged": true,
+      "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\terminal.json",
+      "source_sha256_after": "073aacfe438543ba6a7fd66ec6dc062ad3da683159f2529b6deac4e26fd1f337",
+      "prompt_unchanged": true,
+      "http": 200,
+      "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "owned_exit_code": 0,
+      "source_sha256_before": "073aacfe438543ba6a7fd66ec6dc062ad3da683159f2529b6deac4e26fd1f337",
+      "owned_terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt.owned_terminal.json",
+      "usage_known": true
+    },
+    {
+      "usage": {
+        "prompt_tokens": 1167,
+        "total_tokens": 32966,
+        "completion_tokens": 31799,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 1167
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 27973,
+          "text_tokens": 31799
+        }
+      },
+      "job_id": "qwen_four_capacity",
+      "model": "qwen3.8-max",
+      "source_executed": false,
+      "elapsed_seconds": 663.26,
+      "process_reaped": true,
+      "raw_response_sha256": "7d23563f913de2fda879aa1d29e6826b9017eee13f087ce161cb28e954a649eb",
+      "source_unchanged": true,
+      "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\terminal.json",
+      "source_sha256_after": "8ab81aa30e7ccd104b2e8ae6fbb9d19c87b31fffb7fcb32880dc97f0c02d1bb8",
+      "prompt_unchanged": true,
+      "http": 200,
+      "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+      "owned_exit_code": 0,
+      "source_sha256_before": "8ab81aa30e7ccd104b2e8ae6fbb9d19c87b31fffb7fcb32880dc97f0c02d1bb8",
+      "owned_terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity.owned_terminal.json",
+      "usage_known": true
+    },
+    {
+      "usage": {
+        "prompt_tokens": 1219,
+        "total_tokens": 63264,
+        "completion_tokens": 62045,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 1219
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 55685,
+          "text_tokens": 62045
+        }
+      },
+      "job_id": "qwen_cuda_dmabuf_export",
+      "model": "qwen3.8-max",
+      "source_executed": false,
+      "elapsed_seconds": 1333.82,
+      "process_reaped": true,
+      "raw_response_sha256": "f0880376f0a7039f6fdceb667f843d8895fe77ce61f22365e2df002650d7f808",
+      "source_unchanged": true,
+      "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\terminal.json",
+      "source_sha256_after": "1542c8a8bfec576980991b365e519135bb0c17c9890ad9c561775b9120b347b3",
+      "prompt_unchanged": true,
+      "http": 200,
+      "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "owned_exit_code": 0,
+      "source_sha256_before": "1542c8a8bfec576980991b365e519135bb0c17c9890ad9c561775b9120b347b3",
+      "owned_terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export.owned_terminal.json",
+      "usage_known": true
+    },
+    {
+      "usage": {
+        "prompt_tokens": 48995,
+        "total_tokens": 110326,
+        "completion_tokens": 61331,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 48995
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 55363,
+          "text_tokens": 61331
+        }
+      },
+      "job_id": "qwen_fp32_adjudication",
+      "model": "qwen3.8-max",
+      "source_executed": false,
+      "elapsed_seconds": 1035.18,
+      "process_reaped": true,
+      "raw_response_sha256": "9c5140f54c1df094dc78e0a8c5add3d4f04df0334f81ab5d982afe84a514fe5f",
+      "source_unchanged": true,
+      "terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_fp32_adjudication\\terminal.json",
+      "source_sha256_after": "c973eedf8c00e69a0aa71c3ffa98dbefc611346b057584a166407d9de60651dd",
+      "prompt_unchanged": true,
+      "http": 200,
+      "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "owned_exit_code": 0,
+      "source_sha256_before": "c973eedf8c00e69a0aa71c3ffa98dbefc611346b057584a166407d9de60651dd",
+      "owned_terminal_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_fp32_adjudication.owned_terminal.json",
+      "usage_known": true
+    }
+  ],
+  "source_execution": false,
+  "rootreview_only_extractions_not_retroactive_intake_acceptance": true,
+  "review_chain_separate_pending_not_closed": true
+}

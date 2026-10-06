@@ -1,0 +1,16 @@
+{
+  "status": "COMPLETE_REVIEW_PENDING_ADJUDICATION",
+  "exit_code": 0,
+  "pid": 88696,
+  "requested_model": "gemini-3.8-flash-medium",
+  "outer_killed": false,
+  "native_children": 0,
+  "elapsed_seconds": 129.42,
+  "usage": {
+    "input_tokens": 58776,
+    "output_tokens": 27434,
+    "thinking_tokens": 21972,
+    "cache_read_tokens": 183623,
+    "total_tokens": 86210
+  }
+}

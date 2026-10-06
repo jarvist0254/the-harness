@@ -1,0 +1,9 @@
+{
+  "job": "proof_bindings",
+  "seconds": 210.54,
+  "identity": "retained process object",
+  "pid": 50164,
+  "exit_code": 0,
+  "outer_killed": false,
+  "log_overflow": false
+}

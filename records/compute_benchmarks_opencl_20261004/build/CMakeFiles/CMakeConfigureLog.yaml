@@ -1,0 +1,583 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36246 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      CMakeCCompilerId.c
+      Microsoft (R) Incremental Linker Version 14.51.36246.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCCompilerId.exe 
+      CMakeCCompilerId.obj 
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/4.0.2/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:1322 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        Note: including file: E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Note: including file: "
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36246 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      CMakeCXXCompilerId.cpp
+      Microsoft (R) Incremental Linker Version 14.51.36246.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCXXCompilerId.exe 
+      CMakeCXXCompilerId.obj 
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+      
+      The CXX compiler identification is MSVC, found in:
+        E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/4.0.2/CompilerIdCXX/CMakeCXXCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:1322 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        main.c
+        Note: including file: E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Note: including file: "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:13 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-1v2s9c"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-1v2s9c"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-1v2s9c'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_b2318
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_b2318.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_b2318.dir\\ /FS -c C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c
+        [2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1951 --intdir=CMakeFiles\\cmTC_b2318.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b2318.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_b2318.exe /implib:cmTC_b2318.lib /pdb:cmTC_b2318.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/PROGRA~1/MICROS~4/18/COMMUN~1/VC/Tools/MSVC/1451~1.362/bin/Hostx64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Running the C compiler's linker: "C:/PROGRA~1/MICROS~4/18/COMMUN~1/VC/Tools/MSVC/1451~1.362/bin/Hostx64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.51.36246.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:13 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-atcokt"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-atcokt"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-atcokt'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_17b25
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_17b25.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_17b25.dir\\ /FS -c C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp
+        [2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1951 --intdir=CMakeFiles\\cmTC_17b25.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_17b25.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_17b25.exe /implib:cmTC_17b25.lib /pdb:cmTC_17b25.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/PROGRA~1/MICROS~4/18/COMMUN~1/VC/Tools/MSVC/1451~1.362/bin/Hostx64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/PROGRA~1/MICROS~4/18/COMMUN~1/VC/Tools/MSVC/1451~1.362/bin/Hostx64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.51.36246.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindThreads.cmake:97 (check_c_source_compiles)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "third_party/googletest/googletest/cmake/internal_utils.cmake:66 (find_package)"
+      - "third_party/googletest/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-r9p5hc"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-r9p5hc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-r9p5hc'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_0ce51
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_0ce51.dir\\src.c.obj /FdCMakeFiles\\cmTC_0ce51.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r9p5hc\\src.c
+        FAILED: CMakeFiles/cmTC_0ce51.dir/src.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_0ce51.dir\\src.c.obj /FdCMakeFiles\\cmTC_0ce51.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r9p5hc\\src.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-r9p5hc\\src.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindThreads.cmake:112 (check_library_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "third_party/googletest/googletest/cmake/internal_utils.cmake:66 (find_package)"
+      - "third_party/googletest/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-khmqzp"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-khmqzp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-khmqzp'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_aa026
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_aa026.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_aa026.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-khmqzp\\CheckFunctionExists.c
+        [2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1951 --intdir=CMakeFiles\\cmTC_aa026.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_aa026.dir\\CheckFunctionExists.c.obj  /out:cmTC_aa026.exe /implib:cmTC_aa026.lib /pdb:cmTC_aa026.pdb /version:0.0 /machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_aa026.exe 
+        C:\\windows\\system32\\cmd.exe /C "cd . && C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1951 --intdir=CMakeFiles\\cmTC_aa026.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_aa026.dir\\CheckFunctionExists.c.obj  /out:cmTC_aa026.exe /implib:cmTC_aa026.lib /pdb:cmTC_aa026.pdb /version:0.0 /machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK: command "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_aa026.dir\\CheckFunctionExists.c.obj /out:cmTC_aa026.exe /implib:cmTC_aa026.lib /pdb:cmTC_aa026.pdb /version:0.0 /machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib'\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindThreads.cmake:112 (check_library_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "third_party/googletest/googletest/cmake/internal_utils.cmake:66 (find_package)"
+      - "third_party/googletest/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-vkpqie"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-vkpqie"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-vkpqie'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_b5ab8
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_b5ab8.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_b5ab8.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vkpqie\\CheckFunctionExists.c
+        [2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1951 --intdir=CMakeFiles\\cmTC_b5ab8.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5ab8.dir\\CheckFunctionExists.c.obj  /out:cmTC_b5ab8.exe /implib:cmTC_b5ab8.lib /pdb:cmTC_b5ab8.pdb /version:0.0 /machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_b5ab8.exe 
+        C:\\windows\\system32\\cmd.exe /C "cd . && C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1951 --intdir=CMakeFiles\\cmTC_b5ab8.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5ab8.dir\\CheckFunctionExists.c.obj  /out:cmTC_b5ab8.exe /implib:cmTC_b5ab8.lib /pdb:cmTC_b5ab8.pdb /version:0.0 /machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK: command "C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5ab8.dir\\CheckFunctionExists.c.obj /out:cmTC_b5ab8.exe /implib:cmTC_b5ab8.lib /pdb:cmTC_b5ab8.pdb /version:0.0 /machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib'\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:129 (check_symbol_exists)"
+    checks:
+      - "Looking for SYS_pidfd_getfd"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-f7qvql"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-f7qvql"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "HAVE_SYS_PIDFD_GETFD"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-f7qvql'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_2647c
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_2647c.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_2647c.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-f7qvql\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_2647c.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_2647c.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_2647c.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-f7qvql\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-f7qvql\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'sys/syscall.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:130 (check_symbol_exists)"
+    checks:
+      - "Looking for SYS_pidfd_open"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-y3rd7x"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-y3rd7x"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "HAVE_SYS_PIDFD_OPEN"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-y3rd7x'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_f96ac
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_f96ac.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_f96ac.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y3rd7x\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_f96ac.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_f96ac.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_f96ac.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y3rd7x\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y3rd7x\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'sys/syscall.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-vgbwhs"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-vgbwhs"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_3_0"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-vgbwhs'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_9f4f4
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_9f4f4.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_9f4f4.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vgbwhs\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_9f4f4.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_9f4f4.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_9f4f4.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vgbwhs\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vgbwhs\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-keuz83"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-keuz83"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_2_2"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-keuz83'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_1dac2
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_1dac2.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_1dac2.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-keuz83\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_1dac2.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_1dac2.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_1dac2.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-keuz83\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-keuz83\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-n3pnw1"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-n3pnw1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_2_1"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-n3pnw1'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_998eb
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_998eb.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_998eb.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n3pnw1\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_998eb.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_998eb.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_998eb.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n3pnw1\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n3pnw1\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-xegcbc"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-xegcbc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_2_0"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-xegcbc'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_645b4
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_645b4.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_645b4.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xegcbc\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_645b4.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_645b4.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_645b4.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xegcbc\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xegcbc\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-z1tdf7"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-z1tdf7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_1_2"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-z1tdf7'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_d48a0
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_d48a0.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_d48a0.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z1tdf7\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_d48a0.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_d48a0.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_d48a0.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z1tdf7\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z1tdf7\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-bx5xxn"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-bx5xxn"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_1_1"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-bx5xxn'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_2cb45
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_2cb45.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_2cb45.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bx5xxn\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_2cb45.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_2cb45.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_2cb45.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bx5xxn\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bx5xxn\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/CheckSymbolExists.cmake:65 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:59 (check_symbol_exists)"
+      - "C:/Users/thoma/AppData/Local/Programs/Python/Python310/Lib/site-packages/cmake/data/share/cmake-4.0/Modules/FindOpenCL.cmake:100 (_FIND_OPENCL_VERSION)"
+      - "source/framework/ocl/CMakeLists.txt:12 (find_package)"
+    directories:
+      source: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-myilwd"
+      binary: "E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-myilwd"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64 /DELAYLOAD:OpenCL.dll /DELAYLOAD:ze_loader.dll /DELAYLOAD:vulkan-1.dll /ignore:4199 /MANIFEST:NO"
+      CMAKE_MODULE_PATH: "E:/the_harness/records/compute_benchmarks_opencl_20261004/source/cmake"
+    buildResult:
+      variable: "OPENCL_VERSION_1_0"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/the_harness/records/compute_benchmarks_opencl_20261004/build/CMakeFiles/CMakeScratch/TryCompile-myilwd'
+        
+        Run Build Command(s): C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe -v cmTC_5e9bf
+        [1/2] C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_5e9bf.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_5e9bf.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-myilwd\\CheckSymbolExists.c
+        FAILED: CMakeFiles/cmTC_5e9bf.dir/CheckSymbolExists.c.obj 
+        C:\\PROGRA~1\\MICROS~4\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1451~1.362\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_5e9bf.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_5e9bf.dir\\ /FS -c E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-myilwd\\CheckSymbolExists.c
+        E:\\the_harness\\records\\compute_benchmarks_opencl_20261004\\build\\CMakeFiles\\CMakeScratch\\TryCompile-myilwd\\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+...

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\layer_diagnostic_RED_20261004T145150Z\\evaluate_comparator.py"
+  ],
+  "pid": 6324,
+  "exit_code": 1,
+  "elapsed_seconds": 1.2029999997466803,
+  "timeout": false,
+  "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "evaluator_sha256": "e64ccbc7a62e00680fd1f4ad06ca139364e2daaccf8e59d61d85208ffa8f8730",
+  "scope": "Pure synthetic comparator; native/process/network/GPU calls trapped"
+}

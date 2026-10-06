@@ -1,0 +1,148 @@
+{
+  "utc": "2026-10-04T23:01:06.389638+00:00",
+  "status": "PREPARATION_ONLY_PENDING_ROOT_ADMISSION",
+  "launch_authorized": false,
+  "job": "qwen_q8_original_parity_diagnostic_v2",
+  "model": "qwen3.8-max",
+  "reasoning_effort": "xhigh",
+  "enable_thinking": true,
+  "thinking_budget_absent": true,
+  "source_chars_limit": 32000,
+  "tests_chars_limit": 16000,
+  "http_seconds": 2400,
+  "outer_seconds": 2430,
+  "raw_stream_cap_bytes": 16777216,
+  "normalized_each_cap": 2097152,
+  "native_children_actual": 0,
+  "source_execution": false,
+  "source_binding": {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+    "sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+    "bytes": 898302
+  },
+  "prompt": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.prompt.txt",
+    "sha256": "6bff78f368092229fffc108a21f33cad4116bc536788bec79fc013ee1591f92c",
+    "bytes": 144545
+  },
+  "spec": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.spec.txt",
+    "sha256": "5709f4e62c9b77fe867eea9980411e0236d65b8e9bc6428f3f9808c99251e2ae",
+    "bytes": 4430
+  },
+  "api": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_q8_original_parity_diagnostic_v2.api.txt",
+    "sha256": "898acf7da25c8c505126a55760478e34dc0f9c215e58c72c1cd792a76e5d2ef3",
+    "bytes": 19541
+  },
+  "full_embedded_inputs": [
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_default.stdout.json",
+      "sha256": "e110cddaf86f2b7cd7fdaf5bf37c5a41e6daec167a1cde0805b614fd9d0e43d5",
+      "bytes": 1995
+    },
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_default.json",
+      "sha256": "fc8c6fc236dd2b5cf9c1e31ef71740a2b9454514442411dd13051b57ef80d741",
+      "bytes": 935
+    },
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_reverse.stdout.json",
+      "sha256": "2f9cb4429bc285398a72bfc6721cd525f317a54e449bceb42b2a177f1b6ecbe3",
+      "bytes": 1996
+    },
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_reverse.json",
+      "sha256": "21c72108d8c8774b052c75c06935f603987b8cbf50ad7f2ca4d4c5a2997e1161",
+      "bytes": 801
+    },
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_corruption.stdout.json",
+      "sha256": "b97d24fc06bb949042b974ee6254aaddac35f167c8a0caab66dfd1c440261fe3",
+      "bytes": 2002
+    },
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\contextfix_corruption.json",
+      "sha256": "389798fa64d219a29ae383ca662c9ad531296189c66744793cd6d154175802b4",
+      "bytes": 833
+    },
+    {
+      "path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\whole_model_qualification_receipt.md",
+      "sha256": "66483257f703a7bec707c616fa40a0e2c0d1e4358d04ff1cb44cb7e5c1009562",
+      "bytes": 3944
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_context_padding\\llama_logits_context_corrected.cpp",
+      "sha256": "54ad6fd03cadf8b302b4f6705aec9ab280253277a2f5e00468e59b379cecd2fc",
+      "bytes": 22910
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\FP32_FRESH_NUMERICAL_ACCEPTANCE_20261004T1910Z.json",
+      "sha256": "b1da0dd4719ee343b39f63e8ca0597d80c0c94c7083fe80d283d5b2f81204cde",
+      "bytes": 10265
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\stdout.raw.log",
+      "sha256": "30050a291becf283912afeb2559058fa9615b6ef2bb115ee3dec2c25b8426d78",
+      "bytes": 2361
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\stdout.raw.log",
+      "sha256": "5db2361f7e734798c77f60dfd6a5a1ee79a33f1057449393875076042674d4ce",
+      "bytes": 2360
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\dequant_funcs.glsl",
+      "sha256": "dbd119706ac698c845ecc66ae3185dce0b52e5c0416df48ad39b25c5e3aa8372",
+      "bytes": 31469
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\dequant_q8_0.comp",
+      "sha256": "13f01d84119070b5338dc553f285a6bf8576e124bcff5fb8a7bbadf4d7d36762",
+      "bytes": 1289
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\quantize_q8_1.comp",
+      "sha256": "4bc96135723bf63d6a42871ebcf5d175d033333b0b1e5d747e29aea306a33e59",
+      "bytes": 3271
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\mul_mmq.comp",
+      "sha256": "e985bd21aea9d9084f8486b3ab4a5aa8c24f65f80b6f888fa9e9781cf408b1be",
+      "bytes": 10057
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\mul_mmq_funcs.glsl",
+      "sha256": "18899faaa61e3717a96fb65eb7192aa00d6877266063acb225d4553423cb69b4",
+      "bytes": 22402
+    }
+  ],
+  "helpers": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\invoke_owned_stream_research.v3.ps1",
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "bytes": 8048
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\qwen_http_stream_research.v3.ps1",
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "bytes": 8011
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\provider_common.ps1",
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "bytes": 4072
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\research_artifact.v3.ps1",
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36",
+      "bytes": 774
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\PURE_LIMIT_CONTROLS.json",
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e",
+      "bytes": 582
+    }
+  ],
+  "helper_diffs": "NONE frozen approved helpers unchanged"
+}

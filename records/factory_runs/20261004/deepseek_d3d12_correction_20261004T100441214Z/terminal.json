@@ -1,0 +1,8 @@
+{
+  "status": "SOURCE_SCHEMA_FAILED",
+  "http_status": 200,
+  "seconds": 100.9260782,
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\deepseek_d3d12_correction_20261004T100441214Z",
+  "requested_model": "deepseek-v4-flash-0731",
+  "completed_at": "2026-10-04T10:06:22.1753178Z"
+}

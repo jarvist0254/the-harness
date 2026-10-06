@@ -1,0 +1,89 @@
+{
+  "source_prompt_text_unchanged_from_root_reviewed_v2": true,
+  "native_execution": false,
+  "state": "V3_ACTUAL_BOUNDARY_GREEN_PENDING_ROOT_LAUNCH_ADMISSION",
+  "credentials_read": false,
+  "correction": "single exact unique span18000->16000; NO chained numeric substitution",
+  "actual_controls": [
+    {
+      "tests_chars": 8000,
+      "source_chars": 16000,
+      "expected_accept": true,
+      "name": "exact16000_8000",
+      "observed_accept": true,
+      "pass": true
+    },
+    {
+      "tests_chars": 1,
+      "source_chars": 16001,
+      "expected_accept": false,
+      "name": "source16001",
+      "observed_accept": false,
+      "pass": true
+    },
+    {
+      "tests_chars": 8001,
+      "source_chars": 1,
+      "expected_accept": false,
+      "name": "tests8001",
+      "observed_accept": false,
+      "pass": true
+    },
+    {
+      "tests_chars": 8001,
+      "source_chars": 16001,
+      "expected_accept": false,
+      "name": "both_over",
+      "observed_accept": false,
+      "pass": true
+    },
+    {
+      "tests_chars": 1,
+      "source_chars": 1,
+      "expected_accept": false,
+      "name": "unknown_status",
+      "observed_accept": false,
+      "pass": true
+    }
+  ],
+  "failures": 0,
+  "utc": "2026-10-04T20:06:32.9099875Z",
+  "model_source_execution": false,
+  "provider_launch_authorized": false,
+  "tests_limit_chars": 8000,
+  "files": [
+    {
+      "sha256": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+      "bytes": 6983,
+      "name": "cuda_l0_device_dmabuf.v3.prompt.txt"
+    },
+    {
+      "sha256": "6fb3e449272cfd176ad0961fdc11077eaa84a8fd84155cf89025edf6141f4493",
+      "bytes": 6983,
+      "name": "cuda_l0_device_dmabuf.v3.spec.txt"
+    },
+    {
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063",
+      "bytes": 8048,
+      "name": "invoke_owned_stream_research.v3.ps1"
+    },
+    {
+      "sha256": "e251785dc3b5e51262f4a93f1916814553b19af35e5eac5b95fc1ed00749c316",
+      "bytes": 857,
+      "name": "PURE_V3_LIMIT_CONTROLS.json"
+    },
+    {
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c",
+      "bytes": 8011,
+      "name": "qwen_http_stream_research.v3.ps1"
+    },
+    {
+      "sha256": "ae851878f0bb551909ae16b7a0f58202ba67cc1272df8f34daa53cbc2d5071f3",
+      "bytes": 773,
+      "name": "research_artifact.v3.ps1"
+    }
+  ],
+  "previous_v2_failure_preserved": true,
+  "parse_errors": [],
+  "source_limit_chars": 16000
+}

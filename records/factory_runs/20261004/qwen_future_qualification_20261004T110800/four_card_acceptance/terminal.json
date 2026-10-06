@@ -1,0 +1,19 @@
+{
+  "finish_reason": "stop",
+  "job": "four_card_acceptance",
+  "status": "ERROR_ArgumentException",
+  "observed_model": "qwen3.8-flash",
+  "elapsed_seconds": 23.97,
+  "usage": {
+    "prompt_tokens": 8662,
+    "total_tokens": 9872,
+    "completion_tokens": 1210,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 8662
+    }
+  },
+  "http": 200,
+  "pid": 77632,
+  "requested_model": "qwen3.8-flash"
+}

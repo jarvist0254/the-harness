@@ -1,0 +1,72 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\fp32_staging_operator.cpp",
+    "bytes": 8422,
+    "sha256": "74c34a8726c26d6d1349caa2dca1f2e16a8a5b5295c78cc8d4a5f1842434f754"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\CONTRACT.json",
+    "bytes": 5230,
+    "sha256": "0ad16226c2bc38aeed5a126d33e7273a20d98a0b059505f43321d156e19b7d9b"
+  },
+  {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_staging_operator_fixture_20261004T153409Z\\compile_DRAFT.cmd",
+    "bytes": 975,
+    "sha256": "4c0f4e5007cf663d03dee1c4a127830e9ce8615dcc904e70447fb82e451770d7"
+  },
+  {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+    "bytes": 39,
+    "sha256": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml.h",
+    "bytes": 119166,
+    "sha256": "62e4d28730f96924bfc3ec46771b38c30a8d4397584769fd636d6327354d5430"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-backend.h",
+    "bytes": 26216,
+    "sha256": "d65b0d09a6f5a53bb62b33a0c9e67095f07209d144c556ea87bc555d43b79735"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-alloc.h",
+    "bytes": 3776,
+    "sha256": "4c2dc83a6bc3e8df4c8a613c56ec0a9a96a09a5b96de85cf9e1fbe2873c86608"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-vulkan.h",
+    "bytes": 981,
+    "sha256": "0b6f625021b047907d24b60b3ca441e8a97d44235f0d32abeb2665112c35418e"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\ggml\\src\\ggml.lib",
+    "bytes": 5288,
+    "sha256": "1e1c867d344558ca5f7655b87c4a990709eb73ae9ba6886679c62aa70f4d0de6"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\ggml\\src\\ggml-cpu.lib",
+    "bytes": 15744,
+    "sha256": "0c5ba618f2b0e51b8fa2121d6e918bb3b5edd6a346aa775127494225e0bec643"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\ggml\\src\\ggml-base.lib",
+    "bytes": 154228,
+    "sha256": "986943a5cbfd5c7704d28146d1100a30a32c40ffa499b5b1244ab75625230868"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\ggml\\src\\ggml-rpc\\ggml-rpc.lib",
+    "bytes": 3324,
+    "sha256": "dd65b73490f7916a3e5646e012cf1faffcd52f033e4610b53ab346ca3e3de3c5"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\ggml\\src\\ggml-vulkan\\ggml-vulkan.lib",
+    "bytes": 3712,
+    "sha256": "1f27da22bd90f3224ea0fb88a986b8102b37895a47e0653c874df65daefc638e"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Lib\\vulkan-1.lib",
+    "bytes": 66154,
+    "sha256": "02caa31b8665a79f327cbfe97286fd7d0017c0b1f9b39eb78687b7a509de52b3"
+  }
+]

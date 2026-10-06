@@ -1,0 +1,77 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\CMakeCache.txt",
+    "bytes": 37412,
+    "sha256": "16f23bdfb1daffa86ce9213b4f005cab0abf1b812ec424d42858935f515f280a"
+  },
+  {
+    "path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\cmake\\data\\bin\\cmake.exe",
+    "bytes": 12101584,
+    "sha256": "c5cecf8e663f105217ff5805bb1d748f7de2fe3767312974b677b3c818883d2c"
+  },
+  {
+    "path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ninja.exe",
+    "bytes": 564736,
+    "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+  },
+  {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "bytes": 893328,
+    "sha256": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d"
+  },
+  {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+    "bytes": 39,
+    "sha256": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Bin\\glslc.exe",
+    "bytes": 5297080,
+    "sha256": "644fe20877b3f54bc8ec7b421632db56f04555f3251bd053919d87e157ad856f"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Lib\\vulkan-1.lib",
+    "bytes": 66154,
+    "sha256": "02caa31b8665a79f327cbfe97286fd7d0017c0b1f9b39eb78687b7a509de52b3"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Include\\vulkan\\vulkan.h",
+    "bytes": 1722,
+    "sha256": "2d1a6f00bfdcddbe1c68bf5f574a0fc4cf95c4be9eae683123b6db8af9d1a1de"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Include\\vulkan\\vulkan_core.h",
+    "bytes": 1390151,
+    "sha256": "944cd8f81d98e94999c7353dd632f73be471f2da95afecbc7d9ffe0ad5295deb"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\sdk\\Lib\\cmake\\SPIRV-Headers\\SPIRV-HeadersConfig.cmake",
+    "bytes": 4287,
+    "sha256": "c755db6807cfdfc6a18ee988cd437f6c2ce8338a79b7e42539b0d658cd3ea97b"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml.dll",
+    "bytes": 62976,
+    "sha256": "415259cbf19d6cd1865a76a4742d7c8004371d6c00d65cfa35f316afdacfd5ab"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-base.dll",
+    "bytes": 693760,
+    "sha256": "7a2a41f7c463c2cf86679e8149538b4978e5172cd83f79f9bca981e113bd30a9"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-cpu.dll",
+    "bytes": 1125888,
+    "sha256": "41ba79e465954ed8fd6966c039e31db70a52445a192fba3ee4ef8d76db963d52"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-rpc.dll",
+    "bytes": 143872,
+    "sha256": "529260841c86b30c604fe1d54a6571138f4dd85b7a47b7b1437fdcb6f554095a"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin\\ggml-vulkan.dll",
+    "bytes": 45299200,
+    "sha256": "a960e2eb3d25aa6e4d4139a2db3873e403cbeecb216621db5bc3ad38e4536e00"
+  }
+]

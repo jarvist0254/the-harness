@@ -1,0 +1,15 @@
+{
+  "credits": "NOT_CHECKED",
+  "scope_review_sha256": "d0a9b77012bb9d7ffd2b155d3714b175d7c5a665dc30d726a5741a81293961a3",
+  "actual_requests": 6,
+  "ledger_sha256": "825f8c97606eac737ae8efad510da102da94fb5528119878b4aec8c404ac9274",
+  "audit_sha256": "ec8d5df801c25090fb82c4d3e36a1f06c6ec2f980fdb1034b6ecb9a43e013dd2",
+  "unknown_usage_timeout_requests": 5,
+  "observed_total_tokens": 14223,
+  "complete_advisory_artifacts": 1,
+  "utc": "2026-10-04T18:33:01.3081426Z",
+  "candidate_accepted": false,
+  "state": "CLOSED",
+  "native_children_actual": 0,
+  "generated_code_executed": false
+}

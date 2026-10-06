@@ -1,0 +1,232 @@
+# acceptedcad/integrated_core.py
+"""Parametric integrated four-card draft; unknown interfaces prevent print release.
+
+Import/planning are stdlib-only. build() requires FreeCAD and exports no STL.
+The known compact boxes are fixtures, not measurements of purchased hardware.
+Posts moved into TWO X gaps A-B and B-C derived from actual three upright body edges.
+Post height shortened to d_support_elevation_mm - metal_rail_height_mm (beamTOP).
+"""
+import copy
+import json
+import math
+from pathlib import Path
+
+
+def default_config(profile='compact'):
+    if profile not in ('compact', 'universal'):
+        raise ValueError('Choose compact or universal envelope fixture')
+    dimensions = [199, 116, 40] if profile == 'compact' else [360, 165, 68]
+    return {'profile': profile, 'core_width_mm': 188, 'core_depth_mm': 200,
+            'base_mm': 8, 'post_mm': 10, 'shoe_height_mm': 16,
+            'gap_mm': 12, 'rail_depth_mm': 8, 'd_beam_height_mm': 6,
+            'metal_rail_height_mm': 2, 'cards': [
+                {'bay': bay, 'length_mm': dimensions[0], 'height_mm': dimensions[1],
+                 'thickness_mm': dimensions[2], 'measured': False}
+                for bay in 'ABCD'],
+            'receiver_hole_datums': None, 'safe_support_patches': None,
+            'psu_interfaces': None, 'cable_bends': None, 'fan_plenum': None}
+
+
+def _dimension(value, name, maximum):
+    if type(value) not in (int, float) or not math.isfinite(value) or not 0 < value <= maximum:
+        raise ValueError(f'{name} must be finite positive mm <= {maximum}')
+    return float(value)
+
+
+def plan_layout(config):
+    """Joint installed/print pose and body envelopes, without a fit certificate."""
+    config = copy.deepcopy(config)
+    dims = {key: _dimension(config[key], key, upper) for key, upper in (
+        ('core_width_mm', 188), ('core_depth_mm', 200), ('base_mm', 20),
+        ('post_mm', 20), ('shoe_height_mm', 40), ('gap_mm', 40),
+        ('rail_depth_mm', 20), ('d_beam_height_mm', 20), ('metal_rail_height_mm', 10))}
+    if dims['gap_mm'] < 12:
+        raise ValueError('Recovered twelve mm body-envelope gap is a minimum')
+    if dims['post_mm'] >= dims['gap_mm']:
+        raise ValueError('Post width must be strictly less than gap for positive clearance')
+    if dims['rail_depth_mm'] <= 2:
+        raise ValueError('Metal rail concept needs positive depth after two mm clearance')
+    if (dims['core_width_mm'] <= 2 * max(dims['post_mm'], dims['rail_depth_mm']) or
+            dims['core_depth_mm'] <= 2 * max(dims['post_mm'], dims['rail_depth_mm'])):
+        raise ValueError('Core dimensions must contain distinct posts and positive base sides')
+    if dims['d_beam_height_mm'] + dims['metal_rail_height_mm'] > dims['gap_mm']:
+        raise ValueError('D beam and metal rail must remain above lower card bodies')
+    if not isinstance(config.get('cards'), list) or len(config['cards']) != 4:
+        raise ValueError('Supply exactly four card envelopes A-D')
+    cards = []
+    for bay, source in zip('ABCD', config['cards']):
+        if source.get('bay') != bay:
+            raise ValueError('Cards must be ordered A, B, C, D')
+        length = _dimension(source['length_mm'], bay + '.length', 500)
+        height = _dimension(source['height_mm'], bay + '.height', 250)
+        thickness = _dimension(source['thickness_mm'], bay + '.thickness', 120)
+        cards.append({'bay': bay, 'length': length, 'height': height, 'thickness': thickness})
+    base_top = dims['base_mm'] + dims['shoe_height_mm']
+    span = sum(c['thickness'] for c in cards[:3]) + 2 * dims['gap_mm']
+    x = -span / 2
+    body_boxes = []
+    for card in cards[:3]:
+        if card['length'] <= dims['core_depth_mm'] - dims['rail_depth_mm']:
+            raise ValueError(f'Bay {card["bay"]} misses the rear nominal shoe footprint')
+        if min(x + card['thickness'], dims['core_width_mm']/2) <= max(x, -dims['core_width_mm']/2):
+            raise ValueError(f'Bay {card["bay"]} has no nominal shoe footprint inside the core')
+        body_boxes.append({'bay': card['bay'], 'origin_mm': [x, 0.0, base_top],
+                           'size_mm': [card['thickness'], card['length'], card['height']],
+                           'orientation': 'UPRIGHT', 'measured': False})
+        x += card['thickness'] + dims['gap_mm']
+    d_base = base_top + max(c['height'] for c in cards[:3]) + dims['gap_mm']
+    d = cards[3]
+    if d['length'] <= dims['core_depth_mm'] - dims['rail_depth_mm'] + 1:
+        raise ValueError('D misses the rear nominal metal rail footprint')
+    body_boxes.append({'bay': 'D', 'origin_mm': [-d['height'] / 2, 0.0, d_base],
+                       'size_mm': [d['height'], d['length'], d['thickness']],
+                       'orientation': 'ROLLED_90_DEGREES', 'measured': False})
+    
+    # Derive post X positions from actual body edges (A-B and B-C gaps)
+    post_x_positions = []
+    for i in range(2):
+        right_edge = body_boxes[i]['origin_mm'][0] + body_boxes[i]['size_mm'][0]
+        left_edge_next = body_boxes[i+1]['origin_mm'][0]
+        gap_center = (right_edge + left_edge_next) / 2.0
+        post_x_positions.append(gap_center - dims['post_mm'] / 2.0)
+        
+    beam_top = d_base - dims['metal_rail_height_mm']
+    post_height = beam_top
+    
+    post_boxes = []
+    for px in post_x_positions:
+        for py in (0.0, dims['core_depth_mm'] - dims['post_mm']):
+            post_boxes.append({
+                'origin_mm': [px, py, 0.0],
+                'size_mm': [dims['post_mm'], dims['post_mm'], post_height]
+            })
+            
+    printed_height = beam_top
+    if beam_top <= 0 or post_height <= 0:
+        raise ValueError('Printed beam and post height must be positive')
+    if printed_height > 254.0:
+        raise ValueError('Unclipped printed height exceeds conservative 254 mm envelope')
+    width, depth = dims['core_width_mm'], dims['core_depth_mm']
+    print_bbox = [depth, width, printed_height]  # 90 degree rotation around Z
+    if any(actual > limit for actual, limit in zip(print_bbox, [200, 188, 254])):
+        raise ValueError('Actual planned core exceeds conservative print envelope')
+    gpu_bbox = [max(span, d['height']), max(c['length'] for c in cards),
+                d_base + d['thickness'] - base_top]
+                
+    core_bbox = [width, depth, printed_height]
+    
+    return {'status': 'DRAFT_UNQUALIFIED', 'production_release': False,
+            'measured_interfaces': False, 'config': config, 'dimensions': dims,
+            'cards': body_boxes, 'mount_bays': list('ABCD'),
+            'printed_bbox_mm': [width, depth, printed_height], 'print_bbox_mm': print_bbox,
+            'print_rotation': 'Z_PLUS_90_DEGREES', 'gpu_bbox_mm': gpu_bbox,
+            'frame_policy': 'ONE_CONNECTED_CORE_NO_APPEND_D',
+            'support_bodies': ['BASE', 'POSTS', 'D_BEAMS', 'METAL_RAIL_CONCEPT'],
+            'd_support_elevation_mm': d_base,
+            'post_boxes': post_boxes,
+            'post_height_mm': post_height,
+            'beam_top_mm': beam_top,
+            'core_bbox_mm': core_bbox,
+            'nominal_support_footprints': 'BOTH_FRONT_AND_REAR_BODY_OVERLAP_ONLY_NOT_SAFE_CONTACTS',
+            'unknown_interfaces': ['receiver_hole_datums', 'safe_support_patches',
+                                   'psu_interfaces', 'cable_bends', 'fan_plenum',
+                                   'removal_sweeps', 'brim', 'slicer_mass', 'loads', 'thermal'],
+            'claims': ['GPU_BODY_BOXES_ONLY', 'GPU_OVERHANG_ALLOWED',
+                       'CONTACT_AND_AIRFLOW_UNQUALIFIED', 'NO_PRODUCTION_STL']}
+
+
+def build(config, output_directory):
+    """Build a connected support concept and measure its actual BRep geometry."""
+    import FreeCAD as App
+    import Part
+
+    layout = plan_layout(config)
+    target = Path(output_directory)
+    if target.exists() and any(target.iterdir()):
+        raise FileExistsError('Preserve existing CAD evidence; choose a fresh output directory')
+    target.mkdir(parents=True, exist_ok=True)
+    dims = layout['dimensions']
+    width, depth, height = layout['printed_bbox_mm']
+    post_w, base, edge = dims['post_mm'], dims['base_mm'], dims['rail_depth_mm']
+
+    def box(size, origin):
+        return Part.makeBox(*size, App.Vector(*origin))
+
+    pieces = [
+        box([width, edge, base], [-width/2, 0, 0]),
+        box([width, edge, base], [-width/2, depth-edge, 0]),
+        box([edge, depth-2*edge, base], [-width/2, edge, 0]),
+        box([edge, depth-2*edge, base], [width/2-edge, edge, 0]),
+    ]
+    
+    # Add 4 posts from derived layout post_boxes
+    for pb in layout['post_boxes']:
+        pieces.append(box(pb['size_mm'], pb['origin_mm']))
+
+    for card in layout['cards'][:3]:
+        support_left = max(card['origin_mm'][0], -width/2)
+        support_right = min(card['origin_mm'][0] + card['size_mm'][0], width/2)
+        if support_right <= support_left:
+            raise ValueError(f'No integrated support footprint beneath bay {card["bay"]}')
+        for py in (0, depth-edge):
+            pieces.append(box([support_right-support_left, edge, dims['shoe_height_mm']],
+                              [support_left, py, base]))
+    d_base = layout['d_support_elevation_mm']
+    metal_height, beam_height = dims['metal_rail_height_mm'], dims['d_beam_height_mm']
+    metal = []
+    for py in (0, depth-edge):
+        pieces.append(box([width, edge, beam_height],
+                          [-width/2, py, d_base-metal_height-beam_height]))
+        metal.append(box([width-post_w, edge-2, metal_height],
+                         [-(width-post_w)/2, py+1, d_base-metal_height]))
+    core = pieces[0].multiFuse(pieces[1:]).removeSplitter()
+    if not core.isValid() or len(core.Solids) != 1:
+        raise RuntimeError('Integrated core must be one valid connected BRep solid')
+    actual = [core.BoundBox.XLength, core.BoundBox.YLength, core.BoundBox.ZLength]
+    if any(abs(a-b) > 1e-6 for a, b in zip(actual, layout['printed_bbox_mm'])):
+        raise RuntimeError('Actual geometry differs from declared print bounds')
+    intersections = []
+    card_shapes = []
+    for card in layout['cards']:
+        shape = box(card['size_mm'], card['origin_mm'])
+        card_shapes.append(shape)
+        overlap = core.common(shape).Volume
+        if overlap > 1e-6:
+            intersections.append({'bay': card['bay'], 'printed_overlap_mm3': overlap})
+        for index, rail in enumerate(metal):
+            overlap = rail.common(shape).Volume
+            if overlap > 1e-6:
+                intersections.append({'bay': card['bay'], 'metal_rail': index,
+                                      'overlap_mm3': overlap})
+    doc = App.newDocument('HarnessFourCardDraft')
+    try:
+        printed = doc.addObject('Part::Feature', 'IntegratedPrintedCore_DRAFT')
+        printed.Label = 'A-D integrated support core - DRAFT UNQUALIFIED'
+        printed.Shape = core
+        printed.addProperty('App::PropertyString', 'ReleaseStatus')
+        printed.ReleaseStatus = 'DRAFT_UNQUALIFIED_NO_PRODUCTION_STL'
+        printed.addProperty('App::PropertyString', 'ParametersJSON')
+        printed.ParametersJSON = json.dumps(config, sort_keys=True)
+        for index, shape in enumerate(metal):
+            member = doc.addObject('Part::Feature', f'MetalDLoadRailConcept_{index}')
+            member.Shape = shape
+            member.Label = 'Metal D load rail concept - contact datum unmeasured'
+        for card, shape in zip(layout['cards'], card_shapes):
+            member = doc.addObject('Part::Feature', f'GPU_{card["bay"]}_Envelope')
+            member.Shape = shape
+            member.Label = f'GPU {card["bay"]} hypothetical {card["orientation"]} envelope'
+        doc.recompute()
+        doc.saveAs(str(target / 'integrated_four_card_DRAFT.FCStd'))
+        core.exportStep(str(target / 'printed_core_DRAFT.step'))
+        Part.export(doc.Objects, str(target / 'assembly_envelopes_DRAFT.step'))
+    finally:
+        App.closeDocument(doc.Name)
+    layout.update({'actual_printed_bbox_mm': actual, 'solid_count': len(core.Solids),
+                   'brep_valid': bool(core.isValid()), 'core_volume_mm3': core.Volume,
+                   'body_interferences': intersections,
+                   'body_envelope_collision_status': 'CLEAR_BODIES_ONLY' if not intersections else 'INTERFERENCES_DETECTED',
+                   'contact_patch_status': 'UNMEASURED_NOT_QUALIFIED',
+                   'airflow_and_removal': 'NOT_CHECKED', 'exports_are_draft': True})
+    (target / 'state.json').write_text(json.dumps(layout, indent=2) + '\n', encoding='utf-8')
+    (target / 'parameters.json').write_text(json.dumps(config, indent=2) + '\n', encoding='utf-8')
+    return layout

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\TASK_CONTRACTS.json",
+    "sha256": "5E15D765AD5A2134CD577999800915FED302C026A248AC601A25375F56EA72BC"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\supervisor_v2\\contained_supervisor.py",
+    "sha256": "37835989F61A36A39757F1E35C8BA84720DA54B488F5E282C6DB1F2A383DB908"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\supervisor_v2\\tests.candidate.py",
+    "sha256": "BF42EF9FB5A3E8BD08A834160872BC7B120B24A127C969D8FD273C2A2166CA0E"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\validator_v2\\qualification_validator.py",
+    "sha256": "D907C924569114FF65DE495A42E778A9535E018C3483DC76B12129AD58BECEC3"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\validator_v2\\tests.candidate.py",
+    "sha256": "83F3E9B065E0DC5862CBE4D356E4C596D99983EF82A4135A1EA9DC0DA690A666"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\windows_job.snapshot.py",
+    "sha256": "7C2AA34CE589856F912ED08D7B3389477298E3185596D6790A378D7D6EAA7036"
+  }
+]

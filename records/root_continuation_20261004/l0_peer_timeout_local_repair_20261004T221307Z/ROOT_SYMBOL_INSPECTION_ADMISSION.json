@@ -1,0 +1,26 @@
+{
+  "scope": "CPU_FAKE_SYMBOL_INSPECTION_ONLY",
+  "admitted": true,
+  "authorization": "ROOT_FULL_READ_EXACT_INSPECTION_ONLY",
+  "runner_sha256": "5c791b43d984980ff7d992a90278c927401760b991c0451f6ce65045822bb412",
+  "input_pins": {
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\cpu_stub_controller_phase_pinned.py": "5e9b5964bf0805fd9d91a48ff65f23e84d85c63b96d4ba1293a9a8bd63ee3c4d",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\SYMBOL_INSPECTION_PROPOSAL.json": "cc7b9f0145f1f289bed41fe08dcfb442a95ba2f86a3529422fdbc10bed0ab883",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.cpp": "284e6109f1d32db945ab7719bb77d9a1fc734887c9ebe5068bebc4ac0eef9f59",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.cpp": "96e2f0df7108f1ce31a540c18ae3f50f09b97fa54c5628f8556b86873cbe62d2",
+    "E:\\the_harness\\records\\toolchains\\level_zero_20261004\\sdk\\include\\level_zero\\ze_api.h": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_local.o": "888754880338f9752254dab8a6173239cff630f366716e11f8a4c7705efa6b80",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\fake_level_zero_local.o": "ab9ec1703fe507cb8f043b51646f79a92f640f02e02627cbe4f8b0d786eac1f1",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\peer_copy_cpu_fake": "1b889f1f11884b8b9d0cd92fb7badd3c6468035cdea8a3a4ac358f6535e27c40",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "C:\\Windows\\System32\\wsl.exe": "7e9f5cee6d641481e5a942f0e08563bae9c17ee55f0aad888f9aa0be9a5d4757",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\04_no_level_zero_dependency.stdout.bin": "15f323280163b4b3921b29156ec771181cfda37847227784adf20b605ddaf7e5",
+    "E:\\the_harness\\records\\root_continuation_20261004\\l0_peer_timeout_local_repair_20261004T221307Z\\stub_build_20261004T222818Z\\04_no_level_zero_dependency.receipt.json": "140dc0b7ee3670d927b9bb275e1c5e047d7dad87c1c8b006807730a0187a70eb"
+  },
+  "execution": "AUTHORIZED_NOT_YET_RUN",
+  "stream_cap_bytes": 131072,
+  "outer_seconds": 12,
+  "fake_executable_executed": false,
+  "utc": "2026-10-04T22:49:47.645987+00:00",
+  "no_rebuild_or_fake_executable_run": true
+}

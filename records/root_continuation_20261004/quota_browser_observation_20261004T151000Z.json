@@ -1,0 +1,29 @@
+{
+  "scope": "READ_ONLY_EXISTING_AUTHENTICATED_USER_CHROME_TAB",
+  "observed_utc_approximate": "2026-10-04T15:10:00Z",
+  "page_url_sanitized": "https://home.qwencloud.com/analytics/token-plan/individual",
+  "page_title": "Token Plan Usage - Developer Console - Manage APIs & Billing - QwenCloud",
+  "action": "Reload existing tab; wait for visible Monthly Quota; read accessibility state",
+  "plan": "Individual Plan Pro",
+  "status": "Active",
+  "plan_quota_displayed": 180000,
+  "remaining_percent_displayed": 35.6,
+  "remaining_progress_accessibility_value": 35.570011138916016,
+  "quota_last_updated_literal": "2026-10-04 11:09:46",
+  "reset_time_literal": "2026-10-06 12:00:00",
+  "expiry_date_literal": "2026-11-06 11:00:00",
+  "credit_packs_displayed": "No Credit Packs",
+  "service_display_timezone": "NOT_REPORTED",
+  "previous_snapshot": "quota_browser_observation_20261004T135900Z.json",
+  "previous_progress_accessibility_value": 35.596370697021484,
+  "usage_details_table": "NOT_CHECKED; still loading in captured state",
+  "login_or_key_entry": false,
+  "settings_or_purchase_changes": false,
+  "sensitive_url_query_values_saved": false,
+  "limitations": [
+    "Dated quota observation; the rounded displayed percentage remains 35.6 despite a smaller accessibility progress value.",
+    "Not exact per-job billing or proof that all observed counter movement came from the harness.",
+    "Provider tokens, jobs, internal CLI model calls, native child agents and monthly Credits are different quantities."
+  ],
+  "primary_quota_unit_documentation": "https://docs.qwencloud.com/token-plan/overview"
+}

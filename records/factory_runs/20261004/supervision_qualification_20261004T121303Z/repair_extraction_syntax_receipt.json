@@ -1,0 +1,35 @@
+{
+  "root_authorization": "EXACT_TWO_DOCSTRING_TOKENS_ONLY_NOT_RUNTIME_ADMISSION",
+  "before_sha256": "853fb9d9d950c54ebf4ca1071a890cccf2ca21011451949e27aa2566ccba05e1",
+  "after_sha256": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+  "old_span": "\"\"\\\"",
+  "new_span": "\"\"\"",
+  "occurrence_count": 2,
+  "provider_self_authorization_invalid": true,
+  "syntax_gates": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\contained_supervisor.syntax_normalized.py",
+      "sha256": "7641ed7e865e1a601aeb72be6942f39fb040c8bdd4cec57a34d25fb76e1f4b84",
+      "lines": 623,
+      "gate": "AST_SYNTAX_PASS_NO_IMPORT_NO_EXECUTION"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\qualification_validator.corrected.py",
+      "sha256": "f024298ca0d597c8cfa04f00334924f957bb268b0734fb8ff6ce1ca5fa9378f0",
+      "lines": 540,
+      "gate": "AST_SYNTAX_PASS_NO_IMPORT_NO_EXECUTION"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_supervisor_repair\\tests.candidate.py",
+      "sha256": "f471dbec8d224799ca1d65a346419470670ef469a010bd82d77e8500d1b78bb5",
+      "lines": 375,
+      "gate": "AST_SYNTAX_PASS_NO_IMPORT_NO_EXECUTION"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\supervision_qualification_20261004T121303Z\\grok_validator_repair\\tests.candidate.py",
+      "sha256": "a1c4ee00f2a8047a944527cbb5cc5787a2c094c18d60d3976f67238446020d83",
+      "lines": 312,
+      "gate": "AST_SYNTAX_PASS_NO_IMPORT_NO_EXECUTION"
+    }
+  ]
+}

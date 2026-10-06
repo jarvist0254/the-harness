@@ -1,0 +1,7 @@
+{
+  "stage": "configure",
+  "status": "COMPLETED",
+  "elapsed_seconds": 7.358999999240041,
+  "utc": "2026-10-04T17:02:13.699883+00:00",
+  "owned_worker_receipt": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt3_skip_telemetry\\configure_contained"
+}

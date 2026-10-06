@@ -1,0 +1,9 @@
+{
+  "source_loader_path": "C:\\Windows\\System32\\vulkan-1.dll",
+  "source_loader_sha256": "e933f507df7162eb64de289c5c5ce4ecb48584e5c2b507eea4750b1c870ae6bd",
+  "exports_count": 265,
+  "generated_import_library": "E:\\the_harness\\records\\vulkan_smoke_20261004\\sdk_link\\vulkan-1.lib",
+  "generated_def_sha256": "01ccb22afb63be8112a6aa1165175d14300764523df6fb71eadbcede5260bdb9",
+  "lib_exit": 0,
+  "purpose": "Probe-local import library only; no driver or DLL replacement"
+}

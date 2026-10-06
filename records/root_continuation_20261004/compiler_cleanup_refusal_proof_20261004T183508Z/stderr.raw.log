@@ -1,0 +1,9 @@
+test_job_close_false (__main__.Tests) ... ok
+test_owned_close_false (__main__.Tests) ... ok
+test_reader_bad_unclosed (__main__.Tests) ... ok
+test_shutdown_unknown (__main__.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK

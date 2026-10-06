@@ -1,0 +1,199 @@
+{
+  "schema": 1,
+  "adjudicator": "ROOT",
+  "utc": "2026-10-04T19:17:10.162440+00:00",
+  "verdict": "SCOPED_FP32_SOFTWARE_CRITICAL_PATH_PASS",
+  "scope": "Exact attempt5 ggml build and unchanged fixed fixtures; NVIDIA5070Ti +AMD integrated only",
+  "adjudication_script_sha256": "808b8e4902e579221834bc01af67397e7e1430bc0f8c17f75d1c4671e5c248d5",
+  "build_receipt": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\controller_result.json",
+  "build_receipt_sha256": "c3b83af401e3bd560be78f29427c8d762445a9307485065edd1f78cc430e2c9f",
+  "fresh_dll_manifest": [
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml.dll",
+      "bytes": 62976,
+      "sha256": "56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-base.dll",
+      "bytes": 693760,
+      "sha256": "beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-cpu.dll",
+      "bytes": 1125888,
+      "sha256": "e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-rpc.dll",
+      "bytes": 143872,
+      "sha256": "11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd"
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_attempt5\\bin\\ggml-vulkan.dll",
+      "bytes": 45299712,
+      "sha256": "3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085"
+    }
+  ],
+  "results": [
+    {
+      "run": "operator_candidate_nv2_20261004T1843Z",
+      "scope": "operator",
+      "control": false,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv2_20261004T1843Z\\run_receipt.json",
+      "receipt_sha256": "e32dda15524ce4c675a6ec431bb4f44b49a869d60b9ec0e52950e4a7ef6ec2e7",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv2_20261004T1843Z\\stdout.raw.log",
+      "stdout_sha256": "dd9fc52b433df97686937681a88287b0e99d2dbbe6817eecf2df83a8658b7ab2",
+      "admission_sha256": "bd4da3268ffb427d3790ae2238221248e7dd2075499417cf3468508dc6f7cb6a",
+      "child_exit_code": 0,
+      "comparisons": 12288,
+      "fail_count": 0,
+      "device": "Vulkan0",
+      "description": "NVIDIA GeForce RTX 5070 Ti",
+      "verdict": "OPERATOR_PARITY_PASS"
+    },
+    {
+      "run": "operator_candidate_amd_20261004T1843Z",
+      "scope": "operator",
+      "control": false,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_20261004T1843Z\\run_receipt.json",
+      "receipt_sha256": "1828f127232f0674407042c85a933723a6542ccb7fea54291276eb792ea0d4aa",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_20261004T1843Z\\stdout.raw.log",
+      "stdout_sha256": "935b06dfacdf0f7e59e04239834bea42d9cceb72261c06a5e34cb02994daef35",
+      "admission_sha256": "71c4852c4e3e7e4e7f5b3e950387fd118eb41b1a9f6ae9a896418b84596a94dd",
+      "child_exit_code": 0,
+      "comparisons": 12288,
+      "fail_count": 0,
+      "device": "Vulkan1",
+      "description": "AMD Radeon(TM) Graphics",
+      "verdict": "OPERATOR_PARITY_PASS"
+    },
+    {
+      "run": "operator_candidate_nv_corrupt_20261004T1845Z",
+      "scope": "operator",
+      "control": true,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv_corrupt_20261004T1845Z\\run_receipt.json",
+      "receipt_sha256": "74bc0eb7cea96b9e1917f9df0154932b20570b9cfd55ab8ba48dc845dd193372",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_nv_corrupt_20261004T1845Z\\stdout.raw.log",
+      "stdout_sha256": "1eb66aa2aec8e38fb973eaa6fa38e29f39ba53fdfce1825bb5ba1c9eee8c21e2",
+      "admission_sha256": "e3d0afc37f9659517bed44d41fb3b48a7dbdd96b96773d885195f9caee46a381",
+      "child_exit_code": 1,
+      "comparisons": 12288,
+      "fail_count": 1,
+      "device": "Vulkan0",
+      "description": "NVIDIA GeForce RTX 5070 Ti",
+      "verdict": "COMPARATOR_READBACK_CONTROL_DETECTED"
+    },
+    {
+      "run": "operator_candidate_amd_corrupt_20261004T1845Z",
+      "scope": "operator",
+      "control": true,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z\\run_receipt.json",
+      "receipt_sha256": "12905661aeb032908a868a0e11a95ffc9814fd59b0c22343887a5a5f9fa8eca6",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\operator_candidate_amd_corrupt_20261004T1845Z\\stdout.raw.log",
+      "stdout_sha256": "ec1345cb34acf8387541cb49beb41dd1162a5165fcd13409399868b93ea1e00a",
+      "admission_sha256": "3901e8ee7042fa49c2073f0fe273f7ae076e9575aa903742faccbfa3bbc11a1e",
+      "child_exit_code": 1,
+      "comparisons": 12288,
+      "fail_count": 1,
+      "device": "Vulkan1",
+      "description": "AMD Radeon(TM) Graphics",
+      "verdict": "COMPARATOR_READBACK_CONTROL_DETECTED"
+    },
+    {
+      "run": "model_candidate_mixed_20261004T1845Z",
+      "scope": "model",
+      "control": false,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\run_receipt.json",
+      "receipt_sha256": "ce8b380dd06676ce2e80a228515a75f9eab392811fc7076a8641a15de932e4c0",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_mixed_20261004T1845Z\\stdout.raw.log",
+      "stdout_sha256": "30050a291becf283912afeb2559058fa9615b6ef2bb115ee3dec2c25b8426d78",
+      "admission_sha256": "ae8f3b5ddd298822ba677e104ee042342be0d7b56b68f3c597359c4db60c5aa0",
+      "child_exit_code": 0,
+      "comparisons": 151936,
+      "fail_count": 0,
+      "max_abs": 5.8650970458984375e-05,
+      "rmse": 1.1049192241778093e-05,
+      "devices": [
+        "Vulkan0",
+        "Vulkan1"
+      ],
+      "workload_sha256": "3257aba03bc8b11a99c84399f8dc7c8e15b99cdeff8bf13dad3113a803fd3187",
+      "verdict": "FIXED_DERIVED_F32_MODEL_PARITY_PASS"
+    },
+    {
+      "run": "model_candidate_reverse_20261004T1847Z",
+      "scope": "model",
+      "control": false,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\run_receipt.json",
+      "receipt_sha256": "d5312d7c8922d4c222f599f242992c65babcf63e94214748474db298e5202892",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_20261004T1847Z\\stdout.raw.log",
+      "stdout_sha256": "5db2361f7e734798c77f60dfd6a5a1ee79a33f1057449393875076042674d4ce",
+      "admission_sha256": "a47890945a775e78ffd1981da568db90fabdad387136eabfe7b2eb3b8996e307",
+      "child_exit_code": 0,
+      "comparisons": 151936,
+      "fail_count": 0,
+      "max_abs": 7.343292236328125e-05,
+      "rmse": 1.546105600014273e-05,
+      "devices": [
+        "Vulkan1",
+        "Vulkan0"
+      ],
+      "workload_sha256": "a5d6000a250e782f668df0770fd8a271de51b16c5c6cbfddba9091db66dd0d25",
+      "verdict": "FIXED_DERIVED_F32_MODEL_PARITY_PASS"
+    },
+    {
+      "run": "model_candidate_corrupt_fixed_20261004T1902Z",
+      "scope": "model",
+      "control": true,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_corrupt_fixed_20261004T1902Z\\run_receipt.json",
+      "receipt_sha256": "e1eec739de6bf1f5b561af0b843a59acc714e122e3b0b48286b27a8c729f95a2",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_corrupt_fixed_20261004T1902Z\\stdout.raw.log",
+      "stdout_sha256": "35406d614f7cc4f1bb91a939495e641f235082ea507993c00393d703b06b8068",
+      "admission_sha256": "54b8a8f8a3d800089c181d1b736eeb9a750ab2d07c6b3c8b4e0f364302494834",
+      "child_exit_code": 1,
+      "comparisons": 151936,
+      "fail_count": 1,
+      "max_abs": 1.125143051147461,
+      "rmse": 0.0028865599371591328,
+      "devices": [
+        "Vulkan0",
+        "Vulkan1"
+      ],
+      "workload_sha256": "3257aba03bc8b11a99c84399f8dc7c8e15b99cdeff8bf13dad3113a803fd3187",
+      "verdict": "COMPARATOR_LOGIT_CONTROL_DETECTED"
+    },
+    {
+      "run": "model_candidate_reverse_corrupt_fixed_20261004T1905Z",
+      "scope": "model",
+      "control": true,
+      "receipt": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\run_receipt.json",
+      "receipt_sha256": "dda2c0cf6356c3564bca915cf2a185403023606f6ddd2cad8e59154d55adf704",
+      "stdout": "E:\\the_harness\\records\\root_continuation_20261004\\model_candidate_reverse_corrupt_fixed_20261004T1905Z\\stdout.raw.log",
+      "stdout_sha256": "c64f2d9fa71e7ae83a24a8236a4ca7c3f16a81580c202b44c2460a224943fcd0",
+      "admission_sha256": "107420890c7a564316decd57c0b714288a73e4ef6c996714a756fa0b3002ea71",
+      "child_exit_code": 1,
+      "comparisons": 151936,
+      "fail_count": 1,
+      "max_abs": 1.125143051147461,
+      "rmse": 0.0028865801964631298,
+      "devices": [
+        "Vulkan1",
+        "Vulkan0"
+      ],
+      "workload_sha256": "a5d6000a250e782f668df0770fd8a271de51b16c5c6cbfddba9091db66dd0d25",
+      "verdict": "COMPARATOR_LOGIT_CONTROL_DETECTED"
+    }
+  ],
+  "limits": [
+    "NOT Intel execution or Intel/Intel or Intel/NVIDIA direct P2P",
+    "NOT four cards, 8GB capacity, physical residency or pooled VRAM",
+    "NOT original Q8 model qualification or arbitrary-model accuracy",
+    "Controls mutate GPU readback/logits on host; NOT GPU-internal or P2P-boundary fault injection",
+    "No whole-tree natural completion certificate",
+    "Prior failures and uncertain receipts remain unchanged"
+  ],
+  "excluded_runs": [
+    "operator_candidate_nv_20261004T1840Z: uncertain original collector",
+    "model_candidate_corrupt_20261004T1849Z: bad_arg before model execution"
+  ]
+}

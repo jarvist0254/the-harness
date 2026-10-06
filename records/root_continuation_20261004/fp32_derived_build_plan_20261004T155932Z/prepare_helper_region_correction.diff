@@ -1,0 +1,225 @@
+--- before/root-read-draft
++++ after/root-authorized-two-merged-regions
+@@ -1,74 +1,148 @@
+-"""Preparation helper draft. No calls occur at import. Requires explicit root admission to copy."""
+-import argparse,base64,difflib,hashlib,json,os,pathlib,shutil
+-HERE=pathlib.Path(__file__).resolve().parent
+-REL='ggml/src/ggml-vulkan/ggml-vulkan.cpp'
+-def sha(path):
+- h=hashlib.sha256()
+- with pathlib.Path(path).open('rb') as f:
+-  for b in iter(lambda:f.read(1048576),b''):h.update(b)
+- return h.hexdigest()
+-def exact_json(path):
+- def pairs(xs):
+-  d={}
+-  for k,v in xs:
+-   if k in d:raise ValueError('duplicate key')
+-   d[k]=v
+-  return d
+- return json.loads(pathlib.Path(path).read_text(),object_pairs_hook=pairs)
+-def main():
+- a=argparse.ArgumentParser();a.add_argument('--admission',required=True);a.add_argument('--admission-sha256',required=True);args=a.parse_args()
+- # Trusted caller supplies admission hash; payload cannot authorize itself.
+- if sha(args.admission)!=args.admission_sha256:raise ValueError('admission pin')
+- admission=exact_json(args.admission);cfg=exact_json(HERE/'CONTRACT.json');admitted={'candidate','candidate_sha256','derived_cpp_sha256','exact_regions','output_root','plan_sha256','authorization'}
+- if set(admission)!=admitted or admission['authorization']!='ROOT_BUILD_PREPARATION_ADMITTED':raise ValueError('strict admission fields')
+- if sha(HERE/'CONTRACT.json')!=admission['plan_sha256']:raise ValueError('plan pin')
+- toolpins=exact_json(HERE/'toolchain_pins_preparation.json')
+- for item in toolpins:
+-  if sha(item['path'])!=item['sha256']:raise ValueError('toolchain/original library pin changed')
+- source=pathlib.Path(cfg['baseline_source']).resolve();manifest=pathlib.Path(cfg['baseline_manifest']);assert sha(manifest)==cfg['manifest_sha256'];entries=exact_json(manifest);assert len(entries)==cfg['manifest_count']
+- new=pathlib.Path(admission['output_root']).resolve();allowed=pathlib.Path(cfg['proposed_new_root']).resolve()
+- if new!=allowed or new.exists() or new.parent!=source.parents[2]:raise ValueError('new root confinement/existence')
+- # The proposed destination is exactly E:/the_harness/records/build_vulkan_fp32_staging_<UTC>.
+- candidate=pathlib.Path(admission['candidate']);assert sha(candidate)==admission['candidate_sha256']==admission['derived_cpp_sha256']
+- original=(source/REL).read_bytes();assert hashlib.sha256(original).hexdigest()==cfg['baseline_cpp_sha256'];derived=candidate.read_bytes()
+- oldlines=original.splitlines(keepends=True);newlines=derived.splitlines(keepends=True)
+- opcodes=[x for x in difflib.SequenceMatcher(None,oldlines,newlines,autojunk=False).get_opcodes() if x[0]!='equal']
+- if len(opcodes)!=3 or len(admission['exact_regions'])!=3:raise ValueError('exact3 regions required')
+- for op,region in zip(opcodes,admission['exact_regions']):
+-  tag,i,j,k,l=op
+-  if not (6270<=i+1<=6552 and i<=j<=6552):raise ValueError('outside admitted function')
+-  observed={'tag':tag,'old_first_line':i+1,'old_end_exclusive_line':j+1,'new_first_line':k+1,'new_end_exclusive_line':l+1,'old_bytes_sha256':hashlib.sha256(b''.join(oldlines[i:j])).hexdigest(),'new_bytes_sha256':hashlib.sha256(b''.join(newlines[k:l])).hexdigest()}
+-  if observed!=region:raise ValueError('exact region identity')
+-  for line in newlines[k:l]:
+-   if not line.endswith(b'\n') or line.endswith(b'\r\n')!=(oldlines[i].endswith(b'\r\n')):raise ValueError('EOL preservation')
+- # Validate all source file identities and paths BEFORE creating the destination.
+- seen=set();total=0
+- for item in entries:
+-  rel=pathlib.PurePosixPath(item['path']);assert not rel.is_absolute() and '..' not in rel.parts and ':' not in item['path']
+-  key=str(rel).casefold();assert key not in seen;seen.add(key);f=source.joinpath(*rel.parts)
+-  assert f.resolve().is_relative_to(source) and not f.is_symlink() and f.stat().st_size==item['bytes'] and sha(f)==item['sha256'];total+=item['bytes']
+- if shutil.disk_usage(new.parent).free<total*2+8*(1<<30):raise ValueError('free disk gate')
+- new.mkdir();tree=new/'source';tree.mkdir();evidence=new/'evidence';evidence.mkdir();copies=[]
+- for item in entries:
+-  rel=pathlib.PurePosixPath(item['path']);f=source.joinpath(*rel.parts);dst=tree.joinpath(*rel.parts);dst.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(f,dst)
+-  if dst.stat().st_size!=item['bytes'] or sha(dst)!=item['sha256'] or sha(f)!=item['sha256']:raise ValueError('copy pin')
+-  copies.append(item)
+- (evidence/'copied_clean_manifest.json').write_text(json.dumps(copies,indent=2))
+- # Whole derived candidate bytes are accepted ONLY after exact3 region confinement; no global replace.
+- target=tree/REL;target.write_bytes(derived);assert sha(target)==admission['derived_cpp_sha256']
+- after=[]
+- for item in entries:
+-  f=tree/item['path'];expected=admission['derived_cpp_sha256'] if item['path']==REL else item['sha256'];assert sha(f)==expected;assert sha(source/item['path'])==item['sha256'];after.append(dict(item,sha256=expected,bytes=f.stat().st_size))
+- (evidence/'derived_manifest.json').write_text(json.dumps(after,indent=2))
+- for item in toolpins:
+-  if sha(item['path'])!=item['sha256']:raise ValueError('toolchain/original library pin changed after copy')
+- (evidence/'toolchain_original_pins.json').write_text(json.dumps(toolpins,indent=2))
+- (evidence/'admission_snapshot.json').write_bytes(pathlib.Path(args.admission).read_bytes())
+- flags=['-D'+k+'='+v for k,v in cfg['flags'].items()];configure=[cfg['cmake'],'-S',str(tree),'-B',str(new/'build'),'-G','Ninja']+flags;build=[cfg['cmake'],'--build',str(new/'build'),'--target']+cfg['targets']+['--parallel',str(cfg['parallel_jobs'])]
+- quote=lambda s:'"'+s+'"'
+- cmd=['@echo off','call '+quote(cfg['vcvars']),'if errorlevel 1 exit /b %errorlevel%','set "VULKAN_SDK='+str(pathlib.Path(cfg['flags']['Vulkan_INCLUDE_DIR']).parent)+'"',' '.join(map(quote,configure)),'if errorlevel 1 exit /b %errorlevel%',' '.join(map(quote,build)),'exit /b %errorlevel%']
+- for stage,args in [('configure',configure),('build',build)]:
+-  stage_cmd=['@echo off','call '+quote(cfg['vcvars']),'if errorlevel 1 exit /b %errorlevel%','set "VULKAN_SDK='+str(pathlib.Path(cfg['flags']['Vulkan_INCLUDE_DIR']).parent)+'"',' '.join(map(quote,args)),'exit /b %errorlevel%']
+-  (new/('build_owned_'+stage+'.cmd')).write_bytes(('\r\n'.join(stage_cmd)+'\r\n').encode())
+- (new/'build_owned.cmd').write_bytes(('\r\n'.join(cmd)+'\r\n').encode());(evidence/'prepared_commands.json').write_text(json.dumps({'configure':configure,'build':build,'scope':'Not executed. Root-admitted BUILD_ONLY variant required; configure60s/build600s,128KiB per stream.'},indent=2));print(json.dumps({'status':'COPIED_PATCHED_COMMANDS_PREPARED_ONLY','root':str(new),'derived_manifest_sha256':sha(evidence/'derived_manifest.json')}))
+-if __name__=='__main__':main()
++"""Preparation helper draft. No calls occur at import. Requires explicit root admission to copy."""
++
++import argparse,base64,difflib,hashlib,json,os,pathlib,shutil
++
++HERE=pathlib.Path(__file__).resolve().parent
++
++REL='ggml/src/ggml-vulkan/ggml-vulkan.cpp'
++
++def sha(path):
++
++ h=hashlib.sha256()
++
++ with pathlib.Path(path).open('rb') as f:
++
++  for b in iter(lambda:f.read(1048576),b''):h.update(b)
++
++ return h.hexdigest()
++
++def exact_json(path):
++
++ def pairs(xs):
++
++  d={}
++
++  for k,v in xs:
++
++   if k in d:raise ValueError('duplicate key')
++
++   d[k]=v
++
++  return d
++
++ return json.loads(pathlib.Path(path).read_text(),object_pairs_hook=pairs)
++
++def main():
++
++ a=argparse.ArgumentParser();a.add_argument('--admission',required=True);a.add_argument('--admission-sha256',required=True);args=a.parse_args()
++
++ # Trusted caller supplies admission hash; payload cannot authorize itself.
++
++ if sha(args.admission)!=args.admission_sha256:raise ValueError('admission pin')
++
++ admission=exact_json(args.admission);cfg=exact_json(HERE/'CONTRACT.json');admitted={'candidate','candidate_sha256','derived_cpp_sha256','exact_regions','output_root','plan_sha256','authorization'}
++
++ if set(admission)!=admitted or admission['authorization']!='ROOT_BUILD_PREPARATION_ADMITTED':raise ValueError('strict admission fields')
++
++ if sha(HERE/'CONTRACT.json')!=admission['plan_sha256']:raise ValueError('plan pin')
++
++ toolpins=exact_json(HERE/'toolchain_pins_preparation.json')
++
++ for item in toolpins:
++
++  if sha(item['path'])!=item['sha256']:raise ValueError('toolchain/original library pin changed')
++
++ source=pathlib.Path(cfg['baseline_source']).resolve();manifest=pathlib.Path(cfg['baseline_manifest']);assert sha(manifest)==cfg['manifest_sha256'];entries=exact_json(manifest);assert len(entries)==cfg['manifest_count']
++
++ new=pathlib.Path(admission['output_root']).resolve();allowed=pathlib.Path(cfg['proposed_new_root']).resolve()
++
++ if new!=allowed or new.exists() or new.parent!=source.parents[2]:raise ValueError('new root confinement/existence')
++
++ # The proposed destination is exactly E:/the_harness/records/build_vulkan_fp32_staging_<UTC>.
++
++ candidate=pathlib.Path(admission['candidate']);assert sha(candidate)==admission['candidate_sha256']==admission['derived_cpp_sha256']==cfg['actual_candidate_sha256']
++
++ original=(source/REL).read_bytes();assert hashlib.sha256(original).hexdigest()==cfg['baseline_cpp_sha256'];derived=candidate.read_bytes()
++
++ oldlines=original.splitlines(keepends=True);newlines=derived.splitlines(keepends=True)
++
++ opcodes=[x for x in difflib.SequenceMatcher(None,oldlines,newlines,autojunk=False).get_opcodes() if x[0]!='equal']
++
++ if len(opcodes)!=2 or len(admission['exact_regions'])!=2:raise ValueError('exact2 merged regions required')
++
++ for op,region in zip(opcodes,admission['exact_regions']):
++
++  tag,i,j,k,l=op
++
++  if not (6270<=i+1<=6552 and i<=j<=6552):raise ValueError('outside admitted function')
++
++  observed={'tag':tag,'old_first_line':i+1,'old_end_exclusive_line':j+1,'new_first_line':k+1,'new_end_exclusive_line':l+1,'old_bytes_sha256':hashlib.sha256(b''.join(oldlines[i:j])).hexdigest(),'new_bytes_sha256':hashlib.sha256(b''.join(newlines[k:l])).hexdigest()}
++
++  if observed!=region:raise ValueError('exact region identity')
++
++  for line in newlines[k:l]:
++
++   if not line.endswith(b'\n') or line.endswith(b'\r\n')!=(oldlines[i].endswith(b'\r\n')):raise ValueError('EOL preservation')
++
++ # Validate all source file identities and paths BEFORE creating the destination.
++
++ seen=set();total=0
++
++ for item in entries:
++
++  rel=pathlib.PurePosixPath(item['path']);assert not rel.is_absolute() and '..' not in rel.parts and ':' not in item['path']
++
++  key=str(rel).casefold();assert key not in seen;seen.add(key);f=source.joinpath(*rel.parts)
++
++  assert f.resolve().is_relative_to(source) and not f.is_symlink() and f.stat().st_size==item['bytes'] and sha(f)==item['sha256'];total+=item['bytes']
++
++ if shutil.disk_usage(new.parent).free<total*2+8*(1<<30):raise ValueError('free disk gate')
++
++ new.mkdir();tree=new/'source';tree.mkdir();evidence=new/'evidence';evidence.mkdir();copies=[]
++
++ for item in entries:
++
++  rel=pathlib.PurePosixPath(item['path']);f=source.joinpath(*rel.parts);dst=tree.joinpath(*rel.parts);dst.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(f,dst)
++
++  if dst.stat().st_size!=item['bytes'] or sha(dst)!=item['sha256'] or sha(f)!=item['sha256']:raise ValueError('copy pin')
++
++  copies.append(item)
++
++ (evidence/'copied_clean_manifest.json').write_text(json.dumps(copies,indent=2))
++
++ # Whole derived candidate bytes are accepted ONLY after exact2 merged region confinement; no global replace.
++
++ target=tree/REL;target.write_bytes(derived);assert sha(target)==admission['derived_cpp_sha256']
++
++ after=[]
++
++ for item in entries:
++
++  f=tree/item['path'];expected=admission['derived_cpp_sha256'] if item['path']==REL else item['sha256'];assert sha(f)==expected;assert sha(source/item['path'])==item['sha256'];after.append(dict(item,sha256=expected,bytes=f.stat().st_size))
++
++ (evidence/'derived_manifest.json').write_text(json.dumps(after,indent=2))
++
++ for item in toolpins:
++
++  if sha(item['path'])!=item['sha256']:raise ValueError('toolchain/original library pin changed after copy')
++
++ (evidence/'toolchain_original_pins.json').write_text(json.dumps(toolpins,indent=2))
++
++ (evidence/'admission_snapshot.json').write_bytes(pathlib.Path(args.admission).read_bytes())
++
++ flags=['-D'+k+'='+v for k,v in cfg['flags'].items()];configure=[cfg['cmake'],'-S',str(tree),'-B',str(new/'build'),'-G','Ninja']+flags;build=[cfg['cmake'],'--build',str(new/'build'),'--target']+cfg['targets']+['--parallel',str(cfg['parallel_jobs'])]
++
++ quote=lambda s:'"'+s+'"'
++
++ cmd=['@echo off','call '+quote(cfg['vcvars']),'if errorlevel 1 exit /b %errorlevel%','set "VULKAN_SDK='+str(pathlib.Path(cfg['flags']['Vulkan_INCLUDE_DIR']).parent)+'"',' '.join(map(quote,configure)),'if errorlevel 1 exit /b %errorlevel%',' '.join(map(quote,build)),'exit /b %errorlevel%']
++
++ for stage,args in [('configure',configure),('build',build)]:
++
++  stage_cmd=['@echo off','call '+quote(cfg['vcvars']),'if errorlevel 1 exit /b %errorlevel%','set "VULKAN_SDK='+str(pathlib.Path(cfg['flags']['Vulkan_INCLUDE_DIR']).parent)+'"',' '.join(map(quote,args)),'exit /b %errorlevel%']
++
++  (new/('build_owned_'+stage+'.cmd')).write_bytes(('\r\n'.join(stage_cmd)+'\r\n').encode())
++
++ (new/'build_owned.cmd').write_bytes(('\r\n'.join(cmd)+'\r\n').encode());(evidence/'prepared_commands.json').write_text(json.dumps({'configure':configure,'build':build,'scope':'Not executed. Root-admitted BUILD_ONLY variant required; configure60s/build600s,128KiB per stream.'},indent=2));print(json.dumps({'status':'COPIED_PATCHED_COMMANDS_PREPARED_ONLY','root':str(new),'derived_manifest_sha256':sha(evidence/'derived_manifest.json')}))
++
++if __name__=='__main__':main()
++

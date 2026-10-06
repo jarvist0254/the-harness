@@ -1,0 +1,17 @@
+{
+  "command": [
+    "E:\\tmp\\PyReExperimental\\rocm\\Lib\\site-packages\\_rocm_sdk_core\\bin\\hipcc.exe",
+    "--genco",
+    "--offload-arch=gfx1036",
+    "-D__HIPCC_RTC__",
+    "-O2",
+    "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\affine_device.cpp",
+    "-o",
+    "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\native_hip\\affine_gfx1036.hsaco"
+  ],
+  "pid": 63844,
+  "exit_code": 0,
+  "mode": "EXPERIMENTAL_DEVICE_ONLY_RTC_HEADER_CONFIGURATION",
+  "stdout": "",
+  "stderr": ""
+}

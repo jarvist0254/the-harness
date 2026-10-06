@@ -1,0 +1,14 @@
+{
+  "status": "WAITING_EXACT_SOURCE_HASH_NOT_EXECUTED",
+  "tests": 40,
+  "native_admission": false,
+  "source_target": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+  "independent_evaluator_provenance": "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_20261004T135404Z\\evaluate_qwen.py",
+  "prior_evaluator_sha256": "a075e1446347981c4da580e5343c3cf24fe09c1cc9aa874ae9e6889c1811c082",
+  "new_controls": [
+    "Combined shutdown waits plus eight joins share eight-second deadline",
+    "First reader join exception does not skip other reader join attempts",
+    "Saved receipt reflects job-close failure",
+    "Saved receipt reflects initial writer-close failure"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "MOCK_ONLY_NOT_NATIVE_QUALIFICATION",
+  "source": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor_revision2.py",
+  "source_sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+  "ast_import_gate": "PASS",
+  "actual_native_process_calls": [],
+  "tests_run": 44,
+  "failures": 0,
+  "errors": 0,
+  "limitations": [
+    "Manifest validation and typed native ABI are injected, not qualified.",
+    "Fake scheduling demonstrates selected interleavings, not real concurrency.",
+    "CPython CloseHandle raises on failure and returns None on success; those tests use exceptions. Only ctypes job BOOL failure uses integer zero."
+  ]
+}

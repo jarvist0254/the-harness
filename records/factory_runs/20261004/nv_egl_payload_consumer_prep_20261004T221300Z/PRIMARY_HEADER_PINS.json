@@ -1,0 +1,37 @@
+[
+  {
+    "identity": "Official Khronos point-in-time source snapshot, not installed-driver guarantee",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\eglext_h.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/EGL-Registry/main/api/EGL/eglext.h",
+    "bytes": 73780,
+    "sha256": "a5f574a0074001400c6c50232235ee00e9a67b2168bfd1c364ba0f6f52e5a75c"
+  },
+  {
+    "identity": "Official Khronos point-in-time source snapshot, not installed-driver guarantee",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\gl31_h.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/api/GLES3/gl31.h",
+    "bytes": 106392,
+    "sha256": "bb17bfde4aeba912d3686a0cc68ac04710ddacbcc5df7354994927747357daf3"
+  },
+  {
+    "identity": "Official Khronos point-in-time source snapshot, not installed-driver guarantee",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\gl2ext_h.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/api/GLES2/gl2ext.h",
+    "bytes": 251413,
+    "sha256": "9afc725e9dda7c8b476e7337e75b22fa660ed462c169e203ec28c10e62f91f4c"
+  },
+  {
+    "identity": "Official Khronos point-in-time source snapshot, not installed-driver guarantee",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\khrplatform_h.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/EGL-Registry/main/api/KHR/khrplatform.h",
+    "bytes": 11131,
+    "sha256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83"
+  },
+  {
+    "identity": "Official Khronos point-in-time source snapshot, not installed-driver guarantee",
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\nv_egl_payload_consumer_prep_20261004T221300Z\\primary_headers\\egl_h.txt",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/EGL-Registry/main/api/EGL/egl.h",
+    "bytes": 19286,
+    "sha256": "a7c24c828bf2e1a4dfe6511b4f4812b948a285eb54787074015896976d4da076"
+  }
+]

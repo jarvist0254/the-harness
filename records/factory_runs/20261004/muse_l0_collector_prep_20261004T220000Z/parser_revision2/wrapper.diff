@@ -1,0 +1,87 @@
+--- E:\the_harness\records\factory_runs\20261004\muse_l0_collector_prep_20261004T220000Z\run_muse_collector.pending_admission.py
++++ E:\the_harness\records\factory_runs\20261004\muse_l0_collector_prep_20261004T220000Z\parser_revision2\run_muse_collector.root_revision2.py
+@@ -12,7 +12,7 @@
+ import threading
+ import time
+ 
+-ROOT = Path(r"E:\the_harness\records\factory_runs\20261004\muse_l0_collector_prep_20261004T220000Z")
++ROOT = Path(r"E:\the_harness\records\factory_runs\20261004\muse_l0_collector_prep_20261004T220000Z\parser_revision2")
+ MUSE = Path(r"C:\Users\thoma\AppData\Local\Programs\muse\muse-bin-1.4.2-R4684.1.exe")
+ PROMPT = ROOT / "muse_collector.prompt.txt"
+ SCHEMA = ROOT / "output_schema.json"
+@@ -20,6 +20,7 @@
+ MAX_SECONDS = 300.0
+ MAX_CAPTURE = 2 * 1024 * 1024
+ PINS = {
++    r"E:\the_harness\records\factory_runs\20261004\muse_l0_collector_prep_20261004T220000Z\ROOT_ADDITIONAL_COLLECTOR_SCOPE_GAPS_20261004T220600Z.json": "2E143883A4890886AFDA93FD7158C5CAFA8B29BCD32EA1BD7A7EC3ACCE42CDB4",
+     r"E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\final_source_and_stub_pins.json": "045C0D8B8DEB8B54EC5FCAED2E7B396D41C8E1A5083248EEB9E09CAC8AAC94C5",
+     r"E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\source.local_derivative_revision2.cpp": "5E8C32B98C1FEC8FA708435FC7C039828B1ED1326FCA269A0E1BB75FCD3EDBD6",
+     r"E:\the_harness\records\root_continuation_20261004\l0_query_local_repair_20261004T214344Z\actual_header_stub_local_revision2.cpp": "78250C8D9E780295E3385CF5D5DC88A6C4028064E7383658AAAA00F6F5C7F91D",
+@@ -43,7 +44,7 @@
+     r"E:\the_harness\records\factory_runs\20261004\l0_compiler_two_prep_v2_20261004T214600Z\qwen_l0_query_measured_repair.api_excerpts.txt": "BBC88D7C0CDCD33827DB29E4458B65E7BBFA33F9A26FCEBC5D6054A4FB4E7817",
+ }
+ MUSE_SHA256 = "39A97806D315ECE0FC5CDBB88C903EF5BC77655F32E66DC22D267A212C5030BA"
+-PROMPT_SHA256 = "91156D895F5DDA4F382052D853170C982E9CDE5C314088DDBA7DEBA74A2B5C78"
++PROMPT_SHA256 = "856F540A5EEAA2B8B97043469C4AA0F269341E88B2632AD271CE1A15122327FB"
+ SCHEMA_SHA256 = "049318FD4338375A9798BFA32ECE33AE60C28DA2AC8E05B78BD30419EE9E659F"
+ 
+ RESULT_KEYS = {"verdict", "findings", "safety_checks"}
+@@ -101,28 +102,45 @@
+ 
+ 
+ def parse_jsonl(data: bytes):
++    # This decoder accepts the observed Muse 1.4.2 terminal envelope only.
++    # It parses review shape; process/pin/model evidence is separate.
+     if len(data) > MAX_CAPTURE:
+         return {"status": "OUTPUT_LIMIT", "event_count": 0, "result": None, "usage": "UNKNOWN"}
+     if not data or not data.endswith(b"\n"):
+         return {"status": "TRUNCATED_JSONL", "event_count": 0, "result": None, "usage": "UNKNOWN"}
+     events = []
++    def nonfinite(value):
++        raise ValueError("nonfinite_json")
+     try:
+         for line in data.splitlines():
+-            if not line.strip():
+-                continue
+-            events.append(json.loads(line.decode("utf-8"), object_pairs_hook=strict_object))
++            if line.strip():
++                events.append(json.loads(line.decode("utf-8"), object_pairs_hook=strict_object, parse_constant=nonfinite))
+     except Exception:
+         return {"status": "INVALID_JSONL", "event_count": len(events), "result": None, "usage": "UNKNOWN"}
+-    if any(not isinstance(event, dict) for event in events):
+-        return {"status": "INVALID_EVENT", "event_count": len(events), "result": None, "usage": "UNKNOWN"}
+-    candidates = []
+-    for event in events:
+-        _find_result(event, candidates)
+-    if len(candidates) > 1:
+-        return {"status": "AMBIGUOUS_RESULT", "event_count": len(events), "result": None, "usage": "UNKNOWN"}
+-    if not candidates or not validate_result(candidates[0]):
+-        return {"status": "UNKNOWN_RESULT_SHAPE", "event_count": len(events), "result": None, "usage": "UNKNOWN"}
+-    return {"status": "STRUCTURED_RESULT_PARSED", "event_count": len(events), "result": candidates[0], "usage": "UNKNOWN"}
++    refused = {"status": "UNKNOWN_RESULT_SHAPE", "event_count": len(events), "result": None, "usage": "UNKNOWN"}
++    if any(not isinstance(e, dict) for e in events):
++        return {**refused, "status": "INVALID_EVENT"}
++    terminals = [e for e in events if isinstance(e.get("payload_type"), str) and e["payload_type"].startswith("run.terminal.")]
++    if len(terminals) > 1:
++        return {**refused, "status": "AMBIGUOUS_RESULT"}
++    if len(terminals) != 1 or terminals[0] is not events[-1]:
++        return refused
++    e = terminals[0]
++    if (e.get("payload_type") != "run.terminal.completed" or e.get("record_type") != "event"
++        or type(e.get("schema_version")) is not int or e["schema_version"] != 1
++        or type(e.get("payload_schema_version")) is not int or e["payload_schema_version"] != 1):
++        return refused
++    p = e.get("payload")
++    if (not isinstance(p, dict) or p.get("kind") != "run_terminal" or p.get("terminal") != "completed"
++        or p.get("reason") is not None or not isinstance(p.get("text"), str)):
++        return refused
++    try:
++        result = json.loads(p["text"], object_pairs_hook=strict_object, parse_constant=nonfinite)
++    except Exception:
++        return refused
++    if not validate_result(result):
++        return refused
++    return {"status": "STRUCTURED_RESULT_PARSED", "event_count": len(events), "result": result, "usage": "UNKNOWN"}
+ 
+ 
+ def redact_value(value, key=""):

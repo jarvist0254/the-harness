@@ -1,0 +1,22 @@
+usage: opencl_executor.py [-h] [--width WIDTH] [--batch BATCH]
+                          [--layers LAYERS] [--policy-mib POLICY_MIB]
+                          [--device-ids DEVICE_IDS [DEVICE_IDS ...]]
+                          [--reverse] [--inject-corruption] [--output OUTPUT]
+
+Experimental, policy-bounded mixed-vendor residual MLP executor. This proves
+one host-staged OpenCL workload. It is not an LLM runtime, allocator, durable
+worker system, physical-capacity measurement, or P2P test.
+
+options:
+  -h, --help            show this help message and exit
+  --width WIDTH
+  --batch BATCH
+  --layers LAYERS
+  --policy-mib POLICY_MIB
+  --device-ids DEVICE_IDS [DEVICE_IDS ...]
+                        OpenCL runtime IDs pN:dN; default selects one NVIDIA
+                        and one AMD GPU
+  --reverse             Reverse selected device order
+  --inject-corruption   Corrupt the real activation at the first vendor
+                        boundary
+  --output OUTPUT       Atomically write bounded JSON result

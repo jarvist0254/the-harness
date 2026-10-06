@@ -1,0 +1,17 @@
+{
+  "requested_model": "qwen3.8-max",
+  "http_deadline_seconds": 330,
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+  "reasoning_effort": "xhigh",
+  "pid": 26064,
+  "native_children_actual": 0,
+  "enable_thinking": true,
+  "prompt_sha256": "07E8F289AFFFDCA66B71615E93A9C9F2F3CC986114592C80EC4E9D232104159A",
+  "max_reply_tokens": 16384,
+  "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+  "credential_saved": false,
+  "max_native_authorized_qwen": 10,
+  "response_cap_bytes": 2097152,
+  "max_native_authorized_deepseek": 10
+}

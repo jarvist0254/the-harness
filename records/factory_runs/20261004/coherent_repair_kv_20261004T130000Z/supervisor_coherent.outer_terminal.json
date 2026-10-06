@@ -1,0 +1,9 @@
+{
+  "job": "supervisor_coherent",
+  "seconds": 214.34,
+  "outer_killed": false,
+  "identity": "retained process object",
+  "log_overflow": false,
+  "exit_code": 0,
+  "pid": 8748
+}

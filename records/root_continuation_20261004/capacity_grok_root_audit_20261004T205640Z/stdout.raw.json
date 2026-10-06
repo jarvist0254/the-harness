@@ -1,0 +1,806 @@
+{
+  "scope": "INDEPENDENT_PURE_SYNTHETIC_VALIDATOR_QA_NOT_HARDWARE_CAPACITY",
+  "source_sha256_before": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "source_sha256_after": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "counts": {
+    "total": 47,
+    "passed": 44,
+    "failed": 3
+  },
+  "original_four_red_fixed": true,
+  "cases": [
+    {
+      "case": "legal_four_device_baseline",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "original_red_all_shards_only_device0",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "shard_coverage"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": ""
+    },
+    {
+      "case": "original_red_sum_shards_exceeds_peak",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "peak_cover"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": "Original mutation retained: also removes device1 shard ownership; separate cumulative-only discriminator below."
+    },
+    {
+      "case": "original_red_nonhex_artifact_identifiers",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "hash:model_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": ""
+    },
+    {
+      "case": "original_red_metrics_contradict_logits",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "metric_recompute"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": true,
+      "note": ""
+    },
+    {
+      "case": "legal_repeated_root_enumeration",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "legal_subdevice_same_canonical_root",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": "Physical root canonical ID remains stable; additional runtime subdevice alias is not a new physical card."
+    },
+    {
+      "case": "five_distinct_physical_cards",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "four_phys"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "three_physical_cards_only",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "four_phys"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "alias_collision_between_distinct_canonical_ids",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "dedup:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "missing_card_weights",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "shard_coverage"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "cumulative_peak_with_all_cards_covered_and_total_reconciled",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "peak_cover"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "legal_multiple_shards_per_card",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "replicated_shard",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "replicated_shard"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_digest_mismatch",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "registry_mismatch:workload_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_invalid_hash",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "registry_type:exe_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_missing_source",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "registry:source_hash"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "registry_boolean_not_authority",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "untrusted"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "observed_logit_outside_CPU_tolerance",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "logit_tol_fail"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "metric_rounding_within_1e12_bound",
+      "expected": "PASS",
+      "passed": true,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "metric_rounding_beyond_1e12_bound",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "metric_recompute"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "per_logit_tolerance_widened",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "fixed_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "shared_iGPU_participant",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "discrete:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "shared_allocator",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "alloc_class:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "host_staged_weight_backing",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "backing"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "unknown_weight_backing",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "backing"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "model_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "model_bytes"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "model_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "model_bytes"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "observed_at_ns_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "observed_at_ns"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "observed_at_ns_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "observed_at_ns"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "resident_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "resident"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "peak_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "peak_int"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "OOM_requested_bytes_bool_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "req:single"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "resident_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "resident"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "peak_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "peak_int"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "OOM_requested_bytes_float_refusal",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "req:single"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_bool_True",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_float_nan",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_float_inf",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_str_1",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_tol"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "invalid_logit_int_11481306",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "logit_range"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "stale_allocator",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "NOT_CHECKED",
+        "exit_code": 2,
+        "errors": [
+          "alloc_stale:four"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "policy_cap_not_allocator_OOM",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "policy:single"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "timeout_not_allocator_OOM",
+      "expected": "REFUSE",
+      "passed": true,
+      "candidate_result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "errors": [
+          "timeout:three"
+        ],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    },
+    {
+      "case": "CPU_payload_disagrees_with_registered_reference_bytes",
+      "expected": "REFUSE",
+      "passed": false,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": "Trusted CPU reference is canonical JSON bytes [1.0], whose digest stays pinned; supplied CPU changes to2.0. No particular serialization is parsed by candidate: this measures missing payload-binding contract."
+    },
+    {
+      "case": "single_attempt_foreign_physical_population",
+      "expected": "REFUSE",
+      "passed": false,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": "Same-workload OOM comparison must use a subset of the qualified four physical participants, not unrelated hardware."
+    },
+    {
+      "case": "three_attempt_foreign_physical_population",
+      "expected": "REFUSE",
+      "passed": false,
+      "candidate_result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": [],
+        "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+      },
+      "uncaught_exception": null,
+      "inputs_unchanged": true,
+      "original_measured_red": false,
+      "note": ""
+    }
+  ],
+  "audit_denied_events": [],
+  "canonical_mapping_ambiguity_observation": {
+    "status": "FAIL",
+    "exit_code": 1,
+    "errors": [
+      "dedup:four"
+    ],
+    "scope": "four discrete GPU VRAM capacity receipt; GPU-free strict validator"
+  },
+  "provider_tests_executed": false
+}

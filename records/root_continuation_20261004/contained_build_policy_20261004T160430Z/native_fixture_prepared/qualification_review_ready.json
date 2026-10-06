@@ -1,0 +1,192 @@
+{
+  "status": "ROOT_REVIEW_READY_FIVE_NATIVE_CASES_MET",
+  "classification": "NATIVE_CPU_FIXTURE_ONLY_NOT_PRODUCTION_ADMISSION",
+  "root_admission_sha256": "cb3dfaa9c23e65638504987ac1e23a2aa845af6854835696ea82143b33d4dd4e",
+  "source_sha256": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+  "driver_sha256": "67cc496dc00e09ba56df6d5cb9a590a62a5a2f87becf0cdfaff51d98b2ac12df",
+  "controller_sha256": "4ec44fbc5277e69f8e6607c794c9c1f3c32cfab1b6f08f64ece9213fcd72fe15",
+  "worker_sha256": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31",
+  "interpreter_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "driver_outer": {
+    "pid": 38032,
+    "current_absent": true,
+    "elapsed_seconds": 2.639625,
+    "exit_code": 0,
+    "stdout_bytes": 230,
+    "stderr_bytes": 0,
+    "source_runtime_pins_unchanged": true
+  },
+  "cases": [
+    {
+      "case": "natural",
+      "recomputed_expected_status": "PROCESS_COMPLETED",
+      "recomputed_expected_reason": "",
+      "observed_status": "PROCESS_COMPLETED",
+      "observed_reason": "",
+      "controller_exit": 0,
+      "controller_pid": 72264,
+      "controller_pid_absent_after_wait": true,
+      "worker_pids": [
+        66860,
+        31340,
+        49620,
+        44000
+      ],
+      "worker_pid_absence_recorded": true,
+      "worker_pids_absent_at_verification_time": true,
+      "worker_exit_codes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "assigned_and_resumed": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "job_active_count": 0,
+      "drain_proof": "CLEANUP",
+      "restart_matches": true,
+      "restart_commit_verified": true,
+      "whole_tree_certificate": false,
+      "natural_marker_parity": true,
+      "overflow_limit_control": "NOT_APPLICABLE",
+      "recorded_accepted_type": "Boolean",
+      "recorded_accepted_value_used_for_verdict": false,
+      "independently_recomputed_case_pass": true
+    },
+    {
+      "case": "nonzero",
+      "recomputed_expected_status": "FAILED",
+      "recomputed_expected_reason": "nonzero_exit",
+      "observed_status": "FAILED",
+      "observed_reason": "nonzero_exit",
+      "controller_exit": 0,
+      "controller_pid": 79248,
+      "controller_pid_absent_after_wait": true,
+      "worker_pids": [
+        83364
+      ],
+      "worker_pid_absence_recorded": true,
+      "worker_pids_absent_at_verification_time": true,
+      "worker_exit_codes": [
+        3
+      ],
+      "assigned_and_resumed": [
+        true
+      ],
+      "job_active_count": 0,
+      "drain_proof": "CLEANUP",
+      "restart_matches": true,
+      "restart_commit_verified": true,
+      "whole_tree_certificate": false,
+      "natural_marker_parity": "NOT_APPLICABLE",
+      "overflow_limit_control": "NOT_APPLICABLE",
+      "recorded_accepted_type": "Boolean",
+      "recorded_accepted_value_used_for_verdict": false,
+      "independently_recomputed_case_pass": true
+    },
+    {
+      "case": "timeout",
+      "recomputed_expected_status": "TIMEOUT",
+      "recomputed_expected_reason": "deadline",
+      "observed_status": "TIMEOUT",
+      "observed_reason": "deadline",
+      "controller_exit": 0,
+      "controller_pid": 32752,
+      "controller_pid_absent_after_wait": true,
+      "worker_pids": [
+        69224
+      ],
+      "worker_pid_absence_recorded": true,
+      "worker_pids_absent_at_verification_time": true,
+      "worker_exit_codes": [
+        1
+      ],
+      "assigned_and_resumed": [
+        true
+      ],
+      "job_active_count": 0,
+      "drain_proof": "CLEANUP",
+      "restart_matches": true,
+      "restart_commit_verified": true,
+      "whole_tree_certificate": false,
+      "natural_marker_parity": "NOT_APPLICABLE",
+      "overflow_limit_control": "NOT_APPLICABLE",
+      "recorded_accepted_type": "Object[]",
+      "recorded_accepted_value_used_for_verdict": false,
+      "independently_recomputed_case_pass": true
+    },
+    {
+      "case": "cancel",
+      "recomputed_expected_status": "CANCELLED",
+      "recomputed_expected_reason": "cancelled",
+      "observed_status": "CANCELLED",
+      "observed_reason": "cancelled",
+      "controller_exit": 0,
+      "controller_pid": 50440,
+      "controller_pid_absent_after_wait": true,
+      "worker_pids": [
+        78020
+      ],
+      "worker_pid_absence_recorded": true,
+      "worker_pids_absent_at_verification_time": true,
+      "worker_exit_codes": [
+        1
+      ],
+      "assigned_and_resumed": [
+        true
+      ],
+      "job_active_count": 0,
+      "drain_proof": "CLEANUP",
+      "restart_matches": true,
+      "restart_commit_verified": true,
+      "whole_tree_certificate": false,
+      "natural_marker_parity": "NOT_APPLICABLE",
+      "overflow_limit_control": "NOT_APPLICABLE",
+      "recorded_accepted_type": "Object[]",
+      "recorded_accepted_value_used_for_verdict": false,
+      "independently_recomputed_case_pass": true
+    },
+    {
+      "case": "overflow",
+      "recomputed_expected_status": "FAILED",
+      "recomputed_expected_reason": "LOG_LIMIT",
+      "observed_status": "FAILED",
+      "observed_reason": "LOG_LIMIT",
+      "controller_exit": 0,
+      "controller_pid": 51768,
+      "controller_pid_absent_after_wait": true,
+      "worker_pids": [
+        75032
+      ],
+      "worker_pid_absence_recorded": true,
+      "worker_pids_absent_at_verification_time": true,
+      "worker_exit_codes": [
+        1
+      ],
+      "assigned_and_resumed": [
+        true
+      ],
+      "job_active_count": 0,
+      "drain_proof": "CLEANUP",
+      "restart_matches": true,
+      "restart_commit_verified": true,
+      "whole_tree_certificate": false,
+      "natural_marker_parity": "NOT_APPLICABLE",
+      "overflow_limit_control": true,
+      "recorded_accepted_type": "Boolean",
+      "recorded_accepted_value_used_for_verdict": false,
+      "independently_recomputed_case_pass": true
+    }
+  ],
+  "note": "The driver accepted field is recorded only by JSON type. Verdict is independently recomputed from each raw case receipt; list-valued accepted fields were not coerced.",
+  "limitations": [
+    "point-in-time PID checks only",
+    "whole_tree_certificate remains false",
+    "resource high-water unmeasured",
+    "no build, GPU, provider, or global queue admission"
+  ]
+}

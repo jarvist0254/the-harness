@@ -1,0 +1,133 @@
+{
+  "raw16MiB_normalizedeach2MiB": true,
+  "helper_pins": [
+    {
+      "name": "invoke_owned_stream_research.v3.ps1",
+      "bytes": 8048,
+      "sha256": "891203b8254aba7cab342caf2cf79c89eb04fffcf010e5308652b83392554063"
+    },
+    {
+      "name": "provider_common.ps1",
+      "bytes": 4072,
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a"
+    },
+    {
+      "name": "PURE_LIMIT_CONTROLS.json",
+      "bytes": 582,
+      "sha256": "f654cc28338025a4ddce5e14f517dedcbdb75d09b534a2b6dcbadcf142b7844e"
+    },
+    {
+      "name": "qwen_http_stream_research.v3.ps1",
+      "bytes": 8011,
+      "sha256": "c8b200053928a295e99111b4fcdd73ef17a39b6de0d4e80e446167d3f2018f2c"
+    },
+    {
+      "name": "qwen_l0_egl_fence_adapter.prompt.txt",
+      "bytes": 36759,
+      "sha256": "0f225f4105af59dd2a4a13a75c1a47670730f0a86a0b4284291f872af93b7012"
+    },
+    {
+      "name": "qwen_l0_egl_fence_adapter.spec.txt",
+      "bytes": 4121,
+      "sha256": "a97a6e0bb9552f267c0ff1b1bdb24f8f58a3484da564194f75a89f8c23191eae"
+    },
+    {
+      "name": "qwen_l0_egl_fence_checker.prompt.txt",
+      "bytes": 36812,
+      "sha256": "3233d2b866c06b160a3e2bf7bc9b34392d212dc9d3db4a589a3e73181d09ef7d"
+    },
+    {
+      "name": "qwen_l0_egl_fence_checker.spec.txt",
+      "bytes": 4174,
+      "sha256": "d5b0cfdc371eaf651a05b67f14ca0090fe53de7a9a62bb4283e8890c8caf9bc6"
+    },
+    {
+      "name": "research_artifact.v3.ps1",
+      "bytes": 774,
+      "sha256": "fa4a8ce5f9f80a6db977758a0787ca59aefd0b4df8b31291c054bffbfbc6ff36"
+    }
+  ],
+  "source_execution": false,
+  "helper_changes": "NONE copied exact ROOTapproved32k/16k helpers+5PASSintakecontrolrecord",
+  "source_manifest": [
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\context.cpp",
+      "size_bytes": 138486,
+      "sha256": "298f7f9d04078d23cffb53608b73ab9204d0778a2f802fe093ada543af02471a"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\driver_handle.cpp",
+      "size_bytes": 46557,
+      "sha256": "20ccbc05a38a6a4d7fab7ea2d9ea25185f9f5364611a90202720778d5d27979a"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\memory_manager.cpp",
+      "size_bytes": 82355,
+      "sha256": "b994e44a5001f26c2f1860c9091e6fc8160178abfe1ace3dbba086489b766435"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\context_drm_or_wddm.cpp",
+      "size_bytes": 7025,
+      "sha256": "ceafee2d4152d886d51f07de33aff1ef7c719783ea82152f6eb4b5c15c77576d"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\cmdlist.cpp",
+      "size_bytes": 43337,
+      "sha256": "2fdc69a78815431451f26e53be73b70d9eb86557e444b9366949a4360ea93c20"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_l0_import_sync_trace_20261004T210634Z\\cmdqueue.cpp",
+      "size_bytes": 20393,
+      "sha256": "55e39a0a5a9608b30544f88c7e1dc7dd770cbb04a73a1c45daecd33ee59a5bff"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\level_zero__core__source__semaphore__external_semaphore_imp.cpp",
+      "size_bytes": 6009,
+      "sha256": "3ccf261403276499057f5c3966657d1c24928e9eda162ff61f6ee8e81ec3ddd8"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__external_semaphore_linux.cpp",
+      "size_bytes": 5442,
+      "sha256": "f4e9e16b9deea753720ab85156cbe69795c70aded895910e07632e8f7d55711f"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\shared__source__os_interface__linux__drm_memory_manager.cpp",
+      "size_bytes": 192618,
+      "sha256": "f5e68fd52e4a1171bbe48a30c3ca7c7c0da3f02fcb7a5ab1bc82590d7baafc60"
+    },
+    {
+      "path": "E:\\the_harness\\records\\root_continuation_20261004\\intel_runtime_contract_sources_20261004T2100Z\\PINNED_SOURCE_RECEIPT.json",
+      "size_bytes": 2968,
+      "sha256": "61cef267eee1b19e3755059571a62bc3b43134e1a6e55cdf95dafdfb415ff5fb"
+    }
+  ],
+  "jobs": [
+    {
+      "prompt_chars": 36810,
+      "prompt_sha256": "3233d2b866c06b160a3e2bf7bc9b34392d212dc9d3db4a589a3e73181d09ef7d",
+      "prompt": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_checker.prompt.txt",
+      "spec": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_checker.spec.txt",
+      "spec_sha256": "d5b0cfdc371eaf651a05b67f14ca0090fe53de7a9a62bb4283e8890c8caf9bc6",
+      "model": "qwen3.8-max",
+      "job": "qwen_l0_egl_fence_checker",
+      "reasoning_effort": "xhigh"
+    },
+    {
+      "prompt_chars": 36751,
+      "prompt_sha256": "0f225f4105af59dd2a4a13a75c1a47670730f0a86a0b4284291f872af93b7012",
+      "prompt": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter.prompt.txt",
+      "spec": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter.spec.txt",
+      "spec_sha256": "a97a6e0bb9552f267c0ff1b1bdb24f8f58a3484da564194f75a89f8c23191eae",
+      "model": "qwen3.8-max",
+      "job": "qwen_l0_egl_fence_adapter",
+      "reasoning_effort": "xhigh"
+    }
+  ],
+  "primary10files_rehashed": true,
+  "provider_launch_authorized": false,
+  "utc": "2026-10-04T21:28:37.7255800Z",
+  "http2400_outer2430": true,
+  "native_children_actual": 0,
+  "tests_limit": 16000,
+  "source_limit": 32000
+}

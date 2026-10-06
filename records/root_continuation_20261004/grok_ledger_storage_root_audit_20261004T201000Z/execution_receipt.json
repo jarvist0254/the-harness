@@ -1,0 +1,70 @@
+{
+  "scope": "ROOT_ADMITTED_EXACT_CANDIDATE_INDEPENDENT_PURE_QA_ONLY",
+  "runs": [
+    {
+      "label": "same17",
+      "pid": 94380,
+      "exit_code": 0,
+      "reaped": true,
+      "owned_process_handle_signaled": true,
+      "seconds": 0.5779999997466803,
+      "timeout": false,
+      "capture": {
+        "bytes": {
+          "same17.stdout.raw.log": 0,
+          "same17.stderr.raw.log": 1244
+        },
+        "overflow": [],
+        "errors": []
+      },
+      "readers_joined": true,
+      "native_fence": {
+        "audit_denied_events": [],
+        "scope": "Pure synthetic candidate only; native dependency import guard is in independent exact17 module"
+      }
+    },
+    {
+      "label": "additional3",
+      "pid": 68284,
+      "exit_code": 0,
+      "reaped": true,
+      "owned_process_handle_signaled": true,
+      "seconds": 0.10900000017136335,
+      "timeout": false,
+      "capture": {
+        "bytes": {
+          "additional3.stdout.raw.log": 0,
+          "additional3.stderr.raw.log": 357
+        },
+        "overflow": [],
+        "errors": []
+      },
+      "readers_joined": true,
+      "native_fence": {
+        "audit_denied_events": [],
+        "scope": "Pure synthetic candidate only; native dependency import guard is in independent exact17 module"
+      }
+    }
+  ],
+  "pins_before": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high\\source.grok_untrusted.py": "e44e86db99225b95cb9c9b63a41987d978e692eb0efc3f431741e2adf28833df",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high\\tests_source.grok_untrusted.py": "938739185fe5e6e12d115639160a228a6f917a20a18bd7368bb16231ccdf7869",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\test_independent_same17_adapted.py": "202a19bc747e66236d3b5987e64b6090e9011f514a04c565c139addb4faf3f59",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\test_additional_storage_and_legal_transition.py": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\pure_import_fence.py": "edb65ca99074a40e330b9ea22758a7aca0512a3e69d01a8ebd8101c71cb42df9",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\run_bounded_pure.py": "f66c4d877fbff3d86817b1b46452e244617a32764c775c19b78af2e0cda688df",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high\\source.grok_untrusted.py": "e44e86db99225b95cb9c9b63a41987d978e692eb0efc3f431741e2adf28833df",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z\\grok_ledger_storage_high\\tests_source.grok_untrusted.py": "938739185fe5e6e12d115639160a228a6f917a20a18bd7368bb16231ccdf7869",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\test_independent_same17_adapted.py": "202a19bc747e66236d3b5987e64b6090e9011f514a04c565c139addb4faf3f59",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\test_additional_storage_and_legal_transition.py": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\pure_import_fence.py": "edb65ca99074a40e330b9ea22758a7aca0512a3e69d01a8ebd8101c71cb42df9",
+    "E:\\the_harness\\records\\root_continuation_20261004\\grok_ledger_storage_root_audit_20261004T201000Z\\run_bounded_pure.py": "f66c4d877fbff3d86817b1b46452e244617a32764c775c19b78af2e0cda688df",
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "hashes_unchanged": true,
+  "provider_tests_executed": false,
+  "native_gpu_provider_calls": false
+}

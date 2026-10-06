@@ -1,0 +1,7 @@
+{
+  "pid": 21140,
+  "exit_code": "0",
+  "stdout": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\list_devices.stdout.log",
+  "stderr": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\list_devices.stderr.log",
+  "command": "llama-cli.exe --list-devices"
+}

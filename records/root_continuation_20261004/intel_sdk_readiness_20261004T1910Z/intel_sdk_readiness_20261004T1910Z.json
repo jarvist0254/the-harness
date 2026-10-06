@@ -1,0 +1,55 @@
+{
+  "audit": "intel_sdk_readiness",
+  "date": "2026-10-04",
+  "scope": [
+    "E:\\the_harness\\records\\toolchains\\intel_sycl",
+    "E:\\the_harness\\records\\vendor_headers",
+    "E:\\the_harness\\records\\vendor_cli_qualification_20261004"
+  ],
+  "read_only_audit": true,
+  "level_zero": {
+    "ze_api_h": {"status": "NOT_FOUND_IN_BOUNDED_TREES", "trees": ["toolchains/intel_sycl/nightly_20261004", "records/vendor_headers"]},
+    "ze_loader_lib": {"status": "NOT_FOUND_IN_BOUNDED_TREES", "trees": ["toolchains/intel_sycl/nightly_20261004", "records/vendor_headers"]},
+    "ze_loader_dll": {
+      "status": "NOT_FOUND_AT_CHECKED_PATHS",
+      "paths": [
+        "C:\\Windows\\System32\\ze_loader.dll",
+        "C:\\Program Files\\Intel\\oneAPI\\bin\\ze_loader.dll",
+        "C:\\Program Files\\Intel\\oneAPI\\redist\\intel64_win\\compiler\\ze_loader.dll",
+        "C:\\Program Files\\Intel\\oneAPI\\level-zero\\latest\\bin\\ze_loader.dll",
+        "C:\\Program Files (x86)\\Intel\\oneAPI\\level-zero\\latest\\bin\\ze_loader.dll"
+      ],
+      "global_absence_claimed": false
+    },
+    "runtime_probe": "sycl-ls reported Platforms: 0 and ZE_RESULT_ERROR_UNINITIALIZED in saved qualification evidence"
+  },
+  "compiler": {
+    "path": "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\clang++.exe",
+    "sha256": "882e0708da94ee433861aa3f12d24571580cceafe1797d793064fe0ddad37740",
+    "version": "DPC++ 7.2.0 pre-release; x86_64-pc-windows-msvc",
+    "compile_evidence": "compile_vs_results.json records exit_code 0 via Visual Studio vcvars64.bat; earlier intel_compile.json records LNK1104 msvcrt.lib failure"
+  },
+  "sycl": {
+    "header_path": "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\include\\sycl\\sycl.hpp",
+    "header_sha256": "194b35f256b9c7486f8712b8a4eae54442d9097f3815f05246cf7f41526fac3d",
+    "sycl_ls_path": "E:\\the_harness\\records\\toolchains\\intel_sycl\\nightly_20261004\\bin\\sycl-ls.exe",
+    "sycl_ls_sha256": "995f69127c49da9b0089c5434983e2cd4a7967a2dba95b534e7191d72ab7d262"
+  },
+  "compiled_probe": {
+    "path": "E:\\the_harness\\records\\vendor_cli_qualification_20261004\\intel_vector.exe",
+    "sha256": "411be45a8b2b9fd5469ee1398358e788d8b9e5f86ddc01cb44ada7185123389",
+    "meaning": "SYCL compile succeeded; native Intel hardware qualification did not"
+  },
+  "device_limits": {
+    "inventory": "NVIDIA RTX 5070 Ti and AMD Radeon integrated graphics; no Intel GPU in current display inventory",
+    "intel_native_runs": "NOT_CHECKED; probe filters NVIDIA/AMD OpenCL devices, forbids CPU fallback, and excludes Intel vendor",
+    "opencl_probe_revision2": "0 platforms/devices with opencl:gpu selector; Level Zero uninitialized; no actual UR OpenCL adapter DLL"
+  },
+  "next_compile_prerequisites": [
+    "Qwen fixture source and its exact API target",
+    "existing staged DPC++ compiler and Visual Studio C++ environment for SYCL compilation",
+    "for direct Level Zero C API: matching ze_api.h and ze_loader.lib, or a source-supported dynamic-loading approach",
+    "for runtime Intel device enumeration: loadable ze_loader.dll and a compatible Intel driver/device"
+  ],
+  "search_bound": "No global absence claim. Root-reported fresh C/E manifest filename searches had no ze_api.h or ze_loader.lib matches, but manifest snapshots may predate current staging."
+}

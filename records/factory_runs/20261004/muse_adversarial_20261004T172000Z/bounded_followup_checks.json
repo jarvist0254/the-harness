@@ -1,0 +1,26 @@
+{
+  "observed_utc": "2026-10-04T17:22:38.8683678Z",
+  "scope": "Follow-up bounded location checks only",
+  "named_muse_bins": {
+    "je_horizon_node_bin": "E:\\JE_Horizon\\node_modules\\.bin\\muse.cmd/.ps1/.exe [absent]",
+    "local_bin_muse": "C:\\Users\\thoma\\.local\\bin [no muse file among immediate entries]",
+    "muse_bin": "C:\\Users\\thoma\\.muse\\bin [absent]",
+    "npm_global": "D:\\DevCache\\npm\\node_modules [no exact muse package directory/shim]"
+  },
+  "powershell_profiles_checked": [
+    "D:\\Users\\thoma\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1",
+    "D:\\Users\\thoma\\Documents\\PowerShell\\profile.ps1"
+  ],
+  "profile_files_with_muse_match": [],
+  "je_horizon_root_matching_names": [],
+  "visible_muse_named_process": "none",
+  "manifest_checks": {
+    "root_manifest": "E:\\.MANIFEST.md",
+    "root_paths": "E:\\.MANIFEST.paths.txt",
+    "note": "Other substring hits were unrelated asset/extractor filenames; no CLI launcher pattern was found.",
+    "cli_launcher_pattern_hits": []
+  },
+  "broader_search": "NOT_PERFORMED",
+  "cli_help_version": "NOT_RUN",
+  "provider_session": "NOT_STARTED"
+}

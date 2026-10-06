@@ -1,0 +1,50 @@
+{
+  "admission": "ROOT_ADMITTED_BOUNDED_NATIVE_CPU_FIXTURES",
+  "native_cases_started": false,
+  "run_command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_native_fixture\\fixture_driver.py",
+    "--run"
+  ],
+  "source": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+    "sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663"
+  },
+  "runtime": {
+    "path": "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "version": "3.10.11",
+    "sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260"
+  },
+  "fixture_hashes_sha256": {
+    "fixture_contract.json": "27879a5ee1f8b2d63e138fb2c8b67c3bd16b33400901643e420470acb8fae52e",
+    "fixture_driver.py": "9a7f4158a8bf1b9b9f41fc26d0e3063c44d60e0388b9f49768f218d765c9ee2f",
+    "fixture_controller.py": "d85f31373c78fd8c066427c296e918ef1adbfee34a31f318d6d393f2c82a24ce",
+    "worker.py": "6d9cffd5e7a610f69754c513789d45ed88286a57a79c8c08830b88a9c39efc31"
+  },
+  "case_order": [
+    "natural",
+    "nonzero",
+    "timeout",
+    "cancel",
+    "overflow"
+  ],
+  "case_limits": {
+    "workers_max": 4,
+    "worker_startup_seconds": 5,
+    "worker_deadline_seconds_max": 5,
+    "outer_controller_seconds": 30,
+    "log_limit_bytes_per_stream": 1024
+  },
+  "stop_on": [
+    "natural case fails any expected field",
+    "unexpected UNKNOWN or API exception",
+    "owned worker PID present after cleanup",
+    "controller timeout",
+    "source or fixture hash changes during suite"
+  ],
+  "network": false,
+  "provider": false,
+  "gpu": false,
+  "global_factory_or_role_queues": false,
+  "production_admission": false
+}

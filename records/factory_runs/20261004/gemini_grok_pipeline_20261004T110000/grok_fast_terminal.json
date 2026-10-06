@@ -1,0 +1,16 @@
+{
+  "state": "NOT_ACCEPTED",
+  "pid": 41304,
+  "exit_code": 0,
+  "seconds": 57.12,
+  "model": "grok-4.7-build-fast",
+  "outer_killed": false,
+  "usage": {
+    "input_tokens": 9239,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 9594,
+    "reasoning_tokens": 7527,
+    "total_tokens": 19985
+  }
+}

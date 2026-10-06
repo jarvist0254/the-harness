@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "actual_accept": true,
+      "passed": true,
+      "expected_accept": true,
+      "case": "compact_proposed_valid"
+    },
+    {
+      "actual_accept": false,
+      "passed": true,
+      "expected_accept": false,
+      "case": "source_over8000_refused"
+    },
+    {
+      "actual_accept": false,
+      "passed": true,
+      "expected_accept": false,
+      "case": "tests_over6000_refused"
+    },
+    {
+      "actual_accept": false,
+      "passed": true,
+      "expected_accept": false,
+      "case": "unknownstatus_refused"
+    }
+  ],
+  "failed": 0,
+  "scope": "PURE_STRING_SCHEMA_INTAKE_ONLY",
+  "candidate_source_parsed_imported_executed": false,
+  "provider_calls": 0,
+  "credentials_read": false,
+  "passed": 4
+}

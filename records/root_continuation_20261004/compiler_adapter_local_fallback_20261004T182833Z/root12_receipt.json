@@ -1,0 +1,18 @@
+{
+  "scope": "ACTUAL_LOCAL_FALLBACK_SOURCE_ROOT_UNCHANGED_12_MOCK_CONTROLS_ONLY",
+  "pid": 27996,
+  "exit_code": 0,
+  "reaped": true,
+  "seconds": 0.14000000059604645,
+  "source_hashes_before": {
+    "adapter": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "unchanged_root_tests": "b81b70d331b89733f85e6bcc8fce2c0d40651afda67e9c6d2cc9883e9e3a84b4"
+  },
+  "source_hashes_after": {
+    "adapter": "0e5292d39a9d9afb0d8787904f51d3815c3723694e44f4ab964d8e6bd6e0f564",
+    "unchanged_root_tests": "b81b70d331b89733f85e6bcc8fce2c0d40651afda67e9c6d2cc9883e9e3a84b4"
+  },
+  "stdout_bytes": 0,
+  "stderr_bytes": 807,
+  "native_fixture_build_gpu_execution": false
+}

@@ -1,0 +1,236 @@
+{
+  "hypothetical": true,
+  "description": "Four external 8 GB capacity placeholders. Synthetic 48 x 512 MiB blocks, not real GGUF weights, KV-cache measurements, hardware measurements or purchasing recommendations. Separate host/display GPU is excluded.",
+  "devices": [
+    {
+      "id": "Intel_0",
+      "physical_id": "example_external_card_0",
+      "vendor": "Intel",
+      "bay": "A",
+      "free_mib": 8192,
+      "reserve_mib": 1024,
+      "workspace_mib": 512
+    },
+    {
+      "id": "Intel_1",
+      "physical_id": "example_external_card_1",
+      "vendor": "Intel",
+      "bay": "B",
+      "free_mib": 8192,
+      "reserve_mib": 1024,
+      "workspace_mib": 512
+    },
+    {
+      "id": "Intel_2",
+      "physical_id": "example_external_card_2",
+      "vendor": "Intel",
+      "bay": "C",
+      "free_mib": 8192,
+      "reserve_mib": 1024,
+      "workspace_mib": 512
+    },
+    {
+      "id": "Intel_3",
+      "physical_id": "example_external_card_3",
+      "vendor": "Intel",
+      "bay": "D",
+      "free_mib": 8192,
+      "reserve_mib": 1024,
+      "workspace_mib": 512
+    }
+  ],
+  "blocks": [
+    {
+      "id": "synthetic_block_00",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_01",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_02",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_03",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_04",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_05",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_06",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_07",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_08",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_09",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_10",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_11",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_12",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_13",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_14",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_15",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_16",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_17",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_18",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_19",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_20",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_21",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_22",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_23",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_24",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_25",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_26",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_27",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_28",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_29",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_30",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_31",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_32",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_33",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_34",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_35",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_36",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_37",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_38",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_39",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_40",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_41",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_42",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_43",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_44",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_45",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_46",
+      "memory_mib": 512
+    },
+    {
+      "id": "synthetic_block_47",
+      "memory_mib": 512
+    }
+  ]
+}

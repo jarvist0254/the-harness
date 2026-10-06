@@ -1,0 +1,8 @@
+{
+  "stage": "configure",
+  "status": "RUNNING",
+  "elapsed_seconds": 120.03100000042468,
+  "utc": "2026-10-04T17:25:26.446186+00:00",
+  "deadline_seconds": 120,
+  "scope": "Compiler/shader only; root can read supervisor journal for owned PID"
+}

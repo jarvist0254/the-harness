@@ -1,0 +1,15 @@
+{
+  "seconds": 154.06,
+  "model": "gemini-3.8-flash-high",
+  "outer_killed": false,
+  "state": "COMPLETE_REVIEW_UNADJUDICATED",
+  "pid": 46804,
+  "exit_code": 0,
+  "usage": {
+    "input_tokens": 40710,
+    "output_tokens": 50687,
+    "thinking_tokens": 49819,
+    "cache_read_tokens": 44882,
+    "total_tokens": 91397
+  }
+}

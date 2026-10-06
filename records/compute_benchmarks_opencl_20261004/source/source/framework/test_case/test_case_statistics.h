@@ -1,0 +1,120 @@
+/*
+ * Copyright (C) 2022-2026 Intel Corporation
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#pragma once
+#include "framework/configuration.h"
+#include "framework/utility/statistics.h"
+
+#include <map>
+#include <memory>
+#include <string>
+#include <string_view>
+#include <vector>
+
+class TestCaseStatistics : public Statistics {
+  public:
+    using Clock = std::chrono::high_resolution_clock;
+    using Value = double;
+    using SamplesVector = std::vector<Value>;
+    struct Samples {
+        MeasurementUnit unit = MeasurementUnit::Unknown;
+        MeasurementType type = MeasurementType::Unknown;
+        SamplesVector vector = {};
+    };
+    using SamplesMap = std::map<std::string, Samples, std::less<>>;
+
+    explicit TestCaseStatistics(size_t maxSamplesCount, Configuration::PrintType printType);
+
+    void pushPercentage(double value, MeasurementUnit unit, MeasurementType type, std::string_view description = "") override;
+    void pushValue(Clock::duration time, MeasurementUnit unit, MeasurementType type, std::string_view description = "") override;
+    void pushValue(Clock::duration time, uint64_t size, MeasurementUnit unit, MeasurementType type, std::string_view description = "") override;
+    void pushCpuCounter(uint64_t count, MeasurementUnit unit, MeasurementType type, std::string_view description = "") override;
+    void pushEnergy(size_t microJoules, MeasurementUnit unit, MeasurementType type, std::string_view description = "") override;
+    void pushEnergy(double watts, MeasurementUnit unit, MeasurementType type, std::string_view description = "") override;
+    void pushUnitAndType(MeasurementUnit unit, MeasurementType type) override;
+
+    bool isEmpty() const override;
+    bool isFull() const override;
+
+    static void printStatisticsHeader(Configuration::PrintType printType, int nameColumnWidth);
+    static void flushBufferedResults(Configuration::PrintType printType);
+    static void writeHtmlResults(const std::string &filePath);
+    static void writeMdResults(const std::string &filePath);
+    static void setDeviceInfo(const std::string &info);
+    void printStatisticsBeforeTest(const std::string &testCaseName) const;
+    void printClearLineAfterTest() const;
+    void printStatistics(const std::string &testCaseName) const;
+    void printStatisticsString(const std::string &testCaseName, const std::string &message, char lineEnding = '\n') const;
+
+  private:
+    struct BufferedLine {
+        std::string name;
+        std::string results;
+        bool isFullLine = false;
+    };
+
+    static void overrideMeasurementUnit(MeasurementUnit &unit);
+    void pushValue(Value value, std::string_view description, MeasurementUnit unit, MeasurementType type);
+    void printStatisticsDefault(const std::string &testCaseName) const;
+    void printStatisticsNoop(const std::string &testCaseName) const;
+    void printStatisticsCsv(const std::string &testCaseName) const;
+    void printStatisticsVerbose() const;
+    void collectHistograms(const std::string &testCaseName) const;
+    std::string renderHistogram(const std::string &testCaseName, const std::string &samplesName, const Samples &samples) const;
+
+    const Configuration::PrintType printType;
+    SamplesMap samplesMap = {};
+    Samples noopSample = {};
+    bool reachedInfinity = false;
+
+    static std::vector<BufferedLine> testResults;
+    static std::vector<std::string> histograms;
+    static int lastTransientLineWidth;
+    static std::string deviceInfo;
+
+    struct Metrics;
+    struct MetricsStrings;
+};
+
+struct TestCaseStatistics::Metrics {
+    explicit Metrics(const SamplesVector &samples, size_t iterationsToSkip, size_t trimPercentage);
+    Value min;
+    Value max;
+    Value mean;
+    Value median;
+    Value standardDeviation;
+
+  private:
+    using ConstIter = SamplesVector::const_iterator;
+    static SamplesVector getTrimmedSamples(const SamplesVector &samples, size_t iterationsToSkip, size_t trimPercentage);
+    static Value calculateMin(ConstIter begin, ConstIter end);
+    static Value calculateMax(ConstIter begin, ConstIter end);
+    static Value calculateMean(ConstIter begin, ConstIter end);
+    static Value calculateMedian(ConstIter begin, ConstIter end);
+    static Value calculateStandardDeviation(ConstIter begin, ConstIter end, Value mean);
+};
+
+struct TestCaseStatistics::MetricsStrings {
+    MetricsStrings(const std::string &name, const Samples &samples, bool reachedInfinity, size_t iterationsToSkip, size_t trimPercentage);
+    Metrics metrics;
+    std::string min;
+    std::string max;
+    std::string mean;
+    std::string median;
+    std::string standardDeviation;
+    std::string type;
+    std::string label;
+
+  private:
+    static std::string generateMin(Value min);
+    static std::string generateMax(Value max);
+    static std::string generateMean(Value mean, bool reachedInfinity);
+    static std::string generateMedian(Value median);
+    static std::string generateStandardDeviation(Value standardDeviation, bool reachedInfinity);
+    static std::string generate(Value value);
+    static std::string generateLabel(const std::string &name, MeasurementUnit unit);
+};

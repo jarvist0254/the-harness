@@ -1,0 +1,83 @@
+{
+  "scope": "READ_ONLY_SOURCE_ANALYSIS_NO_BUILD_OR_MODEL_EXECUTION",
+  "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "source_pins": [
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp",
+      "sha256": "86c7d9251ecddff54f6a53956cfd22c94ef9090064789b7a362d56cb1b3cadef",
+      "bytes": 898302,
+      "manifest_matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\copy.comp",
+      "sha256": "25f74584504624beee01304d6b429bc80f14f3d501e1d5fb369d7cff24bbc9c3",
+      "bytes": 785,
+      "manifest_matches": true
+    },
+    {
+      "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-vulkan\\vulkan-shaders\\vulkan-shaders-gen.cpp",
+      "sha256": "115d59ae53df75432860c69664178f4d9510493bcccbabe959d46c1624bc5f6c",
+      "bytes": 83957,
+      "manifest_matches": true
+    }
+  ],
+  "provenance_path": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\source_provenance.json",
+  "manifest_path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source_manifest.json",
+  "manifest_sha256": "ca13617b918efe05af725be2faae155649932598fea2e5f9f61be50234a5ec6a",
+  "run_receipt": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\f32_disable_cooperative_matrices\\baseline\\run_receipt.json",
+  "run_receipt_sha256": "0e579c18061d2ac0e1a9f077996d8e744b6ac10d57839b2563faa612fcfbd1c5",
+  "fixture_compile_receipt": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\compile_receipt.json",
+  "fixture_source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "fixture_binary_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "binding": "Consistent recorded source/build/fixture chain verified; no independent historical object-to-source reproducible-build proof",
+  "baseline_failures": 3,
+  "baseline_max_abs": 0.014285564422607422,
+  "baseline_rmse": 0.0028475802273649183,
+  "patch_scope": "ONLY ggml_vk_mul_mat_q_f16; no vector/MUL_MAT_ID/quantized behavior changes",
+  "causation": "NOT_ESTABLISHED",
+  "runtime_branch_execution": "NOT_CHECKED",
+  "source_excerpt_ranges": [
+    [
+      1145,
+      1168
+    ],
+    [
+      2735,
+      2744
+    ],
+    [
+      3280,
+      3286
+    ],
+    [
+      5954,
+      5985
+    ],
+    [
+      6033,
+      6074
+    ],
+    [
+      6174,
+      6197
+    ],
+    [
+      6270,
+      6552
+    ],
+    [
+      7235,
+      7302
+    ],
+    [
+      7369,
+      7447
+    ]
+  ],
+  "assumptions": [
+    "Dense all-F32 diagnostic eligibility only.",
+    "No runtime trace proves noncontiguous branch executed.",
+    "Scratch padded-tail behavior unchanged.",
+    "Build and native probe admission are future root actions."
+  ]
+}

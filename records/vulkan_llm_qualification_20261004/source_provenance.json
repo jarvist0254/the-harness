@@ -1,0 +1,12 @@
+{
+  "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "archive_sha256": "7B1C763340C17226B4DF928DC34A62150F8D27DECC22AF0CE808EB16BF027872",
+  "source_file_count": 3685,
+  "manifest": "records/build_vulkan_real/toolchain/llama_clean_source_manifest.json",
+  "manifest_sha256": "CA13617B918EFE05AF725BE2FAAE155649932598FEA2E5F9F61BE50234A5EC6A",
+  "sdk": "LunarG Vulkan SDK 1.4.363.0 copy_only=1",
+  "checkout_dirty_paths": 126,
+  "checkout_diff_added": 0,
+  "checkout_diff_deleted": 0,
+  "checkout_preserved": true
+}

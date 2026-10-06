@@ -1,0 +1,56 @@
+{
+  "utc": "2026-10-04T13:39:30.774501+00:00",
+  "provider_batch_status": "CLOSED_ALL14_TASK_JOBS_TERMINAL",
+  "full_goal_status": "OPEN_UNQUALIFIED_FOUR_PHYSICAL_DEDICATED_CARDS_CAPACITY_FABRIC_AND_PHYSICAL_CAD_INTERFACES",
+  "usage_ledger": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\USAGE_FINAL_20261004T133716Z.json",
+  "provider_jobs": 14,
+  "cli_jobs": 11,
+  "direct_http_jobs": 3,
+  "grok_cli_jobs": 7,
+  "grok_reported_internal_model_calls": 8,
+  "gemini_cli_jobs": 4,
+  "gemini_internal_calls": "NOT_REPORTED_NUM_TURNS_NOT_EQUIVALENT",
+  "observed_tokens": 926344,
+  "unknown_usage_jobs": 0,
+  "native_children_actual": 0,
+  "maximum_authorized_qwen_native": 10,
+  "maximum_authorized_deepseek_native": 10,
+  "failed_combined_grok_job": "exit1maxturns_emptytext_real94952reportedtokens_2internalcalls_preserved",
+  "local_startup_failures_excluded": 3,
+  "cad_response_parser": "HTTP200finishstopPythonfences_exactextractedseparate_receipt_originalERRORArgumentExceptionpreserved",
+  "secret_process_audit": "SECRET_PROCESS_AUDIT_FINAL.json",
+  "readonly_quota_status": "QUOTA_READONLY_STATUS.json",
+  "monthly_credits_remaining": "NOT_CHECKED_NO_ADMITTED_EXISTING_GETTER",
+  "dedicated_token_plan_key_class_confirmed": true,
+  "raw_tokens_are_not_credits": true,
+  "manager_candidate_imports": 0,
+  "manager_native_child_or_gpu_or_freecad_runs": 0,
+  "live_factory_started_or_modified": false,
+  "accepted_product_source_docs_edits": false,
+  "artifacts": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp",
+      "sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+      "status": "GEMINI_STATIC_PASS_UNEXECUTED_BY_FACTORY_ROOT_RUNTIME_PARITY_STILL_FAILED"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_supervisor_final\\contained_supervisor.grok_final.py",
+      "sha256": "60391680917cbbe84fe432596c399dccc064c1fc5658a1cc6401c5becf8b0f21",
+      "status": "STATIC_REJECTED_NATIVE_BOOL_ZERO_CHECK_AND_STALE_TEST_PATH"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_validator_final\\qualification_validator.grok_final.py",
+      "sha256": "1c998ceb0ce7b905102d1df40d4bc2fdea36351717714eeb67f708137c571b5f",
+      "status": "STATIC_REJECTED_CAPACITY_RESIDENCY_OOM_PAYLOAD_GAPS_AND_STALE_TEST_PATH"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_cad_bboxfix\\integrated_core.grok_corrected.py",
+      "sha256": "78fd328ecde6067b517bd06368f82b61f3cbe5d73b42877fd643ea3de44ef415",
+      "status": "DELIVERED_DRAFT_ROOT_PURE_AND_NATIVE_CAD_GATE_PENDING"
+    }
+  ],
+  "final_gemini_review": "gemini_final_source_review/review.json",
+  "source_tests_warning": "Final supervisor and validator generated tests name stale focus files; do not count as final implementation tests without separately attributed path correction and root admission.",
+  "root_reported_realmodel_result": "F32weights+F32KV+GGML_VK_DISABLE_F16=1 still34/151936numericalviolations at fixed .01/.01, not qualified; earlierQ8 andF32 failures retained.",
+  "prior_receipts_ledgers": "ALL_PRESERVED_IMMUTABLE"
+}

@@ -1,0 +1,18 @@
+{
+  "source_execution": false,
+  "native_children_actual": 0,
+  "provider_launch_authorized": true,
+  "job_id": "qwen_intel_exporter_sync_contract",
+  "reasoning_effort": "xhigh",
+  "lane": "Qwen",
+  "source_sha256": "447225ecd6b3043f1e1ec4bb9810416363be3f2c56e388a1f216e1fb3ab937de",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\qwen_intel_exporter_sync_contract.spec.txt",
+  "model": "qwen3.8-max",
+  "authority": "ROOT explicit two EGL requests existing32k16k+exactv2 appendedprimary",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k",
+  "tests_limit": 16000,
+  "source_limit": 32000,
+  "prompt_sha256": "de1777194fb6dc5d03f08be4c749b111afb1dc3013d1e579357af5ae80b14958",
+  "primary_excerpt_sha256": "8710bdd2b1e65c03e9262efc9a4acd1d297f6666c2159f299ef6b8039b1ec757",
+  "utc": "2026-10-04T21:04:09.6499744Z"
+}

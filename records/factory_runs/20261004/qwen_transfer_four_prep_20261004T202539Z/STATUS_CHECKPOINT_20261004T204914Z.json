@@ -1,0 +1,101 @@
+{
+  "live_count": 3,
+  "qwen_known_total": 107306,
+  "source_execution": false,
+  "combined_scope_terminal_unknown": 12,
+  "known_closed_token_total": 273588,
+  "prior_scoped23_job_ledger": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\SCOPED_RESUME_PROVIDER_AGGREGATE_20261004T200700Z.json",
+  "combined_scope_total_requests": 30,
+  "credits": "NOT_DERIVED",
+  "combined_with_prior_scoped23_known_tokens": 952554,
+  "root_hardware_qualification": "NOT_CLAIMED",
+  "closed_count": 4,
+  "combined_scope_live": 3,
+  "live": [
+    {
+      "worker_pid": 94856,
+      "wrapper_pid": 28956,
+      "progress": {
+        "observed_model": "qwen3.8-max",
+        "seconds": 878.17,
+        "content_bytes": 0,
+        "done": false,
+        "reasoning_bytes": 147527,
+        "usage_known": false,
+        "finish_reason": null,
+        "frames": 11671,
+        "http": 200,
+        "raw_bytes": 3160733
+      },
+      "job": "qwen_l0_query_replacement"
+    },
+    {
+      "worker_pid": 52796,
+      "wrapper_pid": 81876,
+      "progress": {
+        "http": 200,
+        "frames": 12060,
+        "usage_known": false,
+        "seconds": 878.47,
+        "finish_reason": null,
+        "observed_model": "qwen3.8-max",
+        "done": false,
+        "reasoning_bytes": 155745,
+        "content_bytes": 0,
+        "raw_bytes": 3269274
+      },
+      "job": "qwen_cuda_export_repair"
+    },
+    {
+      "worker_pid": 19104,
+      "wrapper_pid": 97056,
+      "progress": {
+        "frames": 12171,
+        "raw_bytes": 3298923,
+        "usage_known": false,
+        "finish_reason": null,
+        "done": false,
+        "observed_model": "qwen3.8-max",
+        "seconds": 878.43,
+        "reasoning_bytes": 157064,
+        "content_bytes": 0,
+        "http": 200
+      },
+      "job": "qwen_l0_peer_repair"
+    }
+  ],
+  "utc": "2026-10-04T20:49:14.5903326Z",
+  "combined_scope_terminal_known": 15,
+  "grok_known_total": 100630,
+  "unknown_terminal_count": 0,
+  "native_children_actual": 0,
+  "scope": "CURRENT_FOUR_REPAIR_AND_COMBINED_CAPACITY_CHAIN_ONLY_7_REQUESTS",
+  "gemini_known_total": 65652,
+  "closed": [
+    {
+      "status": "COMPLETE_REVIEW_STAGED_REQUEST_CHANGES",
+      "total_tokens": 65652,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\capacity_review_prep\\gemini_capacity_high.owned_terminal.json",
+      "job": "gemini_capacity_high"
+    },
+    {
+      "status": "COMPLETE_RESEARCH_STAGED_UNAPPLIED",
+      "total_tokens": 62270,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\cuda_l0_device_dmabuf_prep_20261004T195400Z\\CLOSED_USAGE_SOURCE_RECEIPT.json",
+      "job": "qwen_cuda_l0_device_dmabuf_v3"
+    },
+    {
+      "status": "ARTIFACT_PARSE_OR_SCHEMA_ERROR",
+      "total_tokens": 45036,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_transfer_four_prep_20261004T202539Z\\qwen_directed_receipt_repair\\terminal.json",
+      "job": "qwen_directed_receipt_repair"
+    },
+    {
+      "status": "COMPLETE_CORRECTION_STAGED_UNAPPLIED",
+      "total_tokens": 100630,
+      "receipt": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high.owned_terminal.json",
+      "job": "grok_capacity_high"
+    }
+  ],
+  "live_usage_not_yet_known": 3
+}

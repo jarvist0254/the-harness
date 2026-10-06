@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "E:\\the_harness\\records\\root_continuation_20261004\\provider_quality_review\\adversarial_eval\\test_actual_candidates.py"
+  ],
+  "owned_evaluation_pid": 19624,
+  "exit": 1,
+  "timed_out": false,
+  "timeout_seconds": 60,
+  "seconds": 0.9689999995753169,
+  "RUN_CONTAINMENT_FIXTURES_removed": true,
+  "tasklist_after": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "test_source_sha256": "e5bc15f1fcfe822115ae46c09c16fd7c765d8a624fb254ce4b99a03359d05872"
+}

@@ -1,0 +1,102 @@
+{
+  "qualification": "Vulkan Qwen3 0.6B mixed-vendor logits experiment",
+  "overall": "NOT_QUALIFIED_NUMERIC_PARITY",
+  "pinned_source_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "pinned_source_archive_sha256": "7B1C763340C17226B4DF928DC34A62150F8D27DECC22AF0CE808EB16BF027872",
+  "llama_cpp_backend": "Vulkan",
+  "model": {
+    "actual_context": 256,
+    "vocab": 151936,
+    "layers": 28,
+    "bytes": 639446688,
+    "name": "Qwen3-0.6B-Q8_0",
+    "requested_context": 128,
+    "path": "records/models/qwen3_06b/Qwen3-0.6B-Q8_0.gguf",
+    "token_count": 16,
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031"
+  },
+  "devices": [
+    {
+      "memory_total_bytes": 16771973120,
+      "vendor": "NVIDIA",
+      "name": "Vulkan0",
+      "device_id": "0000:01:00.0",
+      "description": "NVIDIA GeForce RTX 5070 Ti",
+      "memory_free_bytes": 15966666752
+    },
+    {
+      "vendor": "AMD",
+      "memory_free_bytes": 48192978944,
+      "type": "IGPU",
+      "memory_total_bytes": 50729451520,
+      "host_unified_memory": true,
+      "device_id": "UNKNOWN",
+      "description": "AMD Radeon(TM) Graphics",
+      "name": "Vulkan1"
+    }
+  ],
+  "runtime_source": {
+    "compile_exit": 0,
+    "compile_pid": 20524,
+    "executable": "records/vulkan_llm_qualification_20261004/fixture_compile_contextfix/llama_logits_qual.exe",
+    "executable_sha256": "9FFE782754B8F1858742848F471DC2215DB70B080E0DCFAE30B8331527F30CB8",
+    "sha256": "54AD6FD03CADF8B302B4F6705AEC9AB280253277A2F5E00468E59B379CECD2FC"
+  },
+  "runs": [
+    {
+      "max_abs": 0.3424386978149414,
+      "stderr": "records/vulkan_llm_qualification_20261004/contextfix_default.stderr.log",
+      "pid": 65320,
+      "fail_count": 99853,
+      "all_finite": true,
+      "name": "default_NV_then_AMD",
+      "exit": 1,
+      "status": "NUMERIC_PARITY_FAIL",
+      "stdout": "records/vulkan_llm_qualification_20261004/contextfix_default.stdout.json",
+      "elapsed_ms": 12424,
+      "rmse": 0.06446059050249317
+    },
+    {
+      "max_abs": 1.1263151168823242,
+      "stderr": "records/vulkan_llm_qualification_20261004/contextfix_corruption.stderr.log",
+      "pid": 30868,
+      "fail_count": 99853,
+      "all_finite": true,
+      "name": "inject_corruption_NV_then_AMD",
+      "exit": 1,
+      "status": "NUMERIC_PARITY_FAIL",
+      "stdout": "records/vulkan_llm_qualification_20261004/contextfix_corruption.stdout.json",
+      "elapsed_ms": 8850,
+      "rmse": 0.06452408336973185
+    },
+    {
+      "max_abs": 0.3061027526855469,
+      "stderr": "records/vulkan_llm_qualification_20261004/contextfix_reverse.stderr.log",
+      "pid": 72260,
+      "fail_count": 99891,
+      "all_finite": true,
+      "name": "reverse_AMD_then_NV",
+      "exit": 1,
+      "status": "NUMERIC_PARITY_FAIL",
+      "stdout": "records/vulkan_llm_qualification_20261004/contextfix_reverse.stdout.json",
+      "elapsed_ms": 3824,
+      "rmse": 0.06311297377827425
+    }
+  ],
+  "allocation_evidence": "Default/corruption: 29/29 layers offloaded; NV layers 0-14 and AMD layers 15-28. NV model buffer 239.19 MiB, AMD 364.95 MiB, Vulkan_Host 157.65 MiB; KV NV15/AMD13 MiB; compute NV3.13/AMD20.80/host1.75 MiB; graph 1126 nodes, 3 splits. Reversed order swaps layer assignment and NV/AMD model/KV/compute buffer sizes as preserved in raw logs.",
+  "limitations": [
+    "No numeric parity PASS; 99,853 or 99,891 of 151,936 logits exceeded provisional atol/rtol 0.01.",
+    "Corruption increased max_abs, but fail_count remained equal to baseline; negative-control effect is visible but cannot isolate one new failing logit from baseline failures.",
+    "Provider logs prove this process offloaded all 29 layer slots across the two Vulkan devices; public API does not prove per-tensor ownership.",
+    "AMD reports UMA/shared memory; memory totals are not dedicated VRAM pool evidence.",
+    "No P2P, unified pool, over-one-card capacity, or four-card qualification claim.",
+    "No server/network use."
+  ],
+  "preserved_failures": [
+    "Initial source build had first wrapper PID receipt missing the exit-code property; correction receipt build_verify.json captured incremental exit 0.",
+    "Initial accepted fixture stopped before GPU load because pinned API padded n_ctx 128 to 256; retained default.json and context_padding_diagnosis.json.",
+    "No model result was relabeled PASS."
+  ],
+  "owned_processes_all_absent": true,
+  "cleanup_receipt": "records/vulkan_llm_qualification_20261004/owned_process_cleanup.json"
+}

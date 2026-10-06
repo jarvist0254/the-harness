@@ -1,0 +1,20 @@
+{
+  "native_children_actual": 0,
+  "status": "OWNED_CHILD_TERMINAL_CHECK_WORKER_RECEIPT",
+  "exit_code": 0,
+  "pid": 66232,
+  "elapsed_seconds": 1201.14,
+  "credential_saved": false,
+  "log_cap_exceeded": false,
+  "pipe_error": false,
+  "requested_model": "qwen3.8-max",
+  "usage": null,
+  "parse_error_type": null,
+  "provider_patch_applied": false,
+  "private_url_output_refused": false,
+  "model_usage": null,
+  "outer_killed": false,
+  "drain_unknown": false,
+  "lane": "Qwen",
+  "finish_reason": null
+}

@@ -1,0 +1,125 @@
+[
+  {
+    "case": "default",
+    "command": "python -B j_link/opencl_executor.py",
+    "parent_pid": 28652,
+    "parent_exit": 0,
+    "finished": true,
+    "child_pid": 92256,
+    "child_exit_code": 0,
+    "status": "PASS",
+    "reason": "All GPU stages matched the independent CPU reference",
+    "elapsed_seconds": 1.781000000424683,
+    "source_sha256": "AB509DEFF1A1DA75DF02A7E85471A6501E9799CCD6F9F6C7CBBCE8F6EF521AAF",
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\post_grok_revision\\default.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\post_grok_revision\\default.stderr.log",
+    "vendors": [
+      "NVIDIA",
+      "AMD"
+    ],
+    "execution_population": "MIXED_VENDOR",
+    "selected_vendor_keys": [
+      "AMD",
+      "NVIDIA"
+    ],
+    "labels": [
+      "RESIDUAL_MLP_EXECUTION_ONLY",
+      "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+      "EXPLICIT_HOST_STAGED",
+      "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+    ],
+    "kernels_completed": 8,
+    "cpu_reference_stages": 8,
+    "final_parity": true,
+    "stage_parity_all": true,
+    "weight_upload_count": 8,
+    "activation_upload_count": 2,
+    "activation_readback_bytes": 131072,
+    "boundary_staging_bytes": 16384,
+    "unique_weight_hashes": 8,
+    "corruption_control": "NOT_RUN",
+    "corruption_boundary": null
+  },
+  {
+    "case": "reverse",
+    "command": "python -B j_link/opencl_executor.py --reverse",
+    "parent_pid": 27988,
+    "parent_exit": 0,
+    "finished": true,
+    "child_pid": 6848,
+    "child_exit_code": 0,
+    "status": "PASS",
+    "reason": "All GPU stages matched the independent CPU reference",
+    "elapsed_seconds": 1.1400000005960464,
+    "source_sha256": "AB509DEFF1A1DA75DF02A7E85471A6501E9799CCD6F9F6C7CBBCE8F6EF521AAF",
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\post_grok_revision\\reverse.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\post_grok_revision\\reverse.stderr.log",
+    "vendors": [
+      "AMD",
+      "NVIDIA"
+    ],
+    "execution_population": "MIXED_VENDOR",
+    "selected_vendor_keys": [
+      "AMD",
+      "NVIDIA"
+    ],
+    "labels": [
+      "RESIDUAL_MLP_EXECUTION_ONLY",
+      "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+      "EXPLICIT_HOST_STAGED",
+      "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+    ],
+    "kernels_completed": 8,
+    "cpu_reference_stages": 8,
+    "final_parity": true,
+    "stage_parity_all": true,
+    "weight_upload_count": 8,
+    "activation_upload_count": 2,
+    "activation_readback_bytes": 131072,
+    "boundary_staging_bytes": 16384,
+    "unique_weight_hashes": 8,
+    "corruption_control": "NOT_RUN",
+    "corruption_boundary": null
+  },
+  {
+    "case": "corruption",
+    "command": "python -B j_link/opencl_executor.py --inject-corruption",
+    "parent_pid": 78836,
+    "parent_exit": 1,
+    "finished": true,
+    "child_pid": 30740,
+    "child_exit_code": 1,
+    "status": "FAIL",
+    "reason": "Measured GPU stage or final output mismatch against independent CPU reference",
+    "elapsed_seconds": 1.0470000002533197,
+    "source_sha256": "AB509DEFF1A1DA75DF02A7E85471A6501E9799CCD6F9F6C7CBBCE8F6EF521AAF",
+    "stdout": "E:\\the_harness\\records\\opencl_executor_20261004\\post_grok_revision\\corruption.stdout.log",
+    "stderr": "E:\\the_harness\\records\\opencl_executor_20261004\\post_grok_revision\\corruption.stderr.log",
+    "vendors": [
+      "NVIDIA",
+      "AMD"
+    ],
+    "execution_population": "MIXED_VENDOR",
+    "selected_vendor_keys": [
+      "AMD",
+      "NVIDIA"
+    ],
+    "labels": [
+      "RESIDUAL_MLP_EXECUTION_ONLY",
+      "MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY",
+      "EXPLICIT_HOST_STAGED",
+      "POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF"
+    ],
+    "kernels_completed": 8,
+    "cpu_reference_stages": 8,
+    "final_parity": false,
+    "stage_parity_all": false,
+    "weight_upload_count": 8,
+    "activation_upload_count": 2,
+    "activation_readback_bytes": 131072,
+    "boundary_staging_bytes": 16384,
+    "unique_weight_hashes": 8,
+    "corruption_control": "PASS",
+    "corruption_boundary": "layer_03"
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "replacement_jobs_launched_for_snapshot": false,
+  "native_children_actual": 0,
+  "qwen_jobs": [
+    {
+      "elapsed_last_progress_seconds": 545.95,
+      "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_query\\terminal.json",
+      "http": 200,
+      "handle_identity": "retained wrapper Process; owned unified session; no PID reattach",
+      "progress_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_query\\stream_progress.jsonl",
+      "wrapper_pid": 48756,
+      "usage_known": false,
+      "model": "qwen3.8-max",
+      "reasoning_bytes": 97452,
+      "job_id": "qwen_l0_query",
+      "state": "LIVE_STREAM_NO_FINAL_ARTIFACT",
+      "content_bytes": 0,
+      "owned_session": 91660,
+      "worker_pid": 39044
+    },
+    {
+      "elapsed_last_progress_seconds": 529.21,
+      "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_peer_copy\\terminal.json",
+      "http": 200,
+      "handle_identity": "retained wrapper Process; owned unified session; no PID reattach",
+      "progress_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_l0_peer_copy\\stream_progress.jsonl",
+      "wrapper_pid": 35028,
+      "usage_known": false,
+      "model": "qwen3.8-max",
+      "reasoning_bytes": 86631,
+      "job_id": "qwen_l0_peer_copy",
+      "state": "LIVE_STREAM_NO_FINAL_ARTIFACT",
+      "content_bytes": 0,
+      "owned_session": 93996,
+      "worker_pid": 54064
+    },
+    {
+      "elapsed_last_progress_seconds": 527.69,
+      "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\terminal.json",
+      "http": 200,
+      "handle_identity": "retained wrapper Process; owned unified session; no PID reattach",
+      "progress_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_directed_receipt\\stream_progress.jsonl",
+      "wrapper_pid": 8136,
+      "usage_known": false,
+      "model": "qwen3.8-max",
+      "reasoning_bytes": 94966,
+      "job_id": "qwen_directed_receipt",
+      "state": "LIVE_STREAM_NO_FINAL_ARTIFACT",
+      "content_bytes": 0,
+      "owned_session": 7153,
+      "worker_pid": 43692
+    },
+    {
+      "elapsed_last_progress_seconds": 517.17,
+      "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\terminal.json",
+      "http": 200,
+      "handle_identity": "retained wrapper Process; owned unified session; no PID reattach",
+      "progress_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_four_capacity\\stream_progress.jsonl",
+      "wrapper_pid": 57412,
+      "usage_known": false,
+      "model": "qwen3.8-max",
+      "reasoning_bytes": 93703,
+      "job_id": "qwen_four_capacity",
+      "state": "LIVE_STREAM_NO_FINAL_ARTIFACT",
+      "content_bytes": 0,
+      "owned_session": 85941,
+      "worker_pid": 12560
+    },
+    {
+      "elapsed_last_progress_seconds": 497.65,
+      "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\terminal.json",
+      "http": 200,
+      "handle_identity": "retained wrapper Process; owned unified session; no PID reattach",
+      "progress_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_cuda_dmabuf_export\\stream_progress.jsonl",
+      "wrapper_pid": 96212,
+      "usage_known": false,
+      "model": "qwen3.8-max",
+      "reasoning_bytes": 82479,
+      "job_id": "qwen_cuda_dmabuf_export",
+      "state": "LIVE_STREAM_NO_FINAL_ARTIFACT",
+      "content_bytes": 0,
+      "owned_session": 67299,
+      "worker_pid": 95528
+    },
+    {
+      "elapsed_last_progress_seconds": 483.04,
+      "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_fp32_adjudication\\terminal.json",
+      "http": 200,
+      "handle_identity": "retained wrapper Process; owned unified session; no PID reattach",
+      "progress_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\qwen_fp32_adjudication\\stream_progress.jsonl",
+      "wrapper_pid": 11532,
+      "usage_known": false,
+      "model": "qwen3.8-max",
+      "reasoning_bytes": 92214,
+      "job_id": "qwen_fp32_adjudication",
+      "state": "LIVE_STREAM_NO_FINAL_ARTIFACT",
+      "content_bytes": 0,
+      "owned_session": 42115,
+      "worker_pid": 94960
+    }
+  ],
+  "utc": "2026-10-04T19:38:32.7607713Z",
+  "deduplicated_scope_totals": {
+    "reported_usage_known_calls": 5,
+    "terminal_usage_unknown_calls": 10,
+    "qwen": {
+      "known_calls": 4,
+      "terminal_unknown_calls": 9,
+      "provider_jobs": 19,
+      "pending_calls": 6,
+      "observed_tokens": 118308
+    },
+    "grok": {
+      "known_calls": 1,
+      "provider_jobs": 2,
+      "pending_calls": 0,
+      "observed_tokens": 118196,
+      "terminal_unknown_calls": 1
+    },
+    "provider_jobs": 21,
+    "observed_reported_tokens": 236504,
+    "pending_usage_calls": 6,
+    "source_receipts": [
+      "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\RESUME_ROUNDS_AGGREGATE_FINAL.json",
+      "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\CLOSED_USAGE_SOURCE_RECEIPT.json",
+      "E:\\the_harness\\records\\factory_runs\\20261004\\grok_dmabuf_query_correction_20261004T192708Z\\grok_dmabuf_query_high.owned_terminal.json"
+    ]
+  },
+  "grok_linux": {
+    "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_dmabuf_query_correction_20261004T192708Z\\grok_dmabuf_query_high.owned_terminal.json",
+    "model": "grok-4.7-build-fast",
+    "owned_session": 60443,
+    "state": "OWNED_DEADLINE_TERMINATED_NO_ARTIFACT",
+    "reported_usage": "UNKNOWN",
+    "worker_pid": 36224,
+    "wrapper_pid": 67224
+  },
+  "generated_execution": false,
+  "credits": "NOT_CHECKED_NO_INFERENCE_FROM_TOKENS",
+  "scope": "THIS agent resumed Qwen thirteen calls +new six compact +two distinct Grok corrections; EXCLUDES other-agent Gemini/Muse and older historical53calls",
+  "grok_closed_ledger": {
+    "source_unexecuted": true,
+    "receipt_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\CLOSED_USAGE_SOURCE_RECEIPT.json",
+    "state": "COMPLETE_CORRECTION_STAGED_UNAPPLIED",
+    "reported_tokens": 118196
+  },
+  "accepted_functionality_from_these_artifacts": 0,
+  "supersedes": {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_compact_six_prep_20261004T191000Z\\FACTORY_STATUS_SNAPSHOT_CORRECTED_20261004T193655Z.json",
+    "reason": "Grok Linux deadline terminal; usageUNKNOWN preserved; Qwen refreshed exactprogress"
+  }
+}

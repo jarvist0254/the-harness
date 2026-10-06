@@ -1,0 +1,13 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.6.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+[1/10] Performing build step for 'vulkan-shaders-gen'
+ninja: no work to do.
+[2/10] Provisioning UI assets
+-- UI: HF stamp matches 'ggml-org/llama-ui|b0', skipping HF fetch
+-- UI: assets unchanged, skipping embedding
+[3/4] Performing install step for 'vulkan-shaders-gen'
+-- Up-to-date: E:/the_harness/records/build_vulkan_real/build/Release/./vulkan-shaders-gen.exe
+[4/4] Completed 'vulkan-shaders-gen'

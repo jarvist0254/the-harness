@@ -1,0 +1,13 @@
+{
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py",
+  "lane": "Grok",
+  "prompt_sha256": "96c77b580d649a58ce0494cc00a9a76353a5f6e8fe8817ab288a1eefe0ed39b8",
+  "owned_deadline_seconds": 600,
+  "authority": "ROOT actual narrow ledger storage correction message; existing authorized correctionchain",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_ledger_storage_repair_20261004T195014Z",
+  "native_children_actual": 0,
+  "source_sha256": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+  "model": "grok-4.7-build-fast",
+  "job_id": "grok_ledger_storage_high",
+  "provider_launch_authorized": true
+}

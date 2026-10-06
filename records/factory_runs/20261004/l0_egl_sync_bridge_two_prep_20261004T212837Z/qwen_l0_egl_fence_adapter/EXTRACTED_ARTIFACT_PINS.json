@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-04T21:53:32.7729995Z",
+  "source_execution": false,
+  "pins": [
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\source.qwen_untrusted.py",
+      "bytes": 14662,
+      "sha256": "99375e8072f22a7103517e0772f327b232dd3134f1f6820039a42a55f37c017c"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\tests_source.qwen_untrusted.txt",
+      "bytes": 8580,
+      "sha256": "0e4372f0c706c2e7f9b5ba8354b4e46b7c70649b2f585e8824ab1c8598014491"
+    },
+    {
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\qwen_l0_egl_fence_adapter\\research.pending_root_qa.json",
+      "bytes": 29124,
+      "sha256": "c91cf73e88b32370c85bc92205b5eff10059a1c55acf69f8c9a95feb4537f60d"
+    }
+  ],
+  "status": "STAGED_UNTRUSTED_NOT_IMPORT_COMPILE_EXECUTE_ADMITTED"
+}

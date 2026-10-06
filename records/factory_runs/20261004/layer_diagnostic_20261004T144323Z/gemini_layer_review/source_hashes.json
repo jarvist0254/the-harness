@@ -1,0 +1,26 @@
+[
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_comparator\\capture_comparator.py",
+    "sha256": "56A55D66798F476CC0CD39D0FD21942B046D24E13985E76AF41ECF85CA9DE1DA"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\qwen_capture_tests\\test_capture_comparator.py",
+    "sha256": "53173520F595635DC06582C8ABD86C390F4790660B35D49D28FB3A87D0095ACD"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\COMPARATOR_CONTRACT.json",
+    "sha256": "745215FF0DDA2ED1F3D7A059447AEA20B63428FF581F46F6312B5EE396EEBFC4"
+  },
+  {
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z\\ROOT_CONTRACT_CLARIFICATION.json",
+    "sha256": "66E5687C0C0792884A4CBCE1A0192367636E771817FA496F79D3FC3B2DEA2859"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\include\\ggml-backend.h",
+    "sha256": "D65B0D09A6F5A53BB62B33A0C9E67095F07209D144C556EA87BC555D43B79735"
+  },
+  {
+    "path": "E:\\the_harness\\records\\build_vulkan_real\\toolchain\\llama_clean_source\\ggml\\src\\ggml-backend.cpp",
+    "sha256": "EB012D06903089D0863FF05840EF9CEB8190217A455DF5E547C91280329275E9"
+  }
+]

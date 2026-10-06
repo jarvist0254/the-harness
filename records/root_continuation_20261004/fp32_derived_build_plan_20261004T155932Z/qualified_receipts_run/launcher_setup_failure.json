@@ -1,0 +1,6 @@
+{
+  "launched_child_confirmed_absent": true,
+  "recorded_utc": "2026-10-04T16:34:39.8987020Z",
+  "status": "SETUP_FAILURE",
+  "detail": "PowerShell assignment to reserved read-only $PID failed after child start and before output collection"
+}

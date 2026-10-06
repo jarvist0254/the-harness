@@ -1,0 +1,45 @@
+{
+  "scope": "THIS_MANAGER_SCOPED_RESUME_NOT_GLOBAL_FACTORY",
+  "unknown_usage_jobs": 13,
+  "tokens_not_credits": true,
+  "known_usage_jobs": 23,
+  "addition": "E:\\the_harness\\records\\factory_runs\\20261004\\l0_egl_sync_bridge_two_prep_20261004T212837Z\\CLOSED_THREE_BRIDGE_GEMINI_USAGE_RECEIPT.json",
+  "jobs": 36,
+  "providers": {
+    "Grok": {
+      "known_jobs": 3,
+      "known_tokens": 335755,
+      "unknown_jobs": 1,
+      "jobs": 4
+    },
+    "Gemini": {
+      "known_jobs": 2,
+      "known_tokens": 123496,
+      "unknown_jobs": 0,
+      "jobs": 2
+    },
+    "Qwen": {
+      "known_jobs": 18,
+      "known_tokens": 1011831,
+      "unknown_jobs": 10,
+      "jobs": 28
+    },
+    "Muse": {
+      "known_jobs": 0,
+      "known_tokens": null,
+      "unknown_jobs": 2,
+      "jobs": 2
+    }
+  },
+  "utc": "2026-10-04T21:54:22.4066119Z",
+  "live_jobs": 0,
+  "prior_immutable_ledger": {
+    "known_tokens": 1305239,
+    "path": "E:\\the_harness\\records\\factory_runs\\20261004\\intel_egl_two_prep_20261004T205649Z\\root_budget_32k_16k\\SCOPED_RESUME_33_REQUESTS_FINAL.json",
+    "sha256": "0c0bf124d5b8f7edb1b7ca7d2f6d124d1d19587fa9d753d2b4719d6f0ae6322c",
+    "jobs": 33
+  },
+  "unknown_not_zero": true,
+  "old_ledgers_mutated": false,
+  "total_observed_tokens": 1471082
+}

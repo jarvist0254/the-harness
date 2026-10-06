@@ -1,0 +1,7 @@
+{
+  "endpoint": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "model": "deepseek-v4-flash-0731",
+  "timeout_seconds": 180,
+  "input_source": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen38_direct_d3d12_20261004T100210382Z\\d3d12_crossadapter_buffer.cpp",
+  "credential_persisted": false
+}

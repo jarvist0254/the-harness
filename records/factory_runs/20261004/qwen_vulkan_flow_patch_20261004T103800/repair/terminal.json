@@ -1,0 +1,19 @@
+{
+  "observed_model": "qwen3.8-flash",
+  "pid": 47952,
+  "status": "COMPLETE_UNVERIFIED",
+  "requested_model": "qwen3.8-flash",
+  "elapsed_seconds": 14.1,
+  "finish_reason": "stop",
+  "http": 200,
+  "job": "repair",
+  "usage": {
+    "prompt_tokens": 4799,
+    "total_tokens": 5818,
+    "completion_tokens": 1019,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 4799
+    }
+  }
+}

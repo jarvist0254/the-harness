@@ -1,0 +1,23 @@
+{
+  "provider_tests_executed": false,
+  "root_admission": false,
+  "artifact_sha256": "4d1a7a7fd9b99ff34022f9631f1bf50ff0bfb01f59734272d78ae78e30463003",
+  "candidate_parsed_imported_compiled_executed": false,
+  "job": "qwen_vulkan_numeric_state_ledger",
+  "action": "Exact JSON source-string extraction only",
+  "files": [
+    {
+      "field": "source",
+      "chars": 12056,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\source.qwen_untrusted.py",
+      "sha256": "6dfb6a72a1310d23cf435c73f32dcd0b6a57b85cef774c9a47c8748ce3e68dc1"
+    },
+    {
+      "field": "tests_source",
+      "chars": 7681,
+      "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_vulkan_numeric_state_ledger\\tests_source.qwen_untrusted.txt",
+      "sha256": "612325517bf27fd37d2a3aa0c96906c013f97ca48d4a8bfc1e9934ab674ca2a5"
+    }
+  ],
+  "provider_status": "PROPOSED"
+}

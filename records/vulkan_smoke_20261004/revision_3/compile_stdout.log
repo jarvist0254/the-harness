@@ -1,0 +1,2 @@
+vulkan_smoke.cpp
+j_link\vulkan_smoke.cpp(200): warning C4189: 'dataA': local variable is initialized but not referenced

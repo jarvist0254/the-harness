@@ -1,0 +1,240 @@
+PREPARATION ONLY: ROOT exact-pin launch admission required; no provider/native/tool/source execution now.
+At admitted request: qwen3.8-max enable_thinking=true reasoning_effort=xhigh, no simultaneous thinking_budget. Max10 native children each Qwen/DeepSeek parent authorized where actually supported; THIS directHTTP tools/children0. Return strict JSON status PROPOSED|REFUSED|ANALYSIS,source,tests_source,analysis,prerequisites,evidence_limits,references. Complete source<=16000chars/tests<=8000chars. Meaningful actual-file tests load caller-supplied candidate, no embedded source duplicate. Do not execute code/tests/tools. Existing raw failures/8k refusals immutable. ROOT independently reviews/compiles/executes later. No globalFactory/PyRe/product/auth/settings/driver/purchases. Current hostNV5070Ti+AMDsharediGPU, NO IntelGPU enumerated; SKUs undecided. Do not infer actual capacity, directP2P or cachecoherence from declarations/query/parity. Unsupported/missinghardwareNOT_CHECKED2; attemptednative/cleanup/parityfailureFAIL1. Bounded API waits<=10s +ROOTouterownedprocess, no impossible driver-hang cancellation claim. JSON bounded/robustescaping allpaths; report exactAPI result and actual cleanup uncertainty.
+OfficialSDKv1.34.0/spec1.19.12 ze_api.h pinned c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de, officialsourcecommit934714b278f850d164627eeaaa043eee02785a9e. Header/importlib present, runtimeDLL NOTVERIFIED. Device API https://oneapi-src.github.io/level-zero-spec/level-zero/1.19.12/core/api/apis/device.html ; memory https://oneapi-src.github.io/level-zero-spec/level-zero/1.19.12/core/api/apis/mem.html . CUDA13.4 https://docs.nvidia.com/cuda/cuda-driver-api/cuda_driver_api/group__CUDA__MEM.html exports supported DEVICE DMA_BUF range pagealigned, PCIeBAR1flag orerror. L0documented DMA_BUFimport suggests directedNVownedexport→Intelview HYPOTHESIS, not proof. Reverse desktopCUDA DMABUFimport documentedThor-only; never invent Intelownedexport→desktopCUDAimport. Host import/sharedbacking NOT VRAMP2P.
+3 FOCUSED purePython actual directedreceipt validator repair, not a newgenericreport. Actualsource671c...b56f below; originalcomplete8586>8krefusalpreserved. MANAGERREADONLY findings (not executedRED): treats arbitraryfd_hash as resourcebinding; sync eventhash and residency.measurement_hash merelyshapechecked/notboundtrustedregistry; consumer_result_hash forcedequal corruptionhash, parityhashequality not numericalvalidation; residency booleans alone lead classificationDEVICE_P2P though transport_acceptedfalse. TrustedART names do not bind actualcontrol/sync/residency bytes. Repair validate(receipt,*,trusted) standardlibrary/GPU-free, explicitcompact schema and actual-file tests. Require ROOTcaller named immutable bytes+hash registries and exactbaseline/control/model/workload/build/executable/physicalIDs/direction/payload/controller binding. ActualFD lifetime/backing is OS resourceprovenance, NOT hash of FDinteger or equality of inventedhashes. Distinguish payload cleanbaseline and producer-before-transfer faultcontrol, fullbytecounts/finite/parityevidence; never enforce control==clean/payloadhash just to pass. Unknown/shapeonlyresidency/sync/transport→NOT_CHECKED or DECLARED_EVIDENCE_CONSISTENT, neverDEVICE_P2P. Scope origin/declarations not cryptoauthenticity. NV-ownedexport→Intelimport hypothesis; Intelwrite→CUDAread of SAME NVownedallocation needs separate provenreversevisibility, neverdesktopCUDAimport. Strictint/nonbool/finite/overflow/safehuge conversions; deepimmutability/no input mutation; lowerhexhashschema/unknownfieldrejectors with explicitfields. Discriminators forgedunboundcontrol/sync/residencyhash, identicalclean/control, bogusFDhash, wrongdirection, hostbacking, staleauthority, payloadmismatch/nonfinite, swappeddevices/boolcounts, validindependentboundsynthetic evidence. No physical successfromselfreport.
+ACTUAL SOURCE INPUT E:\the_harness\records\factory_runs\20261004\qwen_compact_six_prep_20261004T191000Z\qwen_directed_receipt\source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt SHA256 671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f
+import re
+SCHEMA='p2p.transfer.receipt/v1'
+TSCHEMA='p2p.trusted/v1'
+MAX=2**63-1
+ZERO='0'*64
+HX=re.compile(r'^[0-9a-f]{64}$')
+UID=re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+PCI=re.compile(r'^[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}[.][0-7]$')
+DIRS={'nv_device_dmabuf_export_to_intel_imported_view':('nvidia','intel'),'intel_write_to_nv_device_allocation_cuda_read':('intel','nvidia')}
+ART=('source_executable','target_executable','build','payload','controller','baseline')
+class Missing(Exception): pass
+def _miss(k): raise Missing(k)
+def _need(d,k):
+ if type(d) is not dict: raise ValueError('obj')
+ if k not in d: _miss(k)
+ return d[k]
+def _int(v,n,lo=0):
+ if type(v) is not int or isinstance(v,bool): raise ValueError(n)
+ if v<lo or v>MAX: raise ValueError(n)
+ return v
+def _str(v,n,ml=256):
+ if type(v) is not str or not v or len(v)>ml: raise ValueError(n)
+ return v
+def _hash(v,n):
+ v=_str(v,n,64)
+ if not HX.match(v) or v==ZERO: raise ValueError(n)
+ return v
+def _bool(v,n):
+ if type(v) is not bool: raise ValueError(n)
+ return v
+def _dev(d,n):
+ if type(d) is not dict: raise ValueError(n)
+ v=_str(_need(d,'vendor'),n,16); u=_str(_need(d,'uuid'),n,36); p=_str(_need(d,'pci'),n,16); a=_hash(_need(d,'allocation_id'),n); api=_str(_need(d,'api'),n,128); pa=_str(_need(d,'path'),n,256); k=_str(_need(d,'kind'),n,16)
+ if v not in ('nvidia','intel') or not UID.match(u) or not PCI.match(p) or k not in ('device','host','shared'): raise ValueError(n)
+ return {'vendor':v,'uuid':u,'pci':p,'allocation_id':a,'api':api,'path':pa,'kind':k}
+def _pins(t):
+ if type(t) is not dict or t.get('schema')!=TSCHEMA: return None
+ au=t.get('authorities')
+ if type(au) is not list or not au: return None
+ ids=set(); ns=set()
+ for a in au:
+  if type(a) is not dict: return None
+  i=a.get('id'); nm=a.get('name')
+  if type(i) is not str or not HX.match(i) or i==ZERO: return None
+  if type(nm) is not str or not nm or nm in ns or i in ids: return None
+  ids.add(i); ns.add(nm)
+ ar=t.get('artifacts')
+ if type(ar) is not dict: return None
+ oa={}
+ for k in ART:
+  v=ar.get(k)
+  if type(v) is not str or not HX.match(v) or v==ZERO: return None
+  oa[k]=v
+ ds=t.get('devices')
+ if type(ds) is not list or not ds: return None
+ dm={}
+ for d in ds:
+  if type(d) is not dict: return None
+  v=d.get('vendor'); u=d.get('uuid'); p=d.get('pci'); a=d.get('allocation_id'); k=d.get('kind')
+  if v not in ('nvidia','intel') or type(u) is not str or not UID.match(u) or type(p) is not str or not PCI.match(p): return None
+  if type(a) is not str or not HX.match(a) or a==ZERO or k not in ('device','host','shared'): return None
+  api=d.get('api'); pa=d.get('path')
+  if type(api) is not str or not api or type(pa) is not str or not pa: return None
+  key=(v,u,p,a)
+  if key in dm: return None
+  dm[key]={'kind':k,'api':api,'path':pa}
+ ev=t.get('evaluation_unix')
+ if type(ev) is not int or isinstance(ev,bool) or ev<0 or ev>MAX: return None
+ ms=t.get('max_staleness_seconds',300)
+ if type(ms) is not int or isinstance(ms,bool) or ms<0 or ms>MAX: return None
+ return {'artifacts':oa,'devices':dm,'evaluation_unix':ev,'max_staleness':ms}
+def _r(s,c,g,f): return {'status':s,'classification':c,'transport_accepted':False,'scope':'evidence_consistency_only','gaps':g,'failures':f}
+def validate(receipt,*,trusted):
+ pins=_pins(trusted)
+ if pins is None: return _r('NOT_CHECKED','NOT_CHECKED',['trusted_authoritative_pins_absent'],[])
+ if type(receipt) is not dict: raise ValueError('receipt')
+ if receipt.get('schema')!=SCHEMA: raise ValueError('schema')
+ direction=_str(receipt.get('direction'),'direction',128)
+ if direction not in DIRS: raise ValueError('direction')
+ try:
+  src=_dev(_need(receipt,'source'),'source'); tgt=_dev(_need(receipt,'target'),'target')
+  arts=_need(receipt,'artifacts')
+  if type(arts) is not dict: raise ValueError('artifacts')
+  for k in ART:
+   if _hash(_need(arts,k),k)!=pins['artifacts'][k]: return _r('FAIL','NOT_CHECKED',[],['artifact_pin_mismatch:'+k])
+  sy=_need(receipt,'sync')
+  if type(sy) is not dict: raise ValueError('sync')
+  _hash(_need(sy,'producer_event_hash'),'sync.producer'); _hash(_need(sy,'consumer_event_hash'),'sync.consumer')
+  ct=_need(receipt,'controls')
+  if type(ct) is not dict: raise ValueError('controls')
+  cpu=_bool(_need(ct,'cpu_staging'),'cpu'); hp=_bool(_need(ct,'host_pointer_equality_only'),'hostptr')
+  clean=_hash(_need(ct,'clean_baseline_hash'),'clean'); corr=_hash(_need(ct,'producer_corruption_before_copy_hash'),'corr')
+  pay=_need(receipt,'payload')
+  if type(pay) is not dict: raise ValueError('payload')
+  pb=_int(_need(pay,'bytes'),'payload.bytes',1); base=_hash(_need(pay,'baseline_hash'),'baseline'); cons=_hash(_need(pay,'consumer_result_hash'),'consumer'); par=_hash(_need(pay,'parity_hash'),'parity')
+  res=receipt.get('residency'); fails=[]; gaps=[]
+  hb=cpu or hp or src['kind']!='device' or tgt['kind']!='device'
+  sk=(src['vendor'],src['uuid'],src['pci'],src['allocation_id']); tk=(tgt['vendor'],tgt['uuid'],tgt['pci'],tgt['allocation_id'])
+  if sk not in pins['devices'] or tk not in pins['devices']: return _r('NOT_CHECKED','HOST_BACKED' if hb else 'NOT_CHECKED',['device_pin_absent'],[])
+  sd=pins['devices'][sk]; td=pins['devices'][tk]
+  if sd['kind']!='device' or td['kind']!='device': hb=True
+  if sd['api']!=src['api'] or sd['path']!=src['path'] or td['api']!=tgt['api'] or td['path']!=tgt['path']: fails.append('device_api_path_mismatch')
+  sv,tv=DIRS[direction]
+  if src['vendor']!=sv or tgt['vendor']!=tv: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',[],['direction_source_target_order'])
+  if direction=='nv_device_dmabuf_export_to_intel_imported_view':
+   ex=_need(receipt,'export'); im=_need(receipt,'import')
+   if type(ex) is not dict or type(im) is not dict: raise ValueError('export/import')
+   fd=_hash(_need(ex,'fd_hash'),'fd'); back=_hash(_need(ex,'backing_allocation_id'),'back'); eb=_int(_need(ex,'bytes'),'export.bytes',1)
+   if back!=src['allocation_id']: fails.append('export_backing_allocation_mismatch')
+   if _str(_need(im,'external_type'),'external_type',64)!='ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF': fails.append('import_external_type')
+   if _hash(_need(im,'imported_fd_hash'),'imported_fd')!=fd: fails.append('fd_binding')
+   if _hash(_need(im,'allocation_id'),'import_allocation')!=tgt['allocation_id']: fails.append('import_allocation_mismatch')
+   if _int(_need(im,'bytes'),'import.bytes',1)!=eb: fails.append('bytes_mismatch')
+   exp=eb
+   if 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+  else:
+   wr=_need(receipt,'write'); rd=_need(receipt,'read')
+   if type(wr) is not dict or type(rd) is not dict: raise ValueError('write/read')
+   wa=_hash(_need(wr,'allocation_id'),'write.allocation'); pat=_hash(_need(wr,'pattern_hash'),'pattern'); wb=_int(_need(wr,'bytes'),'write.bytes',1)
+   ra=_hash(_need(rd,'allocation_id'),'read.allocation'); rr=_hash(_need(rd,'cuda_read_hash'),'cuda_read'); rb=_int(_need(rd,'bytes'),'read.bytes',1)
+   if wa!=tgt['allocation_id'] or ra!=tgt['allocation_id']: fails.append('nv_allocation_binding')
+   if rr!=pat: fails.append('write_read_pattern_mismatch')
+   if pat!=corr: fails.append('write_control_mismatch')
+   if wb!=rb: fails.append('bytes_mismatch')
+   exp=wb
+   if 'export' in receipt or 'import' in receipt or 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+  if pb!=exp: fails.append('payload_bytes_mismatch')
+  if base!=clean: fails.append('baseline_mismatch')
+  if corr==clean: fails.append('corruption_control_not_distinct')
+  if cons!=corr: fails.append('consumer_control_mismatch')
+  if par!=cons: fails.append('parity_mismatch')
+  if type(res) is not dict: gaps.append('residency_missing')
+  else:
+   if _bool(_need(res,'source_device_resident'),'source_resident') is not True: gaps.append('source_not_resident')
+   if _bool(_need(res,'target_device_resident'),'target_resident') is not True: gaps.append('target_not_resident')
+   _hash(_need(res,'measurement_hash'),'measurement')
+   ts=_int(_need(res,'timestamp_unix'),'timestamp',0)
+   if ts>pins['evaluation_unix']+pins['max_staleness'] or ts<pins['evaluation_unix']-pins['max_staleness']: gaps.append('residency_stale')
+ except Missing as m:
+  return _r('NOT_CHECKED','NOT_CHECKED',['missing:'+str(m)],[])
+ if fails: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',gaps,fails)
+ if hb: return _r('EVIDENCE_CONSISTENT','HOST_BACKED',gaps+['host_backed_not_device_p2p'],[])
+ if gaps: return _r('NOT_CHECKED','NOT_CHECKED',gaps,[])
+ return _r('EVIDENCE_CONSISTENT','DEVICE_P2P',[],[])
+ACTUAL SOURCE INPUT E:\the_harness\records\factory_runs\20261004\qwen_compact_six_prep_20261004T191000Z\qwen_directed_receipt\tests_source.OVER_BUDGET_UNTRUSTED_REVIEW_ONLY.txt SHA256 fa250c767d0062c5af5055838dea9e256fe1e87bc2716d110c764e53c9413931
+import importlib.util, os, sys, hashlib, json
+p=os.environ.get('CANDIDATE_PATH') or (sys.argv[1] if len(sys.argv)>1 else 'candidate.py')
+spec=importlib.util.spec_from_file_location('candidate',p)
+m=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(m)
+H=lambda x: hashlib.sha256(x.encode()).hexdigest()
+NU='00000000-0000-0000-0000-000000000001'
+IU='00000000-0000-0000-0000-000000000002'
+NP='0000:01:00.0'
+IP='0000:03:00.0'
+NA=H('nv-alloc'); IA=H('intel-alloc')
+arts={'source_executable':H('src-exe'),'target_executable':H('tgt-exe'),'build':H('build'),'payload':H('payload'),'controller':H('controller'),'baseline':H('clean')}
+trusted={'schema':'p2p.trusted/v1','authorities':[{'id':H('root'),'name':'root'}],'artifacts':arts,'devices':[{'vendor':'nvidia','uuid':NU,'pci':NP,'allocation_id':NA,'api':'cuda/13.4','path':'cuMemGetHandleForAddressRange','kind':'device'},{'vendor':'intel','uuid':IU,'pci':IP,'allocation_id':IA,'api':'level_zero/1.6','path':'ze_external_memory_import_fd','kind':'device'}],'evaluation_unix':1000000,'max_staleness_seconds':300}
+base={'schema':'p2p.transfer.receipt/v1','direction':'nv_device_dmabuf_export_to_intel_imported_view','source':{'vendor':'nvidia','uuid':NU,'pci':NP,'allocation_id':NA,'api':'cuda/13.4','path':'cuMemGetHandleForAddressRange','kind':'device'},'target':{'vendor':'intel','uuid':IU,'pci':IP,'allocation_id':IA,'api':'level_zero/1.6','path':'ze_external_memory_import_fd','kind':'device'},'artifacts':arts,'sync':{'producer_event_hash':H('p'),'consumer_event_hash':H('c')},'controls':{'cpu_staging':False,'host_pointer_equality_only':False,'clean_baseline_hash':H('clean'),'producer_corruption_before_copy_hash':H('corrupt')},'payload':{'bytes':4096,'baseline_hash':H('clean'),'consumer_result_hash':H('corrupt'),'parity_hash':H('corrupt')},'export':{'fd_hash':H('fd'),'backing_allocation_id':NA,'bytes':4096},'import':{'external_type':'ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF','imported_fd_hash':H('fd'),'allocation_id':IA,'bytes':4096},'residency':{'source_device_resident':True,'target_device_resident':True,'measurement_hash':H('res'),'timestamp_unix':1000000}}
+C=lambda d: json.loads(json.dumps(d))
+o=m.validate(C(base),trusted=trusted)
+assert o['status']=='EVIDENCE_CONSISTENT' and o['classification']=='DEVICE_P2P' and o['transport_accepted'] is False
+o=m.validate(C(base),trusted=None)
+assert o['status']=='NOT_CHECKED' and 'trusted_authoritative_pins_absent' in o['gaps']
+t=C(trusted); t['authorities'].append(t['authorities'][0])
+o=m.validate(C(base),trusted=t)
+assert o['status']=='NOT_CHECKED'
+r=C(base); r['source']['allocation_id']=H('forged')
+o=m.validate(r,trusted=trusted)
+assert o['status']=='NOT_CHECKED' and 'device_pin_absent' in o['gaps']
+r=C(base); r['source'],r['target']=C(base['target']),C(base['source'])
+o=m.validate(r,trusted=trusted)
+assert o['status']=='FAIL' and 'direction_source_target_order' in o['failures']
+r=C(base); r['controls']['cpu_staging']=True
+o=m.validate(r,trusted=trusted)
+assert o['status']=='EVIDENCE_CONSISTENT' and o['classification']=='HOST_BACKED'
+r=C(base); r['controls']['producer_corruption_before_copy_hash']=H('clean')
+o=m.validate(r,trusted=trusted)
+assert o['status']=='FAIL' and 'corruption_control_not_distinct' in o['failures']
+r=C(base); r['residency']['timestamp_unix']=999000
+o=m.validate(r,trusted=trusted)
+assert o['status']=='NOT_CHECKED' and 'residency_stale' in o['gaps']
+r=C(base); del r['residency']
+o=m.validate(r,trusted=trusted)
+assert o['status']=='NOT_CHECKED' and 'residency_missing' in o['gaps']
+r=C(base); r['source']['kind']='host'
+o=m.validate(r,trusted=trusted)
+assert o['status']=='EVIDENCE_CONSISTENT' and o['classification']=='HOST_BACKED'
+r=C(base); r['payload']['bytes']=True
+try:
+ m.validate(r,trusted=trusted)
+ raise SystemExit('bool int accepted')
+except ValueError:
+ pass
+print('ok')
+NEW ROOT evidence/adjudication (prelaunch, originals retained):
+ROOT ACTUAL independent PURE RED3/3 failures, no native calls, actual_results.json below: forged clean baseline differs trusted.artifacts.baseline; source and target SAME UUID/PCI despite different vendor labels; arbitrary unregistered residency hash and bool declarations. All yielded EVIDENCE_CONSISTENT/DEVICE_P2P while transport_accepted=false. Correct evidence/classification; NEVER misstate accepted-transport bug. Manager earlier additional concerns remain static hypotheses.
+{
+  "scope": "SYNTHETIC_PURE_ONLY",
+  "source_sha256": "671c3706c5064aae55811020ec845402b1cfa010a224338ca78b42038261b56f",
+  "tests": 3,
+  "failures": [
+    "test_consistent_but_untrusted_clean_baseline_must_refuse (__main__.Controls)",
+    "test_same_physical_uuid_and_pci_must_not_classify_peer (__main__.Controls)",
+    "test_unregistered_self_reported_residency_not_device_p2p (__main__.Controls)"
+  ],
+  "errors": [],
+  "observed": {
+    "baseline_unbound_to_trusted": {
+      "status": "EVIDENCE_CONSISTENT",
+      "classification": "DEVICE_P2P",
+      "transport_accepted": false,
+      "scope": "evidence_consistency_only",
+      "gaps": [],
+      "failures": []
+    },
+    "same_physical_identity": {
+      "status": "EVIDENCE_CONSISTENT",
+      "classification": "DEVICE_P2P",
+      "transport_accepted": false,
+      "scope": "evidence_consistency_only",
+      "gaps": [],
+      "failures": []
+    },
+    "unregistered_measurement": {
+      "status": "EVIDENCE_CONSISTENT",
+      "classification": "DEVICE_P2P",
+      "transport_accepted": false,
+      "scope": "evidence_consistency_only",
+      "gaps": [],
+      "failures": []
+    }
+  },
+  "native_import_traps": []
+}

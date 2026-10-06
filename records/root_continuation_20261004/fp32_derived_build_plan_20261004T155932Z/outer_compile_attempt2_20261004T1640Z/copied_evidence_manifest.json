@@ -1,0 +1,47 @@
+[
+  {
+    "name": "configure_manifest.json",
+    "bytes": 643,
+    "sha256": "edab3f6351cb863d5e0f87025e644a2e7c90fb96b77c3ec0002d8127f1ed2e97"
+  },
+  {
+    "name": "configure_progress.json",
+    "bytes": 252,
+    "sha256": "ecd7bc028bcc4457db635cd18c57900ad47fa8ace8e5b1f7d488538f19f2a45b"
+  },
+  {
+    "name": "configure_result_copy.json",
+    "bytes": 3918,
+    "sha256": "8c740953e9947687188a5f9a9da826c773c4fc1a6af3941186b2daf722518053"
+  },
+  {
+    "name": "configure.stderr.log",
+    "bytes": 316,
+    "sha256": "2a7b2e04ee316f49b1661eb890b3b0bd54dceaa23e102b5bee091afbf85f4529"
+  },
+  {
+    "name": "configure.stdout.log",
+    "bytes": 2776,
+    "sha256": "a16b9c964f7733a0884bdb93cd5557165eabb6bb0523bb2a325d83f6f60145ff"
+  },
+  {
+    "name": "controller_result.json",
+    "bytes": 4764,
+    "sha256": "d39622b660ecb315f8fbc535d1e4d3c5a9a91e6f3e95ac2ff456cacfd8f186f7"
+  },
+  {
+    "name": "fp32_configure_receipt.json",
+    "bytes": 3754,
+    "sha256": "5492ca8ebb06bd8666ede89b1ec0ea11f33965ffb75bb8f0da86d9257dfcd9b9"
+  },
+  {
+    "name": "fp32_configure.journal",
+    "bytes": 191,
+    "sha256": "9bbdfa188d3fb8afc4fe41cf9745764e6b5cb0b4e83b53cdc3b4e3c4f22aa862"
+  },
+  {
+    "name": "worker_pid_absence.json",
+    "bytes": 255,
+    "sha256": "ea559030ea2e6c682379f2f3b257db6a2b54e807028c033c99544c8fb1ca181f"
+  }
+]

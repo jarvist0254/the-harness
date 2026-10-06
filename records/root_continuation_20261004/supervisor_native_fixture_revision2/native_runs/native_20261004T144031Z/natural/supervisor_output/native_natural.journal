@@ -1,0 +1,6 @@
+{"event":"start","policy":"kill_on_close","seq":1}
+{"event":"resumed","worker_id":"natural_a","pid":71476,"seq":2}
+{"event":"resumed","worker_id":"natural_b","pid":28376,"seq":3}
+{"event":"resumed","worker_id":"natural_c","pid":93668,"seq":4}
+{"event":"resumed","worker_id":"natural_d","pid":77188,"seq":5}
+{"event":"terminal","status":"PROCESS_COMPLETED","failure_reason":"","seq":6}

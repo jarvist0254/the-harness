@@ -1,0 +1,10 @@
+OpenCL Platform: AMD Accelerated Parallel Processing
+	Device: gfx1036
+		driverVersion: 3652.0 (PAL,LC)
+		computeUnits:  1
+		clockFreq:     2200
+
+TestCase                                                                    Mean         Median         StdDev            Min            Max   Type   Label [unit]
+ReadBufferMisaligned(api=ocl size=1MB misalignment=1 useEvents=0)          2.960          2.960         69.25%          0.910          5.010  [CPU]         [GB/s]
+individual results: [ 0.91038 5.00992 ]
+

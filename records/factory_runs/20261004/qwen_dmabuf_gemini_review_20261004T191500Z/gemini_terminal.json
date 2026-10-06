@@ -1,0 +1,36 @@
+{
+  "model": "gemini-3.8-flash-high",
+  "pid": 81156,
+  "exit_code": 0,
+  "elapsed_seconds": 114.26,
+  "status": "PARSE_OR_SCHEMA_ERROR",
+  "outer_killed": false,
+  "log_cap_exceeded": false,
+  "pipe_error": false,
+  "drain_unknown": false,
+  "private_url_output_refused": false,
+  "stdout_bytes": 26208,
+  "stderr_bytes": 78,
+  "stdout_sha256": "6D1D9C7DBB66BEAC4B9451D1CDE75C52FF8AD03D230627799A777E132654C7D9",
+  "stderr_sha256": "3A7F8550106D86ABB322E8ED0FB30A0296C0E97C6BE03D5A8033B99D16737459",
+  "usage": {
+    "input_tokens": 57666,
+    "output_tokens": 29029,
+    "thinking_tokens": 24688,
+    "cache_read_tokens": 31745,
+    "total_tokens": 86695
+  },
+  "model_usage": "UNKNOWN",
+  "tool_calls": "UNKNOWN",
+  "subagents": "UNKNOWN",
+  "input_pins_unchanged": true,
+  "input_pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\source.qwen_untrusted.cpp": "7052C8EBAA49D9807F6428B5A1ED6779A093392BCCF6EF3266B254C0EAC3CB5B",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport\\tests_source.qwen_untrusted.txt": "6363369CF5BA49B2B82397893D42D622F35EF5BD434DDFFEFD578733B6568E76",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_jlink_stream_six_20261004T184200Z\\qwen_linux_dmabuf_transport.spec.txt": "7714B45230DBD5DB30A52A186B5934C8A944B60D21053A762EF34D0169D5D8CC"
+  },
+  "credential_saved": false,
+  "provider_edit": false,
+  "source_execution": false,
+  "parse_error_type": "PropertyNotFoundException"
+}

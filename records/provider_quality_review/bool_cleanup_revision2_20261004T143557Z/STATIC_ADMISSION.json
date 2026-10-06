@@ -1,0 +1,11 @@
+{
+  "source": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor_revision2.py",
+  "sha256": "3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c",
+  "status": "MOCK_ONLY_IMPORT_ADMITTED",
+  "ast": true,
+  "functional_difference": "_shutdown only; initial attribution docstring also changed; every other top-level AST node equal to previous admitted exact-hash source",
+  "native_admission": false,
+  "independent_new_tests": 4,
+  "subcases": 5,
+  "fake_wait_states": "Exited returns0; running returns258; unknown raises or returnsFFFFFFFF"
+}

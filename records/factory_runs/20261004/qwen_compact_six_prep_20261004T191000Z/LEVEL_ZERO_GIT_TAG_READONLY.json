@@ -1,0 +1,10 @@
+{
+  "ref": "refs/tags/v1.34.0",
+  "node_id": "MDM6UmVmMjQ1MjQ2NjYzOnJlZnMvdGFncy92MS4zNC4w",
+  "url": "https://api.github.com/repos/oneapi-src/level-zero/git/refs/tags/v1.34.0",
+  "object": {
+    "sha": "934714b278f850d164627eeaaa043eee02785a9e",
+    "type": "commit",
+    "url": "https://api.github.com/repos/oneapi-src/level-zero/git/commits/934714b278f850d164627eeaaa043eee02785a9e"
+  }
+}

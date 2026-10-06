@@ -1,0 +1,8 @@
+{
+  "source_before_sha256": "21a0379e778bdb8c31e5da7774410b59236e2b6f72a87eaf1b68ff584a666815",
+  "admission_sha256": "1fa93e6dada3c91388af976dad07264bdf3d84c829d828f1bf6a379b89408524",
+  "outer_deadline_seconds": 270,
+  "utc": "2026-10-04T17:12:18.1277771Z",
+  "wrapper_pid": 80144,
+  "prompt_sha256": "185b4683b745384357fad4806a181e4a88dd091722646d3e08ce20906c8e53f5"
+}

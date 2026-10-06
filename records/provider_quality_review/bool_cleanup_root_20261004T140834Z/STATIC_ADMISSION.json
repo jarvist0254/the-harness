@@ -1,0 +1,8 @@
+{
+  "candidate": "E:\\the_harness\\records\\root_continuation_20261004\\supervisor_cleanup_root_repair\\contained_supervisor.py",
+  "sha256": "4d8272aa5dbc330e4199b216bd9b3fd3d240c2c8d1c59e223e37d249c936f663",
+  "status": "PURE_MOCK_IMPORT_ONLY_ADMITTED",
+  "native_admission": false,
+  "top_level_purity": "Stdlib imports, literal assignments, undecorated definitions with literal defaults and method-only class body",
+  "test_adaptations": "Independent Codex derivative: transferred reader handles are not forcibly parent-closed; require every parent-owned close and every reader join attempt plus uncertainty. Terminal journal failure may leave absent/refusal receipt, never restarted completion. Prior controls preserved."
+}

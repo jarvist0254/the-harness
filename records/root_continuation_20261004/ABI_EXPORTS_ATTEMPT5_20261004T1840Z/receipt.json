@@ -1,0 +1,42 @@
+{
+  "Status": "PUBLIC_EXPORT_NAMES_MATCH",
+  "Rows": [
+    {
+      "DLL": "ggml.dll",
+      "OriginalExports": 16,
+      "FreshExports": 16,
+      "ExactExportNamesMatch": true,
+      "FreshSHA256": "56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb"
+    },
+    {
+      "DLL": "ggml-base.dll",
+      "OriginalExports": 687,
+      "FreshExports": 687,
+      "ExactExportNamesMatch": true,
+      "FreshSHA256": "beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3"
+    },
+    {
+      "DLL": "ggml-cpu.dll",
+      "OriginalExports": 64,
+      "FreshExports": 64,
+      "ExactExportNamesMatch": true,
+      "FreshSHA256": "e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481"
+    },
+    {
+      "DLL": "ggml-rpc.dll",
+      "OriginalExports": 7,
+      "FreshExports": 7,
+      "ExactExportNamesMatch": true,
+      "FreshSHA256": "11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd"
+    },
+    {
+      "DLL": "ggml-vulkan.dll",
+      "OriginalExports": 8,
+      "FreshExports": 8,
+      "ExactExportNamesMatch": true,
+      "FreshSHA256": "3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085"
+    }
+  ],
+  "DumpbinSHA256": "fc7c126e4d3fafbd0159880e066549825867ad58cb4769281bea8373bf82a1fa",
+  "Scope": "PE export names plus previously verified identical public headers; runtime ABI still requires actual load and computation"
+}

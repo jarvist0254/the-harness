@@ -1,0 +1,747 @@
+Source-only substantial implementation job qwen3.8-max xhigh enable_thinking=true, NO thinking_budget. User authorizes max10 native child agents EACH Qwen/DeepSeek only if actually safely supported; directHTTP has NO tools/child support, actualnativechildren0. Do not execute/compile/import/browse/install/login/edit/source-promote/native/GPU calls or alter globalFactory/PyRe/drivers/config/auth. Return ONE complete strict JSON object exact keys status,source,tests_source,analysis,prerequisites,evidence_limits,references. status PROPOSED|ANALYSIS|REFUSED. Complete executable source STRING<=32000UTF16chars and actual-file behavioral test source STRING<=16000; never arrays-of-lines or copied implementation. Explanation fields arrays1..40 nonemptystrings<=8192, compact to leave room for COMPLETE finalJSON before outputlimit. No partialsource success, grep-only test or claimed testexecution. Missing document/runtime provenance explicitly NOT_CHECKED. Source untrusted until ROOT static/realAPI/compiler/behavior/native admission. Runtime machine receipt strict statusPASS|FAIL|NOT_CHECKED exits0|1|2; querysuccess scopecollectorONLY/direct_transport_qualified=false. API-success value0 can indicate documented absence; preserve genuine attemptedAPIerrors asFAIL/code (never blanket missingdriver or globalhardware impossibility). Full128bitUUID/canonicalPCI/type validation, bounded counts and retries, actual observednamed module path/hash versus callertrustedpin, noauth/secrets in logs; output<=128KiB atomic bounded terminalJSON, truncation mustFAIL notinvalidprefix+exit0. Windowsownedparent deadline60s can terminate wholechild; sourceinternaldeadline cannot cancelblockedFFI. No childspawn in candidate. All fabricated friendlytestmetadata fails physicalproof gates. Pure CPU/headerstub tests onACTUAL source path allowed as generatedtext only; ROOT alone mayexecute.
+TASK
+Deliver native C++17 Intel SYSMAN physicalGPU/local-memory inventory and residency-prerequisite QUERY ONLY. ActualinstalledSDK path zes_api.h is MISSING; suppliedofficialoneapi-src/level-zero v1.34.0 snapshot existsONLYinnewprep, notinstalleddriver. Use exactofficialheader signatures/stypes/pNext/types; missingruntime loader/IntelGPU=>NOT_CHECKED2, NO installs/env/globalflags. Standalone zesInit/zesDriverGet etc; explicittrustedabsolute loaderpath+SHA and actualloadedmodulepath/hash, noPATH/default firstdevice. Queryall eligiblephysicalIntel GPU roots: type/vendor facts, full128bitUUID using correctextended property when available; deprecated core fields retainedlabelled notblindlyidentity-proof. PCI BDF, root/subdeviceUUID lineage, duplicatehandle/UUID/PCI aliases reconcile/de-dupe physicalroots without excluding laterroots becausefirst16slots filledsubdevices. Queryroots first, thenboundedsubdevice details separate; countsdriver<=16,roots<=64,subdevice<=128,module<=64,totalcap withbounded3retries countmutation. Preserve all actualresultcodes; unsupportedfield remainsunknown; DEVICE_LOST/genuineattemptedfailure FAIL, nevergenericNOT_CHECKEDcause. Enumtokens areENUMS notdefined()macros. Memorymodules: locationSYSTEM versusDEVICE, onSubdevice/subdeviceId, type/physicalSize/statefree/statehealth. physicalSize0unknown; currentofficialheader explicitly DEPRECATES zes_mem_state_t.size asunreliable—recordrawdeprecation, doNOTvalidatefreeagainstthat as authoritativecapacity norinventavailableresidency. Availableusablemem extension is separatecoreAPI withdocumentedmapping prerequisite; if can'tmapSysman/core/rootidentity safely markNOT_CHECKED notguessedpointercast. DEVICElogical allocation/location alone doesNOTprove dedicatedresidentVRAM/localphysicalbacking; integratedGPU flag/sharedhost andunknown classifiedtruthfully. No inferredphysicalpoolsum acrossaliases/sharedmodules; recordmodulesindividually and aggregateonlyifproven nonoverlappingownership. Freshquerytimestamp/per-fieldsource/resultcode, advertisedcapacity versusdriverreportedfree versus measuredresident/highwater strictlyseparate. No allocations/context/queues/inference/transfers/P2P/capacityqualification. StrictJSON PASScollectorONLY/direct_transport_qualifiedfalse, FAILerror,NOT_CHECKEDmissingprereq; allbool/int/string/range/cleanup/outputcaps. CPUactualofficialheader stubs/tests againstACTUALsource must exercise genuinelyqueriedproperties(memorylocation/system vsdevice, physicalSize0, deprecatedstate.sizecontradictions), duplicatephysicalalias/multiroot/subdevicefill, GPUtypefiltering, unsupported/error/countmutations, initUNINITIALIZEDwithoutassumedcause, truncation, tupledata malformed and pointerlookup. Missingofficialcontract/exportedruntime entrypoint explicitnotfabricated. Don'tlaunchtests orrealSysman byyou.
+FULL EXACT OFFICIAL USED SYSMAN+CORE DECLARATIONS
+Full exact declarationzesInit lines711-714 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesInit(
+    zes_init_flags_t flags                                                  ///< [in] initialization flags. This should be 0 or a combination of
+                                                                            ///< ::zes_init_flags_t values.
+    );
+
+Full exact declarationzesDriverGet lines745-755 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDriverGet(
+    uint32_t* pCount,                                                       ///< [in,out] pointer to the number of sysman driver instances.
+                                                                            ///< if count is zero, then the loader shall update the value with the
+                                                                            ///< total number of sysman drivers available.
+                                                                            ///< if count is greater than the number of sysman drivers available, then
+                                                                            ///< the loader shall update the value with the correct number of sysman
+                                                                            ///< drivers available.
+    zes_driver_handle_t* phDrivers                                          ///< [in,out][optional][range(0, *pCount)] array of sysman driver instance handles.
+                                                                            ///< if count is less than the number of sysman drivers available, then the
+                                                                            ///< loader shall only retrieve that number of sysman drivers.
+    );
+
+Full exact declarationzesDriverGetProperties lines803-806 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDriverGetProperties(
+    zes_driver_handle_t hDriver,                                            ///< [in] handle of the sysman driver instance
+    zes_driver_properties_t* pDriverProperties                              ///< [in,out] query result for sysman driver properties
+    );
+
+Full exact declarationzesDriverGetExtensionProperties lines849-861 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDriverGetExtensionProperties(
+    zes_driver_handle_t hDriver,                                            ///< [in] handle of the driver instance
+    uint32_t* pCount,                                                       ///< [in,out] pointer to the number of extension properties.
+                                                                            ///< if count is zero, then the driver shall update the value with the
+                                                                            ///< total number of extension properties available.
+                                                                            ///< if count is greater than the number of extension properties available,
+                                                                            ///< then the driver shall update the value with the correct number of
+                                                                            ///< extension properties available.
+    zes_driver_extension_properties_t* pExtensionProperties                 ///< [in,out][optional][range(0, *pCount)] array of query results for
+                                                                            ///< extension properties.
+                                                                            ///< if count is less than the number of extension properties available,
+                                                                            ///< then driver shall only retrieve that number of extension properties.
+    );
+
+Full exact declarationzesDriverGetExtensionFunctionAddress lines891-895 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDriverGetExtensionFunctionAddress(
+    zes_driver_handle_t hDriver,                                            ///< [in] handle of the driver instance
+    const char* name,                                                       ///< [in] extension function name
+    void** ppFunctionAddress                                                ///< [out] pointer to function pointer
+    );
+
+Full exact declarationzesDeviceGet lines935-946 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDeviceGet(
+    zes_driver_handle_t hDriver,                                            ///< [in] handle of the sysman driver instance
+    uint32_t* pCount,                                                       ///< [in,out] pointer to the number of sysman devices.
+                                                                            ///< if count is zero, then the driver shall update the value with the
+                                                                            ///< total number of sysman devices available.
+                                                                            ///< if count is greater than the number of sysman devices available, then
+                                                                            ///< the driver shall update the value with the correct number of sysman
+                                                                            ///< devices available.
+    zes_device_handle_t* phDevices                                          ///< [in,out][optional][range(0, *pCount)] array of handle of sysman devices.
+                                                                            ///< if count is less than the number of sysman devices available, then
+                                                                            ///< driver shall only retrieve that number of sysman devices.
+    );
+
+Full exact declarationzesDeviceGetProperties lines1133-1136 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDeviceGetProperties(
+    zes_device_handle_t hDevice,                                            ///< [in] Sysman handle of the device.
+    zes_device_properties_t* pProperties                                    ///< [in,out] Structure that will contain information about the device.
+    );
+
+Full exact declarationzesDevicePciGetProperties lines1526-1529 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDevicePciGetProperties(
+    zes_device_handle_t hDevice,                                            ///< [in] Sysman handle of the device.
+    zes_pci_properties_t* pProperties                                       ///< [in,out] Will contain the PCI properties.
+    );
+
+Full exact declarationzesDeviceEnumMemoryModules lines5573-5586 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDeviceEnumMemoryModules(
+    zes_device_handle_t hDevice,                                            ///< [in] Sysman handle of the device.
+    uint32_t* pCount,                                                       ///< [in,out] pointer to the number of components of this type.
+                                                                            ///< if count is zero, then the driver shall update the value with the
+                                                                            ///< total number of components of this type that are available.
+                                                                            ///< if count is greater than the number of components of this type that
+                                                                            ///< are available, then the driver shall update the value with the correct
+                                                                            ///< number of components.
+    zes_mem_handle_t* phMemory                                              ///< [in,out][optional][range(0, *pCount)] array of handle of components of
+                                                                            ///< this type.
+                                                                            ///< if count is less than the number of components of this type that are
+                                                                            ///< available, then the driver shall only retrieve that number of
+                                                                            ///< component handles.
+    );
+
+Full exact declarationzesMemoryGetProperties lines5614-5617 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesMemoryGetProperties(
+    zes_mem_handle_t hMemory,                                               ///< [in] Handle for the component.
+    zes_mem_properties_t* pProperties                                       ///< [in,out] Will contain memory properties.
+    );
+
+Full exact declarationzesMemoryGetState lines5645-5648 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesMemoryGetState(
+    zes_mem_handle_t hMemory,                                               ///< [in] Handle for the component.
+    zes_mem_state_t* pState                                                 ///< [in,out] Will contain the current health and allocated memory.
+    );
+
+Full exact declarationzesDeviceGetSubDevicePropertiesExp lines8594-8605 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+zesDeviceGetSubDevicePropertiesExp(
+    zes_device_handle_t hDevice,                                            ///< [in] Sysman handle of the device.
+    uint32_t* pCount,                                                       ///< [in,out] pointer to the number of sub devices.
+                                                                            ///< if count is zero, then the driver shall update the value with the
+                                                                            ///< total number of sub devices currently attached to the device.
+                                                                            ///< if count is greater than the number of sub devices currently attached
+                                                                            ///< to the device, then the driver shall update the value with the correct
+                                                                            ///< number of sub devices.
+    zes_subdevice_exp_properties_t* pSubdeviceProps                         ///< [in,out][optional][range(0, *pCount)] array of sub device property structures.
+                                                                            ///< if count is less than the number of sysman sub devices available, then
+                                                                            ///< the driver shall only retrieve that number of sub device property structures.
+    );
+
+Full exact declarationzes_device_properties_t lines1061-1091 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_device_properties_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_device_properties_t core;                                            ///< [out] (Deprecated, use ::zes_uuid_t in the extended structure) Core
+                                                                            ///< device properties
+    uint32_t numSubdevices;                                                 ///< [out] Number of sub-devices. A value of 0 indicates that this device
+                                                                            ///< doesn't have sub-devices.
+    char serialNumber[ZES_STRING_PROPERTY_SIZE];                            ///< [out] Manufacturing serial number (NULL terminated string value). This
+                                                                            ///< value is intended to reflect the Part ID/SoC ID assigned by
+                                                                            ///< manufacturer that is unique for a SoC. Will be set to the string
+                                                                            ///< "unknown" if this cannot be determined for the device.
+    char boardNumber[ZES_STRING_PROPERTY_SIZE];                             ///< [out] Manufacturing board number (NULL terminated string value).
+                                                                            ///< Alternatively "boardSerialNumber", this value is intended to reflect
+                                                                            ///< the string printed on board label by manufacturer. Will be set to the
+                                                                            ///< string "unknown" if this cannot be determined for the device.
+    char brandName[ZES_STRING_PROPERTY_SIZE];                               ///< [out] Brand name of the device (NULL terminated string value). Will be
+                                                                            ///< set to the string "unknown" if this cannot be determined for the
+                                                                            ///< device.
+    char modelName[ZES_STRING_PROPERTY_SIZE];                               ///< [out] Model name of the device (NULL terminated string value). Will be
+                                                                            ///< set to the string "unknown" if this cannot be determined for the
+                                                                            ///< device.
+    char vendorName[ZES_STRING_PROPERTY_SIZE];                              ///< [out] Vendor name of the device (NULL terminated string value). Will
+                                                                            ///< be set to the string "unknown" if this cannot be determined for the
+                                                                            ///< device.
+    char driverVersion[ZES_STRING_PROPERTY_SIZE];                           ///< [out] Installed driver version (NULL terminated string value). Will be
+                                                                            ///< set to the string "unknown" if this cannot be determined for the
+                                                                            ///< device.
+
+} zes_device_properties_t;
+
+Full exact declarationzes_device_ext_properties_t lines1095-1105 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_device_ext_properties_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    zes_uuid_t uuid;                                                        ///< [out] universal unique identifier. Note: uuid obtained from Sysman API
+                                                                            ///< is the same as from core API. Subdevices will have their own uuid.
+    zes_device_type_t type;                                                 ///< [out] generic device type
+    zes_device_property_flags_t flags;                                      ///< [out] 0 (none) or a valid combination of ::zes_device_property_flag_t
+
+} zes_device_ext_properties_t;
+
+Full exact declarationzes_pci_properties_t lines1349-1364 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_pci_properties_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    zes_pci_address_t address;                                              ///< [out] The BDF address
+    zes_pci_speed_t maxSpeed;                                               ///< [out] Fastest port configuration supported by the device (sum of all
+                                                                            ///< lanes)
+    ze_bool_t haveBandwidthCounters;                                        ///< [out] Indicates whether the `rxCounter` and `txCounter` members of
+                                                                            ///< ::zes_pci_stats_t will have valid values
+    ze_bool_t havePacketCounters;                                           ///< [out] Indicates whether the `packetCounter` member of
+                                                                            ///< ::zes_pci_stats_t will have a valid value
+    ze_bool_t haveReplayCounters;                                           ///< [out] Indicates whether the `replayCounter` member of
+                                                                            ///< ::zes_pci_stats_t will have a valid value
+
+} zes_pci_properties_t;
+
+Full exact declarationzes_pci_address_t lines1325-1332 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_pci_address_t
+{
+    uint32_t domain;                                                        ///< [out] BDF domain
+    uint32_t bus;                                                           ///< [out] BDF bus
+    uint32_t device;                                                        ///< [out] BDF device
+    uint32_t function;                                                      ///< [out] BDF function
+
+} zes_pci_address_t;
+
+Full exact declarationzes_pci_speed_t lines1336-1345 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_pci_speed_t
+{
+    int32_t gen;                                                            ///< [out] The link generation. A value of -1 means that this property is
+                                                                            ///< unknown.
+    int32_t width;                                                          ///< [out] The number of lanes. A value of -1 means that this property is
+                                                                            ///< unknown.
+    int64_t maxBandwidth;                                                   ///< [out] The maximum bandwidth in bytes/sec (sum of all lanes). A value
+                                                                            ///< of -1 means that this property is unknown.
+
+} zes_pci_speed_t;
+
+Full exact declarationzes_mem_properties_t lines5465-5483 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_mem_properties_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    zes_mem_type_t type;                                                    ///< [out] The memory type
+    ze_bool_t onSubdevice;                                                  ///< [out] True if this resource is located on a sub-device; false means
+                                                                            ///< that the resource is on the device of the calling Sysman handle
+    uint32_t subdeviceId;                                                   ///< [out] If onSubdevice is true, this gives the ID of the sub-device
+    zes_mem_loc_t location;                                                 ///< [out] Location of this memory (system, device)
+    uint64_t physicalSize;                                                  ///< [out] Physical memory capacity in bytes. A value of 0 indicates that
+                                                                            ///< this property is not known. However, a call to zesMemoryGetState()
+                                                                            ///< will return the available free physical memory.
+    int32_t busWidth;                                                       ///< [out] Width of the memory bus. A value of -1 means that this property
+                                                                            ///< is unknown.
+    int32_t numChannels;                                                    ///< [out] The number of memory channels. A value of -1 means that this
+                                                                            ///< property is unknown.
+
+} zes_mem_properties_t;
+
+Full exact declarationzes_mem_state_t lines5490-5504 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_mem_state_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    const void* pNext;                                                      ///< [in][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    zes_mem_health_t health;                                                ///< [out] Indicates the health of the memory
+    uint64_t free;                                                          ///< [out] The free physical memory in bytes
+    uint64_t size;                                                          ///< [out] The total allocatable memory in bytes (can be less than the
+                                                                            ///< `physicalSize` member of ::zes_mem_properties_t). *DEPRECATED* 
+                                                                            ///< This member can no longer track the allocatable memory reliably.
+                                                                            ///< Clients depending on this information can use the 
+                                                                            ///< zeDeviceGetProperties with ze_device_usablemem_size_ext_properties_t
+                                                                            ///< extension to get information of the available usable memory.
+
+} zes_mem_state_t;
+
+Full exact declarationzes_mem_loc_t lines5437-5443 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef enum _zes_mem_loc_t
+{
+    ZES_MEM_LOC_SYSTEM = 0,                                                 ///< System memory
+    ZES_MEM_LOC_DEVICE = 1,                                                 ///< On board local device memory
+    ZES_MEM_LOC_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZES_MEM_LOC_* ENUMs
+
+} zes_mem_loc_t;
+
+Full exact declarationzes_mem_type_t lines5401-5433 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef enum _zes_mem_type_t
+{
+    ZES_MEM_TYPE_HBM = 0,                                                   ///< HBM memory
+    ZES_MEM_TYPE_DDR = 1,                                                   ///< DDR memory
+    ZES_MEM_TYPE_DDR3 = 2,                                                  ///< DDR3 memory
+    ZES_MEM_TYPE_DDR4 = 3,                                                  ///< DDR4 memory
+    ZES_MEM_TYPE_DDR5 = 4,                                                  ///< DDR5 memory
+    ZES_MEM_TYPE_LPDDR = 5,                                                 ///< LPDDR memory
+    ZES_MEM_TYPE_LPDDR3 = 6,                                                ///< LPDDR3 memory
+    ZES_MEM_TYPE_LPDDR4 = 7,                                                ///< LPDDR4 memory
+    ZES_MEM_TYPE_LPDDR5 = 8,                                                ///< LPDDR5 memory
+    ZES_MEM_TYPE_SRAM = 9,                                                  ///< SRAM memory
+    ZES_MEM_TYPE_L1 = 10,                                                   ///< L1 cache
+    ZES_MEM_TYPE_L3 = 11,                                                   ///< L3 cache
+    ZES_MEM_TYPE_GRF = 12,                                                  ///< Execution unit register file
+    ZES_MEM_TYPE_SLM = 13,                                                  ///< Execution unit shared local memory
+    ZES_MEM_TYPE_GDDR4 = 14,                                                ///< GDDR4 memory
+    ZES_MEM_TYPE_GDDR5 = 15,                                                ///< GDDR5 memory
+    ZES_MEM_TYPE_GDDR5X = 16,                                               ///< GDDR5X memory
+    ZES_MEM_TYPE_GDDR6 = 17,                                                ///< GDDR6 memory
+    ZES_MEM_TYPE_GDDR6X = 18,                                               ///< GDDR6X memory
+    ZES_MEM_TYPE_GDDR7 = 19,                                                ///< GDDR7 memory
+    ZES_MEM_TYPE_LPDDR5X = 20,                                              ///< LPDDR5X memory
+    ZES_MEM_TYPE_HBM2 = 21,                                                 ///< HBM2 memory
+    ZES_MEM_TYPE_DDR2 = 22,                                                 ///< DDR2 memory
+    ZES_MEM_TYPE_HBM2E = 23,                                                ///< HBM2E memory
+    ZES_MEM_TYPE_HBM3 = 24,                                                 ///< HBM3 memory
+    ZES_MEM_TYPE_HBM3E = 25,                                                ///< HBM3E memory
+    ZES_MEM_TYPE_HBM4 = 26,                                                 ///< HBM4 memory
+    ZES_MEM_TYPE_LPDDR6 = 27,                                               ///< LPDDR6 memory
+    ZES_MEM_TYPE_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZES_MEM_TYPE_* ENUMs
+
+} zes_mem_type_t;
+
+Full exact declarationzes_mem_health_t lines5447-5458 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef enum _zes_mem_health_t
+{
+    ZES_MEM_HEALTH_UNKNOWN = 0,                                             ///< The memory health cannot be determined.
+    ZES_MEM_HEALTH_OK = 1,                                                  ///< All memory channels are healthy.
+    ZES_MEM_HEALTH_DEGRADED = 2,                                            ///< Excessive correctable errors have been detected on one or more
+                                                                            ///< channels. Device should be reset.
+    ZES_MEM_HEALTH_CRITICAL = 3,                                            ///< Operating with reduced memory to cover banks with too many
+                                                                            ///< uncorrectable errors.
+    ZES_MEM_HEALTH_REPLACE = 4,                                             ///< Device should be replaced due to excessive uncorrectable errors.
+    ZES_MEM_HEALTH_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZES_MEM_HEALTH_* ENUMs
+
+} zes_mem_health_t;
+
+Full exact declarationzes_uuid_t lines240-244 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_uuid_t
+{
+    uint8_t id[ZES_MAX_UUID_SIZE];                                          ///< [out] Data representing a device UUID
+
+} zes_uuid_t;
+
+Full exact declarationzes_structure_type_t lines106-180 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef enum _zes_structure_type_t
+{
+    ZES_STRUCTURE_TYPE_DEVICE_PROPERTIES = 0x1,                             ///< ::zes_device_properties_t
+    ZES_STRUCTURE_TYPE_PCI_PROPERTIES = 0x2,                                ///< ::zes_pci_properties_t
+    ZES_STRUCTURE_TYPE_PCI_BAR_PROPERTIES = 0x3,                            ///< ::zes_pci_bar_properties_t
+    ZES_STRUCTURE_TYPE_DIAG_PROPERTIES = 0x4,                               ///< ::zes_diag_properties_t
+    ZES_STRUCTURE_TYPE_ENGINE_PROPERTIES = 0x5,                             ///< ::zes_engine_properties_t
+    ZES_STRUCTURE_TYPE_FABRIC_PORT_PROPERTIES = 0x6,                        ///< ::zes_fabric_port_properties_t
+    ZES_STRUCTURE_TYPE_FAN_PROPERTIES = 0x7,                                ///< ::zes_fan_properties_t
+    ZES_STRUCTURE_TYPE_FIRMWARE_PROPERTIES = 0x8,                           ///< ::zes_firmware_properties_t
+    ZES_STRUCTURE_TYPE_FREQ_PROPERTIES = 0x9,                               ///< ::zes_freq_properties_t
+    ZES_STRUCTURE_TYPE_LED_PROPERTIES = 0xa,                                ///< ::zes_led_properties_t
+    ZES_STRUCTURE_TYPE_MEM_PROPERTIES = 0xb,                                ///< ::zes_mem_properties_t
+    ZES_STRUCTURE_TYPE_PERF_PROPERTIES = 0xc,                               ///< ::zes_perf_properties_t
+    ZES_STRUCTURE_TYPE_POWER_PROPERTIES = 0xd,                              ///< ::zes_power_properties_t
+    ZES_STRUCTURE_TYPE_PSU_PROPERTIES = 0xe,                                ///< ::zes_psu_properties_t
+    ZES_STRUCTURE_TYPE_RAS_PROPERTIES = 0xf,                                ///< ::zes_ras_properties_t
+    ZES_STRUCTURE_TYPE_SCHED_PROPERTIES = 0x10,                             ///< ::zes_sched_properties_t
+    ZES_STRUCTURE_TYPE_SCHED_TIMEOUT_PROPERTIES = 0x11,                     ///< ::zes_sched_timeout_properties_t
+    ZES_STRUCTURE_TYPE_SCHED_TIMESLICE_PROPERTIES = 0x12,                   ///< ::zes_sched_timeslice_properties_t
+    ZES_STRUCTURE_TYPE_STANDBY_PROPERTIES = 0x13,                           ///< ::zes_standby_properties_t
+    ZES_STRUCTURE_TYPE_TEMP_PROPERTIES = 0x14,                              ///< ::zes_temp_properties_t
+    ZES_STRUCTURE_TYPE_DEVICE_STATE = 0x15,                                 ///< ::zes_device_state_t
+    ZES_STRUCTURE_TYPE_PROCESS_STATE = 0x16,                                ///< ::zes_process_state_t
+    ZES_STRUCTURE_TYPE_PCI_STATE = 0x17,                                    ///< ::zes_pci_state_t
+    ZES_STRUCTURE_TYPE_FABRIC_PORT_CONFIG = 0x18,                           ///< ::zes_fabric_port_config_t
+    ZES_STRUCTURE_TYPE_FABRIC_PORT_STATE = 0x19,                            ///< ::zes_fabric_port_state_t
+    ZES_STRUCTURE_TYPE_FAN_CONFIG = 0x1a,                                   ///< ::zes_fan_config_t
+    ZES_STRUCTURE_TYPE_FREQ_STATE = 0x1b,                                   ///< ::zes_freq_state_t
+    ZES_STRUCTURE_TYPE_OC_CAPABILITIES = 0x1c,                              ///< ::zes_oc_capabilities_t
+    ZES_STRUCTURE_TYPE_LED_STATE = 0x1d,                                    ///< ::zes_led_state_t
+    ZES_STRUCTURE_TYPE_MEM_STATE = 0x1e,                                    ///< ::zes_mem_state_t
+    ZES_STRUCTURE_TYPE_PSU_STATE = 0x1f,                                    ///< ::zes_psu_state_t
+    ZES_STRUCTURE_TYPE_BASE_STATE = 0x20,                                   ///< ::zes_base_state_t
+    ZES_STRUCTURE_TYPE_RAS_CONFIG = 0x21,                                   ///< ::zes_ras_config_t
+    ZES_STRUCTURE_TYPE_RAS_STATE = 0x22,                                    ///< ::zes_ras_state_t
+    ZES_STRUCTURE_TYPE_TEMP_CONFIG = 0x23,                                  ///< ::zes_temp_config_t
+    ZES_STRUCTURE_TYPE_PCI_BAR_PROPERTIES_1_2 = 0x24,                       ///< ::zes_pci_bar_properties_1_2_t
+    ZES_STRUCTURE_TYPE_DEVICE_ECC_DESC = 0x25,                              ///< ::zes_device_ecc_desc_t
+    ZES_STRUCTURE_TYPE_DEVICE_ECC_PROPERTIES = 0x26,                        ///< ::zes_device_ecc_properties_t
+    ZES_STRUCTURE_TYPE_POWER_LIMIT_EXT_DESC = 0x27,                         ///< ::zes_power_limit_ext_desc_t
+    ZES_STRUCTURE_TYPE_POWER_EXT_PROPERTIES = 0x28,                         ///< ::zes_power_ext_properties_t
+    ZES_STRUCTURE_TYPE_OVERCLOCK_PROPERTIES = 0x29,                         ///< ::zes_overclock_properties_t
+    ZES_STRUCTURE_TYPE_FABRIC_PORT_ERROR_COUNTERS = 0x2a,                   ///< ::zes_fabric_port_error_counters_t
+    ZES_STRUCTURE_TYPE_ENGINE_EXT_PROPERTIES = 0x2b,                        ///< ::zes_engine_ext_properties_t
+    ZES_STRUCTURE_TYPE_RESET_PROPERTIES = 0x2c,                             ///< ::zes_reset_properties_t
+    ZES_STRUCTURE_TYPE_DEVICE_EXT_PROPERTIES = 0x2d,                        ///< ::zes_device_ext_properties_t
+    ZES_STRUCTURE_TYPE_DEVICE_UUID = 0x2e,                                  ///< ::zes_uuid_t
+    ZES_STRUCTURE_TYPE_DRIVER_PROPERTIES = 0x2f,                            ///< ::zes_driver_properties_t
+    ZES_STRUCTURE_TYPE_POWER_DOMAIN_EXP_PROPERTIES = 0x00020001,            ///< ::zes_power_domain_exp_properties_t
+    ZES_STRUCTURE_TYPE_MEM_BANDWIDTH_COUNTER_BITS_EXP_PROPERTIES = 0x00020002,  ///< ::zes_mem_bandwidth_counter_bits_exp_properties_t
+    ZES_STRUCTURE_TYPE_MEMORY_PAGE_OFFLINE_STATE_EXP = 0x00020003,          ///< ::zes_mem_page_offline_state_exp_t
+    ZES_STRUCTURE_TYPE_SUBDEVICE_EXP_PROPERTIES = 0x00020004,               ///< ::zes_subdevice_exp_properties_t
+    ZES_STRUCTURE_TYPE_VF_EXP_PROPERTIES = 0x00020005,                      ///< ::zes_vf_exp_properties_t
+    ZES_STRUCTURE_TYPE_VF_UTIL_MEM_EXP = 0x00020006,                        ///< ::zes_vf_util_mem_exp_t
+    ZES_STRUCTURE_TYPE_VF_UTIL_ENGINE_EXP = 0x00020007,                     ///< ::zes_vf_util_engine_exp_t
+    ZES_STRUCTURE_TYPE_VF_EXP_CAPABILITIES = 0x00020008,                    ///< ::zes_vf_exp_capabilities_t
+    ZES_STRUCTURE_TYPE_VF_UTIL_MEM_EXP2 = 0x00020009,                       ///< ::zes_vf_util_mem_exp2_t
+    ZES_STRUCTURE_TYPE_VF_UTIL_ENGINE_EXP2 = 0x00020010,                    ///< ::zes_vf_util_engine_exp2_t
+    ZES_STRUCTURE_TYPE_VF_EXP2_CAPABILITIES = 0x00020011,                   ///< ::zes_vf_exp2_capabilities_t
+    ZES_STRUCTURE_TYPE_DEVICE_ECC_DEFAULT_PROPERTIES_EXT = 0x00020012,      ///< ::zes_device_ecc_default_properties_ext_t
+    ZES_STRUCTURE_TYPE_PCI_LINK_SPEED_DOWNGRADE_EXT_STATE = 0x00020013,     ///< ::zes_pci_link_speed_downgrade_ext_state_t
+    ZES_STRUCTURE_TYPE_PCI_LINK_SPEED_DOWNGRADE_EXT_PROPERTIES = 0x00020014,///< ::zes_pci_link_speed_downgrade_ext_properties_t
+    ZES_STRUCTURE_TYPE_RAS_STATE_EXP2 = 0x00020015,                         ///< ::zes_ras_state_exp2_t
+    ZES_STRUCTURE_TYPE_RAS_CONFIG_EXP = 0x00020016,                         ///< ::zes_ras_config_exp_t
+    ZES_STRUCTURE_TYPE_OEM_SERIAL_ID_EXT_PROPERTIES = 0x00020017,           ///< ::zes_oem_serial_id_ext_properties_t
+    ZES_STRUCTURE_TYPE_DEVICE_EXT_STATE = 0x00020018,                       ///< ::zes_device_ext_state_t
+    ZES_STRUCTURE_TYPE_MEMORY_VENDOR_INFO_EXT_PROPERTIES = 0x00020019,      ///< ::zes_memory_vendor_info_ext_properties_t
+    ZES_STRUCTURE_TYPE_INFO_LOG_EXT_PROPERTIES = 0x00020020,                ///< ::zes_info_log_ext_properties_t
+    ZES_STRUCTURE_TYPE_INFO_LOG_INSTANCE_EXT_DESC = 0x00020021,             ///< ::zes_info_log_instance_ext_desc_t
+    ZES_STRUCTURE_TYPE_INFO_LOG_METADATA_EXT = 0x00020022,                  ///< ::zes_info_log_metadata_ext_t
+    ZES_STRUCTURE_TYPE_INFO_LOG_READ_STATUS_EXT = 0x00020023,               ///< ::zes_info_log_read_status_ext_t
+    ZES_STRUCTURE_TYPE_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZES_STRUCTURE_TYPE_* ENUMs
+
+} zes_structure_type_t;
+
+Full exact declarationzes_driver_properties_t lines765-775 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_driver_properties_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    zes_uuid_t uuid;                                                        ///< [out] universal unique identifier of the sysman driver instance.
+    uint32_t driverVersion;                                                 ///< [out] sysman driver version
+                                                                            ///< The sysman driver version is a non-zero, monotonically increasing
+                                                                            ///< value where higher values always indicate a more recent version.
+
+} zes_driver_properties_t;
+
+Full exact declarationzes_driver_extension_properties_t lines816-821 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_driver_extension_properties_t
+{
+    char name[ZES_MAX_EXTENSION_NAME];                                      ///< [out] extension name
+    uint32_t version;                                                       ///< [out] extension version using ::ZE_MAKE_VERSION
+
+} zes_driver_extension_properties_t;
+
+Full exact declarationzes_init_flag_t lines661-670 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef enum _zes_init_flag_t
+{
+    ZES_INIT_FLAG_GPU_ONLY = ZE_BIT(0),                                     ///< Initialize sysman for GPU devices only
+    ZES_INIT_FLAG_VPU_ONLY = ZE_BIT(1),                                     ///< Initialize sysman for VPU devices only
+    ZES_INIT_FLAG_NO_DEVICES = ZE_BIT(2),                                   ///< Allows ::zesInit() to succeed when no devices are discovered. Device
+                                                                            ///< discovery is deferred until the first call to ::zesDeviceGet(), in
+                                                                            ///< case no devices can be discovered when ::zesInit() is called.
+    ZES_INIT_FLAG_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZES_INIT_FLAG_* ENUMs
+
+} zes_init_flag_t;
+
+Full exact declarationzes_subdevice_exp_properties_t lines8558-8566 sourceSHA 569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4
+typedef struct _zes_subdevice_exp_properties_t
+{
+    zes_structure_type_t stype;                                             ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    uint32_t subdeviceId;                                                   ///< [out] this gives the ID of the sub device
+    zes_uuid_t uuid;                                                        ///< [out] universal unique identifier of the sub device.
+
+} zes_subdevice_exp_properties_t;
+FULL exact corresponding core types
+Full exact declarationze_result_t lines205-289 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+typedef enum _ze_result_t
+{
+    ZE_RESULT_SUCCESS = 0,                                                  ///< [Core] success
+    ZE_RESULT_NOT_READY = 1,                                                ///< [Core] synchronization primitive not signaled
+    ZE_RESULT_ERROR_DEVICE_LOST = 0x70000001,                               ///< [Core] device hung, reset, was removed, or driver update occurred
+    ZE_RESULT_ERROR_OUT_OF_HOST_MEMORY = 0x70000002,                        ///< [Core] insufficient host memory to satisfy call
+    ZE_RESULT_ERROR_OUT_OF_DEVICE_MEMORY = 0x70000003,                      ///< [Core] insufficient device memory to satisfy call
+    ZE_RESULT_ERROR_MODULE_BUILD_FAILURE = 0x70000004,                      ///< [Core] error occurred when building module, see build log for details
+    ZE_RESULT_ERROR_MODULE_LINK_FAILURE = 0x70000005,                       ///< [Core] error occurred when linking modules, see build log for details
+    ZE_RESULT_ERROR_DEVICE_REQUIRES_RESET = 0x70000006,                     ///< [Core] device requires a reset
+    ZE_RESULT_ERROR_DEVICE_IN_LOW_POWER_STATE = 0x70000007,                 ///< [Core] device currently in low power state
+    ZE_RESULT_EXP_ERROR_DEVICE_IS_NOT_VERTEX = 0x7ff00001,                  ///< [Core, Experimental] device is not represented by a fabric vertex
+    ZE_RESULT_EXP_ERROR_VERTEX_IS_NOT_DEVICE = 0x7ff00002,                  ///< [Core, Experimental] fabric vertex does not represent a device
+    ZE_RESULT_EXP_ERROR_REMOTE_DEVICE = 0x7ff00003,                         ///< [Core, Experimental] fabric vertex represents a remote device or
+                                                                            ///< subdevice
+    ZE_RESULT_EXP_ERROR_OPERANDS_INCOMPATIBLE = 0x7ff00004,                 ///< [Core, Experimental] operands of comparison are not compatible
+    ZE_RESULT_EXP_RTAS_BUILD_RETRY = 0x7ff00005,                            ///< [Core, Experimental] ray tracing acceleration structure build
+                                                                            ///< operation failed due to insufficient resources, retry with a larger
+                                                                            ///< acceleration structure buffer allocation
+    ZE_RESULT_EXP_RTAS_BUILD_DEFERRED = 0x7ff00006,                         ///< [Core, Experimental] ray tracing acceleration structure build
+                                                                            ///< operation deferred to parallel operation join
+    ZE_RESULT_ERROR_INSUFFICIENT_PERMISSIONS = 0x70010000,                  ///< [Sysman] access denied due to permission level
+    ZE_RESULT_ERROR_NOT_AVAILABLE = 0x70010001,                             ///< [Sysman] resource already in use and simultaneous access not allowed
+                                                                            ///< or resource was removed
+    ZE_RESULT_ERROR_DEPENDENCY_UNAVAILABLE = 0x70020000,                    ///< [Common] external required dependency is unavailable or missing
+    ZE_RESULT_WARNING_DROPPED_DATA = 0x70020001,                            ///< [Tools] data may have been dropped
+    ZE_RESULT_ERROR_UNINITIALIZED = 0x78000001,                             ///< [Validation] driver is not initialized
+    ZE_RESULT_ERROR_UNSUPPORTED_VERSION = 0x78000002,                       ///< [Validation] generic error code for unsupported versions
+    ZE_RESULT_ERROR_UNSUPPORTED_FEATURE = 0x78000003,                       ///< [Validation] generic error code for unsupported features
+    ZE_RESULT_ERROR_INVALID_ARGUMENT = 0x78000004,                          ///< [Validation] generic error code for invalid arguments
+    ZE_RESULT_ERROR_INVALID_NULL_HANDLE = 0x78000005,                       ///< [Validation] handle argument is not valid
+    ZE_RESULT_ERROR_HANDLE_OBJECT_IN_USE = 0x78000006,                      ///< [Validation] object pointed to by handle still in-use by device
+    ZE_RESULT_ERROR_INVALID_NULL_POINTER = 0x78000007,                      ///< [Validation] pointer argument may not be nullptr
+    ZE_RESULT_ERROR_INVALID_SIZE = 0x78000008,                              ///< [Validation] size argument is invalid (e.g., must not be zero)
+    ZE_RESULT_ERROR_UNSUPPORTED_SIZE = 0x78000009,                          ///< [Validation] size argument is not supported by the device (e.g., too
+                                                                            ///< large)
+    ZE_RESULT_ERROR_UNSUPPORTED_ALIGNMENT = 0x7800000a,                     ///< [Validation] alignment argument is not supported by the device (e.g.,
+                                                                            ///< too small)
+    ZE_RESULT_ERROR_INVALID_SYNCHRONIZATION_OBJECT = 0x7800000b,            ///< [Validation] synchronization object in invalid state
+    ZE_RESULT_ERROR_INVALID_ENUMERATION = 0x7800000c,                       ///< [Validation] enumerator argument is not valid
+    ZE_RESULT_ERROR_UNSUPPORTED_ENUMERATION = 0x7800000d,                   ///< [Validation] enumerator argument is not supported by the device
+    ZE_RESULT_ERROR_UNSUPPORTED_IMAGE_FORMAT = 0x7800000e,                  ///< [Validation] image format is not supported by the device
+    ZE_RESULT_ERROR_INVALID_NATIVE_BINARY = 0x7800000f,                     ///< [Validation] native binary is not supported by the device
+    ZE_RESULT_ERROR_INVALID_GLOBAL_NAME = 0x78000010,                       ///< [Validation] global variable is not found in the module
+    ZE_RESULT_ERROR_INVALID_KERNEL_NAME = 0x78000011,                       ///< [Validation] kernel name is not found in the module
+    ZE_RESULT_ERROR_INVALID_FUNCTION_NAME = 0x78000012,                     ///< [Validation] function name is not found in the module
+    ZE_RESULT_ERROR_INVALID_GROUP_SIZE_DIMENSION = 0x78000013,              ///< [Validation] group size dimension is not valid for the kernel or
+                                                                            ///< device
+    ZE_RESULT_ERROR_INVALID_GLOBAL_WIDTH_DIMENSION = 0x78000014,            ///< [Validation] global width dimension is not valid for the kernel or
+                                                                            ///< device
+    ZE_RESULT_ERROR_INVALID_KERNEL_ARGUMENT_INDEX = 0x78000015,             ///< [Validation] kernel argument index is not valid for kernel
+    ZE_RESULT_ERROR_INVALID_KERNEL_ARGUMENT_SIZE = 0x78000016,              ///< [Validation] kernel argument size does not match kernel
+    ZE_RESULT_ERROR_INVALID_KERNEL_ATTRIBUTE_VALUE = 0x78000017,            ///< [Validation] value of kernel attribute is not valid for the kernel or
+                                                                            ///< device
+    ZE_RESULT_ERROR_INVALID_MODULE_UNLINKED = 0x78000018,                   ///< [Validation] module with imports needs to be linked before kernels can
+                                                                            ///< be created from it.
+    ZE_RESULT_ERROR_INVALID_COMMAND_LIST_TYPE = 0x78000019,                 ///< [Validation] command list type does not match command queue type
+    ZE_RESULT_ERROR_OVERLAPPING_REGIONS = 0x7800001a,                       ///< [Validation] copy operations do not support overlapping regions of
+                                                                            ///< memory
+    ZE_RESULT_WARNING_ACTION_REQUIRED = 0x7800001b,                         ///< [Sysman] an action is required to complete the desired operation
+    ZE_RESULT_ERROR_INVALID_KERNEL_HANDLE = 0x7800001c,                     ///< [Core, Validation] kernel handle is invalid for the operation
+    ZE_RESULT_EXT_RTAS_BUILD_RETRY = 0x7800001d,                            ///< [Core, Extension] ray tracing acceleration structure build operation
+                                                                            ///< failed due to insufficient resources, retry with a larger acceleration
+                                                                            ///< structure buffer allocation
+    ZE_RESULT_EXT_RTAS_BUILD_DEFERRED = 0x7800001e,                         ///< [Core, Extension] ray tracing acceleration structure build operation
+                                                                            ///< deferred to parallel operation join
+    ZE_RESULT_EXT_ERROR_OPERANDS_INCOMPATIBLE = 0x7800001f,                 ///< [Core, Extension] operands of comparison are not compatible
+    ZE_RESULT_ERROR_SURVIVABILITY_MODE_DETECTED = 0x78000020,               ///< [Sysman] device is in survivability mode, firmware update needed
+    ZE_RESULT_ERROR_ADDRESS_NOT_FOUND = 0x78000021,                         ///< [Core] address not found within specified or current context
+    ZE_RESULT_QUERY_TRUE = 0x78000022,                                      ///< [Core, Extension] query API returned true
+    ZE_RESULT_QUERY_FALSE = 0x78000023,                                     ///< [Core, Extension] query API returned false
+    ZE_RESULT_ERROR_INVALID_GRAPH = 0x78000024,                             ///< [Core, Extension] graph object is invalid
+    ZE_RESULT_ERROR_GRAPH_CAPTURE_UNSUPPORTED = 0x78000025,                 ///< [Core, Extension] operation is not supported during graph capture
+    ZE_RESULT_ERROR_GRAPH_CAPTURE_INVALIDATED = 0x78000026,                 ///< [Core, Extension] operations failed and invalidated graph capture
+                                                                            ///< session
+    ZE_RESULT_ERROR_GRAPH_CAPTURE_MERGE_ATTEMPT = 0x78000027,               ///< [Core, Extension] operation failed because it would merge two graph
+                                                                            ///< capture sessions
+    ZE_RESULT_ERROR_COMMAND_LIST_NOT_CAPTURING = 0x78000028,                ///< [Core, Extension] command list is not in graph capture mode
+    ZE_RESULT_ERROR_GRAPH_UNJOINED_FORKS = 0x78000029,                      ///< [Core, Extension] graph contains unjoined forks
+    ZE_RESULT_ERROR_GRAPH_INTERNAL_EVENT = 0x7800002a,                      ///< [Core, Extension] operation failed because it uses a graph-internal
+                                                                            ///< counter-based event outside of the graph
+    ZE_RESULT_ERROR_UNKNOWN = 0x7ffffffe,                                   ///< [Core] unknown or internal error
+    ZE_RESULT_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_RESULT_* ENUMs
+
+} ze_result_t;
+
+Full exact declarationze_device_properties_t lines2011-2049 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+typedef struct _ze_device_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    ze_device_type_t type;                                                  ///< [out] generic device type
+    uint32_t vendorId;                                                      ///< [out] vendor id from PCI configuration
+    uint32_t deviceId;                                                      ///< [out] device id from PCI configuration.
+                                                                            ///< Note, the device id uses little-endian format.
+    ze_device_property_flags_t flags;                                       ///< [out] 0 (none) or a valid combination of ::ze_device_property_flag_t
+    uint32_t subdeviceId;                                                   ///< [out] sub-device id. Only valid if ::ZE_DEVICE_PROPERTY_FLAG_SUBDEVICE
+                                                                            ///< is set.
+    uint32_t coreClockRate;                                                 ///< [out] Clock rate for device core.
+    uint64_t maxMemAllocSize;                                               ///< [out] Maximum memory allocation size.
+    uint32_t maxHardwareContexts;                                           ///< [out] Maximum number of logical hardware contexts.
+    uint32_t maxCommandQueuePriority;                                       ///< [out] Maximum priority for command queues. Higher value is higher
+                                                                            ///< priority.
+    uint32_t numThreadsPerEU;                                               ///< [out] Maximum number of threads per EU.
+    uint32_t physicalEUSimdWidth;                                           ///< [out] The physical EU simd width.
+    uint32_t numEUsPerSubslice;                                             ///< [out] Maximum number of EUs per sub-slice.
+    uint32_t numSubslicesPerSlice;                                          ///< [out] Maximum number of sub-slices per slice.
+    uint32_t numSlices;                                                     ///< [out] Maximum number of slices.
+    uint64_t timerResolution;                                               ///< [out] @deprecated when using ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES
+                                                                            ///< since 1.17: Use ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES_1_2 to obtain
+                                                                            ///< timerResolution in cycles/sec for profiling and timestamps.
+    uint32_t timestampValidBits;                                            ///< [out] Returns the number of valid bits in the timestamp value. (i.e
+                                                                            ///< can be used to calculate the max value of the device timestamp in
+                                                                            ///< hardware or get the mask of valid bits in the timestamp value).
+                                                                            ///< timestampValidBits may or may not be same as the
+                                                                            ///< kernelTimestampValidBits as they may be tracked using different
+                                                                            ///< register sizes which are platform specific.
+    uint32_t kernelTimestampValidBits;                                      ///< [out] Returns the number of valid bits in the kernel timestamp values.
+                                                                            ///< (i.e can beused to calculate the max value of the  kernel timestamp in
+                                                                            ///< hardware or get the mask of valid bits in the kernel timestamp value).
+    ze_device_uuid_t uuid;                                                  ///< [out] universal unique identifier. Note: Subdevices will have their
+                                                                            ///< own uuid.
+    char name[ZE_MAX_DEVICE_NAME];                                          ///< [out] Device name
+
+} ze_device_properties_t;
+
+Full exact declarationze_device_property_flag_t lines1999-2007 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+typedef enum _ze_device_property_flag_t
+{
+    ZE_DEVICE_PROPERTY_FLAG_INTEGRATED = ZE_BIT(0),                         ///< Device is integrated with the Host.
+    ZE_DEVICE_PROPERTY_FLAG_SUBDEVICE = ZE_BIT(1),                          ///< Device handle used for query represents a sub-device.
+    ZE_DEVICE_PROPERTY_FLAG_ECC = ZE_BIT(2),                                ///< Device supports error correction memory access.
+    ZE_DEVICE_PROPERTY_FLAG_ONDEMANDPAGING = ZE_BIT(3),                     ///< Device supports on-demand page-faulting.
+    ZE_DEVICE_PROPERTY_FLAG_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_DEVICE_PROPERTY_FLAG_* ENUMs
+
+} ze_device_property_flag_t;
+
+Full exact declarationze_device_type_t lines1965-1974 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+typedef enum _ze_device_type_t
+{
+    ZE_DEVICE_TYPE_GPU = 1,                                                 ///< Graphics Processing Unit
+    ZE_DEVICE_TYPE_CPU = 2,                                                 ///< Central Processing Unit
+    ZE_DEVICE_TYPE_FPGA = 3,                                                ///< Field Programmable Gate Array
+    ZE_DEVICE_TYPE_MCA = 4,                                                 ///< Memory Copy Accelerator
+    ZE_DEVICE_TYPE_VPU = 5,                                                 ///< Vision Processing Unit
+    ZE_DEVICE_TYPE_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_DEVICE_TYPE_* ENUMs
+
+} ze_device_type_t;
+
+Full exact declarationze_structure_type_t lines293-427 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+typedef enum _ze_structure_type_t
+{
+    ZE_STRUCTURE_TYPE_DRIVER_PROPERTIES = 0x1,                              ///< ::ze_driver_properties_t
+    ZE_STRUCTURE_TYPE_DRIVER_IPC_PROPERTIES = 0x2,                          ///< ::ze_driver_ipc_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES = 0x3,                              ///< ::ze_device_properties_t. @deprecated since 1.17: Use
+                                                                            ///< ::ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES_1_2 instead.
+    ZE_STRUCTURE_TYPE_DEVICE_COMPUTE_PROPERTIES = 0x4,                      ///< ::ze_device_compute_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_MODULE_PROPERTIES = 0x5,                       ///< ::ze_device_module_properties_t
+    ZE_STRUCTURE_TYPE_COMMAND_QUEUE_GROUP_PROPERTIES = 0x6,                 ///< ::ze_command_queue_group_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_MEMORY_PROPERTIES = 0x7,                       ///< ::ze_device_memory_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_MEMORY_ACCESS_PROPERTIES = 0x8,                ///< ::ze_device_memory_access_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_CACHE_PROPERTIES = 0x9,                        ///< ::ze_device_cache_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_IMAGE_PROPERTIES = 0xa,                        ///< ::ze_device_image_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_P2P_PROPERTIES = 0xb,                          ///< ::ze_device_p2p_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_EXTERNAL_MEMORY_PROPERTIES = 0xc,              ///< ::ze_device_external_memory_properties_t
+    ZE_STRUCTURE_TYPE_CONTEXT_DESC = 0xd,                                   ///< ::ze_context_desc_t
+    ZE_STRUCTURE_TYPE_COMMAND_QUEUE_DESC = 0xe,                             ///< ::ze_command_queue_desc_t
+    ZE_STRUCTURE_TYPE_COMMAND_LIST_DESC = 0xf,                              ///< ::ze_command_list_desc_t
+    ZE_STRUCTURE_TYPE_EVENT_POOL_DESC = 0x10,                               ///< ::ze_event_pool_desc_t
+    ZE_STRUCTURE_TYPE_EVENT_DESC = 0x11,                                    ///< ::ze_event_desc_t
+    ZE_STRUCTURE_TYPE_FENCE_DESC = 0x12,                                    ///< ::ze_fence_desc_t
+    ZE_STRUCTURE_TYPE_IMAGE_DESC = 0x13,                                    ///< ::ze_image_desc_t
+    ZE_STRUCTURE_TYPE_IMAGE_PROPERTIES = 0x14,                              ///< ::ze_image_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_MEM_ALLOC_DESC = 0x15,                         ///< ::ze_device_mem_alloc_desc_t
+    ZE_STRUCTURE_TYPE_HOST_MEM_ALLOC_DESC = 0x16,                           ///< ::ze_host_mem_alloc_desc_t
+    ZE_STRUCTURE_TYPE_MEMORY_ALLOCATION_PROPERTIES = 0x17,                  ///< ::ze_memory_allocation_properties_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_DESC = 0x18,                   ///< ::ze_external_memory_export_desc_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMPORT_FD = 0x19,                     ///< ::ze_external_memory_import_fd_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_FD = 0x1a,                     ///< ::ze_external_memory_export_fd_t
+    ZE_STRUCTURE_TYPE_MODULE_DESC = 0x1b,                                   ///< ::ze_module_desc_t
+    ZE_STRUCTURE_TYPE_MODULE_PROPERTIES = 0x1c,                             ///< ::ze_module_properties_t
+    ZE_STRUCTURE_TYPE_KERNEL_DESC = 0x1d,                                   ///< ::ze_kernel_desc_t
+    ZE_STRUCTURE_TYPE_KERNEL_PROPERTIES = 0x1e,                             ///< ::ze_kernel_properties_t
+    ZE_STRUCTURE_TYPE_SAMPLER_DESC = 0x1f,                                  ///< ::ze_sampler_desc_t
+    ZE_STRUCTURE_TYPE_PHYSICAL_MEM_DESC = 0x20,                             ///< ::ze_physical_mem_desc_t
+    ZE_STRUCTURE_TYPE_KERNEL_PREFERRED_GROUP_SIZE_PROPERTIES = 0x21,        ///< ::ze_kernel_preferred_group_size_properties_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMPORT_WIN32 = 0x22,                  ///< ::ze_external_memory_import_win32_handle_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_MEMORY_EXPORT_WIN32 = 0x23,                  ///< ::ze_external_memory_export_win32_handle_t
+    ZE_STRUCTURE_TYPE_DEVICE_RAYTRACING_EXT_PROPERTIES = 0x00010001,        ///< ::ze_device_raytracing_ext_properties_t
+    ZE_STRUCTURE_TYPE_RAYTRACING_MEM_ALLOC_EXT_DESC = 0x10002,              ///< ::ze_raytracing_mem_alloc_ext_desc_t
+    ZE_STRUCTURE_TYPE_FLOAT_ATOMIC_EXT_PROPERTIES = 0x10003,                ///< ::ze_float_atomic_ext_properties_t
+    ZE_STRUCTURE_TYPE_CACHE_RESERVATION_EXT_DESC = 0x10004,                 ///< ::ze_cache_reservation_ext_desc_t
+    ZE_STRUCTURE_TYPE_EU_COUNT_EXT = 0x10005,                               ///< ::ze_eu_count_ext_t
+    ZE_STRUCTURE_TYPE_SRGB_EXT_DESC = 0x10006,                              ///< ::ze_srgb_ext_desc_t
+    ZE_STRUCTURE_TYPE_LINKAGE_INSPECTION_EXT_DESC = 0x10007,                ///< ::ze_linkage_inspection_ext_desc_t
+    ZE_STRUCTURE_TYPE_PCI_EXT_PROPERTIES = 0x10008,                         ///< ::ze_pci_ext_properties_t
+    ZE_STRUCTURE_TYPE_DRIVER_MEMORY_FREE_EXT_PROPERTIES = 0x10009,          ///< ::ze_driver_memory_free_ext_properties_t
+    ZE_STRUCTURE_TYPE_MEMORY_FREE_EXT_DESC = 0x1000a,                       ///< ::ze_memory_free_ext_desc_t
+    ZE_STRUCTURE_TYPE_MEMORY_COMPRESSION_HINTS_EXT_DESC = 0x1000b,          ///< ::ze_memory_compression_hints_ext_desc_t
+    ZE_STRUCTURE_TYPE_IMAGE_ALLOCATION_EXT_PROPERTIES = 0x1000c,            ///< ::ze_image_allocation_ext_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_LUID_EXT_PROPERTIES = 0x1000d,                 ///< ::ze_device_luid_ext_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_MEMORY_EXT_PROPERTIES = 0x1000e,               ///< ::ze_device_memory_ext_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_IP_VERSION_EXT = 0x1000f,                      ///< ::ze_device_ip_version_ext_t
+    ZE_STRUCTURE_TYPE_IMAGE_VIEW_PLANAR_EXT_DESC = 0x10010,                 ///< ::ze_image_view_planar_ext_desc_t
+    ZE_STRUCTURE_TYPE_EVENT_QUERY_KERNEL_TIMESTAMPS_EXT_PROPERTIES = 0x10011,   ///< ::ze_event_query_kernel_timestamps_ext_properties_t
+    ZE_STRUCTURE_TYPE_EVENT_QUERY_KERNEL_TIMESTAMPS_RESULTS_EXT_PROPERTIES = 0x10012,   ///< ::ze_event_query_kernel_timestamps_results_ext_properties_t
+    ZE_STRUCTURE_TYPE_KERNEL_MAX_GROUP_SIZE_EXT_PROPERTIES = 0x10013,       ///< ::ze_kernel_max_group_size_ext_properties_t
+    ZE_STRUCTURE_TYPE_IMAGE_FORMAT_SUPPORT_EXT_PROPERTIES = 0x10014,        ///< ::ze_image_format_support_ext_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_READONLY_MEMORY_EXT_PROPERTIES = 0x10015,      ///< ::ze_device_readonly_memory_ext_properties_t
+    ZE_STRUCTURE_TYPE_RELAXED_ALLOCATION_LIMITS_EXT_DESC = 0x10016,         ///< ::ze_relaxed_allocation_limits_ext_desc_t
+    ZE_STRUCTURE_TYPE_POWER_SAVING_HINT_EXT_DESC = 0x10017,                 ///< ::ze_context_power_saving_hint_ext_desc_t
+    ZE_STRUCTURE_TYPE_RELAXED_ALLOCATION_LIMITS_EXP_DESC = 0x00020001,      ///< ::ze_relaxed_allocation_limits_exp_desc_t
+    ZE_STRUCTURE_TYPE_MODULE_PROGRAM_EXP_DESC = 0x00020002,                 ///< ::ze_module_program_exp_desc_t
+    ZE_STRUCTURE_TYPE_SCHEDULING_HINT_EXP_PROPERTIES = 0x00020003,          ///< ::ze_scheduling_hint_exp_properties_t
+    ZE_STRUCTURE_TYPE_SCHEDULING_HINT_EXP_DESC = 0x00020004,                ///< ::ze_scheduling_hint_exp_desc_t
+    ZE_STRUCTURE_TYPE_IMAGE_VIEW_PLANAR_EXP_DESC = 0x00020005,              ///< ::ze_image_view_planar_exp_desc_t
+    ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES_1_2 = 0x00020006,                   ///< ::ze_device_properties_t
+    ZE_STRUCTURE_TYPE_IMAGE_MEMORY_EXP_PROPERTIES = 0x00020007,             ///< ::ze_image_memory_properties_exp_t
+    ZE_STRUCTURE_TYPE_POWER_SAVING_HINT_EXP_DESC = 0x00020008,              ///< ::ze_context_power_saving_hint_exp_desc_t
+    ZE_STRUCTURE_TYPE_COPY_BANDWIDTH_EXP_PROPERTIES = 0x00020009,           ///< ::ze_copy_bandwidth_exp_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_P2P_BANDWIDTH_EXP_PROPERTIES = 0x0002000A,     ///< ::ze_device_p2p_bandwidth_exp_properties_t
+    ZE_STRUCTURE_TYPE_FABRIC_VERTEX_EXP_PROPERTIES = 0x0002000B,            ///< ::ze_fabric_vertex_exp_properties_t
+    ZE_STRUCTURE_TYPE_FABRIC_EDGE_EXP_PROPERTIES = 0x0002000C,              ///< ::ze_fabric_edge_exp_properties_t
+    ZE_STRUCTURE_TYPE_MEMORY_SUB_ALLOCATIONS_EXP_PROPERTIES = 0x0002000D,   ///< ::ze_memory_sub_allocations_exp_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_BUILDER_EXP_DESC = 0x0002000E,                   ///< ::ze_rtas_builder_exp_desc_t
+    ZE_STRUCTURE_TYPE_RTAS_BUILDER_BUILD_OP_EXP_DESC = 0x0002000F,          ///< ::ze_rtas_builder_build_op_exp_desc_t
+    ZE_STRUCTURE_TYPE_RTAS_BUILDER_EXP_PROPERTIES = 0x00020010,             ///< ::ze_rtas_builder_exp_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_PARALLEL_OPERATION_EXP_PROPERTIES = 0x00020011,  ///< ::ze_rtas_parallel_operation_exp_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_DEVICE_EXP_PROPERTIES = 0x00020012,              ///< ::ze_rtas_device_exp_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_GEOMETRY_AABBS_EXP_CB_PARAMS = 0x00020013,       ///< ::ze_rtas_geometry_aabbs_exp_cb_params_t
+    ZE_STRUCTURE_TYPE_COUNTER_BASED_EVENT_POOL_EXP_DESC = 0x00020014,       ///< ::ze_event_pool_counter_based_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_COMMAND_LIST_EXP_PROPERTIES = 0x00020015,     ///< ::ze_mutable_command_list_exp_properties_t
+    ZE_STRUCTURE_TYPE_MUTABLE_COMMAND_LIST_EXP_DESC = 0x00020016,           ///< ::ze_mutable_command_list_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_COMMAND_ID_EXP_DESC = 0x00020017,             ///< ::ze_mutable_command_id_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_COMMANDS_EXP_DESC = 0x00020018,               ///< ::ze_mutable_commands_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_KERNEL_ARGUMENT_EXP_DESC = 0x00020019,        ///< ::ze_mutable_kernel_argument_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_GROUP_COUNT_EXP_DESC = 0x0002001A,            ///< ::ze_mutable_group_count_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_GROUP_SIZE_EXP_DESC = 0x0002001B,             ///< ::ze_mutable_group_size_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_GLOBAL_OFFSET_EXP_DESC = 0x0002001C,          ///< ::ze_mutable_global_offset_exp_desc_t
+    ZE_STRUCTURE_TYPE_PITCHED_ALLOC_DEVICE_EXP_PROPERTIES = 0x0002001D,     ///< ::ze_device_pitched_alloc_exp_properties_t
+    ZE_STRUCTURE_TYPE_BINDLESS_IMAGE_EXP_DESC = 0x0002001E,                 ///< ::ze_image_bindless_exp_desc_t
+    ZE_STRUCTURE_TYPE_PITCHED_IMAGE_EXP_DESC = 0x0002001F,                  ///< ::ze_image_pitched_exp_desc_t
+    ZE_STRUCTURE_TYPE_MUTABLE_GRAPH_ARGUMENT_EXP_DESC = 0x00020020,         ///< ::ze_mutable_graph_argument_exp_desc_t
+    ZE_STRUCTURE_TYPE_INIT_DRIVER_TYPE_DESC = 0x00020021,                   ///< ::ze_init_driver_type_desc_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_EXT_DESC = 0x00020022,             ///< ::ze_external_semaphore_ext_desc_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_WIN32_EXT_DESC = 0x00020023,       ///< ::ze_external_semaphore_win32_ext_desc_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_FD_EXT_DESC = 0x00020024,          ///< ::ze_external_semaphore_fd_ext_desc_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_EXT = 0x00020025,    ///< ::ze_external_semaphore_signal_params_ext_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_WAIT_PARAMS_EXT = 0x00020026,      ///< ::ze_external_semaphore_wait_params_ext_t
+    ZE_STRUCTURE_TYPE_DRIVER_DDI_HANDLES_EXT_PROPERTIES = 0x00020027,       ///< ::ze_driver_ddi_handles_ext_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_CACHELINE_SIZE_EXT = 0x00020028,               ///< ::ze_device_cache_line_size_ext_t
+    ZE_STRUCTURE_TYPE_DEVICE_VECTOR_WIDTH_PROPERTIES_EXT = 0x00020029,      ///< ::ze_device_vector_width_properties_ext_t
+    ZE_STRUCTURE_TYPE_RTAS_BUILDER_EXT_DESC = 0x00020030,                   ///< ::ze_rtas_builder_ext_desc_t
+    ZE_STRUCTURE_TYPE_RTAS_BUILDER_BUILD_OP_EXT_DESC = 0x00020031,          ///< ::ze_rtas_builder_build_op_ext_desc_t
+    ZE_STRUCTURE_TYPE_RTAS_BUILDER_EXT_PROPERTIES = 0x00020032,             ///< ::ze_rtas_builder_ext_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_PARALLEL_OPERATION_EXT_PROPERTIES = 0x00020033,  ///< ::ze_rtas_parallel_operation_ext_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_DEVICE_EXT_PROPERTIES = 0x00020034,              ///< ::ze_rtas_device_ext_properties_t
+    ZE_STRUCTURE_TYPE_RTAS_GEOMETRY_AABBS_EXT_CB_PARAMS = 0x00020035,       ///< ::ze_rtas_geometry_aabbs_ext_cb_params_t
+    ZE_STRUCTURE_TYPE_COMMAND_LIST_APPEND_PARAM_COOPERATIVE_DESC = 0x00020036,  ///< ::ze_command_list_append_launch_kernel_param_cooperative_desc_t
+    ZE_STRUCTURE_TYPE_EXTERNAL_MEMMAP_SYSMEM_EXT_DESC = 0x00020037,         ///< ::ze_external_memmap_sysmem_ext_desc_t
+    ZE_STRUCTURE_TYPE_PITCHED_ALLOC_2DIMAGE_LINEAR_PITCH_EXP_INFO = 0x00020038, ///< ::ze_pitched_alloc_2dimage_linear_pitch_exp_info_t
+    ZE_STRUCTURE_TYPE_KERNEL_ALLOCATION_PROPERTIES = 0x00020039,            ///< ::ze_kernel_allocation_exp_properties_t
+    ZE_STRUCTURE_TYPE_EVENT_COUNTER_BASED_DESC = 0x0002003A,                ///< ::ze_event_counter_based_desc_t
+    ZE_STRUCTURE_TYPE_EVENT_COUNTER_BASED_EXTERNAL_SYNC_ALLOCATION_DESC = 0x0002003B,   ///< ::ze_event_counter_based_external_sync_allocation_desc_t
+    ZE_STRUCTURE_TYPE_EVENT_SYNC_MODE_DESC = 0x0002003C,                    ///< ::ze_event_sync_mode_desc_t
+    ZE_STRUCTURE_TYPE_IPC_MEM_HANDLE_TYPE_EXT_DESC = 0x0002003D,            ///< ::ze_ipc_mem_handle_type_ext_desc_t
+    ZE_STRUCTURE_TYPE_DEVICE_EVENT_PROPERTIES = 0x0002003E,                 ///< ::ze_device_event_properties_t
+    ZE_STRUCTURE_TYPE_EVENT_COUNTER_BASED_EXTERNAL_AGGREGATE_STORAGE_DESC = 0x0002003F, ///< ::ze_event_counter_based_external_aggregate_storage_desc_t
+    ZE_STRUCTURE_TYPE_PHYSICAL_MEM_PROPERTIES = 0x00020040,                 ///< ::ze_physical_mem_properties_t
+    ZE_STRUCTURE_TYPE_DEVICE_USABLEMEM_SIZE_EXT_PROPERTIES = 0x00020041,    ///< ::ze_device_usablemem_size_ext_properties_t
+    ZE_STRUCTURE_TYPE_CUSTOM_PITCH_EXP_DESC = 0x00020042,                   ///< ::ze_custom_pitch_exp_desc_t
+    ZE_STRUCTURE_TYPE_DEVICE_COMPUTE_DOTPRODUCT_EXT_PROPERTIES = 0x00020043,///< ::ze_device_compute_dotproduct_ext_properties_t
+    ZE_STRUCTURE_TYPE_RUNTIME_REQUIREMENTS_MODULE_DESC = 0x00020044,        ///< ::ze_runtime_requirements_module_desc_t
+    ZE_STRUCTURE_TYPE_RUNTIME_REQUIREMENTS_GRAPH_DESC = 0x00020045,         ///< ::ze_runtime_requirements_graph_desc_t
+    ZE_STRUCTURE_TYPE_RUNTIME_REQUIREMENTS_OUTPUT = 0x00020046,             ///< ::ze_validate_runtime_requirements_output_t
+    ZE_STRUCTURE_TYPE_RECORD_REPLAY_GRAPH_EXT_PROPERTIES = 0x00020047,      ///< ::ze_record_replay_graph_ext_properties_t
+    ZE_STRUCTURE_TYPE_RECORD_REPLAY_GRAPH_EXT_DUMP_DESC = 0x00020048,       ///< ::ze_record_replay_graph_ext_dump_desc_t
+    ZE_STRUCTURE_TYPE_DEVICE_NPU_PROPERTIES_EXT = 0x00020049,               ///< ::ze_device_npu_properties_ext_t
+    ZE_STRUCTURE_TYPE_INIT_DRIVER_APP_VERSION_EXT_DESC = 0x0002004A,        ///< ::ze_init_driver_app_version_ext_desc_t
+    ZE_STRUCTURE_TYPE_IPC_PHYS_MEM_HANDLE_RANGE_EXT_DESC = 0x0002004B,      ///< ::ze_ipc_phys_mem_handle_range_ext_desc_t
+    ZE_STRUCTURE_TYPE_COMMAND_QUEUE_QOS_EXT_DESC = 0x0002004C,              ///< ::ze_command_queue_qos_ext_desc_t
+    ZE_STRUCTURE_TYPE_COMMAND_QUEUE_QOS_EXT_PROPERTIES = 0x0002004D,        ///< ::ze_command_queue_qos_ext_properties_t
+    ZE_STRUCTURE_TYPE_FORCE_UINT32 = 0x7fffffff ///< Value marking end of ZE_STRUCTURE_TYPE_* ENUMs
+
+} ze_structure_type_t;
+
+Full exact declarationze_device_usablemem_size_ext_properties_t lines16675-16688 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+typedef struct _ze_device_usablemem_size_ext_properties_t
+{
+    ze_structure_type_t stype;                                              ///< [in] type of this structure
+    void* pNext;                                                            ///< [in,out][optional] must be null or a pointer to an extension-specific
+                                                                            ///< structure (i.e. contains stype and pNext).
+    uint64_t currUsableMemSize;                                             ///< [out] Returns the available usable memory at the device level. This is
+                                                                            ///< typically less than or equal to the available physical memory on the
+                                                                            ///< device. It is important to note that usable memory size reported is
+                                                                            ///< transient in nature and cannot be used to reliably guarantee success
+                                                                            ///< of future allocations. The usable memory includes all the memory that
+                                                                            ///< the clients can allocate for their use and by L0 Core for its internal
+                                                                            ///< allocations.
+
+} ze_device_usablemem_size_ext_properties_t;
+
+Full exact declarationzeDeviceGetProperties lines2099-2102 sourceSHA c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de
+zeDeviceGetProperties(
+    ze_device_handle_t hDevice,                                             ///< [in] handle of the device
+    ze_device_properties_t* pDeviceProperties                               ///< [in,out] query result for device properties
+    );
+OFFICIAL HEADER SOURCEONLY PROVENANCE
+{
+  "sha256": "569df31bd158aa479af53c604bc778b41c61e249ad841ea9e977525898991bc4",
+  "url": "https://raw.githubusercontent.com/oneapi-src/level-zero/v1.34.0/include/zes_api.h",
+  "not_installed_sdk_header": true,
+  "path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_five_software_wave_prep_20261004T223400Z\\primary\\zes_api.v1.34.0.h.txt",
+  "source_only_no_install": true,
+  "bytes": 615098
+}

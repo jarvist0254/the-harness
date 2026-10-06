@@ -1,0 +1,34 @@
+{
+  "authorization": "PENDING_ROOT_NOT_AUTHORIZED_TO_EXECUTE",
+  "controller": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt3_skip_telemetry.py",
+  "controller_sha256": "7f0af5fc2d61a1c3a52a7b4d5ef1383f7943a63bd9920621f68519381c58d52d",
+  "ast": "PASS",
+  "commands": [
+    {
+      "stage": "configure",
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt3.cmd",
+      "sha256": "b607f4e5d5174c0ec79db567c737b724332663de724e1e58b4b8248d52400aac",
+      "original_sha256": "e9e105fd7f71fce319844a85af3ce30bcbf7770a328b3451bf6267526d5dbd0e"
+    },
+    {
+      "stage": "build",
+      "path": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt3.cmd",
+      "sha256": "bef1532e7865ae6f83cd679a3f9762e75ffc8163db221d964d8319c815111ae5",
+      "original_sha256": "a2de7c633182d4eb71fba15c5711734aec4bf24d483e1c53f71b9290fe58d844"
+    }
+  ],
+  "pending_admission": "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\BUILD_ATTEMPT3_ADMISSION_PENDING_ROOT.json",
+  "pending_admission_sha256": "a8eec72a0e0534615c5538a11417a32b361ed88272601fd54d65bccf031fcd79",
+  "original_admission_sha256": "8fac280974cf04d0ef912a2eb237bcc9e60afe684e153e3ce3a4312021ba7d29",
+  "admission_changed_fields": [
+    "controller_sha256",
+    "configure_cmd_sha256",
+    "build_cmd_sha256"
+  ],
+  "warning": "Copied authorization field is historical data only. This preparation receipt grants no runtime authorization. Root must explicitly admit the new hash.",
+  "vsdevcmd_sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+  "evidence_directory": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt3_skip_telemetry",
+  "evidence_exists": false,
+  "source_changes": false,
+  "controller_compiler_gpu_execution": false
+}

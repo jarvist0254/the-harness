@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "E:\\the_harness\\records\\provider_quality_review\\bool_cleanup_revision2_20261004T143557Z\\evaluate_revision2.py"
+  ],
+  "pid": 95224,
+  "exit_code": 0,
+  "elapsed_seconds": 1.125,
+  "timeout": false,
+  "child_presence": "INFO: No tasks are running which match the specified criteria.\r\n",
+  "evaluator_sha256": "5a1f61790d34a750913cc0769cd9025a0b006225ad0a6eb6034a9177fcb92625",
+  "scope": "Mock-only evaluator, no native worker fixtures"
+}

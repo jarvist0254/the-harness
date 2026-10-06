@@ -1,0 +1,26 @@
+{
+  "pid": 82168,
+  "command": [
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-B",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt4_job_probe.py",
+    "--runtime-admission",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_ATTEMPT4_ADMISSION.json",
+    "--runtime-admission-sha256",
+    "ee0da539c2ab1bd5cad23adb68f59acf92dc26b673192349730afe2b7fc144fa"
+  ],
+  "source_pins_before": {
+    "C:\\Users\\thoma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\controller_attempt4_job_probe.py": "5c06efd624620b005c433eafd00e0bfa6672facbd0ddac6c3e8ace02a580566a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\job_member_trace.py": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\ROOT_BUILD_ATTEMPT4_ADMISSION.json": "ee0da539c2ab1bd5cad23adb68f59acf92dc26b673192349730afe2b7fc144fa",
+    "E:\\the_harness\\records\\root_continuation_20261004\\fp32_derived_build_plan_20261004T155932Z\\CONTRACT.json": "048ccef119d51d95ae094d775175f4c9352ff8c3cdc5ee53a33ded4f6650c951",
+    "E:\\the_harness\\records\\root_continuation_20261004\\contained_build_policy_20261004T160430Z\\contained_build_supervisor.py": "fa907e8637870521b573922f6e939e56e388439fa61dc1a76fbeb53f7ad45ef3",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\source\\ggml\\src\\ggml-vulkan\\ggml-vulkan.cpp": "4bf60b8a6c2a4b2b9a6d8c2e6ed6e09904f9f047abfcddcc0917626f1ca015cd",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_configure_attempt4.cmd": "b51d0012531295771e0643145047c1fd795ef76cf7f9e8236ed5f77088df95e8",
+    "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\build_owned_build_attempt4.cmd": "51477a225417baee8de532e6ebe1ca191cbfa188c074bfdcffe389d0524c9175"
+  },
+  "outer_deadline_seconds": 330,
+  "aggregate_log_cap": 2097152,
+  "scope": "Single ROOT admitted CPU build diagnostic, no GPU"
+}

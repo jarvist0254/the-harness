@@ -1,0 +1,14 @@
+{
+  "job_id": "qwen_four_card_acceptance",
+  "actual_native_children": 0,
+  "enable_thinking": true,
+  "model": "qwen3.8-max",
+  "provider_launch_authorized": true,
+  "source_sha256": "8568c3a32d58847fa8683485855659ad50f5c3a0f2c0041512ebbe691b2b1275",
+  "batch_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z",
+  "reasoning_effort": "xhigh",
+  "prompt_sha256": "e43e98f618373729d2c6513821f3f99cb42406fa93291546a3d17df01f34d4af",
+  "source_path": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_max_six_20261004T181657Z\\hardware_contract.txt",
+  "lane": "Qwen",
+  "authority": "ROOT delegated explicit six-job provider-only scope; agent-authored source/prompt binding"
+}

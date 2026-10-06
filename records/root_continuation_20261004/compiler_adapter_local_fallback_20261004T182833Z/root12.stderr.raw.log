@@ -1,0 +1,17 @@
+test_bad_read_from_exit_query (__main__.AdapterTests) ... ok
+test_bad_read_from_wait_signal (__main__.AdapterTests) ... ok
+test_bool_exit_refused (__main__.AdapterTests) ... ok
+test_bool_wait_refused (__main__.AdapterTests) ... ok
+test_cancel_from_exit_query (__main__.AdapterTests) ... ok
+test_cancel_from_wait_signal (__main__.AdapterTests) ... ok
+test_deadline_from_exit_query (__main__.AdapterTests) ... ok
+test_nonzero_exit_refused (__main__.AdapterTests) ... ok
+test_overflow_from_exit_query (__main__.AdapterTests) ... ok
+test_success_requests_cleanup (__main__.AdapterTests) ... ok
+test_timeout (__main__.AdapterTests) ... ok
+test_wrong_policy_refused (__main__.AdapterTests) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.005s
+
+OK

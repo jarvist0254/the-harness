@@ -1,0 +1,11 @@
+{
+  "batch": "E:\\the_harness\\records\\factory_runs\\20261004\\layer_diagnostic_20261004T144323Z",
+  "base_source": "E:\\the_harness\\records\\factory_runs\\20261004\\coherent_repair_kv_20261004T130000Z\\grok_kv_f32\\llama_logits_kv_f32.cpp",
+  "base_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "verified_executable": "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\llama_logits_kv_f32.exe",
+  "exe_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "provider_max_jobs_initial": 3,
+  "provider_nativechildren_actual": 0,
+  "prior4usage_ledger": "E:\\the_harness\\records\\factory_runs\\20261004\\bool_cleanup_repair_20261004T135000Z\\USAGE_ALLFOUR_FINAL_20261004T141456Z.json"
+}

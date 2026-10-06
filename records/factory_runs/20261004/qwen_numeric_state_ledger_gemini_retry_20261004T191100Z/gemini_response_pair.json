@@ -1,0 +1,188 @@
+{
+  "provider_status": "SUCCESS",
+  "response_object_count": 2,
+  "response_objects": [
+    {
+      "verdict": "REJECTED",
+      "findings": [
+        {
+          "region": "state_ledger.py:compare_logits",
+          "exact_source": "state_ledger.py:206",
+          "reason": "Tolerance formula computes relative error against untrusted GPU logit abs(b) instead of CPU reference logit abs(a), violating CPU-reference tolerance. Counterexample: for cpu_logits[i]=100.0 and gpu_logits[i]=100.5, tolerance is calculated as 0.01 + 0.01*100.5 rather than reference 0.01 + 0.01*100.0; if gpu_logits[i]=0.0, relative tolerance collapses to 0.01 regardless of CPU reference magnitude.",
+          "minimal_fix": "Replace 'if err > (ATOL + RTOL * abs(b)):' with 'if err > (ATOL + RTOL * abs(a)):' at line 206."
+        },
+        {
+          "region": "state_ledger.py:StateLedger.append",
+          "exact_source": "state_ledger.py:259-261",
+          "reason": "State transition validity is checked only against caller-supplied record['prior_state'] rather than the actual prior state of experiment_id in self._records, allowing terminal state restarts and illegal transitions. Counterexample: appending {'state': 'RUNNING', 'experiment_id': 'exp1'} or {'state': 'RUNNING', 'experiment_id': 'exp1', 'prior_state': 'PENDING'} succeeds even after 'exp1' has entered terminal state 'FAILED_NUMERIC'.",
+          "minimal_fix": "Resolve actual_prior from self._records for record['experiment_id'] (defaulting to None if unrecorded); verify transition_allowed(actual_prior, record['state']) and disallow any transition out of terminal states ('FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY')."
+        },
+        {
+          "region": "state_ledger.py:StateLedger.append",
+          "exact_source": "state_ledger.py:262",
+          "reason": "StateLedger creates a shallow copy via dict(record), failing to ensure immutability for nested collections. Counterexample: mutating record['cpu_logits'][0] = 1.0 or record['runtime_metadata']['tokens'].append(99) after appending mutates the record inside the ledger in place.",
+          "minimal_fix": "Recursively freeze or deep-copy record contents (e.g. using copy.deepcopy(record) or converting nested dicts/lists to immutable structures) before storing in self._records."
+        },
+        {
+          "region": "state_ledger.py:validate_runtime_metadata,compare_logits,validate_model_metadata",
+          "exact_source": "state_ledger.py:80,89-93,175",
+          "reason": "Metadata integers and vocab count checks use loose equality (!=) rather than is_strict_int, allowing float coercion without strict integer validation. Counterexample: count=151936.0 in compare_logits, meta['size']=639446688.0 in validate_model_metadata, or requested_ctx=128.0 in validate_runtime_metadata evaluate equal under != and pass validation.",
+          "minimal_fix": "Add is_strict_int checks for count at line 175, meta.get('size') at line 80, and requested_ctx, actual_ctx, pinned_ggml_pad, n_batch, n_ubatch at lines 89-93."
+        },
+        {
+          "region": "state_ledger.py:validate_runtime_metadata,tests.py:runtime_meta",
+          "exact_source": "state_ledger.py:106-111; tests.py:42",
+          "reason": "DLL provenance check verifies hash format and list length but fails to enforce hash uniqueness across the fresh 5 DLLs, while tests supply identical dummy hashes. Counterexample: tests.py:42 sets ['0' * 64] * 5, which state_ledger.py accepts despite containing 5 duplicate hashes instead of unique DLL hashes.",
+          "minimal_fix": "In state_ledger.py line 108, add 'if len(set(dlls)) != DLL_COUNT: return False', and update tests.py:42 to provide 5 distinct 64-character hexadecimal hashes."
+        }
+      ],
+      "safety_checks": [
+        "No code execution, test runs, or external tools invoked.",
+        "Static adversarial review strictly confined to supplied snapshot source and tests against acceptance specification.",
+        "No hardware capability, GPU execution, multi-card capacity, or P2P transport inferred.",
+        "No filesystem modifications or external path operations executed."
+      ]
+    },
+    {
+      "findings": [
+        {
+          "exact_source": "state_ledger.py:206",
+          "minimal_fix": "Replace 'if err > (ATOL + RTOL * abs(b)):' with 'if err > (ATOL + RTOL * abs(a)):' at line 206.",
+          "reason": "Tolerance formula computes relative error against untrusted GPU logit abs(b) instead of CPU reference logit abs(a), violating CPU-reference tolerance. Counterexample: for cpu_logits[i]=100.0 and gpu_logits[i]=100.5, tolerance is calculated as 0.01 + 0.01*100.5 rather than reference 0.01 + 0.01*100.0; if gpu_logits[i]=0.0, relative tolerance collapses to 0.01 regardless of CPU reference magnitude.",
+          "region": "state_ledger.py:compare_logits"
+        },
+        {
+          "exact_source": "state_ledger.py:259-261",
+          "minimal_fix": "Resolve actual_prior from self._records for record['experiment_id'] (defaulting to None if unrecorded); verify transition_allowed(actual_prior, record['state']) and disallow any transition out of terminal states ('FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY').",
+          "reason": "State transition validity is checked only against caller-supplied record['prior_state'] rather than the actual prior state of experiment_id in self._records, allowing terminal state restarts and illegal transitions. Counterexample: appending {'state': 'RUNNING', 'experiment_id': 'exp1'} or {'state': 'RUNNING', 'experiment_id': 'exp1', 'prior_state': 'PENDING'} succeeds even after 'exp1' has entered terminal state 'FAILED_NUMERIC'.",
+          "region": "state_ledger.py:StateLedger.append"
+        },
+        {
+          "exact_source": "state_ledger.py:262",
+          "minimal_fix": "Recursively freeze or deep-copy record contents (e.g. using copy.deepcopy(record) or converting nested dicts/lists to immutable structures) before storing in self._records.",
+          "reason": "StateLedger creates a shallow copy via dict(record), failing to ensure immutability for nested collections. Counterexample: mutating record['cpu_logits'][0] = 1.0 or record['runtime_metadata']['tokens'].append(99) after appending mutates the record inside the ledger in place.",
+          "region": "state_ledger.py:StateLedger.append"
+        },
+        {
+          "exact_source": "state_ledger.py:80,89-93,175",
+          "minimal_fix": "Add is_strict_int checks for count at line 175, meta.get('size') at line 80, and requested_ctx, actual_ctx, pinned_ggml_pad, n_batch, n_ubatch at lines 89-93.",
+          "reason": "Metadata integers and vocab count checks use loose equality (!=) rather than is_strict_int, allowing float coercion without strict integer validation. Counterexample: count=151936.0 in compare_logits, meta['size']=639446688.0 in validate_model_metadata, or requested_ctx=128.0 in validate_runtime_metadata evaluate equal under != and pass validation.",
+          "region": "state_ledger.py:validate_runtime_metadata,compare_logits,validate_model_metadata"
+        },
+        {
+          "exact_source": "state_ledger.py:106-111; tests.py:42",
+          "minimal_fix": "In state_ledger.py line 108, add 'if len(set(dlls)) != DLL_COUNT: return False', and update tests.py:42 to provide 5 distinct 64-character hexadecimal hashes.",
+          "reason": "DLL provenance check verifies hash format and list length but fails to enforce hash uniqueness across the fresh 5 DLLs, while tests supply identical dummy hashes. Counterexample: tests.py:42 sets ['0' * 64] * 5, which state_ledger.py accepts despite containing 5 duplicate hashes instead of unique DLL hashes.",
+          "region": "state_ledger.py:validate_runtime_metadata,tests.py:runtime_meta"
+        }
+      ],
+      "safety_checks": [
+        "No code execution, test runs, or external tools invoked during inspection.",
+        "Static adversarial review strictly confined to supplied snapshot source and tests against acceptance specification.",
+        "No hardware capability, GPU execution, multi-card capacity, or P2P transport inferred.",
+        "No filesystem modifications or external path operations executed."
+      ],
+      "toolAction": "Submitting code review",
+      "toolSummary": "Code review verdict",
+      "verdict": "REJECTED"
+    }
+  ],
+  "structured_output": {
+    "findings": [
+      {
+        "exact_source": "state_ledger.py:206",
+        "minimal_fix": "Replace 'if err > (ATOL + RTOL * abs(b)):' with 'if err > (ATOL + RTOL * abs(a)):' at line 206.",
+        "reason": "Tolerance formula computes relative error against untrusted GPU logit abs(b) instead of CPU reference logit abs(a), violating CPU-reference tolerance. Counterexample: for cpu_logits[i]=100.0 and gpu_logits[i]=100.5, tolerance is calculated as 0.01 + 0.01*100.5 rather than reference 0.01 + 0.01*100.0; if gpu_logits[i]=0.0, relative tolerance collapses to 0.01 regardless of CPU reference magnitude.",
+        "region": "state_ledger.py:compare_logits"
+      },
+      {
+        "exact_source": "state_ledger.py:259-261",
+        "minimal_fix": "Resolve actual_prior from self._records for record['experiment_id'] (defaulting to None if unrecorded); verify transition_allowed(actual_prior, record['state']) and disallow any transition out of terminal states ('FAILED_NUMERIC', 'FAILED_RUNTIME', 'NOT_CHECKED', 'DIAGNOSTIC_ONLY').",
+        "reason": "State transition validity is checked only against caller-supplied record['prior_state'] rather than the actual prior state of experiment_id in self._records, allowing terminal state restarts and illegal transitions. Counterexample: appending {'state': 'RUNNING', 'experiment_id': 'exp1'} or {'state': 'RUNNING', 'experiment_id': 'exp1', 'prior_state': 'PENDING'} succeeds even after 'exp1' has entered terminal state 'FAILED_NUMERIC'.",
+        "region": "state_ledger.py:StateLedger.append"
+      },
+      {
+        "exact_source": "state_ledger.py:262",
+        "minimal_fix": "Recursively freeze or deep-copy record contents (e.g. using copy.deepcopy(record) or converting nested dicts/lists to immutable structures) before storing in self._records.",
+        "reason": "StateLedger creates a shallow copy via dict(record), failing to ensure immutability for nested collections. Counterexample: mutating record['cpu_logits'][0] = 1.0 or record['runtime_metadata']['tokens'].append(99) after appending mutates the record inside the ledger in place.",
+        "region": "state_ledger.py:StateLedger.append"
+      },
+      {
+        "exact_source": "state_ledger.py:80,89-93,175",
+        "minimal_fix": "Add is_strict_int checks for count at line 175, meta.get('size') at line 80, and requested_ctx, actual_ctx, pinned_ggml_pad, n_batch, n_ubatch at lines 89-93.",
+        "reason": "Metadata integers and vocab count checks use loose equality (!=) rather than is_strict_int, allowing float coercion without strict integer validation. Counterexample: count=151936.0 in compare_logits, meta['size']=639446688.0 in validate_model_metadata, or requested_ctx=128.0 in validate_runtime_metadata evaluate equal under != and pass validation.",
+        "region": "state_ledger.py:validate_runtime_metadata,compare_logits,validate_model_metadata"
+      },
+      {
+        "exact_source": "state_ledger.py:106-111; tests.py:42",
+        "minimal_fix": "In state_ledger.py line 108, add 'if len(set(dlls)) != DLL_COUNT: return False', and update tests.py:42 to provide 5 distinct 64-character hexadecimal hashes.",
+        "reason": "DLL provenance check verifies hash format and list length but fails to enforce hash uniqueness across the fresh 5 DLLs, while tests supply identical dummy hashes. Counterexample: tests.py:42 sets ['0' * 64] * 5, which state_ledger.py accepts despite containing 5 duplicate hashes instead of unique DLL hashes.",
+        "region": "state_ledger.py:validate_runtime_metadata,tests.py:runtime_meta"
+      }
+    ],
+    "safety_checks": [
+      "No code execution, test runs, or external tools invoked during inspection.",
+      "Static adversarial review strictly confined to supplied snapshot source and tests against acceptance specification.",
+      "No hardware capability, GPU execution, multi-card capacity, or P2P transport inferred.",
+      "No filesystem modifications or external path operations executed."
+    ],
+    "verdict": "REJECTED"
+  },
+  "json_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "verdict": {
+        "type": "string"
+      },
+      "findings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "region": {
+              "type": "string"
+            },
+            "exact_source": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "minimal_fix": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "region",
+            "exact_source",
+            "reason",
+            "minimal_fix"
+          ]
+        }
+      },
+      "safety_checks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "verdict",
+      "findings",
+      "safety_checks"
+    ]
+  },
+  "usage": {
+    "input_tokens": 45637,
+    "output_tokens": 16073,
+    "thinking_tokens": 13862,
+    "cache_read_tokens": 30531,
+    "total_tokens": 61710
+  },
+  "duration_seconds": 74.3271014,
+  "num_turns": 2,
+  "note": "Both response objects preserved; exact single-response acceptance unresolved pending ROOT reconciliation. The first object matches review schema; second includes additional toolAction/toolSummary keys. No source execution or provider edit."
+}

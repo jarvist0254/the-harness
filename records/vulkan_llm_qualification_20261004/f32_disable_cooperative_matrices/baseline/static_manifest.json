@@ -1,0 +1,81 @@
+{
+  "actual_context": 256,
+  "args": [
+    "E:\\the_harness\\records\\vulkan_llm_qualification_20261004\\fixture_kv_f32\\llama_logits_kv_f32.exe",
+    "--model",
+    "E:\\the_harness\\records\\models\\qwen3_06b_f32_derived\\Qwen3-0.6B-Q8_0-dequant-F32.gguf",
+    "--expected-sha256",
+    "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+    "--devices",
+    "Vulkan0,Vulkan1",
+    "--kv-f32"
+  ],
+  "atol": 0.01,
+  "authorization": "ROOT_ADMITTED_MIXED_F32_KV_F32_DISABLE_COOPMAT_AND_COOPMAT2_BASELINE",
+  "batch": 32,
+  "binary_sha256": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+  "child_environment_delta": {
+    "GGML_VK_DISABLE_COOPMAT": "1",
+    "GGML_VK_DISABLE_COOPMAT2": "1",
+    "GGML_VK_DISABLE_F16": "1",
+    "GGML_VK_DISABLE_FUSION": "1"
+  },
+  "conditional_followups": "reverse and comparator control only if this baseline fully passes parity and execution gates",
+  "cwd": "E:\\the_harness\\records\\build_vulkan_real\\build\\bin",
+  "devices": [
+    "Vulkan0",
+    "Vulkan1"
+  ],
+  "experiment": "root-admitted mixed-device F32/KV-F32 diagnostic with cooperative matrices disabled; no source edit",
+  "flash_attn": "disabled",
+  "inject_corruption": false,
+  "input_hashes_before": {
+    "exe": "d9034fe8011c6792110c066e9c4e3d92931960d4e48eec64aeca2c1534bf44c4",
+    "model": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+    "python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "runner": "8688c5b63f6988c37b73ee9e2aa6e4aa012eb4b44b8a50d5dbf6fb474eaa03a4",
+    "source": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371"
+  },
+  "kv": "f32",
+  "model_bytes": 2390150816,
+  "model_sha256": "bb38dab890935b8dbd2cb57e68669f39c34ff54dad07ec0dcd80049071bbcf80",
+  "parent_backend_flag_state": {
+    "GGML_VK_DISABLE_COOPMAT": "unset",
+    "GGML_VK_DISABLE_COOPMAT2": "unset",
+    "GGML_VK_DISABLE_F16": "unset",
+    "GGML_VK_DISABLE_FUSION": "unset",
+    "GGML_VK_DISABLE_GRAPH_OPTIMIZE": "unset"
+  },
+  "pinned_commit": "0faee5004297c3bcfa40b7bf11750127b8c1fd7d",
+  "python_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+  "requested_context": 128,
+  "rtol": 0.01,
+  "source_sha256": "2aff3925329a8ca6ca4834f665a8ed07acb1d3e341f73908dfecb3989057c371",
+  "stop_conditions": [
+    "timeout or native API uncertainty",
+    "wrong model/device/KV metadata",
+    "less than 29/29 offload",
+    "input hash change"
+  ],
+  "threads": 4,
+  "timeout_seconds": 60.0,
+  "tokens": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "ubatch": 32
+}

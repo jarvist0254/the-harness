@@ -1,0 +1,34 @@
+{
+  "status": "PREPARED_PENDING_ROOT_AUTHORIZATION",
+  "provider_launched": false,
+  "job": "grok_capacity_binding_high",
+  "model": "grok-4.7-build-fast",
+  "reasoning_effort": "high",
+  "deadline_seconds": 600,
+  "per_stream_cap_bytes": 2097152,
+  "copied_helpers_byte_identical": true,
+  "helper_and_prompt_pins": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z\\invoke_owned_capacity_editor.ps1": "4c31e32ca8baf6d8b231c38a0a8e3845c667341b6e85f87e5449b08d2b974005",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z\\provider_common.ps1": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z\\research_artifact.ps1": "8dde0fb1b9d79fc056aeb66c2027cf0a4ae6b1fdad51a50b604f254805408459",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z\\grok_capacity_binding_high.prompt.txt": "b3850fd5653d1176f418686fdef2a45500a73134c75c4218f482f707ed3250cc"
+  },
+  "candidate_source_pin": "4a27892638447b0913aa2faffa8b4c6c1615011ddc8fde54550fceb9f1190211",
+  "source_file": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_repair_prep_20261004T203621Z\\grok_capacity_high\\source.grok_untrusted.py",
+  "actual_qa": {
+    "path": "E:\\the_harness\\records\\root_continuation_20261004\\capacity_grok_root_audit_20261004T205640Z\\execution_receipt.json",
+    "sha256": "4da149e4f51a0428cf1af239ad11009d79fa5781739dc157b940c9a01bb2a9af",
+    "counts": {
+      "total": 47,
+      "pass": 44,
+      "red": 3
+    }
+  },
+  "proposed_new_reference_bounds": {
+    "bytes": 16777216,
+    "values": 1048576,
+    "authorization": "PENDING_ROOT_SCHEMA_REVIEW"
+  },
+  "native_gpu_provider_execution": false,
+  "pending_admission_path": "E:\\the_harness\\records\\factory_runs\\20261004\\grok_capacity_binding_repair_prep_20261004T210242Z\\ROOT_LAUNCH_BINDING.pending.json"
+}

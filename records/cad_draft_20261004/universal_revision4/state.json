@@ -1,0 +1,244 @@
+{
+  "status": "DRAFT_UNQUALIFIED",
+  "production_release": false,
+  "measured_interfaces": false,
+  "config": {
+    "profile": "universal",
+    "core_width_mm": 188,
+    "core_depth_mm": 200,
+    "base_mm": 8,
+    "post_mm": 10,
+    "shoe_height_mm": 16,
+    "gap_mm": 12,
+    "rail_depth_mm": 8,
+    "d_beam_height_mm": 6,
+    "metal_rail_height_mm": 2,
+    "cards": [
+      {
+        "bay": "A",
+        "length_mm": 360,
+        "height_mm": 165,
+        "thickness_mm": 68,
+        "measured": false
+      },
+      {
+        "bay": "B",
+        "length_mm": 360,
+        "height_mm": 165,
+        "thickness_mm": 68,
+        "measured": false
+      },
+      {
+        "bay": "C",
+        "length_mm": 360,
+        "height_mm": 165,
+        "thickness_mm": 68,
+        "measured": false
+      },
+      {
+        "bay": "D",
+        "length_mm": 360,
+        "height_mm": 165,
+        "thickness_mm": 68,
+        "measured": false
+      }
+    ],
+    "receiver_hole_datums": null,
+    "safe_support_patches": null,
+    "psu_interfaces": null,
+    "cable_bends": null,
+    "fan_plenum": null
+  },
+  "dimensions": {
+    "core_width_mm": 188.0,
+    "core_depth_mm": 200.0,
+    "base_mm": 8.0,
+    "post_mm": 10.0,
+    "shoe_height_mm": 16.0,
+    "gap_mm": 12.0,
+    "rail_depth_mm": 8.0,
+    "d_beam_height_mm": 6.0,
+    "metal_rail_height_mm": 2.0
+  },
+  "cards": [
+    {
+      "bay": "A",
+      "origin_mm": [
+        -114.0,
+        0.0,
+        24.0
+      ],
+      "size_mm": [
+        68.0,
+        360.0,
+        165.0
+      ],
+      "orientation": "UPRIGHT",
+      "measured": false
+    },
+    {
+      "bay": "B",
+      "origin_mm": [
+        -34.0,
+        0.0,
+        24.0
+      ],
+      "size_mm": [
+        68.0,
+        360.0,
+        165.0
+      ],
+      "orientation": "UPRIGHT",
+      "measured": false
+    },
+    {
+      "bay": "C",
+      "origin_mm": [
+        46.0,
+        0.0,
+        24.0
+      ],
+      "size_mm": [
+        68.0,
+        360.0,
+        165.0
+      ],
+      "orientation": "UPRIGHT",
+      "measured": false
+    },
+    {
+      "bay": "D",
+      "origin_mm": [
+        -82.5,
+        0.0,
+        201.0
+      ],
+      "size_mm": [
+        165.0,
+        360.0,
+        68.0
+      ],
+      "orientation": "ROLLED_90_DEGREES",
+      "measured": false
+    }
+  ],
+  "mount_bays": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "printed_bbox_mm": [
+    188.0,
+    200.0,
+    199.0
+  ],
+  "print_bbox_mm": [
+    200.0,
+    188.0,
+    199.0
+  ],
+  "print_rotation": "Z_PLUS_90_DEGREES",
+  "gpu_bbox_mm": [
+    228.0,
+    360.0,
+    245.0
+  ],
+  "frame_policy": "ONE_CONNECTED_CORE_NO_APPEND_D",
+  "support_bodies": [
+    "BASE",
+    "POSTS",
+    "D_BEAMS",
+    "METAL_RAIL_CONCEPT"
+  ],
+  "d_support_elevation_mm": 201.0,
+  "post_boxes": [
+    {
+      "origin_mm": [
+        -45.0,
+        0.0,
+        0.0
+      ],
+      "size_mm": [
+        10.0,
+        10.0,
+        199.0
+      ]
+    },
+    {
+      "origin_mm": [
+        -45.0,
+        190.0,
+        0.0
+      ],
+      "size_mm": [
+        10.0,
+        10.0,
+        199.0
+      ]
+    },
+    {
+      "origin_mm": [
+        35.0,
+        0.0,
+        0.0
+      ],
+      "size_mm": [
+        10.0,
+        10.0,
+        199.0
+      ]
+    },
+    {
+      "origin_mm": [
+        35.0,
+        190.0,
+        0.0
+      ],
+      "size_mm": [
+        10.0,
+        10.0,
+        199.0
+      ]
+    }
+  ],
+  "post_height_mm": 199.0,
+  "beam_top_mm": 199.0,
+  "core_bbox_mm": [
+    188.0,
+    200.0,
+    199.0
+  ],
+  "nominal_support_footprints": "BOTH_FRONT_AND_REAR_BODY_OVERLAP_ONLY_NOT_SAFE_CONTACTS",
+  "unknown_interfaces": [
+    "receiver_hole_datums",
+    "safe_support_patches",
+    "psu_interfaces",
+    "cable_bends",
+    "fan_plenum",
+    "removal_sweeps",
+    "brim",
+    "slicer_mass",
+    "loads",
+    "thermal"
+  ],
+  "claims": [
+    "GPU_BODY_BOXES_ONLY",
+    "GPU_OVERHANG_ALLOWED",
+    "CONTACT_AND_AIRFLOW_UNQUALIFIED",
+    "NO_PRODUCTION_STL"
+  ],
+  "actual_printed_bbox_mm": [
+    188.0,
+    200.0,
+    199.0
+  ],
+  "solid_count": 1,
+  "brep_valid": true,
+  "core_volume_mm3": 182767.99999999968,
+  "body_interferences": [],
+  "body_envelope_collision_status": "CLEAR_BODIES_ONLY",
+  "contact_patch_status": "UNMEASURED_NOT_QUALIFIED",
+  "airflow_and_removal": "NOT_CHECKED",
+  "exports_are_draft": true
+}

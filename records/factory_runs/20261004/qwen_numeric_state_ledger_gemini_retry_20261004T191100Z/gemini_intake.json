@@ -1,0 +1,21 @@
+{
+  "wrapper_terminal_status": "PARSE_OR_SCHEMA_ERROR",
+  "extraction": "first exact schema object decoded from response; trailing duplicate tool-summary object excluded",
+  "review_verdict": "REJECTED",
+  "finding_count": 5,
+  "review_file": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen_numeric_state_ledger_gemini_retry_20261004T191100Z\\gemini_review.extracted.json",
+  "review_sha256": "CBF1C938EC60706F0E5E679655BCDB0C7AA9FBE7ACF1BD3AF928164BCAC22BC5",
+  "stdout_sha256": "6502C153FAA7F1E84CDE1F6114B8C21440842995F03527FB67A54E0E3FFB2536",
+  "source_execution": false,
+  "provider_edit": false,
+  "input_pins_unchanged": true,
+  "usage": {
+    "input_tokens": 45637,
+    "output_tokens": 16073,
+    "thinking_tokens": 13862,
+    "cache_read_tokens": 30531,
+    "total_tokens": 61710
+  },
+  "tool_calls": "UNKNOWN",
+  "subagents": "UNKNOWN"
+}

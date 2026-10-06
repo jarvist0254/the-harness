@@ -1,0 +1,1159 @@
+{
+  "scope": "SYNTHETIC_COMPARATOR_ONLY_NOT_GPU_OR_MODEL_QUALIFICATION",
+  "original_controls": 62,
+  "additional_malformed_controls": 3,
+  "source": "E:\\the_harness\\records\\root_continuation_20261004\\capture_comparator_root_repair\\capture_comparator.py",
+  "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+  "tests_run": 65,
+  "failures": 0,
+  "errors": 0,
+  "not_checked": 0,
+  "forbidden_calls": [],
+  "outcomes": [
+    {
+      "case": "__main__.Cases.test_actual_hash_mismatch",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_aggregate_actual_file_budget",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_authority_extra",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_canonical_alias",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_duplicate_name",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_equal_baseline",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_extra_nodes",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_global_scale_false_match",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_budget",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_extra",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_op_mismatch",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_shape_mismatch",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_missing_expected_authority",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_missing_nodes",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_diagnostic_intrusive",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_qualification",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_schema",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_status",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dims",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dtype",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_../escape.bin",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_C:\\outside.bin",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_node.bin:ads",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_nbytes",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_0.0",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_False",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_strides",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan0',_'Vulka",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan1',_'Vulka",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_executable_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_flash_attention",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_bytes",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_n_ctx_actual",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_pinned_commit",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_role",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_source_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_vulkan_disable_f16",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_workload_sha256",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nested_duplicate_json_key",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_node_extra",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_minus_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_nan",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_minus_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_nan",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_order_difference",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_small_noise_reported_for_every_capture",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_file_inside_owned_folder",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_root_inside_owned_folder",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_both_short",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_different_passes",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_bool",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_inf",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_nan",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_narrowed",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_negative",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_widened",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_trailing_with_true_hash",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_truncated_with_true_hash",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Cases.test_updated_hash_real_corruption_first_observed",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Additional.test_expected_devices_nested_list",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Additional.test_expected_devices_nested_dict",
+      "outcome": "PASS"
+    },
+    {
+      "case": "__main__.Additional.test_pathological_canonical_suffix",
+      "outcome": "PASS"
+    }
+  ],
+  "observations": [
+    {
+      "case": "__main__.Cases.test_actual_hash_mismatch",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "SHA256 mismatch"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_aggregate_actual_file_budget",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Pass too large"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_authority_extra",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Strict fields rejected: origin"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_canonical_alias",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad node name"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_duplicate_name",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad node name"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_equal_baseline",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY",
+        "control": "COMPARATOR_ONLY",
+        "nodes": [
+          {
+            "ordinal": 0,
+            "name": "attn_norm-0",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          },
+          {
+            "ordinal": 1,
+            "name": "ffn_out-0",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          },
+          {
+            "ordinal": 2,
+            "name": "result_output",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          }
+        ],
+        "first_noise": null,
+        "first_threshold_violation": null
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_extra_nodes",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Structural mismatch node count"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_global_scale_false_match",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "comparator": "COMPARATOR_ONLY",
+        "control": "COMPARATOR_ONLY",
+        "nodes": [
+          {
+            "ordinal": 0,
+            "name": "attn_norm-0",
+            "max_abs": 0.019999999552965164,
+            "rmse": 0.007071067653814793,
+            "exact_mismatch_count": 1,
+            "failed_count": 1
+          },
+          {
+            "ordinal": 1,
+            "name": "ffn_out-0",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          },
+          {
+            "ordinal": 2,
+            "name": "result_output",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          }
+        ],
+        "first_noise": {
+          "ordinal": 0,
+          "name": "attn_norm-0"
+        },
+        "first_threshold_violation": {
+          "ordinal": 0,
+          "name": "attn_norm-0"
+        },
+        "first_divergent_ordinal": 0,
+        "stats": {
+          "max_abs": 0.019999999552965164,
+          "rmse": 0.007071067653814793,
+          "failed_count": 1,
+          "exact_mismatch_count": 1,
+          "samples": [
+            {
+              "index": 0,
+              "cpu": 0.0,
+              "gpu": 0.019999999552965164,
+              "diff": 0.019999999552965164
+            }
+          ]
+        }
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_budget",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "File too large"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_manifest_extra",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Strict fields rejected: manifest"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_op_mismatch",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Structural mismatch op"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_metadata_shape_mismatch",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Structural mismatch dims"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_missing_expected_authority",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Strict fields rejected: expected"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_missing_nodes",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Structural mismatch node count"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_diagnostic_intrusive",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Not diagnostic-only intrusive"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_qualification",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Not diagnostic-only intrusive"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_schema",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad schema or status"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_manifest_status",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad schema or status"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dims",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad dims"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_dtype",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad op or dtype"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_../escape.bin",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad file path"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_C:\\outside.bin",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad file path"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_file_node.bin:ads",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad file path"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_nbytes",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad nbytes"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_0.0",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad ordinal"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_ordinal_False",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad ordinal"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_node_strides",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad strides"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan0',_'Vulka",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "GPU devices must exactly match expected order"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_devices_['Vulkan1',_'Vulka",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "GPU devices must exactly match expected order"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_executable_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Pin mismatch executable_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_flash_attention",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad kv or flash_attention"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_bytes",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad model pin"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_model_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad model pin"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_n_ctx_actual",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad n_ctx_actual"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_pinned_commit",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad origin identity"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_role",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad origin identity"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_source_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Pin mismatch source_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_vulkan_disable_f16",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "GPU vulkan flags"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_mutation_origin_workload_sha256",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Pin mismatch workload_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nested_duplicate_json_key",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Duplicate JSON key: source_sha256"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_node_extra",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Strict fields rejected: node"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_minus_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_cpu_nan",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_minus_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_nonfinite_gpu_nan",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Non-finite value"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_order_difference",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Structural mismatch name"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_small_noise_reported_for_every_capture",
+      "result": {
+        "result": "DIAGNOSTIC_MATCH",
+        "comparator": "COMPARATOR_ONLY",
+        "control": "COMPARATOR_ONLY",
+        "nodes": [
+          {
+            "ordinal": 0,
+            "name": "attn_norm-0",
+            "max_abs": 0.0010000000474974513,
+            "rmse": 0.0003535534073861587,
+            "exact_mismatch_count": 1,
+            "failed_count": 0
+          },
+          {
+            "ordinal": 1,
+            "name": "ffn_out-0",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          },
+          {
+            "ordinal": 2,
+            "name": "result_output",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          }
+        ],
+        "first_noise": {
+          "ordinal": 0,
+          "name": "attn_norm-0"
+        },
+        "first_threshold_violation": null
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_file_inside_owned_folder",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Symlink rejected"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_symlink_root_inside_owned_folder",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Symlink rejected"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_both_short",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad tokens"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tokens_different_passes",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad tokens"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_bool",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad tolerance type"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_inf",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be exactly 0.01"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_nan",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be exactly 0.01"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_narrowed",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be exactly 0.01"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_negative",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be exactly 0.01"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_tolerance_widened",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Tolerance must be exactly 0.01"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_trailing_with_true_hash",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "File too large"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_truncated_with_true_hash",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Size mismatch"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Cases.test_updated_hash_real_corruption_first_observed",
+      "result": {
+        "result": "DIAGNOSTIC_DIVERGENCE",
+        "comparator": "COMPARATOR_ONLY",
+        "control": "COMPARATOR_ONLY",
+        "nodes": [
+          {
+            "ordinal": 0,
+            "name": "attn_norm-0",
+            "max_abs": 0.0,
+            "rmse": 0.0,
+            "exact_mismatch_count": 0,
+            "failed_count": 0
+          },
+          {
+            "ordinal": 1,
+            "name": "ffn_out-0",
+            "max_abs": 1.0,
+            "rmse": 0.3535533905932738,
+            "exact_mismatch_count": 1,
+            "failed_count": 1
+          },
+          {
+            "ordinal": 2,
+            "name": "result_output",
+            "max_abs": 2.0,
+            "rmse": 0.7071067811865476,
+            "exact_mismatch_count": 1,
+            "failed_count": 1
+          }
+        ],
+        "first_noise": {
+          "ordinal": 1,
+          "name": "ffn_out-0"
+        },
+        "first_threshold_violation": {
+          "ordinal": 1,
+          "name": "ffn_out-0"
+        },
+        "first_divergent_ordinal": 1,
+        "stats": {
+          "max_abs": 1.0,
+          "rmse": 0.3535533905932738,
+          "failed_count": 1,
+          "exact_mismatch_count": 1,
+          "samples": [
+            {
+              "index": 0,
+              "cpu": 0.0,
+              "gpu": 1.0,
+              "diff": 1.0
+            }
+          ]
+        }
+      },
+      "error": null,
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Additional.test_expected_devices_nested_list",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad expected devices"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Additional.test_expected_devices_nested_dict",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad expected devices"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    },
+    {
+      "case": "__main__.Additional.test_pathological_canonical_suffix",
+      "result": null,
+      "error": {
+        "type": "CaptureError",
+        "message": "Bad node name"
+      },
+      "input_unchanged": true,
+      "source_sha256": "e383241176f39fea1697857275148664406d6b012990458841201e1a1f5b4b21",
+      "scope": "Synthetic byte files; metadata pins are caller declarations, not native authenticity"
+    }
+  ],
+  "adapter": "Actual Qwen result key result, first_divergent_ordinal, stats; malformed artifacts must CaptureError or resultNOT_CHECKED, not numeric divergence. Output root/file writes remain external caller responsibility.",
+  "limits": [
+    "Metadata pin matching does not authenticate execution or original model.",
+    "144-node cap cannot get otherwise-valid145names under142canonical-name whitelist.",
+    "Synthetic fixture storage maximumabout16MiB, no candidate16MiBfullfloatcomparison.",
+    "No provider-generated tests executed."
+  ]
+}

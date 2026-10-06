@@ -1,0 +1,48 @@
+{
+  "observed_utc": "2026-10-04T17:32:40.6899409Z",
+  "cwd": "E:\\the_harness",
+  "resolved_version": "1.4.2-R4684.1",
+  "resolved_binary": "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe",
+  "source_shim": "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse.cmd",
+  "source_shim_sha256": "62a129087f37a3b18e0893ba1832a1de4bd30620c57b53dd907740b97a061124",
+  "launcher_sha256": "4c6913af8d611bf41a72c17337a6c9e57a733943fb890dbaf3d8f9f06f27fde8",
+  "binary_sha256": "39a97806d315ece0fc5cdbb88c903ef5bc77655f32e66dc22d267a212c5030ba",
+  "version_file_sha256": "d88eaba88d3472a6200a92c5f4e0e5b6583b670497e5e51e58140dfe241f04eb",
+  "invocation_mode": "direct exact versioned active binary resolved by pinned launcher (avoids launcher auto-update path)",
+  "runs": [
+    {
+      "command": "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe --help",
+      "pid": 58564,
+      "status": "EXIT_0",
+      "exit_code": 0,
+      "elapsed_seconds": 0.144,
+      "process_absent": true,
+      "stdout_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\help.stdout.log",
+      "stdout_bytes": 4150,
+      "stderr_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\help.stderr.log",
+      "stderr_bytes": 0,
+      "stream_caps_bytes": 2097152,
+      "stdout_sha256": "a48005291d31469ebfd73f82a075467c27734753a8da5910fdc6540b27fa753f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "C:\\Users\\thoma\\AppData\\Local\\Programs\\muse\\muse-bin-1.4.2-R4684.1.exe --version",
+      "pid": 57848,
+      "status": "EXIT_0",
+      "exit_code": 0,
+      "elapsed_seconds": 0.07,
+      "process_absent": true,
+      "stdout_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\version.stdout.log",
+      "stdout_bytes": 32,
+      "stderr_path": "E:\\the_harness\\records\\factory_runs\\20261004\\muse_adversarial_20261004T172000Z\\cli_probe\\version.stderr.log",
+      "stderr_bytes": 0,
+      "stream_caps_bytes": 2097152,
+      "stdout_sha256": "0f76a4e57018c78b7f9c602217b28cf90099ded8ac5b239ad287159a40ba572b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "input_hashes_unchanged": true,
+  "changed_inputs": [],
+  "provider_auth_session": "NOT_STARTED",
+  "settings_or_global_path_changed": "NOT_ATTEMPTED"
+}

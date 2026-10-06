@@ -1,0 +1,9 @@
+{
+  "credential_saved": false,
+  "model": "qwen3.8-max",
+  "pid": 64460,
+  "http_deadline_seconds": 240,
+  "max_native_authorized_deepseek": 10,
+  "max_native_authorized_qwen": 10,
+  "native_children": 0
+}

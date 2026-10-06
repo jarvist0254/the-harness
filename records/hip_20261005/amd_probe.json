@@ -1,0 +1,44 @@
+{
+  "schema": "amd_probe/1.0",
+  "sampled_at_utc": "2026-10-05T14:17:48.066521+00:00",
+  "display_devices": {
+    "probe": "SAMPLED",
+    "amd_devices": [
+      {
+        "name": "AMD Radeon(TM) Graphics",
+        "instance_id": "PCI\\VEN_1002&DEV_164E&SUBSYS_7E471462&REV_C5\\4&48FFC35&0&0041",
+        "endpoint_class": "SHARED_HOST_MEMORY_NOT_DEDICATED_VRAM"
+      }
+    ]
+  },
+  "tooling": {
+    "amd-smi": {
+      "status": "UNAVAILABLE",
+      "reason": "REFUSED_TOOL_NOT_FOUND",
+      "head": null
+    },
+    "rocm-smi": {
+      "status": "UNAVAILABLE",
+      "reason": "REFUSED_TOOL_NOT_FOUND",
+      "head": null
+    },
+    "rocminfo": {
+      "status": "UNAVAILABLE",
+      "reason": "REFUSED_TOOL_NOT_FOUND",
+      "head": null
+    },
+    "hipinfo": {
+      "status": "UNAVAILABLE",
+      "reason": "REFUSED_TOOL_NOT_FOUND",
+      "head": null
+    },
+    "vulkaninfo": {
+      "status": "SAMPLED",
+      "reason": null,
+      "head": "==========\nVULKANINFO\n==========\n\nVulkan Instance Version: 1.4.321\n\n\nInstance Extensions: count = 20\n-------------------------------\nVK_EXT_debug_report                    : extension revision 10\nVK_EXT_debug_utils                     : extension revision 2\nVK_EXT_direct_mode_display             : extension revision 1\nVK_EXT_surface_maintenance1            : extension revision 1\nVK_EXT_swapchain_colorspace            : extension revision 5\nVK_KHR_device_group_creation           : extension revision 1\nVK_KHR"
+    }
+  },
+  "verdict": "NO_COMPATIBLE_AMD_GPU_THIS_HOST",
+  "evidence": "PROVEN",
+  "note": "no discrete AMD GPU: only shared-memory iGPU or nothing; zero AMD peer pairs constructible"
+}

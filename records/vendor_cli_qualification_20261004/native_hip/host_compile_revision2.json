@@ -1,0 +1,7 @@
+{
+  "command": "cmd.exe /d /s /c \"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && cl /nologo /EHsc /O2 /D__HIP_PLATFORM_AMD__ /I\"E:\\tmp\\PyReExperimental\\rocm\\Lib\\site-packages\\_rocm_sdk_core\\include\" hip_module_host.cpp /Fe:hip_vector.exe /link /LIBPATH:\"E:\\tmp\\PyReExperimental\\rocm\\Lib\\site-packages\\_rocm_sdk_core\\lib\" amdhip64.lib\"",
+  "pid": 38360,
+  "exit_code": 0,
+  "stdout": "hip_module_host.cpp\r\n",
+  "stderr": ""
+}

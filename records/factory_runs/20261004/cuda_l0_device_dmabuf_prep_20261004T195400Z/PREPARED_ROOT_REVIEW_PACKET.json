@@ -1,0 +1,56 @@
+{
+  "native_children_actual": 0,
+  "normalized_caps_each_bytes": 2097152,
+  "model": "qwen3.8-max",
+  "provider_launch_authorized": false,
+  "thinking_budget_set": false,
+  "outer_seconds": 2430,
+  "job_id": "qwen_cuda_l0_device_dmabuf",
+  "state": "NEW_DISTINCT_COMBINED_FIXTURE_PACKET_PENDING_ROOT_LAUNCH_ADMISSION",
+  "existing_qwen_streams_unmodified": true,
+  "enable_thinking": true,
+  "http_seconds": 2400,
+  "raw_cap_bytes": 16777216,
+  "source_execution": false,
+  "reasoning_effort": "xhigh",
+  "source_limit_chars": 8000,
+  "utc": "2026-10-04T19:54:00.7179457Z",
+  "tests_limit_chars": 6000,
+  "files": [
+    {
+      "sha256": "a1af83e43c80c9b322690d4fd23640ef06af95c32e32f2d095d756aa43b6bb63",
+      "name": "cuda_l0_device_dmabuf.prompt.txt",
+      "bytes": 6621
+    },
+    {
+      "sha256": "a1af83e43c80c9b322690d4fd23640ef06af95c32e32f2d095d756aa43b6bb63",
+      "name": "cuda_l0_device_dmabuf.spec.txt",
+      "bytes": 6621
+    },
+    {
+      "sha256": "f70a59ec96c2edd617499499dc815873d9f3996f5c08b1181ef9cc90d4024866",
+      "name": "invoke_owned_stream_research.private_admitted.ps1",
+      "bytes": 8059
+    },
+    {
+      "sha256": "984561623e4a6f371cc8455ac4587728a45fe27a6d24ab7c6f4fa242459f3fbb",
+      "name": "LEVEL_ZERO_OFFICIAL_RUNTIME_SOURCE_METADATA.json",
+      "bytes": 1661
+    },
+    {
+      "sha256": "24e788d256d9c78405f4e2a95bdb257b0775a76a50379e9f9063ff2e355e586a",
+      "name": "provider_common.ps1",
+      "bytes": 4072
+    },
+    {
+      "sha256": "c8f108925d2e10d1d44f097ff582b31c496e11c23aa7e4bc97dd6e52c64e965d",
+      "name": "qwen_http_stream_research.private_admitted.ps1",
+      "bytes": 8008
+    },
+    {
+      "sha256": "ac688b556dbeeb1c54deef0e15d0919a45f1ccd528681c06b1218d458eef1169",
+      "name": "research_artifact.ps1",
+      "bytes": 772
+    }
+  ]
+}

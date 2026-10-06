@@ -1,0 +1,143 @@
+#include <level_zero/ze_api.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstdint>
+#include <cstring>
+#include <string>
+#include <vector>
+using namespace std;
+#define QSTR(x) #x
+#define QARGS(...) #__VA_ARGS__
+static const uint64_t TMO=10000000000ULL;
+static const size_t BYTES=65536;
+static const size_t WORDS=BYTES/4;
+static const size_t FAULT_OFFSET=32768;
+static const char HEX[17]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f',0};
+static const char INJ_FLAG[]={'-','-','i','n','j','e','c','t','-','c','o','r','r','u','p','t','i','o','n',0};
+static const char USAGE[]=QARGS(usage SRC_UUID DST_UUID --inject-corruption);
+static const char SEQ[]=QARGS(zeInit,zeDriverGet,zeDeviceGet,zeDeviceGetProperties,zeDeviceGetCommandQueueGroupProperties,zeDeviceCanAccessPeer,zeDeviceGetP2PProperties,zeContextCreateEx,zeMemAllocDevice,zeMemAllocHost,zeMemGetAllocProperties,zeCommandQueueCreate,zeCommandListCreate,zeCommandListAppendMemoryFill,zeCommandListAppendMemoryCopy,zeCommandListClose,zeFenceCreate,zeCommandQueueExecuteCommandLists,zeFenceHostSynchronize);
+static const char C_OPEN='{';
+static const char C_CLOSE='}';
+static const char C_COLON=':';
+static const char C_COMMA=',';
+static const char C_OBRK='[';
+static const char C_CBRK=']';
+static const char C_EQ='=';
+static string esc(const string& s){string o;for(unsigned char c:s){if(c==34||c==92){o+=char(92);o+=char(c);}else if(c<32){o+=char(92);o+='u';o+='0';o+='0';o+=HEX[(c>>4)&15];o+=HEX[c&15];}else{o+=char(c);}}return o;}
+static string q(const string& s){string o;o+=char(34);o+=esc(s);o+=char(34);return o;}
+static string q(const char* s){return q(s?string(s):string());}
+static string jarr(const vector<string>& v){string o;o+=C_OBRK;for(size_t i=0;i<v.size();++i){if(i)o+=C_COMMA;o+=q(v[i]);}o+=C_CBRK;return o;}
+static void key(string&o,const char*k){if(!o.empty()&&o.back()!=C_OPEN)o+=C_COMMA;o+=q(k);o+=C_COLON;}
+static void add_str(string&o,const char*k,const string& v){key(o,k);o+=q(v);}
+static void add_cstr(string&o,const char*k,const char* v){key(o,k);o+=q(v);}
+static void add_num(string&o,const char*k,const string& v){key(o,k);o+=v;}
+static void add_raw(string&o,const char*k,const char* v){key(o,k);o+=v;}
+static void add_obj(string&o,const char*k,const string& v){key(o,k);o+=v;}
+static const char* zres(ze_result_t r){if(r==ZE_RESULT_SUCCESS)return QSTR(SUCCESS);if(r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE)return QSTR(UNSUPPORTED);if(r==ZE_RESULT_ERROR_UNINITIALIZED)return QSTR(UNINIT);if(r==ZE_RESULT_ERROR_NOT_AVAILABLE)return QSTR(NOT_AVAILABLE);return QSTR(ERROR);}
+static string uuid_hex(const ze_device_uuid_t& u){string s;s.resize(32);for(int i=0;i<16;++i){unsigned v=u.id[i];s[2*i]=HEX[(v>>4)&15];s[2*i+1]=HEX[v&15];}return s;}
+static bool valid_uuid(const string& s){if(s.size()!=32)return false;for(char c:s){bool ok=(c>='0'&&c<='9')||(c>='a'&&c<='f');if(!ok)return false;}return true;}
+static bool ncr(ze_result_t r){return r==ZE_RESULT_ERROR_UNSUPPORTED_FEATURE||r==ZE_RESULT_ERROR_UNINITIALIZED||r==ZE_RESULT_ERROR_NOT_AVAILABLE;}
+struct Dev{ze_device_handle_t h=nullptr;ze_device_properties_t p{};string u;ze_driver_handle_t drv=nullptr;bool found=false;};
+struct GroupSel{int ordinal=-1;string kind;uint32_t numQueues=0;};
+static GroupSel pick_group(ze_device_handle_t h){uint32_t n=0;if(zeDeviceGetCommandQueueGroupProperties(h,&n,nullptr)!=ZE_RESULT_SUCCESS||n==0)return {};vector<ze_command_queue_group_properties_t> v(n);for(auto& x:v){memset(&x,0,sizeof(x));x.stype=ZE_STRUCTURE_TYPE_COMMAND_QUEUE_GROUP_PROPERTIES;}if(zeDeviceGetCommandQueueGroupProperties(h,&n,v.data())!=ZE_RESULT_SUCCESS)return {};int copy=-1;int comp=-1;uint32_t copyQ=0;uint32_t compQ=0;for(uint32_t i=0;i<n;++i){if(v[i].numQueues==0)continue;bool c=(v[i].flags&ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COPY)!=0;bool m=(v[i].flags&ZE_COMMAND_QUEUE_GROUP_PROPERTY_FLAG_COMPUTE)!=0;if(c&&copy<0){copy=(int)i;copyQ=v[i].numQueues;}if(m&&comp<0){comp=(int)i;compQ=v[i].numQueues;}}GroupSel s;if(copy>=0){s.ordinal=copy;s.kind=QSTR(COPY);s.numQueues=copyQ;}else if(comp>=0){s.ordinal=comp;s.kind=QSTR(COMPUTE);s.numQueues=compQ;}return s;}
+static ze_result_t make_queue(ze_context_handle_t ctx,ze_device_handle_t dev,uint32_t ordinal,ze_command_queue_handle_t& out){ze_command_queue_desc_t d{};d.stype=ZE_STRUCTURE_TYPE_COMMAND_QUEUE_DESC;d.ordinal=ordinal;return zeCommandQueueCreate(ctx,dev,&d,&out);}
+struct Tracker{ze_context_handle_t ctx=nullptr;vector<ze_fence_handle_t> fences;vector<ze_command_list_handle_t> lists;vector<ze_command_queue_handle_t> queues;vector<void*> mem;bool destroyed=false;bool submission_unconfirmed=false;};
+static void rec(vector<string>& e,const char* api,ze_result_t r,size_t i){if(r!=ZE_RESULT_SUCCESS){string m(api);m+=C_OBRK;m+=to_string(i);m+=C_CBRK;m+=C_EQ;m+=to_string((int)r);e.push_back(m);}}
+// A failed finite fence wait is not permission to destroy in-flight objects.
+// End this disposable process without driver/static destructors. The caller must
+// retain and reap this owned process; OS/driver GPU reclamation is NOT certified.
+[[noreturn]] static void terminal_quarantine(const char* api,ze_result_t r,const char* reason){
+string o;o+=C_OPEN;add_cstr(o,QSTR(status),QSTR(FAIL));add_cstr(o,QSTR(api),api);add_num(o,QSTR(ze_result),to_string((int)r));add_cstr(o,QSTR(reason),reason);add_cstr(o,QSTR(resource_state),QSTR(TERMINAL_QUARANTINE));add_raw(o,QSTR(destruction_skipped),QSTR(true));add_raw(o,QSTR(cleanup_verified),QSTR(false));add_raw(o,QSTR(direct_transport_qualified),QSTR(false));add_raw(o,QSTR(exit_code),QSTR(1));o+=C_CLOSE;
+puts(o.c_str());fflush(stdout);fflush(stderr);std::_Exit(1);
+}
+static vector<string> destroy_tracker(Tracker& t){vector<string> e;if(t.submission_unconfirmed)terminal_quarantine(QSTR(cleanup),ZE_RESULT_NOT_READY,QSTR(submission_unconfirmed));if(t.destroyed)return e;for(size_t i=t.fences.size();i-- >0;){if(t.fences[i])rec(e,QSTR(zeFenceDestroy),zeFenceDestroy(t.fences[i]),i);}t.fences.clear();for(size_t i=t.lists.size();i-- >0;){if(t.lists[i])rec(e,QSTR(zeCommandListDestroy),zeCommandListDestroy(t.lists[i]),i);}t.lists.clear();for(size_t i=t.queues.size();i-- >0;){if(t.queues[i])rec(e,QSTR(zeCommandQueueDestroy),zeCommandQueueDestroy(t.queues[i]),i);}t.queues.clear();for(size_t i=t.mem.size();i-- >0;){if(t.ctx&&t.mem[i])rec(e,QSTR(zeMemFree),zeMemFree(t.ctx,t.mem[i]),i);}t.mem.clear();if(t.ctx)rec(e,QSTR(zeContextDestroy),zeContextDestroy(t.ctx),0);t.ctx=nullptr;t.destroyed=true;return e;}
+static int emit_not_checked(const char* reason,Tracker& t){vector<string> ce=destroy_tracker(t);string o;o+=C_OPEN;if(!ce.empty()){add_cstr(o,QSTR(status),QSTR(FAIL));add_cstr(o,QSTR(reason),QSTR(cleanup_failed));add_cstr(o,QSTR(original_reason),reason);add_obj(o,QSTR(cleanup_errors),jarr(ce));add_raw(o,QSTR(exit_code),QSTR(1));}else{add_cstr(o,QSTR(status),QSTR(NOT_CHECKED));add_cstr(o,QSTR(reason),reason);add_raw(o,QSTR(exit_code),QSTR(2));}o+=C_CLOSE;puts(o.c_str());return ce.empty()?2:1;}
+static int emit_fail(const char* api,ze_result_t r,const char* reason,Tracker& t){if(t.submission_unconfirmed)terminal_quarantine(api,r,reason);vector<string> ce=destroy_tracker(t);string o;o+=C_OPEN;add_cstr(o,QSTR(status),QSTR(FAIL));add_cstr(o,QSTR(api),api);add_num(o,QSTR(ze_result),to_string((int)r));add_cstr(o,QSTR(ze_result_name),zres(r));if(reason&&reason[0])add_cstr(o,QSTR(reason),reason);add_obj(o,QSTR(cleanup_errors),jarr(ce));add_raw(o,QSTR(exit_code),QSTR(1));o+=C_CLOSE;puts(o.c_str());return 1;}
+static ze_result_t alloc_meta(ze_context_handle_t ctx,void* ptr,const Dev& S,const Dev& D,string& owner_uuid,string& type){ze_memory_allocation_properties_t mp{};mp.stype=ZE_STRUCTURE_TYPE_MEMORY_ALLOCATION_PROPERTIES;ze_device_handle_t dh=nullptr;ze_result_t r=zeMemGetAllocProperties(ctx,ptr,&mp,&dh);if(r!=ZE_RESULT_SUCCESS)return r;if(mp.type==ZE_MEMORY_TYPE_DEVICE)type=QSTR(DEVICE);else if(mp.type==ZE_MEMORY_TYPE_HOST)type=QSTR(HOST);else if(mp.type==ZE_MEMORY_TYPE_SHARED)type=QSTR(SHARED);else type=QSTR(UNKNOWN);owner_uuid.clear();if(dh){if(dh==S.h)owner_uuid=S.u;else if(dh==D.h)owner_uuid=D.u;else owner_uuid=QSTR(other);}return ZE_RESULT_SUCCESS;}
+int main(int argc,char**argv){Tracker trk;string su;string du;bool inj=false;string inj_flag(INJ_FLAG);for(int i=1;i<argc;++i){string a=argv[i];if(a==inj_flag){if(inj)return emit_fail(QSTR(CLI),ZE_RESULT_ERROR_INVALID_ARGUMENT,QSTR(duplicate_flag),trk);inj=true;}else if(su.empty())su=a;else if(du.empty())du=a;else return emit_fail(QSTR(CLI),ZE_RESULT_ERROR_INVALID_ARGUMENT,QSTR(surplus_argument),trk);}
+if(su.empty()||du.empty())return emit_not_checked(USAGE,trk);
+if(!valid_uuid(su)||!valid_uuid(du))return emit_not_checked(QSTR(uuid_must_be_32_lower_hex),trk);
+if(su==du)return emit_not_checked(QSTR(same_uuid_selected),trk);
+ze_result_t r=zeInit(0);if(r!=ZE_RESULT_SUCCESS)return ncr(r)?emit_not_checked(QSTR(zeInit),trk):emit_fail(QSTR(zeInit),r,QSTR(init_failed),trk);
+uint32_t nd=0;r=zeDriverGet(&nd,nullptr);if(r!=ZE_RESULT_SUCCESS)return ncr(r)?emit_not_checked(QSTR(zeDriverGet),trk):emit_fail(QSTR(zeDriverGet),r,QSTR(driver_count),trk);if(nd==0)return emit_not_checked(QSTR(no_drivers),trk);
+vector<ze_driver_handle_t> dr(nd);r=zeDriverGet(&nd,dr.data());if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeDriverGet),r,QSTR(driver_list),trk);
+Dev S;Dev D;int scount=0;int dcount=0;
+for(auto d:dr){uint32_t n=0;if(zeDeviceGet(d,&n,nullptr)!=ZE_RESULT_SUCCESS||n==0)continue;vector<ze_device_handle_t> dv(n);if(zeDeviceGet(d,&n,dv.data())!=ZE_RESULT_SUCCESS)continue;for(auto h:dv){ze_device_properties_t p{};p.stype=ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES;if(zeDeviceGetProperties(h,&p)!=ZE_RESULT_SUCCESS)continue;if(p.type!=ZE_DEVICE_TYPE_GPU)continue;string u=uuid_hex(p.uuid);if(u==su){++scount;S.h=h;S.p=p;S.u=u;S.drv=d;S.found=true;}if(u==du){++dcount;D.h=h;D.p=p;D.u=u;D.drv=d;D.found=true;}}}
+if(scount!=1||dcount!=1)return emit_not_checked(QSTR(selected_UUID_not_unique_or_missing),trk);
+if(S.drv!=D.drv)return emit_not_checked(QSTR(selected_devices_not_same_driver),trk);
+if(S.h==D.h)return emit_not_checked(QSTR(same_device_handle),trk);
+if(S.p.vendorId!=0x8086u||D.p.vendorId!=0x8086u)return emit_not_checked(QSTR(selected_device_not_Intel),trk);
+if(S.p.subdeviceId!=0||D.p.subdeviceId!=0)return emit_not_checked(QSTR(subdevice_selected),trk);
+ze_bool_t can_s2d=0;ze_bool_t can_d2s=0;
+r=zeDeviceCanAccessPeer(S.h,D.h,&can_s2d);if(r!=ZE_RESULT_SUCCESS&&!ncr(r))return emit_fail(QSTR(zeDeviceCanAccessPeer),r,QSTR(src_to_dst),trk);if(ncr(r))can_s2d=0;
+r=zeDeviceCanAccessPeer(D.h,S.h,&can_d2s);if(r!=ZE_RESULT_SUCCESS&&!ncr(r))return emit_fail(QSTR(zeDeviceCanAccessPeer),r,QSTR(dst_to_src),trk);if(ncr(r))can_d2s=0;
+ze_device_p2p_properties_t pp{};pp.stype=ZE_STRUCTURE_TYPE_DEVICE_P2P_PROPERTIES;bool prop_s2d=false;bool prop_d2s=false;
+r=zeDeviceGetP2PProperties(S.h,D.h,&pp);if(r==ZE_RESULT_SUCCESS)prop_s2d=(pp.flags&ZE_DEVICE_P2P_PROPERTY_FLAG_ACCESS)!=0;else if(!ncr(r))return emit_fail(QSTR(zeDeviceGetP2PProperties),r,QSTR(src_to_dst),trk);
+pp.flags=0;r=zeDeviceGetP2PProperties(D.h,S.h,&pp);if(r==ZE_RESULT_SUCCESS)prop_d2s=(pp.flags&ZE_DEVICE_P2P_PROPERTY_FLAG_ACCESS)!=0;else if(!ncr(r))return emit_fail(QSTR(zeDeviceGetP2PProperties),r,QSTR(dst_to_src),trk);
+bool access_s2d=(can_s2d!=0)&&prop_s2d;bool access_d2s=(can_d2s!=0)&&prop_d2s;
+if(!access_s2d&&!access_d2s)return emit_not_checked(QSTR(directed_peer_access_unsupported),trk);
+vector<ze_device_handle_t> ctx_pair;ctx_pair.push_back(S.h);ctx_pair.push_back(D.h);
+ze_context_desc_t cd{};cd.stype=ZE_STRUCTURE_TYPE_CONTEXT_DESC;
+r=zeContextCreateEx(S.drv,&cd,(uint32_t)ctx_pair.size(),ctx_pair.data(),&trk.ctx);if(r!=ZE_RESULT_SUCCESS)return ncr(r)?emit_not_checked(QSTR(zeContextCreateEx),trk):emit_fail(QSTR(zeContextCreateEx),r,QSTR(context),trk);
+ze_device_mem_alloc_desc_t dm{};dm.stype=ZE_STRUCTURE_TYPE_DEVICE_MEM_ALLOC_DESC;dm.ordinal=0;
+void* sp=nullptr;void* dp=nullptr;void* hp=nullptr;
+r=zeMemAllocDevice(trk.ctx,&dm,BYTES,1,S.h,&sp);if(r!=ZE_RESULT_SUCCESS)return ncr(r)?emit_not_checked(QSTR(src_alloc),trk):emit_fail(QSTR(zeMemAllocDevice),r,QSTR(src_alloc),trk);if(!sp)return emit_fail(QSTR(zeMemAllocDevice),ZE_RESULT_ERROR_UNKNOWN,QSTR(src_alloc_null),trk);trk.mem.push_back(sp);
+r=zeMemAllocDevice(trk.ctx,&dm,BYTES,1,D.h,&dp);if(r!=ZE_RESULT_SUCCESS)return ncr(r)?emit_not_checked(QSTR(dst_alloc),trk):emit_fail(QSTR(zeMemAllocDevice),r,QSTR(dst_alloc),trk);if(!dp)return emit_fail(QSTR(zeMemAllocDevice),ZE_RESULT_ERROR_UNKNOWN,QSTR(dst_alloc_null),trk);trk.mem.push_back(dp);
+ze_host_mem_alloc_desc_t hm{};hm.stype=ZE_STRUCTURE_TYPE_HOST_MEM_ALLOC_DESC;
+r=zeMemAllocHost(trk.ctx,&hm,BYTES,1,&hp);if(r!=ZE_RESULT_SUCCESS)return ncr(r)?emit_not_checked(QSTR(host_alloc),trk):emit_fail(QSTR(zeMemAllocHost),r,QSTR(host_alloc),trk);if(!hp)return emit_fail(QSTR(zeMemAllocHost),ZE_RESULT_ERROR_UNKNOWN,QSTR(host_alloc_null),trk);trk.mem.push_back(hp);
+string src_owner;string dst_owner;string host_owner;string src_type;string dst_type;string host_type;
+r=alloc_meta(trk.ctx,sp,S,D,src_owner,src_type);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeMemGetAllocProperties),r,QSTR(src_alloc_meta),trk);
+if(src_owner!=S.u||src_type!=QSTR(DEVICE))return emit_fail(QSTR(zeMemGetAllocProperties),ZE_RESULT_ERROR_UNKNOWN,QSTR(src_owner_mismatch),trk);
+r=alloc_meta(trk.ctx,dp,S,D,dst_owner,dst_type);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeMemGetAllocProperties),r,QSTR(dst_alloc_meta),trk);
+if(dst_owner!=D.u||dst_type!=QSTR(DEVICE))return emit_fail(QSTR(zeMemGetAllocProperties),ZE_RESULT_ERROR_UNKNOWN,QSTR(dst_owner_mismatch),trk);
+r=alloc_meta(trk.ctx,hp,S,D,host_owner,host_type);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeMemGetAllocProperties),r,QSTR(host_alloc_meta),trk);
+GroupSel fq=pick_group(S.h);if(fq.ordinal<0)return emit_not_checked(QSTR(no_src_queue_group),trk);
+ze_command_queue_handle_t qh=nullptr;r=make_queue(trk.ctx,S.h,(uint32_t)fq.ordinal,qh);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueCreate),r,QSTR(fill_queue),trk);trk.queues.push_back(qh);
+ze_command_list_desc_t ld{};ld.stype=ZE_STRUCTURE_TYPE_COMMAND_LIST_DESC;ld.commandQueueGroupOrdinal=(uint32_t)fq.ordinal;
+ze_command_list_handle_t lh=nullptr;r=zeCommandListCreate(trk.ctx,S.h,&ld,&lh);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListCreate),r,QSTR(fill_list),trk);trk.lists.push_back(lh);
+uint32_t pattern=0x5A5A5A5Au;
+r=zeCommandListAppendMemoryFill(lh,sp,&pattern,sizeof(pattern),BYTES,nullptr,0,nullptr);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListAppendMemoryFill),r,QSTR(fill),trk);
+r=zeCommandListClose(lh);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListClose),r,QSTR(fill_close),trk);
+ze_fence_desc_t fd{};fd.stype=ZE_STRUCTURE_TYPE_FENCE_DESC;
+ze_fence_handle_t ff=nullptr;r=zeFenceCreate(qh,&fd,&ff);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceCreate),r,QSTR(fill_fence),trk);trk.fences.push_back(ff);
+trk.submission_unconfirmed=true;r=zeCommandQueueExecuteCommandLists(qh,1,&lh,ff);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueExecuteCommandLists),r,QSTR(fill_wait),trk);r=zeFenceHostSynchronize(ff,TMO);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceHostSynchronize),r,QSTR(fill_wait),trk);trk.submission_unconfirmed=false;
+size_t fault_index=FAULT_OFFSET/4;
+if(inj){ze_command_list_handle_t cl=nullptr;r=zeCommandListCreate(trk.ctx,S.h,&ld,&cl);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListCreate),r,QSTR(corrupt_list),trk);trk.lists.push_back(cl);uint32_t bad=0xDEADBEEFu;void* fp=static_cast<uint8_t*>(sp)+FAULT_OFFSET;r=zeCommandListAppendMemoryFill(cl,fp,&bad,sizeof(bad),sizeof(uint32_t),nullptr,0,nullptr);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListAppendMemoryFill),r,QSTR(corrupt_fill),trk);r=zeCommandListClose(cl);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListClose),r,QSTR(corrupt_close),trk);ze_fence_handle_t cf=nullptr;r=zeFenceCreate(qh,&fd,&cf);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceCreate),r,QSTR(corrupt_fence),trk);trk.fences.push_back(cf);trk.submission_unconfirmed=true;r=zeCommandQueueExecuteCommandLists(qh,1,&cl,cf);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueExecuteCommandLists),r,QSTR(corrupt_wait),trk);r=zeFenceHostSynchronize(cf,TMO);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceHostSynchronize),r,QSTR(corrupt_wait),trk);trk.submission_unconfirmed=false;}
+ze_device_handle_t copy_dev=nullptr;const char* copy_name=nullptr;GroupSel cq;
+if(access_s2d){GroupSel g=pick_group(S.h);if(g.ordinal>=0){copy_dev=S.h;copy_name=QSTR(src);cq=g;}}
+if(!copy_dev&&access_d2s){GroupSel g=pick_group(D.h);if(g.ordinal>=0){copy_dev=D.h;copy_name=QSTR(dst);cq=g;}}
+if(!copy_dev)return emit_not_checked(QSTR(no_copy_queue_group),trk);
+ze_command_queue_handle_t cqh=nullptr;r=make_queue(trk.ctx,copy_dev,(uint32_t)cq.ordinal,cqh);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueCreate),r,QSTR(copy_queue),trk);trk.queues.push_back(cqh);
+ze_command_list_desc_t cld{};cld.stype=ZE_STRUCTURE_TYPE_COMMAND_LIST_DESC;cld.commandQueueGroupOrdinal=(uint32_t)cq.ordinal;
+ze_command_list_handle_t cpl=nullptr;r=zeCommandListCreate(trk.ctx,copy_dev,&cld,&cpl);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListCreate),r,QSTR(copy_list),trk);trk.lists.push_back(cpl);
+r=zeCommandListAppendMemoryCopy(cpl,dp,sp,BYTES,nullptr,0,nullptr);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListAppendMemoryCopy),r,QSTR(peer_copy),trk);
+r=zeCommandListClose(cpl);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListClose),r,QSTR(copy_close),trk);
+ze_fence_handle_t cp=nullptr;r=zeFenceCreate(cqh,&fd,&cp);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceCreate),r,QSTR(copy_fence),trk);trk.fences.push_back(cp);
+trk.submission_unconfirmed=true;r=zeCommandQueueExecuteCommandLists(cqh,1,&cpl,cp);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueExecuteCommandLists),r,QSTR(peer_copy_wait),trk);r=zeFenceHostSynchronize(cp,TMO);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceHostSynchronize),r,QSTR(peer_copy_wait),trk);trk.submission_unconfirmed=false;
+GroupSel rq=pick_group(D.h);if(rq.ordinal<0)return emit_not_checked(QSTR(no_dst_readback_queue_group),trk);
+ze_command_queue_handle_t rqh=nullptr;r=make_queue(trk.ctx,D.h,(uint32_t)rq.ordinal,rqh);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueCreate),r,QSTR(read_queue),trk);trk.queues.push_back(rqh);
+ze_command_list_desc_t rld{};rld.stype=ZE_STRUCTURE_TYPE_COMMAND_LIST_DESC;rld.commandQueueGroupOrdinal=(uint32_t)rq.ordinal;
+ze_command_list_handle_t rl=nullptr;r=zeCommandListCreate(trk.ctx,D.h,&rld,&rl);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListCreate),r,QSTR(read_list),trk);trk.lists.push_back(rl);
+r=zeCommandListAppendMemoryCopy(rl,hp,dp,BYTES,nullptr,0,nullptr);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListAppendMemoryCopy),r,QSTR(readback),trk);
+r=zeCommandListClose(rl);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandListClose),r,QSTR(read_close),trk);
+ze_fence_handle_t rf=nullptr;r=zeFenceCreate(rqh,&fd,&rf);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceCreate),r,QSTR(read_fence),trk);trk.fences.push_back(rf);
+trk.submission_unconfirmed=true;r=zeCommandQueueExecuteCommandLists(rqh,1,&rl,rf);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeCommandQueueExecuteCommandLists),r,QSTR(read_wait),trk);r=zeFenceHostSynchronize(rf,TMO);if(r!=ZE_RESULT_SUCCESS)return emit_fail(QSTR(zeFenceHostSynchronize),r,QSTR(read_wait),trk);trk.submission_unconfirmed=false;
+const uint32_t* hw=static_cast<const uint32_t*>(hp);size_t mismatch_count=0;size_t first_index=0;uint32_t first_got=0;bool have_first=false;for(size_t i=0;i<WORDS;++i){if(hw[i]!=pattern){if(!have_first){have_first=true;first_index=i;first_got=hw[i];}++mismatch_count;}}
+vector<string> ce=destroy_tracker(trk);
+if(!ce.empty()){string o;o+=C_OPEN;add_cstr(o,QSTR(status),QSTR(FAIL));add_cstr(o,QSTR(reason),QSTR(cleanup_failed));add_obj(o,QSTR(cleanup_errors),jarr(ce));add_raw(o,QSTR(inject_corruption),inj?QSTR(true):QSTR(false));add_num(o,QSTR(mismatch_count),to_string(mismatch_count));add_raw(o,QSTR(exit_code),QSTR(1));o+=C_CLOSE;puts(o.c_str());return 1;}
+if(mismatch_count==0){if(inj){string o;o+=C_OPEN;add_cstr(o,QSTR(status),QSTR(FAIL));add_cstr(o,QSTR(reason),QSTR(injection_not_observed));add_raw(o,QSTR(inject_corruption),QSTR(true));add_num(o,QSTR(mismatch_count),to_string(mismatch_count));add_raw(o,QSTR(exit_code),QSTR(1));o+=C_CLOSE;puts(o.c_str());return 1;}
+string o;o+=C_OPEN;add_cstr(o,QSTR(status),QSTR(PEER_COPY_PAYLOAD_OBSERVED));add_raw(o,QSTR(exit_code),QSTR(0));add_raw(o,QSTR(inject_corruption),QSTR(false));add_raw(o,QSTR(direct_transport_qualified),QSTR(false));add_raw(o,QSTR(payload_observed_only),QSTR(true));add_num(o,QSTR(bytes),to_string(BYTES));add_num(o,QSTR(words),to_string(WORDS));add_num(o,QSTR(timeout_ns),to_string(TMO));add_raw(o,QSTR(mismatch_count),QSTR(0));add_raw(o,QSTR(fault_index),QSTR(null));
+string src_obj;src_obj+=C_OPEN;add_str(src_obj,QSTR(uuid),S.u);add_cstr(src_obj,QSTR(vendorId),QSTR(0x8086));add_num(src_obj,QSTR(deviceId),to_string(S.p.deviceId));src_obj+=C_CLOSE;add_obj(o,QSTR(src),src_obj);
+string dst_obj;dst_obj+=C_OPEN;add_str(dst_obj,QSTR(uuid),D.u);add_cstr(dst_obj,QSTR(vendorId),QSTR(0x8086));add_num(dst_obj,QSTR(deviceId),to_string(D.p.deviceId));dst_obj+=C_CLOSE;add_obj(o,QSTR(dst),dst_obj);
+string peer;peer+=C_OPEN;add_raw(peer,QSTR(can_src_to_dst),can_s2d?QSTR(true):QSTR(false));add_raw(peer,QSTR(can_dst_to_src),can_d2s?QSTR(true):QSTR(false));add_raw(peer,QSTR(p2p_src_to_dst),prop_s2d?QSTR(true):QSTR(false));add_raw(peer,QSTR(p2p_dst_to_src),prop_d2s?QSTR(true):QSTR(false));add_raw(peer,QSTR(access_src_to_dst),access_s2d?QSTR(true):QSTR(false));add_raw(peer,QSTR(access_dst_to_src),access_d2s?QSTR(true):QSTR(false));add_cstr(peer,QSTR(copy_device),copy_name);peer+=C_CLOSE;add_obj(o,QSTR(peer),peer);
+string fill_q;fill_q+=C_OPEN;add_cstr(fill_q,QSTR(device),QSTR(src));add_num(fill_q,QSTR(ordinal),to_string(fq.ordinal));add_str(fill_q,QSTR(kind),fq.kind);add_num(fill_q,QSTR(numQueues),to_string(fq.numQueues));fill_q+=C_CLOSE;
+string copy_q;copy_q+=C_OPEN;add_cstr(copy_q,QSTR(device),copy_name);add_num(copy_q,QSTR(ordinal),to_string(cq.ordinal));add_str(copy_q,QSTR(kind),cq.kind);add_num(copy_q,QSTR(numQueues),to_string(cq.numQueues));copy_q+=C_CLOSE;
+string read_q;read_q+=C_OPEN;add_cstr(read_q,QSTR(device),QSTR(dst));add_num(read_q,QSTR(ordinal),to_string(rq.ordinal));add_str(read_q,QSTR(kind),rq.kind);add_num(read_q,QSTR(numQueues),to_string(rq.numQueues));read_q+=C_CLOSE;
+string queues;queues+=C_OPEN;add_obj(queues,QSTR(fill),fill_q);add_obj(queues,QSTR(copy),copy_q);add_obj(queues,QSTR(readback),read_q);queues+=C_CLOSE;add_obj(o,QSTR(queues),queues);
+string src_alloc;src_alloc+=C_OPEN;add_num(src_alloc,QSTR(ptr),to_string((unsigned long long)(uintptr_t)sp));add_num(src_alloc,QSTR(bytes),to_string(BYTES));add_cstr(src_alloc,QSTR(declared_owner),S.u.c_str());add_cstr(src_alloc,QSTR(actual_owner),src_owner.c_str());add_cstr(src_alloc,QSTR(memory_type),src_type.c_str());add_cstr(src_alloc,QSTR(api),QSTR(zeMemAllocDevice));src_alloc+=C_CLOSE;
+string dst_alloc;dst_alloc+=C_OPEN;add_num(dst_alloc,QSTR(ptr),to_string((unsigned long long)(uintptr_t)dp));add_num(dst_alloc,QSTR(bytes),to_string(BYTES));add_cstr(dst_alloc,QSTR(declared_owner),D.u.c_str());add_cstr(dst_alloc,QSTR(actual_owner),dst_owner.c_str());add_cstr(dst_alloc,QSTR(memory_type),dst_type.c_str());add_cstr(dst_alloc,QSTR(api),QSTR(zeMemAllocDevice));dst_alloc+=C_CLOSE;
+string host_owner_json=host_owner.empty()?string(QSTR(null)):q(host_owner);
+string host_alloc;host_alloc+=C_OPEN;add_num(host_alloc,QSTR(ptr),to_string((unsigned long long)(uintptr_t)hp));add_num(host_alloc,QSTR(bytes),to_string(BYTES));add_raw(host_alloc,QSTR(declared_owner),QSTR(null));add_raw(host_alloc,QSTR(actual_owner),host_owner_json.c_str());add_cstr(host_alloc,QSTR(memory_type),host_type.c_str());add_cstr(host_alloc,QSTR(api),QSTR(zeMemAllocHost));host_alloc+=C_CLOSE;
+string allocs;allocs+=C_OPEN;add_obj(allocs,QSTR(src),src_alloc);add_obj(allocs,QSTR(dst),dst_alloc);add_obj(allocs,QSTR(host),host_alloc);allocs+=C_CLOSE;add_obj(o,QSTR(allocations),allocs);
+add_obj(o,QSTR(cleanup_errors),jarr(ce));add_cstr(o,QSTR(api_sequence),SEQ);o+=C_CLOSE;puts(o.c_str());return 0;}
+string o;o+=C_OPEN;add_cstr(o,QSTR(status),QSTR(FAIL));add_cstr(o,QSTR(reason),QSTR(payload_mismatch));add_raw(o,QSTR(inject_corruption),inj?QSTR(true):QSTR(false));add_raw(o,QSTR(direct_transport_qualified),QSTR(false));add_num(o,QSTR(mismatch_count),to_string(mismatch_count));add_num(o,QSTR(first_bad_index),to_string(first_index));add_num(o,QSTR(expected),to_string(pattern));add_num(o,QSTR(got),to_string(first_got));add_num(o,QSTR(bytes),to_string(BYTES));add_num(o,QSTR(words),to_string(WORDS));add_num(o,QSTR(timeout_ns),to_string(TMO));if(inj)add_num(o,QSTR(fault_index),to_string(fault_index));else add_raw(o,QSTR(fault_index),QSTR(null));add_obj(o,QSTR(cleanup_errors),jarr(ce));add_raw(o,QSTR(exit_code),QSTR(1));o+=C_CLOSE;puts(o.c_str());return 1;}

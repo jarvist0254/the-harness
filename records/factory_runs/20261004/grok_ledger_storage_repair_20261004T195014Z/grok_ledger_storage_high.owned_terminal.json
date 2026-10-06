@@ -1,0 +1,36 @@
+{
+  "log_cap_exceeded": false,
+  "finish_reason": "end_turn",
+  "lane": "Grok",
+  "pid": 57160,
+  "model_usage": {
+    "grok-4.7-build-fast": {
+      "inputTokens": 23950,
+      "outputTokens": 91827,
+      "cacheReadInputTokens": 1152,
+      "cacheCreationInputTokens": 0,
+      "modelCalls": 1,
+      "costUSD": 0.40761784
+    }
+  },
+  "status": "PARSE_OR_SCHEMA_ERROR",
+  "usage": {
+    "input_tokens": 23950,
+    "cache_read_input_tokens": 1152,
+    "cache_creation_input_tokens": 0,
+    "output_tokens": 91827,
+    "reasoning_tokens": 75121,
+    "total_tokens": 116929
+  },
+  "provider_patch_applied": false,
+  "exit_code": 0,
+  "outer_killed": false,
+  "drain_unknown": false,
+  "credential_saved": false,
+  "requested_model": "grok-4.7-build-fast",
+  "pipe_error": false,
+  "parse_error_type": "RuntimeException",
+  "native_children_actual": 0,
+  "elapsed_seconds": 534.1,
+  "private_url_output_refused": false
+}

@@ -1,0 +1,32 @@
+{
+  "scope": "READ_ONLY_FILE_HASH_MATCH_NOT_OS_LOAD_OR_GPU_PROOF",
+  "manifest": "E:\\the_harness\\records\\build_vulkan_fp32_staging_20261004T155932Z\\evidence\\attempt5_compiler_root_cleanup\\fresh_dll_manifest.json",
+  "manifest_sha256": "c69b080dbb0f0bcfa1d7f436f791e5f40a46600cdc7326f16f2fc8a5bb2d379f",
+  "verified": [
+    {
+      "name": "ggml.dll",
+      "sha256": "56aa97d552bdb4e1893f136fa3fbeb4208e3e7aef9e1c4e6a6d45785ac6482fb",
+      "bytes": 62976
+    },
+    {
+      "name": "ggml-base.dll",
+      "sha256": "beb563a47637f76e85960648d6970e1e66cadd975541e29d7dc4fd02b5461fa3",
+      "bytes": 693760
+    },
+    {
+      "name": "ggml-cpu.dll",
+      "sha256": "e1253c96eb92facb17032a37ee089b185330fac5db5f75bd3c48238d9829f481",
+      "bytes": 1125888
+    },
+    {
+      "name": "ggml-rpc.dll",
+      "sha256": "11b5c3698fac70ec51a1d743c4bd1324e2b853aa211a0bb85994d68c242453bd",
+      "bytes": 143872
+    },
+    {
+      "name": "ggml-vulkan.dll",
+      "sha256": "3ed6b1e02b6e56c8fc31d01472e8be33e402f7d0562c6272890799eaa99cc085",
+      "bytes": 45299712
+    }
+  ]
+}

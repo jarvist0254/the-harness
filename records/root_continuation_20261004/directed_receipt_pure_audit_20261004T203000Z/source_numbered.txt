@@ -1,0 +1,144 @@
+1: import re
+2: SCHEMA='p2p.transfer.receipt/v1'
+3: TSCHEMA='p2p.trusted/v1'
+4: MAX=2**63-1
+5: ZERO='0'*64
+6: HX=re.compile(r'^[0-9a-f]{64}$')
+7: UID=re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+8: PCI=re.compile(r'^[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}[.][0-7]$')
+9: DIRS={'nv_device_dmabuf_export_to_intel_imported_view':('nvidia','intel'),'intel_write_to_nv_device_allocation_cuda_read':('intel','nvidia')}
+10: ART=('source_executable','target_executable','build','payload','controller','baseline')
+11: class Missing(Exception): pass
+12: def _miss(k): raise Missing(k)
+13: def _need(d,k):
+14:  if type(d) is not dict: raise ValueError('obj')
+15:  if k not in d: _miss(k)
+16:  return d[k]
+17: def _int(v,n,lo=0):
+18:  if type(v) is not int or isinstance(v,bool): raise ValueError(n)
+19:  if v<lo or v>MAX: raise ValueError(n)
+20:  return v
+21: def _str(v,n,ml=256):
+22:  if type(v) is not str or not v or len(v)>ml: raise ValueError(n)
+23:  return v
+24: def _hash(v,n):
+25:  v=_str(v,n,64)
+26:  if not HX.match(v) or v==ZERO: raise ValueError(n)
+27:  return v
+28: def _bool(v,n):
+29:  if type(v) is not bool: raise ValueError(n)
+30:  return v
+31: def _dev(d,n):
+32:  if type(d) is not dict: raise ValueError(n)
+33:  v=_str(_need(d,'vendor'),n,16); u=_str(_need(d,'uuid'),n,36); p=_str(_need(d,'pci'),n,16); a=_hash(_need(d,'allocation_id'),n); api=_str(_need(d,'api'),n,128); pa=_str(_need(d,'path'),n,256); k=_str(_need(d,'kind'),n,16)
+34:  if v not in ('nvidia','intel') or not UID.match(u) or not PCI.match(p) or k not in ('device','host','shared'): raise ValueError(n)
+35:  return {'vendor':v,'uuid':u,'pci':p,'allocation_id':a,'api':api,'path':pa,'kind':k}
+36: def _pins(t):
+37:  if type(t) is not dict or t.get('schema')!=TSCHEMA: return None
+38:  au=t.get('authorities')
+39:  if type(au) is not list or not au: return None
+40:  ids=set(); ns=set()
+41:  for a in au:
+42:   if type(a) is not dict: return None
+43:   i=a.get('id'); nm=a.get('name')
+44:   if type(i) is not str or not HX.match(i) or i==ZERO: return None
+45:   if type(nm) is not str or not nm or nm in ns or i in ids: return None
+46:   ids.add(i); ns.add(nm)
+47:  ar=t.get('artifacts')
+48:  if type(ar) is not dict: return None
+49:  oa={}
+50:  for k in ART:
+51:   v=ar.get(k)
+52:   if type(v) is not str or not HX.match(v) or v==ZERO: return None
+53:   oa[k]=v
+54:  ds=t.get('devices')
+55:  if type(ds) is not list or not ds: return None
+56:  dm={}
+57:  for d in ds:
+58:   if type(d) is not dict: return None
+59:   v=d.get('vendor'); u=d.get('uuid'); p=d.get('pci'); a=d.get('allocation_id'); k=d.get('kind')
+60:   if v not in ('nvidia','intel') or type(u) is not str or not UID.match(u) or type(p) is not str or not PCI.match(p): return None
+61:   if type(a) is not str or not HX.match(a) or a==ZERO or k not in ('device','host','shared'): return None
+62:   api=d.get('api'); pa=d.get('path')
+63:   if type(api) is not str or not api or type(pa) is not str or not pa: return None
+64:   key=(v,u,p,a)
+65:   if key in dm: return None
+66:   dm[key]={'kind':k,'api':api,'path':pa}
+67:  ev=t.get('evaluation_unix')
+68:  if type(ev) is not int or isinstance(ev,bool) or ev<0 or ev>MAX: return None
+69:  ms=t.get('max_staleness_seconds',300)
+70:  if type(ms) is not int or isinstance(ms,bool) or ms<0 or ms>MAX: return None
+71:  return {'artifacts':oa,'devices':dm,'evaluation_unix':ev,'max_staleness':ms}
+72: def _r(s,c,g,f): return {'status':s,'classification':c,'transport_accepted':False,'scope':'evidence_consistency_only','gaps':g,'failures':f}
+73: def validate(receipt,*,trusted):
+74:  pins=_pins(trusted)
+75:  if pins is None: return _r('NOT_CHECKED','NOT_CHECKED',['trusted_authoritative_pins_absent'],[])
+76:  if type(receipt) is not dict: raise ValueError('receipt')
+77:  if receipt.get('schema')!=SCHEMA: raise ValueError('schema')
+78:  direction=_str(receipt.get('direction'),'direction',128)
+79:  if direction not in DIRS: raise ValueError('direction')
+80:  try:
+81:   src=_dev(_need(receipt,'source'),'source'); tgt=_dev(_need(receipt,'target'),'target')
+82:   arts=_need(receipt,'artifacts')
+83:   if type(arts) is not dict: raise ValueError('artifacts')
+84:   for k in ART:
+85:    if _hash(_need(arts,k),k)!=pins['artifacts'][k]: return _r('FAIL','NOT_CHECKED',[],['artifact_pin_mismatch:'+k])
+86:   sy=_need(receipt,'sync')
+87:   if type(sy) is not dict: raise ValueError('sync')
+88:   _hash(_need(sy,'producer_event_hash'),'sync.producer'); _hash(_need(sy,'consumer_event_hash'),'sync.consumer')
+89:   ct=_need(receipt,'controls')
+90:   if type(ct) is not dict: raise ValueError('controls')
+91:   cpu=_bool(_need(ct,'cpu_staging'),'cpu'); hp=_bool(_need(ct,'host_pointer_equality_only'),'hostptr')
+92:   clean=_hash(_need(ct,'clean_baseline_hash'),'clean'); corr=_hash(_need(ct,'producer_corruption_before_copy_hash'),'corr')
+93:   pay=_need(receipt,'payload')
+94:   if type(pay) is not dict: raise ValueError('payload')
+95:   pb=_int(_need(pay,'bytes'),'payload.bytes',1); base=_hash(_need(pay,'baseline_hash'),'baseline'); cons=_hash(_need(pay,'consumer_result_hash'),'consumer'); par=_hash(_need(pay,'parity_hash'),'parity')
+96:   res=receipt.get('residency'); fails=[]; gaps=[]
+97:   hb=cpu or hp or src['kind']!='device' or tgt['kind']!='device'
+98:   sk=(src['vendor'],src['uuid'],src['pci'],src['allocation_id']); tk=(tgt['vendor'],tgt['uuid'],tgt['pci'],tgt['allocation_id'])
+99:   if sk not in pins['devices'] or tk not in pins['devices']: return _r('NOT_CHECKED','HOST_BACKED' if hb else 'NOT_CHECKED',['device_pin_absent'],[])
+100:   sd=pins['devices'][sk]; td=pins['devices'][tk]
+101:   if sd['kind']!='device' or td['kind']!='device': hb=True
+102:   if sd['api']!=src['api'] or sd['path']!=src['path'] or td['api']!=tgt['api'] or td['path']!=tgt['path']: fails.append('device_api_path_mismatch')
+103:   sv,tv=DIRS[direction]
+104:   if src['vendor']!=sv or tgt['vendor']!=tv: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',[],['direction_source_target_order'])
+105:   if direction=='nv_device_dmabuf_export_to_intel_imported_view':
+106:    ex=_need(receipt,'export'); im=_need(receipt,'import')
+107:    if type(ex) is not dict or type(im) is not dict: raise ValueError('export/import')
+108:    fd=_hash(_need(ex,'fd_hash'),'fd'); back=_hash(_need(ex,'backing_allocation_id'),'back'); eb=_int(_need(ex,'bytes'),'export.bytes',1)
+109:    if back!=src['allocation_id']: fails.append('export_backing_allocation_mismatch')
+110:    if _str(_need(im,'external_type'),'external_type',64)!='ZE_EXTERNAL_MEMORY_TYPE_FLAG_DMA_BUF': fails.append('import_external_type')
+111:    if _hash(_need(im,'imported_fd_hash'),'imported_fd')!=fd: fails.append('fd_binding')
+112:    if _hash(_need(im,'allocation_id'),'import_allocation')!=tgt['allocation_id']: fails.append('import_allocation_mismatch')
+113:    if _int(_need(im,'bytes'),'import.bytes',1)!=eb: fails.append('bytes_mismatch')
+114:    exp=eb
+115:    if 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+116:   else:
+117:    wr=_need(receipt,'write'); rd=_need(receipt,'read')
+118:    if type(wr) is not dict or type(rd) is not dict: raise ValueError('write/read')
+119:    wa=_hash(_need(wr,'allocation_id'),'write.allocation'); pat=_hash(_need(wr,'pattern_hash'),'pattern'); wb=_int(_need(wr,'bytes'),'write.bytes',1)
+120:    ra=_hash(_need(rd,'allocation_id'),'read.allocation'); rr=_hash(_need(rd,'cuda_read_hash'),'cuda_read'); rb=_int(_need(rd,'bytes'),'read.bytes',1)
+121:    if wa!=tgt['allocation_id'] or ra!=tgt['allocation_id']: fails.append('nv_allocation_binding')
+122:    if rr!=pat: fails.append('write_read_pattern_mismatch')
+123:    if pat!=corr: fails.append('write_control_mismatch')
+124:    if wb!=rb: fails.append('bytes_mismatch')
+125:    exp=wb
+126:    if 'export' in receipt or 'import' in receipt or 'cuda_dmabuf_import' in receipt: fails.append('desktop_cuda_dmabuf_import_claim')
+127:   if pb!=exp: fails.append('payload_bytes_mismatch')
+128:   if base!=clean: fails.append('baseline_mismatch')
+129:   if corr==clean: fails.append('corruption_control_not_distinct')
+130:   if cons!=corr: fails.append('consumer_control_mismatch')
+131:   if par!=cons: fails.append('parity_mismatch')
+132:   if type(res) is not dict: gaps.append('residency_missing')
+133:   else:
+134:    if _bool(_need(res,'source_device_resident'),'source_resident') is not True: gaps.append('source_not_resident')
+135:    if _bool(_need(res,'target_device_resident'),'target_resident') is not True: gaps.append('target_not_resident')
+136:    _hash(_need(res,'measurement_hash'),'measurement')
+137:    ts=_int(_need(res,'timestamp_unix'),'timestamp',0)
+138:    if ts>pins['evaluation_unix']+pins['max_staleness'] or ts<pins['evaluation_unix']-pins['max_staleness']: gaps.append('residency_stale')
+139:  except Missing as m:
+140:   return _r('NOT_CHECKED','NOT_CHECKED',['missing:'+str(m)],[])
+141:  if fails: return _r('FAIL','HOST_BACKED' if hb else 'NOT_CHECKED',gaps,fails)
+142:  if hb: return _r('EVIDENCE_CONSISTENT','HOST_BACKED',gaps+['host_backed_not_device_p2p'],[])
+143:  if gaps: return _r('NOT_CHECKED','NOT_CHECKED',gaps,[])
+144:  return _r('EVIDENCE_CONSISTENT','DEVICE_P2P',[],[])

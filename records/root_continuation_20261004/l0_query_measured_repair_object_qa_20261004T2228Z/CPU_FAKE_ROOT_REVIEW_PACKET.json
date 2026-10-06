@@ -1,0 +1,45 @@
+{
+  "status": "PENDING_ROOT_REVIEW_NO_FAKE_COMPILE_OR_EXECUTION",
+  "scope": "SYNTHETIC_CPU_STUB_ONLY_NO_LOADER_OR_DRIVER",
+  "candidate_path": "E:/the_harness/records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/source.qwen_untrusted.cpp",
+  "candidate_sha256": "27d560b3f73dd830b68de9aac3316d7b8510c0218d54704156e273929ce23fe2",
+  "independent_contract_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/cpu_fake_contract_pending_root_gate.cpp",
+  "independent_contract_sha256": "bea5c7b8012bd6b327f27be6517b0ba5f57ca975da0c4b31e62cc0d790df6840",
+  "contract_review_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/CPU_FAKE_CONTRACT_REVIEW.md",
+  "contract_review_sha256": "626f3a548dd5a059f665f537cf9ebebb957a6bc3f4f97869f327fcc7a7c420eb",
+  "header_path": "E:/the_harness/records/toolchains/level_zero_20261004/sdk/include/level_zero/ze_api.h",
+  "header_sha256": "c3fb4067e553c31c722cfe934943291b1267402294e7074d34f06b0037ce70de",
+  "compiler_path": "WSL /usr/bin/c++",
+  "compiler_version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "already_authorized_candidate_object_compile": {
+    "receipt_path": "E:/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/compile_receipt.json",
+    "receipt_sha256": "66a0d44cc910da3d583b0107388c0b5d056b6d5ddc271d884cb914b5171b1b67",
+    "result": "OBJECT_COMPILE_PASS"
+  },
+  "synthetic_symbols_defined_by_test": [
+    "zeInit", "zeDriverGet", "zeDeviceGet", "zeDeviceGetSubDevices",
+    "zeDeviceGetProperties", "zeDeviceGetExternalMemoryProperties",
+    "zeDeviceGetCommandQueueGroupProperties", "zeDeviceCanAccessPeer",
+    "zeDeviceGetP2PProperties"
+  ],
+  "link_prerequisites": [
+    "Pinned ze_api.h and standard C++ headers only.",
+    "No Level Zero loader/runtime library should be linked; test definitions satisfy every candidate L0 symbol.",
+    "No CUDA headers or runtime are used by this query source."
+  ],
+  "proposed_compile_command": "/usr/bin/c++ -std=c++17 -Wall -Wextra -I /mnt/e/the_harness/records/toolchains/level_zero_20261004/sdk/include/level_zero '-DLZQ_ACTUAL_SOURCE_PATH=\"/mnt/e/the_harness/records/factory_runs/20261004/l0_compiler_two_prep_v2_20261004T214600Z/qwen_l0_query_measured_repair/source.qwen_untrusted.cpp\"' /mnt/e/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/cpu_fake_contract_pending_root_gate.cpp -o /mnt/e/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/cpu_fake_contract",
+  "proposed_execution_command": "/usr/bin/timeout --signal=TERM --kill-after=2s 10s /mnt/e/the_harness/records/root_continuation_20261004/l0_query_measured_repair_object_qa_20261004T2228Z/cpu_fake_contract",
+  "proposed_limits": {
+    "compile_deadline_seconds": 90,
+    "execution_deadline_seconds": 10,
+    "per_stream_cap_bytes": 131072,
+    "fresh_output_required": true,
+    "source_and_tool_pins_before_and_after": true,
+    "candidate_main_or_l0_runtime_executed": false,
+    "native_gpu_calls": false
+  },
+  "execution_requires_separate_root_admission": true,
+  "provider_tests_executed": false,
+  "hardware_or_transport_claim": false
+}

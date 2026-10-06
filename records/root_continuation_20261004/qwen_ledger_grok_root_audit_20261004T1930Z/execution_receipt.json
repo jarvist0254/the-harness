@@ -1,0 +1,48 @@
+{
+  "scope": "ROOT_ADMITTED_ACTUAL_GROK_PURE_CONTROLS_ONLY",
+  "runs": [
+    {
+      "label": "same17",
+      "pid": 39356,
+      "exit_code": 0,
+      "reaped": true,
+      "seconds": 0.6569999996572733,
+      "timeout": false,
+      "overflow": [],
+      "stream_bytes": {
+        "same17.stdout.raw.log": 0,
+        "same17.stderr.raw.log": 1244
+      },
+      "readers_joined": true
+    },
+    {
+      "label": "additional3",
+      "pid": 25184,
+      "exit_code": 1,
+      "reaped": true,
+      "seconds": 0.14000000059604645,
+      "timeout": false,
+      "overflow": [],
+      "stream_bytes": {
+        "additional3.stdout.raw.log": 0,
+        "additional3.stderr.raw.log": 1678
+      },
+      "readers_joined": true
+    }
+  ],
+  "pins_before": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_independent_same17_adapted.py": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_additional_storage_and_legal_transition.py": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3"
+  },
+  "pins_after": {
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\source.grok_untrusted.py": "d73ebcd2570d955fd81732e706803e701159a040d4bd3326f2377af6a9bbae6a",
+    "E:\\the_harness\\records\\factory_runs\\20261004\\grok_numeric_ledger_correction_20261004T191800Z\\grok_numeric_ledger_high\\tests_source.grok_untrusted.py": "c30fa288671e21f9c19644a51051bac909c22b15fccf1111c8c5f16f40418173",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_independent_same17_adapted.py": "7622eadfe24c30f5879bbef82250014f8fb734b7497dbc0b2e59415db0685e9a",
+    "E:\\the_harness\\records\\root_continuation_20261004\\qwen_ledger_grok_root_audit_20261004T1930Z\\test_additional_storage_and_legal_transition.py": "970be14778e48df834ef4172c0dbcdc319f8a237d7c9359da59124c6c973aed3"
+  },
+  "hashes_unchanged": true,
+  "provider_tests_executed": false,
+  "candidate_native_gpu_provider_calls": false
+}

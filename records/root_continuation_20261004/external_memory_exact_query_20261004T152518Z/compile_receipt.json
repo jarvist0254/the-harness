@@ -1,0 +1,27 @@
+{
+  "bootstrap_drain_failed": false,
+  "bootstrap_elapsed_seconds": 0.031,
+  "bootstrap_output_bytes": 0,
+  "bootstrap_pid": 48480,
+  "bootstrap_return_code": 1,
+  "bootstrap_timed_out": false,
+  "compile_executed": false,
+  "compile_status": "TOOLCHAIN_ENVIRONMENT_FAIL",
+  "input_hashes_after": {
+    "compiler": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "controller_python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "core_header": "944cd8f81d98e94999c7353dd632f73be471f2da95afecbc7d9ffe0ad5295deb",
+    "source": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+    "vcvars64": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "vulkan_library": "02caa31b8665a79f327cbfe97286fd7d0017c0b1f9b39eb78687b7a509de52b3"
+  },
+  "input_hashes_before": {
+    "compiler": "064ea2a183199eea939974fa6033c1b61d11e9504112ab17179887f5011b615d",
+    "controller_python": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+    "core_header": "944cd8f81d98e94999c7353dd632f73be471f2da95afecbc7d9ffe0ad5295deb",
+    "source": "9ae6355ddc8ff72f4c33bce5116669ad84a734e7271287490926d136ec360e8c",
+    "vcvars64": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+    "vulkan_library": "02caa31b8665a79f327cbfe97286fd7d0017c0b1f9b39eb78687b7a509de52b3"
+  },
+  "runtime_status": "NOT_RUN"
+}

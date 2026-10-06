@@ -1,0 +1,11 @@
+# Source-bound cleanup correction
+
+Root preserved revision 1 (`4d8272aa…f663`), its five-case admission and stopped two-case native run. Four natural workers completed; an exit-3 worker then produced the correct task failure but `UNKNOWN_DRAIN`. The remaining native cases were not run against that source.
+
+The separately admitted transparent trace recorded an already-signaled retained process handle, exit code 3, and `TerminateProcess` raising Windows error 5. Job termination succeeded and final job accounting was zero. [Microsoft's API documentation](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess) describes access denied when terminating an already-exited process. The trace retained the actual API returns rather than replacing them with successful mocks.
+
+Revision 2 (`3cb1e44e35ea6c2ef9c01e0d329fb0df98c7785056d65e33ced52ec04706e51c`) adds a zero-time wait on the retained process handle before root termination. A signaled process skips that redundant call. A running process is still terminated. An exceptional or invalid pre-wait remains uncertain and attempts best-effort termination. Job termination and the final bounded wait/accounting checks remain mandatory. No access-denied exception is simply ignored.
+
+Independent trapped evaluation passed 44 controls, including four new direct shutdown controls; the previous revision failed four controls under the same evaluator. Revision 2 then passed five separately admitted real Windows CPU fixture cases: four natural workers, exit 3, timeout, cancellation and log overflow. Each job accounted for zero active processes, reported `CLEANUP`, and produced a matching restart receipt. The raw test driver's timeout/cancel acceptance fields are lists due to a Python Boolean-expression return quirk; root recomputed the gates from the recorded fields in a separate receipt without rewriting the original result.
+
+These experiments qualify these fixed fixtures. They do not admit arbitrary production workers, certify descendants/controller-loss handling, or establish GPU inference/resource capacity. The source remains experimental under records and is not installed into `j_link` or the global Factory.

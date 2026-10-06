@@ -1,0 +1,9 @@
+{
+  "model": "qwen3.8-flash",
+  "pid": 45516,
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 19.8654865,
+  "directory": "E:\\the_harness\\records\\factory_runs\\20261004\\qwen38_identity_20261004T095300081Z",
+  "expected_response_present": false
+}

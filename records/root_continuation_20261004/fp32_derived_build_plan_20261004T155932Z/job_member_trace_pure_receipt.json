@@ -1,0 +1,18 @@
+{
+  "scope": "PURE_MOCK_ONLY_NO_WIN32_OR_BUILD_EXECUTION",
+  "exit_code": 0,
+  "pid": 26608,
+  "reaped": true,
+  "seconds": 0.07799999974668026,
+  "source_hashes_before": {
+    "job_member_trace.py": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd",
+    "test_job_member_trace_pure.py": "9f469cbdffc310fe7ee639bb04249440db7143cf283ea991209771c0672912c0"
+  },
+  "source_hashes_after": {
+    "job_member_trace.py": "8127c5263bb2526c4205b4ecc5aa3f2094ac7e134c0b910b8a6ea0f18ef793dd",
+    "test_job_member_trace_pure.py": "9f469cbdffc310fe7ee639bb04249440db7143cf283ea991209771c0672912c0"
+  },
+  "stdout_bytes": 0,
+  "stderr_bytes": 874,
+  "stderr": "test_cap_without_accounting_change (__main__.Cases) ... ok\r\ntest_close_false_recorded (__main__.Cases) ... ok\r\ntest_no_native_trap_invoked (__main__.Cases) ... ok\r\ntest_nonmember_no_image_still_close (__main__.Cases) ... ok\r\ntest_observation_exception_diagnostic_only (__main__.Cases) ... ok\r\ntest_original_exception_identity (__main__.Cases) ... ok\r\ntest_original_none_identity (__main__.Cases) ... ok\r\ntest_original_positive_identity (__main__.Cases) ... ok\r\ntest_original_zero_identity (__main__.Cases) ... ok\r\ntest_over64_unknown (__main__.Cases) ... ok\r\ntest_partial_list_unknown (__main__.Cases) ... ok\r\ntest_query_false_unknown (__main__.Cases) ... ok\r\ntest_rate_five_seconds (__main__.Cases) ... ok\r\ntest_typed_query_owned_job_and_image (__main__.Cases) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 14 tests in 0.007s\r\n\r\nOK\r\n"
+}

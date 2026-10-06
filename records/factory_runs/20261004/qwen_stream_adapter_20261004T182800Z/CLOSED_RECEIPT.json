@@ -1,0 +1,16 @@
+{
+  "native_children_actual": 0,
+  "candidate_returned": false,
+  "qualified_breakthrough": false,
+  "raw_bytes": 2096424,
+  "usage": "UNKNOWN",
+  "final_content_bytes": 0,
+  "root_quality_admission": "NONE",
+  "raw_cap": 2097152,
+  "partial_reasoning_only": true,
+  "ledger_sha256": "bb7cdbfba15a5a31f4b33dd63462880fba2a487b9a1796118eb039997dc22bcd",
+  "utc": "2026-10-04T18:41:05.9391868Z",
+  "audit_sha256": "b41e5bf38a7e9aeb1a8e204aaaa76a79b0764a90338229150af344649d40ce6e",
+  "state": "CLOSED_RESPONSE_CAP_REFUSED",
+  "aggregate_sha256": "0227fb008edec53fa1f2da077af9a0c094f67b3f27437a1c5ac56929fa3398ab"
+}

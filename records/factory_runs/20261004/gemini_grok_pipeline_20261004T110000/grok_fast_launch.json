@@ -1,0 +1,12 @@
+{
+  "executable": "C:\\Users\\thoma\\.grok\\bin\\grok.exe",
+  "tools_effectively_empty": true,
+  "memory": false,
+  "model": "grok-4.7-build-fast",
+  "credential_persisted": false,
+  "subagents": false,
+  "source_sha256": "765B2BE5E976DFB6709F3D0E7754F71696E2B9287CC87120A767E8820F69DF94",
+  "mode": "plan",
+  "outer_deadline_seconds": 360,
+  "pid": 41304
+}

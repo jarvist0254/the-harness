@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+import os, sys, json
+CANDIDATE = os.environ.get('CANDIDATE_SOURCE_PATH')
+if not CANDIDATE and len(sys.argv) > 1:
+    CANDIDATE = sys.argv[1]
+FAILURES = []
+def check(name, cond, detail=''):
+    if not cond:
+        FAILURES.append(name + (': ' + detail if detail else ''))
+def receipt_ok(r):
+    if not isinstance(r, dict): return False, 'not dict'
+    status = r.get('status')
+    code = r.get('exit_code')
+    scope = r.get('scope')
+    if status not in ('DEVICE_DMA_BUF_EXPORT_OBSERVED','NOT_CHECKED','FAIL'): return False, 'bad status'
+    if not isinstance(code, int): return False, 'exit_code not int'
+    if status == 'DEVICE_DMA_BUF_EXPORT_OBSERVED':
+        if code != 0: return False, 'success exit must be 0'
+        if scope != 'DEVICE_DMA_BUF_EXPORT_OBSERVED': return False, 'scope mismatch'
+        a = r.get('allocation', {})
+        if a.get('class') != 'DEVICE': return False, 'allocation class must be DEVICE'
+        if a.get('api') != 'cuMemAlloc': return False, 'allocation api must be cuMemAlloc'
+        if int(a.get('requested_payload_bytes', 0)) != 65536: return False, 'payload must be 64KiB'
+        if int(a.get('aligned_range_bytes', 0)) > 1048576: return False, 'range bound exceeded'
+        page = int(a.get('page_size', 4096))
+        if page <= 0: return False, 'bad page_size'
+        if int(a.get('aligned_range_bytes', 0)) % page != 0: return False, 'range not page aligned'
+        base = str(a.get('base', ''))
+        if base.startswith('0x'):
+            try:
+                if int(base, 16) % page != 0: return False, 'base not page aligned'
+            except Exception:
+                return False, 'base not hex'
+        e = r.get('export', {})
+        if e.get('handle_type') != 'CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD': return False, 'handle_type'
+        if e.get('flags') != 'CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE': return False, 'flags'
+        if not isinstance(e.get('fd'), int) or e['fd'] < 0: return False, 'fd'
+        if 'fstat_size' not in e: return False, 'fstat_size missing'
+        rb = r.get('readback', {})
+        if rb.get('match') is not True: return False, 'readback match'
+        o = r.get('ownership', {})
+        if not (o.get('fd_closed') and o.get('allocation_freed') and o.get('cuda_context_destroyed')): return False, 'ownership cleanup'
+        txt = json.dumps(r).lower()
+        for banned in ('intel import', 'p2p proven', 'cache coherence proven'):
+            if banned in txt: return False, 'overclaim'
+    elif status == 'NOT_CHECKED':
+        if code != 2: return False, 'NOT_CHECKED exit must be 2'
+    elif status == 'FAIL':
+        if code != 1: return False, 'FAIL exit must be 1'
+    return True, ''
+if CANDIDATE and os.path.isfile(CANDIDATE):
+    src = open(CANDIDATE, 'r', encoding='utf-8', errors='replace').read()
+    check('source_size', len(src) <= 8000, str(len(src)))
+    for token in ['CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED','cuMemGetHandleForAddressRange','CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD','CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE','cuMemAlloc','cuMemsetD32','cuMemcpyDtoH','fstat','close','cuMemFree','NOT_CHECKED','DEVICE_DMA_BUF_EXPORT_OBSERVED']:
+        check('source_token_' + token, token in src)
+    check('no_host_attr_substitution', 'HOST_ALLOC_DMA_BUF_SUPPORTED' not in src)
+else:
+    check('candidate_path', False, 'CANDIDATE_SOURCE_PATH missing')
+good = {'schema':'task5_cuda_dmabuf_export_v1','status':'DEVICE_DMA_BUF_EXPORT_OBSERVED','exit_code':0,'scope':'DEVICE_DMA_BUF_EXPORT_OBSERVED','driver_version':13040,'device':{'index':0,'uuid_hex':'00000000000000000000000000000000','pci_bus_id':'0000:01:00.0'},'allocation':{'class':'DEVICE','api':'cuMemAlloc','api_status':'CUDA_SUCCESS','requested_payload_bytes':65536,'aligned_range_bytes':65536,'base':'0x1000','page_size':4096,'bounded_max_bytes':1048576},'export':{'api':'cuMemGetHandleForAddressRange','api_status':'CUDA_SUCCESS','handle_type':'CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD','flags':'CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE','fd':3,'fstat_size':65536,'fstat_mode':0},'readback':{'api':'cuMemcpyDtoH','api_status':'CUDA_SUCCESS','bytes':65536,'pattern':'0x5a5a5a5a','match':True},'ownership':{'fd_closed':True,'allocation_freed':True,'cuda_context_destroyed':True},'errors':[]}
+unsupported = {'schema':'task5_cuda_dmabuf_export_v1','status':'NOT_CHECKED','exit_code':2,'scope':'ATTRIBUTE','reason':'CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED false','errors':[]}
+wrong_host = dict(good)
+wrong_host['allocation'] = dict(good['allocation'])
+wrong_host['allocation']['class'] = 'HOST'
+misaligned_success = dict(good)
+misaligned_success['allocation'] = dict(good['allocation'])
+misaligned_success['allocation']['base'] = '0x1001'
+leaked_fd = dict(good)
+leaked_fd['ownership'] = dict(good['ownership'])
+leaked_fd['ownership']['fd_closed'] = False
+fixtures = [('good', good, True), ('unsupported_attr', unsupported, True), ('wrong_host_label', wrong_host, False), ('misaligned_success', misaligned_success, False), ('leaked_fd', leaked_fd, False)]
+for name, receipt, expected in fixtures:
+    ok, why = receipt_ok(receipt)
+    check('fixture_' + name, ok == expected, why)
+instructions = ['Compile on Linux with CUDA 13.4 headers: g++ -std=c++17 candidate.cpp -o candidate -ldl -I/usr/local/cuda/include', 'Run under ROOT 30s supervision: ./candidate --uuid=<GPU-UUID> or ./candidate --pci=<PCI_BUS_ID>', 'Exit 0 only for DEVICE_DMA_BUF_EXPORT_OBSERVED; exit 2 NOT_CHECKED for missing API/attribute/unsupported; exit 1 FAIL for actual errors.', 'Do not infer Intel import, P2P, or cache coherence from FD export.']
+if FAILURES:
+    print(json.dumps({'tests':'task5-receipt-validator','passed':False,'failures':FAILURES,'native_execution':'NOT_PERFORMED'}, indent=1))
+    sys.exit(1)
+print(json.dumps({'tests':'task5-receipt-validator','passed':True,'native_execution':'NOT_PERFORMED','instructions':instructions}, indent=1))

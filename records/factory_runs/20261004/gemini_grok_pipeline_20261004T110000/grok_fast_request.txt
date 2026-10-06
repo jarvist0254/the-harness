@@ -1,0 +1,233 @@
+You are Grok EDIT lane after completed substantive Gemini review in an isolated harness factory pipeline. Author a REAL SMALL TESTABLE code patch; do NOT execute tools or edit files yourself. Return ONLY JSON {"replacements":[{"old":"EXACT source substring","new":"replacement"}],"test_source":"complete GPU-free unittest Python tests","notes":["..."]}. No broad rewrite, no placeholders, no cosmetic edits. User explicitly authorizes this provider coding job. No subagents, memories, auth changes, shell, MCP, secrets, network tools, queues, PyRe/product edits. Original source SHA765B2BE5E976DFB6709F3D0E7754F71696E2B9287CC87120A767E8820F69DF94. Gemini actual verdict/findings and exact immutable source appended below. Source owner will apply patch after review and run tests/hardware controls; do NOT claim execution.
+
+PATCH ONLY TWO concrete defects:
+1. Source enumeration failure to query device.max_mem_alloc_size stores0; both _check_device_memory and _execute_gpu currently skip guard when maximum0. Unknown/nonpositive/noninteger/bool maximum must raise RuntimeUnavailable (NOT_CHECKED exit2 via existing exception handling) BEFORE Context/Buffer allocation, never silently allocate. Keep real runtime allocation errors FAIL, not blanketUNSUPPORTED. Known positive maximum below largest W/b/activation buffer must refuse; positive sufficient maximum succeeds. Centralize tiny pure helper if useful, then minimal replacements both existing guarded paths. Do not confuse policycap with reportedphysicalfree memory. No default invented max.
+2. Gemini source-confirmed corruption picks first device boundary instead of first VENDOR boundary, wrong for NV,NV,AMD. Resolve vendor from config devices metadata/vendor_key; choose first i where layer_owner[i] vendor differs layer_owner[i+1] vendor. If --inject-corruption and no vendor boundary, RuntimeRefused exit2. Introduce a tiny pure helper to permit GPU-free tests if necessary. Preserve actual activation injection after sourceGPUreadback BEFORE destinationupload, all remaining actual kernels, independentoriginalCPUreference, bounded60second child supervision.
+
+Do NOT apply Gemini's suggested missingNVIDIA domain fallback0: inventing domain0 can merge distinctdevices and violate identityguard. PCI identity remains conservative until independently qualified. No single-device label or unrelated redesign in this patch.
+
+Tests complete standalone GPU-free unittest module importing from j_link.opencl_executor (parentwilladapt test path), using prepare_plan for synthetic dictdevice fixtures or mocks. Test unknown max=0/None/bool/negative (RuntimeUnavailable before native allocator), known toosmall maximum rejects, validmax returns allocationrecords and proper largestbound. Test first-vendor-boundary NV,NV,AMD selects boundary aftersecondNV, reverse AMD,NV,NV selectsfirstAMD-toNV, homogeneousvendor givesNone/refusal wheninject. NoNumPy/PyOpenCL imports; noGPU jobs. Exact oldstrings mustmatchsource below. In-orderOpenCLqueues order commands correctly; do not add spurious waits/races. Planner block-name mapping is correct. All output source intended compile-test gate only.
+COMPLETED GEMINI REVIEW:
+{
+  "findings": [
+    {
+      "exact_source": "domain = int(device.pci_domain_id_nv)",
+      "line": 177,
+      "minimal_fix": "domain = int(getattr(device, 'pci_domain_id_nv', 0))",
+      "reason": "PyOpenCL Device objects do not provide a 'pci_domain_id_nv' attribute under the Khronos 'cl_nv_device_attribute_query' extension (which only defines CL_DEVICE_PCI_BUS_ID_NV and CL_DEVICE_PCI_SLOT_ID_NV). Direct attribute access raises an AttributeError, which is caught by line 182's bare 'except Exception:', silently falling through to 'EPHEMERAL_RUNTIME_ID'. Consequently, multiple physical NVIDIA GPUs without 'cl_khr_pci_bus_info' are incorrectly rejected as ambiguous by select_devices() (lines 280-282).",
+      "severity": "high"
+    },
+    {
+      "exact_source": "boundary = next((i for i in range(layers - 1)\n                    if layer_owner[i] != layer_owner[i + 1]), None)",
+      "line": 458,
+      "minimal_fix": "vendor_by_id = {m['runtime_id']: m['vendor_key'] for m in selected_meta}\nboundary = next((i for i in range(layers - 1) if vendor_by_id[layer_owner[i]] != vendor_by_id[layer_owner[i + 1]]), None)\nif inject and boundary is None:\n    raise RuntimeRefused('Corruption requires an actual vendor activation boundary')",
+      "reason": "The acceptance specification (items 6 and 10) mandates corrupting the real activation at the first vendor boundary. Line 458 checks 'layer_owner[i] != layer_owner[i + 1]', which detects any device/context boundary rather than a vendor boundary. When more than two devices are selected and the first two devices share a vendor (e.g. two NVIDIA cards followed by AMD), corruption is mistakenly injected at an intra-vendor boundary instead of the vendor boundary. Furthermore, multi-GPU same-vendor selections will incorrectly execute corruption despite having no vendor boundary.",
+      "severity": "medium"
+    }
+  ],
+  "missing_qualification": [
+    "NVIDIA physical PCI identity resolution under cl_nv_device_attribute_query fails with AttributeError on pci_domain_id_nv, degrading to EPHEMERAL_RUNTIME_ID and preventing multi-NVIDIA hardware discrimination.",
+    "First vendor-boundary corruption check compares runtime device IDs instead of vendor keys, corrupting intra-vendor boundaries in multi-card homogeneous prefix topologies.",
+    "Device discovery lacks discrimination for AMD PCIe topology (cl_amd_device_attribute_query) when cl_khr_pci_bus_info is absent, treating distinct AMD physical cards as ephemeral."
+  ],
+  "toolAction": "Submitting review verdict and findings",
+  "toolSummary": "Gemini lane code review completion",
+  "verdict": "reject"
+}
+
+EXACT SOURCE:
+#!/usr/bin/env python3
+"""Experimental, policy-bounded mixed-vendor residual MLP executor.
+
+This proves one host-staged OpenCL workload. It is not an LLM runtime,
+allocator, durable worker system, physical-capacity measurement, or P2P test.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+from datetime import datetime, timezone
+
+from planner import PlanError, plan as planner_plan
+
+MIB = 1024 * 1024
+MAX_RESULT_BYTES = 128 * 1024
+MAX_CHILD_SECONDS = 60
+DEFAULT_SEED = 103004
+WORKSPACE_MIB = 1
+RESULT_LABELS = [
+    'MIXED_VENDOR_RESIDUAL_MLP_EXECUTION_ONLY',
+    'EXPLICIT_HOST_STAGED',
+    'POLICY_LIMIT_EXPERIMENT_NOT_PHYSICAL_CAPACITY_PROOF',
+]
+
+
+class RuntimeUnavailable(RuntimeError):
+    """The required OpenCL devices/runtime could not be checked."""
+
+
+class RuntimeRefused(RuntimeError):
+    """A requested topology or policy is invalid before GPU allocation."""
+
+
+def _integer(value, name, low, high):
+    if type(value) is not int or not low <= value <= high:
+        raise PlanError(f'{name} must be an integer from {low} through {high}')
+ENUMERATION:
+            vendor = str(getattr(device, 'vendor', 'unknown'))
+            vendor_key = _vendor_key(vendor)
+            if vendor_key not in ('NVIDIA', 'AMD', 'Intel'):
+                continue
+            extensions = set(str(getattr(device, 'extensions', '')).split())
+            pci_id, pci_fields, identity_source = _pci_identity(device, extensions)
+            physical_id = pci_id or f'runtime:{runtime_id}'
+            try:
+                unified = bool(device.host_unified_memory)
+            except Exception:
+                unified = None
+            try:
+                max_alloc = int(device.max_mem_alloc_size)
+            except Exception:
+                max_alloc = 0
+            records.append({
+                'id': runtime_id, 'runtime_id': runtime_id, 'physical_id': physical_id,
+                'identity_confidence': identity_source,
+                'pci_identity': pci_fields, 'vendor': vendor, 'vendor_key': vendor_key,
+                'platform': str(getattr(platform, 'name', '')),
+                'platform_vendor': str(getattr(platform, 'vendor', '')),
+                'platform_version': str(getattr(platform, 'version', '')),
+                'name': str(getattr(device, 'name', '')),
+                'device_version': str(getattr(device, 'version', '')),
+                'driver_version': str(getattr(device, 'driver_version', '')),
+                'global_mem_bytes_reported': int(getattr(device, 'global_mem_size', 0)),
+                'max_mem_alloc_bytes_reported': max_alloc,
+                'host_unified_memory_reported': unified,
+                'memory_classification': (
+                    'SHARED_HOST_MEMORY_NOT_DEDICATED_VRAM' if unified is True else
+                    'DEVICE_LOCAL_MEMORY_REPORTED' if unified is False else 'UNKNOWN'),
+                'device': device,
+            })
+ADMISSION:
+def _check_device_memory(selected, prepared):
+    layer_bytes = prepared['actual_layer_weight_bytes']
+    activation_bytes = prepared['workspace_bytes'] // 2
+    by_id = {entry['device_id']: entry['layers'] for entry in prepared['layer_ownership']}
+    per_device = {}
+    for record in selected:
+        resident = layer_bytes * len(by_id[record['runtime_id']])
+        total = resident + prepared['workspace_bytes']
+        cap = prepared['policy_mib_per_device'] * MIB
+        if total > cap:
+            raise RuntimeRefused(f'Actual planned buffers exceed {record["runtime_id"]} policy cap')
+        maximum = record['max_mem_alloc_bytes_reported']
+        largest = max(prepared['width'] * prepared['width'] * 4,
+                      prepared['width'] * 4, activation_bytes)
+        if maximum and largest > maximum:
+            raise RuntimeUnavailable(f'A planned OpenCL buffer exceeds {record["runtime_id"]} max allocation')
+        per_device[record['runtime_id']] = {
+            'assigned_layers': list(by_id[record['runtime_id']]),
+            'resident_weight_and_bias_bytes': resident,
+            'activation_ping_pong_bytes': prepared['workspace_bytes'],
+            'planned_allocation_bytes': total,
+            'policy_cap_bytes': cap,
+            'max_single_buffer_bytes_reported': maximum,
+        }
+    return per_device
+
+
+def _execute_gpu(config, selected):
+    """Child-only execution with unique, resident per-context layer weights."""
+    try:
+        import numpy as np
+    except Exception as exc:
+        raise RuntimeUnavailable(f'NumPy reference runtime unavailable: {exc}') from exc
+    cl = _load_opencl()
+
+    selected_meta = config['devices']
+    prepared = config['prepared_plan']
+    width, batch, layers = config['width'], config['batch'], config['layers']
+    seed, inject = config['seed'], config['inject_corruption']
+    rng = np.random.default_rng(seed)
+    weights, biases, weight_hashes = [], [], []
+    for _ in range(layers):
+        weight = np.ascontiguousarray(
+            rng.integers(-2, 3, size=(width, width), dtype=np.int32).astype(np.float32) / np.float32(4096.0))
+        bias = np.ascontiguousarray(
+            rng.integers(-2, 3, size=(width,), dtype=np.int32).astype(np.float32) / np.float32(4096.0))
+        weights.append(weight)
+        biases.append(bias)
+        weight_hashes.append(hashlib.sha256(weight.tobytes() + bias.tobytes()).hexdigest())
+    if len(set(weight_hashes)) != layers:
+        raise RuntimeError('Generated layer weight/bias arrays are not unique')
+    input_original = np.ascontiguousarray(rng.uniform(1.0, 2.0, size=(batch, width)).astype(np.float32))
+
+    ownership = prepared['layer_ownership']
+    assignment = {entry['device_id']: list(entry['layers']) for entry in ownership}
+    layer_owner = {}
+    for owner, layer_names in assignment.items():
+        for layer_name in layer_names:
+            layer_index = int(layer_name.rsplit('_', 1)[1])
+            if layer_index in layer_owner:
+                raise RuntimeError(f'Duplicate layer owner for layer {layer_index}')
+            layer_owner[layer_index] = owner
+    if set(layer_owner) != set(range(layers)):
+        raise RuntimeError('Layer ownership is incomplete before GPU setup')
+    boundary = next((i for i in range(layers - 1)
+                    if layer_owner[i] != layer_owner[i + 1]), None)
+    if inject and boundary is None:
+        raise RuntimeRefused('Corruption requires an actual inter-device activation boundary')
+
+    source = r"""
+    __kernel void residual_layer(__global const float *x,
+                                 __global const float *w,
+                                 __global const float *b,
+                                 __global float *out,
+                                 const int width) {
+        const int row = get_global_id(0);
+        const int col = get_global_id(1);
+        float value = x[row * width + col] + b[col];
+        for (int k = 0; k < width; ++k) {
+            value += x[row * width + k] * w[k * width + col];
+        }
+        out[row * width + col] = fmax(value, 0.0f);
+    }
+    """
+    activation_bytes = batch * width * 4
+    workspace_bytes = 2 * activation_bytes
+    allocation_records = {}
+    for meta in selected_meta:
+        did = meta['runtime_id']
+        names = assignment[did]
+        resident_bytes = sum(weights[int(name[-2:])].nbytes + biases[int(name[-2:])].nbytes
+                             for name in names)
+        maximum = int(meta.get('max_mem_alloc_bytes_reported') or 0)
+        biggest = max(width * width * 4, width * 4, activation_bytes)
+        if maximum and biggest > maximum:
+            raise RuntimeUnavailable(f'A planned OpenCL buffer exceeds {did} max allocation')
+        planned = resident_bytes + workspace_bytes
+        cap = config['policy_mib'] * MIB
+        if planned > cap:
+            raise RuntimeRefused(f'Actual planned buffers exceed {did} policy cap')
+        allocation_records[did] = {
+            'assigned_layers': names,
+            'resident_weight_and_bias_bytes': resident_bytes,
+            'activation_ping_pong_bytes': workspace_bytes,
+            'planned_allocation_bytes': planned,
+            'policy_cap_bytes': cap,
+            'max_single_buffer_bytes_reported': maximum,
+        }
+
+    contexts, resources = {}, []
+    stats = {
+        'planned_layer_count': layers, 'kernels_enqueued': 0, 'kernels_completed': 0,
+        'weight_upload_count': 0, 'weight_upload_bytes': 0,
+        'activation_upload_count': 0, 'activation_readback_count': 0,
+        'activation_upload_bytes': 0, 'activation_readback_bytes': 0,
